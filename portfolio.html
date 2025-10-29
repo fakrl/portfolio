@@ -14,235 +14,235 @@
     <meta property="og:url" content="https://yoursite.com">
 </head>
 <body class="light">
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-logo">FM</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="theme-toggle nav-theme" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
-    </nav>
+<nav class="navbar">
+    <div class="nav-logo">FM</div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Fakhrul Mukhlisin</h1>
-            <p class="hero-subtitle">Software Developer | PHP/Laravel Specialist | AI Enthusiast</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
-        </div>
-    </section>
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <h2 class="section-title">About Me</h2>
-        <div class="glass-card about-card">
-            <p>
-                Hi! I'm Fakhrul, an Information Systems student with a 3.67/4.0 GPA, passionate about web development and AI implementation. I specialize in PHP/Laravel stack development and have hands-on experience building responsive web solutions.
-            </p>
-            <p>
-                With experience in database management, SEO optimization, and leading 300+ member organizations, I combine technical expertise with strong leadership skills. I'm actively exploring AI technologies and implementing them into practical applications.
-            </p>
-            <p>
-                Currently seeking opportunities as a Software Developer where I can contribute to innovative projects and continue growing my technical skills.
-            </p>
-        </div>
-    </section>
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Fakhrul Mukhlisin</h1>
+                <p class="hero-subtitle">Software Developer | PHP/Laravel Specialist | AI Enthusiast</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="glass-card skill-card">
-                <div class="skill-icon">💻</div>
-                <h3>Programming Languages</h3>
-                <div class="skill-tags">
-                    <span class="tag">PHP</span>
-                    <span class="tag">JavaScript</span>
-                    <span class="tag">HTML5</span>
-                    <span class="tag">CSS3</span>
-                    <span class="tag">SQL</span>
-                    <span class="tag">Python</span>
-                </div>
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="glass-card about-card">
+                <p>
+                    Hi! I'm Fakhrul, an Information Systems student with a 3.67/4.0 GPA, passionate about web development and AI implementation. I specialize in PHP/Laravel stack development and have hands-on experience building responsive web solutions.
+                </p>
+                <p>
+                    With experience in database management, SEO optimization, and leading 300+ member organizations, I combine technical expertise with strong leadership skills. I'm actively exploring AI technologies and implementing them into practical applications.
+                </p>
+                <p>
+                    Currently seeking opportunities as a Software Developer where I can contribute to innovative projects and continue growing my technical skills.
+                </p>
             </div>
-            <div class="glass-card skill-card">
-                <div class="skill-icon">🚀</div>
-                <h3>Frameworks & Libraries</h3>
-                <div class="skill-tags">
-                    <span class="tag">Laravel</span>
-                    <span class="tag">Bootstrap</span>
-                </div>
-            </div>
-            <div class="glass-card skill-card">
-                <div class="skill-icon">🗄️</div>
-                <h3>Databases</h3>
-                <div class="skill-tags">
-                    <span class="tag">MySQL</span>
-                    <span class="tag">phpMyAdmin</span>
-                </div>
-            </div>
-            <div class="glass-card skill-card">
-                <div class="skill-icon">🤖</div>
-                <h3>AI & Automation</h3>
-                <div class="skill-tags">
-                    <span class="tag">ChatGPT</span>
-                    <span class="tag">Azure OpenAI</span>
-                    <span class="tag">Prompt Engineering</span>
-                </div>
-            </div>
-            <div class="glass-card skill-card">
-                <div class="skill-icon">🛠️</div>
-                <h3>Tools & Technologies</h3>
-                <div class="skill-tags">
-                    <span class="tag">Git</span>
-                    <span class="tag">VS Code</span>
-                    <span class="tag">Figma</span>
-                </div>
-            </div>
-            <div class="glass-card skill-card">
-                <div class="skill-icon">🎨</div>
-                <h3>Other Skills</h3>
-                <div class="skill-tags">
-                    <span class="tag">SEO</span>
-                    <span class="tag">Responsive Design</span>
-                    <span class="tag">Database Management</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="glass-card project-card">
-                <div class="project-image">🌐</div>
-                <div class="project-content">
-                    <h3>Web Development Portfolio</h3>
-                    <p>Responsive landing pages with database integration using PHP/Laravel and MySQL. Implemented SEO best practices and modern design principles.</p>
+        <section id="skills" class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="glass-card skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>Programming Languages</h3>
                     <div class="skill-tags">
                         <span class="tag">PHP</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+                <div class="glass-card skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="skill-tags">
                         <span class="tag">Laravel</span>
-                        <span class="tag">MySQL</span>
                         <span class="tag">Bootstrap</span>
                     </div>
                 </div>
-            </div>
-            <div class="glass-card project-card">
-                <div class="project-image">🤖</div>
-                <div class="project-content">
-                    <h3>AI Workflow Automation</h3>
-                    <p>Automated content generation using Azure OpenAI Services with prompt engineering solutions for business optimization.</p>
+                <div class="glass-card skill-card">
+                    <div class="skill-icon">🗄️</div>
+                    <h3>Databases</h3>
                     <div class="skill-tags">
-                        <span class="tag">Azure AI</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">REST APIs</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">phpMyAdmin</span>
+                    </div>
+                </div>
+                <div class="glass-card skill-card">
+                    <div class="skill-icon">🤖</div>
+                    <h3>AI & Automation</h3>
+                    <div class="skill-tags">
+                        <span class="tag">ChatGPT</span>
+                        <span class="tag">Azure OpenAI</span>
+                        <span class="tag">Prompt Engineering</span>
+                    </div>
+                </div>
+                <div class="glass-card skill-card">
+                    <div class="skill-icon">🛠️</div>
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">VS Code</span>
+                        <span class="tag">Figma</span>
+                    </div>
+                </div>
+                <div class="glass-card skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Other Skills</h3>
+                    <div class="skill-tags">
+                        <span class="tag">SEO</span>
+                        <span class="tag">Responsive Design</span>
+                        <span class="tag">Database Management</span>
                     </div>
                 </div>
             </div>
-            <div class="glass-card project-card">
-                <div class="project-image">📊</div>
-                <div class="project-content">
-                    <h3>Digital Archive System</h3>
-                    <p>Comprehensive database management system for 1000+ documentation files with advanced search and categorization features.</p>
-                    <div class="skill-tags">
-                        <span class="tag">Database Design</span>
-                        <span class="tag">Excel</span>
-                        <span class="tag">Data Management</span>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="glass-card project-card">
+                    <div class="project-image">🌐</div>
+                    <div class="project-content">
+                        <h3>Web Development Portfolio</h3>
+                        <p>Responsive landing pages with database integration using PHP/Laravel and MySQL. Implemented SEO best practices and modern design principles.</p>
+                        <div class="skill-tags">
+                            <span class="tag">PHP</span>
+                            <span class="tag">Laravel</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card project-card">
+                    <div class="project-image">🤖</div>
+                    <div class="project-content">
+                        <h3>AI Workflow Automation</h3>
+                        <p>Automated content generation using Azure OpenAI Services with prompt engineering solutions for business optimization.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Azure AI</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">REST APIs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card project-card">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <h3>Digital Archive System</h3>
+                        <p>Comprehensive database management system for 1000+ documentation files with advanced search and categorization features.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Database Design</span>
+                            <span class="tag">Excel</span>
+                            <span class="tag">Data Management</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="timeline">
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Nov 2024 - Jul 2025</div>
-                <h3 class="timeline-title">Data Management Specialist (Internship)</h3>
-                <div class="timeline-company">Lembaga Kemahasiswaan UNPAM</div>
-                <ul class="timeline-list">
-                    <li>Managed database of 500+ student and alumni records</li>
-                    <li>Developed digital archive system for 1000+ files</li>
-                    <li>Provided technical support for academic systems</li>
-                </ul>
+        <section id="experience" class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="glass-card timeline-item">
+                    <div class="timeline-date">Nov 2024 - Jul 2025</div>
+                    <h3 class="timeline-title">Data Management Specialist (Internship)</h3>
+                    <div class="timeline-company">Lembaga Kemahasiswaan UNPAM</div>
+                    <ul class="timeline-list">
+                        <li>Managed database of 500+ student and alumni records</li>
+                        <li>Developed digital archive system for 1000+ files</li>
+                        <li>Provided technical support for academic systems</li>
+                    </ul>
+                </div>
+                <div class="glass-card timeline-item">
+                    <div class="timeline-date">Jul 2024 - Jul 2025</div>
+                    <h3 class="timeline-title">Digital Content Support (Part-time)</h3>
+                    <div class="timeline-company">PT. Cahaya Millenial Sejahtera</div>
+                    <ul class="timeline-list">
+                        <li>Implemented AI tools for content optimization</li>
+                        <li>Maintained brand consistency across platforms</li>
+                        <li>Collaborated with design teams</li>
+                    </ul>
+                </div>
+                <div class="glass-card timeline-item">
+                    <div class="timeline-date">Oct 2023 - Oct 2024</div>
+                    <h3 class="timeline-title">Web Developer & Volunteer (Part-time)</h3>
+                    <div class="timeline-company">Yayasan Peduli Kesejahteraan Bersama</div>
+                    <ul class="timeline-list">
+                        <li>Developed responsive web solutions</li>
+                        <li>Implemented SEO optimization strategies</li>
+                        <li>Created visual content</li>
+                    </ul>
+                </div>
+                <div class="glass-card timeline-item">
+                    <div class="timeline-date">Oct 2021 - Nov 2022</div>
+                    <h3 class="timeline-title">President</h3>
+                    <div class="timeline-company">Forum Studi Jurnalis</div>
+                    <ul class="timeline-list">
+                        <li>Led organization of 300+ members</li>
+                        <li>Coordinated 15+ technical events</li>
+                        <li>Streamlined organizational workflow</li>
+                    </ul>
+                </div>
             </div>
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Jul 2024 - Jul 2025</div>
-                <h3 class="timeline-title">Digital Content Support (Part-time)</h3>
-                <div class="timeline-company">PT. Cahaya Millenial Sejahtera</div>
-                <ul class="timeline-list">
-                    <li>Implemented AI tools for content optimization</li>
-                    <li>Maintained brand consistency across platforms</li>
-                    <li>Collaborated with design teams</li>
-                </ul>
-            </div>
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Oct 2023 - Oct 2024</div>
-                <h3 class="timeline-title">Web Developer & Volunteer (Part-time)</h3>
-                <div class="timeline-company">Yayasan Peduli Kesejahteraan Bersama</div>
-                <ul class="timeline-list">
-                    <li>Developed responsive web solutions</li>
-                    <li>Implemented SEO optimization strategies</li>
-                    <li>Created visual content</li>
-                </ul>
-            </div>
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Oct 2021 - Nov 2022</div>
-                <h3 class="timeline-title">President</h3>
-                <div class="timeline-company">Forum Studi Jurnalis</div>
-                <ul class="timeline-list">
-                    <li>Led organization of 300+ members</li>
-                    <li>Coordinated 15+ technical events</li>
-                    <li>Streamlined organizational workflow</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-grid">
-            <a href="mailto:fahrulmukhlisin13@gmail.com" class="glass-card contact-card">
-                <div class="contact-icon">📧</div>
-                <h3>Email</h3>
-                <p>fahrulmukhlisin13@gmail.com</p>
-            </a>
-            <a href="https://linkedin.com/in/fakrl" class="glass-card contact-card" target="_blank">
-                <div class="contact-icon">💼</div>
-                <h3>LinkedIn</h3>
-                <p>linkedin.com/in/fakrl</p>
-            </a>
-            <a href="https://github.com/fakrl" class="glass-card contact-card" target="_blank">
-                <div class="contact-icon">🐙</div>
-                <h3>GitHub</h3>
-                <p>github.com/fakrl</p>
-            </a>
-            <a href="https://api.whatsapp.com/send/?phone=6281315324195" class="glass-card contact-card" target="_blank">
-                <div class="contact-icon">📱</div>
-                <h3>WhatsApp</h3>
-                <p>+62 813 1532 4195</p>
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 Fakhrul Mukhlisin. Built with passion and code.</p>
-        <div class="footer-links">
-            <a href="index.html">Back to Profile Card</a>
-        </div>
-    </footer>
+        <section id="contact" class="section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <a href="mailto:fahrulmukhlisin13@gmail.com" class="glass-card contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>fahrulmukhlisin13@gmail.com</p>
+                </a>
+                <a href="https://linkedin.com/in/fakrl" class="glass-card contact-card" target="_blank">
+                    <div class="contact-icon">💼</div>
+                    <h3>LinkedIn</h3>
+                    <p>linkedin.com/in/fakrl</p>
+                </a>
+                <a href="https://github.com/fakrl" class="glass-card contact-card" target="_blank">
+                    <div class="contact-icon">🐙</div>
+                    <h3>GitHub</h3>
+                    <p>github.com/fakrl</p>
+                </a>
+                <a href="https://api.whatsapp.com/send/?phone=6281315324195" class="glass-card contact-card" target="_blank">
+                    <div class="contact-icon">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>+62 813 1532 4195</p>
+                </a>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>&copy; 2025 Fakhrul Mukhlisin. Built with passion and code.</p>
+            <div class="footer-links">
+                <a href="index.html">Back to Profile Card</a>
+            </div>
+        </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>

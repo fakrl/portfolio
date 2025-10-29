@@ -165,7 +165,7 @@ body.dark .theme-toggle {
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0.6;
     transition: all 0.8s ease;
     animation: fadeInOut 2s infinite;
@@ -194,6 +194,43 @@ body.dark .click-hint {
         transform: translateY(0);
     }
 }
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    transition: all 0.3s ease;
+}
+
+body.light .hamburger span {
+    background: #1a1a1a;
+}
+
+body.dark .hamburger span {
+    background: #ffffff;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
 
 /* Portfolio Page Styles */
 
@@ -201,6 +238,23 @@ body.portfolio-page {
     display: block;
     padding: 0;
     overflow-x: hidden;
+    width: 100vw;
+    max-width: 100%;
+    opacity: 0;
+    animation: pageLoad 0.5s ease forwards;
+}
+
+@keyframes pageLoad {
+    to {
+        opacity: 1;
+    }
+}
+
+html {
+    overflow-x: hidden;
+    max-width: 100%;
+    scroll-padding-top: 80px;
+
 }
 
 .navbar {
@@ -208,6 +262,7 @@ body.portfolio-page {
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
     padding: 1.5rem 5%;
     display: flex;
     justify-content: space-between;
@@ -271,26 +326,31 @@ body.dark .nav-links a {
     height: 40px;
     font-size: 20px;
     margin: 0;
+    display: none;
 }
 
 body.portfolio-page .theme-toggle {
-    bottom: -100px;
-    opacity: 0;
-    pointer-events: none;
+    bottom: 30px;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Hero Section */
 .hero-section {
     min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 5%;
     text-align: center;
+    will-change: transform, opacity;
+
 }
 
 .hero-content {
     animation: fadeInUp 1s ease;
+    max-width: 100%;
 }
 
 .hero-title {
@@ -378,7 +438,9 @@ body.dark .btn-secondary:hover {
 /* Section */
 .section {
     padding: 5rem 5%;
-    min-height: auto;
+    width: 100%;
+    max-width: 100%;  
+    overflow-x: hidden;
 }
 
 .section-title {
@@ -397,6 +459,14 @@ body.dark .btn-secondary:hover {
     border-radius: 20px;
     padding: 2rem;
     transition: all 0.8s ease;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.glass-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 body.light .glass-card {
@@ -434,14 +504,17 @@ body.dark .about-card p {
 /* Skills Grid */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .skill-card {
     transition: all 0.3s ease;
+    will-change: transform;
+
 }
 
 .skill-card:hover {
@@ -497,16 +570,18 @@ body.dark .tag {
 /* Projects Grid */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .project-card {
     overflow: hidden;
     padding: 0;
     transition: all 0.3s ease;
+    will-change: transform;
 }
 
 .project-card:hover {
@@ -558,11 +633,13 @@ body.dark .project-content p {
 .timeline {
     max-width: 800px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .timeline-item {
     margin-bottom: 2rem;
     transition: all 0.3s ease;
+    will-change: transform;
 }
 
 .timeline-item:hover {
@@ -622,16 +699,18 @@ body.dark .timeline-list {
 /* Contact Grid */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 2rem;
     max-width: 900px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .contact-card {
     text-align: center;
     text-decoration: none;
     transition: all 0.3s ease;
+    will-change: transform;
 }
 
 .contact-card:hover {
@@ -651,6 +730,7 @@ body.dark .timeline-list {
 
 .contact-card p {
     transition: color 0.8s ease;
+    word-break: break-word;
 }
 
 body.light .contact-card p {
@@ -661,10 +741,16 @@ body.dark .contact-card p {
     color: #ffffff;
 }
 
+main {
+    width: 100%;
+    display: block;
+}
+
 /* Footer */
 .footer {
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 5%;
+    width: 100%;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.8s ease;
@@ -696,8 +782,19 @@ body.dark .footer {
     color: #764ba2;
 }
 
+main {
+    width: 100%;
+    display: block;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+     .hamburger {
+        display: flex;
+        position: absolute;
+        right: 5%;
+    }
+
     .profile-card {
         width: 100%;
         max-width: 400px;
@@ -716,17 +813,50 @@ body.dark .footer {
     }
     
     .navbar {
-        flex-direction: column;
         gap: 1rem;
-        padding: 1rem 5%;
+        padding: 1rem 5%;        
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+        
+        .nav-logo {
+        margin: 0;
+    }
+
+    .nav-theme {
+        order: 3;
     }
     
     .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transition: left 0.3s ease;
+        z-index: 999;
     }
     
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    body.light .nav-links {
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    body.dark .nav-links {
+        background: rgba(10, 10, 10, 0.95);
+    }
+
     .skills-grid,
     .projects-grid,
     .contact-grid {
