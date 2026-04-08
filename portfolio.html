@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fakhrul Mukhlisin - Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Fakhrul Mukhlisin - PHP/Laravel Developer Portfolio">
-    <meta name="keywords" content="PHP, Laravel, Web Developer, Software Engineer">
+    <link rel="stylesheet" href="animations.css">
+    <meta name="description" content="Fakhrul Mukhlisin - Backend & Frontend Developer Portfolio">
+    <meta name="keywords" content="Golang, Vue.js, REST API, Backend Developer, Web Developer, Software Engineer">
     <meta name="author" content="Fakhrul Mukhlisin">
     <meta property="og:title" content="Fakhrul Mukhlisin - Portfolio">
-    <meta property="og:description" content="Software Developer specializing in PHP/Laravel">
+    <meta property="og:description" content="Versatile developer with hands-on experience in Golang backend and Vue.js frontend">
     <meta property="og:image" content="image/profile.jpg">
-    <meta property="og:url" content="https://yoursite.com">
+    <meta property="og:url" content="https://fakrul.netlify.app">
 </head>
 <body class="light">
+
 <nav class="navbar">
     <div class="nav-logo">FM</div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -28,222 +30,435 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="proof.html">Proof of Work</a></li>
+        <li><a href="moments.html">Moments</a></li>
     </ul>
 </nav>
 
 <button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
 
-    <main>
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Fakhrul Mukhlisin</h1>
-                <p class="hero-subtitle">Software Developer | PHP/Laravel Specialist | AI Enthusiast</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+<main>
+    <!-- HOME -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Fakhrul Mukhlisin</h1>
+            <p class="hero-subtitle">Backend Developer · Frontend Developer · AI Enthusiast</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="glass-card about-card">
+            <p>
+                I'm Fakhrul — an Information Systems student (GPA 3.68/4.0) who's worked on both sides of the stack.
+                On the backend, I've built a full marketplace REST API from scratch using Golang, Gin, JWT, and MySQL
+                with clean architecture. On the frontend, I've shipped a live e-commerce catalog with Vue.js 2 and CI/CD deployment.
+            </p>
+            <p>
+                I'm the kind of developer who gets things done — whether that means picking up a new framework,
+                integrating AI tools into the workflow, or debugging at 2am. I've led a 300+ member organization,
+                managed 500+ data records, and consistently scored "Excellent" across internship programs.
+            </p>
+            <p>
+                Currently open to full-time, part-time, or paid internship opportunities — remote or Jakarta area.
+            </p>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="glass-card skill-card">
+                <div class="skill-icon">⚙️</div>
+                <h3>Backend</h3>
+                <div class="skill-tags">
+                    <span class="tag">Golang</span>
+                    <span class="tag">Gin Framework</span>
+                    <span class="tag">JWT Auth</span>
+                    <span class="tag">REST API</span>
+                    <span class="tag">Clean Architecture</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">Laravel</span>
                 </div>
             </div>
-        </section>
-
-        <section id="about" class="section">
-            <h2 class="section-title">About Me</h2>
-            <div class="glass-card about-card">
-                <p>
-                    Hi! I'm Fakhrul, an Information Systems student with a 3.67/4.0 GPA, passionate about web development and AI implementation. I specialize in PHP/Laravel stack development and have hands-on experience building responsive web solutions.
-                </p>
-                <p>
-                    With experience in database management, SEO optimization, and leading 300+ member organizations, I combine technical expertise with strong leadership skills. I'm actively exploring AI technologies and implementing them into practical applications.
-                </p>
-                <p>
-                    Currently seeking opportunities as a Software Developer where I can contribute to innovative projects and continue growing my technical skills.
-                </p>
+            <div class="glass-card skill-card">
+                <div class="skill-icon">🎨</div>
+                <h3>Frontend</h3>
+                <div class="skill-tags">
+                    <span class="tag">Vue.js 2</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">Bootstrap</span>
+                    <span class="tag">Responsive Design</span>
+                </div>
             </div>
-        </section>
+            <div class="glass-card skill-card">
+                <div class="skill-icon">🗄️</div>
+                <h3>Database</h3>
+                <div class="skill-tags">
+                    <span class="tag">MySQL</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">phpMyAdmin</span>
+                    <span class="tag">Database Design</span>
+                </div>
+            </div>
+            <div class="glass-card skill-card">
+                <div class="skill-icon">🛠️</div>
+                <h3>DevOps & Tools</h3>
+                <div class="skill-tags">
+                    <span class="tag">Git</span>
+                    <span class="tag">GitHub</span>
+                    <span class="tag">GitLab CI/CD</span>
+                    <span class="tag">Firebase</span>
+                    <span class="tag">Postman</span>
+                    <span class="tag">VS Code</span>
+                    <span class="tag">Figma</span>
+                </div>
+            </div>
+            <div class="glass-card skill-card">
+                <div class="skill-icon">🤖</div>
+                <h3>AI & Automation</h3>
+                <div class="skill-tags">
+                    <span class="tag">Prompt Engineering</span>
+                    <span class="tag">Azure OpenAI</span>
+                    <span class="tag">Generative AI Tools</span>
+                </div>
+            </div>
+            <div class="glass-card skill-card">
+                <div class="skill-icon">🔐</div>
+                <h3>Architecture & Design</h3>
+                <div class="skill-tags">
+                    <span class="tag">Clean Architecture</span>
+                    <span class="tag">Role-based Access Control</span>
+                    <span class="tag">SEO Optimization</span>
+                    <span class="tag">Data Visualization</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section id="skills" class="section">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="glass-card skill-card">
-                    <div class="skill-icon">💻</div>
-                    <h3>Programming Languages</h3>
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="glass-card project-card">
+                <div class="project-image">⚙️</div>
+                <div class="project-content">
+                    <h3>Evermos Marketplace REST API</h3>
+                    <p>
+                        Full marketplace backend built with Golang, Gin, MySQL, and JWT.
+                        Covers 7 modules: Auth, User, Store, Address, Category (admin-only), Product, and Transaction.
+                        Implemented clean architecture, pagination, price-range filtering, multi-image upload,
+                        atomic transactions, and product log for historical pricing.
+                    </p>
                     <div class="skill-tags">
-                        <span class="tag">PHP</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">HTML5</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">SQL</span>
-                        <span class="tag">Python</span>
-                    </div>
-                </div>
-                <div class="glass-card skill-card">
-                    <div class="skill-icon">🚀</div>
-                    <h3>Frameworks & Libraries</h3>
-                    <div class="skill-tags">
-                        <span class="tag">Laravel</span>
-                        <span class="tag">Bootstrap</span>
-                    </div>
-                </div>
-                <div class="glass-card skill-card">
-                    <div class="skill-icon">🗄️</div>
-                    <h3>Databases</h3>
-                    <div class="skill-tags">
+                        <span class="tag">Golang</span>
+                        <span class="tag">Gin</span>
                         <span class="tag">MySQL</span>
-                        <span class="tag">phpMyAdmin</span>
+                        <span class="tag">JWT</span>
+                        <span class="tag">Clean Architecture</span>
+                        <span class="tag">REST API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/fakrl/evermos-backend" target="_blank" class="btn btn-primary" style="margin-top:1rem; font-size:0.9rem; padding: 0.6rem 1.2rem;">GitHub →</a>
                     </div>
                 </div>
-                <div class="glass-card skill-card">
-                    <div class="skill-icon">🤖</div>
-                    <h3>AI & Automation</h3>
+            </div>
+            <div class="glass-card project-card">
+                <div class="project-image">🛍️</div>
+                <div class="project-content">
+                    <h3>E-Commerce Catalog</h3>
+                    <p>
+                        Dynamic product catalog built with Vue.js 2, fetching live data from a REST API.
+                        Features 3 distinct UI themes per product category using Vue class binding and CSS variables.
+                        Implemented pixel-perfect design from Figma, SVG export, CSS filters,
+                        and deployed with CI/CD pipeline.
+                    </p>
                     <div class="skill-tags">
-                        <span class="tag">ChatGPT</span>
-                        <span class="tag">Azure OpenAI</span>
-                        <span class="tag">Prompt Engineering</span>
-                    </div>
-                </div>
-                <div class="glass-card skill-card">
-                    <div class="skill-icon">🛠️</div>
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="tag">Git</span>
-                        <span class="tag">VS Code</span>
+                        <span class="tag">Vue.js 2</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">CSS Variables</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Firebase</span>
                         <span class="tag">Figma</span>
                     </div>
-                </div>
-                <div class="glass-card skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h3>Other Skills</h3>
-                    <div class="skill-tags">
-                        <span class="tag">SEO</span>
-                        <span class="tag">Responsive Design</span>
-                        <span class="tag">Database Management</span>
+                    <div class="project-links">
+                        <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" class="btn btn-primary" style="margin-top:1rem; font-size:0.9rem; padding: 0.6rem 1.2rem;">GitHub →</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="projects" class="section">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="glass-card project-card">
-                    <div class="project-image">🌐</div>
-                    <div class="project-content">
-                        <h3>Web Development Portfolio</h3>
-                        <p>Responsive landing pages with database integration using PHP/Laravel and MySQL. Implemented SEO best practices and modern design principles.</p>
-                        <div class="skill-tags">
-                            <span class="tag">PHP</span>
-                            <span class="tag">Laravel</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">Bootstrap</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-card project-card">
-                    <div class="project-image">🤖</div>
-                    <div class="project-content">
-                        <h3>AI Workflow Automation</h3>
-                        <p>Automated content generation using Azure OpenAI Services with prompt engineering solutions for business optimization.</p>
-                        <div class="skill-tags">
-                            <span class="tag">Azure AI</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">REST APIs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-card project-card">
-                    <div class="project-image">📊</div>
-                    <div class="project-content">
-                        <h3>Digital Archive System</h3>
-                        <p>Comprehensive database management system for 1000+ documentation files with advanced search and categorization features.</p>
-                        <div class="skill-tags">
-                            <span class="tag">Database Design</span>
-                            <span class="tag">Excel</span>
-                            <span class="tag">Data Management</span>
-                        </div>
-                    </div>
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="glass-card timeline-item">
+                <div class="timeline-date">Dec 2025</div>
+                <h3 class="timeline-title">Backend Developer Intern</h3>
+                <div class="timeline-company">Evermos × Rakamin Academy</div>
+                <ul class="timeline-list">
+                    <li>Built full marketplace REST API in Golang/Gin with clean architecture — 7 modules end-to-end</li>
+                    <li>Implemented JWT auth, RBAC (admin vs user), multi-image upload, pagination & filtering</li>
+                    <li>Applied atomic DB transactions for auto-create store on register; built product log for historical pricing</li>
+                    <li>Score: <strong>90.91/100 (Excellent)</strong></li>
+                </ul>
+            </div>
+            <div class="glass-card timeline-item">
+                <div class="timeline-date">Oct – Nov 2025</div>
+                <h3 class="timeline-title">Frontend Developer Intern</h3>
+                <div class="timeline-company">Core Initiative × Rakamin Academy</div>
+                <ul class="timeline-list">
+                    <li>Built E-Commerce Catalog with Vue.js 2 — live API integration with 3 dynamic UI themes</li>
+                    <li>Applied advanced CSS: SVG export from Figma, CSS filters, pixel-perfect implementation</li>
+                    <li>Deployed to Firebase via GitLab CI/CD pipeline</li>
+                    <li>Score: <strong>87.79/100 (Excellent)</strong></li>
+                </ul>
+            </div>
+            <div class="glass-card timeline-item">
+                <div class="timeline-date">Nov 2024 – Jul 2025</div>
+                <h3 class="timeline-title">Data Management Specialist (Internship)</h3>
+                <div class="timeline-company">Lembaga Kemahasiswaan UNPAM</div>
+                <ul class="timeline-list">
+                    <li>Structured and managed relational dataset of 500+ student and alumni records</li>
+                    <li>Used JavaScript for data scraping and automation workflows</li>
+                    <li>Built data visualizations for faculty and developed a digital archive for 1,000+ files</li>
+                </ul>
+            </div>
+            <div class="glass-card timeline-item">
+                <div class="timeline-date">Jul 2024 – Jul 2025</div>
+                <h3 class="timeline-title">Digital Content Support (Part-time)</h3>
+                <div class="timeline-company">PT. Cahaya Millenial Sejahtera</div>
+                <ul class="timeline-list">
+                    <li>Leveraged generative AI and prompt engineering for copywriting automation</li>
+                    <li>Maintained brand messaging consistency across digital platforms</li>
+                </ul>
+            </div>
+            <div class="glass-card timeline-item">
+                <div class="timeline-date">Oct 2021 – Nov 2022</div>
+                <h3 class="timeline-title">President</h3>
+                <div class="timeline-company">Forum Studi Jurnalis</div>
+                <ul class="timeline-list">
+                    <li>Led organization of 300+ members; coordinated 15+ events including technical seminars</li>
+                    <li>Implemented new editorial processes and streamlined cross-functional workflows</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+            <a href="mailto:fahrulmukhlisin13@gmail.com" class="glass-card contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <p>fahrulmukhlisin13@gmail.com</p>
+            </a>
+            <a href="https://linkedin.com/in/fakrl" class="glass-card contact-card" target="_blank">
+                <div class="contact-icon">💼</div>
+                <h3>LinkedIn</h3>
+                <p>linkedin.com/in/fakrl</p>
+            </a>
+            <a href="https://github.com/fakrl" class="glass-card contact-card" target="_blank">
+                <div class="contact-icon">🐙</div>
+                <h3>GitHub</h3>
+                <p>github.com/fakrl</p>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=6281315324195" class="glass-card contact-card" target="_blank">
+                <div class="contact-icon">📱</div>
+                <h3>WhatsApp</h3>
+                <p>+62 813 1532 4195</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- FEEDBACK REALTIME -->
+    <section id="feedback" class="section">
+        <h2 class="section-title">Leave a Feedback</h2>
+        <div class="feedback-wrapper">
+
+            <!-- Form -->
+            <div class="glass-card feedback-form-card">
+                <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
+                <div class="feedback-form">
+                    <input
+                        type="text"
+                        id="feedbackName"
+                        placeholder="Your name"
+                        class="feedback-input"
+                        maxlength="50"
+                    />
+                    <textarea
+                        id="feedbackMessage"
+                        placeholder="Your message..."
+                        class="feedback-input feedback-textarea"
+                        maxlength="300"
+                        rows="3"
+                    ></textarea>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">
+                        Send Message ✉️
+                    </button>
                 </div>
             </div>
-        </section>
 
-        <section id="experience" class="section">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="glass-card timeline-item">
-                    <div class="timeline-date">Nov 2024 - Jul 2025</div>
-                    <h3 class="timeline-title">Data Management Specialist (Internship)</h3>
-                    <div class="timeline-company">Lembaga Kemahasiswaan UNPAM</div>
-                    <ul class="timeline-list">
-                        <li>Managed database of 500+ student and alumni records</li>
-                        <li>Developed digital archive system for 1000+ files</li>
-                        <li>Provided technical support for academic systems</li>
-                    </ul>
-                </div>
-                <div class="glass-card timeline-item">
-                    <div class="timeline-date">Jul 2024 - Jul 2025</div>
-                    <h3 class="timeline-title">Digital Content Support (Part-time)</h3>
-                    <div class="timeline-company">PT. Cahaya Millenial Sejahtera</div>
-                    <ul class="timeline-list">
-                        <li>Implemented AI tools for content optimization</li>
-                        <li>Maintained brand consistency across platforms</li>
-                        <li>Collaborated with design teams</li>
-                    </ul>
-                </div>
-                <div class="glass-card timeline-item">
-                    <div class="timeline-date">Oct 2023 - Oct 2024</div>
-                    <h3 class="timeline-title">Web Developer & Volunteer (Part-time)</h3>
-                    <div class="timeline-company">Yayasan Peduli Kesejahteraan Bersama</div>
-                    <ul class="timeline-list">
-                        <li>Developed responsive web solutions</li>
-                        <li>Implemented SEO optimization strategies</li>
-                        <li>Created visual content</li>
-                    </ul>
-                </div>
-                <div class="glass-card timeline-item">
-                    <div class="timeline-date">Oct 2021 - Nov 2022</div>
-                    <h3 class="timeline-title">President</h3>
-                    <div class="timeline-company">Forum Studi Jurnalis</div>
-                    <ul class="timeline-list">
-                        <li>Led organization of 300+ members</li>
-                        <li>Coordinated 15+ technical events</li>
-                        <li>Streamlined organizational workflow</li>
-                    </ul>
+            <!-- Cards muncul di sini -->
+            <div id="feedbackList" class="feedback-list">
+                <div class="feedback-empty" id="feedbackEmpty">
+                    <p>No feedback yet. Be the first! 🚀</p>
                 </div>
             </div>
-        </section>
 
-        <section id="contact" class="section">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-grid">
-                <a href="mailto:fahrulmukhlisin13@gmail.com" class="glass-card contact-card">
-                    <div class="contact-icon">📧</div>
-                    <h3>Email</h3>
-                    <p>fahrulmukhlisin13@gmail.com</p>
-                </a>
-                <a href="https://linkedin.com/in/fakrl" class="glass-card contact-card" target="_blank">
-                    <div class="contact-icon">💼</div>
-                    <h3>LinkedIn</h3>
-                    <p>linkedin.com/in/fakrl</p>
-                </a>
-                <a href="https://github.com/fakrl" class="glass-card contact-card" target="_blank">
-                    <div class="contact-icon">🐙</div>
-                    <h3>GitHub</h3>
-                    <p>github.com/fakrl</p>
-                </a>
-                <a href="https://api.whatsapp.com/send/?phone=6281315324195" class="glass-card contact-card" target="_blank">
-                    <div class="contact-icon">📱</div>
-                    <h3>WhatsApp</h3>
-                    <p>+62 813 1532 4195</p>
-                </a>
-            </div>
-        </section>
-        
-        <footer class="footer">
-            <p>&copy; 2025 Fakhrul Mukhlisin. Built with passion and code.</p>
-            <div class="footer-links">
-                <a href="index.html">Back to Profile Card</a>
-            </div>
-        </footer>
-    </main>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <footer class="footer">
+        <p>&copy; 2025 Fakhrul Mukhlisin. Built with passion and code.</p>
+        <div class="footer-links">
+            <a href="index.html">← Back to Profile Card</a>
+            &nbsp;·&nbsp;
+            <a href="proof.html">Proof of Work</a>
+            &nbsp;·&nbsp;
+            <a href="moments.html">Moments</a>
+        </div>
+    </footer>
+</main>
+
+<!-- Firebase SDK via CDN — tidak perlu npm! -->
+<script type="module">
+    import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onValue, serverTimestamp }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    // ── 1. Config Firebase lo ────────────────────────────────
+    const firebaseConfig = {
+        apiKey: "AIzaSyDhJLaWGZs1YILiMaNIDQ3mapnBUoH9R6s",
+        authDomain: "fakrul-feeeb.firebaseapp.com",
+        databaseURL: "https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "fakrul-feeeb",
+        storageBucket: "fakrul-feeeb.firebasestorage.app",
+        messagingSenderId: "767578062305",
+        appId: "1:767578062305:web:3cdf7bd8678923bb3e26a0"
+    };
+
+    // ── 2. Init app & ambil referensi ke node "feedback" ────
+    const app = initializeApp(firebaseConfig);
+    const db  = getDatabase(app);
+    const commentsRef = ref(db, "feedback");
+    // "feedback" = nama node di database lo, kayak nama tabel di MySQL
+
+    // ── 3. Helper: escape HTML supaya aman dari XSS ──────────
+    // XSS = orang iseng kirim <script> lewat form
+    function escapeHtml(str) {
+        return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+    }
+
+    // ── 4. Helper: format timestamp jadi tanggal readable ───
+    function formatTime(ts) {
+        if (!ts) return "";
+        const d = new Date(ts);
+        return d.toLocaleDateString("id-ID", {
+            day: "numeric", month: "short", year: "numeric",
+            hour: "2-digit", minute: "2-digit"
+        });
+    }
+
+    // ── 5. Bikin card element dari data ─────────────────────
+    function createCard(data) {
+        const card = document.createElement("div");
+        card.className = "glass-card feedback-card fade-in";
+        card.innerHTML = `
+            <div class="feedback-card-header">
+                <span class="feedback-avatar">${escapeHtml(data.nama.charAt(0).toUpperCase())}</span>
+                <div class="feedback-card-meta">
+                    <strong class="feedback-card-name">${escapeHtml(data.nama)}</strong>
+                    <span class="feedback-card-time">${formatTime(data.waktu)}</span>
+                </div>
+            </div>
+            <p class="feedback-card-msg">${escapeHtml(data.pesan)}</p>
+        `;
+        return card;
+    }
+
+    // ── 6. LISTEN realtime — ini inti dari Firebase ──────────
+    // onValue() = "dengerin terus node ini, kalau ada perubahan, jalanin callback"
+    // Analoginya: kayak subscribe notif — begitu ada data baru, langsung dikabarin
+    onValue(commentsRef, (snapshot) => {
+        const list  = document.getElementById("feedbackList");
+        const empty = document.getElementById("feedbackEmpty");
+        const data  = snapshot.val();
+
+        // Bersihkan card lama
+        list.querySelectorAll(".feedback-card").forEach(el => el.remove());
+
+        if (!data) {
+            empty.style.display = "block";
+            return;
+        }
+
+        empty.style.display = "none";
+
+        // Firebase return object, kita ubah jadi array dan balik urutannya
+        // biar yang terbaru muncul di atas
+        const entries = Object.values(data).reverse();
+        entries.forEach(item => {
+            list.appendChild(createCard(item));
+        });
+    });
+
+    // ── 7. Submit komentar ke Firebase ───────────────────────
+    document.getElementById("feedbackSubmit").addEventListener("click", async () => {
+        const nameEl = document.getElementById("feedbackName");
+        const msgEl  = document.getElementById("feedbackMessage");
+        const btn    = document.getElementById("feedbackSubmit");
+
+        const nama  = nameEl.value.trim();
+        const pesan = msgEl.value.trim();
+
+        if (!nama || !pesan) {
+            alert("Nama dan pesan harus diisi ya!");
+            return;
+        }
+
+        // Disable tombol sementara biar ga double submit
+        btn.textContent = "Sending...";
+        btn.disabled = true;
+
+        try {
+            // push() = tambah data baru ke node "feedback"
+            // serverTimestamp() = pakai waktu dari server Firebase, bukan waktu browser
+            await push(commentsRef, {
+                nama,
+                pesan,
+                waktu: serverTimestamp()
+            });
+
+            nameEl.value = "";
+            msgEl.value  = "";
+        } catch (err) {
+            alert("Gagal kirim, coba lagi ya!");
+            console.error(err);
+        } finally {
+            btn.textContent = "Send Message ✉️";
+            btn.disabled = false;
+        }
+    });
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>
