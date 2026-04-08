@@ -6,6 +6,7 @@
     <title>Fakhrul Mukhlisin - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="experience-carousel.css">
     <meta name="description" content="Fakhrul Mukhlisin - Backend & Frontend Developer Portfolio">
     <meta name="keywords" content="Golang, Vue.js, REST API, Backend Developer, Web Developer, Software Engineer">
     <meta name="author" content="Fakhrul Mukhlisin">
@@ -200,59 +201,146 @@
 
     <!-- EXPERIENCE -->
     <section id="experience" class="section">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Dec 2025</div>
-                <h3 class="timeline-title">Backend Developer Intern</h3>
-                <div class="timeline-company">Evermos × Rakamin Academy</div>
-                <ul class="timeline-list">
-                    <li>Built full marketplace REST API in Golang/Gin with clean architecture — 7 modules end-to-end</li>
-                    <li>Implemented JWT auth, RBAC (admin vs user), multi-image upload, pagination & filtering</li>
-                    <li>Applied atomic DB transactions for auto-create store on register; built product log for historical pricing</li>
-                    <li>Score: <strong>90.91/100 (Excellent)</strong></li>
-                </ul>
+    <h2 class="section-title">Experience</h2>
+ 
+    <div class="exp-carousel-container">
+ 
+        <!-- Tombol navigasi -->
+        <button class="exp-nav exp-nav--prev" id="expPrev" aria-label="Previous">&#8592;</button>
+        <button class="exp-nav exp-nav--next" id="expNext" aria-label="Next">&#8594;</button>
+ 
+        <!-- Track — ini yang bergerak -->
+        <div class="exp-track" id="expTrack">
+ 
+            <!-- CARD 1 -->
+            <div class="exp-card glass-card">
+                <div class="exp-card__img">
+                    <img src="image/exp-evermos.jpg" alt="Evermos Internship"
+                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    <div class="exp-card__badge">90.91 / 100</div>
+                </div>
+                <div class="exp-card__body">
+                    <span class="exp-card__date">Dec 2025</span>
+                    <h3 class="exp-card__title">Backend Developer Intern</h3>
+                    <p class="exp-card__company">Evermos × Rakamin Academy</p>
+                    <ul class="exp-card__list">
+                        <li>Built full marketplace REST API — Golang, Gin, MySQL, JWT</li>
+                        <li>7 modules: Auth, User, Store, Address, Category, Product, Transaction</li>
+                        <li>Clean architecture, pagination, filtering, multi-image upload</li>
+                        <li>Atomic DB transactions & product log for historical pricing</li>
+                    </ul>
+                    <div class="exp-card__tags">
+                        <span class="tag">Golang</span>
+                        <span class="tag">Gin</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">JWT</span>
+                        <span class="tag">REST API</span>
+                    </div>
+                </div>
             </div>
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Oct – Nov 2025</div>
-                <h3 class="timeline-title">Frontend Developer Intern</h3>
-                <div class="timeline-company">Core Initiative × Rakamin Academy</div>
-                <ul class="timeline-list">
-                    <li>Built E-Commerce Catalog with Vue.js 2 — live API integration with 3 dynamic UI themes</li>
-                    <li>Applied advanced CSS: SVG export from Figma, CSS filters, pixel-perfect implementation</li>
-                    <li>Deployed to Firebase via GitLab CI/CD pipeline</li>
-                    <li>Score: <strong>87.79/100 (Excellent)</strong></li>
-                </ul>
+ 
+            <!-- CARD 2 -->
+            <div class="exp-card glass-card">
+                <div class="exp-card__img">
+                    <img src="image/exp-coreinit.jpg" alt="Core Initiative Internship"
+                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    <div class="exp-card__badge">87.79 / 100</div>
+                </div>
+                <div class="exp-card__body">
+                    <span class="exp-card__date">Oct – Nov 2025</span>
+                    <h3 class="exp-card__title">Frontend Developer Intern</h3>
+                    <p class="exp-card__company">Core Initiative × Rakamin Academy</p>
+                    <ul class="exp-card__list">
+                        <li>Built E-Commerce Catalog — Vue.js 2, live REST API integration</li>
+                        <li>3 dynamic UI themes per product category via Vue class binding</li>
+                        <li>Pixel-perfect Figma implementation, SVG export, CSS filters</li>
+                        <li>Deployed via GitLab CI/CD pipeline to Firebase</li>
+                    </ul>
+                    <div class="exp-card__tags">
+                        <span class="tag">Vue.js 2</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Figma</span>
+                    </div>
+                </div>
             </div>
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Nov 2024 – Jul 2025</div>
-                <h3 class="timeline-title">Data Management Specialist (Internship)</h3>
-                <div class="timeline-company">Lembaga Kemahasiswaan UNPAM</div>
-                <ul class="timeline-list">
-                    <li>Structured and managed relational dataset of 500+ student and alumni records</li>
-                    <li>Used JavaScript for data scraping and automation workflows</li>
-                    <li>Built data visualizations for faculty and developed a digital archive for 1,000+ files</li>
-                </ul>
+ 
+            <!-- CARD 3 -->
+            <div class="exp-card glass-card">
+                <div class="exp-card__img">
+                    <img src="image/exp-unpam.jpg" alt="UNPAM Internship"
+                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                </div>
+                <div class="exp-card__body">
+                    <span class="exp-card__date">Nov 2024 – Jul 2025</span>
+                    <h3 class="exp-card__title">Data Management Specialist</h3>
+                    <p class="exp-card__company">Lembaga Kemahasiswaan UNPAM</p>
+                    <ul class="exp-card__list">
+                        <li>Managed relational dataset of 500+ student & alumni records</li>
+                        <li>Built data visualizations for faculty presentations</li>
+                        <li>Developed digital archive system for 1,000+ documentation files</li>
+                        <li>JavaScript automation for data scraping workflows</li>
+                    </ul>
+                    <div class="exp-card__tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Data Management</span>
+                        <span class="tag">Visualization</span>
+                    </div>
+                </div>
             </div>
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Jul 2024 – Jul 2025</div>
-                <h3 class="timeline-title">Digital Content Support (Part-time)</h3>
-                <div class="timeline-company">PT. Cahaya Millenial Sejahtera</div>
-                <ul class="timeline-list">
-                    <li>Leveraged generative AI and prompt engineering for copywriting automation</li>
-                    <li>Maintained brand messaging consistency across digital platforms</li>
-                </ul>
+ 
+            <!-- CARD 4 -->
+            <div class="exp-card glass-card">
+                <div class="exp-card__img">
+                    <img src="image/exp-cms.jpg" alt="CMS Part-time"
+                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                </div>
+                <div class="exp-card__body">
+                    <span class="exp-card__date">Jul 2024 – Jul 2025</span>
+                    <h3 class="exp-card__title">Digital Content Support</h3>
+                    <p class="exp-card__company">PT. Cahaya Millenial Sejahtera</p>
+                    <ul class="exp-card__list">
+                        <li>AI-powered copywriting automation via prompt engineering</li>
+                        <li>Maintained brand messaging across digital platforms</li>
+                        <li>Collaborated cross-functionally with design teams</li>
+                    </ul>
+                    <div class="exp-card__tags">
+                        <span class="tag">Prompt Engineering</span>
+                        <span class="tag">AI Tools</span>
+                        <span class="tag">Content</span>
+                    </div>
+                </div>
             </div>
-            <div class="glass-card timeline-item">
-                <div class="timeline-date">Oct 2021 – Nov 2022</div>
-                <h3 class="timeline-title">President</h3>
-                <div class="timeline-company">Forum Studi Jurnalis</div>
-                <ul class="timeline-list">
-                    <li>Led organization of 300+ members; coordinated 15+ events including technical seminars</li>
-                    <li>Implemented new editorial processes and streamlined cross-functional workflows</li>
-                </ul>
+ 
+            <!-- CARD 5 -->
+            <div class="exp-card glass-card">
+                <div class="exp-card__img">
+                    <img src="image/exp-jurnalis.jpg" alt="Forum Studi Jurnalis"
+                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                </div>
+                <div class="exp-card__body">
+                    <span class="exp-card__date">Oct 2021 – Nov 2022</span>
+                    <h3 class="exp-card__title">President</h3>
+                    <p class="exp-card__company">Forum Studi Jurnalis</p>
+                    <ul class="exp-card__list">
+                        <li>Led organization of 300+ members</li>
+                        <li>Coordinated 15+ events including technical seminars & workshops</li>
+                        <li>Implemented new editorial processes & streamlined workflows</li>
+                    </ul>
+                    <div class="exp-card__tags">
+                        <span class="tag">Leadership</span>
+                        <span class="tag">Event Management</span>
+                        <span class="tag">300+ Members</span>
+                    </div>
+                </div>
             </div>
-        </div>
+ 
+        </div><!-- /exp-track -->
+ 
+        <!-- Dot indicators -->
+        <div class="exp-dots" id="expDots"></div>
+ 
+    </div><!-- /exp-carousel-container -->
     </section>
 
     <!-- CONTACT -->
@@ -469,7 +557,110 @@
         }
     });
 </script>
-
+<script>
+(function() {
+    const track    = document.getElementById('expTrack');
+    const prevBtn  = document.getElementById('expPrev');
+    const nextBtn  = document.getElementById('expNext');
+    const dotsEl   = document.getElementById('expDots');
+ 
+    if (!track) return;
+ 
+    const cards    = Array.from(track.querySelectorAll('.exp-card'));
+    const total    = cards.length;
+    let current    = 0;
+    let isDragging = false;
+    let startX     = 0;
+    let dragDelta  = 0;
+ 
+    // ── Hitung berapa card yang keliatan sesuai lebar layar ─
+    function visibleCount() {
+        const w = window.innerWidth;
+        if (w >= 1200) return 4;
+        if (w >= 900)  return 3;
+        if (w >= 600)  return 2;
+        return 1;
+    }
+ 
+    // ── Max index supaya ga over-scroll ─────────────────────
+    function maxIndex() {
+        return Math.max(0, total - visibleCount());
+    }
+ 
+    // ── Geser track ke posisi yang bener ────────────────────
+    function goTo(index) {
+        current = Math.max(0, Math.min(index, maxIndex()));
+ 
+        const cardW   = cards[0].offsetWidth;
+        const gap     = 24; // harus sama dengan gap di CSS
+        const offset  = current * (cardW + gap);
+ 
+        track.style.transform = `translateX(-${offset}px)`;
+ 
+        // Update dots
+        dotsEl.querySelectorAll('.exp-dot').forEach((d, i) => {
+            d.classList.toggle('exp-dot--active', i === current);
+        });
+ 
+        // Disable/enable tombol
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current >= maxIndex();
+    }
+ 
+    // ── Bikin dots sesuai jumlah "halaman" ──────────────────
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        const pages = maxIndex() + 1;
+        for (let i = 0; i < pages; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'exp-dot';
+            dot.setAttribute('aria-label', `Go to ${i + 1}`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(dot);
+        }
+    }
+ 
+    // ── Tombol prev / next ───────────────────────────────────
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+ 
+    // ── Swipe / drag support ─────────────────────────────────
+    // Biar bisa di-swipe di HP atau drag di desktop
+    track.addEventListener('mousedown',  e => { isDragging = true; startX = e.clientX; });
+    track.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; }, { passive: true });
+ 
+    track.addEventListener('mousemove',  e => { if (isDragging) dragDelta = e.clientX - startX; });
+    track.addEventListener('touchmove',  e => { if (isDragging) dragDelta = e.touches[0].clientX - startX; }, { passive: true });
+ 
+    function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        if (dragDelta < -50) goTo(current + 1);      // swipe kiri → next
+        else if (dragDelta > 50) goTo(current - 1);  // swipe kanan → prev
+        dragDelta = 0;
+    }
+ 
+    track.addEventListener('mouseup',    endDrag);
+    track.addEventListener('mouseleave', endDrag);
+    track.addEventListener('touchend',   endDrag);
+ 
+    // ── Keyboard navigation ──────────────────────────────────
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+ 
+    // ── Re-init waktu resize ─────────────────────────────────
+    window.addEventListener('resize', () => {
+        buildDots();
+        goTo(Math.min(current, maxIndex()));
+    });
+ 
+    // ── Init ─────────────────────────────────────────────────
+    buildDots();
+    goTo(0);
+})();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
