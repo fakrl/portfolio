@@ -298,6 +298,13 @@
                         class="feedback-input"
                         maxlength="50"
                     />
+                    <input
+                    type="text"
+                    id="feedbackFrom"
+                    placeholder="Asal / Instansi (contoh: Teman kampus, Magang, dll)"
+                    class="feedback-input"
+                    maxlength="80"
+                    />
                     <textarea
                         id="feedbackMessage"
                         placeholder="Your message..."
@@ -386,6 +393,7 @@
                 <span class="feedback-avatar">${escapeHtml(data.nama.charAt(0).toUpperCase())}</span>
                 <div class="feedback-card-meta">
                     <strong class="feedback-card-name">${escapeHtml(data.nama)}</strong>
+                    <span class="feedback-card-from">📍 ${escapeHtml(data.dari || "")}</span>
                     <span class="feedback-card-time">${formatTime(data.waktu)}</span>
                 </div>
             </div>
@@ -427,10 +435,11 @@
         const btn    = document.getElementById("feedbackSubmit");
 
         const nama  = nameEl.value.trim();
+        const dari  = document.getElementById("feedbackFrom").value.trim();
         const pesan = msgEl.value.trim();
 
         if (!nama || !pesan) {
-            alert("Nama dan pesan harus diisi ya!");
+    alert("Nama dan pesan harus diisi ya! Asal/instansi boleh dikosongkan.");
             return;
         }
 
@@ -443,11 +452,13 @@
             // serverTimestamp() = pakai waktu dari server Firebase, bukan waktu browser
             await push(commentsRef, {
                 nama,
+                dari: dari || "Anonymous",
                 pesan,
                 waktu: serverTimestamp()
             });
 
             nameEl.value = "";
+            document.getElementById("feedbackFrom").value = "";
             msgEl.value  = "";
         } catch (err) {
             alert("Gagal kirim, coba lagi ya!");
