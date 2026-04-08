@@ -871,6 +871,11 @@ main {
 /* ==========================================
    FEEDBACK SECTION
    ========================================== */
+.feedback-card-from {
+    font-size: 0.8rem;
+    color: #667eea;
+    font-weight: 500;
+}
 
 .feedback-wrapper {
     max-width: 700px;
