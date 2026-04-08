@@ -259,10 +259,10 @@
     <section id="contact" class="section">
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-grid">
-            <a href="mailto:fahrulmukhlisin13@gmail.com" class="glass-card contact-card">
+            <a href="/cdn-cgi/l/email-protection#3b5d5a53494e57564e505357524852550a087b5c565a525715585456" class="glass-card contact-card">
                 <div class="contact-icon">📧</div>
                 <h3>Email</h3>
-                <p>fahrulmukhlisin13@gmail.com</p>
+                <p><span class="__cf_email__" data-cfemail="98fef9f0eaedf4f5edf3f0f4f1ebf1f6a9abd8fff5f9f1f4b6fbf7f5">[email&#160;protected]</span></p>
             </a>
             <a href="https://linkedin.com/in/fakrl" class="glass-card contact-card" target="_blank">
                 <div class="contact-icon">💼</div>
@@ -291,13 +291,20 @@
             <div class="glass-card feedback-form-card">
                 <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
                 <div class="feedback-form">
-<input
-    type="text"
-    id="feedbackInstansi"
-    placeholder="Asal instansi (opsional) — e.g. Temen kampus, Magang, Sekolah, dll"
-    class="feedback-input"
-    maxlength="80"
-/>
+                    <input
+                        type="text"
+                        id="feedbackName"
+                        placeholder="Your name *"
+                        class="feedback-input"
+                        maxlength="50"
+                    />
+                    <input
+                        type="text"
+                        id="feedbackInstansi"
+                        placeholder="Asal instansi (opsional) — e.g. Teman kampus, Evermos, PT XYZ"
+                        class="feedback-input"
+                        maxlength="80"
+                    />
                     <textarea
                         id="feedbackMessage"
                         placeholder="Your message..."
@@ -334,7 +341,7 @@
 </main>
 
 <!-- Firebase SDK via CDN — tidak perlu npm! -->
-<script type="module">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
     import { initializeApp }
         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue, serverTimestamp }
@@ -385,9 +392,10 @@
             <div class="feedback-card-header">
                 <span class="feedback-avatar">${escapeHtml(data.nama.charAt(0).toUpperCase())}</span>
                 <div class="feedback-card-meta">
-<strong class="feedback-card-name">${escapeHtml(data.nama)}</strong>
-${data.instansi ? `<span class="feedback-card-instansi">📍 ${escapeHtml(data.instansi)}</span>` : ''}
-<span class="feedback-card-time">${formatTime(data.waktu)}</span>                </div>
+                    <strong class="feedback-card-name">${escapeHtml(data.nama)}</strong>
+                    ${data.instansi ? `<span class="feedback-card-instansi">📍 ${escapeHtml(data.instansi)}</span>` : ''}
+                    <span class="feedback-card-time">${formatTime(data.waktu)}</span>
+                </div>
             </div>
             <p class="feedback-card-msg">${escapeHtml(data.pesan)}</p>
         `;
@@ -428,6 +436,8 @@ ${data.instansi ? `<span class="feedback-card-instansi">📍 ${escapeHtml(data.i
 
         const nama  = nameEl.value.trim();
         const pesan = msgEl.value.trim();
+        const instansiEl = document.getElementById("feedbackInstansi");
+        const instansi   = instansiEl.value.trim();
 
         if (!nama || !pesan) {
             alert("Nama dan pesan harus diisi ya!");
@@ -441,29 +451,15 @@ ${data.instansi ? `<span class="feedback-card-instansi">📍 ${escapeHtml(data.i
         try {
             // push() = tambah data baru ke node "feedback"
             // serverTimestamp() = pakai waktu dari server Firebase, bukan waktu browser
-const instansi = document.getElementById("feedbackInstansi").value.trim();
+            await push(commentsRef, {
+                nama,
+                pesan,
+                instansi: instansi || null,
+                waktu: serverTimestamp()
+            });
 
-await push(commentsRef, {
-    nama,
-    pesan,
-    instansi: instansi || null,
-    waktu: serverTimestamp()
-});
-
-            nameEl.value = "";
-            msgEl.value  = "";
-            document.getElementById("feedbackInstansi").value = "";
-
+            nameEl.value    = "";
+            msgEl.value     = "";
+            instansiEl.value = "";
         } catch (err) {
-            alert("Gagal kirim, coba lagi ya!");
-            console.error(err);
-        } finally {
-            btn.textContent = "Send Message ✉️";
-            btn.disabled = false;
-        }
-    });
-</script>
-
-<script src="script.js"></script>
-</body>
-</html>
+            alert(
