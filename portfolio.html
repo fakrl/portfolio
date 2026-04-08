@@ -291,13 +291,13 @@
             <div class="glass-card feedback-form-card">
                 <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
                 <div class="feedback-form">
-                    <input
-                        type="text"
-                        id="feedbackName"
-                        placeholder="Your name"
-                        class="feedback-input"
-                        maxlength="50"
-                    />
+<input
+    type="text"
+    id="feedbackInstansi"
+    placeholder="Asal instansi (opsional) — e.g. Temen kampus, Magang, Sekolah, dll"
+    class="feedback-input"
+    maxlength="80"
+/>
                     <textarea
                         id="feedbackMessage"
                         placeholder="Your message..."
@@ -385,9 +385,9 @@
             <div class="feedback-card-header">
                 <span class="feedback-avatar">${escapeHtml(data.nama.charAt(0).toUpperCase())}</span>
                 <div class="feedback-card-meta">
-                    <strong class="feedback-card-name">${escapeHtml(data.nama)}</strong>
-                    <span class="feedback-card-time">${formatTime(data.waktu)}</span>
-                </div>
+<strong class="feedback-card-name">${escapeHtml(data.nama)}</strong>
+${data.instansi ? `<span class="feedback-card-instansi">📍 ${escapeHtml(data.instansi)}</span>` : ''}
+<span class="feedback-card-time">${formatTime(data.waktu)}</span>                </div>
             </div>
             <p class="feedback-card-msg">${escapeHtml(data.pesan)}</p>
         `;
@@ -441,14 +441,19 @@
         try {
             // push() = tambah data baru ke node "feedback"
             // serverTimestamp() = pakai waktu dari server Firebase, bukan waktu browser
-            await push(commentsRef, {
-                nama,
-                pesan,
-                waktu: serverTimestamp()
-            });
+const instansi = document.getElementById("feedbackInstansi").value.trim();
+
+await push(commentsRef, {
+    nama,
+    pesan,
+    instansi: instansi || null,
+    waktu: serverTimestamp()
+});
 
             nameEl.value = "";
             msgEl.value  = "";
+            document.getElementById("feedbackInstansi").value = "";
+
         } catch (err) {
             alert("Gagal kirim, coba lagi ya!");
             console.error(err);
