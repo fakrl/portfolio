@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="animations.css">
     <link rel="stylesheet" href="feedback.css">
     <link rel="stylesheet" href="experience-carousel.css">
+    <link rel="stylesheet" href="contact-section.css">
     <meta name="description" content="Fakhrul Mukhlisin - Backend & Frontend Developer Portfolio">
     <meta name="keywords" content="Golang, Vue.js, REST API, Backend Developer, Web Developer, Software Engineer">
     <meta name="author" content="Fakhrul Mukhlisin">
@@ -319,40 +320,91 @@
     </section>
 
     <!-- ── CONTACT ────────────────────────────── -->
-    <section id="contact" class="section">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-grid">
-            <a href="mailto:fahrulmukhlisin13@gmail.com" class="glass-card contact-card">
-                <div class="contact-icon">📧</div>
-                <h3>Email</h3>
-                <p>fahrulmukhlisin13@gmail.com</p>
-            </a>
-            <a href="https://linkedin.com/in/fakrl" class="glass-card contact-card" target="_blank">
-                <div class="contact-icon">💼</div>
-                <h3>LinkedIn</h3>
-                <p>linkedin.com/in/fakrl</p>
-            </a>
-            <a href="https://github.com/fakrl" class="glass-card contact-card" target="_blank">
-                <div class="contact-icon">🐙</div>
-                <h3>GitHub</h3>
-                <p>github.com/fakrl</p>
-            </a>
-            <a href="https://api.whatsapp.com/send/?phone=6281315324195" class="glass-card contact-card" target="_blank">
-                <div class="contact-icon">📱</div>
-                <h3>WhatsApp</h3>
-                <p>+62 813 1532 4195</p>
-            </a>
+<section id="contact" class="section">
+    <h2 class="section-title">Hit Me Up</h2>
+ 
+    <!-- Download CV — di atas, sebelum kotak kontak -->
+    <div class="cv-download-wrapper">
+        <a href="cv/cv_fakhrul_mukhlisin_2026.pdf"
+           download
+           class="cv-download-btn btn btn-primary">
+            📄 Download CV
+        </a>
+        <p class="cv-download-hint">PDF · Updated 2026</p>
+    </div>
+ 
+    <!-- Kotak-kotak kontak -->
+    <div class="contact-grid">
+ 
+        <a href="mailto:fahrulmukhlisin13@gmail.com"
+           class="glass-card contact-card">
+            <div class="contact-icon">📧</div>
+            <h3>Email</h3>
+            <p>fahrulmukhlisin13@gmail.com</p>
+        </a>
+ 
+        <a href="https://www.instagram.com/fak.rl/"
+           target="_blank" class="glass-card contact-card">
+            <div class="contact-icon">📷</div>
+            <h3>Instagram</h3>
+            <p>@fak.rl</p>
+        </a>
+ 
+        <a href="https://linkedin.com/in/fakrl"
+           target="_blank" class="glass-card contact-card">
+            <div class="contact-icon">💼</div>
+            <h3>LinkedIn</h3>
+            <p>linkedin.com/in/fakrl</p>
+        </a>
+ 
+        <a href="https://api.whatsapp.com/send/?phone=6281315324195"
+           target="_blank" class="glass-card contact-card">
+            <div class="contact-icon">💬</div>
+            <h3>WhatsApp</h3>
+            <p>+62 813 1532 4195</p>
+        </a>
+ 
+    </div>
+ 
+    <!-- Form kirim pesan langsung ke WA -->
+    <div class="wa-form-wrapper glass-card">
+        <div class="wa-form-header">
+            <span class="wa-form-icon">💬</span>
+            <div>
+                <h3 class="wa-form-title">Send a Message</h3>
+                <p class="wa-form-sub">Straight to my WhatsApp — I'll reply ASAP!</p>
+            </div>
         </div>
-    </section>
-
-    <footer class="footer">
-        <p>&copy; 2025 Fakhrul Mukhlisin. Built with passion and code.</p>
-        <div class="footer-links">
-            <a href="index.html">← Profile Card</a> &nbsp;·&nbsp;
-            <a href="proof.html">Proof of Work</a> &nbsp;·&nbsp;
-            <a href="moments.html">Moments</a>
+        <div class="wa-form">
+            <input
+                type="text"
+                id="waName"
+                placeholder="Your name"
+                class="feedback-input"
+                maxlength="60"
+            />
+            <textarea
+                id="waMessage"
+                placeholder="What's on your mind?"
+                class="feedback-input wa-textarea"
+                maxlength="500"
+                rows="4"
+            ></textarea>
+            <button id="waSend" class="btn btn-primary wa-send-btn">
+                Send via WhatsApp 🚀
+            </button>
         </div>
-    </footer>
+    </div>
+ 
+</section>
+<!-- ======= END SECTION CONTACT ======= -->
+ 
+<footer class="footer">
+    <p>&copy; 2026 Fakhrul Mukhlisin.</p>
+    <div class="footer-links">
+        <a href="index.html">← Back to Profile Card</a>
+    </div>
+</footer>
 </main>
 
 <!-- ── Firebase Feedback ──────────────────────────────── -->
@@ -500,7 +552,31 @@
     goTo(0);
 })();
 </script>
-
+<script>
+document.getElementById('waSend').addEventListener('click', () => {
+    const name    = document.getElementById('waName').value.trim();
+    const message = document.getElementById('waMessage').value.trim();
+ 
+    // Validasi
+    if (!name || !message) {
+        alert('Please fill in both your name and message!');
+        return;
+    }
+ 
+    // Format pesan yang otomatis terketik di WA
+    const text = `Hi Fakhrul! I'm ${name} and I just came across your portfolio.\n\n${message}\n\nLooking forward to hearing from you!`;
+ 
+    // Encode biar aman di URL
+    const encoded = encodeURIComponent(text);
+ 
+    // Buka WA dengan pesan otomatis
+    window.open(`https://wa.me/6281315324195?text=${encoded}`, '_blank');
+ 
+    // Reset form
+    document.getElementById('waName').value    = '';
+    document.getElementById('waMessage').value = '';
+});
+</script>
 <script src="script.js"></script>
 </body>
 </html>
