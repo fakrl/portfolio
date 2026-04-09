@@ -1,0 +1,482 @@
+/* ==========================================
+   PROOF OF WORK & MOMENTS — SHARED STYLES
+   ========================================== */
+
+/* ── Hero sections ───────────────────────── */
+.proof-hero,
+.moments-hero {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 5% 4rem;
+}
+
+.proof-hero__label,
+.moments-hero__label {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    transition: color 0.8s ease;
+}
+
+body.light .proof-hero__label,
+body.light .moments-hero__label { color: #667eea; }
+body.dark  .proof-hero__label,
+body.dark  .moments-hero__label { color: #667eea; }
+
+.proof-hero__title,
+.moments-hero__title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.proof-hero__sub,
+.moments-hero__sub {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    transition: color 0.8s ease;
+}
+
+body.light .proof-hero__sub,
+body.light .moments-hero__sub { color: #555; }
+body.dark  .proof-hero__sub,
+body.dark  .moments-hero__sub { color: #aaa; }
+
+/* ── Tab navigation (Proof of Work) ─────── */
+.proof-tabs {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.proof-tab {
+    padding: 0.6rem 1.4rem;
+    border-radius: 30px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+body.light .proof-tab {
+    background: rgba(0,0,0,0.06);
+    color: #555;
+}
+
+body.dark .proof-tab {
+    background: rgba(255,255,255,0.08);
+    color: #aaa;
+}
+
+.proof-tab--active,
+.proof-tab:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+}
+
+/* ── Proof cards grid ────────────────────── */
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.proof-card {
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.proof-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Card image area */
+.proof-card__img {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+}
+
+.proof-card__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.proof-card:hover .proof-card__img img {
+    transform: scale(1.05);
+}
+
+.proof-card__img--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    opacity: 0.4;
+}
+
+.proof-card__img--placeholder::after {
+    content: '📄';
+}
+
+/* Badge */
+.proof-card__badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: white;
+}
+
+.proof-card__badge--gold   { background: linear-gradient(135deg, #f6d365, #fda085); }
+.proof-card__badge--purple { background: linear-gradient(135deg, #667eea, #764ba2); }
+.proof-card__badge--blue   { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #111; }
+.proof-card__badge--green  { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #111; }
+
+/* Card body */
+.proof-card__body {
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.proof-card__date {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.proof-card__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: color 0.8s ease;
+}
+
+body.light .proof-card__title { color: #1a1a1a; }
+body.dark  .proof-card__title { color: #ffffff; }
+
+.proof-card__issuer {
+    font-size: 0.85rem;
+    font-style: italic;
+    transition: color 0.8s ease;
+}
+
+body.light .proof-card__issuer { color: #666; }
+body.dark  .proof-card__issuer { color: #aaa; }
+
+.proof-card__desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-top: 0.3rem;
+    transition: color 0.8s ease;
+}
+
+body.light .proof-card__desc { color: #444; }
+body.dark  .proof-card__desc { color: #ccc; }
+
+.proof-card__tag {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+}
+
+/* ── Photography grid ────────────────────── */
+.proof-photo-desc {
+    text-align: center;
+    margin-bottom: 2rem;
+    transition: color 0.8s ease;
+}
+
+body.light .proof-photo-desc { color: #666; }
+body.dark  .proof-photo-desc { color: #aaa; }
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+    border-radius: 16px;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.photo-item:hover img {
+    transform: scale(1.08);
+}
+
+.photo-item--placeholder {
+    background: linear-gradient(135deg, #667eea22, #764ba222);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-item--placeholder::after {
+    content: '📷';
+    font-size: 2.5rem;
+    opacity: 0.4;
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover .photo-overlay {
+    transform: translateY(0);
+}
+
+.photo-caption {
+    color: white;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* ── MOMENTS — filter buttons ────────────── */
+.moments-filters {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.moments-filter {
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+body.light .moments-filter {
+    background: rgba(0,0,0,0.06);
+    color: #555;
+}
+
+body.dark .moments-filter {
+    background: rgba(255,255,255,0.08);
+    color: #aaa;
+}
+
+.moments-filter--active,
+.moments-filter:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+}
+
+/* ── Moments grid ────────────────────────── */
+.moments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.moment-item {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+}
+
+.moment-item:hover {
+    transform: scale(1.02);
+}
+
+.moment-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.moment-item:hover img {
+    transform: scale(1.08);
+}
+
+.moment-item--placeholder {
+    background: linear-gradient(135deg, #667eea22, #764ba222);
+}
+
+.moment-item--placeholder::after {
+    content: '📸';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2.5rem;
+    opacity: 0.4;
+}
+
+.moment-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.moment-item:hover .moment-overlay {
+    transform: translateY(0);
+}
+
+.moment-tag {
+    display: inline-block;
+    background: rgba(102,126,234,0.8);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+.moment-caption {
+    color: white;
+    font-size: 0.82rem;
+    margin: 0;
+}
+
+/* ── Lightbox ─────────────────────────────── */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.lightbox--open {
+    display: flex;
+}
+
+.lightbox__img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.lightbox__caption {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.lightbox__close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.lightbox__close:hover { background: rgba(255,255,255,0.3); }
+
+.lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox__nav--prev { left: 1.5rem; }
+.lightbox__nav--next { right: 1.5rem; }
+.lightbox__nav:hover { background: rgba(255,255,255,0.3); }
+
+/* ── Active nav link ─────────────────────── */
+.nav-links a.active {
+    color: #667eea !important;
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 768px) {
+    .proof-hero__title,
+    .moments-hero__title { font-size: 2.5rem; }
+
+    .proof-grid,
+    .photo-grid,
+    .moments-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .lightbox__nav--prev { left: 0.5rem; }
+    .lightbox__nav--next { right: 0.5rem; }
+}
