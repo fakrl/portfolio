@@ -1,0 +1,133 @@
+/* ==========================================
+   CONTACT SECTION — Hit Me Up
+   ========================================== */
+
+/* ── Download CV ─────────────────────────── */
+.cv-download-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.cv-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+}
+
+.cv-download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.cv-download-hint {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    transition: color 0.8s ease;
+}
+
+body.light .cv-download-hint { color: #666; }
+body.dark  .cv-download-hint { color: #aaa; }
+
+/* ── Contact cards grid ──────────────────── */
+/* Tetap pakai .contact-grid dari style.css,
+   override supaya max 4 kolom rapi */
+.contact-grid {
+    margin-bottom: 2.5rem;
+}
+
+/* ── WA Form ─────────────────────────────── */
+.wa-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.wa-form-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.wa-form-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.wa-form-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    transition: color 0.8s ease;
+}
+
+body.light .wa-form-title { color: #1a1a1a; }
+body.dark  .wa-form-title { color: #ffffff; }
+
+.wa-form-sub {
+    font-size: 0.88rem;
+    transition: color 0.8s ease;
+}
+
+body.light .wa-form-sub { color: #777; }
+body.dark  .wa-form-sub { color: #aaa; }
+
+.wa-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Pakai .feedback-input dari feedback.css
+   biar konsisten — tidak perlu redefine */
+
+.wa-textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.wa-send-btn {
+    align-self: flex-start;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.wa-send-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+/* ── Footer update ───────────────────────── */
+/* Override footer-links biar cuma 1 link,
+   tetap centered */
+.footer-links {
+    margin-top: 0.8rem;
+    text-align: center;
+}
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+    .wa-send-btn {
+        align-self: stretch;
+        justify-content: center;
+    }
+
+    .cv-download-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+}
