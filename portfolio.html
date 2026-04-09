@@ -6,6 +6,7 @@
     <title>Fakhrul Mukhlisin - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="feedback.css">
     <link rel="stylesheet" href="experience-carousel.css">
     <meta name="description" content="Fakhrul Mukhlisin - Backend & Frontend Developer Portfolio">
     <meta name="keywords" content="Golang, Vue.js, REST API, Backend Developer, Web Developer, Software Engineer">
@@ -20,18 +21,15 @@
 <nav class="navbar">
     <div class="nav-logo">FM</div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
         <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li><a href="proof.html">Proof of Work</a></li>
         <li><a href="moments.html">Moments</a></li>
     </ul>
@@ -40,19 +38,19 @@
 <button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
 
 <main>
-    <!-- HOME -->
+
+    <!-- ── HOME ──────────────────────────────── -->
     <section id="home" class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">Fakhrul Mukhlisin</h1>
             <p class="hero-subtitle">Backend Developer · Frontend Developer · AI Enthusiast</p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ── ABOUT ──────────────────────────────── -->
     <section id="about" class="section">
         <h2 class="section-title">About Me</h2>
         <div class="glass-card about-card">
@@ -72,7 +70,7 @@
         </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- ── SKILLS ─────────────────────────────── -->
     <section id="skills" class="section">
         <h2 class="section-title">Technical Skills</h2>
         <div class="skills-grid">
@@ -146,204 +144,181 @@
         </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="glass-card project-card">
-                <div class="project-image">⚙️</div>
-                <div class="project-content">
-                    <h3>Evermos Marketplace REST API</h3>
-                    <p>
-                        Full marketplace backend built with Golang, Gin, MySQL, and JWT.
-                        Covers 7 modules: Auth, User, Store, Address, Category (admin-only), Product, and Transaction.
-                        Implemented clean architecture, pagination, price-range filtering, multi-image upload,
-                        atomic transactions, and product log for historical pricing.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="tag">Golang</span>
-                        <span class="tag">Gin</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">JWT</span>
-                        <span class="tag">Clean Architecture</span>
-                        <span class="tag">REST API</span>
+    <!-- ── EXPERIENCE CAROUSEL ────────────────── -->
+    <section id="experience" class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="exp-carousel-container">
+
+            <div class="exp-track" id="expTrack">
+
+                <!-- CARD 1 — Evermos (ada link project) -->
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-evermos.jpg" alt="Evermos"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                        <div class="exp-card__badge">90.91 / 100</div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://github.com/fakrl/evermos-backend" target="_blank" class="btn btn-primary" style="margin-top:1rem; font-size:0.9rem; padding: 0.6rem 1.2rem;">GitHub →</a>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Dec 2025</span>
+                        <h3 class="exp-card__title">Backend Developer Intern</h3>
+                        <p class="exp-card__company">Evermos × Rakamin Academy</p>
+                        <ul class="exp-card__list">
+                            <li>Full marketplace REST API — Golang, Gin, MySQL, JWT</li>
+                            <li>7 modules: Auth, User, Store, Address, Category, Product, Transaction</li>
+                            <li>Clean architecture, pagination, filtering, multi-image upload</li>
+                            <li>Atomic DB transactions & product log for historical pricing</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Golang</span>
+                            <span class="tag">Gin</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JWT</span>
+                            <span class="tag">REST API</span>
+                            <span class="tag">Clean Architecture</span>
+                        </div>
+                        <a href="https://github.com/fakrl/evermos-backend"
+                           target="_blank" class="exp-card__link">
+                            GitHub →
+                        </a>
                     </div>
                 </div>
+
+                <!-- CARD 2 — Core Initiative (ada link project) -->
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-coreinit.jpg" alt="Core Initiative"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                        <div class="exp-card__badge">87.79 / 100</div>
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Oct – Nov 2025</span>
+                        <h3 class="exp-card__title">Frontend Developer Intern</h3>
+                        <p class="exp-card__company">Core Initiative × Rakamin Academy</p>
+                        <ul class="exp-card__list">
+                            <li>E-Commerce Catalog — Vue.js 2, live REST API integration</li>
+                            <li>3 dynamic UI themes per product category</li>
+                            <li>Pixel-perfect Figma implementation, SVG export</li>
+                            <li>Deployed via GitLab CI/CD to Firebase</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Vue.js 2</span>
+                            <span class="tag">REST API</span>
+                            <span class="tag">CI/CD</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                        <a href="https://github.com/fakrl/ecommerce-catalog"
+                           target="_blank" class="exp-card__link">
+                            GitHub →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 3 — UNPAM -->
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-unpam.jpg" alt="UNPAM"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Nov 2024 – Jul 2025</span>
+                        <h3 class="exp-card__title">Data Management Specialist</h3>
+                        <p class="exp-card__company">Lembaga Kemahasiswaan UNPAM</p>
+                        <ul class="exp-card__list">
+                            <li>Managed dataset of 500+ student & alumni records</li>
+                            <li>Built data visualizations for faculty presentations</li>
+                            <li>Digital archive for 1,000+ documentation files</li>
+                            <li>JavaScript automation for data scraping</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Data Management</span>
+                            <span class="tag">Visualization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 4 — CMS -->
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-cms.jpg" alt="PT CMS"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Jul 2024 – Jul 2025</span>
+                        <h3 class="exp-card__title">Digital Content Support</h3>
+                        <p class="exp-card__company">PT. Cahaya Millenial Sejahtera</p>
+                        <ul class="exp-card__list">
+                            <li>AI-powered copywriting automation</li>
+                            <li>Prompt engineering for content workflows</li>
+                            <li>Brand consistency across digital platforms</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Prompt Engineering</span>
+                            <span class="tag">AI Tools</span>
+                            <span class="tag">Content</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 5 — Jurnalis -->
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-jurnalis.jpg" alt="Forum Studi Jurnalis"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Oct 2021 – Nov 2022</span>
+                        <h3 class="exp-card__title">President</h3>
+                        <p class="exp-card__company">Forum Studi Jurnalis</p>
+                        <ul class="exp-card__list">
+                            <li>Led organization of 300+ members</li>
+                            <li>Coordinated 15+ events & technical seminars</li>
+                            <li>Streamlined editorial & cross-functional workflows</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Leadership</span>
+                            <span class="tag">Event Management</span>
+                            <span class="tag">300+ Members</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /exp-track -->
+            <div class="exp-dots" id="expDots"></div>
+        </div>
+    </section>
+
+    <!-- ── FEEDBACK ───────────────────────────── -->
+    <section id="feedback" class="section">
+        <h2 class="section-title">Leave a Feedback</h2>
+        <div class="feedback-wrapper">
+            <div class="glass-card feedback-form-card">
+                <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
+                <div class="feedback-form">
+                    <input type="text" id="feedbackName"
+                           placeholder="Your name" class="feedback-input" maxlength="50"/>
+                    <input type="text" id="feedbackFrom"
+                           placeholder="Asal / Instansi (contoh: Teman kampus, Evermos...)"
+                           class="feedback-input" maxlength="80"/>
+                    <textarea id="feedbackMessage"
+                              placeholder="Your message..."
+                              class="feedback-input feedback-textarea"
+                              maxlength="300" rows="3"></textarea>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">
+                        Send Message ✉️
+                    </button>
+                </div>
             </div>
-            <div class="glass-card project-card">
-                <div class="project-image">🛍️</div>
-                <div class="project-content">
-                    <h3>E-Commerce Catalog</h3>
-                    <p>
-                        Dynamic product catalog built with Vue.js 2, fetching live data from a REST API.
-                        Features 3 distinct UI themes per product category using Vue class binding and CSS variables.
-                        Implemented pixel-perfect design from Figma, SVG export, CSS filters,
-                        and deployed with CI/CD pipeline.
-                    </p>
-                    <div class="skill-tags">
-                        <span class="tag">Vue.js 2</span>
-                        <span class="tag">REST API</span>
-                        <span class="tag">CSS Variables</span>
-                        <span class="tag">CI/CD</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">Figma</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" class="btn btn-primary" style="margin-top:1rem; font-size:0.9rem; padding: 0.6rem 1.2rem;">GitHub →</a>
-                    </div>
+            <div id="feedbackList" class="feedback-list">
+                <div class="feedback-empty" id="feedbackEmpty">
+                    <p>No feedback yet. Be the first! 🚀</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section">
-    <h2 class="section-title">Experience</h2>
- 
-    <div class="exp-carousel-container">
- 
-        <!-- Tombol navigasi -->
-        <button class="exp-nav exp-nav--prev" id="expPrev" aria-label="Previous">&#8592;</button>
-        <button class="exp-nav exp-nav--next" id="expNext" aria-label="Next">&#8594;</button>
- 
-        <!-- Track — ini yang bergerak -->
-        <div class="exp-track" id="expTrack">
- 
-            <!-- CARD 1 -->
-            <div class="exp-card glass-card">
-                <div class="exp-card__img">
-                    <img src="image/exp-evermos.jpg" alt="Evermos Internship"
-                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
-                    <div class="exp-card__badge">90.91 / 100</div>
-                </div>
-                <div class="exp-card__body">
-                    <span class="exp-card__date">Dec 2025</span>
-                    <h3 class="exp-card__title">Backend Developer Intern</h3>
-                    <p class="exp-card__company">Evermos × Rakamin Academy</p>
-                    <ul class="exp-card__list">
-                        <li>Built full marketplace REST API — Golang, Gin, MySQL, JWT</li>
-                        <li>7 modules: Auth, User, Store, Address, Category, Product, Transaction</li>
-                        <li>Clean architecture, pagination, filtering, multi-image upload</li>
-                        <li>Atomic DB transactions & product log for historical pricing</li>
-                    </ul>
-                    <div class="exp-card__tags">
-                        <span class="tag">Golang</span>
-                        <span class="tag">Gin</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">JWT</span>
-                        <span class="tag">REST API</span>
-                    </div>
-                </div>
-            </div>
- 
-            <!-- CARD 2 -->
-            <div class="exp-card glass-card">
-                <div class="exp-card__img">
-                    <img src="image/exp-coreinit.jpg" alt="Core Initiative Internship"
-                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
-                    <div class="exp-card__badge">87.79 / 100</div>
-                </div>
-                <div class="exp-card__body">
-                    <span class="exp-card__date">Oct – Nov 2025</span>
-                    <h3 class="exp-card__title">Frontend Developer Intern</h3>
-                    <p class="exp-card__company">Core Initiative × Rakamin Academy</p>
-                    <ul class="exp-card__list">
-                        <li>Built E-Commerce Catalog — Vue.js 2, live REST API integration</li>
-                        <li>3 dynamic UI themes per product category via Vue class binding</li>
-                        <li>Pixel-perfect Figma implementation, SVG export, CSS filters</li>
-                        <li>Deployed via GitLab CI/CD pipeline to Firebase</li>
-                    </ul>
-                    <div class="exp-card__tags">
-                        <span class="tag">Vue.js 2</span>
-                        <span class="tag">CI/CD</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">Figma</span>
-                    </div>
-                </div>
-            </div>
- 
-            <!-- CARD 3 -->
-            <div class="exp-card glass-card">
-                <div class="exp-card__img">
-                    <img src="image/exp-unpam.jpg" alt="UNPAM Internship"
-                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
-                </div>
-                <div class="exp-card__body">
-                    <span class="exp-card__date">Nov 2024 – Jul 2025</span>
-                    <h3 class="exp-card__title">Data Management Specialist</h3>
-                    <p class="exp-card__company">Lembaga Kemahasiswaan UNPAM</p>
-                    <ul class="exp-card__list">
-                        <li>Managed relational dataset of 500+ student & alumni records</li>
-                        <li>Built data visualizations for faculty presentations</li>
-                        <li>Developed digital archive system for 1,000+ documentation files</li>
-                        <li>JavaScript automation for data scraping workflows</li>
-                    </ul>
-                    <div class="exp-card__tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Data Management</span>
-                        <span class="tag">Visualization</span>
-                    </div>
-                </div>
-            </div>
- 
-            <!-- CARD 4 -->
-            <div class="exp-card glass-card">
-                <div class="exp-card__img">
-                    <img src="image/exp-cms.jpg" alt="CMS Part-time"
-                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
-                </div>
-                <div class="exp-card__body">
-                    <span class="exp-card__date">Jul 2024 – Jul 2025</span>
-                    <h3 class="exp-card__title">Digital Content Support</h3>
-                    <p class="exp-card__company">PT. Cahaya Millenial Sejahtera</p>
-                    <ul class="exp-card__list">
-                        <li>AI-powered copywriting automation via prompt engineering</li>
-                        <li>Maintained brand messaging across digital platforms</li>
-                        <li>Collaborated cross-functionally with design teams</li>
-                    </ul>
-                    <div class="exp-card__tags">
-                        <span class="tag">Prompt Engineering</span>
-                        <span class="tag">AI Tools</span>
-                        <span class="tag">Content</span>
-                    </div>
-                </div>
-            </div>
- 
-            <!-- CARD 5 -->
-            <div class="exp-card glass-card">
-                <div class="exp-card__img">
-                    <img src="image/exp-jurnalis.jpg" alt="Forum Studi Jurnalis"
-                         onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
-                </div>
-                <div class="exp-card__body">
-                    <span class="exp-card__date">Oct 2021 – Nov 2022</span>
-                    <h3 class="exp-card__title">President</h3>
-                    <p class="exp-card__company">Forum Studi Jurnalis</p>
-                    <ul class="exp-card__list">
-                        <li>Led organization of 300+ members</li>
-                        <li>Coordinated 15+ events including technical seminars & workshops</li>
-                        <li>Implemented new editorial processes & streamlined workflows</li>
-                    </ul>
-                    <div class="exp-card__tags">
-                        <span class="tag">Leadership</span>
-                        <span class="tag">Event Management</span>
-                        <span class="tag">300+ Members</span>
-                    </div>
-                </div>
-            </div>
- 
-        </div><!-- /exp-track -->
- 
-        <!-- Dot indicators -->
-        <div class="exp-dots" id="expDots"></div>
- 
-    </div><!-- /exp-carousel-container -->
-    </section>
-
-    <!-- CONTACT -->
+    <!-- ── CONTACT ────────────────────────────── -->
     <section id="contact" class="section">
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-grid">
@@ -370,72 +345,23 @@
         </div>
     </section>
 
-    <!-- FEEDBACK REALTIME -->
-    <section id="feedback" class="section">
-        <h2 class="section-title">Leave a Feedback</h2>
-        <div class="feedback-wrapper">
-
-            <!-- Form -->
-            <div class="glass-card feedback-form-card">
-                <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
-                <div class="feedback-form">
-                    <input
-                        type="text"
-                        id="feedbackName"
-                        placeholder="Your name"
-                        class="feedback-input"
-                        maxlength="50"
-                    />
-                    <input
-                    type="text"
-                    id="feedbackFrom"
-                    placeholder="Asal / Instansi (contoh: Teman kampus, Magang, dll)"
-                    class="feedback-input"
-                    maxlength="80"
-                    />
-                    <textarea
-                        id="feedbackMessage"
-                        placeholder="Your message..."
-                        class="feedback-input feedback-textarea"
-                        maxlength="300"
-                        rows="3"
-                    ></textarea>
-                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">
-                        Send Message ✉️
-                    </button>
-                </div>
-            </div>
-
-            <!-- Cards muncul di sini -->
-            <div id="feedbackList" class="feedback-list">
-                <div class="feedback-empty" id="feedbackEmpty">
-                    <p>No feedback yet. Be the first! 🚀</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
     <footer class="footer">
         <p>&copy; 2025 Fakhrul Mukhlisin. Built with passion and code.</p>
         <div class="footer-links">
-            <a href="index.html">← Back to Profile Card</a>
-            &nbsp;·&nbsp;
-            <a href="proof.html">Proof of Work</a>
-            &nbsp;·&nbsp;
+            <a href="index.html">← Profile Card</a> &nbsp;·&nbsp;
+            <a href="proof.html">Proof of Work</a> &nbsp;·&nbsp;
             <a href="moments.html">Moments</a>
         </div>
     </footer>
 </main>
 
-<!-- Firebase SDK via CDN — tidak perlu npm! -->
+<!-- ── Firebase Feedback ──────────────────────────────── -->
 <script type="module">
     import { initializeApp }
         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue, serverTimestamp }
         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-    // ── 1. Config Firebase lo ────────────────────────────────
     const firebaseConfig = {
         apiKey: "AIzaSyDhJLaWGZs1YILiMaNIDQ3mapnBUoH9R6s",
         authDomain: "fakrul-feeeb.firebaseapp.com",
@@ -446,33 +372,21 @@
         appId: "1:767578062305:web:3cdf7bd8678923bb3e26a0"
     };
 
-    // ── 2. Init app & ambil referensi ke node "feedback" ────
     const app = initializeApp(firebaseConfig);
     const db  = getDatabase(app);
     const commentsRef = ref(db, "feedback");
-    // "feedback" = nama node di database lo, kayak nama tabel di MySQL
 
-    // ── 3. Helper: escape HTML supaya aman dari XSS ──────────
-    // XSS = orang iseng kirim <script> lewat form
     function escapeHtml(str) {
-        return str
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;");
+        return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
     }
 
-    // ── 4. Helper: format timestamp jadi tanggal readable ───
     function formatTime(ts) {
         if (!ts) return "";
-        const d = new Date(ts);
-        return d.toLocaleDateString("id-ID", {
-            day: "numeric", month: "short", year: "numeric",
-            hour: "2-digit", minute: "2-digit"
+        return new Date(ts).toLocaleDateString("id-ID", {
+            day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"
         });
     }
 
-    // ── 5. Bikin card element dari data ─────────────────────
     function createCard(data) {
         const card = document.createElement("div");
         card.className = "glass-card feedback-card fade-in";
@@ -490,177 +404,103 @@
         return card;
     }
 
-    // ── 6. LISTEN realtime — ini inti dari Firebase ──────────
-    // onValue() = "dengerin terus node ini, kalau ada perubahan, jalanin callback"
-    // Analoginya: kayak subscribe notif — begitu ada data baru, langsung dikabarin
     onValue(commentsRef, (snapshot) => {
         const list  = document.getElementById("feedbackList");
         const empty = document.getElementById("feedbackEmpty");
         const data  = snapshot.val();
-
-        // Bersihkan card lama
         list.querySelectorAll(".feedback-card").forEach(el => el.remove());
-
-        if (!data) {
-            empty.style.display = "block";
-            return;
-        }
-
+        if (!data) { empty.style.display = "block"; return; }
         empty.style.display = "none";
-
-        // Firebase return object, kita ubah jadi array dan balik urutannya
-        // biar yang terbaru muncul di atas
-        const entries = Object.values(data).reverse();
-        entries.forEach(item => {
-            list.appendChild(createCard(item));
-        });
+        Object.values(data).reverse().forEach(item => list.appendChild(createCard(item)));
     });
 
-    // ── 7. Submit komentar ke Firebase ───────────────────────
     document.getElementById("feedbackSubmit").addEventListener("click", async () => {
         const nameEl = document.getElementById("feedbackName");
+        const fromEl = document.getElementById("feedbackFrom");
         const msgEl  = document.getElementById("feedbackMessage");
         const btn    = document.getElementById("feedbackSubmit");
-
-        const nama  = nameEl.value.trim();
-        const dari  = document.getElementById("feedbackFrom").value.trim();
-        const pesan = msgEl.value.trim();
-
-        if (!nama || !pesan) {
-    alert("Nama dan pesan harus diisi ya! Asal/instansi boleh dikosongkan.");
-            return;
-        }
-
-        // Disable tombol sementara biar ga double submit
+        const nama   = nameEl.value.trim();
+        const dari   = fromEl.value.trim();
+        const pesan  = msgEl.value.trim();
+        if (!nama || !pesan) { alert("Nama dan pesan harus diisi ya! Asal/instansi boleh dikosongkan."); return; }
         btn.textContent = "Sending...";
         btn.disabled = true;
-
         try {
-            // push() = tambah data baru ke node "feedback"
-            // serverTimestamp() = pakai waktu dari server Firebase, bukan waktu browser
-            await push(commentsRef, {
-                nama,
-                dari: dari || "Anonymous",
-                pesan,
-                waktu: serverTimestamp()
-            });
-
-            nameEl.value = "";
-            document.getElementById("feedbackFrom").value = "";
-            msgEl.value  = "";
-        } catch (err) {
-            alert("Gagal kirim, coba lagi ya!");
-            console.error(err);
+            await push(commentsRef, { nama, dari: dari || "Anonymous", pesan, waktu: serverTimestamp() });
+            nameEl.value = ""; fromEl.value = ""; msgEl.value = "";
+        } catch(err) {
+            alert("Gagal kirim, coba lagi ya!"); console.error(err);
         } finally {
-            btn.textContent = "Send Message ✉️";
-            btn.disabled = false;
+            btn.textContent = "Send Message ✉️"; btn.disabled = false;
         }
     });
 </script>
+
+<!-- ── Experience Carousel (no arrow buttons) ────────── -->
 <script>
 (function() {
-    const track    = document.getElementById('expTrack');
-    const prevBtn  = document.getElementById('expPrev');
-    const nextBtn  = document.getElementById('expNext');
-    const dotsEl   = document.getElementById('expDots');
- 
+    const track  = document.getElementById('expTrack');
+    const dotsEl = document.getElementById('expDots');
     if (!track) return;
- 
-    const cards    = Array.from(track.querySelectorAll('.exp-card'));
-    const total    = cards.length;
-    let current    = 0;
-    let isDragging = false;
-    let startX     = 0;
-    let dragDelta  = 0;
- 
-    // ── Hitung berapa card yang keliatan sesuai lebar layar ─
+
+    const cards = Array.from(track.querySelectorAll('.exp-card'));
+    const total = cards.length;
+    let current = 0, isDragging = false, startX = 0, dragDelta = 0;
+
     function visibleCount() {
         const w = window.innerWidth;
-        if (w >= 1200) return 4;
-        if (w >= 900)  return 3;
+        if (w >= 1000) return 3;
         if (w >= 600)  return 2;
         return 1;
     }
- 
-    // ── Max index supaya ga over-scroll ─────────────────────
-    function maxIndex() {
-        return Math.max(0, total - visibleCount());
-    }
- 
-    // ── Geser track ke posisi yang bener ────────────────────
+
+    function maxIndex() { return Math.max(0, total - visibleCount()); }
+
     function goTo(index) {
         current = Math.max(0, Math.min(index, maxIndex()));
- 
-        const cardW   = cards[0].offsetWidth;
-        const gap     = 24; // harus sama dengan gap di CSS
-        const offset  = current * (cardW + gap);
- 
-        track.style.transform = `translateX(-${offset}px)`;
- 
-        // Update dots
-        dotsEl.querySelectorAll('.exp-dot').forEach((d, i) => {
-            d.classList.toggle('exp-dot--active', i === current);
-        });
- 
-        // Disable/enable tombol
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current >= maxIndex();
+        const cardW = cards[0].offsetWidth;
+        const gap   = 32; // 2rem
+        track.style.transform = `translateX(-${current * (cardW + gap)}px)`;
+        dotsEl.querySelectorAll('.exp-dot').forEach((d, i) =>
+            d.classList.toggle('exp-dot--active', i === current));
     }
- 
-    // ── Bikin dots sesuai jumlah "halaman" ──────────────────
+
     function buildDots() {
         dotsEl.innerHTML = '';
-        const pages = maxIndex() + 1;
-        for (let i = 0; i < pages; i++) {
+        for (let i = 0; i <= maxIndex(); i++) {
             const dot = document.createElement('button');
             dot.className = 'exp-dot';
-            dot.setAttribute('aria-label', `Go to ${i + 1}`);
+            dot.setAttribute('aria-label', `Slide ${i + 1}`);
             dot.addEventListener('click', () => goTo(i));
             dotsEl.appendChild(dot);
         }
     }
- 
-    // ── Tombol prev / next ───────────────────────────────────
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
- 
-    // ── Swipe / drag support ─────────────────────────────────
-    // Biar bisa di-swipe di HP atau drag di desktop
+
+    // Swipe / drag
     track.addEventListener('mousedown',  e => { isDragging = true; startX = e.clientX; });
     track.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; }, { passive: true });
- 
     track.addEventListener('mousemove',  e => { if (isDragging) dragDelta = e.clientX - startX; });
     track.addEventListener('touchmove',  e => { if (isDragging) dragDelta = e.touches[0].clientX - startX; }, { passive: true });
- 
+
     function endDrag() {
         if (!isDragging) return;
         isDragging = false;
-        if (dragDelta < -50) goTo(current + 1);      // swipe kiri → next
-        else if (dragDelta > 50) goTo(current - 1);  // swipe kanan → prev
+        if      (dragDelta < -50) goTo(current + 1);
+        else if (dragDelta > 50)  goTo(current - 1);
         dragDelta = 0;
     }
- 
+
     track.addEventListener('mouseup',    endDrag);
     track.addEventListener('mouseleave', endDrag);
     track.addEventListener('touchend',   endDrag);
- 
-    // ── Keyboard navigation ──────────────────────────────────
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft')  goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
-    });
- 
-    // ── Re-init waktu resize ─────────────────────────────────
-    window.addEventListener('resize', () => {
-        buildDots();
-        goTo(Math.min(current, maxIndex()));
-    });
- 
-    // ── Init ─────────────────────────────────────────────────
+
+    window.addEventListener('resize', () => { buildDots(); goTo(Math.min(current, maxIndex())); });
+
     buildDots();
     goTo(0);
 })();
 </script>
+
 <script src="script.js"></script>
 </body>
 </html>
