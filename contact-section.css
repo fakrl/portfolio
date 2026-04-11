@@ -8,7 +8,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .cv-download-btn {
@@ -16,7 +16,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 1rem;
-    padding: 0.9rem 2rem;
+    padding: 0.9rem 2.2rem;
     border-radius: 15px;
     text-decoration: none;
     font-weight: 700;
@@ -30,22 +30,159 @@
 }
 
 .cv-download-hint {
-    font-size: 0.8rem;
-    opacity: 0.6;
+    font-size: 0.78rem;
     transition: color 0.8s ease;
 }
 
-body.light .cv-download-hint { color: #666; }
-body.dark  .cv-download-hint { color: #aaa; }
+body.light .cv-download-hint { color: #999; }
+body.dark  .cv-download-hint { color: #666; }
 
-/* ── Contact cards grid ──────────────────── */
-/* Tetap pakai .contact-grid dari style.css,
-   override supaya max 4 kolom rapi */
-.contact-grid {
-    margin-bottom: 2.5rem;
+/* ── Social Profile Cards grid ───────────── */
+.social-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
 }
 
-/* ── WA Form ─────────────────────────────── */
+.social-profile-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.8rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.social-profile-card:hover {
+    transform: translateY(-6px);
+}
+
+body.light .social-profile-card:hover {
+    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.2);
+}
+
+body.dark .social-profile-card:hover {
+    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.35);
+}
+
+/* ── Avatar + badge ──────────────────────── */
+.social-profile-top {
+    position: relative;
+    width: fit-content;
+}
+
+.social-profile-avatar-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid transparent;
+}
+
+/* Instagram ring gradient */
+.social-profile-avatar-wrap--ig {
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) border-box;
+}
+
+/* LinkedIn ring biru */
+.social-profile-avatar-wrap--li {
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #0077b5, #00a0dc) border-box;
+}
+
+.social-profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Badge icon platform di pojok kanan bawah avatar */
+.social-profile-badge {
+    position: absolute;
+    bottom: 0;
+    right: -4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-profile-badge--ig {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.social-profile-badge--li {
+    background: #0077b5;
+}
+
+/* ── Text info ───────────────────────────── */
+.social-profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+}
+
+.social-profile-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    transition: color 0.8s ease;
+}
+
+body.light .social-profile-name { color: #1a1a1a; }
+body.dark  .social-profile-name { color: #ffffff; }
+
+.social-profile-handle {
+    font-size: 0.82rem;
+    color: #667eea;
+    font-weight: 600;
+    margin: 0;
+}
+
+.social-profile-desc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0;
+    transition: color 0.8s ease;
+}
+
+body.light .social-profile-desc { color: #777; }
+body.dark  .social-profile-desc { color: #aaa; }
+
+/* ── CTA button di dalam card ────────────── */
+.social-profile-cta {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.45rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-profile-cta--ig {
+    background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+}
+
+.social-profile-cta--li {
+    background: #0077b5;
+}
+
+.social-profile-card:hover .social-profile-cta {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── WA + Email Form ─────────────────────── */
 .wa-form-wrapper {
     max-width: 600px;
     margin: 0 auto;
@@ -60,14 +197,14 @@ body.dark  .cv-download-hint { color: #aaa; }
 }
 
 .wa-form-icon {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     flex-shrink: 0;
 }
 
 .wa-form-title {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    margin-bottom: 0.2rem;
+    margin: 0 0 0.2rem;
     transition: color 0.8s ease;
 }
 
@@ -75,7 +212,8 @@ body.light .wa-form-title { color: #1a1a1a; }
 body.dark  .wa-form-title { color: #ffffff; }
 
 .wa-form-sub {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
+    margin: 0;
     transition: color 0.8s ease;
 }
 
@@ -88,41 +226,55 @@ body.dark  .wa-form-sub { color: #aaa; }
     gap: 1rem;
 }
 
-/* Pakai .feedback-input dari feedback.css
-   biar konsisten — tidak perlu redefine */
-
 .wa-textarea {
     resize: vertical;
     min-height: 110px;
 }
 
-.wa-send-btn {
-    align-self: flex-start;
-    padding: 0.85rem 2rem;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
+/* 2 tombol sejajar */
+.wa-form-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
-.wa-send-btn:hover {
+.wa-btn {
+    flex: 1;
+    min-width: 160px;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+.wa-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
 }
 
-/* ── Footer update ───────────────────────── */
-/* Override footer-links biar cuma 1 link,
-   tetap centered */
+/* ── Footer ──────────────────────────────── */
 .footer-links {
     margin-top: 0.8rem;
     text-align: center;
 }
 
 /* ── Responsive ─────────────────────────── */
-@media (max-width: 768px) {
-    .wa-send-btn {
-        align-self: stretch;
-        justify-content: center;
+@media (max-width: 600px) {
+    .social-cards {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+    }
+
+    .wa-form-buttons {
+        flex-direction: column;
+    }
+
+    .wa-btn {
+        width: 100%;
     }
 
     .cv-download-btn {
