@@ -1,0 +1,10 @@
+# Netlify Redirects
+# Clean URLs untuk proof dan moments
+
+/proof      /proof/index.html   200
+/proof/     /proof/index.html   200
+/moments    /moments/index.html 200
+/moments/   /moments/index.html 200
+
+# Catch-all SPA fallback (opsional, aktifkan kalau ada 404 lain)
+# /*    /index.html   200

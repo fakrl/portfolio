@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proof of Work – Fakhrul Mukhlisin</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="animations.css">
-    <link rel="stylesheet" href="feedback.css">
-    <link rel="stylesheet" href="pages.css">
-    <link rel="stylesheet" href="experience-carousel.css">
-    <meta name="description" content="Certifications, awards, and creative work by Fakhrul Mukhlisin">
+    <title>Proof of Work — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../animations.css">
+    <link rel="stylesheet" href="../pages.css">
+    <meta name="description" content="Certifications, awards, and creative work by Fakhrul Mukhlisin.">
+    <meta property="og:title" content="Proof of Work — Fakhrul Mukhlisin">
+    <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/profile.jpg">
+    <meta property="og:url" content="https://fakrul.netlify.app/proof/">
+    <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="light">
 
@@ -19,12 +23,9 @@
         <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-        <li><a href="portfolio.html#home">Home</a></li>
-        <li><a href="portfolio.html#about">About</a></li>
-        <li><a href="portfolio.html#projects">Projects</a></li>
-        <li><a href="portfolio.html#experience">Experience</a></li>
-        <li><a href="proof.html" class="active">Proof of Work</a></li>
-        <li><a href="moments.html">Moments</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/proof/" class="active">Proof of Work</a></li>
+        <li><a href="/moments/">Moments</a></li>
     </ul>
 </nav>
 
@@ -40,7 +41,6 @@
             <p class="proof-hero__sub">
                 Certifications, achievements, and creative work — everything that shows, not just tells.
             </p>
-            <!-- Tab navigation -->
             <div class="proof-tabs" id="proofTabs">
                 <button class="proof-tab proof-tab--active" data-tab="certifications">🏅 Certifications</button>
                 <button class="proof-tab" data-tab="awards">🏆 Awards</button>
@@ -56,7 +56,7 @@
 
             <div class="glass-card proof-card">
                 <div class="proof-card__img">
-                    <img src="image/cert-bnsp.jpg" alt="BNSP Junior Web Developer"
+                    <img src="../image/cert-bnsp.jpg" alt="BNSP Junior Web Developer"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">🏅 BNSP</span>
                 </div>
@@ -71,7 +71,7 @@
 
             <div class="glass-card proof-card">
                 <div class="proof-card__img">
-                    <img src="image/cert-evermos.jpg" alt="Evermos Backend Intern Certificate"
+                    <img src="../image/cert-evermos.jpg" alt="Evermos Backend Intern Certificate"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">⭐ 90.91/100</span>
                 </div>
@@ -81,12 +81,16 @@
                     <p class="proof-card__issuer">Evermos × Rakamin Academy</p>
                     <p class="proof-card__desc">Certificate of completion for project-based internship program. Built full marketplace REST API in Golang with clean architecture. Score: Excellent.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
+                    <a href="/moments/?filter=internship"
+                       class="exp-card__link exp-card__link--ghost" style="margin-top:0.8rem; display:inline-block;">
+                        See Moments →
+                    </a>
                 </div>
             </div>
 
             <div class="glass-card proof-card">
                 <div class="proof-card__img">
-                    <img src="image/cert-coreinit.jpg" alt="Core Initiative Frontend Intern Certificate"
+                    <img src="../image/cert-coreinit.jpg" alt="Core Initiative Frontend Intern Certificate"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">⭐ 87.79/100</span>
                 </div>
@@ -96,12 +100,16 @@
                     <p class="proof-card__issuer">Core Initiative × Rakamin Academy</p>
                     <p class="proof-card__desc">Certificate of completion for frontend internship. Built Vue.js 2 e-commerce catalog with CI/CD deployment. Score: Excellent.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
+                    <a href="/moments/?filter=internship"
+                       class="exp-card__link exp-card__link--ghost" style="margin-top:0.8rem; display:inline-block;">
+                        See Moments →
+                    </a>
                 </div>
             </div>
 
             <div class="glass-card proof-card">
                 <div class="proof-card__img">
-                    <img src="image/cert-azure.jpg" alt="Azure AI Fundamentals"
+                    <img src="../image/cert-azure.jpg" alt="Azure AI Fundamentals"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">☁️ Microsoft</span>
                 </div>
@@ -116,7 +124,7 @@
 
             <div class="glass-card proof-card">
                 <div class="proof-card__img">
-                    <img src="image/cert-ml.jpg" alt="Linear Models in Machine Learning"
+                    <img src="../image/cert-ml.jpg" alt="Linear Models in Machine Learning"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--green">🤖 91 hrs</span>
                 </div>
@@ -135,11 +143,11 @@
     <!-- ── AWARDS ────────────────────────────────── -->
     <section class="section proof-section" id="tab-awards" style="display:none">
         <h2 class="section-title">Awards & Achievements</h2>
-        <div class="proof-grid proof-grid--awards">
+        <div class="proof-grid">
 
-            <div class="glass-card proof-card proof-card--award">
+            <div class="glass-card proof-card">
                 <div class="proof-card__img">
-                    <img src="image/award-photo.jpg" alt="Photography Award"
+                    <img src="../image/award-photo.jpg" alt="Photography Award"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">🏆 Juara</span>
                 </div>
@@ -147,12 +155,10 @@
                     <span class="proof-card__date">— Ganti dengan tahun —</span>
                     <h3 class="proof-card__title">Juara Fotografi</h3>
                     <p class="proof-card__issuer">— Ganti dengan nama penyelenggara —</p>
-                    <p class="proof-card__desc">— Tambahkan deskripsi singkat tentang kompetisi dan kategori foto yang dilombakan —</p>
+                    <p class="proof-card__desc">— Tambahkan deskripsi singkat tentang kompetisi dan kategori foto —</p>
                     <span class="proof-card__tag tag">Photography Competition</span>
                 </div>
             </div>
-
-            <!-- Tambah card award lain di sini kalau ada -->
 
         </div>
     </section>
@@ -161,68 +167,48 @@
     <section class="section proof-section" id="tab-photography" style="display:none">
         <h2 class="section-title">Photography Work</h2>
         <p class="proof-photo-desc">A selection of frames I'm proud of.</p>
-
-        <!-- Masonry-style grid -->
         <div class="photo-grid" id="photoGrid">
 
             <div class="photo-item glass-card">
-                <img src="image/photo-1.jpg" alt="Photography work 1"
+                <img src="../image/photo-1.jpg" alt="Photography work 1"
                      onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
                      loading="lazy">
-                <div class="photo-overlay">
-                    <p class="photo-caption">— Caption —</p>
-                </div>
+                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
-
             <div class="photo-item glass-card">
-                <img src="image/photo-2.jpg" alt="Photography work 2"
+                <img src="../image/photo-2.jpg" alt="Photography work 2"
                      onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
                      loading="lazy">
-                <div class="photo-overlay">
-                    <p class="photo-caption">— Caption —</p>
-                </div>
+                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
-
             <div class="photo-item glass-card">
-                <img src="image/photo-3.jpg" alt="Photography work 3"
+                <img src="../image/photo-3.jpg" alt="Photography work 3"
                      onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
                      loading="lazy">
-                <div class="photo-overlay">
-                    <p class="photo-caption">— Caption —</p>
-                </div>
+                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
-
             <div class="photo-item glass-card">
-                <img src="image/photo-4.jpg" alt="Photography work 4"
+                <img src="../image/photo-4.jpg" alt="Photography work 4"
                      onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
                      loading="lazy">
-                <div class="photo-overlay">
-                    <p class="photo-caption">— Caption —</p>
-                </div>
+                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
-
             <div class="photo-item glass-card">
-                <img src="image/photo-5.jpg" alt="Photography work 5"
+                <img src="../image/photo-5.jpg" alt="Photography work 5"
                      onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
                      loading="lazy">
-                <div class="photo-overlay">
-                    <p class="photo-caption">— Caption —</p>
-                </div>
+                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
-
             <div class="photo-item glass-card">
-                <img src="image/photo-6.jpg" alt="Photography work 6"
+                <img src="../image/photo-6.jpg" alt="Photography work 6"
                      onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
                      loading="lazy">
-                <div class="photo-overlay">
-                    <p class="photo-caption">— Caption —</p>
-                </div>
+                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
 
         </div>
     </section>
 
-    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox__close" id="lightboxClose">✕</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev">‹</button>
@@ -232,81 +218,14 @@
     </div>
 
     <footer class="footer">
-        <p>&copy; 2025 Fakhrul Mukhlisin.</p>
+        <p>&copy; 2026 Fakhrul Mukhlisin.</p>
         <div class="footer-links">
-            <a href="index.html">← Profile Card</a> &nbsp;·&nbsp;
-            <a href="portfolio.html">Portfolio</a> &nbsp;·&nbsp;
-            <a href="moments.html">Moments</a>
+            <a href="/">← Home</a>
         </div>
     </footer>
 </main>
 
-<script src="script.js"></script>
-<script>
-// ── Tab switching ─────────────────────────────────────────
-document.getElementById('proofTabs').addEventListener('click', e => {
-    const btn = e.target.closest('.proof-tab');
-    if (!btn) return;
-
-    // Update active tab button
-    document.querySelectorAll('.proof-tab').forEach(b => b.classList.remove('proof-tab--active'));
-    btn.classList.add('proof-tab--active');
-
-    // Show/hide sections
-    const target = btn.dataset.tab;
-    document.querySelectorAll('.proof-section').forEach(s => {
-        s.style.display = s.id === `tab-${target}` ? 'block' : 'none';
-    });
-});
-
-// ── Lightbox untuk photography ───────────────────────────
-const lightbox     = document.getElementById('lightbox');
-const lightboxImg  = document.getElementById('lightboxImg');
-const lightboxCap  = document.getElementById('lightboxCaption');
-let photoItems     = [];
-let currentPhoto   = 0;
-
-function openLightbox(index) {
-    currentPhoto = index;
-    const item = photoItems[index];
-    const img  = item.querySelector('img');
-    const cap  = item.querySelector('.photo-caption');
-    lightboxImg.src       = img.src;
-    lightboxCap.textContent = cap ? cap.textContent : '';
-    lightbox.classList.add('lightbox--open');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-    lightbox.classList.remove('lightbox--open');
-    document.body.style.overflow = '';
-}
-
-function lightboxNav(dir) {
-    currentPhoto = (currentPhoto + dir + photoItems.length) % photoItems.length;
-    openLightbox(currentPhoto);
-}
-
-// Attach click pada photo items
-document.getElementById('photoGrid').addEventListener('click', e => {
-    const item = e.target.closest('.photo-item');
-    if (!item) return;
-    photoItems = Array.from(document.querySelectorAll('.photo-item'));
-    openLightbox(photoItems.indexOf(item));
-});
-
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-document.getElementById('lightboxPrev').addEventListener('click', () => lightboxNav(-1));
-document.getElementById('lightboxNext').addEventListener('click', () => lightboxNav(1));
-lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-
-// Keyboard
-document.addEventListener('keydown', e => {
-    if (!lightbox.classList.contains('lightbox--open')) return;
-    if (e.key === 'Escape')     closeLightbox();
-    if (e.key === 'ArrowLeft')  lightboxNav(-1);
-    if (e.key === 'ArrowRight') lightboxNav(1);
-});
-</script>
+<script src="../script.js"></script>
+<script src="../proof.js"></script>
 </body>
 </html>
