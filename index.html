@@ -1,31 +1,1461 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Card</title>
+    <title>Fakhrul Mukhlisin — Software Engineer</title>
+    <link rel="icon" type="image/png" href="/image/logo.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="forms.css">
+    <link rel="stylesheet" href="experience-carousel.css">
+    <meta name="description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
+    <meta name="keywords" content="Golang, Vue.js, REST API, Backend Developer, Web Developer, Software Engineer">
+    <meta name="author" content="Fakhrul Mukhlisin">
+    <meta property="og:title" content="Fakhrul Mukhlisin — Software Engineer">
+    <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/profile.jpg">
+    <meta property="og:url" content="https://fakrul.netlify.app">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+    /* ==========================================
+       HERO — CINEMATIC SPLIT
+       ========================================== */
+    .hero-section {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .hero-pair {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        position: relative;
+    }
+
+    /* ── Card wrap ── */
+    .hero-card-wrap {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+        transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ── Profile card ── */
+    .hero-profile-card {
+        width: 300px;
+        padding: 2rem;
+        border-radius: 28px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.8s ease;
+    }
+
+    body.light .hero-profile-card {
+        background: rgba(255,255,255,0.55);
+        box-shadow: 0 20px 60px rgba(102,126,234,0.15), 0 4px 16px rgba(0,0,0,0.08);
+        border: 1px solid rgba(255,255,255,0.8);
+    }
+
+    body.dark .hero-profile-card {
+        background: rgba(255,255,255,0.06);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 4px 16px rgba(102,126,234,0.1);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .hero-profile-card::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #667eea, #764ba2, #4facfe);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .hero-profile-card:hover::before { opacity: 0.35; }
+
+    /* ── Photo frame ── */
+    .hero-photo-frame {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 1rem;
+    }
+
+    .hero-photo-ring {
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2, #4facfe);
+        animation: ringRotate 4s linear infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes ringRotate {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+    }
+
+    .hero-photo-inner {
+        position: absolute;
+        inset: 3px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-photo-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: opacity 0.5s ease;
+    }
+
+    .hero-photo-initials {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: white;
+        user-select: none;
+    }
+
+    /* Slide indicator dots */
+    .hero-photo-dots {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        margin-top: 0.6rem;
+        min-height: 10px;
+    }
+
+    .hero-photo-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    body.light .hero-photo-dot { background: rgba(0,0,0,0.2); }
+    body.dark  .hero-photo-dot { background: rgba(255,255,255,0.2); }
+
+    .hero-photo-dot.active {
+        background: linear-gradient(135deg, #667eea, #764ba2) !important;
+        width: 14px;
+        border-radius: 3px;
+    }
+
+    /* ── Card text ── */
+    .hero-card-name {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+        transition: color 0.8s ease;
+    }
+
+    body.light .hero-card-name { color: #1a1a1a; }
+    body.dark  .hero-card-name { color: #ffffff; }
+
+    .hero-card-title {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #667eea;
+        margin-bottom: 1rem;
+    }
+
+    /* ── Social links in card ── */
+    .hero-card-socials {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .hero-card-social {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+    body.light .hero-card-social {
+        background: rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    body.dark .hero-card-social {
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-card-social:hover { transform: translateY(-3px); }
+
+    /* ── Availability badge ── */
+    .hero-availability {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        margin-top: 0.8rem;
+        background: rgba(67, 233, 123, 0.12);
+        border: 1px solid rgba(67, 233, 123, 0.3);
+        color: #43e97b;
+    }
+
+    .hero-availability-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #43e97b;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── About panel ── */
+    .hero-about {
+        flex: 0 0 0;
+        width: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateX(30px);
+        transition:
+            flex 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            opacity 0.8s ease 0.4s,
+            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    .hero-about.visible {
+        flex: 0 0 480px;
+        width: 480px;
+        overflow: visible;
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+        padding-left: 3rem;
+        white-space: normal;
+    }
+
+    .hero-greeting {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #667eea;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-name {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-role {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        transition: color 0.8s ease;
+    }
+
+    body.light .hero-role { color: #555; }
+    body.dark  .hero-role { color: #aaa; }
+
+    .hero-bio {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        transition: color 0.8s ease;
+    }
+
+    body.light .hero-bio { color: #444; }
+    body.dark  .hero-bio { color: #ccc; }
+
+    .hero-bio strong { color: #667eea; font-weight: 600; }
+
+    .hero-cta-group {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    /* ==========================================
+       SKILLS — TWO COL
+       ========================================== */
+    .skills-grid--two-col {
+        grid-template-columns: 1fr 1fr;
+        max-width: 1000px;
+    }
+
+    .skill-production-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 1rem;
+    }
+
+    .skill-prod-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.55rem 0;
+        border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+        gap: 1rem;
+    }
+
+    .skill-prod-item:last-child { border-bottom: none; }
+
+    .skill-prod-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        transition: color 0.8s ease;
+    }
+
+    body.light .skill-prod-name { color: #1a1a1a; }
+    body.dark  .skill-prod-name { color: #ffffff; }
+
+    .skill-prod-context {
+        font-size: 0.75rem;
+        text-align: right;
+        font-style: italic;
+        transition: color 0.8s ease;
+    }
+
+    body.light .skill-prod-context { color: #999; }
+    body.dark  .skill-prod-context { color: #666; }
+
+    /* ==========================================
+       EXP CARD ACTIONS
+       ========================================== */
+    .exp-card__actions {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+    .exp-card__link--ghost {
+        background: transparent !important;
+        border: 1px solid #667eea;
+        color: #667eea !important;
+        box-shadow: none !important;
+    }
+
+    .exp-card__link--ghost:hover {
+        background: rgba(102, 126, 234, 0.1) !important;
+        transform: translateY(-2px);
+    }
+
+    /* ==========================================
+       MOBILE
+       ========================================== */
+    @media (max-width: 768px) {
+        .hero-pair {
+            flex-direction: column;
+            align-items: center;
+            padding-top: 8rem;
+            text-align: center;
+        }
+
+        .hero-card-wrap { transform: translateX(0) !important; }
+
+        .hero-about {
+            flex: 0 0 0 !important;
+            width: 0 !important;
+            opacity: 0;
+            transform: translateY(30px);
+            transition:
+                opacity 0.9s ease 0.3s,
+                transform 0.9s ease 0.3s;
+            padding-left: 0 !important;
+            white-space: nowrap;
+        }
+
+        .hero-about.visible {
+            flex: 0 0 auto !important;
+            width: auto !important;
+            max-width: 340px;
+            overflow: visible;
+            opacity: 1;
+            transform: translateY(0);
+            padding: 2rem 0.5rem 0 !important;
+            white-space: normal;
+        }
+
+        .hero-cta-group { justify-content: center; }
+        .skills-grid--two-col { grid-template-columns: 1fr; }
+        .skill-lang-card { grid-column: 1 / -1; }
+        .skill-prod-item { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+        .skill-prod-context { text-align: left; }
+        .edu-main { flex-direction: column; text-align: center; }
+        .edu-stat-num { font-size: 1.3rem; }
+        .skill-lang-tags { margin-left: 0; }
+    }
+    /* ==========================================
+       EDUCATION + LANGUAGES + STATS
+       ========================================== */
+    .edu-lang-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto 2.5rem;
+    }
+
+    .edu-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .edu-block-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #667eea;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 0.2rem;
+    }
+
+    .edu-block-title {
+        font-size: 1rem;
+        font-weight: 700;
+        transition: color 0.8s ease;
+    }
+    body.light .edu-block-title { color: #1a1a1a; }
+    body.dark  .edu-block-title { color: #ffffff; }
+
+    .edu-block-sub {
+        font-size: 0.85rem;
+        transition: color 0.8s ease;
+    }
+    body.light .edu-block-sub { color: #666; }
+    body.dark  .edu-block-sub { color: #aaa; }
+
+    .edu-gpa {
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #667eea22, #764ba222);
+        color: #667eea;
+        border: 1px solid rgba(102,126,234,0.25);
+        margin-top: 0.3rem;
+        width: fit-content;
+    }
+
+    .lang-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        margin-top: 0.3rem;
+    }
+
+    .lang-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(102,126,234,0.1);
+    }
+    .lang-item:last-child { border-bottom: none; }
+
+    .lang-name {
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: color 0.8s ease;
+    }
+    body.light .lang-name { color: #1a1a1a; }
+    body.dark  .lang-name { color: #ffffff; }
+
+    .lang-badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+    }
+
+    /* Stats row */
+    .stats-row {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .stat-item {
+        flex: 1;
+        min-width: 160px;
+        text-align: center;
+        padding: 1.4rem 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: block;
+        line-height: 1.1;
+        margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+        font-size: 0.78rem;
+        font-weight: 500;
+        transition: color 0.8s ease;
+    }
+    body.light .stat-label { color: #777; }
+    body.dark  .stat-label { color: #aaa; }
+
+    @media (max-width: 768px) {
+        .edu-lang-grid { grid-template-columns: 1fr; }
+        .stat-item { min-width: 130px; }
+        .stat-number { font-size: 1.6rem; }
+    }
+.floating-pill {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    border-radius: 30px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    overflow: hidden;
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease;
+    transform: translateY(-50%) translateX(20px);
+}
+ 
+.floating-pill.visible {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+ 
+body.light .floating-pill {
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+ 
+body.dark .floating-pill {
+    background: rgba(20,20,20,0.75);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+ 
+.floating-pill:hover {
+    box-shadow: 0 12px 40px rgba(102,126,234,0.25);
+}
+ 
+.floating-pill__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.9rem 0.8rem;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    width: 100%;
+}
+ 
+.floating-pill__item:hover {
+    background: rgba(102,126,234,0.1);
+}
+ 
+.floating-pill__icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+ 
+.floating-pill__label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+ 
+body.light .floating-pill__label { color: #555; }
+body.dark  .floating-pill__label { color: #aaa; }
+ 
+.floating-pill__item:hover .floating-pill__label { color: #667eea; }
+ 
+.floating-pill__divider {
+    width: 60%;
+    height: 1px;
+    flex-shrink: 0;
+    transition: background 0.3s ease;
+}
+ 
+body.light .floating-pill__divider { background: rgba(0,0,0,0.08); }
+body.dark  .floating-pill__divider { background: rgba(255,255,255,0.08); }
+ 
+/* Mobile — pindah ke bawah, horizontal */
+@media (max-width: 768px) {
+    .floating-pill {
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: 1.5rem;
+        transform: translateX(-50%) translateY(20px);
+        flex-direction: row;
+        border-radius: 30px;
+    }
+ 
+    .floating-pill.visible {
+        transform: translateX(-50%) translateY(0);
+    }
+ 
+    .floating-pill__item {
+        flex-direction: row;
+        gap: 0.4rem;
+        padding: 0.7rem 1.1rem;
+    }
+ 
+    .floating-pill__label { font-size: 0.7rem; }
+ 
+    .floating-pill__divider {
+        width: 1px;
+        height: 24px;
+    }
+}
+/* ── PRELOADER ── */
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+ 
+body.light #preloader { background: #ffffff; }
+body.dark  #preloader { background: #0a0a0a; }
+ 
+#preloader-greeting {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: greetPulse 0.25s ease;
+    letter-spacing: -1px;
+}
+ 
+@keyframes greetPulse {
+    0%   { opacity: 0; transform: scale(0.85); }
+    60%  { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}
+ 
+#preloader.hide-preloader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+    </style>
 </head>
 <body class="light">
-    <div class="profile-card">
-        <img src="image/profile.jpg" alt="Profile" class="profile-image">
-        
-        <div class="profile-name">Fakhrul Mukhlisin</div>
-        
-        <div class="profile-title" id="animatedTitle">I am problem solver</div>
-
-        <div class="social-links">
-            <a href="https://www.instagram.com/fak.rl/" target="_blank" class="social-btn" title="Instagram">📷</a>
-            <a href="https://linkedin.com/in/fakrl" target="_blank" class="social-btn" title="LinkedIn">💼</a>
-            <a href="https://github.com/fakrl" target="_blank" class="social-btn" title="GitHub">🐙</a>
-            <a href="mailto:fahrulmukhlisin13@gmail.com?subject=Halo John!&body=Hi John, saya tertarik untuk berkolaborasi dengan kamu." class="social-btn" title="Email">✉️</a>
-        </div>
+<div id="preloader">
+    <span id="preloader-greeting">Hello</span>
+</div>
+ 
+<nav class="navbar">
+    <div class="nav-logo">
+        <img src="image/logo.png" alt="FM Logo"
+             style="height:32px; width:auto; object-fit:contain; vertical-align:middle;"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+        <span style="display:none; background:linear-gradient(135deg,#667eea,#764ba2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:700; font-size:1.5rem;">FM</span>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+    </ul>
+</nav>
 
-    <button class="theme-toggle" id="themeBtn">🌙</button>
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
 
-    <p class="click-hint">Click anywhere to see about him</p>
-    
-    <script src="script.js"></script>
+<main>
+
+    <!-- ── HERO ─────────────────────────────────── -->
+    <section id="hero" class="hero-section">
+        <div class="hero-inner">
+            <div class="hero-pair">
+
+                <!-- Card -->
+                <div class="hero-card-wrap" id="heroCard">
+                    <div class="hero-profile-card">
+
+                        <!-- Photo with rotating ring -->
+                        <div class="hero-photo-frame">
+                            <div class="hero-photo-ring"></div>
+                            <div class="hero-photo-inner">
+                                <img src="image/profile.jpg"
+                                     id="heroPhoto"
+                                     alt="Fakhrul Mukhlisin"
+                                     onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex'">
+                                <div class="hero-photo-initials" id="heroInitials"
+                                     style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">FM</div>
+                            </div>
+                        </div>
+
+                        <!-- Dots (shown only if multiple photos) -->
+                        <div class="hero-photo-dots" id="heroDots"></div>
+
+                        <p class="hero-card-name">Fakhrul Mukhlisin</p>
+                        <p class="hero-card-title">Backend · Frontend · AI Enthusiast</p>
+
+                        <div class="hero-card-socials">
+                            <a href="https://www.instagram.com/fak.rl/" target="_blank" class="hero-card-social" title="Instagram">📷</a>
+                            <a href="https://linkedin.com/in/fakrl" target="_blank" class="hero-card-social" title="LinkedIn">💼</a>
+                            <a href="https://github.com/fakrl" target="_blank" class="hero-card-social" title="GitHub">🐙</a>
+                            <a href="/cdn-cgi/l/email-protection#6e080f061c1b02031b050602071d07005f5d2e09030f0702400d0103" class="hero-card-social" title="Email">✉️</a>
+                        </div>
+
+                        <div class="hero-availability">
+                            <span class="hero-availability-dot"></span>
+                            Open to Work
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- About panel (reveals after 2.5s) -->
+                <div class="hero-about" id="heroAbout">
+                    <p class="hero-greeting">Hey there 👋</p>
+                    <h1 class="hero-name">Fakhrul<br>Mukhlisin</h1>
+                    <p class="hero-role">Software Engineer · Information Systems Student</p>
+                    <p class="hero-bio">
+                        I'm Fakhrul — an Information Systems student (<strong>GPA 3.68/4.0</strong>)
+                        who's shipped real products on both sides of the stack.
+                        Backend: a <strong>full marketplace REST API in Golang</strong> with clean architecture.
+                        Frontend: a <strong>live e-commerce catalog in Vue.js 2</strong> with CI/CD deployment.
+                        Both scored <strong>Excellent</strong>.
+                        Open to full-time, part-time, or paid internship — remote or Jakarta.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="/moments/" class="btn btn-secondary">See My Moments →</a>
+                    </div>
+                </div>
+
+            </div><!-- /hero-pair -->
+        </div><!-- /hero-inner -->
+    </section>
+
+    <!-- ── SKILLS ─────────────────────────────── -->
+    <section id="skills" class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid skills-grid--two-col">
+
+            <div class="glass-card skill-card">
+                <div class="skill-icon">🚀</div>
+                <h3>Used in Production</h3>
+                <div class="skill-production-list">
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">Golang</span>
+                        <span class="skill-prod-context">Evermos — marketplace REST API</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">Gin Framework</span>
+                        <span class="skill-prod-context">Evermos — routing & middleware</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">JWT Auth</span>
+                        <span class="skill-prod-context">Evermos — authentication & RBAC</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">MySQL</span>
+                        <span class="skill-prod-context">Evermos — relational database design</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">REST API</span>
+                        <span class="skill-prod-context">Evermos — 7 module endpoints</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">Vue.js 2</span>
+                        <span class="skill-prod-context">Core Initiative — e-commerce catalog</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">GitLab CI/CD</span>
+                        <span class="skill-prod-context">Core Initiative — automated deployment</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">Firebase</span>
+                        <span class="skill-prod-context">Core Initiative — hosting & realtime DB</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">JavaScript</span>
+                        <span class="skill-prod-context">UNPAM — data scraping & automation</span>
+                    </div>
+                    <div class="skill-prod-item">
+                        <span class="skill-prod-name">Prompt Engineering</span>
+                        <span class="skill-prod-context">PT CMS — AI content automation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card skill-card">
+                <div class="skill-icon">🛠️</div>
+                <h3>Also Know</h3>
+                <div class="skill-tags">
+                    <span class="tag">PHP</span>
+                    <span class="tag">Laravel</span>
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">Bootstrap</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">phpMyAdmin</span>
+                    <span class="tag">Git</span>
+                    <span class="tag">GitHub</span>
+                    <span class="tag">Postman</span>
+                    <span class="tag">VS Code</span>
+                    <span class="tag">Figma</span>
+                    <span class="tag">Clean Architecture</span>
+                    <span class="tag">RBAC</span>
+                    <span class="tag">Azure OpenAI</span>
+                    <span class="tag">SEO Optimization</span>
+                    <span class="tag">Responsive Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── EDUCATION + LANGUAGES + STATS ────────── -->
+    <section id="education" class="section" style="padding-top:0">
+        <h2 class="section-title">Education & Languages</h2>
+        <div class="edu-lang-grid">
+
+            <div class="glass-card edu-block">
+                <span class="edu-block-label">🎓 Education</span>
+                <p class="edu-block-title">Bachelor of Information Systems</p>
+                <p class="edu-block-sub">Universitas Pamulang · Tangerang Selatan</p>
+                <p class="edu-block-sub">Semester 6 · Sep 2023 – Oct 2027 (Expected)</p>
+                <span class="edu-gpa">GPA 3.68 / 4.00</span>
+            </div>
+
+            <div class="glass-card edu-block">
+                <span class="edu-block-label">🌐 Languages</span>
+                <div class="lang-list">
+                    <div class="lang-item">
+                        <span class="lang-name">🇮🇩 Indonesian</span>
+                        <span class="lang-badge">Native · Certified Madya</span>
+                    </div>
+                    <div class="lang-item">
+                        <span class="lang-name">🇬🇧 English</span>
+                        <span class="lang-badge">B2 Proficiency</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stats-row">
+            <div class="glass-card stat-item">
+                <span class="stat-number">3.68</span>
+                <span class="stat-label">GPA out of 4.00</span>
+            </div>
+            <div class="glass-card stat-item">
+                <span class="stat-number">90.91</span>
+                <span class="stat-label">Evermos Internship Score</span>
+            </div>
+            <div class="glass-card stat-item">
+                <span class="stat-number">87.79</span>
+                <span class="stat-label">Core Initiative Score</span>
+            </div>
+            <div class="glass-card stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Records Managed</span>
+            </div>
+            <div class="glass-card stat-item">
+                <span class="stat-number">300+</span>
+                <span class="stat-label">Members Led</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="exp-carousel-container">
+            <div class="exp-track" id="expTrack">
+
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-evermos.jpg" alt="Evermos"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                        <div class="exp-card__badge">90.91 / 100</div>
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Dec 2025</span>
+                        <h3 class="exp-card__title">Backend Developer Intern</h3>
+                        <p class="exp-card__company">Evermos × Rakamin Academy</p>
+                        <ul class="exp-card__list">
+                            <li>Full marketplace REST API — Golang, Gin, MySQL, JWT</li>
+                            <li>7 modules: Auth, User, Store, Address, Category, Product, Transaction</li>
+                            <li>Clean architecture, pagination, filtering, multi-image upload</li>
+                            <li>Atomic DB transactions & product log for historical pricing</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Golang</span><span class="tag">Gin</span>
+                            <span class="tag">MySQL</span><span class="tag">JWT</span>
+                            <span class="tag">REST API</span><span class="tag">Clean Architecture</span>
+                        </div>
+                        <div class="exp-card__actions">
+                            <a href="https://github.com/fakrl/evermos-backend" target="_blank" class="exp-card__link">GitHub →</a>
+                            <a href="/proof/" class="exp-card__link exp-card__link--ghost">See Full Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-coreinit.jpg" alt="Core Initiative"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                        <div class="exp-card__badge">87.79 / 100</div>
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Oct – Nov 2025</span>
+                        <h3 class="exp-card__title">Frontend Developer Intern</h3>
+                        <p class="exp-card__company">Core Initiative × Rakamin Academy</p>
+                        <ul class="exp-card__list">
+                            <li>E-Commerce Catalog — Vue.js 2, live REST API integration</li>
+                            <li>3 dynamic UI themes per product category</li>
+                            <li>Pixel-perfect Figma implementation, SVG export</li>
+                            <li>Deployed via GitLab CI/CD to Firebase</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Vue.js 2</span><span class="tag">REST API</span>
+                            <span class="tag">CI/CD</span><span class="tag">Firebase</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                        <div class="exp-card__actions">
+                            <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" class="exp-card__link">GitHub →</a>
+                            <a href="/proof/" class="exp-card__link exp-card__link--ghost">See Full Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-unpam.jpg" alt="UNPAM"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Nov 2024 – Jul 2025</span>
+                        <h3 class="exp-card__title">Data Management Specialist</h3>
+                        <p class="exp-card__company">Lembaga Kemahasiswaan UNPAM</p>
+                        <ul class="exp-card__list">
+                            <li>Managed dataset of 500+ student & alumni records</li>
+                            <li>Built data visualizations for faculty presentations</li>
+                            <li>Digital archive for 1,000+ documentation files</li>
+                            <li>JavaScript automation for data scraping</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Data Management</span>
+                            <span class="tag">Visualization</span>
+                        </div>
+                        <div class="exp-card__actions">
+                            <a href="/moments/?filter=campus" class="exp-card__link exp-card__link--ghost">See Moments →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-cms.jpg" alt="PT CMS"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Jul 2024 – Jul 2025</span>
+                        <h3 class="exp-card__title">Digital Content Support</h3>
+                        <p class="exp-card__company">PT. Cahaya Millenial Sejahtera</p>
+                        <ul class="exp-card__list">
+                            <li>AI-powered copywriting automation</li>
+                            <li>Prompt engineering for content workflows</li>
+                            <li>Brand consistency across digital platforms</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Prompt Engineering</span>
+                            <span class="tag">AI Tools</span>
+                            <span class="tag">Content</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-card glass-card">
+                    <div class="exp-card__img">
+                        <img src="image/exp-jurnalis.jpg" alt="Forum Studi Jurnalis"
+                             onerror="this.parentElement.classList.add('exp-card__img--placeholder')">
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__date">Oct 2021 – Nov 2022</span>
+                        <h3 class="exp-card__title">President</h3>
+                        <p class="exp-card__company">Forum Studi Jurnalis</p>
+                        <ul class="exp-card__list">
+                            <li>Led organization of 300+ members</li>
+                            <li>Coordinated 15+ events & technical seminars</li>
+                            <li>Streamlined editorial & cross-functional workflows</li>
+                        </ul>
+                        <div class="exp-card__tags">
+                            <span class="tag">Leadership</span>
+                            <span class="tag">Event Management</span>
+                            <span class="tag">300+ Members</span>
+                        </div>
+                        <div class="exp-card__actions">
+                            <a href="/moments/?filter=event" class="exp-card__link exp-card__link--ghost">See Moments →</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="exp-dots" id="expDots"></div>
+        </div>
+    </section>
+
+    <!-- ── CONTACT — Hit Me Up ────────────────── -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Hit Me Up</h2>
+
+        <div class="cv-download-wrapper">
+            <a href="cv/cv_fakhrul_mukhlisin_2026.pdf" download
+               class="cv-download-btn btn btn-primary">
+                📄 Download CV
+            </a>
+            <p class="cv-download-hint">PDF · Updated 2026</p>
+        </div>
+
+        <div class="social-cards">
+            <a href="https://www.instagram.com/fak.rl/" target="_blank"
+               class="glass-card social-profile-card">
+                <div class="social-profile-top">
+                    <div class="social-profile-avatar-wrap social-profile-avatar-wrap--ig">
+                        <img src="image/profile.jpg" alt="Instagram" class="social-profile-avatar">
+                    </div>
+                    <span class="social-profile-badge social-profile-badge--ig">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="social-profile-info">
+                    <p class="social-profile-name">Fakhrul Mukhlisin</p>
+                    <p class="social-profile-handle">@fak.rl</p>
+                    <p class="social-profile-desc">Developer · Photographer · Creating things</p>
+                </div>
+                <div class="social-profile-cta social-profile-cta--ig">Follow</div>
+            </a>
+
+            <a href="https://linkedin.com/in/fakrl" target="_blank"
+               class="glass-card social-profile-card">
+                <div class="social-profile-top">
+                    <div class="social-profile-avatar-wrap social-profile-avatar-wrap--li">
+                        <img src="image/profile.jpg" alt="LinkedIn" class="social-profile-avatar">
+                    </div>
+                    <span class="social-profile-badge social-profile-badge--li">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="social-profile-info">
+                    <p class="social-profile-name">Fakhrul Mukhlisin</p>
+                    <p class="social-profile-handle">linkedin.com/in/fakrl</p>
+                    <p class="social-profile-desc">Software Engineer · Information Systems · Open to Work</p>
+                </div>
+                <div class="social-profile-cta social-profile-cta--li">Connect</div>
+            </a>
+        </div>
+
+        <div class="wa-form-wrapper glass-card">
+            <div class="wa-form-header">
+                <span class="wa-form-icon">✉️</span>
+                <div>
+                    <h3 class="wa-form-title">Send a Message</h3>
+                    <p class="wa-form-sub">Choose how you want to reach me — WhatsApp or Email.</p>
+                </div>
+            </div>
+            <div class="wa-form">
+                <input type="text" id="waName" placeholder="Your name"
+                       class="feedback-input" maxlength="60"/>
+                <textarea id="waMessage" placeholder="What's on your mind?"
+                          class="feedback-input wa-textarea"
+                          maxlength="500" rows="4"></textarea>
+                <div class="wa-form-buttons">
+                    <button id="waSend" class="btn btn-primary wa-btn">Send via WhatsApp 🚀</button>
+                    <button id="emailSend" class="btn btn-secondary wa-btn">Send via Email 📧</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FEEDBACK ───────────────────────────── -->
+    <section id="feedback" class="section">
+        <h2 class="section-title">Leave a Feedback</h2>
+        <div class="feedback-wrapper">
+            <div class="glass-card feedback-form-card">
+                <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
+                <div class="feedback-form">
+                    <input type="text" id="feedbackName" placeholder="Your name"
+                           class="feedback-input" maxlength="50"/>
+                    <input type="text" id="feedbackFrom"
+                           placeholder="Asal / Instansi (contoh: Teman kampus, Evermos...)"
+                           class="feedback-input" maxlength="80"/>
+                    <textarea id="feedbackMessage" placeholder="Your message..."
+                              class="feedback-input feedback-textarea"
+                              maxlength="300" rows="3"></textarea>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">
+                        Send Message ✉️
+                    </button>
+                </div>
+            </div>
+            <div id="feedbackList" class="feedback-list">
+                <div class="feedback-empty" id="feedbackEmpty">
+                    <p>No feedback yet. Be the first! 🚀</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Fakhrul Mukhlisin.</p>
+        <div class="footer-links">
+            <a href="/proof/">Proof of Work</a> &nbsp;·&nbsp;
+            <a href="/moments/">Moments</a>
+        </div>
+    </footer>
+
+<!-- ── HTML: Floating Pill ── -->
+<div class="floating-pill" id="floatingPill">
+    <a href="/proof/" class="floating-pill__item" title="Proof of Work">
+        <span class="floating-pill__icon">🏅</span>
+        <span class="floating-pill__label">Proof</span>
+    </a>
+    <div class="floating-pill__divider"></div>
+    <a href="/moments/" class="floating-pill__item" title="Moments">
+        <span class="floating-pill__icon">📸</span>
+        <span class="floating-pill__label">Moments</span>
+    </a>
+</div>
+</main>
+
+<!-- ── script.js ─────────────────────────── -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+
+<!-- ── Cinematic Hero ────────────────────── -->
+<script>
+(function() {
+    const card  = document.getElementById('heroCard');
+    const about = document.getElementById('heroAbout');
+    if (!card || !about) return;
+
+    // Tambah foto di sini kalau udah punya lebih dari 1
+    const photos = [
+        'image/profile.jpg',
+        // 'image/profile-2.jpg',
+        // 'image/profile-3.jpg',
+    ];
+
+    const photoEl = document.getElementById('heroPhoto');
+    const dotsEl  = document.getElementById('heroDots');
+    let current   = 0;
+
+    // Bangun dots hanya kalau ada lebih dari 1 foto
+    if (photos.length > 1) {
+        photos.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'hero-photo-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => switchPhoto(i));
+            dotsEl.appendChild(dot);
+        });
+    }
+
+    function switchPhoto(index) {
+        current = index;
+        photoEl.style.opacity = '0';
+        setTimeout(() => {
+            photoEl.src = photos[index];
+            photoEl.style.opacity = '1';
+        }, 250);
+        dotsEl.querySelectorAll('.hero-photo-dot').forEach((d, i) =>
+            d.classList.toggle('active', i === index));
+    }
+
+    // Auto-cycle tiap 4 detik kalau ada lebih dari 1 foto
+    if (photos.length > 1) {
+        setInterval(() => switchPhoto((current + 1) % photos.length), 4000);
+    }
+
+    // Cinematic reveal setelah 2.5 detik
+    setTimeout(() => {
+        about.classList.add('visible');
+    }, 2500);
+})();
+</script>
+
+<!-- ── Experience Carousel ───────────────── -->
+<script>
+(function() {
+    const track  = document.getElementById('expTrack');
+    const dotsEl = document.getElementById('expDots');
+    if (!track) return;
+    const cards = Array.from(track.querySelectorAll('.exp-card'));
+    const total = cards.length;
+    let current = 0, isDragging = false, startX = 0, dragDelta = 0;
+
+    function visibleCount() {
+        const w = window.innerWidth;
+        if (w >= 1000) return 3;
+        if (w >= 600)  return 2;
+        return 1;
+    }
+    function maxIndex() { return Math.max(0, total - visibleCount()); }
+    function goTo(index) {
+        current = Math.max(0, Math.min(index, maxIndex()));
+        const cardW = cards[0].offsetWidth, gap = 32;
+        track.style.transform = `translateX(-${current * (cardW + gap)}px)`;
+        dotsEl.querySelectorAll('.exp-dot').forEach((d, i) =>
+            d.classList.toggle('exp-dot--active', i === current));
+    }
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        for (let i = 0; i <= maxIndex(); i++) {
+            const dot = document.createElement('button');
+            dot.className = 'exp-dot';
+            dot.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(dot);
+        }
+    }
+    track.addEventListener('mousedown',  e => { isDragging = true; startX = e.clientX; });
+    track.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('mousemove',  e => { if (isDragging) dragDelta = e.clientX - startX; });
+    track.addEventListener('touchmove',  e => { if (isDragging) dragDelta = e.touches[0].clientX - startX; }, { passive: true });
+    function endDrag() {
+        if (!isDragging) return; isDragging = false;
+        if (dragDelta < -50) goTo(current + 1);
+        else if (dragDelta > 50) goTo(current - 1);
+        dragDelta = 0;
+    }
+    track.addEventListener('mouseup', endDrag);
+    track.addEventListener('mouseleave', endDrag);
+    track.addEventListener('touchend', endDrag);
+    window.addEventListener('resize', () => { buildDots(); goTo(Math.min(current, maxIndex())); });
+    buildDots(); goTo(0);
+})();
+</script>
+
+<!-- ── WA + Email ─────────────────────────── -->
+<script>
+(function() {
+    const WA    = '6281315324195';
+    const EMAIL = 'fahrulmukhlisin13@gmail.com';
+    function getInputs() {
+        return {
+            name:    document.getElementById('waName').value.trim(),
+            message: document.getElementById('waMessage').value.trim()
+        };
+    }
+    function clearForm() {
+        document.getElementById('waName').value    = '';
+        document.getElementById('waMessage').value = '';
+    }
+    document.getElementById('waSend').addEventListener('click', () => {
+        const { name, message } = getInputs();
+        if (!name || !message) { alert('Please fill in both fields!'); return; }
+        const text = `Hi Fakhrul! I'm ${name} and I just came across your portfolio.\n\n${message}\n\nLooking forward to hearing from you!`;
+        window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`, '_blank');
+        clearForm();
+    });
+    document.getElementById('emailSend').addEventListener('click', () => {
+        const { name, message } = getInputs();
+        if (!name || !message) { alert('Please fill in both fields!'); return; }
+        const subject = `Hi Fakhrul! — Message from ${name}`;
+        const body    = `Hi Fakhrul! I'm ${name} and I just came across your portfolio.\n\n${message}\n\nLooking forward to hearing from you!`;
+        window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        clearForm();
+    });
+})();
+</script>
+
+<!-- ── Firebase Feedback ──────────────────── -->
+<script type="module">
+    (function() {
+    const pill = document.getElementById('floatingPill');
+    if (!pill) return;
+ // ── PRELOADER ─────────────────────────────────────
+(function() {
+    const words = ["Hello", "Halo", "Hola", "Bonjour", "Konnichiwa", "Ciao", "Namaste", "Salut"];
+    const el       = document.getElementById('preloader-greeting');
+    const preloader = document.getElementById('preloader');
+    if (!el || !preloader) return;
+ 
+    let i = 0;
+    el.textContent = words[0];
+ 
+    const timer = setInterval(() => {
+        i++;
+        if (i < words.length) {
+            el.style.animation = 'none';
+            void el.offsetWidth; // reflow biar animasi restart
+            el.style.animation = 'greetPulse 0.25s ease';
+            el.textContent = words[i];
+        } else {
+            clearInterval(timer);
+            setTimeout(() => {
+                preloader.classList.add('hide-preloader');
+            }, 300);
+        }
+    }, 280);
+})();
+ 
+    // Muncul setelah scroll sedikit, sembunyi di hero
+    function updatePill() {
+        const scrolled = window.scrollY;
+        const heroH    = document.getElementById('hero')?.offsetHeight || 0;
+ 
+        if (scrolled > heroH * 0.5) {
+            pill.classList.add('visible');
+        } else {
+            pill.classList.remove('visible');
+        }
+    }
+ 
+    window.addEventListener('scroll', updatePill, { passive: true });
+    updatePill();
+})();
+    import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onValue, serverTimestamp }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDhJLaWGZs1YILiMaNIDQ3mapnBUoH9R6s",
+        authDomain: "fakrul-feeeb.firebaseapp.com",
+        databaseURL: "https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "fakrul-feeeb",
+        storageBucket: "fakrul-feeeb.firebasestorage.app",
+        messagingSenderId: "767578062305",
+        appId: "1:767578062305:web:3cdf7bd8678923bb3e26a0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getDatabase(app);
+    const commentsRef = ref(db, "feedback");
+
+    function escapeHtml(str) {
+        return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+    function formatTime(ts) {
+        if (!ts) return "";
+        return new Date(ts).toLocaleDateString("id-ID", {
+            day:"numeric", month:"short", year:"numeric",
+            hour:"2-digit", minute:"2-digit"
+        });
+    }
+    function createCard(data) {
+        const card = document.createElement("div");
+        card.className = "glass-card feedback-card fade-in";
+        card.innerHTML = `
+            <div class="feedback-card-header">
+                <span class="feedback-avatar">${escapeHtml(data.nama.charAt(0).toUpperCase())}</span>
+                <div class="feedback-card-meta">
+                    <strong class="feedback-card-name">${escapeHtml(data.nama)}</strong>
+                    <span class="feedback-card-from">📍 ${escapeHtml(data.dari || "")}</span>
+                    <span class="feedback-card-time">${formatTime(data.waktu)}</span>
+                </div>
+            </div>
+            <p class="feedback-card-msg">${escapeHtml(data.pesan)}</p>
+        `;
+        return card;
+    }
+    onValue(commentsRef, (snapshot) => {
+        const list  = document.getElementById("feedbackList");
+        const empty = document.getElementById("feedbackEmpty");
+        const data  = snapshot.val();
+        list.querySelectorAll(".feedback-card").forEach(el => el.remove());
+        if (!data) { empty.style.display = "block"; return; }
+        empty.style.display = "none";
+        Object.values(data).reverse().forEach(item => list.appendChild(createCard(item)));
+    });
+    document.getElementById("feedbackSubmit").addEventListener("click", async () => {
+        const nameEl = document.getElementById("feedbackName");
+        const fromEl = document.getElementById("feedbackFrom");
+        const msgEl  = document.getElementById("feedbackMessage");
+        const btn    = document.getElementById("feedbackSubmit");
+        const nama = nameEl.value.trim(), dari = fromEl.value.trim(), pesan = msgEl.value.trim();
+        if (!nama || !pesan) { alert("Nama dan pesan harus diisi ya!"); return; }
+        btn.textContent = "Sending..."; btn.disabled = true;
+        try {
+            await push(commentsRef, { nama, dari: dari || "Anonymous", pesan, waktu: serverTimestamp() });
+            nameEl.value = ""; fromEl.value = ""; msgEl.value = "";
+        } catch(err) { alert("Gagal kirim!"); console.error(err); }
+        finally { btn.textContent = "Send Message ✉️"; btn.disabled = false; }
+    });
+</script>
+
 </body>
 </html>

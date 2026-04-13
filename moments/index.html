@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moments — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../animations.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="stylesheet" href="../forms.css">
+    <meta name="description" content="Behind the scenes moments and feedback for Fakhrul Mukhlisin.">
+    <meta property="og:title" content="Moments — Fakhrul Mukhlisin">
+    <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/profile.jpg">
+    <meta property="og:url" content="https://fakrul.netlify.app/moments/">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="light">
+
+<nav class="navbar">
+    <div class="nav-logo">FM</div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/proof/">Proof of Work</a></li>
+        <li><a href="/moments/" class="active">Moments</a></li>
+    </ul>
+</nav>
+
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
+
+<main>
+
+    <!-- ── HERO ─────────────────────────────────── -->
+    <section class="moments-hero">
+        <div class="moments-hero__content">
+            <p class="moments-hero__label">Behind the scenes 📸</p>
+            <h1 class="moments-hero__title">Moments</h1>
+            <p class="moments-hero__sub">
+                The people, places, and memories that shaped the journey so far.
+            </p>
+        </div>
+    </section>
+
+    <!-- ── GALLERY ───────────────────────────────── -->
+    <section class="section" id="gallery">
+        <h2 class="section-title">Gallery</h2>
+
+        <div class="moments-filters" id="momentsFilters">
+            <button class="moments-filter moments-filter--active" data-filter="all">All</button>
+            <button class="moments-filter" data-filter="internship">Internship</button>
+            <button class="moments-filter" data-filter="campus">Campus</button>
+            <button class="moments-filter" data-filter="event">Event</button>
+            <button class="moments-filter" data-filter="personal">Personal</button>
+        </div>
+
+        <div class="moments-grid" id="momentsGrid">
+
+            <div class="moment-item glass-card" data-category="internship">
+                <img src="../image/moment-evermos.jpg" alt="Evermos Internship"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Internship</span>
+                    <p class="moment-caption">Evermos × Rakamin — Backend Internship 2025</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="internship">
+                <img src="../image/moment-coreinit.jpg" alt="Core Initiative Internship"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Internship</span>
+                    <p class="moment-caption">Core Initiative × Rakamin — Frontend Internship 2025</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="campus">
+                <img src="../image/moment-campus-1.jpg" alt="Campus moment"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Campus</span>
+                    <p class="moment-caption">— Tambah caption —</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="campus">
+                <img src="../image/moment-campus-2.jpg" alt="Campus moment 2"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Campus</span>
+                    <p class="moment-caption">— Tambah caption —</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="event">
+                <img src="../image/moment-event-1.jpg" alt="Event moment"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Event</span>
+                    <p class="moment-caption">Forum Studi Jurnalis — Event Koordinasi</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="event">
+                <img src="../image/moment-event-2.jpg" alt="Event moment 2"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Event</span>
+                    <p class="moment-caption">— Tambah caption —</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="personal">
+                <img src="../image/moment-personal-1.jpg" alt="Personal moment"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Personal</span>
+                    <p class="moment-caption">— Tambah caption —</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="personal">
+                <img src="../image/moment-personal-2.jpg" alt="Personal moment 2"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Personal</span>
+                    <p class="moment-caption">— Tambah caption —</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── FEEDBACK ──────────────────────────────── -->
+    <section id="feedback" class="section">
+        <h2 class="section-title">Leave a Feedback</h2>
+        <div class="feedback-wrapper">
+            <div class="glass-card feedback-form-card">
+                <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
+                <div class="feedback-form">
+                    <input type="text" id="feedbackName"
+                           placeholder="Your name" class="feedback-input" maxlength="50"/>
+                    <input type="text" id="feedbackFrom"
+                           placeholder="Asal / Instansi (contoh: Teman kampus, Evermos...)"
+                           class="feedback-input" maxlength="80"/>
+                    <textarea id="feedbackMessage"
+                              placeholder="Your message..."
+                              class="feedback-input feedback-textarea"
+                              maxlength="300" rows="3"></textarea>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">
+                        Send Message ✉️
+                    </button>
+                </div>
+            </div>
+            <div id="feedbackList" class="feedback-list">
+                <div class="feedback-empty" id="feedbackEmpty">
+                    <p>No feedback yet. Be the first! 🚀</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox__close" id="lightboxClose">✕</button>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev">‹</button>
+        <button class="lightbox__nav lightbox__nav--next" id="lightboxNext">›</button>
+        <img class="lightbox__img" id="lightboxImg" src="" alt="">
+        <p class="lightbox__caption" id="lightboxCaption"></p>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Fakhrul Mukhlisin.</p>
+        <div class="footer-links">
+            <a href="/">← Home</a>
+        </div>
+    </footer>
+</main>
+
+<script src="../script.js"></script>
+<script type="module" src="../moments.js"></script>
+
+<!-- Auto-apply filter dari URL param ?filter=internship -->
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const filter = params.get('filter');
+        if (filter && filter !== 'all') {
+            // Klik filter button yang sesuai
+            const btn = document.querySelector(`.moments-filter[data-filter="${filter}"]`);
+            if (btn) btn.click();
+        }
+    });
+</script>
+</body>
+</html>
