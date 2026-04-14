@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proof of Work — Fakhrul Mukhlisin</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/image/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../animations.css">
     <link rel="stylesheet" href="../pages.css">
@@ -14,11 +17,462 @@
     <meta property="og:image" content="https://fakrul.netlify.app/image/profile.jpg">
     <meta property="og:url" content="https://fakrul.netlify.app/proof/">
     <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+    /* ==========================================
+       CERT MODAL — Google Drive style preview
+       ========================================== */
+    .cert-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.85);
+        z-index: 9000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .cert-modal-overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .cert-modal {
+        position: relative;
+        width: 100%;
+        max-width: 780px;
+        max-height: 90vh;
+        border-radius: 20px;
+        overflow: hidden;
+        transform: scale(0.92) translateY(20px);
+        transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cert-modal-overlay.open .cert-modal {
+        transform: scale(1) translateY(0);
+    }
+
+    body.light .cert-modal {
+        background: #ffffff;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+    }
+
+    body.dark .cert-modal {
+        background: #111111;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    }
+
+    /* ── Modal header ── */
+    .cert-modal__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.4rem;
+        flex-shrink: 0;
+        border-bottom: 1px solid;
+    }
+
+    body.light .cert-modal__header { border-color: rgba(0,0,0,0.08); }
+    body.dark  .cert-modal__header { border-color: rgba(255,255,255,0.08); }
+
+    .cert-modal__title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        transition: color 0.3s;
+    }
+
+    body.light .cert-modal__title { color: #1a1a1a; }
+    body.dark  .cert-modal__title { color: #ffffff; }
+
+    .cert-modal__counter {
+        font-size: 0.8rem;
+        color: #2563eb;
+        font-weight: 600;
+    }
+
+    .cert-modal__close {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    body.light .cert-modal__close { background: rgba(0,0,0,0.06); color: #1a1a1a; }
+    body.dark  .cert-modal__close { background: rgba(255,255,255,0.1); color: #ffffff; }
+    .cert-modal__close:hover { background: rgba(37,99,235,0.15); color: #2563eb; }
+
+    /* ── Image viewer ── */
+    .cert-modal__viewer {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        min-height: 300px;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    body.dark .cert-modal__viewer { background: #1a1a1a; }
+
+    .cert-modal__img {
+        max-width: 100%;
+        max-height: 60vh;
+        object-fit: contain;
+        display: block;
+        transition: opacity 0.25s ease;
+        padding: 1rem;
+    }
+
+    .cert-modal__img.fading { opacity: 0; }
+
+    /* Placeholder when no image */
+    .cert-modal__placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 3rem;
+        text-align: center;
+    }
+
+    .cert-modal__placeholder-icon { font-size: 4rem; opacity: 0.3; }
+
+    .cert-modal__placeholder-text {
+        font-size: 0.9rem;
+        transition: color 0.3s;
+    }
+
+    body.light .cert-modal__placeholder-text { color: #999; }
+    body.dark  .cert-modal__placeholder-text { color: #555; }
+
+    /* ── Nav arrows ── */
+    .cert-modal__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        z-index: 2;
+    }
+
+    body.light .cert-modal__nav { background: rgba(255,255,255,0.9); color: #1a1a1a; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+    body.dark  .cert-modal__nav { background: rgba(30,30,30,0.9); color: #ffffff; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .cert-modal__nav:hover { background: #2563eb; color: white; }
+    .cert-modal__nav--prev { left: 0.8rem; }
+    .cert-modal__nav--next { right: 0.8rem; }
+    .cert-modal__nav:disabled { opacity: 0.3; cursor: not-allowed; }
+    .cert-modal__nav:disabled:hover { background: inherit; color: inherit; }
+
+    /* ── Dots ── */
+    .cert-modal__dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        padding: 0.8rem 1rem;
+        flex-shrink: 0;
+    }
+
+    .cert-modal__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all 0.3s ease;
+    }
+
+    body.light .cert-modal__dot { background: rgba(0,0,0,0.2); }
+    body.dark  .cert-modal__dot { background: rgba(255,255,255,0.2); }
+
+    .cert-modal__dot.active {
+        background: #2563eb !important;
+        width: 18px;
+        border-radius: 3px;
+    }
+
+    /* ── Footer actions ── */
+    .cert-modal__footer {
+        display: flex;
+        gap: 0.8rem;
+        padding: 0.8rem 1.4rem 1.2rem;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+        border-top: 1px solid;
+    }
+
+    body.light .cert-modal__footer { border-color: rgba(0,0,0,0.08); }
+    body.dark  .cert-modal__footer { border-color: rgba(255,255,255,0.08); }
+
+    .cert-modal__btn {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+
+    .cert-modal__btn--primary {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+    }
+
+    .cert-modal__btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+    }
+
+    .cert-modal__btn--ghost {
+        background: transparent;
+        border: 1px solid #2563eb;
+        color: #2563eb;
+    }
+
+    .cert-modal__btn--ghost:hover {
+        background: rgba(37,99,235,0.08);
+    }
+
+    .cert-modal__btn--youtube {
+        background: linear-gradient(135deg, #ff0000, #cc0000);
+        color: white;
+    }
+
+    .cert-modal__btn--youtube:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255,0,0,0.3);
+    }
+
+    /* ── Proof card clickable ── */
+    .proof-card {
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .proof-card:hover {
+        transform: translateY(-8px);
+    }
+
+    body.light .proof-card:hover { box-shadow: 0 20px 60px rgba(37,99,235,0.15); }
+    body.dark  .proof-card:hover { box-shadow: 0 20px 60px rgba(37,99,235,0.3); }
+
+    /* Click hint badge on card */
+    .proof-card__click-hint {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.5);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 10px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+    }
+
+    .proof-card:hover .proof-card__click-hint { opacity: 1; }
+
+    /* ── Badge for attempt/participated ── */
+    .proof-card__attempt {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 0.25rem 0.7rem;
+        border-radius: 20px;
+        margin-top: 0.5rem;
+        background: rgba(37,99,235,0.1);
+        border: 1px solid rgba(37,99,235,0.2);
+        color: #2563eb;
+    }
+
+    /* ── Floating pill ── */
+    .floating-pill {
+        position: fixed;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%) translateX(20px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 30px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        overflow: hidden;
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .floating-pill.visible {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+
+    body.light .floating-pill {
+        background: rgba(255,255,255,0.75);
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    body.dark .floating-pill {
+        background: rgba(20,20,20,0.75);
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .floating-pill:hover { box-shadow: 0 12px 40px rgba(37,99,235,0.25); }
+
+    .floating-pill__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.9rem 0.8rem;
+        text-decoration: none;
+        transition: background 0.2s ease;
+        width: 100%;
+    }
+
+    .floating-pill__item:hover { background: rgba(37,99,235,0.1); }
+
+    .floating-pill__icon { font-size: 1.2rem; line-height: 1; }
+
+    .floating-pill__label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+    }
+
+    body.light .floating-pill__label { color: #555; }
+    body.dark  .floating-pill__label { color: #aaa; }
+    .floating-pill__item:hover .floating-pill__label { color: #2563eb; }
+
+    .floating-pill__divider {
+        width: 60%;
+        height: 1px;
+        flex-shrink: 0;
+        transition: background 0.3s ease;
+    }
+
+    body.light .floating-pill__divider { background: rgba(0,0,0,0.08); }
+    body.dark  .floating-pill__divider { background: rgba(255,255,255,0.08); }
+
+    @media (max-width: 768px) {
+        .floating-pill {
+            right: auto;
+            left: 50%;
+            top: auto;
+            bottom: 1.5rem;
+            transform: translateX(-50%) translateY(20px);
+            flex-direction: row;
+        }
+        .floating-pill.visible { transform: translateX(-50%) translateY(0); }
+        .floating-pill__item { flex-direction: row; gap: 0.4rem; padding: 0.7rem 1.1rem; }
+        .floating-pill__label { font-size: 0.7rem; }
+        .floating-pill__divider { width: 1px; height: 24px; }
+
+        .cert-modal { max-height: 95vh; }
+        .cert-modal__img { max-height: 50vh; }
+    }
+
+    /* ── Preloader ── */
+    #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    body.light #preloader { background: #ffffff; }
+    body.dark  #preloader { background: #000000; }
+
+    #preloader-greeting {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 800;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: greetPulse 0.25s ease;
+        letter-spacing: -1px;
+    }
+
+    @keyframes greetPulse {
+        0%   { opacity: 0; transform: scale(0.85); }
+        60%  { opacity: 1; transform: scale(1.05); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    #preloader.hide-preloader {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    </style>
 </head>
 <body class="light">
 
+<!-- Preloader -->
+<div id="preloader">
+    <span id="preloader-greeting">Proof</span>
+</div>
+
+<!-- Floating Pill -->
+<div class="floating-pill" id="floatingPill">
+    <a href="/" class="floating-pill__item" title="Home">
+        <span class="floating-pill__icon">🏠</span>
+        <span class="floating-pill__label">Home</span>
+    </a>
+    <div class="floating-pill__divider"></div>
+    <a href="/moments/" class="floating-pill__item" title="Moments">
+        <span class="floating-pill__icon">📸</span>
+        <span class="floating-pill__label">Moments</span>
+    </a>
+</div>
+
 <nav class="navbar">
-    <div class="nav-logo">FM</div>
+    <div class="nav-logo">
+        <img src="/image/logo.png" alt="FM Logo"
+             style="height:32px; width:auto; object-fit:contain; vertical-align:middle;"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+        <span style="display:none; background:linear-gradient(135deg,#2563eb,#1d4ed8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:700; font-size:1.5rem;">FM</span>
+    </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
     </button>
@@ -33,7 +487,7 @@
 
 <main>
 
-    <!-- ── HERO ─────────────────────────────────── -->
+    <!-- ── HERO ───────────────────────────────────── -->
     <section class="proof-hero">
         <div class="proof-hero__content">
             <p class="proof-hero__label">The receipts 🧾</p>
@@ -49,16 +503,22 @@
         </div>
     </section>
 
-    <!-- ── CERTIFICATIONS ────────────────────────── -->
+    <!-- ── CERTIFICATIONS ─────────────────────────── -->
     <section class="section proof-section" id="tab-certifications">
         <h2 class="section-title">Certifications</h2>
         <div class="proof-grid">
 
-            <div class="glass-card proof-card">
+            <!-- BNSP — 2 slides -->
+            <div class="glass-card proof-card"
+                 data-title="Junior Web Developer — BNSP"
+                 data-images='["../image/cert-bnsp-1.jpg","../image/cert-bnsp-2.jpg","../image/cert-bnsp-3.jpg","../image/cert-bnsp-4.jpg"]'
+                 data-moments="/moments/?filter=certification"
+                 data-moments-label="See Moments →">
                 <div class="proof-card__img">
-                    <img src="../image/cert-bnsp.jpg" alt="BNSP Junior Web Developer"
+                    <img src="../image/cert-bnsp-1.jpg" alt="BNSP Junior Web Developer"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">🏅 BNSP</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Aug 2023</span>
@@ -69,11 +529,19 @@
                 </div>
             </div>
 
-            <div class="glass-card proof-card">
+            <!-- Evermos — 1 slide + YouTube -->
+            <div class="glass-card proof-card"
+                 data-title="Backend Developer Intern — Evermos"
+                 data-images='["../image/cert-evermos.jpg"]'
+                 data-moments="/moments/?filter=project"
+                 data-moments-label="See Project →"
+                 data-youtube="https://youtu.be/blat9DpMBJw"
+                 data-youtube-label="Watch Presentation 🎬">
                 <div class="proof-card__img">
                     <img src="../image/cert-evermos.jpg" alt="Evermos Backend Intern Certificate"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">⭐ 90.91/100</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Dec 2025</span>
@@ -81,18 +549,22 @@
                     <p class="proof-card__issuer">Evermos × Rakamin Academy</p>
                     <p class="proof-card__desc">Certificate of completion for project-based internship program. Built full marketplace REST API in Golang with clean architecture. Score: Excellent.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
-                    <a href="/moments/?filter=internship"
-                       class="exp-card__link exp-card__link--ghost" style="margin-top:0.8rem; display:inline-block;">
-                        See Moments →
-                    </a>
                 </div>
             </div>
 
-            <div class="glass-card proof-card">
+            <!-- Core Initiative — 1 slide + YouTube -->
+            <div class="glass-card proof-card"
+                 data-title="Frontend Developer Intern — Core Initiative"
+                 data-images='["../image/cert-coreinit.jpg"]'
+                 data-moments="/moments/?filter=project"
+                 data-moments-label="See Project →"
+                 data-youtube="https://youtu.be/1DamWnPyG4g"
+                 data-youtube-label="Watch Presentation 🎬">
                 <div class="proof-card__img">
                     <img src="../image/cert-coreinit.jpg" alt="Core Initiative Frontend Intern Certificate"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">⭐ 87.79/100</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Nov 2025</span>
@@ -100,62 +572,135 @@
                     <p class="proof-card__issuer">Core Initiative × Rakamin Academy</p>
                     <p class="proof-card__desc">Certificate of completion for frontend internship. Built Vue.js 2 e-commerce catalog with CI/CD deployment. Score: Excellent.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
-                    <a href="/moments/?filter=internship"
-                       class="exp-card__link exp-card__link--ghost" style="margin-top:0.8rem; display:inline-block;">
-                        See Moments →
-                    </a>
                 </div>
             </div>
 
-            <div class="glass-card proof-card">
+            <!-- LKA UNPAM — 2 slides -->
+            <div class="glass-card proof-card"
+                 data-title="Data Management Intern — LKA UNPAM"
+                 data-images='["../image/cert-unpam-lka-1.jpg","../image/cert-unpam-lka-2.jpg","../image/cert-unpam-lka-3.jpg","../image/cert-unpam-lka-4.jpg"]'
+                 data-moments="/moments/?filter=internship"
+                 data-moments-label="See Moments →">
                 <div class="proof-card__img">
-                    <img src="../image/cert-azure.jpg" alt="Azure AI Fundamentals"
+                    <img src="../image/cert-unpam-lka-1.jpg" alt="LKA UNPAM Internship"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--green">⭐ Sangat Baik</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jan – Jul 2025</span>
+                    <h3 class="proof-card__title">Data Management Intern</h3>
+                    <p class="proof-card__issuer">Lembaga Kemahasiswaan & Alumni UNPAM</p>
+                    <p class="proof-card__desc">Internship di bidang Tracer Study dan Alumni. Mengelola 500+ data mahasiswa dan alumni dengan hasil "Sangat Baik".</p>
+                    <span class="proof-card__tag tag">Internship Certificate</span>
+                </div>
+            </div>
+
+            <!-- Azure — multiple slides -->
+            <div class="glass-card proof-card"
+                 data-title="Azure AI Fundamentals (AI-900)"
+                 data-images='["../image/cert-azure-1.jpg","../image/cert-azure-2.jpg","../image/cert-azure-3.jpg"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-azure-1.jpg" alt="Azure AI Fundamentals"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">☁️ Microsoft</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">May 2025</span>
                     <h3 class="proof-card__title">Azure AI Fundamentals (AI-900)</h3>
                     <p class="proof-card__issuer">Microsoft · Elevate · Merdeka Academy</p>
-                    <p class="proof-card__desc">Training program covering fundamental AI concepts on Microsoft Azure platform, including ML, cognitive services, and responsible AI.</p>
+                    <p class="proof-card__desc">Training program covering fundamental AI concepts on Microsoft Azure platform. Attempted official exam — scored 684/700.</p>
                     <span class="proof-card__tag tag">AI / Cloud</span>
+                    <span class="proof-card__attempt">📊 Exam Attempted · 684/700</span>
                 </div>
             </div>
 
-            <div class="glass-card proof-card">
+            <!-- ML — multiple slides -->
+            <div class="glass-card proof-card"
+                 data-title="Linear Models in Machine Learning"
+                 data-images='["../image/cert-ml-1.jpg" ,"../image/cert-ml-2.jpg","../image/cert-ml-3.jpg","../image/cert-ml-4.jpg","../image/cert-ml-5.jpg","../image/cert-ml-6.jpg"]'>
                 <div class="proof-card__img">
-                    <img src="../image/cert-ml.jpg" alt="Linear Models in Machine Learning"
+                    <img src="../image/cert-ml-1.jpg" alt="Linear Models in Machine Learning"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--green">🤖 91 hrs</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">May – Jul 2025</span>
                     <h3 class="proof-card__title">Linear Models in Machine Learning</h3>
                     <p class="proof-card__issuer">Yandex · Digitalent Scholarship KOMDIGI</p>
-                    <p class="proof-card__desc">91-hour intensive ML program covering linear regression, classification, and model evaluation techniques.</p>
+                    <p class="proof-card__desc">91-hour intensive ML program. Participated in GenAI Hackathon (Alibaba Cloud × KOMDIGI) as culmination of the program.</p>
                     <span class="proof-card__tag tag">Machine Learning</span>
+                    <span class="proof-card__attempt">🏁 Participated · GenAI Hackathon</span>
+                </div>
+            </div>
+
+            <!-- Publikasi Jurnal -->
+            <div class="glass-card proof-card"
+                 data-title="Publikasi Jurnal Ilmiah"
+                 data-images='["../image/cert-jurnal.jpg"]'
+                 data-link="https://portalpublikasi.com/index.php/inomatec/article/view/791"
+                 data-link-label="See Journal →">
+                <div class="proof-card__img">
+                    <img src="../image/cert-jurnal.jpg" alt="Publikasi Jurnal"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--blue">📄 Jurnal</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jan 2026</span>
+                    <h3 class="proof-card__title">Publikasi Jurnal Ilmiah</h3>
+                    <p class="proof-card__issuer">Program Studi Sistem Informasi · UNPAM</p>
+                    <p class="proof-card__desc">Penerapan Metode Simple Additive Weighting (SAW) untuk sistem pendukung keputusan penerima BLT berbasis web.</p>
+                    <span class="proof-card__tag tag">Academic Publication</span>
+                </div>
+            </div>
+
+            <!-- UKBI -->
+            <div class="glass-card proof-card"
+                 data-title="UKBI — Uji Kemahiran Berbahasa Indonesia"
+                 data-images='["../image/cert-ukbi.jpg"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-ukbi.jpg" alt="UKBI Madya"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--gold">🇮🇩 Madya</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Sep 2025</span>
+                    <h3 class="proof-card__title">UKBI — Peringkat Madya</h3>
+                    <p class="proof-card__issuer">Badan Pengembangan dan Pembinaan Bahasa · Kemdikbud</p>
+                    <p class="proof-card__desc">Uji Kemahiran Berbahasa Indonesia resmi dari Kemdikbud. Skor 549, Peringkat Madya. Berlaku s.d. September 2027.</p>
+                    <span class="proof-card__tag tag">Language Certification</span>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- ── AWARDS ────────────────────────────────── -->
+    <!-- ── AWARDS ──────────────────────────────────── -->
     <section class="section proof-section" id="tab-awards" style="display:none">
         <h2 class="section-title">Awards & Achievements</h2>
         <div class="proof-grid">
 
-            <div class="glass-card proof-card">
+            <!-- Juara 1 Fotografi -->
+            <div class="glass-card proof-card"
+                 data-title="Juara 1 Lomba Photography — Digital Creation 2"
+                 data-images='["../image/award-foto-1.jpg","../image/award-foto-2.jpg","../image/award-foto-3.jpg"]'
+                 data-link="prooftab:photography"
+                 data-link-label="See All Photos →">
                 <div class="proof-card__img">
-                    <img src="../image/award-photo.jpg" alt="Photography Award"
+                    <img src="../image/award-foto-1.jpg" alt="Photography Award"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--gold">🏆 Juara</span>
+                    <span class="proof-card__badge proof-card__badge--gold">🏆 Juara 1</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
                 </div>
                 <div class="proof-card__body">
-                    <span class="proof-card__date">— Ganti dengan tahun —</span>
-                    <h3 class="proof-card__title">Juara Fotografi</h3>
-                    <p class="proof-card__issuer">— Ganti dengan nama penyelenggara —</p>
-                    <p class="proof-card__desc">— Tambahkan deskripsi singkat tentang kompetisi dan kategori foto —</p>
+                    <span class="proof-card__date">Feb 2023</span>
+                    <h3 class="proof-card__title">Juara 1 Lomba Photography</h3>
+                    <p class="proof-card__issuer">Digital Creation 2 · OPMAZ Ma'had Al-Zaytun</p>
+                    <p class="proof-card__desc">Meraih juara pertama dalam kompetisi fotografi tingkat pesantren. Kategori fotografi kreatif dengan teknik pencahayaan dan komposisi.</p>
                     <span class="proof-card__tag tag">Photography Competition</span>
                 </div>
             </div>
@@ -163,7 +708,7 @@
         </div>
     </section>
 
-    <!-- ── PHOTOGRAPHY ───────────────────────────── -->
+    <!-- ── PHOTOGRAPHY ─────────────────────────────── -->
     <section class="section proof-section" id="tab-photography" style="display:none">
         <h2 class="section-title">Photography Work</h2>
         <p class="proof-photo-desc">A selection of frames I'm proud of.</p>
@@ -171,44 +716,39 @@
 
             <div class="photo-item glass-card">
                 <img src="../image/photo-1.jpg" alt="Photography work 1"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
-                     loading="lazy">
+                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
                 <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
             <div class="photo-item glass-card">
                 <img src="../image/photo-2.jpg" alt="Photography work 2"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
-                     loading="lazy">
+                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
                 <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
             <div class="photo-item glass-card">
                 <img src="../image/photo-3.jpg" alt="Photography work 3"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
-                     loading="lazy">
+                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
                 <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
             <div class="photo-item glass-card">
                 <img src="../image/photo-4.jpg" alt="Photography work 4"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
-                     loading="lazy">
+                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
                 <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
             <div class="photo-item glass-card">
                 <img src="../image/photo-5.jpg" alt="Photography work 5"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
-                     loading="lazy">
+                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
                 <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
             <div class="photo-item glass-card">
                 <img src="../image/photo-6.jpg" alt="Photography work 6"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')"
-                     loading="lazy">
+                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
                 <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
             </div>
 
         </div>
     </section>
 
+    <!-- ── LIGHTBOX (for photography tab) ─────────── -->
     <div class="lightbox" id="lightbox">
         <button class="lightbox__close" id="lightboxClose">✕</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev">‹</button>
@@ -217,15 +757,281 @@
         <p class="lightbox__caption" id="lightboxCaption"></p>
     </div>
 
+    <!-- ── CERT MODAL ──────────────────────────────── -->
+    <div class="cert-modal-overlay" id="certModal">
+        <div class="cert-modal" id="certModalInner">
+            <div class="cert-modal__header">
+                <span class="cert-modal__title" id="certModalTitle">Certificate</span>
+                <span class="cert-modal__counter" id="certModalCounter"></span>
+                <button class="cert-modal__close" id="certModalClose">✕</button>
+            </div>
+            <div class="cert-modal__viewer">
+                <img class="cert-modal__img" id="certModalImg" src="" alt="">
+                <div class="cert-modal__placeholder" id="certModalPlaceholder" style="display:none">
+                    <span class="cert-modal__placeholder-icon">📄</span>
+                    <p class="cert-modal__placeholder-text">Image will appear here once uploaded</p>
+                </div>
+                <button class="cert-modal__nav cert-modal__nav--prev" id="certModalPrev">‹</button>
+                <button class="cert-modal__nav cert-modal__nav--next" id="certModalNext">›</button>
+            </div>
+            <div class="cert-modal__dots" id="certModalDots"></div>
+            <div class="cert-modal__footer" id="certModalFooter"></div>
+        </div>
+    </div>
+
     <footer class="footer">
         <p>&copy; 2026 Fakhrul Mukhlisin.</p>
         <div class="footer-links">
-            <a href="/">← Home</a>
+            <a href="/">← Home</a> &nbsp;·&nbsp;
+            <a href="/moments/">Moments</a>
         </div>
     </footer>
+
 </main>
 
 <script src="../script.js"></script>
-<script src="../proof.js"></script>
+<script>
+// ── Preloader ─────────────────────────────────────────
+(function() {
+    const words = ["Proof", "Hello", "Receipts", "Evidence", "Done ✓"];
+    const el = document.getElementById('preloader-greeting');
+    const preloader = document.getElementById('preloader');
+    if (!el || !preloader) return;
+    let i = 0;
+    el.textContent = words[0];
+    const timer = setInterval(() => {
+        i++;
+        if (i < words.length) {
+            el.style.animation = 'none';
+            void el.offsetWidth;
+            el.style.animation = 'greetPulse 0.25s ease';
+            el.textContent = words[i];
+        } else {
+            clearInterval(timer);
+            setTimeout(() => preloader.classList.add('hide-preloader'), 300);
+        }
+    }, 280);
+})();
+
+// ── Floating pill ─────────────────────────────────────
+(function() {
+    const pill = document.getElementById('floatingPill');
+    if (!pill) return;
+    function updatePill() {
+        pill.classList.toggle('visible', window.scrollY > 200);
+    }
+    window.addEventListener('scroll', updatePill, { passive: true });
+    updatePill();
+})();
+
+// ── Tab switching ─────────────────────────────────────
+document.getElementById('proofTabs').addEventListener('click', e => {
+    const btn = e.target.closest('.proof-tab');
+    if (!btn) return;
+    document.querySelectorAll('.proof-tab').forEach(b => b.classList.remove('proof-tab--active'));
+    btn.classList.add('proof-tab--active');
+    const target = btn.dataset.tab;
+    document.querySelectorAll('.proof-section').forEach(s => {
+        s.style.display = s.id === `tab-${target}` ? 'block' : 'none';
+    });
+});
+
+// ── Cert Modal ────────────────────────────────────────
+(function() {
+    const overlay   = document.getElementById('certModal');
+    const modalImg  = document.getElementById('certModalImg');
+    const modalPH   = document.getElementById('certModalPlaceholder');
+    const title     = document.getElementById('certModalTitle');
+    const counter   = document.getElementById('certModalCounter');
+    const dotsEl    = document.getElementById('certModalDots');
+    const footer    = document.getElementById('certModalFooter');
+    const btnPrev   = document.getElementById('certModalPrev');
+    const btnNext   = document.getElementById('certModalNext');
+    const btnClose  = document.getElementById('certModalClose');
+
+    let images = [];
+    let current = 0;
+
+    function showImg(index) {
+        current = index;
+        const src = images[index];
+
+        // fade out
+        modalImg.classList.add('fading');
+        modalPH.style.display = 'none';
+        modalImg.style.display = 'block';
+
+        setTimeout(() => {
+            modalImg.src = src;
+            modalImg.onload  = () => modalImg.classList.remove('fading');
+            modalImg.onerror = () => {
+                modalImg.style.display = 'none';
+                modalPH.style.display = 'flex';
+                modalImg.classList.remove('fading');
+            };
+        }, 150);
+
+        // counter
+        counter.textContent = images.length > 1 ? `${index + 1} / ${images.length}` : '';
+
+        // dots
+        dotsEl.querySelectorAll('.cert-modal__dot').forEach((d, i) =>
+            d.classList.toggle('active', i === index));
+
+        // nav buttons
+        btnPrev.disabled = index === 0;
+        btnNext.disabled = index === images.length - 1;
+    }
+
+    function openModal(card) {
+        images  = JSON.parse(card.dataset.images || '[]');
+        current = 0;
+
+        title.textContent = card.dataset.title || 'Certificate';
+
+        // Build dots
+        dotsEl.innerHTML = '';
+        if (images.length > 1) {
+            images.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'cert-modal__dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => showImg(i));
+                dotsEl.appendChild(dot);
+            });
+        }
+
+        // Build footer buttons
+        footer.innerHTML = '';
+
+        const momentsUrl   = card.dataset.moments;
+        const momentsLabel = card.dataset.momentsLabel;
+        const youtubeUrl   = card.dataset.youtube;
+        const youtubeLabel = card.dataset.youtubeLabel;
+        const linkUrl      = card.dataset.link;
+        const linkLabel    = card.dataset.linkLabel;
+
+        if (momentsUrl) {
+            const a = document.createElement('a');
+            a.href = momentsUrl;
+            a.className = 'cert-modal__btn cert-modal__btn--ghost';
+            a.textContent = momentsLabel || 'See Moments →';
+            footer.appendChild(a);
+        }
+
+        if (youtubeUrl) {
+            const a = document.createElement('a');
+            a.href = youtubeUrl;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.className = 'cert-modal__btn cert-modal__btn--youtube';
+            a.textContent = youtubeLabel || 'Watch on YouTube 🎬';
+            footer.appendChild(a);
+        }
+
+        if (linkUrl) {
+            if (linkUrl.startsWith('prooftab:')) {
+                // Switch to proof tab
+                const tabName = linkUrl.replace('prooftab:', '');
+                const btn = document.createElement('button');
+                btn.className = 'cert-modal__btn cert-modal__btn--primary';
+                btn.textContent = linkLabel || 'See More →';
+                btn.addEventListener('click', () => {
+                    closeModal();
+                    const tabBtn = document.querySelector(`.proof-tab[data-tab="${tabName}"]`);
+                    if (tabBtn) tabBtn.click();
+                    document.querySelector(`#tab-${tabName}`)?.scrollIntoView({ behavior: 'smooth' });
+                });
+                footer.appendChild(btn);
+            } else {
+                const a = document.createElement('a');
+                a.href = linkUrl;
+                a.target = '_blank';
+                a.rel = 'noopener';
+                a.className = 'cert-modal__btn cert-modal__btn--primary';
+                a.textContent = linkLabel || 'Open Link →';
+                footer.appendChild(a);
+            }
+        }
+
+        // Hide footer if no buttons
+        footer.style.display = footer.children.length ? 'flex' : 'none';
+
+        showImg(0);
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Attach click to all proof cards
+    document.querySelectorAll('.proof-card').forEach(card => {
+        card.addEventListener('click', e => {
+            // Don't open modal if clicking a link inside card
+            if (e.target.closest('a, button')) return;
+            openModal(card);
+        });
+    });
+
+    btnPrev.addEventListener('click', () => { if (current > 0) showImg(current - 1); });
+    btnNext.addEventListener('click', () => { if (current < images.length - 1) showImg(current + 1); });
+    btnClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+    // Keyboard nav
+    document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeModal();
+        if (e.key === 'ArrowLeft')  { if (current > 0) showImg(current - 1); }
+        if (e.key === 'ArrowRight') { if (current < images.length - 1) showImg(current + 1); }
+    });
+})();
+
+// ── Lightbox for photography ──────────────────────────
+(function() {
+    const lightbox    = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCap = document.getElementById('lightboxCaption');
+    let photoItems    = [];
+    let currentPhoto  = 0;
+
+    function openLightbox(index) {
+        currentPhoto = index;
+        const item = photoItems[index];
+        lightboxImg.src = item.querySelector('img').src;
+        lightboxCap.textContent = item.querySelector('.photo-caption')?.textContent || '';
+        lightbox.classList.add('lightbox--open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        lightbox.classList.remove('lightbox--open');
+        document.body.style.overflow = '';
+    }
+    function lightboxNav(dir) {
+        currentPhoto = (currentPhoto + dir + photoItems.length) % photoItems.length;
+        openLightbox(currentPhoto);
+    }
+
+    document.getElementById('photoGrid').addEventListener('click', e => {
+        const item = e.target.closest('.photo-item');
+        if (!item) return;
+        photoItems = Array.from(document.querySelectorAll('.photo-item'));
+        openLightbox(photoItems.indexOf(item));
+    });
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', () => lightboxNav(-1));
+    document.getElementById('lightboxNext').addEventListener('click', () => lightboxNav(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('lightbox--open')) return;
+        if (e.key === 'Escape')     closeLightbox();
+        if (e.key === 'ArrowLeft')  lightboxNav(-1);
+        if (e.key === 'ArrowRight') lightboxNav(1);
+    });
+})();
+</script>
 </body>
 </html>

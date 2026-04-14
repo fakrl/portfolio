@@ -21,15 +21,15 @@
 }
 
 body.light .proof-hero__label,
-body.light .moments-hero__label { color: #667eea; }
+body.light .moments-hero__label { color: #2563eb; }
 body.dark  .proof-hero__label,
-body.dark  .moments-hero__label { color: #667eea; }
+body.dark  .moments-hero__label { color: #2563eb; }
 
 .proof-hero__title,
 .moments-hero__title {
     font-size: 3.5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 1rem;
@@ -79,7 +79,7 @@ body.dark .proof-tab {
 
 .proof-tab--active,
 .proof-tab:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
     color: white !important;
 }
 
@@ -106,7 +106,7 @@ body.dark .proof-tab {
 .proof-card__img {
     position: relative;
     height: 200px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     overflow: hidden;
 }
 
@@ -146,8 +146,8 @@ body.dark .proof-tab {
 }
 
 .proof-card__badge--gold   { background: linear-gradient(135deg, #f6d365, #fda085); }
-.proof-card__badge--purple { background: linear-gradient(135deg, #667eea, #764ba2); }
-.proof-card__badge--blue   { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #111; }
+.proof-card__badge--purple { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+.proof-card__badge--blue   { background: linear-gradient(135deg, #3b82f6, #00f2fe); color: #111; }
 .proof-card__badge--green  { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #111; }
 
 /* Card body */
@@ -161,7 +161,7 @@ body.dark .proof-tab {
 .proof-card__date {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #667eea;
+    color: #2563eb;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -240,7 +240,7 @@ body.dark  .proof-photo-desc { color: #aaa; }
 }
 
 .photo-item--placeholder {
-    background: linear-gradient(135deg, #667eea22, #764ba222);
+    background: linear-gradient(135deg, #2563eb22, #1d4ed822);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,7 +304,7 @@ body.dark .moments-filter {
 
 .moments-filter--active,
 .moments-filter:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
     color: white !important;
 }
 
@@ -344,7 +344,7 @@ body.dark .moments-filter {
 }
 
 .moment-item--placeholder {
-    background: linear-gradient(135deg, #667eea22, #764ba222);
+    background: linear-gradient(135deg, #2563eb22, #1d4ed822);
 }
 
 .moment-item--placeholder::after {
@@ -463,7 +463,7 @@ body.dark .moments-filter {
 
 /* ── Active nav link ─────────────────────── */
 .nav-links a.active {
-    color: #667eea !important;
+    color: #2563eb !important;
 }
 
 /* ── Responsive ──────────────────────────── */
