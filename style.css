@@ -11,13 +11,15 @@
    BODY BASE + THEME
    ========================================== */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     transition: background 0.8s ease;
 }
 
 body.light { background: #ffffff; }
-body.dark  { background: #0a0a0a; }
+body.dark  { background: #000000; }
 
 /* ==========================================
    HTML BASE
@@ -70,14 +72,14 @@ body.light .navbar {
 }
 
 body.dark .navbar {
-    background: rgba(10, 10, 10, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-logo {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -101,7 +103,7 @@ body.dark  .nav-links a { color: #ffffff; }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #667eea;
+    color: #2563eb;
 }
 
 /* ==========================================
@@ -185,7 +187,7 @@ body.portfolio-page .theme-toggle {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     color: white;
 }
 
@@ -231,7 +233,7 @@ body.dark  .btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
     font-size: 3rem;
     text-align: center;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -262,7 +264,7 @@ body.light .glass-card {
 }
 
 body.dark .glass-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -286,7 +288,7 @@ body.dark .glass-card {
 
 .skill-card:hover {
     transform: translateY(-10px);
-    border-color: #667eea;
+    border-color: #2563eb;
 }
 
 body.light .skill-card:hover { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2); }
@@ -298,7 +300,7 @@ body.dark  .skill-card:hover { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
 }
 
 .skill-card h3 {
-    color: #667eea;
+    color: #2563eb;
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
@@ -353,7 +355,7 @@ body.light .footer {
 }
 
 body.dark .footer {
-    background: rgba(10, 10, 10, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
@@ -363,12 +365,12 @@ body.dark .footer {
 }
 
 .footer-links a {
-    color: #667eea;
+    color: #2563eb;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
-.footer-links a:hover { color: #764ba2; }
+.footer-links a:hover { color: #1d4ed8; }
 
 /* ==========================================
    RESPONSIVE
@@ -410,7 +412,7 @@ body.dark .footer {
     }
 
     body.light .nav-links { background: rgba(255, 255, 255, 0.95); }
-    body.dark  .nav-links { background: rgba(10, 10, 10, 0.95); }
+    body.dark  .nav-links { background: rgba(0, 0, 0, 0.95); }
 
     .section-title { font-size: 2rem; }
     .section       { padding: 3rem 5%; }
