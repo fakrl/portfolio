@@ -37,71 +37,23 @@
         opacity: 0;
         transition: opacity 0.4s ease, transform 0.4s ease;
     }
-
-    .floating-pill.visible {
-        opacity: 1;
-        transform: translateY(-50%) translateX(0);
-    }
-
-    body.light .floating-pill {
-        background: rgba(255,255,255,0.75);
-        border: 1px solid rgba(0,0,0,0.08);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    body.dark .floating-pill {
-        background: rgba(20,20,20,0.75);
-        border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    }
-
+    .floating-pill.visible { opacity: 1; transform: translateY(-50%) translateX(0); }
+    body.light .floating-pill { background: rgba(255,255,255,0.75); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    body.dark  .floating-pill { background: rgba(20,20,20,0.75); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
     .floating-pill:hover { box-shadow: 0 12px 40px rgba(37,99,235,0.25); }
-
-    .floating-pill__item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.3rem;
-        padding: 0.9rem 0.8rem;
-        text-decoration: none;
-        transition: background 0.2s ease;
-        width: 100%;
-    }
-
+    .floating-pill__item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0.9rem 0.8rem; text-decoration: none; transition: background 0.2s ease; width: 100%; }
     .floating-pill__item:hover { background: rgba(37,99,235,0.1); }
     .floating-pill__icon { font-size: 1.2rem; line-height: 1; }
-
-    .floating-pill__label {
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
-        transition: color 0.3s ease;
-    }
-
+    .floating-pill__label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; transition: color 0.3s ease; }
     body.light .floating-pill__label { color: #555; }
     body.dark  .floating-pill__label { color: #aaa; }
     .floating-pill__item:hover .floating-pill__label { color: #2563eb; }
-
-    .floating-pill__divider {
-        width: 60%;
-        height: 1px;
-        flex-shrink: 0;
-        transition: background 0.3s ease;
-    }
-
+    .floating-pill__divider { width: 60%; height: 1px; flex-shrink: 0; }
     body.light .floating-pill__divider { background: rgba(0,0,0,0.08); }
     body.dark  .floating-pill__divider { background: rgba(255,255,255,0.08); }
 
     @media (max-width: 768px) {
-        .floating-pill {
-            right: auto;
-            left: 50%;
-            top: auto;
-            bottom: 1.5rem;
-            transform: translateX(-50%) translateY(20px);
-            flex-direction: row;
-        }
+        .floating-pill { right: auto; left: 50%; top: auto; bottom: 1.5rem; transform: translateX(-50%) translateY(20px); flex-direction: row; }
         .floating-pill.visible { transform: translateX(-50%) translateY(0); }
         .floating-pill__item { flex-direction: row; gap: 0.4rem; padding: 0.7rem 1.1rem; }
         .floating-pill__label { font-size: 0.7rem; }
@@ -118,10 +70,8 @@
         justify-content: center;
         transition: opacity 0.4s ease, visibility 0.4s ease;
     }
-
     body.light #preloader { background: #ffffff; }
     body.dark  #preloader { background: #000000; }
-
     #preloader-greeting {
         font-size: clamp(2.5rem, 8vw, 5rem);
         font-weight: 800;
@@ -132,26 +82,18 @@
         animation: greetPulse 0.25s ease;
         letter-spacing: -1px;
     }
-
     @keyframes greetPulse {
         0%   { opacity: 0; transform: scale(0.85); }
         60%  { opacity: 1; transform: scale(1.05); }
         100% { opacity: 1; transform: scale(1); }
     }
-
-    #preloader.hide-preloader {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
+    #preloader.hide-preloader { opacity: 0; visibility: hidden; pointer-events: none; }
     </style>
 </head>
 <body class="light">
 
 <!-- Preloader -->
-<div id="preloader">
-    <span id="preloader-greeting">Moments</span>
-</div>
+<div id="preloader"><span id="preloader-greeting">Moments</span></div>
 
 <!-- Floating Pill -->
 <div class="floating-pill" id="floatingPill">
@@ -192,9 +134,7 @@
         <div class="moments-hero__content">
             <p class="moments-hero__label">Behind the scenes 📸</p>
             <h1 class="moments-hero__title">Moments</h1>
-            <p class="moments-hero__sub">
-                The people, places, and memories that shaped the journey so far.
-            </p>
+            <p class="moments-hero__sub">The people, places, and memories that shaped the journey.</p>
         </div>
     </section>
 
@@ -204,19 +144,81 @@
 
         <div class="moments-filters" id="momentsFilters">
             <button class="moments-filter moments-filter--active" data-filter="all">All</button>
-            <button class="moments-filter" data-filter="project">Project</button>
-            <button class="moments-filter" data-filter="internship">Internship</button>
-            <button class="moments-filter" data-filter="campus">Campus</button>
-            <button class="moments-filter" data-filter="event">Event</button>
-            <button class="moments-filter" data-filter="certification">Certification</button>
-            <button class="moments-filter" data-filter="personal">Personal</button>
+            <button class="moments-filter" data-filter="momen">🤝 Momen</button>
+            <button class="moments-filter" data-filter="project">💻 Project</button>
+            <button class="moments-filter" data-filter="photography">📷 Photography</button>
+            <button class="moments-filter" data-filter="personal">🙋 Personal</button>
         </div>
 
         <div class="moments-grid" id="momentsGrid">
 
-            <!-- PROJECT — Evermos -->
+            <!-- MOMEN — kegiatan, internship bareng orang, organisasi, event -->
+            <div class="moment-item glass-card" data-category="momen">
+                <img src="../image/moment-evermos.jpg" alt="Evermos"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Momen</span>
+                    <p class="moment-caption">Evermos × Rakamin — Backend Internship 2025</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="momen">
+                <img src="../image/moment-coreinit.jpg" alt="Core Initiative"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Momen</span>
+                    <p class="moment-caption">Core Initiative × Rakamin — Frontend Internship 2025</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="momen">
+                <img src="../image/moment-lka.jpg" alt="LKA UNPAM"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Momen</span>
+                    <p class="moment-caption">LKA UNPAM — Tracer Study & Alumni</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="momen">
+                <img src="../image/moment-kesbang.jpg" alt="Kesbang"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Momen</span>
+                    <p class="moment-caption">Kesbang Jakarta Pusat — Computer Operator</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="momen">
+                <img src="../image/moment-jurnalis.jpg" alt="Forum Studi Jurnalis"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Momen</span>
+                    <p class="moment-caption">Forum Studi Jurnalis — Koordinasi Tim</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="momen">
+                <img src="../image/moment-event-1.jpg" alt="Event"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Momen</span>
+                    <p class="moment-caption">— Tambah caption —</p>
+                </div>
+            </div>
+
+            <div class="moment-item glass-card" data-category="momen">
+                <img src="../image/moment-campus-1.jpg" alt="Campus"
+                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
+                <div class="moment-overlay">
+                    <span class="moment-tag">Momen</span>
+                    <p class="moment-caption">— Tambah caption —</p>
+                </div>
+            </div>
+
+            <!-- PROJECT — screenshot hasil kerja, dummy, tugas kuliah -->
             <div class="moment-item glass-card" data-category="project">
-                <img src="../image/moment-project-evermos-1.jpg" alt="Evermos Project"
+                <img src="../image/proj-evermos-1.jpg" alt="Evermos Project"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
                     <span class="moment-tag">Project</span>
@@ -225,17 +227,7 @@
             </div>
 
             <div class="moment-item glass-card" data-category="project">
-                <img src="../image/moment-project-evermos-2.jpg" alt="Evermos Project 2"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Project</span>
-                    <p class="moment-caption">Evermos — API Endpoint Documentation</p>
-                </div>
-            </div>
-
-            <!-- PROJECT — Core Initiative -->
-            <div class="moment-item glass-card" data-category="project">
-                <img src="../image/moment-project-coreinit-1.jpg" alt="Core Initiative Project"
+                <img src="../image/proj-coreinit-1.jpg" alt="Core Initiative Project"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
                     <span class="moment-tag">Project</span>
@@ -244,17 +236,7 @@
             </div>
 
             <div class="moment-item glass-card" data-category="project">
-                <img src="../image/moment-project-coreinit-2.jpg" alt="Core Initiative Project 2"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Project</span>
-                    <p class="moment-caption">Core Initiative — Dynamic Theme UI</p>
-                </div>
-            </div>
-
-            <!-- PROJECT — Other/Kuliah -->
-            <div class="moment-item glass-card" data-category="project">
-                <img src="../image/moment-project-other-1.jpg" alt="Other Project"
+                <img src="../image/proj-other-1.jpg" alt="Other Project"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
                     <span class="moment-tag">Project</span>
@@ -262,103 +244,46 @@
                 </div>
             </div>
 
-            <!-- INTERNSHIP — LKA & Kesbang -->
-            <div class="moment-item glass-card" data-category="internship">
-                <img src="../image/moment-lka-1.jpg" alt="LKA UNPAM"
+            <!-- PHOTOGRAPHY — hasil jepretan lo sendiri + momen fotografi -->
+            <div class="moment-item glass-card" data-category="photography">
+                <img src="../image/award-foto-1.jpg" alt="Juara Fotografi"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
-                    <span class="moment-tag">Internship</span>
-                    <p class="moment-caption">LKA UNPAM — Tracer Study & Alumni</p>
+                    <span class="moment-tag">Photography</span>
+                    <p class="moment-caption">Juara 1 Lomba Photography — Digital Creation 2</p>
                 </div>
             </div>
 
-            <div class="moment-item glass-card" data-category="internship">
-                <img src="../image/moment-lka-2.jpg" alt="LKA UNPAM 2"
+            <div class="moment-item glass-card" data-category="photography">
+                <img src="../image/photo-1.jpg" alt="Photography Work"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
-                    <span class="moment-tag">Internship</span>
-                    <p class="moment-caption">— Tambah caption —</p>
+                    <span class="moment-tag">Photography</span>
+                    <p class="moment-caption">— Caption —</p>
                 </div>
             </div>
 
-            <div class="moment-item glass-card" data-category="internship">
-                <img src="../image/moment-kesbang-1.jpg" alt="Kesbang"
+            <div class="moment-item glass-card" data-category="photography">
+                <img src="../image/photo-2.jpg" alt="Photography Work"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
-                    <span class="moment-tag">Internship</span>
-                    <p class="moment-caption">Kesbang Jakarta Pusat — Computer Operator</p>
+                    <span class="moment-tag">Photography</span>
+                    <p class="moment-caption">— Caption —</p>
                 </div>
             </div>
 
-            <div class="moment-item glass-card" data-category="internship">
-                <img src="../image/moment-kesbang-2.jpg" alt="Kesbang 2"
+            <div class="moment-item glass-card" data-category="photography">
+                <img src="../image/photo-3.jpg" alt="Photography Work"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
-                    <span class="moment-tag">Internship</span>
-                    <p class="moment-caption">— Tambah caption —</p>
-                </div>
-            </div>
-
-            <!-- CAMPUS -->
-            <div class="moment-item glass-card" data-category="campus">
-                <img src="../image/moment-campus-1.jpg" alt="Campus moment"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Campus</span>
-                    <p class="moment-caption">— Tambah caption —</p>
-                </div>
-            </div>
-
-            <div class="moment-item glass-card" data-category="campus">
-                <img src="../image/moment-campus-2.jpg" alt="Campus moment 2"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Campus</span>
-                    <p class="moment-caption">— Tambah caption —</p>
-                </div>
-            </div>
-
-            <!-- EVENT -->
-            <div class="moment-item glass-card" data-category="event">
-                <img src="../image/moment-event-1.jpg" alt="Event moment"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Event</span>
-                    <p class="moment-caption">Forum Studi Jurnalis — Event Koordinasi</p>
-                </div>
-            </div>
-
-            <div class="moment-item glass-card" data-category="event">
-                <img src="../image/moment-event-2.jpg" alt="Event moment 2"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Event</span>
-                    <p class="moment-caption">— Tambah caption —</p>
-                </div>
-            </div>
-
-            <!-- CERTIFICATION — BNSP -->
-            <div class="moment-item glass-card" data-category="certification">
-                <img src="../image/moment-cert-bnsp-1.jpg" alt="BNSP Ujian"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Certification</span>
-                    <p class="moment-caption">Hari Ujian BNSP Junior Web Developer</p>
-                </div>
-            </div>
-
-            <div class="moment-item glass-card" data-category="certification">
-                <img src="../image/moment-cert-bnsp-2.jpg" alt="BNSP Ujian 2"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Certification</span>
-                    <p class="moment-caption">— Tambah caption —</p>
+                    <span class="moment-tag">Photography</span>
+                    <p class="moment-caption">— Caption —</p>
                 </div>
             </div>
 
             <!-- PERSONAL -->
             <div class="moment-item glass-card" data-category="personal">
-                <img src="../image/moment-personal-1.jpg" alt="Personal moment"
+                <img src="../image/moment-personal-1.jpg" alt="Personal"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
                     <span class="moment-tag">Personal</span>
@@ -367,7 +292,7 @@
             </div>
 
             <div class="moment-item glass-card" data-category="personal">
-                <img src="../image/moment-personal-2.jpg" alt="Personal moment 2"
+                <img src="../image/moment-personal-2.jpg" alt="Personal"
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
                     <span class="moment-tag">Personal</span>
@@ -385,18 +310,10 @@
             <div class="glass-card feedback-form-card">
                 <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
                 <div class="feedback-form">
-                    <input type="text" id="feedbackName"
-                           placeholder="Your name" class="feedback-input" maxlength="50"/>
-                    <input type="text" id="feedbackFrom"
-                           placeholder="Asal / Instansi (contoh: Teman kampus, Evermos...)"
-                           class="feedback-input" maxlength="80"/>
-                    <textarea id="feedbackMessage"
-                              placeholder="Your message..."
-                              class="feedback-input feedback-textarea"
-                              maxlength="300" rows="3"></textarea>
-                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">
-                        Send Message ✉️
-                    </button>
+                    <input type="text" id="feedbackName" placeholder="Your name" class="feedback-input" maxlength="50"/>
+                    <input type="text" id="feedbackFrom" placeholder="Asal / Instansi (contoh: Teman kampus, Evermos...)" class="feedback-input" maxlength="80"/>
+                    <textarea id="feedbackMessage" placeholder="Your message..." class="feedback-input feedback-textarea" maxlength="300" rows="3"></textarea>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">Send Message ✉️</button>
                 </div>
             </div>
             <div id="feedbackList" class="feedback-list">
@@ -433,11 +350,11 @@
 (function() {
     const words = ["Moments", "Hello", "Memories", "Stories", "Here 📸"];
     const el = document.getElementById('preloader-greeting');
-    const preloader = document.getElementById('preloader');
-    if (!el || !preloader) return;
+    const pre = document.getElementById('preloader');
+    if (!el || !pre) return;
     let i = 0;
     el.textContent = words[0];
-    const timer = setInterval(() => {
+    const t = setInterval(() => {
         i++;
         if (i < words.length) {
             el.style.animation = 'none';
@@ -445,8 +362,8 @@
             el.style.animation = 'greetPulse 0.25s ease';
             el.textContent = words[i];
         } else {
-            clearInterval(timer);
-            setTimeout(() => preloader.classList.add('hide-preloader'), 300);
+            clearInterval(t);
+            setTimeout(() => pre.classList.add('hide-preloader'), 300);
         }
     }, 280);
 })();
@@ -457,19 +374,16 @@
 (function() {
     const pill = document.getElementById('floatingPill');
     if (!pill) return;
-    function updatePill() {
-        pill.classList.toggle('visible', window.scrollY > 200);
-    }
-    window.addEventListener('scroll', updatePill, { passive: true });
-    updatePill();
+    const update = () => pill.classList.toggle('visible', window.scrollY > 200);
+    window.addEventListener('scroll', update, { passive: true });
+    update();
 })();
 </script>
 
 <!-- Auto-filter from URL param -->
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const filter = params.get('filter');
+    const filter = new URLSearchParams(window.location.search).get('filter');
     if (filter && filter !== 'all') {
         const btn = document.querySelector(`.moments-filter[data-filter="${filter}"]`);
         if (btn) btn.click();
