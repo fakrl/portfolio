@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../animations.css">
     <link rel="stylesheet" href="../pages.css">
-    <meta name="description" content="Certifications, awards, and creative work by Fakhrul Mukhlisin.">
+    <meta name="description" content="Certifications, awards, and projects by Fakhrul Mukhlisin.">
     <meta property="og:title" content="Proof of Work — Fakhrul Mukhlisin">
     <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
     <meta property="og:image" content="https://fakrul.netlify.app/image/profile.jpg">
@@ -20,32 +20,30 @@
 
     <style>
     /* ==========================================
-       CERT MODAL — Google Drive style preview
+       CERT MODAL
        ========================================== */
     .cert-modal-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,0.85);
+        background: rgba(0,0,0,0.88);
         z-index: 9000;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1.5rem;
+        padding: 1rem;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-
     .cert-modal-overlay.open {
         opacity: 1;
         visibility: visible;
     }
-
     .cert-modal {
         position: relative;
         width: 100%;
-        max-width: 780px;
-        max-height: 90vh;
+        max-width: 960px;
+        max-height: 95vh;
         border-radius: 20px;
         overflow: hidden;
         transform: scale(0.92) translateY(20px);
@@ -53,22 +51,10 @@
         display: flex;
         flex-direction: column;
     }
+    .cert-modal-overlay.open .cert-modal { transform: scale(1) translateY(0); }
+    body.light .cert-modal { background: #ffffff; box-shadow: 0 32px 80px rgba(0,0,0,0.25); }
+    body.dark  .cert-modal { background: #111111; box-shadow: 0 32px 80px rgba(0,0,0,0.7); }
 
-    .cert-modal-overlay.open .cert-modal {
-        transform: scale(1) translateY(0);
-    }
-
-    body.light .cert-modal {
-        background: #ffffff;
-        box-shadow: 0 32px 80px rgba(0,0,0,0.25);
-    }
-
-    body.dark .cert-modal {
-        background: #111111;
-        box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-    }
-
-    /* ── Modal header ── */
     .cert-modal__header {
         display: flex;
         align-items: center;
@@ -77,7 +63,6 @@
         flex-shrink: 0;
         border-bottom: 1px solid;
     }
-
     body.light .cert-modal__header { border-color: rgba(0,0,0,0.08); }
     body.dark  .cert-modal__header { border-color: rgba(255,255,255,0.08); }
 
@@ -85,8 +70,9 @@
         font-size: 0.95rem;
         font-weight: 700;
         transition: color 0.3s;
+        flex: 1;
+        margin-right: 1rem;
     }
-
     body.light .cert-modal__title { color: #1a1a1a; }
     body.dark  .cert-modal__title { color: #ffffff; }
 
@@ -94,11 +80,11 @@
         font-size: 0.8rem;
         color: #2563eb;
         font-weight: 600;
+        flex-shrink: 0;
+        margin-right: 0.8rem;
     }
-
     .cert-modal__close {
-        width: 32px;
-        height: 32px;
+        width: 32px; height: 32px;
         border-radius: 50%;
         border: none;
         cursor: pointer;
@@ -107,38 +93,42 @@
         align-items: center;
         justify-content: center;
         transition: all 0.2s ease;
+        flex-shrink: 0;
     }
-
     body.light .cert-modal__close { background: rgba(0,0,0,0.06); color: #1a1a1a; }
     body.dark  .cert-modal__close { background: rgba(255,255,255,0.1); color: #ffffff; }
     .cert-modal__close:hover { background: rgba(37,99,235,0.15); color: #2563eb; }
 
-    /* ── Image viewer ── */
     .cert-modal__viewer {
         position: relative;
         flex: 1;
-        overflow: hidden;
+        overflow: auto;
         min-height: 300px;
-        background: #f5f5f5;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
-    body.dark .cert-modal__viewer { background: #1a1a1a; }
+    body.light .cert-modal__viewer { background: #f0f0f0; }
+    body.dark  .cert-modal__viewer { background: #1a1a1a; }
 
     .cert-modal__img {
         max-width: 100%;
-        max-height: 60vh;
+        max-height: 75vh;
         object-fit: contain;
         display: block;
         transition: opacity 0.25s ease;
-        padding: 1rem;
+        padding: 0.5rem;
+        cursor: zoom-in;
+    }
+    .cert-modal__img.fading { opacity: 0; }
+    .cert-modal__img.zoomed {
+        max-height: none;
+        max-width: none;
+        width: 100%;
+        cursor: zoom-out;
+        object-fit: cover;
     }
 
-    .cert-modal__img.fading { opacity: 0; }
-
-    /* Placeholder when no image */
     .cert-modal__placeholder {
         display: flex;
         flex-direction: column;
@@ -147,24 +137,16 @@
         padding: 3rem;
         text-align: center;
     }
-
-    .cert-modal__placeholder-icon { font-size: 4rem; opacity: 0.3; }
-
-    .cert-modal__placeholder-text {
-        font-size: 0.9rem;
-        transition: color 0.3s;
-    }
-
+    .cert-modal__placeholder-icon { font-size: 4rem; opacity: 0.25; }
+    .cert-modal__placeholder-text { font-size: 0.9rem; }
     body.light .cert-modal__placeholder-text { color: #999; }
     body.dark  .cert-modal__placeholder-text { color: #555; }
 
-    /* ── Nav arrows ── */
     .cert-modal__nav {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
+        width: 40px; height: 40px;
         border-radius: 50%;
         border: none;
         cursor: pointer;
@@ -175,44 +157,33 @@
         transition: all 0.2s ease;
         z-index: 2;
     }
-
-    body.light .cert-modal__nav { background: rgba(255,255,255,0.9); color: #1a1a1a; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-    body.dark  .cert-modal__nav { background: rgba(30,30,30,0.9); color: #ffffff; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    body.light .cert-modal__nav { background: rgba(255,255,255,0.92); color: #1a1a1a; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+    body.dark  .cert-modal__nav { background: rgba(20,20,20,0.92); color: #ffffff; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
     .cert-modal__nav:hover { background: #2563eb; color: white; }
     .cert-modal__nav--prev { left: 0.8rem; }
     .cert-modal__nav--next { right: 0.8rem; }
-    .cert-modal__nav:disabled { opacity: 0.3; cursor: not-allowed; }
+    .cert-modal__nav:disabled { opacity: 0.25; cursor: not-allowed; }
     .cert-modal__nav:disabled:hover { background: inherit; color: inherit; }
 
-    /* ── Dots ── */
     .cert-modal__dots {
         display: flex;
         justify-content: center;
         gap: 6px;
-        padding: 0.8rem 1rem;
+        padding: 0.7rem 1rem;
         flex-shrink: 0;
     }
-
     .cert-modal__dot {
-        width: 6px;
-        height: 6px;
+        width: 6px; height: 6px;
         border-radius: 50%;
         border: none;
         cursor: pointer;
         padding: 0;
         transition: all 0.3s ease;
     }
-
     body.light .cert-modal__dot { background: rgba(0,0,0,0.2); }
     body.dark  .cert-modal__dot { background: rgba(255,255,255,0.2); }
+    .cert-modal__dot.active { background: #2563eb !important; width: 18px; border-radius: 3px; }
 
-    .cert-modal__dot.active {
-        background: #2563eb !important;
-        width: 18px;
-        border-radius: 3px;
-    }
-
-    /* ── Footer actions ── */
     .cert-modal__footer {
         display: flex;
         gap: 0.8rem;
@@ -221,7 +192,6 @@
         flex-shrink: 0;
         border-top: 1px solid;
     }
-
     body.light .cert-modal__footer { border-color: rgba(0,0,0,0.08); }
     body.dark  .cert-modal__footer { border-color: rgba(255,255,255,0.08); }
 
@@ -239,56 +209,21 @@
         transition: all 0.2s ease;
         font-family: inherit;
     }
+    .cert-modal__btn--primary { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; }
+    .cert-modal__btn--primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+    .cert-modal__btn--ghost { background: transparent; border: 1px solid #2563eb; color: #2563eb; }
+    .cert-modal__btn--ghost:hover { background: rgba(37,99,235,0.08); }
+    .cert-modal__btn--youtube { background: linear-gradient(135deg, #ff0000, #cc0000); color: white; }
+    .cert-modal__btn--youtube:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,0,0,0.3); }
 
-    .cert-modal__btn--primary {
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        color: white;
-    }
-
-    .cert-modal__btn--primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(37,99,235,0.4);
-    }
-
-    .cert-modal__btn--ghost {
-        background: transparent;
-        border: 1px solid #2563eb;
-        color: #2563eb;
-    }
-
-    .cert-modal__btn--ghost:hover {
-        background: rgba(37,99,235,0.08);
-    }
-
-    .cert-modal__btn--youtube {
-        background: linear-gradient(135deg, #ff0000, #cc0000);
-        color: white;
-    }
-
-    .cert-modal__btn--youtube:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255,0,0,0.3);
-    }
-
-    /* ── Proof card clickable ── */
-    .proof-card {
-        cursor: pointer;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .proof-card:hover {
-        transform: translateY(-8px);
-    }
-
-    body.light .proof-card:hover { box-shadow: 0 20px 60px rgba(37,99,235,0.15); }
-    body.dark  .proof-card:hover { box-shadow: 0 20px 60px rgba(37,99,235,0.3); }
-
-    /* Click hint badge on card */
+    /* ==========================================
+       PROOF CARD — clickable
+       ========================================== */
+    .proof-card { cursor: pointer; }
     .proof-card__click-hint {
         position: absolute;
-        top: 10px;
-        left: 10px;
-        background: rgba(0,0,0,0.5);
+        top: 10px; left: 10px;
+        background: rgba(0,0,0,0.55);
         color: white;
         font-size: 0.65rem;
         font-weight: 600;
@@ -298,10 +233,8 @@
         transition: opacity 0.2s ease;
         pointer-events: none;
     }
-
     .proof-card:hover .proof-card__click-hint { opacity: 1; }
 
-    /* ── Badge for attempt/participated ── */
     .proof-card__attempt {
         display: inline-flex;
         align-items: center;
@@ -316,7 +249,42 @@
         color: #2563eb;
     }
 
-    /* ── Floating pill ── */
+    /* ==========================================
+       PROJECT LINKS
+       ========================================== */
+    .project-links {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+    .project-link {
+        display: inline-block;
+        font-size: 0.85rem;
+        padding: 0.5rem 1.1rem;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+    }
+    .project-link--primary { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; }
+    .project-link--primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+    .project-link--ghost { background: transparent; border: 1px solid #2563eb; color: #2563eb; }
+    .project-link--ghost:hover { background: rgba(37,99,235,0.08); transform: translateY(-2px); }
+    .project-link--youtube { background: linear-gradient(135deg, #ff0000, #cc0000); color: white; }
+    .project-link--youtube:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,0,0,0.3); }
+
+    /* Award card accent */
+    .award-card .proof-card__img {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    }
+
+    /* ==========================================
+       FLOATING PILL
+       ========================================== */
     .floating-pill {
         position: fixed;
         right: 1.5rem;
@@ -333,24 +301,9 @@
         opacity: 0;
         transition: opacity 0.4s ease, transform 0.4s ease;
     }
-
-    .floating-pill.visible {
-        opacity: 1;
-        transform: translateY(-50%) translateX(0);
-    }
-
-    body.light .floating-pill {
-        background: rgba(255,255,255,0.75);
-        border: 1px solid rgba(0,0,0,0.08);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
-
-    body.dark .floating-pill {
-        background: rgba(20,20,20,0.75);
-        border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    }
-
+    .floating-pill.visible { opacity: 1; transform: translateY(-50%) translateX(0); }
+    body.light .floating-pill { background: rgba(255,255,255,0.75); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    body.dark  .floating-pill { background: rgba(20,20,20,0.75); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
     .floating-pill:hover { box-shadow: 0 12px 40px rgba(37,99,235,0.25); }
 
     .floating-pill__item {
@@ -363,52 +316,29 @@
         transition: background 0.2s ease;
         width: 100%;
     }
-
     .floating-pill__item:hover { background: rgba(37,99,235,0.1); }
-
     .floating-pill__icon { font-size: 1.2rem; line-height: 1; }
-
-    .floating-pill__label {
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
-        transition: color 0.3s ease;
-    }
-
+    .floating-pill__label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; transition: color 0.3s ease; }
     body.light .floating-pill__label { color: #555; }
     body.dark  .floating-pill__label { color: #aaa; }
     .floating-pill__item:hover .floating-pill__label { color: #2563eb; }
-
-    .floating-pill__divider {
-        width: 60%;
-        height: 1px;
-        flex-shrink: 0;
-        transition: background 0.3s ease;
-    }
-
+    .floating-pill__divider { width: 60%; height: 1px; flex-shrink: 0; }
     body.light .floating-pill__divider { background: rgba(0,0,0,0.08); }
     body.dark  .floating-pill__divider { background: rgba(255,255,255,0.08); }
 
     @media (max-width: 768px) {
-        .floating-pill {
-            right: auto;
-            left: 50%;
-            top: auto;
-            bottom: 1.5rem;
-            transform: translateX(-50%) translateY(20px);
-            flex-direction: row;
-        }
+        .floating-pill { right: auto; left: 50%; top: auto; bottom: 1.5rem; transform: translateX(-50%) translateY(20px); flex-direction: row; }
         .floating-pill.visible { transform: translateX(-50%) translateY(0); }
         .floating-pill__item { flex-direction: row; gap: 0.4rem; padding: 0.7rem 1.1rem; }
         .floating-pill__label { font-size: 0.7rem; }
         .floating-pill__divider { width: 1px; height: 24px; }
-
         .cert-modal { max-height: 95vh; }
         .cert-modal__img { max-height: 50vh; }
     }
 
-    /* ── Preloader ── */
+    /* ==========================================
+       PRELOADER
+       ========================================== */
     #preloader {
         position: fixed;
         inset: 0;
@@ -418,10 +348,8 @@
         justify-content: center;
         transition: opacity 0.4s ease, visibility 0.4s ease;
     }
-
     body.light #preloader { background: #ffffff; }
     body.dark  #preloader { background: #000000; }
-
     #preloader-greeting {
         font-size: clamp(2.5rem, 8vw, 5rem);
         font-weight: 800;
@@ -432,26 +360,18 @@
         animation: greetPulse 0.25s ease;
         letter-spacing: -1px;
     }
-
     @keyframes greetPulse {
         0%   { opacity: 0; transform: scale(0.85); }
         60%  { opacity: 1; transform: scale(1.05); }
         100% { opacity: 1; transform: scale(1); }
     }
-
-    #preloader.hide-preloader {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
+    #preloader.hide-preloader { opacity: 0; visibility: hidden; pointer-events: none; }
     </style>
 </head>
 <body class="light">
 
 <!-- Preloader -->
-<div id="preloader">
-    <span id="preloader-greeting">Proof</span>
-</div>
+<div id="preloader"><span id="preloader-greeting">Proof</span></div>
 
 <!-- Floating Pill -->
 <div class="floating-pill" id="floatingPill">
@@ -492,18 +412,16 @@
         <div class="proof-hero__content">
             <p class="proof-hero__label">The receipts 🧾</p>
             <h1 class="proof-hero__title">Proof of Work</h1>
-            <p class="proof-hero__sub">
-                Certifications, achievements, and creative work — everything that shows, not just tells.
-            </p>
+            <p class="proof-hero__sub">Certifications, awards, and projects — everything that shows, not just tells.</p>
             <div class="proof-tabs" id="proofTabs">
                 <button class="proof-tab proof-tab--active" data-tab="certifications">🏅 Certifications</button>
                 <button class="proof-tab" data-tab="awards">🏆 Awards</button>
-                <button class="proof-tab" data-tab="photography">📷 Photography</button>
+                <button class="proof-tab" data-tab="projects">💻 Projects</button>
             </div>
         </div>
     </section>
 
-    <!-- ── CERTIFICATIONS ─────────────────────────── -->
+    <!-- ═══ CERTIFICATIONS ═══ -->
     <section class="section proof-section" id="tab-certifications">
         <h2 class="section-title">Certifications</h2>
         <div class="proof-grid">
@@ -511,11 +429,11 @@
             <!-- BNSP — 2 slides -->
             <div class="glass-card proof-card"
                  data-title="Junior Web Developer — BNSP"
-                 data-images='["../image/cert-bnsp-1.jpg","../image/cert-bnsp-2.jpg","../image/cert-bnsp-3.jpg","../image/cert-bnsp-4.jpg"]'
-                 data-moments="/moments/?filter=certification"
+                 data-images='["../image/cert-bnsp-1.jpg","../image/cert-bnsp-2.jpg"]'
+                 data-moments="/moments/?filter=momen"
                  data-moments-label="See Moments →">
                 <div class="proof-card__img">
-                    <img src="../image/cert-bnsp-1.jpg" alt="BNSP Junior Web Developer"
+                    <img src="../image/cert-bnsp-1.jpg" alt="BNSP"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">🏅 BNSP</span>
                     <span class="proof-card__click-hint">👆 Click to preview</span>
@@ -524,7 +442,7 @@
                     <span class="proof-card__date">Aug 2023</span>
                     <h3 class="proof-card__title">Junior Web Developer</h3>
                     <p class="proof-card__issuer">BPPTIK Kominfo · Digitalent Scholarship</p>
-                    <p class="proof-card__desc">National professional certification for web development competency, issued by Indonesia's national certification body (BNSP).</p>
+                    <p class="proof-card__desc">Sertifikasi profesi nasional bidang web development, diterbitkan BNSP.</p>
                     <span class="proof-card__tag tag">National Certification</span>
                 </div>
             </div>
@@ -533,12 +451,12 @@
             <div class="glass-card proof-card"
                  data-title="Backend Developer Intern — Evermos"
                  data-images='["../image/cert-evermos.jpg"]'
-                 data-moments="/moments/?filter=project"
-                 data-moments-label="See Project →"
+                 data-moments="/moments/?filter=momen"
+                 data-moments-label="See Moments →"
                  data-youtube="https://youtu.be/blat9DpMBJw"
                  data-youtube-label="Watch Presentation 🎬">
                 <div class="proof-card__img">
-                    <img src="../image/cert-evermos.jpg" alt="Evermos Backend Intern Certificate"
+                    <img src="../image/cert-evermos.jpg" alt="Evermos"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">⭐ 90.91/100</span>
                     <span class="proof-card__click-hint">👆 Click to preview</span>
@@ -547,7 +465,7 @@
                     <span class="proof-card__date">Dec 2025</span>
                     <h3 class="proof-card__title">Backend Developer Intern</h3>
                     <p class="proof-card__issuer">Evermos × Rakamin Academy</p>
-                    <p class="proof-card__desc">Certificate of completion for project-based internship program. Built full marketplace REST API in Golang with clean architecture. Score: Excellent.</p>
+                    <p class="proof-card__desc">Certificate of completion — marketplace REST API in Golang, clean architecture. Score: Excellent.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
                 </div>
             </div>
@@ -556,12 +474,12 @@
             <div class="glass-card proof-card"
                  data-title="Frontend Developer Intern — Core Initiative"
                  data-images='["../image/cert-coreinit.jpg"]'
-                 data-moments="/moments/?filter=project"
-                 data-moments-label="See Project →"
+                 data-moments="/moments/?filter=momen"
+                 data-moments-label="See Moments →"
                  data-youtube="https://youtu.be/1DamWnPyG4g"
                  data-youtube-label="Watch Presentation 🎬">
                 <div class="proof-card__img">
-                    <img src="../image/cert-coreinit.jpg" alt="Core Initiative Frontend Intern Certificate"
+                    <img src="../image/cert-coreinit.jpg" alt="Core Initiative"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">⭐ 87.79/100</span>
                     <span class="proof-card__click-hint">👆 Click to preview</span>
@@ -570,7 +488,7 @@
                     <span class="proof-card__date">Nov 2025</span>
                     <h3 class="proof-card__title">Frontend Developer Intern</h3>
                     <p class="proof-card__issuer">Core Initiative × Rakamin Academy</p>
-                    <p class="proof-card__desc">Certificate of completion for frontend internship. Built Vue.js 2 e-commerce catalog with CI/CD deployment. Score: Excellent.</p>
+                    <p class="proof-card__desc">Certificate of completion — Vue.js 2 e-commerce catalog, CI/CD deployment. Score: Excellent.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
                 </div>
             </div>
@@ -578,11 +496,11 @@
             <!-- LKA UNPAM — 2 slides -->
             <div class="glass-card proof-card"
                  data-title="Data Management Intern — LKA UNPAM"
-                 data-images='["../image/cert-unpam-lka-1.jpg","../image/cert-unpam-lka-2.jpg","../image/cert-unpam-lka-3.jpg","../image/cert-unpam-lka-4.jpg"]'
-                 data-moments="/moments/?filter=internship"
+                 data-images='["../image/cert-unpam-lka-1.jpg","../image/cert-unpam-lka-2.jpg"]'
+                 data-moments="/moments/?filter=momen"
                  data-moments-label="See Moments →">
                 <div class="proof-card__img">
-                    <img src="../image/cert-unpam-lka-1.jpg" alt="LKA UNPAM Internship"
+                    <img src="../image/cert-unpam-lka-1.jpg" alt="LKA UNPAM"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--green">⭐ Sangat Baik</span>
                     <span class="proof-card__click-hint">👆 Click to preview</span>
@@ -591,7 +509,7 @@
                     <span class="proof-card__date">Jan – Jul 2025</span>
                     <h3 class="proof-card__title">Data Management Intern</h3>
                     <p class="proof-card__issuer">Lembaga Kemahasiswaan & Alumni UNPAM</p>
-                    <p class="proof-card__desc">Internship di bidang Tracer Study dan Alumni. Mengelola 500+ data mahasiswa dan alumni dengan hasil "Sangat Baik".</p>
+                    <p class="proof-card__desc">Tracer Study & Alumni. 500+ data records managed. Predikat Sangat Baik.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
                 </div>
             </div>
@@ -599,9 +517,9 @@
             <!-- Azure — multiple slides -->
             <div class="glass-card proof-card"
                  data-title="Azure AI Fundamentals (AI-900)"
-                 data-images='["../image/cert-azure-1.jpg","../image/cert-azure-2.jpg","../image/cert-azure-3.jpg"]'>
+                 data-images='["../image/cert-azure-1.jpg","../image/cert-azure-2.jpg"]'>
                 <div class="proof-card__img">
-                    <img src="../image/cert-azure-1.jpg" alt="Azure AI Fundamentals"
+                    <img src="../image/cert-azure-1.jpg" alt="Azure AI"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">☁️ Microsoft</span>
                     <span class="proof-card__click-hint">👆 Click to preview</span>
@@ -610,7 +528,7 @@
                     <span class="proof-card__date">May 2025</span>
                     <h3 class="proof-card__title">Azure AI Fundamentals (AI-900)</h3>
                     <p class="proof-card__issuer">Microsoft · Elevate · Merdeka Academy</p>
-                    <p class="proof-card__desc">Training program covering fundamental AI concepts on Microsoft Azure platform. Attempted official exam — scored 684/700.</p>
+                    <p class="proof-card__desc">Fundamental AI concepts on Azure: ML, cognitive services, responsible AI.</p>
                     <span class="proof-card__tag tag">AI / Cloud</span>
                     <span class="proof-card__attempt">📊 Exam Attempted · 684/700</span>
                 </div>
@@ -619,9 +537,9 @@
             <!-- ML — multiple slides -->
             <div class="glass-card proof-card"
                  data-title="Linear Models in Machine Learning"
-                 data-images='["../image/cert-ml-1.jpg" ,"../image/cert-ml-2.jpg","../image/cert-ml-3.jpg","../image/cert-ml-4.jpg","../image/cert-ml-5.jpg","../image/cert-ml-6.jpg"]'>
+                 data-images='["../image/cert-ml-1.jpg","../image/cert-ml-2.jpg"]'>
                 <div class="proof-card__img">
-                    <img src="../image/cert-ml-1.jpg" alt="Linear Models in Machine Learning"
+                    <img src="../image/cert-ml-1.jpg" alt="Machine Learning"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--green">🤖 91 hrs</span>
                     <span class="proof-card__click-hint">👆 Click to preview</span>
@@ -630,13 +548,13 @@
                     <span class="proof-card__date">May – Jul 2025</span>
                     <h3 class="proof-card__title">Linear Models in Machine Learning</h3>
                     <p class="proof-card__issuer">Yandex · Digitalent Scholarship KOMDIGI</p>
-                    <p class="proof-card__desc">91-hour intensive ML program. Participated in GenAI Hackathon (Alibaba Cloud × KOMDIGI) as culmination of the program.</p>
+                    <p class="proof-card__desc">91-jam program intensif: linear regression, classification, model evaluation.</p>
                     <span class="proof-card__tag tag">Machine Learning</span>
                     <span class="proof-card__attempt">🏁 Participated · GenAI Hackathon</span>
                 </div>
             </div>
 
-            <!-- Publikasi Jurnal -->
+            <!-- Jurnal -->
             <div class="glass-card proof-card"
                  data-title="Publikasi Jurnal Ilmiah"
                  data-images='["../image/cert-jurnal.jpg"]'
@@ -652,7 +570,7 @@
                     <span class="proof-card__date">Jan 2026</span>
                     <h3 class="proof-card__title">Publikasi Jurnal Ilmiah</h3>
                     <p class="proof-card__issuer">Program Studi Sistem Informasi · UNPAM</p>
-                    <p class="proof-card__desc">Penerapan Metode Simple Additive Weighting (SAW) untuk sistem pendukung keputusan penerima BLT berbasis web.</p>
+                    <p class="proof-card__desc">Penerapan Metode SAW untuk sistem pendukung keputusan penerima BLT berbasis web.</p>
                     <span class="proof-card__tag tag">Academic Publication</span>
                 </div>
             </div>
@@ -671,7 +589,7 @@
                     <span class="proof-card__date">Sep 2025</span>
                     <h3 class="proof-card__title">UKBI — Peringkat Madya</h3>
                     <p class="proof-card__issuer">Badan Pengembangan dan Pembinaan Bahasa · Kemdikbud</p>
-                    <p class="proof-card__desc">Uji Kemahiran Berbahasa Indonesia resmi dari Kemdikbud. Skor 549, Peringkat Madya. Berlaku s.d. September 2027.</p>
+                    <p class="proof-card__desc">Sertifikasi kemahiran Bahasa Indonesia resmi. Skor 549, Peringkat Madya. Berlaku s.d. September 2027.</p>
                     <span class="proof-card__tag tag">Language Certification</span>
                 </div>
             </div>
@@ -679,19 +597,19 @@
         </div>
     </section>
 
-    <!-- ── AWARDS ──────────────────────────────────── -->
+    <!-- ═══ AWARDS ═══ -->
     <section class="section proof-section" id="tab-awards" style="display:none">
-        <h2 class="section-title">Awards & Achievements</h2>
+        <h2 class="section-title">Awards & Recognition</h2>
         <div class="proof-grid">
 
             <!-- Juara 1 Fotografi -->
-            <div class="glass-card proof-card"
+            <div class="glass-card proof-card award-card"
                  data-title="Juara 1 Lomba Photography — Digital Creation 2"
                  data-images='["../image/award-foto-1.jpg","../image/award-foto-2.jpg","../image/award-foto-3.jpg"]'
-                 data-link="prooftab:photography"
-                 data-link-label="See All Photos →">
+                 data-moments="/moments/?filter=photography"
+                 data-moments-label="See Photos →">
                 <div class="proof-card__img">
-                    <img src="../image/award-foto-1.jpg" alt="Photography Award"
+                    <img src="../image/award-foto-1.jpg" alt="Juara Fotografi"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">🏆 Juara 1</span>
                     <span class="proof-card__click-hint">👆 Click to preview</span>
@@ -700,64 +618,202 @@
                     <span class="proof-card__date">Feb 2023</span>
                     <h3 class="proof-card__title">Juara 1 Lomba Photography</h3>
                     <p class="proof-card__issuer">Digital Creation 2 · OPMAZ Ma'had Al-Zaytun</p>
-                    <p class="proof-card__desc">Meraih juara pertama dalam kompetisi fotografi tingkat pesantren. Kategori fotografi kreatif dengan teknik pencahayaan dan komposisi.</p>
+                    <p class="proof-card__desc">Meraih juara pertama dalam kompetisi fotografi tingkat pesantren, kategori fotografi kreatif.</p>
                     <span class="proof-card__tag tag">Photography Competition</span>
+                </div>
+            </div>
+
+            <!-- Ketum Terbaik -->
+            <div class="glass-card proof-card award-card"
+                 data-title="Ketua Umum Jurnalis Terbaik"
+                 data-images='["../image/award-ketum-jurnalis.jpg"]'
+                 data-moments="/moments/?filter=momen"
+                 data-moments-label="See Moments →">
+                <div class="proof-card__img">
+                    <img src="../image/award-ketum-jurnalis.jpg" alt="Ketum Terbaik"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--gold">🏆 Terbaik</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">— Tahun —</span>
+                    <h3 class="proof-card__title">Ketua Umum Jurnalis Terbaik</h3>
+                    <p class="proof-card__issuer">Forum Studi Jurnalis</p>
+                    <p class="proof-card__desc">Penghargaan atas kepemimpinan 300+ anggota dan koordinasi 15+ event & seminar teknis.</p>
+                    <span class="proof-card__tag tag">Leadership Award</span>
+                </div>
+            </div>
+
+            <!-- Doorprize -->
+            <div class="glass-card proof-card award-card"
+                 data-title="Doorprize Franchise"
+                 data-images='["../image/award-doorprize.jpg"]'>
+                <div class="proof-card__img">
+                    <img src="../image/award-doorprize.jpg" alt="Doorprize"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--gold">🎉 Winner</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">— Tahun —</span>
+                    <h3 class="proof-card__title">Doorprize Franchise</h3>
+                    <p class="proof-card__issuer">— Nama Penyelenggara / Seminar —</p>
+                    <p class="proof-card__desc">— Isi dengan nama event, konteks seminar, dan deskripsi singkat. —</p>
+                    <span class="proof-card__tag tag">Event Prize</span>
+                </div>
+            </div>
+
+            <!-- Template award baru — copy-paste untuk tambah award -->
+            <div class="glass-card proof-card award-card"
+                 data-title="— Nama Penghargaan —"
+                 data-images='["../image/award-template.jpg"]'>
+                <div class="proof-card__img proof-card__img--placeholder">
+                    <span class="proof-card__badge proof-card__badge--gold">🏅 Award</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">— Tahun —</span>
+                    <h3 class="proof-card__title">— Nama Penghargaan —</h3>
+                    <p class="proof-card__issuer">— Penyelenggara —</p>
+                    <p class="proof-card__desc">— Deskripsi. Ganti foto dengan foto penerimaan. —</p>
+                    <span class="proof-card__tag tag">— Kategori —</span>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- ── PHOTOGRAPHY ─────────────────────────────── -->
-    <section class="section proof-section" id="tab-photography" style="display:none">
-        <h2 class="section-title">Photography Work</h2>
-        <p class="proof-photo-desc">A selection of frames I'm proud of.</p>
-        <div class="photo-grid" id="photoGrid">
+    <!-- ═══ PROJECTS ═══ -->
+    <section class="section proof-section" id="tab-projects" style="display:none">
+        <h2 class="section-title">Projects</h2>
+        <div class="proof-grid">
 
-            <div class="photo-item glass-card">
-                <img src="../image/photo-1.jpg" alt="Photography work 1"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
-                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
+            <!-- Evermos -->
+            <div class="glass-card proof-card"
+                 data-title="Marketplace REST API — Evermos"
+                 data-images='["../image/proj-evermos-1.jpg","../image/proj-evermos-2.jpg"]'
+                 data-moments="/moments/?filter=project"
+                 data-moments-label="See Project Moments →">
+                <div class="proof-card__img">
+                    <img src="../image/proj-evermos-1.jpg" alt="Evermos API"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--purple">🚀 Internship</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Dec 2025</span>
+                    <h3 class="proof-card__title">Marketplace REST API</h3>
+                    <p class="proof-card__issuer">Evermos × Rakamin — Backend Internship</p>
+                    <p class="proof-card__desc">Full marketplace API: Golang, Gin, MySQL, JWT. 7 modul, clean architecture, pagination, multi-image upload, atomic transactions.</p>
+                    <div class="skill-tags" style="margin-top:0.8rem">
+                        <span class="tag">Golang</span><span class="tag">Gin</span>
+                        <span class="tag">MySQL</span><span class="tag">JWT</span><span class="tag">REST API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/fakrl/evermos-backend" target="_blank" class="project-link project-link--primary">GitHub →</a>
+                        <a href="https://youtu.be/blat9DpMBJw" target="_blank" class="project-link project-link--youtube">▶ Watch</a>
+                    </div>
+                </div>
             </div>
-            <div class="photo-item glass-card">
-                <img src="../image/photo-2.jpg" alt="Photography work 2"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
-                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
+
+            <!-- Core Initiative -->
+            <div class="glass-card proof-card"
+                 data-title="E-Commerce Catalog — Core Initiative"
+                 data-images='["../image/proj-coreinit-1.jpg","../image/proj-coreinit-2.jpg"]'
+                 data-moments="/moments/?filter=project"
+                 data-moments-label="See Project Moments →">
+                <div class="proof-card__img">
+                    <img src="../image/proj-coreinit-1.jpg" alt="E-Commerce Catalog"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--purple">🚀 Internship</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Oct – Nov 2025</span>
+                    <h3 class="proof-card__title">E-Commerce Catalog</h3>
+                    <p class="proof-card__issuer">Core Initiative × Rakamin — Frontend Internship</p>
+                    <p class="proof-card__desc">Katalog e-commerce Vue.js 2, live REST API, 3 dynamic UI themes, pixel-perfect Figma, deployed via GitLab CI/CD.</p>
+                    <div class="skill-tags" style="margin-top:0.8rem">
+                        <span class="tag">Vue.js 2</span><span class="tag">REST API</span>
+                        <span class="tag">CI/CD</span><span class="tag">Firebase</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" class="project-link project-link--primary">GitHub →</a>
+                        <a href="https://youtu.be/1DamWnPyG4g" target="_blank" class="project-link project-link--youtube">▶ Watch</a>
+                    </div>
+                </div>
             </div>
-            <div class="photo-item glass-card">
-                <img src="../image/photo-3.jpg" alt="Photography work 3"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
-                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
+
+            <!-- Template: Tugas Kuliah -->
+            <div class="glass-card proof-card"
+                 data-title="— Nama Project —"
+                 data-images='["../image/proj-college-1.jpg"]'>
+                <div class="proof-card__img proof-card__img--placeholder">
+                    <span class="proof-card__badge proof-card__badge--blue">📚 College</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">— Semester / Tahun —</span>
+                    <h3 class="proof-card__title">— Nama Project —</h3>
+                    <p class="proof-card__issuer">— Mata Kuliah / Konteks —</p>
+                    <p class="proof-card__desc">— Deskripsi: apa yang dibangun, tech stack, hasil akhirnya. —</p>
+                    <div class="skill-tags" style="margin-top:0.8rem">
+                        <span class="tag">— Tech —</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link project-link--primary">GitHub →</a>
+                        <a href="#" class="project-link project-link--ghost">Live Demo →</a>
+                    </div>
+                </div>
             </div>
-            <div class="photo-item glass-card">
-                <img src="../image/photo-4.jpg" alt="Photography work 4"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
-                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
+
+            <!-- Template: Personal -->
+            <div class="glass-card proof-card"
+                 data-title="— Nama Project —"
+                 data-images='["../image/proj-personal-1.jpg"]'>
+                <div class="proof-card__img proof-card__img--placeholder">
+                    <span class="proof-card__badge proof-card__badge--green">🛠️ Personal</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">— Tahun —</span>
+                    <h3 class="proof-card__title">— Nama Project —</h3>
+                    <p class="proof-card__issuer">Personal / Freelance / Iseng</p>
+                    <p class="proof-card__desc">— Ceritain: bikin apa, kenapa, tech apa. —</p>
+                    <div class="skill-tags" style="margin-top:0.8rem">
+                        <span class="tag">— Tech —</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link project-link--primary">GitHub →</a>
+                    </div>
+                </div>
             </div>
-            <div class="photo-item glass-card">
-                <img src="../image/photo-5.jpg" alt="Photography work 5"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
-                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
-            </div>
-            <div class="photo-item glass-card">
-                <img src="../image/photo-6.jpg" alt="Photography work 6"
-                     onerror="this.src=''; this.parentElement.classList.add('photo-item--placeholder')" loading="lazy">
-                <div class="photo-overlay"><p class="photo-caption">— Caption —</p></div>
+
+            <!-- Template: Digital Marketing (PT CMS) -->
+            <div class="glass-card proof-card"
+                 data-title="Social Media Management — PT CMS"
+                 data-images='["../image/proj-cms-1.jpg"]'>
+                <div class="proof-card__img proof-card__img--placeholder">
+                    <span class="proof-card__badge proof-card__badge--gold">📱 Marketing</span>
+                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jul 2024 – Jul 2025</span>
+                    <h3 class="proof-card__title">Social Media Management</h3>
+                    <p class="proof-card__issuer">PT. Cahaya Millenial Sejahtera</p>
+                    <p class="proof-card__desc">— Isi dengan hasil konkret: growth %, jumlah konten, campaign. Masukin screenshot kalau ada. —</p>
+                    <div class="skill-tags" style="margin-top:0.8rem">
+                        <span class="tag">Content Creation</span>
+                        <span class="tag">Prompt Engineering</span>
+                        <span class="tag">AI Tools</span>
+                    </div>
+                </div>
             </div>
 
         </div>
     </section>
 
-    <!-- ── LIGHTBOX (for photography tab) ─────────── -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox__close" id="lightboxClose">✕</button>
-        <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev">‹</button>
-        <button class="lightbox__nav lightbox__nav--next" id="lightboxNext">›</button>
-        <img class="lightbox__img" id="lightboxImg" src="" alt="">
-        <p class="lightbox__caption" id="lightboxCaption"></p>
-    </div>
-
-    <!-- ── CERT MODAL ──────────────────────────────── -->
+    <!-- Cert Modal -->
     <div class="cert-modal-overlay" id="certModal">
         <div class="cert-modal" id="certModalInner">
             <div class="cert-modal__header">
@@ -769,7 +825,7 @@
                 <img class="cert-modal__img" id="certModalImg" src="" alt="">
                 <div class="cert-modal__placeholder" id="certModalPlaceholder" style="display:none">
                     <span class="cert-modal__placeholder-icon">📄</span>
-                    <p class="cert-modal__placeholder-text">Image will appear here once uploaded</p>
+                    <p class="cert-modal__placeholder-text">Image akan muncul setelah foto diupload ke folder /image</p>
                 </div>
                 <button class="cert-modal__nav cert-modal__nav--prev" id="certModalPrev">‹</button>
                 <button class="cert-modal__nav cert-modal__nav--next" id="certModalNext">›</button>
@@ -790,16 +846,17 @@
 </main>
 
 <script src="../script.js"></script>
+<script src="../proof.js"></script>
 <script>
 // ── Preloader ─────────────────────────────────────────
 (function() {
     const words = ["Proof", "Hello", "Receipts", "Evidence", "Done ✓"];
     const el = document.getElementById('preloader-greeting');
-    const preloader = document.getElementById('preloader');
-    if (!el || !preloader) return;
+    const pre = document.getElementById('preloader');
+    if (!el || !pre) return;
     let i = 0;
     el.textContent = words[0];
-    const timer = setInterval(() => {
+    const t = setInterval(() => {
         i++;
         if (i < words.length) {
             el.style.animation = 'none';
@@ -807,8 +864,8 @@
             el.style.animation = 'greetPulse 0.25s ease';
             el.textContent = words[i];
         } else {
-            clearInterval(timer);
-            setTimeout(() => preloader.classList.add('hide-preloader'), 300);
+            clearInterval(t);
+            setTimeout(() => pre.classList.add('hide-preloader'), 300);
         }
     }, 280);
 })();
@@ -817,52 +874,35 @@
 (function() {
     const pill = document.getElementById('floatingPill');
     if (!pill) return;
-    function updatePill() {
-        pill.classList.toggle('visible', window.scrollY > 200);
-    }
-    window.addEventListener('scroll', updatePill, { passive: true });
-    updatePill();
+    const update = () => pill.classList.toggle('visible', window.scrollY > 200);
+    window.addEventListener('scroll', update, { passive: true });
+    update();
 })();
-
-// ── Tab switching ─────────────────────────────────────
-document.getElementById('proofTabs').addEventListener('click', e => {
-    const btn = e.target.closest('.proof-tab');
-    if (!btn) return;
-    document.querySelectorAll('.proof-tab').forEach(b => b.classList.remove('proof-tab--active'));
-    btn.classList.add('proof-tab--active');
-    const target = btn.dataset.tab;
-    document.querySelectorAll('.proof-section').forEach(s => {
-        s.style.display = s.id === `tab-${target}` ? 'block' : 'none';
-    });
-});
 
 // ── Cert Modal ────────────────────────────────────────
 (function() {
-    const overlay   = document.getElementById('certModal');
-    const modalImg  = document.getElementById('certModalImg');
-    const modalPH   = document.getElementById('certModalPlaceholder');
-    const title     = document.getElementById('certModalTitle');
-    const counter   = document.getElementById('certModalCounter');
-    const dotsEl    = document.getElementById('certModalDots');
-    const footer    = document.getElementById('certModalFooter');
-    const btnPrev   = document.getElementById('certModalPrev');
-    const btnNext   = document.getElementById('certModalNext');
-    const btnClose  = document.getElementById('certModalClose');
+    const overlay  = document.getElementById('certModal');
+    const modalImg = document.getElementById('certModalImg');
+    const modalPH  = document.getElementById('certModalPlaceholder');
+    const titleEl  = document.getElementById('certModalTitle');
+    const counter  = document.getElementById('certModalCounter');
+    const dotsEl   = document.getElementById('certModalDots');
+    const footer   = document.getElementById('certModalFooter');
+    const btnPrev  = document.getElementById('certModalPrev');
+    const btnNext  = document.getElementById('certModalNext');
+    const btnClose = document.getElementById('certModalClose');
 
-    let images = [];
-    let current = 0;
+    let images = [], current = 0;
 
     function showImg(index) {
         current = index;
-        const src = images[index];
-
-        // fade out
         modalImg.classList.add('fading');
+        modalImg.classList.remove('zoomed');
         modalPH.style.display = 'none';
         modalImg.style.display = 'block';
 
         setTimeout(() => {
-            modalImg.src = src;
+            modalImg.src = images[index];
             modalImg.onload  = () => modalImg.classList.remove('fading');
             modalImg.onerror = () => {
                 modalImg.style.display = 'none';
@@ -871,14 +911,9 @@ document.getElementById('proofTabs').addEventListener('click', e => {
             };
         }, 150);
 
-        // counter
         counter.textContent = images.length > 1 ? `${index + 1} / ${images.length}` : '';
-
-        // dots
         dotsEl.querySelectorAll('.cert-modal__dot').forEach((d, i) =>
             d.classList.toggle('active', i === index));
-
-        // nav buttons
         btnPrev.disabled = index === 0;
         btnNext.disabled = index === images.length - 1;
     }
@@ -886,10 +921,9 @@ document.getElementById('proofTabs').addEventListener('click', e => {
     function openModal(card) {
         images  = JSON.parse(card.dataset.images || '[]');
         current = 0;
+        titleEl.textContent = card.dataset.title || 'Certificate';
 
-        title.textContent = card.dataset.title || 'Certificate';
-
-        // Build dots
+        // Dots
         dotsEl.innerHTML = '';
         if (images.length > 1) {
             images.forEach((_, i) => {
@@ -900,62 +934,33 @@ document.getElementById('proofTabs').addEventListener('click', e => {
             });
         }
 
-        // Build footer buttons
+        // Footer buttons
         footer.innerHTML = '';
+        const { moments, momentsLabel, youtube, youtubeLabel, link, linkLabel } = card.dataset;
 
-        const momentsUrl   = card.dataset.moments;
-        const momentsLabel = card.dataset.momentsLabel;
-        const youtubeUrl   = card.dataset.youtube;
-        const youtubeLabel = card.dataset.youtubeLabel;
-        const linkUrl      = card.dataset.link;
-        const linkLabel    = card.dataset.linkLabel;
-
-        if (momentsUrl) {
+        if (moments) {
             const a = document.createElement('a');
-            a.href = momentsUrl;
+            a.href = moments;
             a.className = 'cert-modal__btn cert-modal__btn--ghost';
             a.textContent = momentsLabel || 'See Moments →';
             footer.appendChild(a);
         }
-
-        if (youtubeUrl) {
+        if (youtube) {
             const a = document.createElement('a');
-            a.href = youtubeUrl;
-            a.target = '_blank';
-            a.rel = 'noopener';
+            a.href = youtube; a.target = '_blank'; a.rel = 'noopener';
             a.className = 'cert-modal__btn cert-modal__btn--youtube';
             a.textContent = youtubeLabel || 'Watch on YouTube 🎬';
             footer.appendChild(a);
         }
-
-        if (linkUrl) {
-            if (linkUrl.startsWith('prooftab:')) {
-                // Switch to proof tab
-                const tabName = linkUrl.replace('prooftab:', '');
-                const btn = document.createElement('button');
-                btn.className = 'cert-modal__btn cert-modal__btn--primary';
-                btn.textContent = linkLabel || 'See More →';
-                btn.addEventListener('click', () => {
-                    closeModal();
-                    const tabBtn = document.querySelector(`.proof-tab[data-tab="${tabName}"]`);
-                    if (tabBtn) tabBtn.click();
-                    document.querySelector(`#tab-${tabName}`)?.scrollIntoView({ behavior: 'smooth' });
-                });
-                footer.appendChild(btn);
-            } else {
-                const a = document.createElement('a');
-                a.href = linkUrl;
-                a.target = '_blank';
-                a.rel = 'noopener';
-                a.className = 'cert-modal__btn cert-modal__btn--primary';
-                a.textContent = linkLabel || 'Open Link →';
-                footer.appendChild(a);
-            }
+        if (link) {
+            const a = document.createElement('a');
+            a.href = link; a.target = '_blank'; a.rel = 'noopener';
+            a.className = 'cert-modal__btn cert-modal__btn--primary';
+            a.textContent = linkLabel || 'Open →';
+            footer.appendChild(a);
         }
 
-        // Hide footer if no buttons
         footer.style.display = footer.children.length ? 'flex' : 'none';
-
         showImg(0);
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -966,70 +971,28 @@ document.getElementById('proofTabs').addEventListener('click', e => {
         document.body.style.overflow = '';
     }
 
-    // Attach click to all proof cards
+    // Attach to proof cards only (not project cards with their own links)
     document.querySelectorAll('.proof-card').forEach(card => {
         card.addEventListener('click', e => {
-            // Don't open modal if clicking a link inside card
             if (e.target.closest('a, button')) return;
+            if (!card.dataset.images) return;
             openModal(card);
         });
     });
+
+    // Zoom toggle
+    modalImg.addEventListener('click', () => modalImg.classList.toggle('zoomed'));
 
     btnPrev.addEventListener('click', () => { if (current > 0) showImg(current - 1); });
     btnNext.addEventListener('click', () => { if (current < images.length - 1) showImg(current + 1); });
     btnClose.addEventListener('click', closeModal);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 
-    // Keyboard nav
     document.addEventListener('keydown', e => {
         if (!overlay.classList.contains('open')) return;
         if (e.key === 'Escape')     closeModal();
-        if (e.key === 'ArrowLeft')  { if (current > 0) showImg(current - 1); }
-        if (e.key === 'ArrowRight') { if (current < images.length - 1) showImg(current + 1); }
-    });
-})();
-
-// ── Lightbox for photography ──────────────────────────
-(function() {
-    const lightbox    = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxCap = document.getElementById('lightboxCaption');
-    let photoItems    = [];
-    let currentPhoto  = 0;
-
-    function openLightbox(index) {
-        currentPhoto = index;
-        const item = photoItems[index];
-        lightboxImg.src = item.querySelector('img').src;
-        lightboxCap.textContent = item.querySelector('.photo-caption')?.textContent || '';
-        lightbox.classList.add('lightbox--open');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-        lightbox.classList.remove('lightbox--open');
-        document.body.style.overflow = '';
-    }
-    function lightboxNav(dir) {
-        currentPhoto = (currentPhoto + dir + photoItems.length) % photoItems.length;
-        openLightbox(currentPhoto);
-    }
-
-    document.getElementById('photoGrid').addEventListener('click', e => {
-        const item = e.target.closest('.photo-item');
-        if (!item) return;
-        photoItems = Array.from(document.querySelectorAll('.photo-item'));
-        openLightbox(photoItems.indexOf(item));
-    });
-
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-    document.getElementById('lightboxPrev').addEventListener('click', () => lightboxNav(-1));
-    document.getElementById('lightboxNext').addEventListener('click', () => lightboxNav(1));
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => {
-        if (!lightbox.classList.contains('lightbox--open')) return;
-        if (e.key === 'Escape')     closeLightbox();
-        if (e.key === 'ArrowLeft')  lightboxNav(-1);
-        if (e.key === 'ArrowRight') lightboxNav(1);
+        if (e.key === 'ArrowLeft' && current > 0) showImg(current - 1);
+        if (e.key === 'ArrowRight' && current < images.length - 1) showImg(current + 1);
     });
 })();
 </script>
