@@ -145,12 +145,11 @@
         <div class="moments-filters" id="momentsFilters">
             <button class="moments-filter moments-filter--active" data-filter="all">All</button>
             <button class="moments-filter" data-filter="momen">🤝 Momen</button>
-            <button class="moments-filter" data-filter="project">💻 Project</button>
             <button class="moments-filter" data-filter="photography">📷 Photography</button>
             <button class="moments-filter" data-filter="personal">🙋 Personal</button>
         </div>
 
-        <div class="moments-grid" id="momentsGrid">
+        <div class="moments-grid" id="momentsGrid" style="grid-template-columns: repeat(3, 1fr);">
 
             <!-- MOMEN — kegiatan, internship bareng orang, organisasi, event -->
             <div class="moment-item glass-card" data-category="momen">
@@ -212,34 +211,6 @@
                      onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
                 <div class="moment-overlay">
                     <span class="moment-tag">Momen</span>
-                    <p class="moment-caption">— Tambah caption —</p>
-                </div>
-            </div>
-
-            <!-- PROJECT — screenshot hasil kerja, dummy, tugas kuliah -->
-            <div class="moment-item glass-card" data-category="project">
-                <img src="../image/proj-evermos-1.webp" alt="Evermos Project"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Project</span>
-                    <p class="moment-caption">Evermos Marketplace REST API — Golang</p>
-                </div>
-            </div>
-
-            <div class="moment-item glass-card" data-category="project">
-                <img src="../image/proj-coreinit-1.webp" alt="Core Initiative Project"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Project</span>
-                    <p class="moment-caption">Core Initiative — E-Commerce Catalog Vue.js</p>
-                </div>
-            </div>
-
-            <div class="moment-item glass-card" data-category="project">
-                <img src="../image/proj-other-1.webp" alt="Other Project"
-                     onerror="this.parentElement.classList.add('moment-item--placeholder')" loading="lazy">
-                <div class="moment-overlay">
-                    <span class="moment-tag">Project</span>
                     <p class="moment-caption">— Tambah caption —</p>
                 </div>
             </div>
