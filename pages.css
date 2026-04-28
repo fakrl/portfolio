@@ -474,7 +474,7 @@ body.dark .moments-filter {
     .proof-grid,
     .photo-grid,
     .moments-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: 1fr;
     }
 
     .lightbox__nav--prev { left: 0.5rem; }
