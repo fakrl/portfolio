@@ -191,6 +191,7 @@
         flex-wrap: wrap;
         flex-shrink: 0;
         border-top: 1px solid;
+        align-items: center;
     }
     body.light .cert-modal__footer { border-color: rgba(0,0,0,0.08); }
     body.dark  .cert-modal__footer { border-color: rgba(255,255,255,0.08); }
@@ -215,6 +216,38 @@
     .cert-modal__btn--ghost:hover { background: rgba(37,99,235,0.08); }
     .cert-modal__btn--youtube { background: linear-gradient(135deg, #ff0000, #cc0000); color: white; }
     .cert-modal__btn--youtube:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,0,0,0.3); }
+
+    /* Copy ID button */
+    .cert-modal__copy-id {
+        flex: 0 0 auto;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        white-space: nowrap;
+    }
+    body.light .cert-modal__copy-id { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); color: #555; }
+    body.dark  .cert-modal__copy-id { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #aaa; }
+    .cert-modal__copy-id:hover { background: rgba(37,99,235,0.1); border-color: #2563eb; color: #2563eb; }
+    .cert-modal__copy-id.copied { background: rgba(67,233,123,0.15); border-color: #43e97b; color: #43e97b; }
+
+    /* ==========================================
+       TAB FADE TRANSITION
+       ========================================== */
+    .proof-section {
+        animation: tabFadeIn 0.3s ease;
+    }
+    @keyframes tabFadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
 
     /* ==========================================
        PROOF CARD — clickable
@@ -366,6 +399,65 @@
         100% { opacity: 1; transform: scale(1); }
     }
     #preloader.hide-preloader { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* ==========================================
+       PROOF FILTER BAR (replaces hero)
+       ========================================== */
+    .proof-filter-bar {
+        position: sticky;
+        top: 64px; /* below navbar */
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem 5%;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid;
+        flex-wrap: wrap;
+        margin-top: 64px; /* navbar height */
+    }
+    body.light .proof-filter-bar {
+        background: rgba(255,255,255,0.85);
+        border-color: rgba(0,0,0,0.08);
+    }
+    body.dark .proof-filter-bar {
+        background: rgba(0,0,0,0.85);
+        border-color: rgba(255,255,255,0.08);
+    }
+    .proof-filter-bar__title {
+        font-size: 0.95rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        flex-shrink: 0;
+        letter-spacing: -0.3px;
+    }
+    .proof-filter-bar .proof-tabs {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+    .proof-filter-bar .proof-tab {
+        padding: 0.45rem 1.1rem;
+        font-size: 0.85rem;
+    }
+    /* Remove top padding from sections since no hero */
+    .proof-section {
+        padding-top: 2.5rem !important;
+    }
+    @media (max-width: 600px) {
+        .proof-filter-bar {
+            gap: 0.8rem;
+            padding: 0.8rem 5%;
+        }
+        .proof-filter-bar__title {
+            font-size: 0.85rem;
+        }
+    }
     </style>
 </head>
 <body class="light">
@@ -407,31 +499,27 @@
 
 <main>
 
-    <!-- ── HERO ───────────────────────────────────── -->
-    <section class="proof-hero">
-        <div class="proof-hero__content">
-            <p class="proof-hero__label">The receipts 🧾</p>
-            <h1 class="proof-hero__title">Proof of Work</h1>
-            <p class="proof-hero__sub">Certifications, awards, and projects — everything that shows, not just tells.</p>
-            <div class="proof-tabs" id="proofTabs">
-                <button class="proof-tab proof-tab--active" data-tab="certifications">🏅 Certifications</button>
-                <button class="proof-tab" data-tab="awards">🏆 Awards</button>
-                <button class="proof-tab" data-tab="projects">💻 Projects</button>
-            </div>
+    <!-- ── FILTER BAR ─────────────────────────────── -->
+    <div class="proof-filter-bar" id="proofFilterBar">
+        <span class="proof-filter-bar__title">Proof of Work</span>
+        <div class="proof-tabs" id="proofTabs">
+            <button class="proof-tab proof-tab--active" data-tab="certifications">🏅 Certifications</button>
+            <button class="proof-tab" data-tab="awards">🏆 Awards</button>
+            <button class="proof-tab" data-tab="projects">💻 Projects</button>
         </div>
-    </section>
+    </div>
 
     <!-- ═══ CERTIFICATIONS ═══ -->
     <section class="section proof-section" id="tab-certifications">
-        <h2 class="section-title">Certifications</h2>
         <div class="proof-grid">
 
-            <!-- BNSP — 2 slides -->
-            <div class="glass-card proof-card"
+            <!-- BNSP -->
+            <div id="bnsp" class="glass-card proof-card"
                  data-title="Junior Web Developer — BNSP"
+                 data-credential-id="62010 2513 4 0005102 2023"
                  data-images='["../image/cert-bnsp-1.webp","../image/cert-bnsp-2.webp","../image/cert-bnsp-3.webp","../image/cert-bnsp-4.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Moments →">
+                 data-link="https://github.com/fakrl/juniorwebdev"
+                 data-link-label="See Documentation →">
                 <div class="proof-card__img">
                     <img src="../image/cert-bnsp-1.webp" alt="BNSP"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -447,12 +535,12 @@
                 </div>
             </div>
 
-            <!-- Evermos — 1 slide + YouTube -->
-            <div class="glass-card proof-card"
+            <!-- Evermos -->
+            <div id="evermos" class="glass-card proof-card"
                  data-title="Backend Developer Intern — Evermos"
                  data-images='["../image/cert-evermos.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Moments →"
+                 data-project="#proj-evermos"
+                 data-project-label="See Project →"
                  data-youtube="https://youtu.be/blat9DpMBJw"
                  data-youtube-label="Watch Presentation 🎬">
                 <div class="proof-card__img">
@@ -470,12 +558,12 @@
                 </div>
             </div>
 
-            <!-- Core Initiative — 1 slide + YouTube -->
-            <div class="glass-card proof-card"
+            <!-- Core Initiative -->
+            <div id="core-initiative" class="glass-card proof-card"
                  data-title="Frontend Developer Intern — Core Initiative"
                  data-images='["../image/cert-coreinit.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Moments →"
+                 data-project="#proj-core-initiative"
+                 data-project-label="See Project →"
                  data-youtube="https://youtu.be/1DamWnPyG4g"
                  data-youtube-label="Watch Presentation 🎬">
                 <div class="proof-card__img">
@@ -493,9 +581,10 @@
                 </div>
             </div>
 
-            <!-- Huawei HCIA Cloud -->
-            <div class="glass-card proof-card"
+            <!-- Huawei HCIA -->
+            <div id="huawei" class="glass-card proof-card"
                 data-title="HCIA Cloud Service — Huawei"
+                data-credential-id="19511300840-121/FGA/BLSDM.Komdigi/2025"
                 data-images='["../image/cert-huawei-1.webp","../image/cert-huawei-2.webp","../image/cert-huawei-3.webp","../image/cert-huawei-4.webp"]'>
                 <div class="proof-card__img">
                     <img src="../image/cert-huawei-1.webp" alt="Huawei HCIA"
@@ -512,9 +601,10 @@
                 </div>
             </div>
 
-            <!-- Google Project Management -->
-            <div class="glass-card proof-card"
+            <!-- Google PM -->
+            <div id="google-pm" class="glass-card proof-card"
                 data-title="Fundamental Project Management — Google"
+                data-credential-id="19510935840-24/FGA/BLSDM.Komdigi/2025"
                 data-images='["../image/cert-pm-1.webp","../image/cert-pm-2.webp"]'>
                 <div class="proof-card__img">
                     <img src="../image/cert-pm-1.webp" alt="Google PM"
@@ -530,13 +620,13 @@
                     <span class="proof-card__tag tag">Project Management</span>
                 </div>
             </div>
-            
-            <!-- LKA UNPAM — 2 slides -->
-            <div class="glass-card proof-card"
+
+            <!-- LKA UNPAM -->
+            <div id="lka-unpam" class="glass-card proof-card"
                  data-title="Data Management Intern — LKA UNPAM"
                  data-images='["../image/cert-unpam-lka-1.webp","../image/cert-unpam-lka-2.webp","../image/cert-unpam-lka-3.webp","../image/cert-unpam-lka-4.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Moments →">
+                 data-link="https://www.instagram.com/kemahasiswaanunpam.official/"
+                 data-link-label="Instagram LKA →">
                 <div class="proof-card__img">
                     <img src="../image/cert-unpam-lka-1.webp" alt="LKA UNPAM"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -552,9 +642,11 @@
                 </div>
             </div>
 
-            <!-- Azure — multiple slides -->
-            <div class="glass-card proof-card"
+            <!-- Azure AI-900 -->
+            <!-- NOTE: Exam attempted but not passed (686/700). Card shows as Training Only to match CV. -->
+            <div id="azure" class="glass-card proof-card"
                  data-title="Azure AI Fundamentals (AI-900)"
+                 data-credential-id="310b813a"
                  data-images='["../image/cert-azure-1.webp","../image/cert-azure-2.webp","../image/cert-azure-3.webp","../image/cert-azure-4.webp","../image/cert-azure-5.webp","../image/cert-azure-6.webp","../image/cert-azure-7.webp"]'>
                 <div class="proof-card__img">
                     <img src="../image/cert-azure-1.webp" alt="Azure AI"
@@ -565,16 +657,17 @@
                 <div class="proof-card__body">
                     <span class="proof-card__date">May 2025</span>
                     <h3 class="proof-card__title">Azure AI Fundamentals (AI-900)</h3>
-                    <p class="proof-card__issuer">Microsoft · Elevate · Merdeka Academy</p>
-                    <p class="proof-card__desc">Fundamental AI concepts on Azure: ML, cognitive services, responsible AI.</p>
+                    <p class="proof-card__issuer">Microsoft · elevAIte · Merdeka Academy</p>
+                    <p class="proof-card__desc">Fundamental AI concepts on Azure: ML, cognitive services, responsible AI. Training Only — preparation course.</p>
                     <span class="proof-card__tag tag">AI / Cloud</span>
-                    <span class="proof-card__attempt">📊 Exam Attempted · 684/700</span>
+                    <span class="proof-card__attempt">📊 Exam Attempted · 686/700</span>
                 </div>
             </div>
 
-            <!-- ML — multiple slides -->
-            <div class="glass-card proof-card"
+            <!-- Yandex ML -->
+            <div id="yandex" class="glass-card proof-card"
                  data-title="Linear Models in Machine Learning"
+                 data-credential-id="19510714840-160/FGA/BLSDM.Komdigi/2025"
                  data-images='["../image/cert-ml-1.webp","../image/cert-ml-2.webp","../image/cert-ml-3.webp","../image/cert-ml-4.webp","../image/cert-ml-5.webp","../image/cert-ml-6.webp","../image/cert-ml-7.webp"]'>
                 <div class="proof-card__img">
                     <img src="../image/cert-ml-1.webp" alt="Machine Learning"
@@ -594,7 +687,7 @@
             </div>
 
             <!-- Jurnal -->
-            <div class="glass-card proof-card"
+            <div id="jurnal" class="glass-card proof-card"
                  data-title="Publikasi Jurnal Ilmiah"
                  data-images='["../image/cert-jurnal.webp"]'
                  data-link="https://portalpublikasi.com/index.php/inomatec/article/view/791"
@@ -615,8 +708,9 @@
             </div>
 
             <!-- UKBI -->
-            <div class="glass-card proof-card"
+            <div id="ukbi" class="glass-card proof-card"
                  data-title="UKBI — Uji Kemahiran Berbahasa Indonesia"
+                 data-credential-id="SD-BB-1068600"
                  data-images='["../image/cert-ukbi.webp"]'>
                 <div class="proof-card__img">
                     <img src="../image/cert-ukbi.webp" alt="UKBI Madya"
@@ -632,21 +726,18 @@
                     <span class="proof-card__tag tag">Language Certification</span>
                 </div>
             </div>
-
         </div>
     </section>
 
     <!-- ═══ AWARDS ═══ -->
     <section class="section proof-section" id="tab-awards" style="display:none">
-        <h2 class="section-title">Awards & Recognition</h2>
         <div class="proof-grid">
 
-            <!-- Juara 1 Fotografi -->
-            <div class="glass-card proof-card award-card"
+            <div id="award-foto" class="glass-card proof-card award-card"
                  data-title="Juara 1 Lomba Photography — Digital Creation 2"
                  data-images='["../image/award-foto-1.webp","../image/award-foto-2.webp","../image/award-foto-3.webp"]'
-                 data-moments="/moments/?filter=photography"
-                 data-moments-label="See Photos →">
+                 data-link="https://www.instagram.com/p/Cn-ast7Sc7k/?img_index=2"
+                 data-link-label="See on Instagram →">
                 <div class="proof-card__img">
                     <img src="../image/award-foto-1.webp" alt="Juara Fotografi"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -662,12 +753,11 @@
                 </div>
             </div>
 
-            <!-- Ketua Umum Jurnalis -->
-            <div class="glass-card proof-card award-card"
+            <div id="award-ketum" class="glass-card proof-card award-card"
                  data-title="Ketua Umum Forum Studi Jurnalis"
                  data-images='["../image/award-ketum-jurnalis.webp", "../image/award-ketum-jurnalis-2.webp", "../image/award-ketum-jurnalis-3.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Moments →">
+                 data-link="https://www.instagram.com/official_fsj/"
+                 data-link-label="Instagram FSJ →">
                 <div class="proof-card__img">
                     <img src="../image/award-ketum-jurnalis.webp" alt="Ketua Jurnalis"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -683,10 +773,11 @@
                 </div>
             </div>
 
-            <!-- Peserta Aktif DiploY × NyokKerja -->
-            <div class="glass-card proof-card award-card"
+            <div id="award-diploy" class="glass-card proof-card award-card"
                  data-title="Peserta Aktif — DiploY × NyokKerja 2025"
-                 data-images='["../image/award-event.webp", "../image/award-event-2.webp", "../image/award-event-3.webp", "../image/award-event-4.webp"]'>
+                 data-images='["../image/award-event.webp", "../image/award-event-2.webp", "../image/award-event-3.webp", "../image/award-event-4.webp"]'
+                 data-link="https://www.instagram.com/p/DNFCqssTKyb/"
+                 data-link-label="See Event →">
                 <div class="proof-card__img">
                     <img src="../image/award-event.webp" alt="DiploY NyokKerja"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -702,12 +793,11 @@
                 </div>
             </div>
 
-            <!-- Magang LKA UNPAM -->
-            <div class="glass-card proof-card award-card"
+            <div id="award-lka" class="glass-card proof-card award-card"
                  data-title="Magang — Lembaga Kemahasiswaan & Alumni UNPAM"
                  data-images='["../image/award-lka.webp", "../image/award-lka-2.webp", "../image/award-lka-3.webp", "../image/award-lka-4.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Moments →">
+                 data-link="https://www.instagram.com/kemahasiswaanunpam.official/"
+                 data-link-label="Instagram LKA →">
                 <div class="proof-card__img">
                     <img src="../image/award-lka.webp" alt="Sertifikat Magang LKA"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -728,15 +818,12 @@
 
     <!-- ═══ PROJECTS ═══ -->
     <section class="section proof-section" id="tab-projects" style="display:none">
-        <h2 class="section-title">Projects</h2>
         <div class="proof-grid">
 
-            <!-- Evermos -->
-            <div class="glass-card proof-card"
+            <div id="proj-evermos" class="glass-card proof-card"
                  data-title="Marketplace REST API — Evermos"
                  data-images='["../image/proj-evermos-1.webp","../image/proj-evermos-2.webp","../image/proj-evermos-3.webp","../image/proj-evermos-4.webp","../image/proj-evermos-5.webp","../image/proj-evermos-6.webp","../image/proj-evermos-7.webp","../image/proj-evermos-8.webp","../image/proj-evermos-9.webp","../image/proj-evermos-10.webp","../image/proj-evermos-11.webp","../image/proj-evermos-12.webp","../image/proj-evermos-13.webp","../image/proj-evermos-14.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Project Moments →">
+>
                 <div class="proof-card__img">
                     <img src="../image/proj-evermos-1.webp" alt="Evermos API"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -759,12 +846,10 @@
                 </div>
             </div>
 
-            <!-- Core Initiative -->
-            <div class="glass-card proof-card"
+            <div id="proj-core-initiative" class="glass-card proof-card"
                  data-title="E-Commerce Catalog — Core Initiative"
                  data-images='["../image/proj-coreinitiative-1.webp","../image/proj-coreinitiative-2.webp","../image/proj-coreinitiative-3.webp","../image/proj-coreinitiative-4.webp","../image/proj-coreinitiative-5.webp","../image/proj-coreinitiative-6.webp","../image/proj-coreinitiative-7.webp","../image/proj-coreinitiative-8.webp","../image/proj-coreinitiative-9.webp","../image/proj-coreinitiative-10.webp","../image/proj-coreinitiative-11.webp"]'
-                 data-moments="/moments/?filter=momen"
-                 data-moments-label="See Project Moments →">
+>
                 <div class="proof-card__img">
                     <img src="../image/proj-coreinitiative-1.webp" alt="E-Commerce Catalog"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -787,8 +872,7 @@
                 </div>
             </div>
 
-            <!-- PT CMS Social Media -->
-            <div class="glass-card proof-card"
+            <div id="proj-cms" class="glass-card proof-card"
                  data-title="Social Media Management — PT. Cahaya Millenial Sejahtera"
                  data-images='["../image/proj-cms-1.webp","../image/proj-cms-2.webp","../image/proj-cms-3.webp","../image/proj-cms-4.webp"]'>
                 <div class="proof-card__img">
@@ -808,13 +892,12 @@
                         <span class="tag">AI Tools</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://www.instagram.com/cms_project.id/" target="_blank" class="project-link project-link--instagram">📷 Instagram</a>
+                        <a href="https://www.instagram.com/cms_project.id/" target="_blank" class="project-link project-link--primary">📷 Instagram</a>
                     </div>
                 </div>
             </div>
 
-            <!-- YPKB Volunteer WordPress -->
-            <div class="glass-card proof-card"
+            <div id="proj-ypkb" class="glass-card proof-card"
                  data-title="WordPress Web Developer — YPKB Indonesia"
                  data-images='["../image/proj-ypkb-1.webp","../image/proj-ypkb-2.webp","../image/proj-ypkb-3.webp","../image/proj-ypkb-4.webp"]'>
                 <div class="proof-card__img">
@@ -834,7 +917,7 @@
                         <span class="tag">Volunteer</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://www.instagram.com/ypkb_indonesia/" target="_blank" class="project-link project-link--instagram">📷 Instagram</a>
+                        <a href="https://www.instagram.com/ypkb_indonesia/" target="_blank" class="project-link project-link--primary">📷 Instagram</a>
                     </div>
                 </div>
             </div>
@@ -908,6 +991,68 @@
     update();
 })();
 
+// ── Tab switching with fade ───────────────────────────
+(function() {
+    document.getElementById('proofTabs').addEventListener('click', e => {
+        const btn = e.target.closest('.proof-tab');
+        if (!btn) return;
+
+        document.querySelectorAll('.proof-tab').forEach(b => b.classList.remove('proof-tab--active'));
+        btn.classList.add('proof-tab--active');
+
+        const target = btn.dataset.tab;
+        document.querySelectorAll('.proof-section').forEach(s => {
+            if (s.id === `tab-${target}`) {
+                s.style.display = 'block';
+                // Force reflow so animation triggers
+                void s.offsetWidth;
+                s.style.animation = 'none';
+                void s.offsetWidth;
+                s.style.animation = 'tabFadeIn 0.3s ease';
+            } else {
+                s.style.display = 'none';
+            }
+        });
+
+        // Scroll to top of content (filter bar is sticky)
+        window.scrollTo({ top: document.querySelector('.proof-filter-bar').offsetTop - 20, behavior: 'smooth' });
+    });
+
+    // Deep link via URL hash — e.g. /proof/#bnsp or /proof/#tab-awards
+    window.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash) return;
+
+        // Check if it's a tab anchor
+        if (hash.startsWith('tab-')) {
+            const tabName = hash.replace('tab-', '');
+            const btn = document.querySelector(`.proof-tab[data-tab="${tabName}"]`);
+            if (btn) btn.click();
+            return;
+        }
+
+        // Check if it's a cert/award/project card anchor
+        const card = document.getElementById(hash);
+        if (card) {
+            // Find which tab this card belongs to
+            const section = card.closest('.proof-section');
+            if (section) {
+                const tabId = section.id.replace('tab-', '');
+                const btn = document.querySelector(`.proof-tab[data-tab="${tabId}"]`);
+                if (btn) btn.click();
+                // After tab switch, scroll to card and open modal
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    if (card.dataset.images) {
+                        // Give scroll time then open modal
+                        setTimeout(() => card.click(), 400);
+                    }
+                }, 350);
+            }
+        }
+    });
+})();
+
 // ── Cert Modal ────────────────────────────────────────
 (function() {
     const overlay  = document.getElementById('certModal');
@@ -965,14 +1110,23 @@
 
         // Footer buttons
         footer.innerHTML = '';
-        const { moments, momentsLabel, youtube, youtubeLabel, link, linkLabel } = card.dataset;
+        const { youtube, youtubeLabel, link, linkLabel, credentialId } = card.dataset;
 
-        if (moments) {
-            const a = document.createElement('a');
-            a.href = moments;
-            a.className = 'cert-modal__btn cert-modal__btn--ghost';
-            a.textContent = momentsLabel || 'See Moments →';
-            footer.appendChild(a);
+        if (card.dataset.project) {
+            const btn = document.createElement('button');
+            btn.className = 'cert-modal__btn cert-modal__btn--ghost';
+            btn.textContent = card.dataset.projectLabel || 'See Project →';
+            btn.addEventListener('click', () => {
+                closeModal();
+                // Switch to projects tab then scroll to card
+                const projBtn = document.querySelector('.proof-tab[data-tab="projects"]');
+                if (projBtn) projBtn.click();
+                setTimeout(() => {
+                    const projCard = document.querySelector(card.dataset.project);
+                    if (projCard) projCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 350);
+            });
+            footer.appendChild(btn);
         }
         if (youtube) {
             const a = document.createElement('a');
@@ -988,6 +1142,22 @@
             a.textContent = linkLabel || 'Open →';
             footer.appendChild(a);
         }
+        if (credentialId) {
+            const btn = document.createElement('button');
+            btn.className = 'cert-modal__copy-id';
+            btn.innerHTML = `📋 <span>Copy Credential ID</span>`;
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(credentialId).then(() => {
+                    btn.classList.add('copied');
+                    btn.querySelector('span').textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.querySelector('span').textContent = 'Copy Credential ID';
+                    }, 2000);
+                });
+            });
+            footer.appendChild(btn);
+        }
 
         footer.style.display = footer.children.length ? 'flex' : 'none';
         showImg(0);
@@ -1000,7 +1170,6 @@
         document.body.style.overflow = '';
     }
 
-    // Attach to proof cards only (not project cards with their own links)
     document.querySelectorAll('.proof-card').forEach(card => {
         card.addEventListener('click', e => {
             if (e.target.closest('a, button')) return;
