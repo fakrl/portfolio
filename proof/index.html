@@ -209,6 +209,10 @@
         border: none;
         transition: all 0.2s ease;
         font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
     }
     .cert-modal__btn--primary { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; }
     .cert-modal__btn--primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
@@ -216,6 +220,10 @@
     .cert-modal__btn--ghost:hover { background: rgba(37,99,235,0.08); }
     .cert-modal__btn--youtube { background: linear-gradient(135deg, #ff0000, #cc0000); color: white; }
     .cert-modal__btn--youtube:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,0,0,0.3); }
+    .cert-modal__btn--github { background: linear-gradient(135deg, #238636, #2ea043); color: white; }
+    .cert-modal__btn--github:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(35,134,54,0.35); }
+    .cert-modal__btn--instagram { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; }
+    .cert-modal__btn--instagram:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220,39,67,0.35); }
 
     /* Copy ID button */
     .cert-modal__copy-id {
@@ -287,28 +295,41 @@
        ========================================== */
     .project-links {
         display: flex;
-        gap: 0.8rem;
+        gap: 0.6rem;
         flex-wrap: wrap;
         margin-top: 1rem;
     }
     .project-link {
-        display: inline-block;
-        font-size: 0.85rem;
-        padding: 0.5rem 1.1rem;
-        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.8rem;
+        padding: 0.45rem 1rem;
+        border-radius: 20px;
         text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        font-weight: 700;
+        transition: all 0.25s ease;
         cursor: pointer;
         border: none;
         font-family: inherit;
+        color: white;
     }
-    .project-link--primary { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; }
+    .project-link--github {
+        background: linear-gradient(135deg, #238636, #2ea043);
+    }
+    .project-link--github:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(35,134,54,0.4); }
+    .project-link--youtube {
+        background: linear-gradient(135deg, #ff0000, #cc0000);
+    }
+    .project-link--youtube:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,0,0,0.3); }
+    .project-link--instagram {
+        background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+    }
+    .project-link--instagram:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(220,39,67,0.4); }
+    .project-link--primary { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
     .project-link--primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
     .project-link--ghost { background: transparent; border: 1px solid #2563eb; color: #2563eb; }
     .project-link--ghost:hover { background: rgba(37,99,235,0.08); transform: translateY(-2px); }
-    .project-link--youtube { background: linear-gradient(135deg, #ff0000, #cc0000); color: white; }
-    .project-link--youtube:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,0,0,0.3); }
 
     /* Award card accent */
     .award-card .proof-card__img {
@@ -404,59 +425,37 @@
        PROOF FILTER BAR (replaces hero)
        ========================================== */
     .proof-filter-bar {
-        position: sticky;
-        top: 64px; /* below navbar */
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        padding: 1rem 5%;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid;
-        flex-wrap: wrap;
-        margin-top: 64px; /* navbar height */
-    }
-    body.light .proof-filter-bar {
-        background: rgba(255,255,255,0.85);
-        border-color: rgba(0,0,0,0.08);
-    }
-    body.dark .proof-filter-bar {
-        background: rgba(0,0,0,0.85);
-        border-color: rgba(255,255,255,0.08);
+        padding: 5rem 5% 2rem;
+        text-align: center;
     }
     .proof-filter-bar__title {
-        font-size: 0.95rem;
+        font-size: 3rem;
         font-weight: 800;
         background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        flex-shrink: 0;
-        letter-spacing: -0.3px;
+        margin-bottom: 1.5rem;
+        display: block;
     }
     .proof-filter-bar .proof-tabs {
         display: flex;
-        gap: 0.5rem;
+        gap: 0.8rem;
+        justify-content: center;
         flex-wrap: wrap;
         margin: 0;
     }
     .proof-filter-bar .proof-tab {
-        padding: 0.45rem 1.1rem;
-        font-size: 0.85rem;
+        padding: 0.6rem 1.4rem;
+        font-size: 0.95rem;
     }
-    /* Remove top padding from sections since no hero */
+    /* section padding */
     .proof-section {
-        padding-top: 2.5rem !important;
+        padding-top: 0 !important;
     }
-    @media (max-width: 600px) {
-        .proof-filter-bar {
-            gap: 0.8rem;
-            padding: 0.8rem 5%;
-        }
-        .proof-filter-bar__title {
-            font-size: 0.85rem;
-        }
+    @media (max-width: 768px) {
+        .proof-filter-bar__title { font-size: 2.5rem; }
+        .proof-filter-bar { padding: 4rem 5% 2rem; }
     }
     </style>
 </head>
@@ -500,7 +499,7 @@
 <main>
 
     <!-- ── FILTER BAR ─────────────────────────────── -->
-    <div class="proof-filter-bar" id="proofFilterBar">
+    <div class="proof-filter-bar" id="proofFilterBar" style="margin-top:64px">
         <span class="proof-filter-bar__title">Proof of Work</span>
         <div class="proof-tabs" id="proofTabs">
             <button class="proof-tab proof-tab--active" data-tab="certifications">🏅 Certifications</button>
@@ -523,8 +522,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-bnsp-1.webp" alt="BNSP"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--gold">🏅 BNSP</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--gold">BNSP</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Aug 2023</span>
@@ -546,8 +545,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-evermos.webp" alt="Evermos"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--purple">⭐ 90.91/100</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--purple">90.91 / 100</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Dec 2025</span>
@@ -569,8 +568,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-coreinit.webp" alt="Core Initiative"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--purple">⭐ 87.79/100</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--purple">87.79 / 100</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Nov 2025</span>
@@ -589,8 +588,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-huawei-1.webp" alt="Huawei HCIA"
                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--blue">☁️ Huawei</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--blue">Huawei</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2025</span>
@@ -609,8 +608,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-pm-1.webp" alt="Google PM"
                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--blue">🔵 Google</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--blue">Google</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2025</span>
@@ -630,8 +629,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-unpam-lka-1.webp" alt="LKA UNPAM"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--green">⭐ Sangat Baik</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--green">Sangat Baik</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Jan – Jul 2025</span>
@@ -651,8 +650,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-azure-1.webp" alt="Azure AI"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--blue">☁️ Microsoft</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--blue">Microsoft</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">May 2025</span>
@@ -672,8 +671,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-ml-1.webp" alt="Machine Learning"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--green">🤖 91 hrs</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--green">91 hrs</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">May – Jul 2025</span>
@@ -695,8 +694,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-jurnal.webp" alt="Publikasi Jurnal"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--blue">📄 Jurnal</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--blue">Jurnal</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Jan 2026</span>
@@ -715,8 +714,8 @@
                 <div class="proof-card__img">
                     <img src="../image/cert-ukbi.webp" alt="UKBI Madya"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--gold">🇮🇩 Madya</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--gold">Madya</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Sep 2025</span>
@@ -726,6 +725,7 @@
                     <span class="proof-card__tag tag">Language Certification</span>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -741,8 +741,8 @@
                 <div class="proof-card__img">
                     <img src="../image/award-foto-1.webp" alt="Juara Fotografi"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--gold">🏆 Juara 1</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--gold">Juara 1</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Feb 2023</span>
@@ -761,8 +761,8 @@
                 <div class="proof-card__img">
                     <img src="../image/award-ketum-jurnalis.webp" alt="Ketua Jurnalis"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--gold">👑 Ketua</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--gold">Ketua</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Oct 2021 – Nov 2022</span>
@@ -781,8 +781,8 @@
                 <div class="proof-card__img">
                     <img src="../image/award-event.webp" alt="DiploY NyokKerja"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--blue">🎯 Active</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--blue">Active</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2025</span>
@@ -801,8 +801,8 @@
                 <div class="proof-card__img">
                     <img src="../image/award-lka.webp" alt="Sertifikat Magang LKA"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--green">⭐ Sangat Baik</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--green">Sangat Baik</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Jan – Jul 2025</span>
@@ -823,12 +823,15 @@
             <div id="proj-evermos" class="glass-card proof-card"
                  data-title="Marketplace REST API — Evermos"
                  data-images='["../image/proj-evermos-1.webp","../image/proj-evermos-2.webp","../image/proj-evermos-3.webp","../image/proj-evermos-4.webp","../image/proj-evermos-5.webp","../image/proj-evermos-6.webp","../image/proj-evermos-7.webp","../image/proj-evermos-8.webp","../image/proj-evermos-9.webp","../image/proj-evermos-10.webp","../image/proj-evermos-11.webp","../image/proj-evermos-12.webp","../image/proj-evermos-13.webp","../image/proj-evermos-14.webp"]'
->
+                 data-github="https://github.com/fakrl/evermos-backend"
+                 data-github-label="GitHub"
+                 data-youtube="https://youtu.be/blat9DpMBJw"
+                 data-youtube-label="YouTube">
                 <div class="proof-card__img">
                     <img src="../image/proj-evermos-1.webp" alt="Evermos API"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--purple">🚀 Internship</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--purple">Internship</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Dec 2025</span>
@@ -839,22 +842,21 @@
                         <span class="tag">Golang</span><span class="tag">Gin</span>
                         <span class="tag">MySQL</span><span class="tag">JWT</span><span class="tag">REST API</span>
                     </div>
-                    <div class="project-links">
-                        <a href="https://github.com/fakrl/evermos-backend" target="_blank" class="project-link project-link--primary">GitHub →</a>
-                        <a href="https://youtu.be/blat9DpMBJw" target="_blank" class="project-link project-link--youtube">▶ Watch</a>
-                    </div>
                 </div>
             </div>
 
             <div id="proj-core-initiative" class="glass-card proof-card"
                  data-title="E-Commerce Catalog — Core Initiative"
                  data-images='["../image/proj-coreinitiative-1.webp","../image/proj-coreinitiative-2.webp","../image/proj-coreinitiative-3.webp","../image/proj-coreinitiative-4.webp","../image/proj-coreinitiative-5.webp","../image/proj-coreinitiative-6.webp","../image/proj-coreinitiative-7.webp","../image/proj-coreinitiative-8.webp","../image/proj-coreinitiative-9.webp","../image/proj-coreinitiative-10.webp","../image/proj-coreinitiative-11.webp"]'
->
+                 data-github="https://github.com/fakrl/ecommerce-catalog"
+                 data-github-label="GitHub"
+                 data-youtube="https://youtu.be/1DamWnPyG4g"
+                 data-youtube-label="YouTube">
                 <div class="proof-card__img">
                     <img src="../image/proj-coreinitiative-1.webp" alt="E-Commerce Catalog"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--purple">🚀 Internship</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--purple">Internship</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Oct – Nov 2025</span>
@@ -865,21 +867,19 @@
                         <span class="tag">Vue.js 2</span><span class="tag">REST API</span>
                         <span class="tag">CI/CD</span><span class="tag">Firebase</span>
                     </div>
-                    <div class="project-links">
-                        <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" class="project-link project-link--primary">GitHub →</a>
-                        <a href="https://youtu.be/1DamWnPyG4g" target="_blank" class="project-link project-link--youtube">▶ Watch</a>
-                    </div>
                 </div>
             </div>
 
             <div id="proj-cms" class="glass-card proof-card"
                  data-title="Social Media Management — PT. Cahaya Millenial Sejahtera"
-                 data-images='["../image/proj-cms-1.webp","../image/proj-cms-2.webp","../image/proj-cms-3.webp","../image/proj-cms-4.webp"]'>
+                 data-images='["../image/proj-cms-1.webp","../image/proj-cms-2.webp","../image/proj-cms-3.webp","../image/proj-cms-4.webp"]'
+                 data-instagram="https://www.instagram.com/cms_project.id/"
+                 data-instagram-label="Instagram">
                 <div class="proof-card__img">
                     <img src="../image/proj-cms-1.webp" alt="PT CMS Social Media"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--gold">📱 Marketing</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--gold">Marketing</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Jul 2024 – Jul 2025</span>
@@ -891,20 +891,19 @@
                         <span class="tag">Prompt Engineering</span>
                         <span class="tag">AI Tools</span>
                     </div>
-                    <div class="project-links">
-                        <a href="https://www.instagram.com/cms_project.id/" target="_blank" class="project-link project-link--primary">📷 Instagram</a>
-                    </div>
                 </div>
             </div>
 
             <div id="proj-ypkb" class="glass-card proof-card"
                  data-title="WordPress Web Developer — YPKB Indonesia"
-                 data-images='["../image/proj-ypkb-1.webp","../image/proj-ypkb-2.webp","../image/proj-ypkb-3.webp","../image/proj-ypkb-4.webp"]'>
+                 data-images='["../image/proj-ypkb-1.webp","../image/proj-ypkb-2.webp","../image/proj-ypkb-3.webp","../image/proj-ypkb-4.webp"]'
+                 data-instagram="https://www.instagram.com/ypkb_indonesia/"
+                 data-instagram-label="Instagram">
                 <div class="proof-card__img">
                     <img src="../image/proj-ypkb-1.webp" alt="YPKB WordPress"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--blue">🌐 Volunteer</span>
-                    <span class="proof-card__click-hint">👆 Click to preview</span>
+                    <span class="proof-card__badge proof-card__badge--blue">Volunteer</span>
+                    <span class="proof-card__click-hint">Click to preview</span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2023 – 2024</span>
@@ -915,9 +914,6 @@
                         <span class="tag">WordPress</span>
                         <span class="tag">Web Development</span>
                         <span class="tag">Volunteer</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://www.instagram.com/ypkb_indonesia/" target="_blank" class="project-link project-link--primary">📷 Instagram</a>
                     </div>
                 </div>
             </div>
@@ -1108,17 +1104,31 @@
             });
         }
 
+        // SVG logos
+        const SVG = {
+            github: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+            youtube: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
+            instagram: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>'
+        };
+
+        function makeBtn(href, cls, svgKey, label) {
+            const a = document.createElement('a');
+            a.href = href; a.target = '_blank'; a.rel = 'noopener';
+            a.className = `cert-modal__btn ${cls}`;
+            a.innerHTML = `${SVG[svgKey] || ''} ${label}`;
+            return a;
+        }
+
         // Footer buttons
         footer.innerHTML = '';
-        const { youtube, youtubeLabel, link, linkLabel, credentialId } = card.dataset;
+        const { link, linkLabel, credentialId } = card.dataset;
 
         if (card.dataset.project) {
             const btn = document.createElement('button');
             btn.className = 'cert-modal__btn cert-modal__btn--ghost';
-            btn.textContent = card.dataset.projectLabel || 'See Project →';
+            btn.textContent = card.dataset.projectLabel || 'See Project';
             btn.addEventListener('click', () => {
                 closeModal();
-                // Switch to projects tab then scroll to card
                 const projBtn = document.querySelector('.proof-tab[data-tab="projects"]');
                 if (projBtn) projBtn.click();
                 setTimeout(() => {
@@ -1128,18 +1138,26 @@
             });
             footer.appendChild(btn);
         }
-        if (youtube) {
-            const a = document.createElement('a');
-            a.href = youtube; a.target = '_blank'; a.rel = 'noopener';
-            a.className = 'cert-modal__btn cert-modal__btn--youtube';
-            a.textContent = youtubeLabel || 'Watch on YouTube 🎬';
-            footer.appendChild(a);
+        if (card.dataset.github) {
+            footer.appendChild(makeBtn(card.dataset.github, 'cert-modal__btn--github', 'github', card.dataset.githubLabel || 'GitHub'));
+        }
+        if (card.dataset.youtube) {
+            footer.appendChild(makeBtn(card.dataset.youtube, 'cert-modal__btn--youtube', 'youtube', card.dataset.youtubeLabel || 'YouTube'));
+        }
+        if (card.dataset.instagram) {
+            footer.appendChild(makeBtn(card.dataset.instagram, 'cert-modal__btn--instagram', 'instagram', card.dataset.instagramLabel || 'Instagram'));
         }
         if (link) {
             const a = document.createElement('a');
             a.href = link; a.target = '_blank'; a.rel = 'noopener';
-            a.className = 'cert-modal__btn cert-modal__btn--primary';
-            a.textContent = linkLabel || 'Open →';
+            let btnClass = 'cert-modal__btn--primary';
+            if (link.includes('github.com')) btnClass = 'cert-modal__btn--github';
+            else if (link.includes('instagram.com')) btnClass = 'cert-modal__btn--instagram';
+            a.className = `cert-modal__btn ${btnClass}`;
+            // Add SVG for known platforms
+            if (link.includes('github.com')) a.innerHTML = SVG.github + ' ' + (linkLabel || 'GitHub');
+            else if (link.includes('instagram.com')) a.innerHTML = SVG.instagram + ' ' + (linkLabel || 'Instagram');
+            else a.textContent = linkLabel || 'Open';
             footer.appendChild(a);
         }
         if (credentialId) {
