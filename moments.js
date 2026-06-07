@@ -24,7 +24,7 @@ let allPhotos     = [];
 let filteredPhotos = [];
 let currentFilter = 'all';
 let currentPage   = 0;
-const PAGE_SIZE   = 9;
+const PAGE_SIZE   = 12;
 let momentItems   = [];
 let currentMoment = 0;
 
@@ -142,6 +142,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
 
         allPhotos = Object.values(data).filter(p => p.approved !== false);
+        // Shuffle biar tiap refresh urutan beda
+        allPhotos.sort(() => Math.random() - 0.5);
         applyFilter('all');
 
     } catch (err) {
