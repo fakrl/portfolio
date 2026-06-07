@@ -17,23 +17,6 @@ function updateThemeButton(theme) {
     });
 }
 
-function createMomentItem(photo) {
-    const item = document.createElement('div');
-    item.className = 'moment-item glass-card visible'; // tambahin visible di sini
-    item.dataset.category = photo.categories[0];
-    item.innerHTML = `
-        <img src="${photo.url}"
-             alt="${escapeHtml(photo.caption)}"
-             loading="lazy"
-             onerror="this.parentElement.classList.add('moment-item--placeholder')">
-        <div class="moment-overlay">
-            <span class="moment-tag">${getCategoryLabel(photo.categories[0])}</span>
-            <p class="moment-caption">${escapeHtml(photo.caption)}</p>
-        </div>
-    `;
-    return item;
-}
-
 // Init theme on load
 document.addEventListener('DOMContentLoaded', () => {
     setTheme(getTheme());
