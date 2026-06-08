@@ -182,12 +182,71 @@
 
     <footer class="footer">
         <p>&copy; 2026 Fakhrul Mukhlisin.</p>
-        <div class="footer-links">
-            <a href="/">← Home</a> &nbsp;·&nbsp;
-            <a href="/proof/">Proof of Work</a>
-        </div>
     </footer>
 
+        <!-- Contribute Button -->
+<button id="contributeBtn" style="
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+" title="Contribute a photo">+</button>
+
+<!-- Contribute Modal -->
+<div id="contributeModal" style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(0,0,0,0.7);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+">
+    <div class="glass-card visible" style="
+        width: 100%;
+        max-width: 420px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    ">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="color:#2563eb; margin:0;">📸 Contribute a Moment</h3>
+            <button id="contributeClose" style="background:none;border:none;font-size:1.3rem;cursor:pointer;">✕</button>
+        </div>
+
+        <div id="contributeAuth">
+            <p style="font-size:0.85rem;opacity:0.6;margin-bottom:0.5rem">Enter password to continue</p>
+            <input type="password" id="contributePassword" placeholder="Password"
+                   class="feedback-input" style="margin-bottom:0.8rem"/>
+            <button id="contributeAuthBtn" class="btn btn-primary" style="width:100%">Unlock</button>
+        </div>
+
+        <div id="contributeForm" style="display:none; flex-direction:column; gap:1rem;">
+            <input type="text" id="contribCaption" placeholder="Caption (optional)"
+                   class="feedback-input" maxlength="100"/>
+            <select id="contribCategory" class="feedback-input">
+                <option value="momen">🤝 Momen</option>
+                <option value="photography">📷 Photography</option>
+                <option value="personal">🙋 Personal</option>
+            </select>
+            <input type="file" id="contribFile" accept="image/*" class="feedback-input"/>
+            <button id="contribSubmit" class="btn btn-primary">Upload 📸</button>
+            <p id="contribStatus" style="font-size:0.82rem;text-align:center;opacity:0.6"></p>
+        </div>
+    </div>
+</div>
 </main>
 
 <script src="../script.js"></script>
