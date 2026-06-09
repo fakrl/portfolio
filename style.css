@@ -1,38 +1,93 @@
 /* ==========================================
-   RESET
+   STYLE.CSS
+   Scope: Reset · CSS Variables · Body/Theme · HTML base
    ========================================== */
+
+/* ── Reset ─────────────────────────────── */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ==========================================
-   BODY BASE + THEME
-   ========================================== */
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background 0.8s ease;
+/* ── CSS Variables ──────────────────────── */
+:root {
+    /* Surfaces */
+    --glass-light: rgba(255, 255, 255, 0.30);
+    --glass-light-hover: rgba(255, 255, 255, 0.48);
+    --glass-dark: rgba(255, 255, 255, 0.05);
+    --glass-dark-hover: rgba(255, 255, 255, 0.09);
+
+    /* Borders */
+    --border-light: rgba(0, 0, 0, 0.08);
+    --border-dark: rgba(255, 255, 255, 0.10);
+
+    /* Text */
+    --text-primary-light: #0a0a0a;
+    --text-primary-dark: #f0f0f0;
+    --text-secondary-light: #555;
+    --text-secondary-dark: #999;
+    --text-muted-light: #999;
+    --text-muted-dark: #555;
+
+    /* Accent — monochromatic only */
+    --accent-light: rgba(0, 0, 0, 0.65);
+    --accent-dark: rgba(255, 255, 255, 0.65);
+
+    /* Brand (for social icons only — do not use elsewhere) */
+    --brand-linkedin: #0077b5;
+    --brand-github: #24292e;
+    --brand-instagram: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    --brand-whatsapp: #25d366;
+    --brand-email: #555;
+
+    /* Shadows */
+    --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.50);
+    --shadow-hover-light: 0 16px 48px rgba(0, 0, 0, 0.13);
+    --shadow-hover-dark: 0 16px 48px rgba(0, 0, 0, 0.65);
+
+    /* Radii */
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-pill: 100px;
+
+    /* Spacing */
+    --section-padding: 5rem 5%;
+    --nav-height: 72px;
+
+    /* Typography */
+    --font-base: 'Plus Jakarta Sans', sans-serif;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.6s ease;
+    --transition-theme: 0.5s ease;
 }
 
-body.light { background: #ffffff; }
-body.dark  { background: #000000; }
-
-/* ==========================================
-   HTML BASE
-   ========================================== */
+/* ── HTML base ──────────────────────────── */
 html {
     overflow-x: hidden;
     max-width: 100%;
     scroll-padding-top: 80px;
 }
 
-/* ==========================================
-   PORTFOLIO PAGE BASE
-   ========================================== */
+/* ── Body ───────────────────────────────── */
+body {
+    font-family: var(--font-base);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background var(--transition-theme);
+}
+
+body.light { background: #f8f8f6; }
+body.dark  { background: #080808; }
+
+/* ── Portfolio page ─────────────────────── */
 body.portfolio-page {
     display: block;
     padding: 0;
@@ -47,374 +102,8 @@ body.portfolio-page {
     to { opacity: 1; }
 }
 
-/* ==========================================
-   NAVBAR
-   ========================================== */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 1.5rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.8s ease;
-}
-
-body.light .navbar {
-    background: rgba(255, 255, 255, 0.8);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.dark .navbar {
-    background: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
-
-body.light .nav-links a { color: #1a1a1a; }
-body.dark  .nav-links a { color: #ffffff; }
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: #2563eb;
-}
-
-/* ==========================================
-   HAMBURGER MENU
-   ========================================== */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    z-index: 1001;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    transition: all 0.3s ease;
-}
-
-body.light .hamburger span { background: #1a1a1a; }
-body.dark  .hamburger span { background: #ffffff; }
-
-.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-
-/* ==========================================
-   THEME TOGGLE BUTTON
-   ========================================== */
-.theme-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1001;
-}
-
-body.light .theme-toggle {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.dark .theme-toggle {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.theme-toggle:hover { transform: rotate(180deg) scale(1.1); }
-
-body.portfolio-page .theme-toggle {
-    bottom: 30px;
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* ==========================================
-   BUTTONS
-   ========================================== */
-.btn {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 15px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 600;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    color: white;
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-}
-
-.btn-secondary {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-body.light .btn-secondary {
-    background: rgba(0, 0, 0, 0.05);
-    color: #1a1a1a;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.dark .btn-secondary {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.btn-secondary:hover { transform: translateY(-3px); }
-
-body.light .btn-secondary:hover { background: rgba(0, 0, 0, 0.1); }
-body.dark  .btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
-
-/* ==========================================
-   SECTION
-   ========================================== */
-.section {
-    padding: 5rem 5%;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-.section-title {
-    font-size: 3rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* ==========================================
-   GLASS CARD
-   ========================================== */
-.glass-card {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    transition: all 0.8s ease;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.glass-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-body.light .glass-card {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.dark .glass-card {
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* ==========================================
-   SKILLS
-   ========================================== */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.skill-card {
-    transition: all 0.3s ease;
-    will-change: transform;
-}
-
-.skill-card:hover {
-    transform: translateY(-10px);
-    border-color: #2563eb;
-}
-
-body.light .skill-card:hover { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2); }
-body.dark  .skill-card:hover { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4); }
-
-.skill-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.skill-card h3 {
-    color: #2563eb;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.tag {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    transition: all 0.8s ease;
-}
-
-body.light .tag {
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.2);
-    color: #1a1a1a;
-}
-
-body.dark .tag {
-    background: rgba(102, 126, 234, 0.2);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    color: #ffffff;
-}
-
-/* ==========================================
-   MAIN + FOOTER
-   ========================================== */
+/* ── Main ───────────────────────────────── */
 main {
     width: 100%;
     display: block;
-}
-
-.footer {
-    text-align: center;
-    padding: 2rem 5%;
-    width: 100%;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.8s ease;
-}
-
-body.light .footer {
-    background: rgba(255, 255, 255, 0.8);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: #1a1a1a;
-}
-
-body.dark .footer {
-    background: rgba(0, 0, 0, 0.8);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-}
-
-.footer-links {
-    margin-top: 1rem;
-}
-
-.footer-links a {
-    color: #2563eb;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.footer-links a:hover { color: #1d4ed8; }
-
-/* ==========================================
-   RESPONSIVE
-   ========================================== */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-        position: absolute;
-        right: 5%;
-    }
-
-    .navbar {
-        gap: 1rem;
-        padding: 1rem 5%;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .nav-logo { margin: 0; }
-
-    .nav-links {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        flex-direction: column;
-        padding: 2rem;
-        gap: 1.5rem;
-        transition: left 0.3s ease;
-        z-index: 999;
-    }
-
-    .nav-links.active { left: 0; }
-
-    .nav-links li {
-        width: 100%;
-        text-align: center;
-    }
-
-    body.light .nav-links { background: rgba(255, 255, 255, 0.95); }
-    body.dark  .nav-links { background: rgba(0, 0, 0, 0.95); }
-
-    .section-title { font-size: 2rem; }
-    .section       { padding: 3rem 5%; }
-    .skills-grid   { grid-template-columns: 1fr; }
 }
