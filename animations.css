@@ -1,5 +1,13 @@
 /* ==========================================
-   Floating Particles Animation
+   ANIMATIONS.CSS
+   Scope: Keyframes · Utility classes · Scroll reveal
+          GPU hint · Reduced motion
+   Note: Global transition override REMOVED —
+         moved to components.css per-property
+   ========================================== */
+
+/* ==========================================
+   Floating Particles (canvas layer)
    ========================================== */
 .particles {
     position: fixed;
@@ -10,10 +18,10 @@
 }
 
 /* ==========================================
-   Fade In Animations
+   Fade In
    ========================================== */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(28px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -26,45 +34,77 @@
     to { opacity: 1; }
 }
 
-.fade-in      { animation: fadeIn 0.8s ease-in-out; }
-.fade-in-up   { animation: fadeInUp 0.8s ease-in-out; }
+.fade-in    { animation: fadeIn 0.7s ease-in-out; }
+.fade-in-up { animation: fadeInUp 0.7s ease-in-out; }
 
 /* ==========================================
-   Gradient Text Animation
+   Scroll Reveal
    ========================================== */
-.gradient-text {
-    background: linear-gradient(45deg, #2563eb, #1d4ed8, #3b82f6);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 3s ease-in-out infinite;
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-@keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ==========================================
-   Button Shine Effect
+   Pulse & Bounce
    ========================================== */
-.btn {
-    position: relative;
-    overflow: hidden;
+.pulse {
+    animation: pulse 2.5s ease-in-out infinite;
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.04); }
 }
 
-.btn:hover::before { left: 100%; }
+.bounce {
+    animation: bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    40%       { transform: translateY(-9px); }
+    60%       { transform: translateY(-4px); }
+}
+
+/* ==========================================
+   Floating
+   ========================================== */
+.floating {
+    animation: floating 3.2s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-9px); }
+}
+
+/* ==========================================
+   Loading Spinner
+   ========================================== */
+.loading-spinner {
+    width: 36px; height: 36px;
+    border: 3px solid rgba(0, 0, 0, 0.10);
+    border-left: 3px solid rgba(0, 0, 0, 0.55);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+body.dark .loading-spinner {
+    border-color: rgba(255, 255, 255, 0.10);
+    border-left-color: rgba(255, 255, 255, 0.55);
+}
+
+@keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 /* ==========================================
    Card Hover Shine
@@ -79,7 +119,7 @@
     position: absolute;
     top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(100,255,218,0.05), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.04), transparent);
     transform: rotate(45deg);
     opacity: 0;
     transition: opacity 0.3s;
@@ -96,78 +136,23 @@
 }
 
 /* ==========================================
-   Scroll Reveal
+   Button Shine
    ========================================== */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.6s ease;
+.btn {
+    position: relative;
+    overflow: hidden;
 }
 
-.scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    transition: left 0.5s ease;
 }
 
-/* ==========================================
-   Pulse & Bounce
-   ========================================== */
-.pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50%       { transform: scale(1.05); }
-}
-
-.bounce {
-    animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    40%       { transform: translateY(-10px); }
-    60%       { transform: translateY(-5px); }
-}
-
-/* ==========================================
-   Floating
-   ========================================== */
-.floating {
-    animation: floating 3s ease-in-out infinite;
-}
-
-@keyframes floating {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-10px); }
-}
-
-/* ==========================================
-   Loading Spinner
-   ========================================== */
-.loading-spinner {
-    width: 40px; height: 40px;
-    border: 4px solid rgba(102, 126, 234, 0.3);
-    border-left: 4px solid #2563eb;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* ==========================================
-   Theme Transition
-   ========================================== */
-*, *::before, *::after {
-    transition: background-color 0.3s ease,
-                color 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-}
+.btn:hover::before { left: 100%; }
 
 /* ==========================================
    GPU Accelerated

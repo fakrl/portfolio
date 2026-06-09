@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
     <link rel="stylesheet" href="../animations.css">
     <link rel="stylesheet" href="../pages.css">
     <link rel="stylesheet" href="../forms.css">
@@ -20,80 +21,40 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <style>
-    /* ── Floating pill ── */
-    .floating-pill {
-        position: fixed;
-        right: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%) translateX(20px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-radius: 30px;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        overflow: hidden;
-        z-index: 998;
-        opacity: 0;
-        transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .floating-pill.visible { opacity: 1; transform: translateY(-50%) translateX(0); }
-    body.light .floating-pill { background: rgba(255,255,255,0.75); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-    body.dark  .floating-pill { background: rgba(20,20,20,0.75); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-    .floating-pill:hover { box-shadow: 0 12px 40px rgba(37,99,235,0.25); }
-    .floating-pill__item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0.9rem 0.8rem; text-decoration: none; transition: background 0.2s ease; width: 100%; }
-    .floating-pill__item:hover { background: rgba(37,99,235,0.1); }
-    .floating-pill__icon { font-size: 1.2rem; line-height: 1; }
-    .floating-pill__label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; transition: color 0.3s ease; }
-    body.light .floating-pill__label { color: #555; }
-    body.dark  .floating-pill__label { color: #aaa; }
-    .floating-pill__item:hover .floating-pill__label { color: #2563eb; }
-    .floating-pill__divider { width: 60%; height: 1px; flex-shrink: 0; }
-    body.light .floating-pill__divider { background: rgba(0,0,0,0.08); }
-    body.dark  .floating-pill__divider { background: rgba(255,255,255,0.08); }
-
-    @media (max-width: 768px) {
-        .floating-pill { right: auto; left: 50%; top: auto; bottom: 1.5rem; transform: translateX(-50%) translateY(20px); flex-direction: row; }
-        .floating-pill.visible { transform: translateX(-50%) translateY(0); }
-        .floating-pill__item { flex-direction: row; gap: 0.4rem; padding: 0.7rem 1.1rem; }
-        .floating-pill__label { font-size: 0.7rem; }
-        .floating-pill__divider { width: 1px; height: 24px; }
-    }
-
-    /* ── Preloader ── */
-    #preloader {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.4s ease, visibility 0.4s ease;
-    }
-    body.light #preloader { background: #ffffff; }
-    body.dark  #preloader { background: #000000; }
-    #preloader-greeting {
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 800;
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: greetPulse 0.25s ease;
-        letter-spacing: -1px;
-    }
-    @keyframes greetPulse {
-        0%   { opacity: 0; transform: scale(0.85); }
-        60%  { opacity: 1; transform: scale(1.05); }
-        100% { opacity: 1; transform: scale(1); }
-    }
-    #preloader.hide-preloader { opacity: 0; visibility: hidden; pointer-events: none; }
-    
-    @media (min-width: 1024px) {
-    .moments-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+        .contribute-btn {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+            
+        body.light .contribute-btn {
+            background: rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.10);
+            color: #555;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+        }
+        
+        body.dark .contribute-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #aaa;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.40);
+        }
+        .contribute-btn:hover {
+            transform: scale(1.08);
+        }
     </style>
 </head>
 <body class="light">
@@ -104,12 +65,16 @@
 <!-- Floating Pill -->
 <div class="floating-pill" id="floatingPill">
     <a href="/" class="floating-pill__item" title="Home">
-        <span class="floating-pill__icon">🏠</span>
+        <span class="floating-pill__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </span>
         <span class="floating-pill__label">Home</span>
     </a>
     <div class="floating-pill__divider"></div>
     <a href="/proof/" class="floating-pill__item" title="Proof of Work">
-        <span class="floating-pill__icon">🏅</span>
+        <span class="floating-pill__icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
         <span class="floating-pill__label">Proof</span>
     </a>
 </div>
@@ -136,8 +101,7 @@
 <main>
     <!-- ── GALLERY ────────────────────────────────── -->
     <section class="section" id="gallery">
-        <h2 class="section-title">Gallery</h2>
-
+        <span class="section-title">Gallery</span>
         <div class="moments-filters" id="momentsFilters">
             <button class="moments-filter moments-filter--active" data-filter="all">All</button>
             <button class="moments-filter" data-filter="momen">🤝 Momen</button>
@@ -185,22 +149,9 @@
     </footer>
 
         <!-- Contribute Button -->
-<button id="contributeBtn" style="
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 999;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-" title="Contribute a photo">+</button>
+<button id="contributeBtn" class="contribute-btn" title="Contribute a photo">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+</button>
 
 <!-- Contribute Modal -->
 <div id="contributeModal" style="
