@@ -673,121 +673,83 @@
     }
 
     /* ==========================================
-       SKILLS — FLOATING ICON GRID
+       SKILLS — 3D SPHERE
        ========================================== */
-    .skills-section-inner {
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-
-    .skills-group-label {
-        font-size: 0.70rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 1.2rem;
-        display: block;
-        transition: color var(--transition-theme);
-    }
-
-    body.light .skills-group-label { color: #999; }
-    body.dark  .skills-group-label { color: #555; }
-
-    .skills-icon-grid {
+    .skills-sphere-wrap {
+        perspective: 900px;
+        height: 460px;
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        margin-bottom: 2.5rem;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
     }
 
-    .skill-icon-item {
+    .skills-sphere-wrap:active { cursor: grabbing; }
+
+    .skills-sphere {
         position: relative;
+        width: 0; height: 0;
+        transform-style: preserve-3d;
+    }
+
+    .skill-sphere-item {
+        position: absolute;
+        left: 0; top: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.4rem;
-        padding: 0.9rem 1rem;
+        gap: 0.3rem;
+        padding: 0.65rem 0.85rem;
         border-radius: var(--radius-md);
-        cursor: default;
-        transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-theme);
-        animation: skillFloat linear infinite;
-        /* Each item gets a unique duration & delay via inline style */
-    }
-
-    body.light .skill-icon-item {
-        background: var(--glass-light);
-        border: 1px solid var(--border-light);
-        box-shadow: var(--shadow-light);
-    }
-
-    body.dark .skill-icon-item {
-        background: var(--glass-dark);
-        border: 1px solid var(--border-dark);
-        box-shadow: var(--shadow-dark);
-    }
-
-    .skill-icon-item:hover {
-        animation-play-state: paused;
-        transform: translateY(-6px) scale(1.06) !important;
-        z-index: 10;
-    }
-
-    body.light .skill-icon-item:hover { box-shadow: var(--shadow-hover-light); }
-    body.dark  .skill-icon-item:hover { box-shadow: var(--shadow-hover-dark); }
-
-    @keyframes skillFloat {
-        0%,100% { transform: translateY(0px); }
-        50%      { transform: translateY(-5px); }
-    }
-
-    .skill-icon-item i,
-    .skill-icon-item svg {
-        font-size: 2rem;
-        width: 32px; height: 32px;
-        display: block;
-    }
-
-    .skill-icon-label {
-        font-size: 0.68rem;
-        font-weight: 700;
-        letter-spacing: 0.2px;
-        text-align: center;
         white-space: nowrap;
+        pointer-events: auto;
+        transition: background var(--transition-theme), border-color var(--transition-theme);
+    }
+
+    body.light .skill-sphere-item {
+        background: rgba(255,255,255,0.55);
+        border: 1px solid rgba(0,0,0,0.09);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+
+    body.dark .skill-sphere-item {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.11);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    }
+
+    .skill-sphere-item i  { font-size: 1.9rem; display: block; }
+    .skill-sphere-item svg { display: block; }
+
+    .skill-sphere-label {
+        font-size: 0.60rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        text-align: center;
         transition: color var(--transition-theme);
     }
 
-    body.light .skill-icon-label { color: var(--text-secondary-light); }
-    body.dark  .skill-icon-label { color: var(--text-secondary-dark); }
+    body.light .skill-sphere-label { color: var(--text-secondary-light); }
+    body.dark  .skill-sphere-label { color: var(--text-secondary-dark); }
 
-    /* Tooltip on hover */
-    .skill-icon-item::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: calc(100% + 8px);
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.68rem;
-        font-weight: 600;
-        padding: 4px 10px;
-        border-radius: 8px;
-        white-space: nowrap;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.2s ease;
-        z-index: 20;
+    .skills-sphere-hint {
+        text-align: center;
+        margin-top: 0.8rem;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: color var(--transition-theme);
     }
 
-    body.light .skill-icon-item::after {
-        background: rgba(0,0,0,0.82);
-        color: #f0f0f0;
-    }
+    body.light .skills-sphere-hint { color: #bbb; }
+    body.dark  .skills-sphere-hint { color: #444; }
 
-    body.dark .skill-icon-item::after {
-        background: rgba(255,255,255,0.92);
-        color: #0a0a0a;
+    @media (max-width: 600px) {
+        .skills-sphere-wrap { height: 380px; }
     }
-
-    .skill-icon-item:hover::after { opacity: 1; }
 
     /* ==========================================
        EDUCATION + STATS
@@ -1524,22 +1486,14 @@
     </section>
 
     <!-- ══════════════════════════════════════
-         SKILLS — ICON GRID
+         SKILLS — 3D SPHERE
     ══════════════════════════════════════ -->
     <section id="skills" class="section">
         <h2 class="section-title">Technical Skills</h2>
-
-        <div class="skills-section-inner">
-            <span class="skills-group-label">Used in Production</span>
-            <div class="skills-icon-grid" id="prodSkills">
-                <!-- JS rendered -->
-            </div>
-
-            <span class="skills-group-label">Also Know</span>
-            <div class="skills-icon-grid" id="alsoSkills">
-                <!-- JS rendered -->
-            </div>
+        <div class="skills-sphere-wrap" id="skillsWrap">
+            <div class="skills-sphere" id="skillsSphere"></div>
         </div>
+        <p class="skills-sphere-hint">drag to explore</p>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -1761,73 +1715,154 @@
 
 <script src="script.js"></script>
 
-<!-- Skills icon grid -->
+<!-- Skills 3D Sphere -->
 <script>
 (function() {
-    const prodSkills = [
-        { icon: 'devicon-go-original', label: 'Golang',   tooltip: 'Evermos — Marketplace REST API' },
-        { icon: 'devicon-mysql-plain',  label: 'MySQL',    tooltip: 'Evermos — Relational DB' },
-        { icon: 'devicon-vuejs-plain',  label: 'Vue.js 2', tooltip: 'Core Initiative — E-Commerce Catalog' },
-        { icon: 'devicon-javascript-plain', label: 'JavaScript', tooltip: 'LKA UNPAM — Scraping & Automation' },
-        { icon: 'devicon-git-plain',    label: 'Git',      tooltip: 'All Internships — Version Control' },
-        { icon: 'devicon-firebase-plain', label: 'Firebase', tooltip: 'Core Initiative — Hosting & Realtime DB' },
-        { icon: 'devicon-figma-plain',  label: 'Figma',    tooltip: 'Core Initiative — Pixel-Perfect Design' },
-        // JWT & Postman don't have devicons, using SVG fallbacks
-    ];
-
-    const alsoSkills = [
-        { icon: 'devicon-php-plain',        label: 'PHP' },
-        { icon: 'devicon-laravel-plain',     label: 'Laravel' },
-        { icon: 'devicon-html5-plain',       label: 'HTML5' },
-        { icon: 'devicon-css3-plain',        label: 'CSS3' },
-        { icon: 'devicon-bootstrap-plain',   label: 'Bootstrap' },
-        { icon: 'devicon-python-plain',      label: 'Python' },
-        { icon: 'devicon-github-original',   label: 'GitHub' },
-        { icon: 'devicon-vscode-plain',      label: 'VS Code' },
-        { icon: 'devicon-wordpress-plain',   label: 'WordPress' },
-        { icon: 'devicon-azure-plain',       label: 'Azure' },
-    ];
-
-    // Extra non-devicon items for prod
-    const prodExtra = [
+    const SKILLS = [
+        { icon: 'devicon-go-original colored',          label: 'Golang' },
+        { icon: 'devicon-mysql-plain colored',           label: 'MySQL' },
+        { icon: 'devicon-vuejs-plain colored',           label: 'Vue.js 2' },
+        { icon: 'devicon-javascript-plain colored',      label: 'JavaScript' },
+        { icon: 'devicon-git-plain colored',             label: 'Git' },
+        { icon: 'devicon-firebase-plain colored',        label: 'Firebase' },
+        { icon: 'devicon-figma-plain colored',           label: 'Figma' },
+        { icon: 'devicon-php-plain colored',             label: 'PHP' },
+        { icon: 'devicon-laravel-plain colored',         label: 'Laravel' },
+        { icon: 'devicon-html5-plain colored',           label: 'HTML5' },
+        { icon: 'devicon-css3-plain colored',            label: 'CSS3' },
+        { icon: 'devicon-bootstrap-plain colored',       label: 'Bootstrap' },
+        { icon: 'devicon-python-plain colored',          label: 'Python' },
+        { icon: 'devicon-github-original colored',       label: 'GitHub' },
+        { icon: 'devicon-vscode-plain colored',          label: 'VS Code' },
+        { icon: 'devicon-wordpress-plain colored',       label: 'WordPress' },
+        { icon: 'devicon-azure-plain colored',           label: 'Azure' },
         {
             label: 'REST API',
-            tooltip: 'Evermos — 7 Module Endpoints',
-            svg: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`
+            svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`
         },
         {
             label: 'Postman',
-            tooltip: 'API Testing & Documentation',
-            svg: `<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" opacity=".15"/><circle cx="12" cy="12" r="3"/></svg>`
+            svg: `<svg width="26" height="26" viewBox="0 0 512 512" fill="currentColor"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 64c51.2 0 97.9 18.7 134.2 49.5L99.6 404.2C68.7 367.9 50 321.2 50 274c0-112.6 93.4-210 206-210zm0 384c-51.2 0-97.9-18.7-134.2-49.5l290.6-290.7C443.3 144.1 462 190.8 462 238c0 112.6-93.4 210-206 210z" opacity=".2"/><circle cx="256" cy="256" r="80"/></svg>`
         },
     ];
 
-    function floatStyle(i) {
-        const dur = 3 + (i % 4) * 0.7;
-        const delay = (i * 0.4) % 3;
-        return `animation-duration:${dur}s; animation-delay:-${delay}s;`;
-    }
+    const wrap  = document.getElementById('skillsWrap');
+    const sphere = document.getElementById('skillsSphere');
+    if (!wrap || !sphere) return;
 
-    function renderGrid(skills, extra, containerId) {
-        const el = document.getElementById(containerId);
-        if (!el) return;
-        const all = [...skills, ...extra];
-        all.forEach((s, i) => {
-            const div = document.createElement('div');
-            div.className = 'skill-icon-item';
-            if (s.tooltip) div.setAttribute('data-tooltip', s.tooltip);
-            div.setAttribute('style', floatStyle(i));
-            if (s.svg) {
-                div.innerHTML = `${s.svg}<span class="skill-icon-label">${s.label}</span>`;
-            } else {
-                div.innerHTML = `<i class="${s.icon} colored" style="font-size:2rem;"></i><span class="skill-icon-label">${s.label}</span>`;
-            }
-            el.appendChild(div);
+    const R = 175; // sphere radius px
+    const phi = Math.PI * (3 - Math.sqrt(5)); // golden angle
+
+    // Build items with Fibonacci sphere positions
+    const items = SKILLS.map((s, i) => {
+        const y    = 1 - (i / (SKILLS.length - 1)) * 2;
+        const rad  = Math.sqrt(1 - y * y);
+        const theta = phi * i;
+        const x = Math.cos(theta) * rad;
+        const z = Math.sin(theta) * rad;
+
+        const el = document.createElement('div');
+        el.className = 'skill-sphere-item';
+        el.innerHTML = s.svg
+            ? `${s.svg}<span class="skill-sphere-label">${s.label}</span>`
+            : `<i class="${s.icon}"></i><span class="skill-sphere-label">${s.label}</span>`;
+        sphere.appendChild(el);
+
+        return { el, ox: x, oy: y, oz: z };
+    });
+
+    // Rotation state
+    let rotX = 0.3, rotY = 0;
+    let velX = 0,   velY = 0.003;
+    let dragging = false;
+    let lastMX = 0, lastMY = 0;
+    let dragVX = 0, dragVY = 0;
+
+    function applyPositions() {
+        const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+        const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+
+        items.forEach(({ el, ox, oy, oz }) => {
+            // Rotate around Y, then X
+            const x1 = ox * cosY - oz * sinY;
+            const z1 = ox * sinY + oz * cosY;
+            const y1 = oy * cosX - z1 * sinX;
+            const z2 = oy * sinX + z1 * cosX;
+
+            const px = x1 * R;
+            const py = y1 * R;
+            const scale = (z2 + 1.5) / 2.5;
+            const opacity = Math.max(0.18, (z2 + 1) / 2);
+
+            el.style.transform = `translate(-50%, -50%) translate3d(${px}px, ${py}px, 0) scale(${scale.toFixed(3)})`;
+            el.style.opacity   = opacity.toFixed(3);
+            el.style.zIndex    = Math.round(z2 * 100);
         });
     }
 
-    renderGrid(prodSkills, prodExtra, 'prodSkills');
-    renderGrid(alsoSkills, [], 'alsoSkills');
+    function tick() {
+        if (!dragging) {
+            velX *= 0.96;
+            velY *= 0.96;
+            if (Math.abs(velY) < 0.001) velY = 0.003; // keep gentle auto-spin
+            rotX += velX;
+            rotY += velY;
+        }
+        applyPositions();
+        requestAnimationFrame(tick);
+    }
+
+    // Mouse drag
+    wrap.addEventListener('mousedown', e => {
+        dragging = true;
+        lastMX = e.clientX;
+        lastMY = e.clientY;
+        dragVX = dragVY = 0;
+        e.preventDefault();
+    });
+    window.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        const dx = e.clientX - lastMX;
+        const dy = e.clientY - lastMY;
+        dragVX = dy * 0.008;
+        dragVY = dx * 0.008;
+        rotX += dragVX;
+        rotY += dragVY;
+        lastMX = e.clientX;
+        lastMY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => {
+        if (!dragging) return;
+        dragging = false;
+        velX = dragVX;
+        velY = dragVY;
+    });
+
+    // Touch drag
+    wrap.addEventListener('touchstart', e => {
+        dragging = true;
+        lastMX = e.touches[0].clientX;
+        lastMY = e.touches[0].clientY;
+        dragVX = dragVY = 0;
+    }, { passive: true });
+    wrap.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        const dx = e.touches[0].clientX - lastMX;
+        const dy = e.touches[0].clientY - lastMY;
+        dragVX = dy * 0.008;
+        dragVY = dx * 0.008;
+        rotX += dragVX;
+        rotY += dragVY;
+        lastMX = e.touches[0].clientX;
+        lastMY = e.touches[0].clientY;
+    }, { passive: true });
+    wrap.addEventListener('touchend', () => {
+        dragging = false;
+        velX = dragVX;
+        velY = dragVY;
+    });
+
+    tick();
 })();
 </script>
 
