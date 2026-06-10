@@ -66,21 +66,21 @@
 
     .hero-photo-ring {
         position: absolute;
-        inset: -4px;
+        inset: -2px;
         border-radius: 50%;
         background: conic-gradient(
-            rgba(0,0,0,0.15) 0deg,
-            rgba(0,0,0,0.05) 180deg,
-            rgba(0,0,0,0.15) 360deg
+            rgba(0,0,0,0.10) 0deg,
+            rgba(0,0,0,0.03) 180deg,
+            rgba(0,0,0,0.10) 360deg
         );
         animation: ringRotate 6s linear infinite;
     }
 
     body.dark .hero-photo-ring {
         background: conic-gradient(
-            rgba(255,255,255,0.18) 0deg,
-            rgba(255,255,255,0.04) 180deg,
-            rgba(255,255,255,0.18) 360deg
+            rgba(255,255,255,0.12) 0deg,
+            rgba(255,255,255,0.02) 180deg,
+            rgba(255,255,255,0.12) 360deg
         );
     }
 
@@ -91,7 +91,7 @@
 
     .hero-photo-inner {
         position: absolute;
-        inset: 3px;
+        inset: 1px;
         border-radius: 50%;
         overflow: hidden;
         display: flex;
@@ -814,6 +814,7 @@
         display: flex;
         flex-direction: column;
         gap: 0.9rem;
+        height: 100%;
     }
 
     .contact-form-row {
@@ -1470,7 +1471,7 @@
                                class="feedback-input" required maxlength="80">
                     </div>
                     <textarea name="message" placeholder="What's on your mind?"
-                              class="feedback-input" style="min-height:110px; resize:vertical"
+                              class="feedback-input" style="min-height:140px; resize:vertical; flex:1"
                               required maxlength="600"></textarea>
                     <div class="contact-form-actions">
                         <button type="submit" class="btn btn-primary" style="flex:1" id="formSubmitBtn">
@@ -1519,12 +1520,8 @@
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" style="padding-bottom: 5rem;">
         <p>&copy; 2026 Fakhrul Mukhlisin.</p>
-        <div class="footer-links">
-            <a href="/proof/">Proof of Work</a> &nbsp;·&nbsp;
-            <a href="/moments/">Moments</a>
-        </div>
     </footer>
 
 </main>
@@ -1607,7 +1604,7 @@
             if (s.svg) {
                 div.innerHTML = `${s.svg}<span class="skill-icon-label">${s.label}</span>`;
             } else {
-                div.innerHTML = `<i class="${s.icon}" style="font-size:2rem;"></i><span class="skill-icon-label">${s.label}</span>`;
+                div.innerHTML = `<i class="${s.icon} colored" style="font-size:2rem;"></i><span class="skill-icon-label">${s.label}</span>`;
             }
             el.appendChild(div);
         });
