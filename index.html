@@ -275,6 +275,21 @@
         align-items: center;
     }
 
+    .hero-cv-link {
+        display: inline-block;
+        margin-top: 0.6rem;
+        font-size: 0.80rem;
+        font-weight: 600;
+        text-decoration: none;
+        letter-spacing: 0.2px;
+        transition: opacity var(--transition-fast);
+    }
+
+    body.light .hero-cv-link { color: #888; }
+    body.dark  .hero-cv-link { color: #666; }
+
+    .hero-cv-link:hover { opacity: 0.65; }
+
     /* ==========================================
        EXPERIENCE — BENTO GRID
        ========================================== */
@@ -1147,12 +1162,15 @@
                 <h1 class="hero-name">Fakhrul<br>Mukhlisin</h1>
                 <p class="hero-role">Backend · Frontend · Information Systems</p>
                 <p class="hero-bio">
-                    I build things that actually ship. REST API marketplace in Golang scored 90.91, e-commerce catalog in Vue.js scored 87.79 — both in production internships. Currently semester 6, GPA 3.68, open to full-time or remote roles.
+                    Semester 6 Information Systems student with two production internships — backend REST API at Evermos (Golang, scored 90.91) and frontend e-commerce at Core Initiative (Vue.js, scored 87.79). GPA 3.68. Looking for full-time, part-time, or remote roles in backend or frontend.
                 </p>
                 <div class="hero-cta-group">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
                     <a href="/proof/" class="btn btn-secondary">Proof of Work</a>
                 </div>
+                <a href="cv/cv_fakhrul_mukhlisin_2026.pdf" download class="hero-cv-link">
+                    Download CV <span style="opacity:0.5">↓</span>
+                </a>
             </div>
 
         </div>
