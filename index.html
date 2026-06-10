@@ -491,6 +491,188 @@
     }
 
     /* ==========================================
+       EXPERIENCE — TIMELINE
+       ========================================== */
+    .exp-timeline {
+        max-width: 780px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    /* vertical line */
+    .exp-timeline::before {
+        content: '';
+        position: absolute;
+        left: 112px;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        transition: background var(--transition-theme);
+    }
+
+    body.light .exp-timeline::before { background: rgba(0,0,0,0.10); }
+    body.dark  .exp-timeline::before { background: rgba(255,255,255,0.10); }
+
+    .exp-tl-item {
+        display: flex;
+        gap: 1.4rem;
+        margin-bottom: 1.2rem;
+        align-items: flex-start;
+    }
+
+    .exp-tl-left {
+        flex: 0 0 112px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+        padding-top: 1.4rem;
+        position: relative;
+    }
+
+    .exp-tl-date {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        text-align: right;
+        line-height: 1.3;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .exp-tl-date { color: var(--text-muted-light); }
+    body.dark  .exp-tl-date { color: var(--text-muted-dark); }
+
+    .exp-tl-dot {
+        width: 9px; height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-right: -5px;
+        transition: background var(--transition-theme), border-color var(--transition-theme);
+        border: 2px solid transparent;
+    }
+
+    body.light .exp-tl-dot {
+        background: #fff;
+        border-color: rgba(0,0,0,0.22);
+    }
+
+    body.dark .exp-tl-dot {
+        background: #080808;
+        border-color: rgba(255,255,255,0.28);
+    }
+
+    .exp-tl-dot--featured {
+        width: 11px; height: 11px;
+        margin-right: -6px;
+    }
+
+    body.light .exp-tl-dot--featured {
+        background: #0a0a0a;
+        border-color: #0a0a0a;
+    }
+
+    body.dark .exp-tl-dot--featured {
+        background: #f0f0f0;
+        border-color: #f0f0f0;
+    }
+
+    .exp-tl-card {
+        flex: 1;
+        padding: 1.2rem 1.4rem;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        transition: transform var(--transition-base), box-shadow var(--transition-base),
+                    background var(--transition-theme), border-color var(--transition-theme);
+    }
+
+    .exp-tl-card:hover { transform: translateY(-3px); }
+
+    body.light .exp-tl-card:hover { box-shadow: var(--shadow-hover-light); }
+    body.dark  .exp-tl-card:hover { box-shadow: var(--shadow-hover-dark); }
+
+    .exp-tl-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .exp-tl-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.3;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .exp-tl-title { color: var(--text-primary-light); }
+    body.dark  .exp-tl-title { color: var(--text-primary-dark); }
+
+    .exp-tl-company {
+        font-size: 0.80rem;
+        font-style: italic;
+        margin-top: 0.15rem;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .exp-tl-company { color: var(--text-secondary-light); }
+    body.dark  .exp-tl-company { color: var(--text-secondary-dark); }
+
+    .exp-tl-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: var(--radius-pill);
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background var(--transition-theme), color var(--transition-theme);
+    }
+
+    body.light .exp-tl-badge {
+        background: rgba(0,0,0,0.06);
+        color: var(--text-secondary-light);
+        border: 1px solid rgba(0,0,0,0.10);
+    }
+
+    body.dark .exp-tl-badge {
+        background: rgba(255,255,255,0.08);
+        color: var(--text-secondary-dark);
+        border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .exp-tl-outcome {
+        font-size: 0.82rem;
+        line-height: 1.6;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .exp-tl-outcome { color: var(--text-secondary-light); }
+    body.dark  .exp-tl-outcome { color: var(--text-secondary-dark); }
+
+    .exp-tl-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.2rem;
+    }
+
+    @media (max-width: 600px) {
+        .exp-timeline::before { left: 0; }
+        .exp-tl-item { flex-direction: column; gap: 0.5rem; }
+        .exp-tl-left {
+            flex-direction: row;
+            align-items: center;
+            flex: unset;
+            padding-top: 0;
+            padding-left: 1.2rem;
+        }
+        .exp-tl-date { text-align: left; }
+        .exp-tl-dot { margin-right: 0; margin-left: -1.35rem; order: -1; }
+    }
+
+    /* ==========================================
        SKILLS — FLOATING ICON GRID
        ========================================== */
     .skills-section-inner {
@@ -1176,152 +1358,167 @@
     </section>
 
     <!-- ══════════════════════════════════════
-         EXPERIENCE — BENTO GRID
+         EXPERIENCE — TIMELINE
     ══════════════════════════════════════ -->
     <section id="experience" class="section">
         <h2 class="section-title">Experience</h2>
 
-        <div class="bento-grid">
+        <div class="exp-timeline">
 
-            <!-- Evermos — large -->
-            <a href="/proof/#proj-evermos" class="bento-card bento-card--large glass-card visible">
-                <div class="bento-card__img">
-                    <img src="image/cert-evermos.webp" alt="Evermos"
-                         onerror="this.parentElement.classList.add('bento-card__img--placeholder')">
-                    <span class="bento-card__badge">90.91 / 100</span>
+            <!-- Evermos -->
+            <div class="exp-tl-item">
+                <div class="exp-tl-left">
+                    <span class="exp-tl-date">Dec 2025</span>
+                    <div class="exp-tl-dot exp-tl-dot--featured"></div>
                 </div>
-                <div class="bento-card__body">
-                    <span class="bento-card__date">Dec 2025</span>
-                    <p class="bento-card__title">Backend Developer Intern — Evermos</p>
-                    <p class="bento-card__company">Evermos × Rakamin Academy</p>
-                    <p class="bento-card__outcome">Full marketplace REST API — Golang, Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
-                    <div class="bento-card__tags">
+                <a href="/proof/#proj-evermos" class="exp-tl-card glass-card visible">
+                    <div class="exp-tl-top">
+                        <div>
+                            <p class="exp-tl-title">Backend Developer Intern</p>
+                            <p class="exp-tl-company">Evermos × Rakamin Academy</p>
+                        </div>
+                        <span class="exp-tl-badge">90.91 / 100</span>
+                    </div>
+                    <p class="exp-tl-outcome">Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
+                    <div class="exp-tl-tags">
                         <span class="tag">Golang</span>
                         <span class="tag">Gin</span>
                         <span class="tag">MySQL</span>
                         <span class="tag">JWT</span>
                     </div>
-                </div>
-                <span class="bento-card__arrow">→</span>
-            </a>
+                </a>
+            </div>
 
-            <!-- Core Initiative — large -->
-            <a href="/proof/#proj-core-initiative" class="bento-card bento-card--large glass-card visible">
-                <div class="bento-card__img">
-                    <img src="image/cert-coreinit.webp" alt="Core Initiative"
-                         onerror="this.parentElement.classList.add('bento-card__img--placeholder')">
-                    <span class="bento-card__badge">87.79 / 100</span>
+            <!-- Core Initiative -->
+            <div class="exp-tl-item">
+                <div class="exp-tl-left">
+                    <span class="exp-tl-date">Oct – Nov 2025</span>
+                    <div class="exp-tl-dot exp-tl-dot--featured"></div>
                 </div>
-                <div class="bento-card__body">
-                    <span class="bento-card__date">Oct – Nov 2025</span>
-                    <p class="bento-card__title">Frontend Developer Intern — Core Initiative</p>
-                    <p class="bento-card__company">Core Initiative × Rakamin Academy</p>
-                    <p class="bento-card__outcome">E-commerce catalog in Vue.js 2, 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
-                    <div class="bento-card__tags">
+                <a href="/proof/#proj-core-initiative" class="exp-tl-card glass-card visible">
+                    <div class="exp-tl-top">
+                        <div>
+                            <p class="exp-tl-title">Frontend Developer Intern</p>
+                            <p class="exp-tl-company">Core Initiative × Rakamin Academy</p>
+                        </div>
+                        <span class="exp-tl-badge">87.79 / 100</span>
+                    </div>
+                    <p class="exp-tl-outcome">E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
+                    <div class="exp-tl-tags">
                         <span class="tag">Vue.js 2</span>
                         <span class="tag">REST API</span>
                         <span class="tag">CI/CD</span>
+                        <span class="tag">Firebase</span>
                     </div>
-                </div>
-                <span class="bento-card__arrow">→</span>
-            </a>
+                </a>
+            </div>
 
-            <!-- LKA UNPAM — medium -->
-            <a href="/proof/#lka-unpam" class="bento-card bento-card--medium glass-card visible">
-                <div class="bento-card__img">
-                    <img src="image/cert-unpam-lka-1.webp" alt="LKA UNPAM"
-                         onerror="this.parentElement.classList.add('bento-card__img--placeholder')">
-                    <span class="bento-card__badge">Sangat Baik</span>
+            <!-- Kesbang -->
+            <div class="exp-tl-item">
+                <div class="exp-tl-left">
+                    <span class="exp-tl-date">Nov – Dec 2025</span>
+                    <div class="exp-tl-dot"></div>
                 </div>
-                <div class="bento-card__body">
-                    <span class="bento-card__date">Jan – Jul 2025</span>
-                    <p class="bento-card__title">Data Management Intern</p>
-                    <p class="bento-card__company">LKA UNPAM</p>
-                    <p class="bento-card__outcome">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
-                    <div class="bento-card__tags">
+                <a href="/moments/?filter=momen" class="exp-tl-card glass-card visible">
+                    <div class="exp-tl-top">
+                        <div>
+                            <p class="exp-tl-title">Computer Operator</p>
+                            <p class="exp-tl-company">Kesbang · Jakarta Pusat</p>
+                        </div>
+                    </div>
+                    <div class="exp-tl-tags">
+                        <span class="tag">Government</span>
+                        <span class="tag">Admin</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Yandex ML -->
+            <div class="exp-tl-item">
+                <div class="exp-tl-left">
+                    <span class="exp-tl-date">May – Jul 2025</span>
+                    <div class="exp-tl-dot"></div>
+                </div>
+                <a href="/proof/#yandex" class="exp-tl-card glass-card visible">
+                    <div class="exp-tl-top">
+                        <div>
+                            <p class="exp-tl-title">Machine Learning Program</p>
+                            <p class="exp-tl-company">Yandex · Digitalent KOMDIGI</p>
+                        </div>
+                        <span class="exp-tl-badge">#5 / 926</span>
+                    </div>
+                    <p class="exp-tl-outcome">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
+                    <div class="exp-tl-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">ML</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- LKA UNPAM -->
+            <div class="exp-tl-item">
+                <div class="exp-tl-left">
+                    <span class="exp-tl-date">Jan – Jul 2025</span>
+                    <div class="exp-tl-dot"></div>
+                </div>
+                <a href="/proof/#lka-unpam" class="exp-tl-card glass-card visible">
+                    <div class="exp-tl-top">
+                        <div>
+                            <p class="exp-tl-title">Data Management Intern</p>
+                            <p class="exp-tl-company">LKA UNPAM</p>
+                        </div>
+                        <span class="exp-tl-badge">Sangat Baik</span>
+                    </div>
+                    <p class="exp-tl-outcome">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
+                    <div class="exp-tl-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">Data</span>
                     </div>
-                </div>
-                <span class="bento-card__arrow">→</span>
-            </a>
+                </a>
+            </div>
 
-            <!-- Yandex ML — medium -->
-            <a href="/proof/#yandex" class="bento-card bento-card--medium glass-card visible">
-                <div class="bento-card__img">
-                    <img src="image/cert-ml-1.webp" alt="Yandex ML"
-                         onerror="this.parentElement.classList.add('bento-card__img--placeholder')">
-                    <span class="bento-card__badge">#5 / 926</span>
+            <!-- PT CMS -->
+            <div class="exp-tl-item">
+                <div class="exp-tl-left">
+                    <span class="exp-tl-date">Jul 2024 – Jul 2025</span>
+                    <div class="exp-tl-dot"></div>
                 </div>
-                <div class="bento-card__body">
-                    <span class="bento-card__date">May – Jul 2025</span>
-                    <p class="bento-card__title">Machine Learning Program</p>
-                    <p class="bento-card__company">Yandex · Digitalent KOMDIGI</p>
-                    <p class="bento-card__outcome">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
-                    <div class="bento-card__tags">
-                        <span class="tag">ML</span>
-                        <span class="tag">Python</span>
+                <a href="/proof/#proj-cms" class="exp-tl-card glass-card visible">
+                    <div class="exp-tl-top">
+                        <div>
+                            <p class="exp-tl-title">Content Creator & Copywriter</p>
+                            <p class="exp-tl-company">PT. Cahaya Millenial Sejahtera</p>
+                        </div>
                     </div>
-                </div>
-                <span class="bento-card__arrow">→</span>
-            </a>
-
-            <!-- PT CMS — small -->
-            <a href="/proof/#proj-cms" class="bento-card bento-card--small glass-card visible">
-                <div class="bento-card__img">
-                    <img src="image/proj-cms-2.webp" alt="PT CMS"
-                         onerror="this.parentElement.classList.add('bento-card__img--placeholder')">
-                </div>
-                <div class="bento-card__body">
-                    <span class="bento-card__date">Jul 2024 – Jul 2025</span>
-                    <p class="bento-card__title">Content Creator & Copywriter</p>
-                    <p class="bento-card__company">PT. Cahaya Millenial Sejahtera</p>
-                    <p class="bento-card__outcome">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
-                    <div class="bento-card__tags">
+                    <p class="exp-tl-outcome">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
+                    <div class="exp-tl-tags">
                         <span class="tag">Copywriting</span>
                         <span class="tag">Photography</span>
                         <span class="tag">AI Tools</span>
                     </div>
-                </div>
-                <span class="bento-card__arrow">→</span>
-            </a>
+                </a>
+            </div>
 
-            <!-- FSJ President — small -->
-            <a href="/proof/#award-ketum" class="bento-card bento-card--small glass-card visible">
-                <div class="bento-card__img">
-                    <img src="image/award-ketum-jurnalis-3.webp" alt="Forum Studi Jurnalis"
-                         onerror="this.parentElement.classList.add('bento-card__img--placeholder')">
-                    <span class="bento-card__badge">300+ Members</span>
+            <!-- FSJ President -->
+            <div class="exp-tl-item">
+                <div class="exp-tl-left">
+                    <span class="exp-tl-date">Oct 2021 – Nov 2022</span>
+                    <div class="exp-tl-dot"></div>
                 </div>
-                <div class="bento-card__body">
-                    <span class="bento-card__date">Oct 2021 – Nov 2022</span>
-                    <p class="bento-card__title">President</p>
-                    <p class="bento-card__company">Forum Studi Jurnalis</p>
-                    <div class="bento-card__tags">
+                <a href="/proof/#award-ketum" class="exp-tl-card glass-card visible">
+                    <div class="exp-tl-top">
+                        <div>
+                            <p class="exp-tl-title">President</p>
+                            <p class="exp-tl-company">Forum Studi Jurnalis</p>
+                        </div>
+                        <span class="exp-tl-badge">300+ Members</span>
+                    </div>
+                    <div class="exp-tl-tags">
                         <span class="tag">Leadership</span>
                         <span class="tag">15+ Events</span>
                     </div>
-                </div>
-                <span class="bento-card__arrow">→</span>
-            </a>
-
-            <!-- Kesbang — small -->
-            <a href="/moments/?filter=momen" class="bento-card bento-card--small glass-card visible">
-                <div class="bento-card__img">
-                    <img src="image/exp-kesbang.webp" alt="Kesbang"
-                         onerror="this.parentElement.classList.add('bento-card__img--placeholder')">
-                </div>
-                <div class="bento-card__body">
-                    <span class="bento-card__date">Nov – Dec 2025</span>
-                    <p class="bento-card__title">Computer Operator</p>
-                    <p class="bento-card__company">Kesbang · Jakarta Pusat</p>
-                    <div class="bento-card__tags">
-                        <span class="tag">Government</span>
-                        <span class="tag">Admin</span>
-                    </div>
-                </div>
-                <span class="bento-card__arrow">→</span>
-            </a>
+                </a>
+            </div>
 
         </div>
     </section>
