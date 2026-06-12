@@ -381,15 +381,21 @@
     <!-- ── FILTER BAR ─────────────────────────────── -->
     <div class="proof-filter-bar" id="proofFilterBar" style="margin-top:72px">
         <span class="proof-filter-bar__title">Proof of Work</span>
+        <div class="proof-filter-bar__stats">
+            <span class="proof-stat"><i class="fa-solid fa-briefcase"></i> 3 Internships</span>
+            <span class="proof-stat"><i class="fa-solid fa-medal"></i> 2 National Certs</span>
+            <span class="proof-stat"><i class="fa-solid fa-trophy"></i> #5 / 926 Hackathon</span>
+            <span class="proof-stat"><i class="fa-solid fa-file-lines"></i> Published Research</span>
+        </div>
         <div class="proof-tabs" id="proofTabs">
-            <button class="proof-tab proof-tab--active" data-tab="certifications"><i class="fa-solid fa-medal"></i> Certifications</button>
+            <button class="proof-tab proof-tab--active" data-tab="projects"><i class="fa-solid fa-code"></i> Projects</button>
+            <button class="proof-tab" data-tab="certifications"><i class="fa-solid fa-medal"></i> Certifications</button>
             <button class="proof-tab" data-tab="awards"><i class="fa-solid fa-trophy"></i> Awards</button>
-            <button class="proof-tab" data-tab="projects"><i class="fa-solid fa-code"></i> Projects</button>
         </div>
     </div>
 
     <!-- ═══ CERTIFICATIONS ═══ -->
-    <section class="section proof-section" id="tab-certifications">
+    <section class="section proof-section" id="tab-certifications" style="display:none">
         <div class="proof-grid">
 
             <!-- BNSP -->
@@ -403,19 +409,22 @@
                     <img src="../image/cert-bnsp-1.webp" alt="BNSP"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">BNSP</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Aug 2023</span>
                     <h3 class="proof-card__title">Junior Web Developer</h3>
                     <p class="proof-card__issuer">BPPTIK Kominfo · Digitalent Scholarship</p>
-                    <p class="proof-card__desc">Sertifikasi profesi nasional bidang web development, diterbitkan BNSP.</p>
+                    <p class="proof-card__desc">National professional certification in web development, issued by BNSP (Indonesia's national competency certification body).</p>
                     <span class="proof-card__tag tag">National Certification</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Evermos -->
-            <div id="evermos" class="glass-card proof-card"
+            <div id="evermos" class="glass-card proof-card proof-card--featured"
                  data-title="Backend Developer Intern — Evermos"
                  data-images='["../image/cert-evermos.webp"]'
                  data-project="#proj-evermos"
@@ -426,19 +435,22 @@
                     <img src="../image/cert-evermos.webp" alt="Evermos"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">90.91 / 100</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Dec 2025</span>
                     <h3 class="proof-card__title">Backend Developer Intern</h3>
                     <p class="proof-card__issuer">Evermos × Rakamin Academy</p>
-                    <p class="proof-card__desc">Certificate of completion — marketplace REST API in Golang, clean architecture. Score: Excellent.</p>
+                    <p class="proof-card__desc">Built a production-grade marketplace REST API in Golang — 7 modules, clean architecture, JWT auth, multi-image upload, atomic transactions. Final score: <strong>90.91 / 100 (Excellent)</strong>.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Golang</span><span class="tag">Gin</span><span class="tag">MySQL</span><span class="tag">JWT</span><span class="tag">REST API</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Core Initiative -->
-            <div id="core-initiative" class="glass-card proof-card"
+            <div id="core-initiative" class="glass-card proof-card proof-card--featured"
                  data-title="Frontend Developer Intern — Core Initiative"
                  data-images='["../image/cert-coreinit.webp"]'
                  data-project="#proj-core-initiative"
@@ -449,14 +461,17 @@
                     <img src="../image/cert-coreinit.webp" alt="Core Initiative"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">87.79 / 100</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Nov 2025</span>
                     <h3 class="proof-card__title">Frontend Developer Intern</h3>
                     <p class="proof-card__issuer">Core Initiative × Rakamin Academy</p>
-                    <p class="proof-card__desc">Certificate of completion — Vue.js 2 e-commerce catalog, CI/CD deployment. Score: Excellent.</p>
+                    <p class="proof-card__desc">Delivered a pixel-perfect e-commerce catalog in Vue.js 2 — live REST API integration, 3 dynamic UI themes, Figma-to-code, deployed via GitLab CI/CD. Final score: <strong>87.79 / 100 (Excellent)</strong>.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Vue.js 2</span><span class="tag">REST API</span><span class="tag">Figma</span><span class="tag">CI/CD</span><span class="tag">Firebase</span>
+                    </div>
                 </div>
             </div>
 
@@ -469,14 +484,17 @@
                     <img src="../image/cert-huawei-1.webp" alt="Huawei HCIA"
                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">Huawei</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2025</span>
                     <h3 class="proof-card__title">HCIA Cloud Service</h3>
                     <p class="proof-card__issuer">Huawei · Digitalent Scholarship KOMDIGI</p>
-                    <p class="proof-card__desc">40-jam program cloud computing fundamentals — Huawei Cloud architecture, services, dan deployment.</p>
+                    <p class="proof-card__desc">40-hour cloud computing program — Huawei Cloud architecture, core services, and deployment fundamentals.</p>
                     <span class="proof-card__tag tag">Cloud Computing</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Huawei Cloud</span><span class="tag">Cloud Architecture</span>
+                    </div>
                 </div>
             </div>
 
@@ -489,14 +507,17 @@
                     <img src="../image/cert-pm-1.webp" alt="Google PM"
                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">Google</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2025</span>
                     <h3 class="proof-card__title">Fundamental Project Management</h3>
                     <p class="proof-card__issuer">Google · Digitalent Scholarship KOMDIGI</p>
-                    <p class="proof-card__desc">10-jam program project management fundamentals dari Google — planning, execution, dan team management.</p>
+                    <p class="proof-card__desc">10-hour Google-issued program covering project planning, execution, stakeholder communication, and team management.</p>
                     <span class="proof-card__tag tag">Project Management</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Agile</span><span class="tag">Planning</span><span class="tag">Team Management</span>
+                    </div>
                 </div>
             </div>
 
@@ -510,14 +531,17 @@
                     <img src="../image/cert-unpam-lka-1.webp" alt="LKA UNPAM"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--green">Sangat Baik</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Jan – Jul 2025</span>
                     <h3 class="proof-card__title">Data Management Intern</h3>
                     <p class="proof-card__issuer">Lembaga Kemahasiswaan & Alumni UNPAM</p>
-                    <p class="proof-card__desc">Tracer Study & Alumni. 500+ data records managed. Predikat Sangat Baik.</p>
+                    <p class="proof-card__desc">Managed 500+ student records and 1,000+ digital archive files for Tracer Study & Alumni division. Final grade: <strong>Sangat Baik (Excellent)</strong>.</p>
                     <span class="proof-card__tag tag">Internship Certificate</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Data Management</span><span class="tag">Excel</span><span class="tag">Digital Archiving</span>
+                    </div>
                 </div>
             </div>
 
@@ -531,15 +555,17 @@
                     <img src="../image/cert-azure-1.webp" alt="Azure AI"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">Microsoft</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">May 2025</span>
                     <h3 class="proof-card__title">Azure AI Fundamentals (AI-900)</h3>
                     <p class="proof-card__issuer">Microsoft · elevAIte · Merdeka Academy</p>
-                    <p class="proof-card__desc">Fundamental AI concepts on Azure: ML, cognitive services, responsible AI. Training Only — preparation course.</p>
-                    <span class="proof-card__tag tag">AI / Cloud</span>
-                    <span class="proof-card__attempt"><i class="fa-solid fa-chart-simple"></i> Exam Attempted · 686/700</span>
+                    <p class="proof-card__desc">Completed Microsoft's Azure AI training — machine learning concepts, cognitive services, and responsible AI principles.</p>
+                    <span class="proof-card__tag tag">Training Certificate</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Azure</span><span class="tag">Machine Learning</span><span class="tag">Cognitive Services</span>
+                    </div>
                 </div>
             </div>
 
@@ -552,16 +578,18 @@
                     <img src="../image/cert-ml-1.webp" alt="Machine Learning"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--green">91 hrs</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">May – Jul 2025</span>
                     <h3 class="proof-card__title">Linear Models in Machine Learning</h3>
                     <p class="proof-card__issuer">Yandex · Digitalent Scholarship KOMDIGI</p>
-                    <p class="proof-card__desc">91-jam program intensif: linear regression, classification, model evaluation.</p>
-                    <p class="proof-card__desc">Hackathon result: ranked #5 out of 926 participants.</p>
+                    <p class="proof-card__desc">91-hour intensive program: linear regression, classification, and model evaluation. Closed with an in-class hackathon — <strong>ranked #5 out of 926 participants</strong>.</p>
                     <span class="proof-card__tag tag">Machine Learning</span>
-                    <span class="proof-card__attempt"><i class="fa-solid fa-trophy"></i> Ranked #5 / 926 · Yandex Hackathon</span>
+                    <span class="proof-card__attempt"><i class="fa-solid fa-trophy"></i> #5 / 926 · Yandex Hackathon</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">scikit-learn</span>
+                    </div>
                 </div>
             </div>
 
@@ -575,14 +603,17 @@
                     <img src="../image/cert-jurnal.webp" alt="Publikasi Jurnal"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">Jurnal</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Jan 2026</span>
-                    <h3 class="proof-card__title">Publikasi Jurnal Ilmiah</h3>
-                    <p class="proof-card__issuer">Program Studi Sistem Informasi · UNPAM</p>
-                    <p class="proof-card__desc">Penerapan Metode SAW untuk sistem pendukung keputusan penerima BLT berbasis web.</p>
+                    <h3 class="proof-card__title">Academic Journal Publication</h3>
+                    <p class="proof-card__issuer">Information Systems · Universitas Pamulang</p>
+                    <p class="proof-card__desc">Published research: web-based decision support system for BLT recipient selection using the SAW (Simple Additive Weighting) method.</p>
                     <span class="proof-card__tag tag">Academic Publication</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">DSS</span><span class="tag">SAW Method</span>
+                    </div>
                 </div>
             </div>
 
@@ -595,13 +626,13 @@
                     <img src="../image/cert-ukbi.webp" alt="UKBI Madya"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">Madya</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Sep 2025</span>
-                    <h3 class="proof-card__title">UKBI — Peringkat Madya</h3>
-                    <p class="proof-card__issuer">Badan Pengembangan dan Pembinaan Bahasa · Kemdikbud</p>
-                    <p class="proof-card__desc">Sertifikasi kemahiran Bahasa Indonesia resmi. Skor 549, Peringkat Madya. Berlaku s.d. September 2027.</p>
+                    <h3 class="proof-card__title">UKBI — Madya Level</h3>
+                    <p class="proof-card__issuer">Language Development Agency · Kemdikbud</p>
+                    <p class="proof-card__desc">Official Indonesian language proficiency certification. Score: 549, Madya (Intermediate-Advanced) level. Valid until Sep 2027.</p>
                     <span class="proof-card__tag tag">Language Certification</span>
                 </div>
             </div>
@@ -611,6 +642,7 @@
 
     <!-- ═══ AWARDS ═══ -->
     <section class="section proof-section" id="tab-awards" style="display:none">
+
         <div class="proof-grid">
 
             <div id="award-foto" class="glass-card proof-card award-card"
@@ -622,13 +654,13 @@
                     <img src="../image/award-foto-1.webp" alt="Juara Fotografi"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">Juara 1</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Feb 2023</span>
-                    <h3 class="proof-card__title">Juara 1 Lomba Photography</h3>
+                    <h3 class="proof-card__title">1st Place — Photography Competition</h3>
                     <p class="proof-card__issuer">Digital Creation 2 · OPMAZ Ma'had Al-Zaytun</p>
-                    <p class="proof-card__desc">Meraih juara pertama dalam kompetisi fotografi tingkat pesantren, kategori fotografi kreatif.</p>
+                    <p class="proof-card__desc">Won first place in a creative photography competition at pesantren level — Digital Creation 2 event.</p>
                     <span class="proof-card__tag tag">Photography Competition</span>
                 </div>
             </div>
@@ -642,13 +674,13 @@
                     <img src="../image/award-ketum-jurnalis.webp" alt="Ketua Jurnalis"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">Ketua</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Oct 2021 – Nov 2022</span>
-                    <h3 class="proof-card__title">Ketua Umum Jurnalis</h3>
+                    <h3 class="proof-card__title">Chairman — Journalism Study Forum</h3>
                     <p class="proof-card__issuer">Forum Studi Jurnalis · Ma'had Al-Zaytun</p>
-                    <p class="proof-card__desc">Dilantik sebagai Ketua Umum Forum Studi Jurnalis. Memimpin 300+ anggota, mengkoordinasikan 15+ event & seminar teknis.</p>
+                    <p class="proof-card__desc">Led 300+ members as Chairman of the Journalism Study Forum. Coordinated 15+ events and technical seminars over a one-year tenure.</p>
                     <span class="proof-card__tag tag">Leadership</span>
                 </div>
             </div>
@@ -662,45 +694,26 @@
                     <img src="../image/award-event.webp" alt="DiploY NyokKerja"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">Active</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2025</span>
-                    <h3 class="proof-card__title">Peserta Aktif DiploY × NyokKerja</h3>
-                    <p class="proof-card__issuer">DiploY × NyokKerja · Event 2025</p>
-                    <p class="proof-card__desc">Penghargaan sebagai peserta aktif dalam program DiploY × NyokKerja 2025 — program pengembangan karier dan kewirausahaan untuk generasi muda.</p>
+                    <h3 class="proof-card__title">Active Participant — DiploY × NyokKerja</h3>
+                    <p class="proof-card__issuer">DiploY × NyokKerja · 2025</p>
+                    <p class="proof-card__desc">Recognized as an active participant in DiploY × NyokKerja 2025 — a career development and entrepreneurship program for young professionals.</p>
                     <span class="proof-card__tag tag">Career Development</span>
                 </div>
             </div>
 
-            <div id="award-lka" class="glass-card proof-card award-card"
-                 data-title="Magang — Lembaga Kemahasiswaan & Alumni UNPAM"
-                 data-images='["../image/award-lka.webp", "../image/award-lka-2.webp", "../image/award-lka-3.webp", "../image/award-lka-4.webp"]'
-                 data-link="https://www.instagram.com/kemahasiswaanunpam.official/"
-                 data-link-label="Instagram LKA →">
-                <div class="proof-card__img">
-                    <img src="../image/award-lka.webp" alt="Sertifikat Magang LKA"
-                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
-                    <span class="proof-card__badge proof-card__badge--green">Sangat Baik</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
-                </div>
-                <div class="proof-card__body">
-                    <span class="proof-card__date">Jan – Jul 2025</span>
-                    <h3 class="proof-card__title">Magang LKA UNPAM</h3>
-                    <p class="proof-card__issuer">Lembaga Kemahasiswaan & Alumni · Universitas Pamulang</p>
-                    <p class="proof-card__desc">Penyerahan Sertifikat penyelesaian magang sebagai Data Management Specialist. Predikat Sangat Baik atas pengelolaan 500+ data mahasiswa dan arsip digital 1.000+ file.</p>
-                    <span class="proof-card__tag tag">Internship Certificate</span>
-                </div>
-            </div>
 
         </div>
     </section>
 
     <!-- ═══ PROJECTS ═══ -->
-    <section class="section proof-section" id="tab-projects" style="display:none">
+    <section class="section proof-section" id="tab-projects">
         <div class="proof-grid">
 
-            <div id="proj-evermos" class="glass-card proof-card"
+            <div id="proj-evermos" class="glass-card proof-card proof-card--featured"
                  data-title="Marketplace REST API — Evermos"
                  data-images='["../image/proj-evermos-1.webp","../image/proj-evermos-2.webp","../image/proj-evermos-3.webp","../image/proj-evermos-4.webp","../image/proj-evermos-5.webp","../image/proj-evermos-6.webp","../image/proj-evermos-7.webp","../image/proj-evermos-8.webp","../image/proj-evermos-9.webp","../image/proj-evermos-10.webp","../image/proj-evermos-11.webp","../image/proj-evermos-12.webp","../image/proj-evermos-13.webp","../image/proj-evermos-14.webp"]'
                  data-github="https://github.com/fakrl/evermos-backend"
@@ -711,7 +724,7 @@
                     <img src="../image/proj-evermos-1.webp" alt="Evermos API"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">Internship</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Dec 2025</span>
@@ -725,7 +738,7 @@
                 </div>
             </div>
 
-            <div id="proj-core-initiative" class="glass-card proof-card"
+            <div id="proj-core-initiative" class="glass-card proof-card proof-card--featured"
                  data-title="E-Commerce Catalog — Core Initiative"
                  data-images='["../image/proj-coreinitiative-1.webp","../image/proj-coreinitiative-2.webp","../image/proj-coreinitiative-3.webp","../image/proj-coreinitiative-4.webp","../image/proj-coreinitiative-5.webp","../image/proj-coreinitiative-6.webp","../image/proj-coreinitiative-7.webp","../image/proj-coreinitiative-8.webp","../image/proj-coreinitiative-9.webp","../image/proj-coreinitiative-10.webp","../image/proj-coreinitiative-11.webp"]'
                  data-github="https://github.com/fakrl/ecommerce-catalog"
@@ -736,7 +749,7 @@
                     <img src="../image/proj-coreinitiative-1.webp" alt="E-Commerce Catalog"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--purple">Internship</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Oct – Nov 2025</span>
@@ -759,17 +772,18 @@
                     <img src="../image/proj-cms-1.webp" alt="PT CMS Social Media"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--gold">Marketing</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">Jul 2024 – Jul 2025</span>
-                    <h3 class="proof-card__title">Social Media Management</h3>
+                    <h3 class="proof-card__title">Brand Social Media Presence</h3>
                     <p class="proof-card__issuer">PT. Cahaya Millenial Sejahtera</p>
-                    <p class="proof-card__desc">Pengelolaan konten media sosial menggunakan AI dan prompt engineering untuk copywriting otomatis. Menjaga konsistensi brand di berbagai platform digital.</p>
+                    <p class="proof-card__desc">Part of a 3-person team building and maintaining the company's social media presence from scratch — consistent posting cadence, brand voice, and AI-assisted copywriting via prompt engineering.</p>
                     <div class="skill-tags" style="margin-top:0.8rem">
-                        <span class="tag">Content Creation</span>
+                        <span class="tag">Content Strategy</span>
                         <span class="tag">Prompt Engineering</span>
                         <span class="tag">AI Tools</span>
+                        <span class="tag">Brand Identity</span>
                     </div>
                 </div>
             </div>
@@ -783,13 +797,13 @@
                     <img src="../image/proj-ypkb-1.webp" alt="YPKB WordPress"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
                     <span class="proof-card__badge proof-card__badge--blue">Volunteer</span>
-                    <span class="proof-card__click-hint">Click to preview</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                 </div>
                 <div class="proof-card__body">
                     <span class="proof-card__date">2023 – 2024</span>
                     <h3 class="proof-card__title">WordPress Web Developer</h3>
                     <p class="proof-card__issuer">Yayasan Peduli Kesejahteraan Bersama (YPKB)</p>
-                    <p class="proof-card__desc">Volunteer sebagai WordPress developer untuk website yayasan. Juga tampil sebagai talent di beberapa konten Instagram @ypkb_indonesia.</p>
+                    <p class="proof-card__desc">Volunteer developer building and maintaining the foundation's website on WordPress. Also appeared as on-camera talent in several Instagram content pieces for @ypkb_indonesia.</p>
                     <div class="skill-tags" style="margin-top:0.8rem">
                         <span class="tag">WordPress</span>
                         <span class="tag">Web Development</span>

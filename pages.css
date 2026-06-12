@@ -25,6 +25,37 @@
 body.light .proof-filter-bar__title { color: var(--text-primary-light); }
 body.dark  .proof-filter-bar__title { color: var(--text-primary-dark); }
 
+.proof-filter-bar__stats {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.proof-stat {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.85rem;
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.2px;
+}
+
+body.light .proof-stat {
+    background: rgba(37,99,235,0.08);
+    color: #2563eb;
+    border: 1px solid rgba(37,99,235,0.18);
+}
+body.dark .proof-stat {
+    background: rgba(96,165,250,0.10);
+    color: #60a5fa;
+    border: 1px solid rgba(96,165,250,0.20);
+}
+
 /* ==========================================
    TAB NAVIGATION
    ========================================== */
@@ -90,8 +121,8 @@ body.dark .proof-tab:hover {
    ========================================== */
 .proof-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -108,10 +139,37 @@ body.dark .proof-tab:hover {
 body.light .proof-card:hover { box-shadow: var(--shadow-hover-light); }
 body.dark  .proof-card:hover { box-shadow: var(--shadow-hover-dark); }
 
+/* Featured card — spans full width, horizontal layout */
+.proof-card--featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    position: relative;
+}
+.proof-card--featured::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    border-radius: 12px 12px 0 0;
+}
+.proof-card--featured .proof-card__img {
+    height: 100%;
+    min-height: 240px;
+}
+.proof-card--featured .proof-card__body {
+    padding: 2rem 2.2rem;
+    justify-content: center;
+}
+.proof-card--featured .proof-card__title {
+    font-size: 1.15rem;
+}
+
 /* Card image */
 .proof-card__img {
     position: relative;
-    height: 190px;
+    height: 210px;
     overflow: hidden;
     transition: background var(--transition-theme);
 }
@@ -141,23 +199,25 @@ body.dark  .proof-card__img { background: rgba(255, 255, 255, 0.04); }
     opacity: 0.2;
 }
 
-/* Click hint */
+/* Click hint — icon in bottom-right corner */
 .proof-card__click-hint {
     position: absolute;
-    top: 8px; left: 8px;
-    font-size: 0.62rem;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 8px;
+    bottom: 10px; right: 10px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
     opacity: 0;
-    transition: opacity var(--transition-fast);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
     pointer-events: none;
     background: rgba(0, 0, 0, 0.55);
     color: white;
-    letter-spacing: 0.3px;
 }
 
-.proof-card:hover .proof-card__click-hint { opacity: 1; }
+.proof-card:hover .proof-card__click-hint {
+    opacity: 1;
+    transform: scale(1.1);
+}
 
 /* Badge — glass monochromatic */
 .proof-card__badge {
@@ -1032,6 +1092,14 @@ body.dark .skeleton-avatar {
     .proof-grid,
     .photo-grid,
     .moments-grid { grid-template-columns: 1fr; }
+
+    .proof-card--featured {
+        grid-template-columns: 1fr;
+    }
+    .proof-card--featured .proof-card__img {
+        height: 210px;
+        min-height: unset;
+    }
     .lightbox__nav--prev { left: 0.5rem; }
     .lightbox__nav--next { right: 0.5rem; }
     .cert-modal__img { max-height: 50vh; }
