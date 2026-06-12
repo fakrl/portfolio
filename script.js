@@ -13,7 +13,9 @@ function setTheme(theme) {
 
 function updateThemeButton(theme) {
     document.querySelectorAll('.theme-toggle').forEach(btn => {
-        btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        btn.innerHTML = theme === 'dark'
+            ? '<i class="fa-solid fa-sun"></i>'
+            : '<i class="fa-solid fa-moon"></i>';
     });
 }
 
