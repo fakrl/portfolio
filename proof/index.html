@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../components.css">
     <link rel="stylesheet" href="../animations.css">
     <link rel="stylesheet" href="../pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="description" content="Certifications, awards, and projects by Fakhrul Mukhlisin.">
     <meta property="og:title" content="Proof of Work — Fakhrul Mukhlisin">
     <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
@@ -338,7 +339,6 @@
 <body class="light">
 
 <!-- Preloader -->
-<div id="preloader"><span id="preloader-greeting">Proof</span></div>
 
 <!-- Floating Pill -->
 <div class="floating-pill" id="floatingPill">
@@ -374,7 +374,7 @@
     </ul>
 </nav>
 
-<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
 
 <main>
 
@@ -382,9 +382,9 @@
     <div class="proof-filter-bar" id="proofFilterBar" style="margin-top:72px">
         <span class="proof-filter-bar__title">Proof of Work</span>
         <div class="proof-tabs" id="proofTabs">
-            <button class="proof-tab proof-tab--active" data-tab="certifications">🏅 Certifications</button>
-            <button class="proof-tab" data-tab="awards">🏆 Awards</button>
-            <button class="proof-tab" data-tab="projects">💻 Projects</button>
+            <button class="proof-tab proof-tab--active" data-tab="certifications"><i class="fa-solid fa-medal"></i> Certifications</button>
+            <button class="proof-tab" data-tab="awards"><i class="fa-solid fa-trophy"></i> Awards</button>
+            <button class="proof-tab" data-tab="projects"><i class="fa-solid fa-code"></i> Projects</button>
         </div>
     </div>
 
@@ -421,7 +421,7 @@
                  data-project="#proj-evermos"
                  data-project-label="See Project →"
                  data-youtube="https://youtu.be/blat9DpMBJw"
-                 data-youtube-label="Watch Presentation 🎬">
+                 data-youtube-label="Watch Presentation">
                 <div class="proof-card__img">
                     <img src="../image/cert-evermos.webp" alt="Evermos"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -444,7 +444,7 @@
                  data-project="#proj-core-initiative"
                  data-project-label="See Project →"
                  data-youtube="https://youtu.be/1DamWnPyG4g"
-                 data-youtube-label="Watch Presentation 🎬">
+                 data-youtube-label="Watch Presentation">
                 <div class="proof-card__img">
                     <img src="../image/cert-coreinit.webp" alt="Core Initiative"
                          onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
@@ -539,7 +539,7 @@
                     <p class="proof-card__issuer">Microsoft · elevAIte · Merdeka Academy</p>
                     <p class="proof-card__desc">Fundamental AI concepts on Azure: ML, cognitive services, responsible AI. Training Only — preparation course.</p>
                     <span class="proof-card__tag tag">AI / Cloud</span>
-                    <span class="proof-card__attempt">📊 Exam Attempted · 686/700</span>
+                    <span class="proof-card__attempt"><i class="fa-solid fa-chart-simple"></i> Exam Attempted · 686/700</span>
                 </div>
             </div>
 
@@ -561,7 +561,7 @@
                     <p class="proof-card__desc">91-jam program intensif: linear regression, classification, model evaluation.</p>
                     <p class="proof-card__desc">Hackathon result: ranked #5 out of 926 participants.</p>
                     <span class="proof-card__tag tag">Machine Learning</span>
-                    <span class="proof-card__attempt">🏆 Ranked #5 / 926 · Yandex Hackathon</span>
+                    <span class="proof-card__attempt"><i class="fa-solid fa-trophy"></i> Ranked #5 / 926 · Yandex Hackathon</span>
                 </div>
             </div>
 
@@ -812,7 +812,7 @@
             <div class="cert-modal__viewer">
                 <img class="cert-modal__img" id="certModalImg" src="" alt="">
                 <div class="cert-modal__placeholder" id="certModalPlaceholder" style="display:none">
-                    <span class="cert-modal__placeholder-icon">📄</span>
+                    <span class="cert-modal__placeholder-icon"><i class="fa-regular fa-file-image"></i></span>
                     <p class="cert-modal__placeholder-text">Image akan muncul setelah foto diupload ke folder /image</p>
                 </div>
                 <button class="cert-modal__nav cert-modal__nav--prev" id="certModalPrev">‹</button>
@@ -832,28 +832,16 @@
 <script src="../script.js"></script>
 <script src="../proof.js"></script>
 <script>
-// ── Preloader ─────────────────────────────────────────
-(function() {
-    const words = ["Proof", "Hello", "Receipts", "Evidence", "Done ✓"];
-    const el = document.getElementById('preloader-greeting');
-    const pre = document.getElementById('preloader');
-    if (!el || !pre) return;
-    let i = 0;
-    el.textContent = words[0];
-    const t = setInterval(() => {
-        i++;
-        if (i < words.length) {
-            el.style.animation = 'none';
-            void el.offsetWidth;
-            el.style.animation = 'greetPulse 0.25s ease';
-            el.textContent = words[i];
-        } else {
-            clearInterval(t);
-            setTimeout(() => pre.classList.add('hide-preloader'), 300);
-        }
-    }, 280);
-})();
-
+// Skeleton shimmer on proof card images until loaded
+document.querySelectorAll('.proof-card__img img').forEach(img => {
+    const wrap = img.parentElement;
+    wrap.classList.add('skeleton');
+    const done = () => wrap.classList.remove('skeleton');
+    if (img.complete) done();
+    else { img.addEventListener('load', done); img.addEventListener('error', done); }
+});
+</script>
+<script>
 // ── Floating pill ─────────────────────────────────────
 (function() {
     const pill = document.getElementById('floatingPill');
@@ -1039,7 +1027,7 @@
         if (credentialId) {
             const btn = document.createElement('button');
             btn.className = 'cert-modal__copy-id';
-            btn.innerHTML = `📋 <span>Copy Credential ID</span>`;
+            btn.innerHTML = `<i class="fa-regular fa-copy"></i> <span>Copy Credential ID</span>`;
             btn.addEventListener('click', () => {
                 navigator.clipboard.writeText(credentialId).then(() => {
                     btn.classList.add('copied');

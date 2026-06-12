@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../animations.css">
     <link rel="stylesheet" href="../pages.css">
     <link rel="stylesheet" href="../forms.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="description" content="Behind the scenes moments and feedback for Fakhrul Mukhlisin.">
     <meta property="og:title" content="Moments — Fakhrul Mukhlisin">
     <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
@@ -59,8 +60,6 @@
 </head>
 <body class="light">
 
-<!-- Preloader -->
-<div id="preloader"><span id="preloader-greeting">Moments</span></div>
 
 <!-- Floating Pill -->
 <div class="floating-pill" id="floatingPill">
@@ -96,7 +95,7 @@
     </ul>
 </nav>
 
-<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme">🌙</button>
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
 
 <main>
     <!-- ── GALLERY ────────────────────────────────── -->
@@ -104,9 +103,9 @@
         <h2 class="section-title">Gallery</h2>
         <div class="moments-filters" id="momentsFilters">
             <button class="moments-filter moments-filter--active" data-filter="all">All</button>
-            <button class="moments-filter" data-filter="momen">🤝 Momen</button>
-            <button class="moments-filter" data-filter="photography">📷 Photography</button>
-            <button class="moments-filter" data-filter="personal">🙋 Personal</button>
+            <button class="moments-filter" data-filter="momen"><i class="fa-solid fa-handshake"></i> Momen</button>
+            <button class="moments-filter" data-filter="photography"><i class="fa-solid fa-camera"></i> Photography</button>
+            <button class="moments-filter" data-filter="personal"><i class="fa-solid fa-user"></i> Personal</button>
         </div>
         
         <div class="moments-grid" id="momentsGrid">            
@@ -120,17 +119,17 @@
         <h2 class="section-title">Leave a Feedback</h2>
         <div class="feedback-wrapper">
             <div class="glass-card feedback-form-card">
-                <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly! 👇</p>
+                <p class="feedback-desc">Got something to say? Drop a message — it shows up instantly.</p>
                 <div class="feedback-form">
                     <input type="text" id="feedbackName" placeholder="Your name" class="feedback-input" maxlength="50"/>
                     <input type="text" id="feedbackFrom" placeholder="from where you know this guy? " class="feedback-input" maxlength="80"/>
                     <textarea id="feedbackMessage" placeholder="Your message..." class="feedback-input feedback-textarea" maxlength="300" rows="3"></textarea>
-                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">Send Message ✉️</button>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
                 </div>
             </div>
             <div id="feedbackList" class="feedback-list">
                 <div class="feedback-empty" id="feedbackEmpty">
-                    <p>No feedback yet. Be the first! 🚀</p>
+                    <p>No feedback yet. Be the first!</p>
                 </div>
             </div>
         </div>
@@ -173,7 +172,7 @@
         gap: 1rem;
     ">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h3 style="color:#2563eb; margin:0;">📸 Contribute a Moment</h3>
+            <h3 style="color:#2563eb; margin:0;"><i class="fa-solid fa-camera-retro"></i> Contribute a Moment</h3>
             <button id="contributeClose" style="background:none;border:none;font-size:1.3rem;cursor:pointer;">✕</button>
         </div>
 
@@ -188,12 +187,12 @@
             <input type="text" id="contribCaption" placeholder="Caption (optional)"
                    class="feedback-input" maxlength="100"/>
             <select id="contribCategory" class="feedback-input">
-                <option value="momen">🤝 Momen</option>
-                <option value="photography">📷 Photography</option>
-                <option value="personal">🙋 Personal</option>
+                <option value="momen">Momen</option>
+                <option value="photography">Photography</option>
+                <option value="personal">Personal</option>
             </select>
             <input type="file" id="contribFile" accept="image/*" class="feedback-input"/>
-            <button id="contribSubmit" class="btn btn-primary">Upload 📸</button>
+            <button id="contribSubmit" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Upload</button>
             <p id="contribStatus" style="font-size:0.82rem;text-align:center;opacity:0.6"></p>
         </div>
     </div>
@@ -202,30 +201,6 @@
 
 <script src="../script.js"></script>
 <script type="module" src="../moments.js"></script>
-
-<!-- Preloader -->
-<script>
-(function() {
-    const words = ["Moments", "Hello", "Memories", "Stories", "Here 📸"];
-    const el = document.getElementById('preloader-greeting');
-    const pre = document.getElementById('preloader');
-    if (!el || !pre) return;
-    let i = 0;
-    el.textContent = words[0];
-    const t = setInterval(() => {
-        i++;
-        if (i < words.length) {
-            el.style.animation = 'none';
-            void el.offsetWidth;
-            el.style.animation = 'greetPulse 0.25s ease';
-            el.textContent = words[i];
-        } else {
-            clearInterval(t);
-            setTimeout(() => pre.classList.add('hide-preloader'), 300);
-        }
-    }, 280);
-})();
-</script>
 
 <!-- Floating pill -->
 <script>

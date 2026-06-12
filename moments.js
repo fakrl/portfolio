@@ -44,7 +44,7 @@ function formatTime(ts) {
 }
 
 function getCategoryLabel(cat) {
-    const map = { momen:'🤝 Momen', photography:'📷 Photography', personal:'🙋 Personal' };
+    const map = { momen:'Momen', photography:'Photography', personal:'Personal' };
     return map[cat] || cat;
 }
 
@@ -127,10 +127,27 @@ function applyFilter(filter) {
     renderNextPage();
 }
 
+// ── Skeleton cards ────────────────────────
+function renderSkeletons(grid, n = 6) {
+    grid.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+        const el = document.createElement('div');
+        el.className = 'moment-item skeleton';
+        el.style.padding = '0';
+        el.innerHTML = `
+            <div class="skeleton-img"></div>
+            <div style="padding:0.75rem 1rem 1rem">
+                <div class="skeleton-line skeleton-line--medium"></div>
+                <div class="skeleton-line skeleton-line--short"></div>
+            </div>`;
+        grid.appendChild(el);
+    }
+}
+
 // ── Load photos from Firebase ─────────────
 window.addEventListener('DOMContentLoaded', async () => {
     const grid = document.getElementById('momentsGrid');
-    grid.innerHTML = '<p style="text-align:center;opacity:0.5;padding:2rem">Loading photos...</p>';
+    renderSkeletons(grid);
 
     try {
         const snapshot = await get(photosRef);
@@ -219,7 +236,7 @@ onValue(commentsRef, (snapshot) => {
                 <span class="feedback-avatar">${escapeHtml(item.nama.charAt(0).toUpperCase())}</span>
                 <div class="feedback-card-meta">
                     <strong class="feedback-card-name">${escapeHtml(item.nama)}</strong>
-                    <span class="feedback-card-from">📍 ${escapeHtml(item.dari || "")}</span>
+                    <span class="feedback-card-from"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(item.dari || "")}</span>
                     <span class="feedback-card-time">${formatTime(item.waktu)}</span>
                 </div>
             </div>
@@ -251,7 +268,7 @@ document.getElementById("feedbackSubmit").addEventListener("click", async () => 
     } catch(err) {
         alert("Gagal kirim, coba lagi ya!"); console.error(err);
     } finally {
-        btn.textContent = "Send Message ✉️"; btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message'; btn.disabled = false;
     }
 });
 
@@ -343,15 +360,15 @@ document.getElementById('contribSubmit').addEventListener('click', async () => {
             filename: file.name
         });
 
-        status.textContent = '✅ Uploaded! Refresh to see your photo.';
+        status.textContent = 'Uploaded! Refresh to see your photo.';
         document.getElementById('contribFile').value = '';
         document.getElementById('contribCaption').value = '';
 
     } catch (err) {
         console.error(err);
-        status.textContent = '❌ Failed. Try again.';
+        status.textContent = 'Failed. Try again.';
     } finally {
         btn.disabled = false;
-        btn.textContent = 'Upload 📸';
+        btn.innerHTML = '<i class="fa-solid fa-upload"></i> Upload';
     }
 });
