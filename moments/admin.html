@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caption Admin — Moments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f0f0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        #auth-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            gap: 1rem;
+        }
+
+        #auth-screen h2 { font-size: 1.4rem; color: #fff; }
+        #auth-screen p  { font-size: 0.85rem; color: #888; }
+
+        input[type="password"], input[type="text"], textarea {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #e0e0e0;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+        }
+        input[type="password"]:focus, input[type="text"]:focus, textarea:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        button:hover { background: #1d4ed8; }
+        button.secondary {
+            background: rgba(255,255,255,0.08);
+            color: #aaa;
+        }
+        button.secondary:hover { background: rgba(255,255,255,0.14); }
+
+        #main-screen { display: none; }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15,15,15,0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        header h1 { font-size: 1rem; color: #fff; }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .progress-bar {
+            width: 120px;
+            height: 6px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        #photo-list {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .photo-item {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .photo-item.has-caption { border-color: rgba(37,99,235,0.4); }
+        .photo-item.saving { border-color: rgba(250,204,21,0.4); }
+        .photo-item.saved  { border-color: rgba(34,197,94,0.4); }
+
+        .photo-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .photo-body {
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .photo-meta {
+            font-size: 0.72rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .photo-category {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            color: #999;
+        }
+
+        .caption-input {
+            width: 100%;
+            resize: none;
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            min-height: 60px;
+        }
+
+        .caption-status {
+            font-size: 0.7rem;
+            color: #666;
+            height: 14px;
+            transition: color 0.2s;
+        }
+        .caption-status.saving { color: #f59e0b; }
+        .caption-status.saved  { color: #22c55e; }
+
+        .toolbar {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        #filter-bar {
+            padding: 1rem 1.5rem 0;
+            display: flex;
+            gap: 0.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background: rgba(255,255,255,0.06);
+            color: #aaa;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.8rem;
+        }
+        .filter-btn.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+        .filter-btn:hover:not(.active) { background: rgba(255,255,255,0.1); }
+
+        #empty-state {
+            text-align: center;
+            padding: 4rem;
+            color: #555;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .loading-spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            color: #555;
+            gap: 0.75rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner-icon { animation: spin 1s linear infinite; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+<!-- Auth -->
+<div id="auth-screen">
+    <h2><i class="fa-solid fa-lock" style="color:#2563eb"></i> Caption Admin</h2>
+    <p>Enter password to manage photo captions</p>
+    <input type="password" id="auth-input" placeholder="Password" style="width:220px" />
+    <button id="auth-btn">Unlock</button>
+    <p id="auth-error" style="color:#ef4444;font-size:0.8rem;display:none">Wrong password</p>
+</div>
+
+<!-- Main -->
+<div id="main-screen">
+    <header>
+        <h1><i class="fa-solid fa-pen-to-square" style="color:#2563eb;margin-right:0.5rem"></i>Caption Admin</h1>
+        <div class="header-meta">
+            <span id="caption-count">0 / 0 captioned</span>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+            <button class="secondary" onclick="location.href='/moments/'">← Back</button>
+        </div>
+    </header>
+
+    <div id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="no-caption">No Caption</button>
+        <button class="filter-btn" data-filter="momen">Momen</button>
+        <button class="filter-btn" data-filter="photography">Photography</button>
+        <button class="filter-btn" data-filter="personal">Personal</button>
+    </div>
+
+    <div id="photo-list">
+        <div class="loading-spinner">
+            <i class="fa-solid fa-circle-notch spinner-icon"></i>
+            Loading photos from Firebase…
+        </div>
+    </div>
+    <p id="empty-state">No photos match this filter.</p>
+</div>
+
+<script type="module">
+import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const PASSWORD = 'Oktober13';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDhJLaWGZs1YILiMaNIDQ3mapnBUoH9R6s",
+    authDomain: "fakrul-feeeb.firebaseapp.com",
+    databaseURL: "https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "fakrul-feeeb",
+    storageBucket: "fakrul-feeeb.firebasestorage.app",
+    messagingSenderId: "767578062305",
+    appId: "1:767578062305:web:3cdf7bd8678923bb3e26a0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+
+// ── Auth ──────────────────────────────────
+document.getElementById('auth-btn').addEventListener('click', tryAuth);
+document.getElementById('auth-input').addEventListener('keydown', e => { if (e.key === 'Enter') tryAuth(); });
+
+function tryAuth() {
+    if (document.getElementById('auth-input').value === PASSWORD) {
+        document.getElementById('auth-screen').style.display = 'none';
+        document.getElementById('main-screen').style.display = 'block';
+        loadPhotos();
+    } else {
+        document.getElementById('auth-error').style.display = 'block';
+    }
+}
+
+// ── State ─────────────────────────────────
+let allPhotos  = [];
+let activeFilter = 'all';
+
+// ── Load ──────────────────────────────────
+async function loadPhotos() {
+    const snapshot = await get(ref(db, 'photos'));
+    const data = snapshot.val();
+    if (!data) {
+        document.getElementById('photo-list').innerHTML = '';
+        document.getElementById('empty-state').style.display = 'block';
+        return;
+    }
+    allPhotos = Object.entries(data).map(([key, val]) => ({ key, ...val }));
+    allPhotos.sort((a, b) => (a.uploadedAt || 0) - (b.uploadedAt || 0));
+    render();
+}
+
+// ── Render ────────────────────────────────
+function render() {
+    const list = document.getElementById('photo-list');
+    const empty = document.getElementById('empty-state');
+
+    const filtered = allPhotos.filter(p => {
+        if (activeFilter === 'all') return true;
+        if (activeFilter === 'no-caption') return !p.caption || p.caption.trim() === '';
+        return (p.categories || []).includes(activeFilter);
+    });
+
+    if (filtered.length === 0) {
+        list.innerHTML = '';
+        empty.style.display = 'block';
+    } else {
+        empty.style.display = 'none';
+        list.innerHTML = '';
+        filtered.forEach(photo => list.appendChild(createCard(photo)));
+    }
+
+    updateProgress();
+}
+
+function createCard(photo) {
+    const div = document.createElement('div');
+    div.className = 'photo-item' + (photo.caption ? ' has-caption' : '');
+    div.dataset.key = photo.key;
+
+    const cat = (photo.categories || ['—'])[0];
+    const date = photo.uploadedAt
+        ? new Date(photo.uploadedAt).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' })
+        : '—';
+
+    div.innerHTML = `
+        <img src="${photo.url}" alt="" loading="lazy" onerror="this.style.opacity=0.2">
+        <div class="photo-body">
+            <div class="photo-meta">
+                <span>${date}</span>
+                <span class="photo-category">${cat}</span>
+            </div>
+            <textarea class="caption-input" placeholder="Add a caption… (Enter to save, Shift+Enter for newline)"
+                rows="2">${photo.caption || ''}</textarea>
+            <span class="caption-status"></span>
+        </div>`;
+
+    const textarea = div.querySelector('.caption-input');
+    const status   = div.querySelector('.caption-status');
+    let saveTimer;
+
+    textarea.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            saveCaption(photo.key, textarea.value.trim(), div, status);
+            // Move focus to next card's textarea
+            const cards = [...document.querySelectorAll('.photo-item')];
+            const idx   = cards.indexOf(div);
+            if (idx < cards.length - 1) {
+                const next = cards[idx + 1].querySelector('.caption-input');
+                if (next) { next.focus(); next.select(); }
+            }
+        }
+    });
+
+    textarea.addEventListener('input', () => {
+        clearTimeout(saveTimer);
+        status.textContent = 'Typing…';
+        status.className = 'caption-status';
+        saveTimer = setTimeout(() => {
+            saveCaption(photo.key, textarea.value.trim(), div, status);
+        }, 1200);
+    });
+
+    return div;
+}
+
+async function saveCaption(key, caption, card, status) {
+    card.className = 'photo-item saving';
+    status.textContent = 'Saving…';
+    status.className = 'caption-status saving';
+    try {
+        await update(ref(db, `photos/${key}`), { caption });
+        // Update local state
+        const p = allPhotos.find(x => x.key === key);
+        if (p) p.caption = caption;
+        card.className = 'photo-item ' + (caption ? 'saved has-caption' : 'saved');
+        status.textContent = caption ? 'Saved ✓' : 'Cleared';
+        status.className = 'caption-status saved';
+        updateProgress();
+        setTimeout(() => {
+            status.textContent = '';
+            status.className = 'caption-status';
+        }, 2000);
+    } catch (err) {
+        card.className = 'photo-item';
+        status.textContent = 'Error — try again';
+        status.className = 'caption-status';
+        console.error(err);
+    }
+}
+
+function updateProgress() {
+    const total      = allPhotos.length;
+    const captioned  = allPhotos.filter(p => p.caption && p.caption.trim()).length;
+    const pct        = total ? Math.round(captioned / total * 100) : 0;
+    document.getElementById('caption-count').textContent = `${captioned} / ${total} captioned`;
+    document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+// ── Filters ───────────────────────────────
+document.getElementById('filter-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    render();
+});
+</script>
+</body>
+</html>
