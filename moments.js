@@ -53,14 +53,15 @@ function createMomentItem(photo) {
     const item = document.createElement('div');
     item.className = 'moment-item glass-card visible'; // tambahin visible di sini
     item.dataset.category = photo.categories[0];
+    const cap = photo.caption && photo.caption !== '— Caption —' ? escapeHtml(photo.caption) : '';
     item.innerHTML = `
         <img src="${photo.url}"
-             alt="${escapeHtml(photo.caption)}"
+             alt="${cap}"
              loading="lazy"
              onerror="this.parentElement.classList.add('moment-item--placeholder')">
         <div class="moment-overlay">
             <span class="moment-tag">${getCategoryLabel(photo.categories[0])}</span>
-            <p class="moment-caption">${escapeHtml(photo.caption)}</p>
+            ${cap ? `<p class="moment-caption">${cap}</p>` : ''}
         </div>
     `;
     return item;
@@ -186,7 +187,8 @@ const lightboxCap = document.getElementById('lightboxCaption');
 function openLightbox(index) {
     currentMoment = index;
     lightboxImg.src = momentItems[index].querySelector('img').src;
-    lightboxCap.textContent = momentItems[index].querySelector('.moment-caption')?.textContent || '';
+    const rawCap = momentItems[index].querySelector('.moment-caption')?.textContent || '';
+    lightboxCap.textContent = rawCap !== '— Caption —' ? rawCap : '';
     lightbox.classList.add('lightbox--open');
     document.body.style.overflow = 'hidden';
 }
@@ -327,7 +329,7 @@ document.getElementById('contributeAuthBtn').addEventListener('click', () => {
 
 document.getElementById('contribSubmit').addEventListener('click', async () => {
     const file     = document.getElementById('contribFile').files[0];
-    const caption  = document.getElementById('contribCaption').value.trim() || '— Caption —';
+    const caption  = document.getElementById('contribCaption').value.trim() || '';
     const category = document.getElementById('contribCategory').value;
     const status   = document.getElementById('contribStatus');
     const btn      = document.getElementById('contribSubmit');
