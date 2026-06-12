@@ -25,36 +25,6 @@
 body.light .proof-filter-bar__title { color: var(--text-primary-light); }
 body.dark  .proof-filter-bar__title { color: var(--text-primary-dark); }
 
-.proof-filter-bar__stats {
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 0.6rem;
-    margin-bottom: 0.4rem;
-}
-
-.proof-stat {
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.25rem 0.85rem;
-    border-radius: var(--radius-pill);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    letter-spacing: 0.2px;
-}
-
-body.light .proof-stat {
-    background: rgba(37,99,235,0.08);
-    color: #2563eb;
-    border: 1px solid rgba(37,99,235,0.18);
-}
-body.dark .proof-stat {
-    background: rgba(96,165,250,0.10);
-    color: #60a5fa;
-    border: 1px solid rgba(96,165,250,0.20);
-}
 
 /* ==========================================
    TAB NAVIGATION
