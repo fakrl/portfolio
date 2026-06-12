@@ -381,12 +381,6 @@
     <!-- ── FILTER BAR ─────────────────────────────── -->
     <div class="proof-filter-bar" id="proofFilterBar" style="margin-top:72px">
         <span class="proof-filter-bar__title">Proof of Work</span>
-        <div class="proof-filter-bar__stats">
-            <span class="proof-stat"><i class="fa-solid fa-briefcase"></i> 3 Internships</span>
-            <span class="proof-stat"><i class="fa-solid fa-medal"></i> 2 National Certs</span>
-            <span class="proof-stat"><i class="fa-solid fa-trophy"></i> #5 / 926 Hackathon</span>
-            <span class="proof-stat"><i class="fa-solid fa-file-lines"></i> Published Research</span>
-        </div>
         <div class="proof-tabs" id="proofTabs">
             <button class="proof-tab proof-tab--active" data-tab="projects"><i class="fa-solid fa-code"></i> Projects</button>
             <button class="proof-tab" data-tab="certifications"><i class="fa-solid fa-medal"></i> Certifications</button>
@@ -812,6 +806,26 @@
                 </div>
             </div>
 
+            <div id="award-lka" class="glass-card proof-card award-card"
+                 data-title="Internship Completion — LKA UNPAM"
+                 data-images='["../image/award-lka.webp", "../image/award-lka-2.webp", "../image/award-lka-3.webp", "../image/award-lka-4.webp"]'
+                 data-link="https://www.instagram.com/kemahasiswaanunpam.official/"
+                 data-link-label="Instagram LKA →">
+                <div class="proof-card__img">
+                    <img src="../image/award-lka.webp" alt="Sertifikat Magang LKA"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--green">Sangat Baik</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jan – Jul 2025</span>
+                    <h3 class="proof-card__title">Internship Completion — LKA UNPAM</h3>
+                    <p class="proof-card__issuer">Lembaga Kemahasiswaan & Alumni · Universitas Pamulang</p>
+                    <p class="proof-card__desc">Certificate handover ceremony — completing a 6-month Data Management internship. Managed 500+ student records and 1,000+ digital archive files. Grade: <strong>Sangat Baik (Excellent)</strong>.</p>
+                    <span class="proof-card__tag tag">Internship</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1088,6 +1102,19 @@ document.querySelectorAll('.proof-card__img img').forEach(img => {
         if (e.key === 'ArrowLeft' && current > 0) showImg(current - 1);
         if (e.key === 'ArrowRight' && current < images.length - 1) showImg(current + 1);
     });
+
+    // Touch swipe for mobile
+    let touchStartX = 0;
+    const inner = document.getElementById('certModalInner');
+    inner.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    inner.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0 && current < images.length - 1) showImg(current + 1);
+        if (dx > 0 && current > 0) showImg(current - 1);
+    }, { passive: true });
 })();
 </script>
 </body>
