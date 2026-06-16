@@ -199,7 +199,12 @@ body.light .gb-replies { border-color: rgba(0,0,0,0.08); }
 body.dark  .gb-replies { border-color: rgba(255,255,255,0.10); }
 .gb-reply { display: flex; gap: 0.6rem; align-items: flex-start; }
 
-.gb-reply-form { margin-top: 0.95rem; display: flex; gap: 0.5rem; }
+.gb-reply-to { margin-top: 0.9rem; font-size: 0.74rem; }
+body.light .gb-reply-to { color: var(--text-muted-light); }
+body.dark  .gb-reply-to { color: var(--text-muted-dark); }
+.gb-reply-to strong { font-weight: 700; }
+
+.gb-reply-form { margin-top: 0.45rem; display: flex; gap: 0.5rem; }
 .gb-reply-input {
     flex: 1;
     min-height: 0 !important;
