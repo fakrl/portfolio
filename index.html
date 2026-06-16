@@ -2406,7 +2406,7 @@
     //   2. Sign in here once; copy the "Owner UID:" logged in the browser console.
     //   3. Paste that UID below.
     //   4. Realtime DB Rules: allow write to feedback/$id/replies only if auth.uid === this UID.
-    const OWNER_UID = ""; // empty = owner replies disabled until set
+    const OWNER_UID = "624rNLzK3JSG61VOCF9ddWEEUm33"; // Fakhrul — enables owner replies
 
     const app  = initializeApp(firebaseConfig);
     const db   = getDatabase(app);
@@ -2467,7 +2467,8 @@
             const repliesHtml = replies.length
                 ? `<div class="gb-replies">${replies.map(replyHtml).join("")}</div>` : "";
             const replyForm = isOwner()
-                ? `<div class="gb-reply-form">
+                ? `<div class="gb-reply-to">Replying to <strong>${escapeHtml(item.nama)}</strong></div>
+                   <div class="gb-reply-form">
                         <input class="feedback-input gb-reply-input" placeholder="Post your reply…" maxlength="300">
                         <button class="gb-reply-send" data-key="${key}">Reply</button>
                    </div>` : "";
@@ -2558,5 +2559,7 @@
     });
 </script>
 
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5d59608e2b5043bb86b48608d415afa9"}'></script>
 </body>
 </html>
