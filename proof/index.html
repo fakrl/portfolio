@@ -308,6 +308,18 @@
     body.dark  .proof-card__tech i { color: #bbb; }
     .proof-card__tech i.colored { color: unset; }
 
+    /* Hidden admin entry */
+    .contribute-btn {
+        position: fixed; bottom: 28px; left: 28px; width: 48px; height: 48px;
+        border-radius: 50%; cursor: pointer; z-index: 999;
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        display: flex; align-items: center; justify-content: center; text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    body.light .contribute-btn { background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.10); color: #555; box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    body.dark  .contribute-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #aaa; box-shadow: 0 4px 16px rgba(0,0,0,0.40); }
+    .contribute-btn:hover { transform: scale(1.08); }
+
     /* ==========================================
        PROJECT LINKS
        ========================================== */
@@ -937,6 +949,11 @@
     <footer class="footer" style="padding-bottom:5rem;">
         <p>&copy; 2026 Fakhrul Mukhlisin.</p>
     </footer>
+
+    <!-- Hidden admin entry -->
+    <a href="/admin/" class="contribute-btn" title="Admin" aria-label="Admin">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </a>
 
 </main>
 

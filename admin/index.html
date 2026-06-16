@@ -68,6 +68,14 @@
         .progress-bar { width: 120px; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
         .progress-fill { height: 100%; background: #6366f1; border-radius: 3px; transition: width 0.3s ease; }
 
+        /* Upload */
+        .upload-card { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.18); border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 1.25rem; }
+        .upload-card input[type="file"] { font-size: 0.8rem; color: #aaa; }
+        .upload-card input[type="text"], .upload-card select { flex: 1; min-width: 140px; }
+        .upload-card select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #e0e0e0; border-radius: 8px; padding: 0.55rem 0.8rem; font-size: 0.85rem; font-family: inherit; }
+        #up-status { font-size: 0.78rem; color: #888; width: 100%; }
+        #up-status.ok { color: #22c55e; } #up-status.err { color: #ef4444; }
+
         /* Moments grid */
         #photo-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
         .photo-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
@@ -147,6 +155,17 @@
 
     <!-- Moments panel -->
     <section class="panel active" id="panel-moments">
+        <div class="upload-card">
+            <input type="file" id="up-file" accept="image/*">
+            <input type="text" id="up-caption" placeholder="Caption (optional)" maxlength="100">
+            <select id="up-category">
+                <option value="momen">Momen</option>
+                <option value="photography">Photography</option>
+                <option value="personal">Personal</option>
+            </select>
+            <button id="up-btn"><i class="fa-solid fa-upload"></i> Upload</button>
+            <span id="up-status"></span>
+        </div>
         <div id="filter-bar">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="no-caption">No Caption</button>
@@ -327,6 +346,36 @@ $("filter-bar").addEventListener("click", e => {
     const btn = e.target.closest(".filter-btn"); if (!btn) return;
     document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active"); activeFilter = btn.dataset.filter; renderMoments();
+});
+
+// ── Upload (Cloudinary → Firebase) ────────
+const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dxccvha88/image/upload";
+const CLOUDINARY_UPLOAD_PRESET = "moments_unsigned";
+$("up-btn").addEventListener("click", async () => {
+    const file = $("up-file").files[0];
+    const caption = $("up-caption").value.trim();
+    const category = $("up-category").value;
+    const status = $("up-status");
+    if (!file) { status.className = "err"; status.textContent = "Pick a photo first."; return; }
+    $("up-btn").disabled = true; status.className = ""; status.textContent = "Uploading to Cloudinary…";
+    try {
+        const fd = new FormData();
+        fd.append("file", file);
+        fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        fd.append("folder", "moments");
+        const res = await fetch(CLOUDINARY_UPLOAD_URL, { method: "POST", body: fd });
+        const data = await res.json();
+        if (!data.secure_url) throw new Error("Cloudinary upload failed");
+        await push(ref(db, "photos"), {
+            url: data.secure_url, caption, categories: [category],
+            approved: true, uploadedBy: "owner", uploadedAt: Date.now(), filename: file.name
+        });
+        status.className = "ok"; status.textContent = "Uploaded ✓";
+        $("up-file").value = ""; $("up-caption").value = "";
+        loadMoments();
+    } catch (err) {
+        status.className = "err"; status.textContent = "Failed: " + err.message;
+    } finally { $("up-btn").disabled = false; }
 });
 
 // ══════════════════════════════════════════
