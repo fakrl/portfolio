@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../animations.css">
     <link rel="stylesheet" href="../pages.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- devicons for project tech stacks -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
     <meta name="description" content="Certifications, awards, and projects by Fakhrul Mukhlisin.">
     <meta property="og:title" content="Proof of Work — Fakhrul Mukhlisin">
     <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
@@ -291,6 +293,20 @@
         border: 1px solid rgba(37,99,235,0.2);
         color: #2563eb;
     }
+
+    /* ==========================================
+       PROJECT TECH ICONS
+       ========================================== */
+    .proof-card__tech {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 1.4rem;
+        margin-top: 0.9rem;
+    }
+    body.light .proof-card__tech i { color: #555; }
+    body.dark  .proof-card__tech i { color: #bbb; }
+    .proof-card__tech i.colored { color: unset; }
 
     /* ==========================================
        PROJECT LINKS
@@ -726,6 +742,35 @@
     <section class="section proof-section" id="tab-projects">
         <div class="proof-grid">
 
+            <!-- Nobel: add screenshots to data-images and the live URL to data-link when production is up -->
+            <div id="proj-nobel" class="glass-card proof-card proof-card--featured"
+                 data-title="Nobel Akademi — Bootcamp Module"
+                 data-images='[]'>
+                <div class="proof-card__img proof-card__img--placeholder" style="flex-direction:column; gap:0.55rem;">
+                    <i class="devicon-laravel-original" style="font-size:2.8rem; opacity:0.55;"></i>
+                    <span style="font-size:0.72rem; font-weight:600; opacity:0.6;">Screenshot coming soon</span>
+                    <span class="proof-card__badge proof-card__badge--purple">Laravel 11</span>
+                    <span class="proof-card__click-hint"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jun 2026 – Present</span>
+                    <h3 class="proof-card__title">Nobel Akademi — Bootcamp Module</h3>
+                    <p class="proof-card__issuer">PT Indotech Digital Group — Full Stack Internship</p>
+                    <p class="proof-card__desc">End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.</p>
+                    <div class="proof-card__tech">
+                        <i class="devicon-laravel-original colored" title="Laravel"></i>
+                        <i class="devicon-php-plain colored" title="PHP"></i>
+                        <i class="devicon-mysql-plain colored" title="MySQL"></i>
+                        <i class="devicon-bootstrap-plain colored" title="Bootstrap"></i>
+                    </div>
+                    <div class="skill-tags" style="margin-top:0.8rem">
+                        <span class="tag">Laravel 11</span><span class="tag">Eloquent</span>
+                        <span class="tag">Admin CMS</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
+                    </div>
+                    <p class="proof-card__credential" style="margin-top:0.8rem;">Internal production project · code &amp; data under NDA</p>
+                </div>
+            </div>
+
             <div id="proj-evermos" class="glass-card proof-card proof-card--featured"
                  data-title="Marketplace REST API — Evermos"
                  data-images='["../image/proj-evermos-1.webp","../image/proj-evermos-2.webp","../image/proj-evermos-3.webp","../image/proj-evermos-4.webp","../image/proj-evermos-5.webp","../image/proj-evermos-6.webp","../image/proj-evermos-7.webp","../image/proj-evermos-8.webp","../image/proj-evermos-9.webp","../image/proj-evermos-10.webp","../image/proj-evermos-11.webp","../image/proj-evermos-12.webp","../image/proj-evermos-13.webp","../image/proj-evermos-14.webp"]'
@@ -744,6 +789,10 @@
                     <h3 class="proof-card__title">Marketplace REST API</h3>
                     <p class="proof-card__issuer">Evermos × Rakamin — Backend Internship</p>
                     <p class="proof-card__desc">Full marketplace API: Golang, Gin, MySQL, JWT. 7 modul, clean architecture, pagination, multi-image upload, atomic transactions.</p>
+                    <div class="proof-card__tech">
+                        <i class="devicon-go-plain colored" title="Golang"></i>
+                        <i class="devicon-mysql-plain colored" title="MySQL"></i>
+                    </div>
                     <div class="skill-tags" style="margin-top:0.8rem">
                         <span class="tag">Golang</span><span class="tag">Gin</span>
                         <span class="tag">MySQL</span><span class="tag">JWT</span><span class="tag">REST API</span>
@@ -769,6 +818,11 @@
                     <h3 class="proof-card__title">E-Commerce Catalog</h3>
                     <p class="proof-card__issuer">Core Initiative × Rakamin — Frontend Internship</p>
                     <p class="proof-card__desc">Katalog e-commerce Vue.js 2, live REST API, 3 dynamic UI themes, pixel-perfect Figma, deployed via GitLab CI/CD.</p>
+                    <div class="proof-card__tech">
+                        <i class="devicon-vuejs-plain colored" title="Vue.js"></i>
+                        <i class="devicon-firebase-plain colored" title="Firebase"></i>
+                        <i class="devicon-figma-plain colored" title="Figma"></i>
+                    </div>
                     <div class="skill-tags" style="margin-top:0.8rem">
                         <span class="tag">Vue.js 2</span><span class="tag">REST API</span>
                         <span class="tag">CI/CD</span><span class="tag">Firebase</span>
@@ -817,6 +871,10 @@
                     <h3 class="proof-card__title">WordPress Web Developer</h3>
                     <p class="proof-card__issuer">Yayasan Peduli Kesejahteraan Bersama (YPKB)</p>
                     <p class="proof-card__desc">Volunteer developer building and maintaining the foundation's website on WordPress. Also appeared as on-camera talent in several Instagram content pieces for @ypkb_indonesia.</p>
+                    <div class="proof-card__tech">
+                        <i class="devicon-wordpress-plain colored" title="WordPress"></i>
+                        <i class="devicon-php-plain colored" title="PHP"></i>
+                    </div>
                     <div class="skill-tags" style="margin-top:0.8rem">
                         <span class="tag">WordPress</span>
                         <span class="tag">Web Development</span>
@@ -842,6 +900,9 @@
                     <h3 class="proof-card__title">Groomy — Mobile App UI/UX</h3>
                     <p class="proof-card__issuer">UAS Project · Information Systems · UNPAM</p>
                     <p class="proof-card__desc">End-to-end mobile UI/UX design for an on-demand grooming and beauty service booking app. Covers user flows, component library, and interactive prototype.</p>
+                    <div class="proof-card__tech">
+                        <i class="devicon-figma-plain colored" title="Figma"></i>
+                    </div>
                     <div class="skill-tags" style="margin-top:0.8rem">
                         <span class="tag">Figma</span><span class="tag">UI/UX</span><span class="tag">Prototyping</span><span class="tag">Mobile Design</span>
                     </div>
@@ -863,7 +924,7 @@
                 <img class="cert-modal__img" id="certModalImg" src="" alt="">
                 <div class="cert-modal__placeholder" id="certModalPlaceholder" style="display:none">
                     <span class="cert-modal__placeholder-icon"><i class="fa-regular fa-file-image"></i></span>
-                    <p class="cert-modal__placeholder-text">Image akan muncul setelah foto diupload ke folder /image</p>
+                    <p class="cert-modal__placeholder-text">Screenshots coming soon</p>
                 </div>
                 <button class="cert-modal__nav cert-modal__nav--prev" id="certModalPrev">‹</button>
                 <button class="cert-modal__nav cert-modal__nav--next" id="certModalNext">›</button>
