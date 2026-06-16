@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/png" href="/image/favicon.webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; min-height: 100vh; }
+
+        /* Auth gate */
+        #auth-screen, #denied-screen {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; gap: 1rem; text-align: center; padding: 1.5rem;
+        }
+        #denied-screen { display: none; }
+        #auth-screen h2, #denied-screen h2 { font-size: 1.4rem; color: #fff; }
+        #auth-screen p, #denied-screen p { font-size: 0.85rem; color: #888; max-width: 360px; }
+
+        button {
+            background: #fff; color: #0a0a0a; border: none; border-radius: 8px;
+            padding: 0.6rem 1.4rem; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit;
+            display: inline-flex; align-items: center; gap: 0.5rem; transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.85; }
+        button.secondary { background: rgba(255,255,255,0.08); color: #aaa; }
+        button.danger { background: transparent; color: #ef4444; padding: 0.3rem 0.6rem; font-size: 0.78rem; }
+        button.danger:hover { background: rgba(239,68,68,0.12); opacity: 1; }
+
+        input[type="text"], textarea {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+            color: #e0e0e0; border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.9rem; font-family: inherit; outline: none;
+        }
+        input:focus, textarea:focus { border-color: #6366f1; }
+
+        #main-screen { display: none; }
+        header {
+            position: sticky; top: 0; z-index: 100; background: rgba(15,15,15,0.95);
+            backdrop-filter: blur(12px); padding: 0.9rem 1.5rem; display: flex; align-items: center;
+            justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; gap: 0.75rem;
+        }
+        header h1 { font-size: 1rem; color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+        .header-meta { display: flex; align-items: center; gap: 0.8rem; font-size: 0.8rem; color: #888; }
+        .header-user { display: flex; align-items: center; gap: 0.5rem; }
+        .header-user img { width: 26px; height: 26px; border-radius: 50%; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 0.4rem; padding: 1rem 1.5rem 0; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; }
+        .tab {
+            background: rgba(255,255,255,0.06); color: #aaa; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 0.45rem;
+        }
+        .tab.active { background: #fff; color: #0a0a0a; border-color: #fff; }
+        .tab:hover:not(.active) { background: rgba(255,255,255,0.12); }
+
+        .panel { display: none; padding: 1.25rem 1.5rem 4rem; max-width: 1400px; margin: 0 auto; }
+        .panel.active { display: block; }
+
+        /* Filters (moments) */
+        #filter-bar { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
+        .filter-btn { background: rgba(255,255,255,0.06); color: #aaa; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 0.3rem 0.9rem; font-size: 0.8rem; font-weight: 500; }
+        .filter-btn.active { background: #6366f1; color: #fff; border-color: #6366f1; }
+        .progress-wrap { margin-left: auto; display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; color: #888; }
+        .progress-bar { width: 120px; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #6366f1; border-radius: 3px; transition: width 0.3s ease; }
+
+        /* Moments grid */
+        #photo-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+        .photo-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
+        .photo-item.has-caption { border-color: rgba(99,102,241,0.4); }
+        .photo-item.saving { border-color: rgba(250,204,21,0.4); }
+        .photo-item.saved  { border-color: rgba(34,197,94,0.4); }
+        .photo-item img { width: 100%; height: 150px; object-fit: cover; display: block; background: rgba(255,255,255,0.04); }
+        .photo-body { padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .photo-meta { font-size: 0.72rem; color: #666; display: flex; justify-content: space-between; align-items: center; }
+        .photo-category { font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; background: rgba(255,255,255,0.06); color: #999; }
+        .caption-input { width: 100%; resize: none; border-radius: 6px; padding: 0.5rem 0.75rem; font-size: 0.82rem; line-height: 1.5; min-height: 56px; }
+        .caption-status { font-size: 0.7rem; color: #666; height: 14px; }
+        .caption-status.saving { color: #f59e0b; }
+        .caption-status.saved  { color: #22c55e; }
+
+        /* Guestbook */
+        #gb-list { display: flex; flex-direction: column; gap: 1rem; max-width: 720px; }
+        .gb-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.25rem; }
+        .gb-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+        .gb-card-name { font-size: 0.92rem; font-weight: 700; color: #fff; }
+        .gb-card-from { font-size: 0.74rem; color: #888; margin-top: 0.1rem; }
+        .gb-card-time { font-size: 0.72rem; color: #666; white-space: nowrap; }
+        .gb-card-msg { font-size: 0.88rem; line-height: 1.6; color: #ccc; margin-top: 0.6rem; white-space: pre-wrap; }
+        .gb-card-replies { margin-top: 0.9rem; padding-left: 0.8rem; border-left: 2px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 0.7rem; }
+        .gb-card-reply { font-size: 0.82rem; line-height: 1.55; color: #bbb; }
+        .gb-card-reply .who { font-weight: 700; color: #fff; }
+        .gb-card-reply .when { color: #666; font-size: 0.7rem; margin-left: 0.4rem; }
+        .gb-reply-row { display: flex; gap: 0.5rem; margin-top: 0.9rem; }
+        .gb-reply-row input { flex: 1; }
+        .gb-reply-row button { white-space: nowrap; }
+        .reply-line { display: flex; align-items: baseline; gap: 0.4rem; }
+
+        /* Analytics */
+        .analytics-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem; max-width: 620px; }
+        .analytics-card h3 { color: #fff; font-size: 1rem; margin-bottom: 0.5rem; }
+        .analytics-card p { font-size: 0.85rem; color: #999; line-height: 1.6; margin-bottom: 1rem; }
+        .badge-ok { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; color: #22c55e; margin-bottom: 1rem; }
+
+        .loading-spinner { display: flex; align-items: center; justify-content: center; padding: 4rem; color: #555; gap: 0.75rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner-icon { animation: spin 1s linear infinite; font-size: 1.2rem; }
+        .empty-note { color: #555; font-size: 0.88rem; padding: 2rem 0; }
+    </style>
+</head>
+<body>
+
+<!-- Auth gate -->
+<div id="auth-screen">
+    <h2><i class="fa-solid fa-lock" style="color:#6366f1"></i> Admin</h2>
+    <p>Sign in with your owner Google account to manage moments, guestbook, and analytics.</p>
+    <button id="signin-btn"><i class="fa-brands fa-google"></i> Sign in with Google</button>
+</div>
+
+<!-- Not authorized -->
+<div id="denied-screen">
+    <h2><i class="fa-solid fa-ban" style="color:#ef4444"></i> Not authorized</h2>
+    <p>This account is not the site owner. Sign out and use the owner account.</p>
+    <button class="secondary" id="denied-signout">Sign out</button>
+</div>
+
+<!-- Main -->
+<div id="main-screen">
+    <header>
+        <h1><i class="fa-solid fa-gauge-high" style="color:#6366f1"></i> Admin Panel</h1>
+        <div class="header-meta">
+            <span class="header-user" id="header-user"></span>
+            <button class="secondary" onclick="location.href='/'"><i class="fa-solid fa-arrow-left"></i> Site</button>
+            <button class="secondary" id="signout-btn">Sign out</button>
+        </div>
+    </header>
+
+    <div class="tabs">
+        <button class="tab active" data-panel="moments"><i class="fa-solid fa-image"></i> Moments</button>
+        <button class="tab" data-panel="guestbook"><i class="fa-solid fa-comments"></i> Guestbook</button>
+        <button class="tab" data-panel="analytics"><i class="fa-solid fa-chart-simple"></i> Analytics</button>
+    </div>
+
+    <!-- Moments panel -->
+    <section class="panel active" id="panel-moments">
+        <div id="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="no-caption">No Caption</button>
+            <button class="filter-btn" data-filter="momen">Momen</button>
+            <button class="filter-btn" data-filter="photography">Photography</button>
+            <button class="filter-btn" data-filter="personal">Personal</button>
+            <span class="progress-wrap">
+                <span id="caption-count">0 / 0 captioned</span>
+                <span class="progress-bar"><span class="progress-fill" id="progress-fill" style="width:0%"></span></span>
+            </span>
+        </div>
+        <div id="photo-list">
+            <div class="loading-spinner"><i class="fa-solid fa-circle-notch spinner-icon"></i> Loading photos…</div>
+        </div>
+        <p class="empty-note" id="photo-empty" style="display:none">No photos match this filter.</p>
+    </section>
+
+    <!-- Guestbook panel -->
+    <section class="panel" id="panel-guestbook">
+        <div id="gb-list">
+            <div class="loading-spinner"><i class="fa-solid fa-circle-notch spinner-icon"></i> Loading messages…</div>
+        </div>
+    </section>
+
+    <!-- Analytics panel -->
+    <section class="panel" id="panel-analytics">
+        <div class="analytics-card">
+            <h3><i class="fa-solid fa-chart-simple" style="color:#6366f1"></i> Cloudflare Web Analytics</h3>
+            <span class="badge-ok"><i class="fa-solid fa-circle-check"></i> Beacon active on all public pages</span>
+            <p>Privacy-friendly traffic stats (page views, visitors, referrers, top pages) are collected by Cloudflare. The full dashboard opens in Cloudflare — it can't be embedded here.</p>
+            <button onclick="window.open('https://dash.cloudflare.com/?to=/:account/web-analytics','_blank')">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Cloudflare dashboard
+            </button>
+        </div>
+    </section>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, get, update, push, remove, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const OWNER_UID = "624rNLzK3JSG61VOCF9ddWEEUm33";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDhJLaWGZs1YILiMaNIDQ3mapnBUoH9R6s",
+    authDomain: "fakrul-feeeb.firebaseapp.com",
+    databaseURL: "https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "fakrul-feeeb",
+    storageBucket: "fakrul-feeeb.firebasestorage.app",
+    messagingSenderId: "767578062305",
+    appId: "1:767578062305:web:3cdf7bd8678923bb3e26a0"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getDatabase(app);
+const provider = new GoogleAuthProvider();
+
+const $ = id => document.getElementById(id);
+
+// ── Auth ──────────────────────────────────
+$("signin-btn").addEventListener("click", () => signInWithPopup(auth, provider).catch(e => alert(e.message)));
+$("signout-btn").addEventListener("click", () => signOut(auth));
+$("denied-signout").addEventListener("click", () => signOut(auth));
+
+let started = false;
+onAuthStateChanged(auth, (user) => {
+    const isOwner = user && user.uid === OWNER_UID;
+    $("auth-screen").style.display   = user ? "none" : "flex";
+    $("denied-screen").style.display = (user && !isOwner) ? "flex" : "none";
+    $("main-screen").style.display   = isOwner ? "block" : "none";
+    if (isOwner) {
+        $("header-user").innerHTML =
+            (user.photoURL ? `<img src="${user.photoURL}" alt="">` : "") +
+            `<span>${user.displayName || user.email}</span>`;
+        if (!started) { started = true; loadMoments(); watchGuestbook(); }
+    }
+});
+
+// ── Tabs ──────────────────────────────────
+document.querySelector(".tabs").addEventListener("click", e => {
+    const tab = e.target.closest(".tab");
+    if (!tab) return;
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    tab.classList.add("active");
+    $("panel-" + tab.dataset.panel).classList.add("active");
+});
+
+const escapeHtml = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+function fmtDate(ts) {
+    if (!ts) return "—";
+    return new Date(ts).toLocaleDateString("id-ID", { day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit" });
+}
+
+// ══════════════════════════════════════════
+// MOMENTS
+// ══════════════════════════════════════════
+let allPhotos = [], activeFilter = "all";
+
+async function loadMoments() {
+    const snap = await get(ref(db, "photos"));
+    const data = snap.val();
+    if (!data) { $("photo-list").innerHTML = ""; $("photo-empty").style.display = "block"; return; }
+    allPhotos = Object.entries(data).map(([key, val]) => ({ key, ...val }));
+    allPhotos.sort((a, b) => (a.uploadedAt || 0) - (b.uploadedAt || 0));
+    renderMoments();
+}
+
+function renderMoments() {
+    const list = $("photo-list"), empty = $("photo-empty");
+    const filtered = allPhotos.filter(p => {
+        if (activeFilter === "all") return true;
+        if (activeFilter === "no-caption") return !p.caption || !p.caption.trim() || p.caption === "— Caption —";
+        return (p.categories || []).includes(activeFilter);
+    });
+    list.innerHTML = "";
+    empty.style.display = filtered.length ? "none" : "block";
+    filtered.forEach(p => list.appendChild(momentCard(p)));
+    updateProgress();
+}
+
+function momentCard(photo) {
+    const hasCap = photo.caption && photo.caption.trim() && photo.caption !== "— Caption —";
+    const div = document.createElement("div");
+    div.className = "photo-item" + (hasCap ? " has-caption" : "");
+    const cat = (photo.categories || ["—"])[0];
+    div.innerHTML = `
+        <img src="${photo.url}" alt="" loading="lazy" onerror="this.style.opacity=0.2">
+        <div class="photo-body">
+            <div class="photo-meta"><span>${fmtDate(photo.uploadedAt)}</span><span class="photo-category">${escapeHtml(cat)}</span></div>
+            <textarea class="caption-input" rows="2" placeholder="Add a caption… (Enter to save, Shift+Enter = newline)">${escapeHtml(photo.caption && photo.caption !== "— Caption —" ? photo.caption : "")}</textarea>
+            <span class="caption-status"></span>
+        </div>`;
+    const ta = div.querySelector(".caption-input"), status = div.querySelector(".caption-status");
+    let timer;
+    ta.addEventListener("keydown", e => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            saveCaption(photo.key, ta.value.trim(), div, status);
+            const cards = [...document.querySelectorAll(".photo-item")];
+            const next = cards[cards.indexOf(div) + 1]?.querySelector(".caption-input");
+            if (next) { next.focus(); next.select(); }
+        }
+    });
+    ta.addEventListener("input", () => {
+        clearTimeout(timer);
+        status.textContent = "Typing…"; status.className = "caption-status";
+        timer = setTimeout(() => saveCaption(photo.key, ta.value.trim(), div, status), 1200);
+    });
+    return div;
+}
+
+async function saveCaption(key, caption, card, status) {
+    card.className = "photo-item saving";
+    status.textContent = "Saving…"; status.className = "caption-status saving";
+    try {
+        await update(ref(db, `photos/${key}`), { caption });
+        const p = allPhotos.find(x => x.key === key); if (p) p.caption = caption;
+        card.className = "photo-item " + (caption ? "saved has-caption" : "saved");
+        status.textContent = caption ? "Saved ✓" : "Cleared"; status.className = "caption-status saved";
+        updateProgress();
+        setTimeout(() => { status.textContent = ""; status.className = "caption-status"; }, 2000);
+    } catch (err) {
+        card.className = "photo-item"; status.textContent = "Error — " + err.message; console.error(err);
+    }
+}
+
+function updateProgress() {
+    const total = allPhotos.length;
+    const cap = allPhotos.filter(p => p.caption && p.caption.trim() && p.caption !== "— Caption —").length;
+    $("caption-count").textContent = `${cap} / ${total} captioned`;
+    $("progress-fill").style.width = (total ? Math.round(cap / total * 100) : 0) + "%";
+}
+
+$("filter-bar").addEventListener("click", e => {
+    const btn = e.target.closest(".filter-btn"); if (!btn) return;
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active"); activeFilter = btn.dataset.filter; renderMoments();
+});
+
+// ══════════════════════════════════════════
+// GUESTBOOK
+// ══════════════════════════════════════════
+function watchGuestbook() {
+    onValue(ref(db, "feedback"), snap => renderGuestbook(snap.val()));
+}
+
+function renderGuestbook(data) {
+    const list = $("gb-list");
+    if (!data) { list.innerHTML = `<p class="empty-note">No messages yet.</p>`; return; }
+    list.innerHTML = "";
+    Object.entries(data).reverse().forEach(([key, item]) => {
+        const replies = item.replies ? Object.entries(item.replies) : [];
+        const repliesHtml = replies.length ? `<div class="gb-card-replies">${replies.map(([rk, r]) => `
+            <div class="gb-card-reply reply-line">
+                <span><span class="who">Fakhrul</span> ${escapeHtml(r.pesan)}<span class="when">${fmtDate(r.waktu)}</span></span>
+                <button class="danger" data-del-reply="${key}/${rk}" title="Delete reply"><i class="fa-solid fa-xmark"></i></button>
+            </div>`).join("")}</div>` : "";
+        const card = document.createElement("div");
+        card.className = "gb-card";
+        card.innerHTML = `
+            <div class="gb-card-head">
+                <div>
+                    <div class="gb-card-name">${escapeHtml(item.nama || "Anonymous")}</div>
+                    ${item.dari ? `<div class="gb-card-from">${escapeHtml(item.dari)}</div>` : ""}
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem">
+                    <span class="gb-card-time">${fmtDate(item.waktu)}</span>
+                    <button class="danger" data-del-msg="${key}" title="Delete message"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="gb-card-msg">${escapeHtml(item.pesan)}</div>
+            ${repliesHtml}
+            <div class="gb-reply-row">
+                <input type="text" placeholder="Reply as owner…" maxlength="300" data-reply-input="${key}">
+                <button data-reply-send="${key}">Reply</button>
+            </div>`;
+        list.appendChild(card);
+    });
+}
+
+$("gb-list").addEventListener("click", async e => {
+    const sendBtn = e.target.closest("[data-reply-send]");
+    const delMsg  = e.target.closest("[data-del-msg]");
+    const delRep  = e.target.closest("[data-del-reply]");
+
+    if (sendBtn) {
+        const key = sendBtn.dataset.replySend;
+        const input = document.querySelector(`[data-reply-input="${key}"]`);
+        const pesan = input.value.trim();
+        if (!pesan) return;
+        sendBtn.disabled = true;
+        try {
+            await push(ref(db, `feedback/${key}/replies`), { pesan, waktu: serverTimestamp(), uid: auth.currentUser.uid });
+            input.value = "";
+        } catch (err) { alert("Error: " + err.message); }
+        sendBtn.disabled = false;
+    } else if (delMsg) {
+        if (!confirm("Delete this whole message (and its replies)?")) return;
+        await remove(ref(db, `feedback/${delMsg.dataset.delMsg}`)).catch(err => alert(err.message));
+    } else if (delRep) {
+        if (!confirm("Delete this reply?")) return;
+        await remove(ref(db, `feedback/${delRep.dataset.delReply}`)).catch(err => alert(err.message));
+    }
+});
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5d59608e2b5043bb86b48608d415afa9"}'></script>
+</body>
+</html>
