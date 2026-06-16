@@ -129,18 +129,11 @@ function applyFilter(filter) {
 }
 
 // ── Skeleton cards ────────────────────────
-function renderSkeletons(grid, n = 6) {
+function renderSkeletons(grid, n = PAGE_SIZE) {
     grid.innerHTML = '';
     for (let i = 0; i < n; i++) {
         const el = document.createElement('div');
         el.className = 'moment-item skeleton';
-        el.style.padding = '0';
-        el.innerHTML = `
-            <div class="skeleton-img"></div>
-            <div style="padding:0.75rem 1rem 1rem">
-                <div class="skeleton-line skeleton-line--medium"></div>
-                <div class="skeleton-line skeleton-line--short"></div>
-            </div>`;
         grid.appendChild(el);
     }
 }
