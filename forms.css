@@ -100,86 +100,127 @@ body.dark  .feedback-desc { color: var(--text-secondary-dark); }
 body.light .feedback-empty p { color: var(--text-muted-light); }
 body.dark  .feedback-empty p { color: var(--text-muted-dark); }
 
-.feedback-card {
-    padding: 1.5rem;
+/* ── Guestbook: owner auth bar ── */
+.owner-auth-bar {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.owner-auth-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0;
+    transition: opacity var(--transition-fast);
+}
+
+body.light .owner-auth-link { color: var(--text-muted-light); }
+body.dark  .owner-auth-link { color: var(--text-muted-dark); }
+.owner-auth-link:hover { opacity: 0.65; }
+
+.owner-auth-status { font-size: 0.78rem; font-weight: 600; }
+body.light .owner-auth-status { color: var(--text-secondary-light); }
+body.dark  .owner-auth-status { color: var(--text-secondary-dark); }
+
+/* ==========================================
+   GUESTBOOK — Threads / Twitter style feed
+   ========================================== */
+.feedback-list { gap: 0 !important; }
+
+.gb-post {
+    display: flex;
+    gap: 0.85rem;
+    padding: 1.3rem 0.15rem;
+    border-top: 1px solid;
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(16px);
 }
+.gb-post.fade-in { animation: fadeInUp 0.5s ease forwards; }
+body.light .gb-post { border-color: rgba(0,0,0,0.07); }
+body.dark  .gb-post { border-color: rgba(255,255,255,0.08); }
+.gb-post:first-of-type { border-top: none; }
 
-.feedback-card.fade-in {
-    animation: fadeInUp 0.5s ease forwards;
-}
-
-.feedback-card-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.8rem;
-}
-
-.feedback-avatar {
-    width: 40px;
-    height: 40px;
+.gb-avatar {
+    width: 44px; height: 44px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.05rem;
     flex-shrink: 0;
+    overflow: hidden;
     transition: background var(--transition-theme), color var(--transition-theme);
 }
+body.light .gb-avatar { background: rgba(0,0,0,0.08); color: var(--text-primary-light); }
+body.dark  .gb-avatar { background: rgba(255,255,255,0.10); color: var(--text-primary-dark); }
+.gb-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-body.light .feedback-avatar {
-    background: rgba(0, 0, 0, 0.08);
-    color: var(--text-primary-light);
+.gb-avatar--owner { width: 38px; height: 38px; font-size: 0.78rem; font-weight: 800; }
+body.light .gb-avatar--owner { background: #0a0a0a; color: #fff; }
+body.dark  .gb-avatar--owner { background: #f0f0f0; color: #0a0a0a; }
+
+.gb-main { flex: 1; min-width: 0; }
+.gb-head { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+.gb-name { font-size: 0.92rem; font-weight: 700; }
+body.light .gb-name { color: var(--text-primary-light); }
+body.dark  .gb-name { color: var(--text-primary-dark); }
+.gb-time { font-size: 0.8rem; }
+body.light .gb-time { color: var(--text-muted-light); }
+body.dark  .gb-time { color: var(--text-muted-dark); }
+.gb-from { font-size: 0.76rem; margin-top: 0.05rem; }
+body.light .gb-from { color: var(--text-muted-light); }
+body.dark  .gb-from { color: var(--text-muted-dark); }
+.gb-text { font-size: 0.9rem; line-height: 1.6; margin-top: 0.35rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+body.light .gb-text { color: var(--text-secondary-light); }
+body.dark  .gb-text { color: var(--text-secondary-dark); }
+
+.gb-badge {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+    padding: 2px 7px; border-radius: 999px;
 }
+body.light .gb-badge { background: #0a0a0a; color: #fff; }
+body.dark  .gb-badge { background: #f0f0f0; color: #0a0a0a; }
 
-body.dark .feedback-avatar {
-    background: rgba(255, 255, 255, 0.10);
-    color: var(--text-primary-dark);
+.gb-replies {
+    margin-top: 0.9rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    padding-left: 0.7rem;
+    border-left: 2px solid;
 }
+body.light .gb-replies { border-color: rgba(0,0,0,0.08); }
+body.dark  .gb-replies { border-color: rgba(255,255,255,0.10); }
+.gb-reply { display: flex; gap: 0.6rem; align-items: flex-start; }
 
-.feedback-card-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
+.gb-reply-form { margin-top: 0.95rem; display: flex; gap: 0.5rem; }
+.gb-reply-input {
+    flex: 1;
+    min-height: 0 !important;
+    padding: 0.55rem 0.9rem !important;
+    font-size: 0.82rem !important;
 }
-
-.feedback-card-name {
-    font-size: 0.95rem;
-    font-weight: 700;
-    transition: color var(--transition-theme);
+.gb-reply-send {
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0 1.1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: opacity var(--transition-fast);
 }
-
-body.light .feedback-card-name { color: var(--text-primary-light); }
-body.dark  .feedback-card-name { color: var(--text-primary-dark); }
-
-.feedback-card-from {
-    font-size: 0.78rem;
-    font-weight: 500;
-    transition: color var(--transition-theme);
-}
-
-body.light .feedback-card-from { color: var(--text-secondary-light); }
-body.dark  .feedback-card-from { color: var(--text-secondary-dark); }
-
-.feedback-card-time {
-    font-size: 0.75rem;
-    transition: color var(--transition-theme);
-}
-
-body.light .feedback-card-time { color: var(--text-muted-light); }
-body.dark  .feedback-card-time { color: var(--text-muted-dark); }
-
-.feedback-card-msg {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    transition: color var(--transition-theme);
-}
-
-body.light .feedback-card-msg { color: var(--text-secondary-light); }
-body.dark  .feedback-card-msg { color: var(--text-secondary-dark); }
+body.light .gb-reply-send { background: #0a0a0a; color: #fff; }
+body.dark  .gb-reply-send { background: #f0f0f0; color: #0a0a0a; }
+.gb-reply-send:hover { opacity: 0.85; }
+.gb-reply-send:disabled { opacity: 0.5; cursor: default; }
 
 /* ==========================================
    CONTACT — CV Download
