@@ -595,8 +595,23 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.1rem;
+        position: relative;
+        padding-left: 34px;
     }
+
+    /* timeline rail */
+    .exp-cards::before {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 10px;
+        bottom: 10px;
+        width: 2px;
+        transition: background var(--transition-theme);
+    }
+    body.light .exp-cards::before { background: rgba(0,0,0,0.10); }
+    body.dark  .exp-cards::before { background: rgba(255,255,255,0.12); }
 
     .exp-card {
         padding: 1.4rem 1.5rem;
@@ -604,9 +619,26 @@
         display: flex;
         flex-direction: column;
         gap: 0.8rem;
+        position: relative;
         transition: transform var(--transition-base), box-shadow var(--transition-base),
                     background var(--transition-theme), border-color var(--transition-theme);
     }
+
+    /* timeline dot */
+    .exp-card::before {
+        content: '';
+        position: absolute;
+        left: -34px;
+        top: 1.5rem;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 3px solid;
+        transition: background var(--transition-theme), border-color var(--transition-theme);
+        z-index: 1;
+    }
+    body.light .exp-card::before { background: #f4f4f2; border-color: rgba(0,0,0,0.22); }
+    body.dark  .exp-card::before { background: #0a0a0a; border-color: rgba(255,255,255,0.28); }
 
     .exp-card:hover { transform: translateY(-3px); }
 
@@ -615,6 +647,15 @@
 
     body.light .exp-card--current { border-color: rgba(0,0,0,0.30); }
     body.dark  .exp-card--current { border-color: rgba(255,255,255,0.32); }
+    /* current = filled accent dot */
+    body.light .exp-card--current::before { background: #0a0a0a; border-color: #0a0a0a; }
+    body.dark  .exp-card--current::before { background: #f0f0f0; border-color: #f0f0f0; }
+
+    @media (max-width: 600px) {
+        .exp-cards { padding-left: 26px; }
+        .exp-cards::before { left: 5px; }
+        .exp-card::before { left: -26px; top: 1.3rem; width: 12px; height: 12px; }
+    }
 
     .exp-card-head {
         display: flex;
@@ -1776,7 +1817,7 @@
         <div class="work-grid">
 
             <!-- Nobel Akademi (placeholder screenshot) -->
-            <article class="work-card glass-card visible">
+            <a href="/proof/#proj-nobel" class="work-card glass-card visible">
                 <div class="work-card-media work-card-media--placeholder">
                     <i class="devicon-laravel-original"></i>
                     <span>Screenshot coming soon</span>
@@ -1799,10 +1840,10 @@
                             <i class="devicon-mysql-plain colored" title="MySQL"></i>
                             <i class="devicon-bootstrap-plain colored" title="Bootstrap"></i>
                         </div>
-                        <span class="work-card-link">Internship · NDA</span>
+                        <span class="work-card-link">View details →</span>
                     </div>
                 </div>
-            </article>
+            </a>
 
             <!-- Evermos backend -->
             <a href="https://github.com/fakrl/evermos-backend" target="_blank" rel="noopener" class="work-card glass-card visible">
