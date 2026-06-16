@@ -1,0 +1,5 @@
+# Claude Code session data & worktrees
+.claude/
+
+# Scratch / audit artifacts
+emoji_audit.txt
