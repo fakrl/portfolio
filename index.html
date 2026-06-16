@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fakhrul Mukhlisin — Software Engineer</title>
+    <title>Fakhrul Mukhlisin — Full Stack Developer</title>
     <link rel="icon" type="image/png" href="/image/favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="animations.css">
     <link rel="stylesheet" href="forms.css">
     <link rel="stylesheet" href="experience-carousel.css">
-    <!-- devicons for skill icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.15.1/devicon.min.css">
+    <!-- devicons for skill icons (jsdelivr — includes Postman, Tailwind, Go) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <meta name="description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
-    <meta name="keywords" content="Golang, Vue.js, REST API, Backend Developer, Web Developer, Software Engineer">
+    <meta name="description" content="Full Stack Developer — building production web apps with Laravel, Vue.js, and Golang. Backend REST APIs, modern frontends, end-to-end.">
+    <meta name="keywords" content="Full Stack Developer, Laravel, PHP, Vue.js, Golang, REST API, Backend Developer, Frontend Developer, Software Engineer">
     <meta name="author" content="Fakhrul Mukhlisin">
-    <meta property="og:title" content="Fakhrul Mukhlisin — Software Engineer">
-    <meta property="og:description" content="Information Systems student with backend & frontend internship experience in Golang and Vue.js.">
+    <meta property="og:title" content="Fakhrul Mukhlisin — Full Stack Developer">
+    <meta property="og:description" content="Full Stack Developer — building production web apps with Laravel, Vue.js, and Golang. Backend REST APIs, modern frontends, end-to-end.">
     <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
     <meta property="og:url" content="https://fakrul.netlify.app">
     <meta name="twitter:card" content="summary_large_image">
@@ -292,6 +292,101 @@
 
     .hero-cv-link:hover { opacity: 0.65; }
 
+    /* ── Hero profile card (Deft-style glass business card) ── */
+    .hero-profile-card {
+        width: 300px;
+        max-width: 100%;
+        padding: 1.8rem 1.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.65rem;
+    }
+
+    .hero-profile-photo {
+        position: relative;
+        width: 150px;
+        height: 150px;
+    }
+
+    .hero-profile-photo .hero-photo-frame {
+        width: 150px;
+        height: 150px;
+    }
+
+    .hero-profile-status {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #4ade80;
+        z-index: 2;
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    body.light .hero-profile-status { border: 3px solid #f1f1ef; }
+    body.dark  .hero-profile-status { border: 3px solid #161616; }
+
+    .hero-profile-name {
+        font-size: 1.18rem;
+        font-weight: 800;
+        margin: 0.35rem 0 0;
+        letter-spacing: -0.3px;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .hero-profile-name { color: #0a0a0a; }
+    body.dark  .hero-profile-name { color: #f0f0f0; }
+
+    .hero-profile-handle {
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin: 0;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .hero-profile-handle { color: #999; }
+    body.dark  .hero-profile-handle { color: #777; }
+
+    .hero-profile-role-tag {
+        font-size: 0.82rem;
+        font-weight: 500;
+        margin: 0.05rem 0 0.15rem;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .hero-profile-role-tag { color: #555; }
+    body.dark  .hero-profile-role-tag { color: #aaa; }
+
+    .hero-profile-actions {
+        display: flex;
+        gap: 0.6rem;
+        width: 100%;
+        margin-top: 0.35rem;
+    }
+
+    .hero-profile-actions .btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.6rem 0.5rem;
+        font-size: 0.8rem;
+        text-align: center;
+    }
+
+    .hero-profile-card .hero-socials {
+        margin-top: 0.15rem;
+    }
+
+    .hero-profile-card .hero-social {
+        width: 34px;
+        height: 34px;
+    }
+
     /* ==========================================
        EXPERIENCE — BENTO GRID
        ========================================== */
@@ -493,136 +588,73 @@
     }
 
     /* ==========================================
-       EXPERIENCE — TIMELINE
+       EXPERIENCE — CARDS
        ========================================== */
-    .exp-timeline {
-        max-width: 780px;
+    .exp-cards {
+        max-width: 760px;
         margin: 0 auto;
-        position: relative;
-    }
-
-    /* vertical line */
-    .exp-timeline::before {
-        content: '';
-        position: absolute;
-        left: 112px;
-        top: 8px;
-        bottom: 8px;
-        width: 1px;
-        transition: background var(--transition-theme);
-    }
-
-    body.light .exp-timeline::before { background: rgba(0,0,0,0.10); }
-    body.dark  .exp-timeline::before { background: rgba(255,255,255,0.10); }
-
-    .exp-tl-item {
-        display: flex;
-        gap: 1.4rem;
-        margin-bottom: 1.2rem;
-        align-items: flex-start;
-    }
-
-    .exp-tl-left {
-        flex: 0 0 112px;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        gap: 0.5rem;
-        padding-top: 1.4rem;
-        position: relative;
+        gap: 1rem;
     }
 
-    .exp-tl-date {
-        font-size: 0.68rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.4px;
-        text-align: right;
-        line-height: 1.3;
-        transition: color var(--transition-theme);
-    }
-
-    body.light .exp-tl-date { color: var(--text-muted-light); }
-    body.dark  .exp-tl-date { color: var(--text-muted-dark); }
-
-    .exp-tl-dot {
-        width: 9px; height: 9px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        margin-right: -5px;
-        transition: background var(--transition-theme), border-color var(--transition-theme);
-        border: 2px solid transparent;
-    }
-
-    body.light .exp-tl-dot {
-        background: #fff;
-        border-color: rgba(0,0,0,0.22);
-    }
-
-    body.dark .exp-tl-dot {
-        background: #080808;
-        border-color: rgba(255,255,255,0.28);
-    }
-
-    .exp-tl-dot--featured {
-        width: 11px; height: 11px;
-        margin-right: -6px;
-    }
-
-    body.light .exp-tl-dot--featured {
-        background: #0a0a0a;
-        border-color: #0a0a0a;
-    }
-
-    body.dark .exp-tl-dot--featured {
-        background: #f0f0f0;
-        border-color: #f0f0f0;
-    }
-
-    .exp-tl-card {
-        flex: 1;
-        padding: 1.2rem 1.4rem;
+    .exp-card {
+        padding: 1.4rem 1.5rem;
         text-decoration: none;
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.8rem;
         transition: transform var(--transition-base), box-shadow var(--transition-base),
                     background var(--transition-theme), border-color var(--transition-theme);
     }
 
-    .exp-tl-card:hover { transform: translateY(-3px); }
+    .exp-card:hover { transform: translateY(-3px); }
 
-    body.light .exp-tl-card:hover { box-shadow: var(--shadow-hover-light); }
-    body.dark  .exp-tl-card:hover { box-shadow: var(--shadow-hover-dark); }
+    body.light .exp-card:hover { box-shadow: var(--shadow-hover-light); }
+    body.dark  .exp-card:hover { box-shadow: var(--shadow-hover-dark); }
 
-    .exp-tl-top {
+    body.light .exp-card--current { border-color: rgba(0,0,0,0.30); }
+    body.dark  .exp-card--current { border-color: rgba(255,255,255,0.32); }
+
+    .exp-card-head {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         gap: 0.8rem;
     }
 
-    .exp-tl-title {
-        font-size: 0.95rem;
+    .exp-card-role {
+        font-size: 1rem;
         font-weight: 700;
         line-height: 1.3;
         transition: color var(--transition-theme);
     }
 
-    body.light .exp-tl-title { color: var(--text-primary-light); }
-    body.dark  .exp-tl-title { color: var(--text-primary-dark); }
+    body.light .exp-card-role { color: var(--text-primary-light); }
+    body.dark  .exp-card-role { color: var(--text-primary-dark); }
 
-    .exp-tl-company {
-        font-size: 0.80rem;
-        font-style: italic;
-        margin-top: 0.15rem;
+    .exp-card-company {
+        font-size: 0.82rem;
+        font-weight: 600;
+        margin-top: 0.18rem;
         transition: color var(--transition-theme);
     }
 
-    body.light .exp-tl-company { color: var(--text-secondary-light); }
-    body.dark  .exp-tl-company { color: var(--text-secondary-dark); }
+    body.light .exp-card-company { color: var(--text-secondary-light); }
+    body.dark  .exp-card-company { color: var(--text-secondary-dark); }
 
-    .exp-tl-badge {
+    .exp-card-meta {
+        font-size: 0.72rem;
+        font-weight: 500;
+        margin-top: 0.3rem;
+        letter-spacing: 0.2px;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .exp-card-meta { color: var(--text-muted-light); }
+    body.dark  .exp-card-meta { color: var(--text-muted-dark); }
+
+    .exp-card-badge {
         font-size: 0.68rem;
         font-weight: 700;
         padding: 3px 10px;
@@ -632,46 +664,269 @@
         transition: background var(--transition-theme), color var(--transition-theme);
     }
 
-    body.light .exp-tl-badge {
+    body.light .exp-card-badge {
         background: rgba(0,0,0,0.06);
         color: var(--text-secondary-light);
         border: 1px solid rgba(0,0,0,0.10);
     }
 
-    body.dark .exp-tl-badge {
+    body.dark .exp-card-badge {
         background: rgba(255,255,255,0.08);
         color: var(--text-secondary-dark);
         border: 1px solid rgba(255,255,255,0.12);
     }
 
-    .exp-tl-outcome {
-        font-size: 0.82rem;
+    body.light .exp-card-badge--current { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+    body.dark  .exp-card-badge--current { background: #f0f0f0; color: #0a0a0a; border-color: #f0f0f0; }
+
+    .exp-card-desc {
+        font-size: 0.83rem;
+        line-height: 1.65;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .exp-card-desc { color: var(--text-secondary-light); }
+    body.dark  .exp-card-desc { color: var(--text-secondary-dark); }
+
+    .exp-card-bullets {
+        margin: 0;
+        padding-left: 1.1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .exp-card-bullets li {
+        font-size: 0.83rem;
         line-height: 1.6;
         transition: color var(--transition-theme);
     }
 
-    body.light .exp-tl-outcome { color: var(--text-secondary-light); }
-    body.dark  .exp-tl-outcome { color: var(--text-secondary-dark); }
+    body.light .exp-card-bullets li { color: var(--text-secondary-light); }
+    body.dark  .exp-card-bullets li { color: var(--text-secondary-dark); }
 
-    .exp-tl-tags {
+    .exp-card-tech {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        margin-top: 0.1rem;
+    }
+
+    .exp-card-tech-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.9px;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .exp-card-tech-label { color: var(--text-muted-light); }
+    body.dark  .exp-card-tech-label { color: var(--text-muted-dark); }
+
+    .exp-card-tags {
         display: flex;
         flex-wrap: wrap;
         gap: 0.35rem;
-        margin-top: 0.2rem;
     }
 
     @media (max-width: 600px) {
-        .exp-timeline::before { left: 0; }
-        .exp-tl-item { flex-direction: column; gap: 0.5rem; }
-        .exp-tl-left {
-            flex-direction: row;
-            align-items: center;
-            flex: unset;
-            padding-top: 0;
-            padding-left: 1.2rem;
-        }
-        .exp-tl-date { text-align: left; }
-        .exp-tl-dot { margin-right: 0; margin-left: -1.35rem; order: -1; }
+        .exp-card-head { flex-direction: column; }
+    }
+
+    /* ==========================================
+       FEATURED WORKS
+       ========================================== */
+    .work-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.4rem;
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    .work-card {
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        transition: transform var(--transition-base), box-shadow var(--transition-base),
+                    background var(--transition-theme), border-color var(--transition-theme);
+    }
+
+    .work-card:hover { transform: translateY(-5px); }
+    body.light .work-card:hover { box-shadow: var(--shadow-hover-light); }
+    body.dark  .work-card:hover { box-shadow: var(--shadow-hover-dark); }
+
+    .work-card-media {
+        position: relative;
+        height: 190px;
+        overflow: hidden;
+        flex-shrink: 0;
+        transition: background var(--transition-theme);
+    }
+
+    body.light .work-card-media { background: rgba(0,0,0,0.04); }
+    body.dark  .work-card-media { background: rgba(255,255,255,0.04); }
+
+    .work-card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+    }
+
+    .work-card:hover .work-card-media img { transform: scale(1.05); }
+
+    .work-card-media--placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+    }
+
+    body.light .work-card-media--placeholder {
+        background: linear-gradient(135deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02));
+    }
+
+    body.dark .work-card-media--placeholder {
+        background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    }
+
+    .work-card-media--placeholder i {
+        font-size: 2.6rem;
+    }
+
+    body.light .work-card-media--placeholder i { color: rgba(0,0,0,0.30); }
+    body.dark  .work-card-media--placeholder i { color: rgba(255,255,255,0.30); }
+
+    .work-card-media--placeholder span {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .work-card-media--placeholder span { color: var(--text-muted-light); }
+    body.dark  .work-card-media--placeholder span { color: var(--text-muted-dark); }
+
+    .work-card-tag {
+        position: absolute;
+        top: 10px; left: 10px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        padding: 3px 9px;
+        border-radius: var(--radius-pill);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    body.light .work-card-tag { background: rgba(255,255,255,0.85); color: #1a1a1a; border: 1px solid rgba(0,0,0,0.08); }
+    body.dark  .work-card-tag { background: rgba(0,0,0,0.70); color: #f0f0f0; border: 1px solid rgba(255,255,255,0.10); }
+
+    .work-card-body {
+        padding: 1.3rem 1.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        flex: 1;
+    }
+
+    .work-card-title {
+        font-size: 1.02rem;
+        font-weight: 700;
+        line-height: 1.3;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .work-card-title { color: var(--text-primary-light); }
+    body.dark  .work-card-title { color: var(--text-primary-dark); }
+
+    .work-card-sub {
+        font-size: 0.76rem;
+        font-weight: 600;
+        margin-top: 0.15rem;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .work-card-sub { color: var(--text-muted-light); }
+    body.dark  .work-card-sub { color: var(--text-muted-dark); }
+
+    .work-card-desc {
+        font-size: 0.8rem;
+        line-height: 1.6;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .work-card-desc { color: var(--text-secondary-light); }
+    body.dark  .work-card-desc { color: var(--text-secondary-dark); }
+
+    .work-card-metrics {
+        display: flex;
+        gap: 1.6rem;
+        margin-top: 0.1rem;
+    }
+
+    .work-metric { display: flex; flex-direction: column; gap: 0.1rem; }
+
+    .work-metric-num {
+        font-size: 1.25rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.5px;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .work-metric-num { color: var(--text-primary-light); }
+    body.dark  .work-metric-num { color: var(--text-primary-dark); }
+
+    .work-metric-label {
+        font-size: 0.62rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: color var(--transition-theme);
+    }
+
+    body.light .work-metric-label { color: var(--text-muted-light); }
+    body.dark  .work-metric-label { color: var(--text-muted-dark); }
+
+    .work-card-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 0.6rem;
+    }
+
+    .work-card-tech {
+        display: flex;
+        gap: 0.6rem;
+        font-size: 1.35rem;
+        align-items: center;
+    }
+
+    body.light .work-card-tech i { color: #555; }
+    body.dark  .work-card-tech i { color: #bbb; }
+    .work-card-tech i.colored { color: unset; }
+
+    .work-card-link {
+        font-size: 0.78rem;
+        font-weight: 700;
+        white-space: nowrap;
+        transition: color var(--transition-theme), opacity var(--transition-fast);
+    }
+
+    body.light .work-card-link { color: var(--text-primary-light); }
+    body.dark  .work-card-link { color: var(--text-primary-dark); }
+    .work-card-link:hover { opacity: 0.6; }
+
+    @media (max-width: 720px) {
+        .work-grid { grid-template-columns: 1fr; max-width: 460px; }
     }
 
     /* ==========================================
@@ -1241,6 +1496,7 @@
     <ul class="nav-links" id="navLinks">
         <li><a href="#hero">Home</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#featured">Work</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -1264,21 +1520,39 @@
     <section id="hero" class="hero-section">
         <div class="hero-inner">
 
-            <!-- Photo side -->
+            <!-- Profile card side -->
             <div class="hero-photo-side">
-                <div class="hero-photo-frame">
-                    <div class="hero-photo-ring"></div>
-                    <div class="hero-photo-inner">
-                        <img src="image/profile.webp"
-                             id="heroPhoto"
-                             alt="Fakhrul Mukhlisin"
-                             onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex'">
-                        <div class="hero-photo-initials" id="heroInitials"
-                             style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">FM</div>
+              <div class="hero-profile-card glass-card visible">
+                <div class="hero-profile-photo">
+                    <div class="hero-photo-frame">
+                        <div class="hero-photo-ring"></div>
+                        <div class="hero-photo-inner">
+                            <img src="image/profile.webp"
+                                 id="heroPhoto"
+                                 alt="Fakhrul Mukhlisin"
+                                 onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex'">
+                            <div class="hero-photo-initials" id="heroInitials"
+                                 style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">FM</div>
+                        </div>
                     </div>
+                    <span class="hero-profile-status" title="Online"></span>
                 </div>
 
                 <div class="hero-photo-dots" id="heroDots"></div>
+
+                <h3 class="hero-profile-name">Fakhrul Mukhlisin</h3>
+                <p class="hero-profile-handle">@fak.rl</p>
+                <p class="hero-profile-role-tag">Full Stack Developer</p>
+
+                <div class="hero-availability">
+                    <span class="hero-avail-dot"></span>
+                    Online · Open to Work
+                </div>
+
+                <div class="hero-profile-actions">
+                    <a href="#contact" class="btn btn-primary">Contact Me</a>
+                    <a href="cv/CV_Fakhrul_Mukhlisin_2026_FullStack.pdf" download class="btn btn-secondary">Download CV</a>
+                </div>
 
                 <div class="hero-socials">
                     <a href="https://www.instagram.com/fak.rl/" target="_blank" class="hero-social" title="Instagram">
@@ -1294,28 +1568,21 @@
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     </a>
                 </div>
-
-                <div class="hero-availability">
-                    <span class="hero-avail-dot"></span>
-                    Open to Work
-                </div>
+              </div>
             </div>
 
             <!-- Text side -->
             <div class="hero-text-side">
-                <span class="hero-label">Software Engineer</span>
+                <span class="hero-label">Full Stack Developer</span>
                 <h1 class="hero-name">Fakhrul<br>Mukhlisin</h1>
-                <p class="hero-role">Backend · Frontend · Information Systems</p>
+                <p class="hero-role">Full Stack · Laravel · Vue.js · Golang</p>
                 <p class="hero-bio">
-                    Semester 6 Information Systems student with two production internships — backend REST API at Evermos (Golang, scored 90.91) and frontend e-commerce at Core Initiative (Vue.js, scored 87.79). GPA 3.68. Looking for full-time, part-time, or remote roles in backend or frontend.
+                    Full Stack Developer Intern at PT Indotech Digital, building production Laravel apps end-to-end. Previously shipped a marketplace REST API in Golang (scored 90.91) and a Vue.js e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68.
                 </p>
                 <div class="hero-cta-group">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
                     <a href="/proof/" class="btn btn-secondary">Proof of Work</a>
                 </div>
-                <a href="cv/cv_fakhrul_mukhlisin_2026.pdf" download class="hero-cv-link">
-                    Download CV <span style="opacity:0.5">↓</span>
-                </a>
             </div>
 
         </div>
@@ -1327,162 +1594,293 @@
     <section id="experience" class="section">
         <h2 class="section-title">Experience</h2>
 
-        <div class="exp-timeline">
+        <div class="exp-cards">
+
+            <!-- Indotech (current) -->
+            <a href="#featured" class="exp-card exp-card--current glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">Full Stack Developer Intern</p>
+                        <p class="exp-card-company">PT Indotech Digital Group</p>
+                        <p class="exp-card-meta">Jun 2026 – Present · Jakarta (Hybrid)</p>
+                    </div>
+                    <span class="exp-card-badge exp-card-badge--current">Current</span>
+                </div>
+                <ul class="exp-card-bullets">
+                    <li>Built the Nobel Akademi Bootcamp module end-to-end in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages.</li>
+                    <li>Eager-loaded Eloquent relations to avoid N+1 queries; implemented slug routing, YouTube embeds, and a ratings system.</li>
+                    <li>Worked in a real Git workflow — feature branches, pull requests, and code review.</li>
+                </ul>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <div class="exp-card-tags">
+                        <span class="tag">Laravel</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Eloquent</span>
+                        <span class="tag">Bootstrap</span>
+                    </div>
+                </div>
+            </a>
 
             <!-- Evermos -->
-            <div class="exp-tl-item">
-                <div class="exp-tl-left">
-                    <span class="exp-tl-date">Dec 2025</span>
-                    <div class="exp-tl-dot exp-tl-dot--featured"></div>
-                </div>
-                <a href="/proof/#proj-evermos" class="exp-tl-card glass-card visible">
-                    <div class="exp-tl-top">
-                        <div>
-                            <p class="exp-tl-title">Backend Developer Intern</p>
-                            <p class="exp-tl-company">Evermos × Rakamin Academy</p>
-                        </div>
-                        <span class="exp-tl-badge">90.91 / 100</span>
+            <a href="/proof/#proj-evermos" class="exp-card glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">Backend Developer Intern</p>
+                        <p class="exp-card-company">Evermos × Rakamin Academy</p>
+                        <p class="exp-card-meta">Dec 2025 · Remote</p>
                     </div>
-                    <p class="exp-tl-outcome">Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
-                    <div class="exp-tl-tags">
+                    <span class="exp-card-badge">90.91 / 100</span>
+                </div>
+                <p class="exp-card-desc">Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <div class="exp-card-tags">
                         <span class="tag">Golang</span>
                         <span class="tag">Gin</span>
                         <span class="tag">MySQL</span>
                         <span class="tag">JWT</span>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
             <!-- Core Initiative -->
-            <div class="exp-tl-item">
-                <div class="exp-tl-left">
-                    <span class="exp-tl-date">Oct – Nov 2025</span>
-                    <div class="exp-tl-dot exp-tl-dot--featured"></div>
-                </div>
-                <a href="/proof/#proj-core-initiative" class="exp-tl-card glass-card visible">
-                    <div class="exp-tl-top">
-                        <div>
-                            <p class="exp-tl-title">Frontend Developer Intern</p>
-                            <p class="exp-tl-company">Core Initiative × Rakamin Academy</p>
-                        </div>
-                        <span class="exp-tl-badge">87.79 / 100</span>
+            <a href="/proof/#proj-core-initiative" class="exp-card glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">Frontend Developer Intern</p>
+                        <p class="exp-card-company">Core Initiative × Rakamin Academy</p>
+                        <p class="exp-card-meta">Oct – Nov 2025 · Remote</p>
                     </div>
-                    <p class="exp-tl-outcome">E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
-                    <div class="exp-tl-tags">
+                    <span class="exp-card-badge">87.79 / 100</span>
+                </div>
+                <p class="exp-card-desc">E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <div class="exp-card-tags">
                         <span class="tag">Vue.js 2</span>
                         <span class="tag">REST API</span>
                         <span class="tag">CI/CD</span>
                         <span class="tag">Firebase</span>
                     </div>
-                </a>
-            </div>
-
-            <!-- Kesbang -->
-            <div class="exp-tl-item">
-                <div class="exp-tl-left">
-                    <span class="exp-tl-date">Nov – Dec 2025</span>
-                    <div class="exp-tl-dot"></div>
                 </div>
-                <a href="/moments/?filter=momen" class="exp-tl-card glass-card visible">
-                    <div class="exp-tl-top">
-                        <div>
-                            <p class="exp-tl-title">Computer Operator</p>
-                            <p class="exp-tl-company">Kesbang · Jakarta Pusat</p>
-                        </div>
-                    </div>
-                    <div class="exp-tl-tags">
-                        <span class="tag">Government</span>
-                        <span class="tag">Admin</span>
-                    </div>
-                </a>
-            </div>
+            </a>
 
             <!-- Yandex ML -->
-            <div class="exp-tl-item">
-                <div class="exp-tl-left">
-                    <span class="exp-tl-date">May – Jul 2025</span>
-                    <div class="exp-tl-dot"></div>
-                </div>
-                <a href="/proof/#yandex" class="exp-tl-card glass-card visible">
-                    <div class="exp-tl-top">
-                        <div>
-                            <p class="exp-tl-title">Machine Learning Program</p>
-                            <p class="exp-tl-company">Yandex · Digitalent KOMDIGI</p>
-                        </div>
-                        <span class="exp-tl-badge">#5 / 926</span>
+            <a href="/proof/#yandex" class="exp-card glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">Machine Learning Program</p>
+                        <p class="exp-card-company">Yandex · Digitalent KOMDIGI</p>
+                        <p class="exp-card-meta">May – Jul 2025 · Online</p>
                     </div>
-                    <p class="exp-tl-outcome">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
-                    <div class="exp-tl-tags">
+                    <span class="exp-card-badge">#5 / 926</span>
+                </div>
+                <p class="exp-card-desc">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <div class="exp-card-tags">
                         <span class="tag">Python</span>
                         <span class="tag">ML</span>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
             <!-- LKA UNPAM -->
-            <div class="exp-tl-item">
-                <div class="exp-tl-left">
-                    <span class="exp-tl-date">Jan – Jul 2025</span>
-                    <div class="exp-tl-dot"></div>
-                </div>
-                <a href="/proof/#lka-unpam" class="exp-tl-card glass-card visible">
-                    <div class="exp-tl-top">
-                        <div>
-                            <p class="exp-tl-title">Data Management Intern</p>
-                            <p class="exp-tl-company">LKA UNPAM</p>
-                        </div>
-                        <span class="exp-tl-badge">Sangat Baik</span>
+            <a href="/proof/#lka-unpam" class="exp-card glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">Data Management Intern</p>
+                        <p class="exp-card-company">LKA UNPAM</p>
+                        <p class="exp-card-meta">Jan – Jul 2025 · Tangerang Selatan</p>
                     </div>
-                    <p class="exp-tl-outcome">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
-                    <div class="exp-tl-tags">
+                    <span class="exp-card-badge">Excellent</span>
+                </div>
+                <p class="exp-card-desc">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <div class="exp-card-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">Data</span>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+
+            <!-- Kesbang -->
+            <a href="/moments/?filter=momen" class="exp-card glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">Computer Operator</p>
+                        <p class="exp-card-company">Kesbang</p>
+                        <p class="exp-card-meta">Nov – Dec 2025 · Jakarta Pusat</p>
+                    </div>
+                </div>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Focus</span>
+                    <div class="exp-card-tags">
+                        <span class="tag">Government</span>
+                        <span class="tag">Admin</span>
+                    </div>
+                </div>
+            </a>
 
             <!-- PT CMS -->
-            <div class="exp-tl-item">
-                <div class="exp-tl-left">
-                    <span class="exp-tl-date">Jul 2024 – Jul 2025</span>
-                    <div class="exp-tl-dot"></div>
-                </div>
-                <a href="/proof/#proj-cms" class="exp-tl-card glass-card visible">
-                    <div class="exp-tl-top">
-                        <div>
-                            <p class="exp-tl-title">Content Creator & Copywriter</p>
-                            <p class="exp-tl-company">PT. Cahaya Millenial Sejahtera</p>
-                        </div>
+            <a href="/proof/#proj-cms" class="exp-card glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">Content Creator & Copywriter</p>
+                        <p class="exp-card-company">PT. Cahaya Millenial Sejahtera</p>
+                        <p class="exp-card-meta">Jul 2024 – Jul 2025</p>
                     </div>
-                    <p class="exp-tl-outcome">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
-                    <div class="exp-tl-tags">
+                </div>
+                <p class="exp-card-desc">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Focus</span>
+                    <div class="exp-card-tags">
                         <span class="tag">Copywriting</span>
                         <span class="tag">Photography</span>
                         <span class="tag">AI Tools</span>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
             <!-- FSJ President -->
-            <div class="exp-tl-item">
-                <div class="exp-tl-left">
-                    <span class="exp-tl-date">Oct 2021 – Nov 2022</span>
-                    <div class="exp-tl-dot"></div>
-                </div>
-                <a href="/proof/#award-ketum" class="exp-tl-card glass-card visible">
-                    <div class="exp-tl-top">
-                        <div>
-                            <p class="exp-tl-title">President</p>
-                            <p class="exp-tl-company">Forum Studi Jurnalis</p>
-                        </div>
-                        <span class="exp-tl-badge">300+ Members</span>
+            <a href="/proof/#award-ketum" class="exp-card glass-card visible">
+                <div class="exp-card-head">
+                    <div>
+                        <p class="exp-card-role">President</p>
+                        <p class="exp-card-company">Forum Studi Jurnalis</p>
+                        <p class="exp-card-meta">Oct 2021 – Nov 2022</p>
                     </div>
-                    <div class="exp-tl-tags">
+                    <span class="exp-card-badge">300+ Members</span>
+                </div>
+                <div class="exp-card-tech">
+                    <span class="exp-card-tech-label">Focus</span>
+                    <div class="exp-card-tags">
                         <span class="tag">Leadership</span>
                         <span class="tag">15+ Events</span>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         FEATURED WORKS
+    ══════════════════════════════════════ -->
+    <section id="featured" class="section">
+        <h2 class="section-title">Featured Works</h2>
+
+        <div class="work-grid">
+
+            <!-- Nobel Akademi (placeholder screenshot) -->
+            <article class="work-card glass-card visible">
+                <div class="work-card-media work-card-media--placeholder">
+                    <i class="devicon-laravel-original"></i>
+                    <span>Screenshot coming soon</span>
+                    <span class="work-card-tag">Laravel 11</span>
+                </div>
+                <div class="work-card-body">
+                    <div>
+                        <h3 class="work-card-title">Nobel Akademi — Bootcamp Module</h3>
+                        <p class="work-card-sub">PT Indotech Digital · Production LMS</p>
+                    </div>
+                    <p class="work-card-desc">End-to-end bootcamp module: data model, backend, admin CMS, and public pages. Eager-loaded Eloquent relations, slug routing, YouTube embeds, and ratings.</p>
+                    <div class="work-card-metrics">
+                        <div class="work-metric"><span class="work-metric-num">6</span><span class="work-metric-label">Related Tables</span></div>
+                        <div class="work-metric"><span class="work-metric-num">CMS</span><span class="work-metric-label">Admin Panel</span></div>
+                    </div>
+                    <div class="work-card-foot">
+                        <div class="work-card-tech">
+                            <i class="devicon-laravel-original colored" title="Laravel"></i>
+                            <i class="devicon-php-plain colored" title="PHP"></i>
+                            <i class="devicon-mysql-plain colored" title="MySQL"></i>
+                            <i class="devicon-bootstrap-plain colored" title="Bootstrap"></i>
+                        </div>
+                        <span class="work-card-link">Internship · NDA</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Evermos backend -->
+            <a href="https://github.com/fakrl/evermos-backend" target="_blank" rel="noopener" class="work-card glass-card visible">
+                <div class="work-card-media">
+                    <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
+                    <span class="work-card-tag">Golang</span>
+                </div>
+                <div class="work-card-body">
+                    <div>
+                        <h3 class="work-card-title">Marketplace REST API</h3>
+                        <p class="work-card-sub">Evermos · Backend</p>
+                    </div>
+                    <p class="work-card-desc">Full marketplace REST API in Golang with Gin, MySQL, and JWT auth — clean architecture and atomic transactions across 7 modules.</p>
+                    <div class="work-card-metrics">
+                        <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label">Modules</span></div>
+                        <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label">Score / 100</span></div>
+                    </div>
+                    <div class="work-card-foot">
+                        <div class="work-card-tech">
+                            <i class="devicon-go-plain colored" title="Golang"></i>
+                            <i class="devicon-mysql-plain colored" title="MySQL"></i>
+                        </div>
+                        <span class="work-card-link">GitHub →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Core Initiative frontend -->
+            <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" rel="noopener" class="work-card glass-card visible">
+                <div class="work-card-media">
+                    <img src="image/proj-coreinitiative-1.webp" alt="Core Initiative e-commerce catalog" loading="lazy">
+                    <span class="work-card-tag">Vue.js</span>
+                </div>
+                <div class="work-card-body">
+                    <div>
+                        <h3 class="work-card-title">E-Commerce Catalog</h3>
+                        <p class="work-card-sub">Core Initiative · Frontend</p>
+                    </div>
+                    <p class="work-card-desc">E-commerce catalog in Vue.js 2 with 3 dynamic UI themes, pixel-perfect Figma implementation, and CI/CD to Firebase.</p>
+                    <div class="work-card-metrics">
+                        <div class="work-metric"><span class="work-metric-num">3</span><span class="work-metric-label">Dynamic Themes</span></div>
+                        <div class="work-metric"><span class="work-metric-num">87.79</span><span class="work-metric-label">Score / 100</span></div>
+                    </div>
+                    <div class="work-card-foot">
+                        <div class="work-card-tech">
+                            <i class="devicon-vuejs-plain colored" title="Vue.js"></i>
+                            <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+                            <i class="devicon-firebase-plain colored" title="Firebase"></i>
+                        </div>
+                        <span class="work-card-link">GitHub →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Groomy UI/UX -->
+            <a href="/proof/#proj-groomy" class="work-card glass-card visible">
+                <div class="work-card-media">
+                    <img src="image/proj-groomy-1.webp" alt="Groomy UI/UX design" loading="lazy">
+                    <span class="work-card-tag">UI/UX</span>
+                </div>
+                <div class="work-card-body">
+                    <div>
+                        <h3 class="work-card-title">Groomy</h3>
+                        <p class="work-card-sub">Mobile App · UI/UX Design</p>
+                    </div>
+                    <p class="work-card-desc">Pet grooming mobile app concept — full UI/UX design and interactive Figma prototype, from wireframes to polished screens.</p>
+                    <div class="work-card-metrics">
+                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label">Key Screens</span></div>
+                        <div class="work-metric"><span class="work-metric-num">Figma</span><span class="work-metric-label">Prototype</span></div>
+                    </div>
+                    <div class="work-card-foot">
+                        <div class="work-card-tech">
+                            <i class="devicon-figma-plain colored" title="Figma"></i>
+                        </div>
+                        <span class="work-card-link">View →</span>
+                    </div>
+                </div>
+            </a>
 
         </div>
     </section>
@@ -1495,7 +1893,7 @@
         <div class="skills-sphere-wrap" id="skillsWrap">
             <div class="skills-sphere" id="skillsSphere"></div>
         </div>
-        <p class="skills-sphere-hint">drag to explore</p>
+        <p class="skills-sphere-hint" id="skillsHint">drag to explore</p>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -1522,7 +1920,7 @@
                     </div>
                     <div class="lang-item">
                         <span class="lang-name">English</span>
-                        <span class="lang-badge">B2 Proficiency</span>
+                        <span class="lang-badge">Conversational</span>
                     </div>
                 </div>
             </div>
@@ -1559,7 +1957,7 @@
         <h2 class="section-title">Hit Me Up</h2>
 
         <div class="cv-download-wrapper">
-            <a href="cv/cv_fakhrul_mukhlisin_2026.pdf" download
+            <a href="cv/CV_Fakhrul_Mukhlisin_2026_FullStack.pdf" download
                class="cv-download-btn btn btn-primary">
                 Download CV
             </a>
@@ -1683,6 +2081,7 @@
                         Send Message
                     </button>
                 </div>
+                <div class="owner-auth-bar" id="ownerAuthBar"></div>
             </div>
             <div id="feedbackList" class="feedback-list">
                 <div class="feedback-empty" id="feedbackEmpty">
@@ -1721,36 +2120,35 @@
 <script>
 (function() {
     const SKILLS = [
-        { icon: 'devicon-go-original colored',          label: 'Golang' },
+        { icon: 'devicon-laravel-plain colored',         label: 'Laravel' },
+        { icon: 'devicon-php-plain colored',             label: 'PHP' },
+        { icon: 'devicon-vuejs-plain colored',           label: 'Vue.js' },
+        { icon: 'devicon-go-plain colored',              label: 'Golang' },
         { icon: 'devicon-mysql-plain colored',           label: 'MySQL' },
-        { icon: 'devicon-vuejs-plain colored',           label: 'Vue.js 2' },
         { icon: 'devicon-javascript-plain colored',      label: 'JavaScript' },
         { icon: 'devicon-git-plain colored',             label: 'Git' },
-        { icon: 'devicon-firebase-plain colored',        label: 'Firebase' },
+        { icon: 'devicon-github-original colored',       label: 'GitHub' },
+        { icon: 'devicon-postman-plain colored',         label: 'Postman' },
         { icon: 'devicon-figma-plain colored',           label: 'Figma' },
-        { icon: 'devicon-php-plain colored',             label: 'PHP' },
-        { icon: 'devicon-laravel-plain colored',         label: 'Laravel' },
+        { icon: 'devicon-bootstrap-plain colored',       label: 'Bootstrap' },
+        { icon: 'devicon-tailwindcss-plain colored',     label: 'Tailwind' },
         { icon: 'devicon-html5-plain colored',           label: 'HTML5' },
         { icon: 'devicon-css3-plain colored',            label: 'CSS3' },
-        { icon: 'devicon-bootstrap-plain colored',       label: 'Bootstrap' },
         { icon: 'devicon-python-plain colored',          label: 'Python' },
-        { icon: 'devicon-github-original colored',       label: 'GitHub' },
+        { icon: 'devicon-firebase-plain colored',        label: 'Firebase' },
         { icon: 'devicon-vscode-plain colored',          label: 'VS Code' },
-        { icon: 'devicon-wordpress-plain colored',       label: 'WordPress' },
         { icon: 'devicon-azure-plain colored',           label: 'Azure' },
-        {
-            label: 'REST API',
-            svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`
-        },
-        {
-            label: 'Postman',
-            svg: `<svg width="26" height="26" viewBox="0 0 512 512" fill="currentColor"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 64c51.2 0 97.9 18.7 134.2 49.5L99.6 404.2C68.7 367.9 50 321.2 50 274c0-112.6 93.4-210 206-210zm0 384c-51.2 0-97.9-18.7-134.2-49.5l290.6-290.7C443.3 144.1 462 190.8 462 238c0 112.6-93.4 210-206 210z" opacity=".2"/><circle cx="256" cy="256" r="80"/></svg>`
-        },
+        { icon: 'devicon-wordpress-plain colored',       label: 'WordPress' },
+        { icon: 'fa-solid fa-wand-magic-sparkles',       label: 'AI-Assisted Dev' },
     ];
 
     const wrap  = document.getElementById('skillsWrap');
     const sphere = document.getElementById('skillsSphere');
     if (!wrap || !sphere) return;
+
+    // Skill counter shown in the hint line (no distracting center overlay)
+    const hintEl = document.getElementById('skillsHint');
+    if (hintEl) hintEl.textContent = `${SKILLS.length} technologies · drag to explore`;
 
     const R = 175; // sphere radius px
     const phi = Math.PI * (3 - Math.sqrt(5)); // golden angle
@@ -1990,6 +2388,8 @@
         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue, serverTimestamp }
         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDhJLaWGZs1YILiMaNIDQ3mapnBUoH9R6s",
@@ -2001,12 +2401,25 @@
         appId: "1:767578062305:web:3cdf7bd8678923bb3e26a0"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db  = getDatabase(app);
+    // ⚠️ OWNER SETUP (Firebase Console, one-time):
+    //   1. Authentication → Sign-in method → enable Google provider.
+    //   2. Sign in here once; copy the "Owner UID:" logged in the browser console.
+    //   3. Paste that UID below.
+    //   4. Realtime DB Rules: allow write to feedback/$id/replies only if auth.uid === this UID.
+    const OWNER_UID = ""; // empty = owner replies disabled until set
+
+    const app  = initializeApp(firebaseConfig);
+    const db   = getDatabase(app);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
     const commentsRef = ref(db, "feedback");
 
+    let latestData  = null;
+    let currentUser = null;
+    const isOwner = () => !!currentUser && !!OWNER_UID && currentUser.uid === OWNER_UID;
+
     function escapeHtml(str) {
-        return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+        return String(str ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
     }
     function formatTime(ts) {
         if (!ts) return "";
@@ -2016,31 +2429,71 @@
         });
     }
 
-    onValue(commentsRef, (snapshot) => {
+    function relativeTime(ts) {
+        if (!ts) return "";
+        const diff = Date.now() - ts;
+        if (diff < 60000) return "just now";
+        const m = Math.floor(diff / 60000);
+        if (m < 60) return m + "m";
+        const h = Math.floor(m / 60);
+        if (h < 24) return h + "h";
+        const d = Math.floor(h / 24);
+        if (d < 7) return d + "d";
+        return formatTime(ts);
+    }
+
+    function replyHtml(r) {
+        return `<div class="gb-reply">
+            <span class="gb-avatar gb-avatar--owner"><img src="image/profile.webp" alt="Fakhrul" onerror="this.replaceWith(document.createTextNode('FM'))"></span>
+            <div class="gb-main">
+                <div class="gb-head">
+                    <span class="gb-name">Fakhrul</span>
+                    <span class="gb-badge"><i class="fa-solid fa-circle-check"></i> Owner</span>
+                    <span class="gb-time">· ${relativeTime(r.waktu)}</span>
+                </div>
+                <p class="gb-text">${escapeHtml(r.pesan)}</p>
+            </div>
+        </div>`;
+    }
+
+    function render() {
         const list  = document.getElementById("feedbackList");
         const empty = document.getElementById("feedbackEmpty");
-        const data  = snapshot.val();
-        list.querySelectorAll(".feedback-card").forEach(el => el.remove());
-        if (!data) { empty.style.display = "block"; return; }
+        list.querySelectorAll(".gb-post").forEach(el => el.remove());
+        if (!latestData) { empty.style.display = "block"; return; }
         empty.style.display = "none";
-        Object.values(data).reverse().forEach(item => {
-            const card = document.createElement("div");
-            card.className = "glass-card visible feedback-card fade-in";
-            card.innerHTML = `
-                <div class="feedback-card-header">
-                    <span class="feedback-avatar">${escapeHtml(item.nama.charAt(0).toUpperCase())}</span>
-                    <div class="feedback-card-meta">
-                        <strong class="feedback-card-name">${escapeHtml(item.nama)}</strong>
-                        <span class="feedback-card-from">${escapeHtml(item.dari || "")}</span>
-                        <span class="feedback-card-time">${formatTime(item.waktu)}</span>
+        Object.entries(latestData).reverse().forEach(([key, item]) => {
+            const replies = item.replies ? Object.values(item.replies) : [];
+            const repliesHtml = replies.length
+                ? `<div class="gb-replies">${replies.map(replyHtml).join("")}</div>` : "";
+            const replyForm = isOwner()
+                ? `<div class="gb-reply-form">
+                        <input class="feedback-input gb-reply-input" placeholder="Post your reply…" maxlength="300">
+                        <button class="gb-reply-send" data-key="${key}">Reply</button>
+                   </div>` : "";
+            const fromLine = item.dari ? `<div class="gb-from">${escapeHtml(item.dari)}</div>` : "";
+            const post = document.createElement("article");
+            post.className = "gb-post fade-in";
+            post.innerHTML = `
+                <span class="gb-avatar">${escapeHtml((item.nama || "?").charAt(0).toUpperCase())}</span>
+                <div class="gb-main">
+                    <div class="gb-head">
+                        <span class="gb-name">${escapeHtml(item.nama)}</span>
+                        <span class="gb-time">· ${relativeTime(item.waktu)}</span>
                     </div>
+                    ${fromLine}
+                    <p class="gb-text">${escapeHtml(item.pesan)}</p>
+                    ${repliesHtml}
+                    ${replyForm}
                 </div>
-                <p class="feedback-card-msg">${escapeHtml(item.pesan)}</p>
             `;
-            list.appendChild(card);
+            list.appendChild(post);
         });
-    });
+    }
 
+    onValue(commentsRef, (snapshot) => { latestData = snapshot.val(); render(); });
+
+    // ── New feedback ──
     document.getElementById("feedbackSubmit").addEventListener("click", async () => {
         const nameEl = document.getElementById("feedbackName");
         const fromEl = document.getElementById("feedbackFrom");
@@ -2054,6 +2507,54 @@
             nameEl.value = ""; fromEl.value = ""; msgEl.value = "";
         } catch(err) { alert("Failed to send, try again."); console.error(err); }
         finally { btn.textContent = "Send Message"; btn.disabled = false; }
+    });
+
+    // ── Owner auth (Google sign-in) ──
+    function doLogin() {
+        signInWithPopup(auth, provider).catch(err => {
+            console.error(err);
+            alert("Sign-in failed. Enable the Google provider in Firebase Console → Authentication.");
+        });
+    }
+    function updateAuthBar() {
+        const bar = document.getElementById("ownerAuthBar");
+        if (!bar) return;
+        if (currentUser) {
+            const owner = isOwner();
+            bar.innerHTML =
+                `<span class="owner-auth-status">${owner ? "✓ Owner mode — you can reply" : "Signed in (not recognized as owner)"}</span>
+                 <button id="ownerLogoutBtn" class="owner-auth-link">Logout</button>`;
+            document.getElementById("ownerLogoutBtn").addEventListener("click", () => signOut(auth));
+        } else {
+            bar.innerHTML =
+                `<button id="ownerLoginBtn" class="owner-auth-link"><i class="fa-brands fa-google"></i> Owner? Sign in to reply</button>`;
+            document.getElementById("ownerLoginBtn").addEventListener("click", doLogin);
+        }
+    }
+    updateAuthBar();
+
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        if (user) console.log("Owner UID:", user.uid, "— paste this into OWNER_UID to enable replying.");
+        updateAuthBar();
+        render();
+    });
+
+    // ── Owner reply (event delegation) ──
+    document.getElementById("feedbackList").addEventListener("click", async (e) => {
+        const btn = e.target.closest(".gb-reply-send");
+        if (!btn) return;
+        if (!isOwner()) { alert("Owner only."); return; }
+        const key   = btn.dataset.key;
+        const input = btn.parentElement.querySelector(".gb-reply-input");
+        const pesan = input.value.trim();
+        if (!pesan) return;
+        btn.disabled = true;
+        try {
+            await push(ref(db, `feedback/${key}/replies`), { pesan, waktu: serverTimestamp(), uid: currentUser.uid });
+            input.value = "";
+        } catch(err) { console.error(err); alert("Reply failed. Check your Firebase DB rules."); }
+        finally { btn.disabled = false; }
     });
 </script>
 
