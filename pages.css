@@ -843,6 +843,8 @@ body.dark .moments-filter:hover {
     .moments-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
+@keyframes momentIn { from { opacity: 0; } to { opacity: 1; } }
+
 .moment-item {
     position: relative;
     overflow: hidden;
@@ -851,6 +853,7 @@ body.dark .moments-filter:hover {
     cursor: pointer;
     border-radius: var(--radius-md);
     transition: transform var(--transition-base);
+    animation: momentIn 0.5s ease both;
 }
 
 .moment-item:hover { transform: scale(1.015); }

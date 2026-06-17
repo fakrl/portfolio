@@ -153,6 +153,24 @@ body.portfolio-page .theme-toggle {
 }
 
 /* ==========================================
+   SCROLL PROGRESS BAR
+   ========================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    z-index: 2000;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform 0.08s linear;
+}
+body.light .scroll-progress { background: linear-gradient(90deg, #0a0a0a, #888); }
+body.dark  .scroll-progress { background: linear-gradient(90deg, #ffffff, #888); }
+
+/* ==========================================
    BUTTONS — full glass, monochromatic
    ========================================== */
 .btn {

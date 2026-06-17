@@ -75,6 +75,19 @@ if (isNavPage) {
         .filter(el => !el.closest('.hero-section'))
         .forEach(el => observer.observe(el));
 
+    // Scroll progress bar
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+    const updateProgress = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - doc.clientHeight;
+        progressBar.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress, { passive: true });
+    updateProgress();
+
     // Active nav link on scroll
     window.addEventListener('scroll', () => {
         let current = '';
