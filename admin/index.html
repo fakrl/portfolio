@@ -199,11 +199,12 @@
 
     <!-- Analytics panel -->
     <section class="panel" id="panel-analytics">
-        <div class="analytics-head">
-            <span class="badge-ok"><i class="fa-solid fa-circle-check"></i> Umami tracking active on public pages</span>
-            <a href="https://cloud.umami.is/share/LTokIwK8tBurYSjR" target="_blank" rel="noopener" class="analytics-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open full dashboard</a>
+        <div class="analytics-card">
+            <h3><i class="fa-solid fa-chart-simple" style="color:#6366f1"></i> Umami Analytics</h3>
+            <span class="badge-ok"><i class="fa-solid fa-circle-check"></i> Tracking active on public pages</span>
+            <p>Umami's dashboard can't be embedded inline — their pages send an <code>X-Frame-Options</code> header that blocks framing. But your share link is <strong>public</strong>: it opens the full dashboard in one click, no login required.</p>
+            <button onclick="window.open('https://cloud.umami.is/share/LTokIwK8tBurYSjR','_blank')"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open dashboard (no login)</button>
         </div>
-        <iframe class="analytics-frame" src="https://cloud.umami.is/share/LTokIwK8tBurYSjR" title="Umami Analytics" loading="lazy"></iframe>
     </section>
 </div>
 
