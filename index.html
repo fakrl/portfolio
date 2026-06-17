@@ -292,6 +292,17 @@
 
     .hero-cv-link:hover { opacity: 0.65; }
 
+    /* ── Hero entrance (plays after preloader clears) ── */
+    .hero-text-side > *, .hero-photo-side { opacity: 0; }
+    body.hero-in .hero-photo-side { animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both; }
+    body.hero-in .hero-text-side > * { animation: heroRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    body.hero-in .hero-text-side > *:nth-child(1) { animation-delay: 0.15s; }
+    body.hero-in .hero-text-side > *:nth-child(2) { animation-delay: 0.24s; }
+    body.hero-in .hero-text-side > *:nth-child(3) { animation-delay: 0.33s; }
+    body.hero-in .hero-text-side > *:nth-child(4) { animation-delay: 0.42s; }
+    body.hero-in .hero-text-side > *:nth-child(5) { animation-delay: 0.51s; }
+    @keyframes heroRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+
     /* ── Hero profile card (Deft-style glass business card) ── */
     .hero-profile-card {
         width: 300px;
@@ -2365,10 +2376,15 @@
                 el.textContent = words[i];
             } else {
                 clearInterval(t);
-                setTimeout(() => pre.classList.add('hide-preloader'), 300);
+                setTimeout(() => {
+                    pre.classList.add('hide-preloader');
+                    document.body.classList.add('hero-in');
+                }, 300);
             }
         }, 280);
     }
+    // Safety: reveal hero even if the preloader path is skipped/errors
+    setTimeout(() => document.body.classList.add('hero-in'), 5000);
 
     const pill = document.getElementById('floatingPill');
     if (pill) {
