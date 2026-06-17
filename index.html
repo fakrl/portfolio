@@ -2616,6 +2616,57 @@
     });
 </script>
 
+    <!-- Micro-interactions: hero tilt + metric count-up -->
+    <script>
+    (function() {
+        const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Subtle 3D tilt on the hero profile card (desktop pointers only)
+        const card = document.querySelector('.hero-profile-card');
+        if (card && motionOK && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            const wrap = card.parentElement;
+            card.style.transition = 'transform 0.18s ease';
+            wrap.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width - 0.5;
+                const py = (e.clientY - r.top) / r.height - 0.5;
+                card.style.transform = `perspective(820px) rotateY(${px * 7}deg) rotateX(${-py * 7}deg)`;
+            });
+            wrap.addEventListener('mouseleave', () => { card.style.transform = ''; });
+        }
+
+        // Count-up for Featured Works metric numbers
+        const nums = document.querySelectorAll('.work-metric-num');
+        if (nums.length) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((en) => {
+                    if (!en.isIntersecting) return;
+                    const el = en.target;
+                    io.unobserve(el);
+                    const raw = el.textContent.trim();
+                    const m = raw.match(/^(\d+(?:\.\d+)?)/);
+                    if (!m || !motionOK) return; // non-numeric (CMS, Figma) or reduced motion → leave as-is
+                    const targetStr = m[1];
+                    const target = parseFloat(targetStr);
+                    const decimals = (targetStr.split('.')[1] || '').length;
+                    const suffix = raw.slice(targetStr.length);
+                    const dur = 1100, start = performance.now();
+                    el.textContent = (0).toFixed(decimals) + suffix;
+                    const tick = (now) => {
+                        const t = Math.min(1, (now - start) / dur);
+                        const eased = 1 - Math.pow(1 - t, 3);
+                        el.textContent = (target * eased).toFixed(decimals) + suffix;
+                        if (t < 1) requestAnimationFrame(tick);
+                        else el.textContent = targetStr + suffix;
+                    };
+                    requestAnimationFrame(tick);
+                });
+            }, { threshold: 0.6 });
+            nums.forEach((n) => io.observe(n));
+        }
+    })();
+    </script>
+
     <!-- Umami Analytics -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="b47339d6-c2d4-42f9-bfed-19a95a9ffc48"></script>
 </body>
