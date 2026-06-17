@@ -133,6 +133,8 @@
         .an-row:first-child { border-top:none; }
         .an-row span:first-child { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
         .an-row span:last-child { color:#fff; font-weight:600; flex-shrink:0; }
+        .an-fallback { grid-column: 1 / -1; background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.5rem; }
+        .an-fallback p { font-size:0.85rem; color:#aaa; line-height:1.6; margin-bottom:1rem; }
         .an-status { font-size:0.78rem; color:#888; margin-top:1rem; }
         .an-status.err { color:#ef4444; }
         @media (max-width: 600px) { .an-lists { grid-template-columns: 1fr; } }
@@ -224,7 +226,7 @@
             <a href="https://cloud.umami.is/share/LTokIwK8tBurYSjR" target="_blank" rel="noopener" class="analytics-open"><i class="fa-solid fa-arrow-up-right-from-square"></i> Full dashboard</a>
         </div>
         <div id="an-stats" class="an-stats"></div>
-        <div class="an-lists">
+        <div class="an-lists" id="an-lists">
             <div class="an-list"><h4>Top pages</h4><div id="an-urls"></div></div>
             <div class="an-list"><h4>Referrers</h4><div id="an-refs"></div></div>
         </div>
@@ -311,10 +313,15 @@ async function loadAnalytics() {
         $("an-stats").innerHTML = cards.map(([l, n]) => `<div class="an-card"><div class="an-num">${n}</div><div class="an-label">${l}</div></div>`).join("");
         $("an-urls").innerHTML = (data.urls || []).length ? data.urls.map(u => anRow(u.x, u.y)).join("") : anRow("No data yet", "");
         $("an-refs").innerHTML = (data.refs || []).length ? data.refs.map(r => anRow(r.x || "Direct", r.y)).join("") : anRow("No data yet", "");
+        document.getElementById("an-lists").style.display = "";
         status.textContent = `Umami · last ${data.days} day(s)`;
     } catch (err) {
-        status.className = "an-status err";
-        status.textContent = "Couldn't load stats: " + err.message + " — works on the live site once UMAMI_API_KEY is set in Netlify.";
+        document.getElementById("an-lists").style.display = "none";
+        $("an-stats").innerHTML = `<div class="an-fallback">
+            <p><i class="fa-solid fa-circle-info"></i> Live inline numbers need Umami's API (paid plan) or a self-hosted Umami. On the free plan, open the full dashboard — it's <strong>public, no login needed</strong>:</p>
+            <button onclick="window.open('https://cloud.umami.is/share/LTokIwK8tBurYSjR','_blank')"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open dashboard (no login)</button>
+        </div>`;
+        status.className = "an-status"; status.textContent = "";
     }
 }
 document.querySelector(".analytics-range").addEventListener("click", e => {
