@@ -56,17 +56,24 @@ if (isNavPage) {
         });
     });
 
-    // Scroll reveal untuk glass-card
+    // Scroll reveal — staggered cards + section titles (hero handled separately)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-            }
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            // stagger by position among glass-card siblings in the same container
+            const sibs = [...el.parentElement.children].filter(c => c.classList.contains('glass-card'));
+            const idx = sibs.indexOf(el);
+            const delay = idx > 0 ? Math.min(idx, 6) * 70 : 0;
+            el.classList.add('visible');
+            el.style.animation = `fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms both`;
+            observer.unobserve(el);
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.glass-card').forEach(card => observer.observe(card));
+    [...document.querySelectorAll('.glass-card, .section-title')]
+        .filter(el => !el.closest('.hero-section'))
+        .forEach(el => observer.observe(el));
 
     // Active nav link on scroll
     window.addEventListener('scroll', () => {
