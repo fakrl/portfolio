@@ -578,6 +578,11 @@
   <canvas id="selfieCanvas" style="display:none"></canvas>
   <canvas id="segCanvas" style="display:none"></canvas>
   <audio id="bgMusic" preload="auto" loop style="display:none"></audio>
+
+  <!-- ==========================================
+       TEMP DEBUG HUD (remove once gesture detection is confirmed working)
+       ========================================== -->
+  <div id="debugHud" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(0,0,0,0.75);color:#0f0;font:11px monospace;padding:4px 8px;white-space:pre-wrap;pointer-events:none;"></div>
   
   <!-- ==========================================
        MAIN SCRIPT
@@ -747,6 +752,7 @@
       videoInput: document.getElementById('videoInput'),
       mainCanvas: document.getElementById('mainCanvas'),
       selfieCanvas: document.getElementById('selfieCanvas'),
+      debugHud: document.getElementById('debugHud'),
       segCanvas: document.getElementById('segCanvas'),
       bgMusic: document.getElementById('bgMusic'),
     };
@@ -754,6 +760,11 @@
     // ==========================================
     // UTILITIES
     // ==========================================
+    function debug(msg) {
+      console.log('[debug]', msg);
+      if (els.debugHud) els.debugHud.textContent = msg;
+    }
+
     function showRevealScreen() {
       els.revealScreen.classList.remove('hidden');
       requestAnimationFrame(() => els.revealScreen.classList.add('active'));
@@ -956,25 +967,28 @@
         console.error('MediaPipe init error:', err);
         hideLoading();
         state.mpLoadError = err.message;
+        debug('MediaPipe init failed: ' + err.message);
         return false;
       }
     }
-    
+
     function onHandResults(results) {
       if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         state.landmarks = results.multiHandLandmarks[0];
         state.handedness = results.multiHandedness?.[0]?.label || 'Right';
-        
+
         // Index finger tip (landmark 8)
         const tip = state.landmarks[8];
         state.indexTip = { x: tip.x, y: tip.y };
-        
+
         // Pinch distance: thumb tip (4) to index tip (8)
         const thumb = state.landmarks[4];
         const dx = thumb.x - tip.x;
         const dy = thumb.y - tip.y;
         state.pinchDistance = Math.sqrt(dx * dx + dy * dy);
-        
+
+        debug(`hand: yes | handedness: ${state.handedness} | gesture: ${state.gestureType || '-'} (${state.gestureState})`);
+
         // Detect gestures
         detectGestures(state.landmarks);
       } else {
@@ -982,6 +996,7 @@
         state.indexTip = null;
         state.pinchDistance = null;
         resetGestureProgress();
+        debug('hand: no');
       }
     }
     
@@ -1142,9 +1157,11 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
+        debug(`camera ok: ${state.videoWidth}x${state.videoHeight}`);
         return true;
       } catch (err) {
         console.error('Camera error:', err);
+        debug('camera error: ' + (err?.message || err));
         return false;
       }
     }
@@ -1177,8 +1194,10 @@
         state.mpBusy = true;
         Promise.resolve(state.hands.send({ image: state.video }))
           .then(() => state.segmentation.send({ image: state.video }))
-          .catch(() => {})
+          .catch((err) => debug('send() error: ' + (err?.message || err)))
           .finally(() => { state.mpBusy = false; });
+      } else if (!state.hands || !state.segmentation) {
+        debug('hands/segmentation not initialized yet');
       }
 
       const ctx = state.ctx;
