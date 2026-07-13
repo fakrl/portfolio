@@ -594,7 +594,7 @@
     const CONFIG = {
       // Model versions (pinned)
       MP_HANDS_VERSION: '0.4.1675469240',
-      MP_SEG_VERSION: '0.1.1675469240',
+      MP_SEG_VERSION: '0.1.1675465747',
       
       // Camera resolution for processing (balance perf/quality)
       PROC_WIDTH: 640,
@@ -966,8 +966,11 @@
       } catch (err) {
         console.error('MediaPipe init error:', err);
         hideLoading();
-        state.mpLoadError = err.message;
-        debug('MediaPipe init failed: ' + err.message);
+        // script.onerror already set a specific mpLoadError (e.g. "hands.js
+        // failed"); a load-failure err here is a bare Event with no
+        // .message, so don't clobber that with "undefined".
+        state.mpLoadError = state.mpLoadError || err?.message || String(err);
+        debug('MediaPipe init failed: ' + state.mpLoadError);
         return false;
       }
     }
@@ -1197,7 +1200,7 @@
           .catch((err) => debug('send() error: ' + (err?.message || err)))
           .finally(() => { state.mpBusy = false; });
       } else if (!state.hands || !state.segmentation) {
-        debug('hands/segmentation not initialized yet');
+        debug(state.mpLoadError ? ('MediaPipe load failed: ' + state.mpLoadError) : 'MediaPipe still loading...');
       }
 
       const ctx = state.ctx;
