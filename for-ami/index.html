@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Untuk Ami ❤️">
+  <title>for Ami</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       CSS VARIABLES & RESET
+       ========================================== */
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f0f0f0;
+      --muted: #888;
+      --accent: rgba(255, 255, 255, 0.85);
+      --accent-glow: rgba(255, 255, 255, 0.35);
+      --card: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.08);
+      --glass: rgba(255,255,255,0.04);
+      --glass-strong: rgba(255,255,255,0.08);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: 0.3s ease;
+      --transition-fast: 0.15s ease;
+      --font-ui: 'Plus Jakarta Sans', sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-ui);
+      -webkit-font-smoothing: antialiased;
+      touch-action: none;
+    }
+    
+    /* ==========================================
+       FULLSCREEN CANVAS LAYER
+       ========================================== */
+    #mainCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+    
+    /* ==========================================
+       UI OVERLAYS (on top of canvas)
+       ========================================== */
+    .ui-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    
+    .ui-layer > * { pointer-events: auto; }
+    
+    .screen {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all var(--transition);
+    }
+    
+    .screen.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .screen.hidden { display: none; }
+
+    /* ==========================================
+       COUNTDOWN OVERLAY (for photo capture)
+       ========================================== */
+    .countdown-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition);
+    }
+    
+    .countdown-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .countdown-number {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 0 60px var(--accent-glow);
+      animation: countdownPop 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    
+    @keyframes countdownPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .countdown-text {
+      position: absolute;
+      bottom: 20%;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+    }
+    
+    /* ==========================================
+       GESTURE PROGRESS BAR (floating during camera)
+       ========================================== */
+    .gesture-hud {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      max-width: 90vw;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(20px);
+      transition: all var(--transition);
+      pointer-events: none;
+    }
+    
+    .gesture-hud.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    .gesture-hud-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    
+    .gesture-progress {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    .gesture-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(255,255,255,0.55), rgba(255,255,255,0.95));
+      border-radius: 2px;
+      transition: width 0.05s linear;
+    }
+    
+    /* ==========================================
+       PUZZLE OVERLAY (on top of canvas)
+       ========================================== */
+    .puzzle-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition);
+    }
+    
+    .puzzle-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .puzzle-overlay > * { pointer-events: auto; }
+    
+    .puzzle-board {
+      aspect-ratio: 1;
+      max-width: min(80vw, 500px);
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 4px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    
+    .puzzle-hint {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+      background: var(--glass);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    
+    /* ==========================================
+       CURSOR DOT (index finger tip)
+       ========================================== */
+    .cursor-dot {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+      pointer-events: none;
+      z-index: 30;
+      transform: translate(-50%, -50%);
+      transition: transform 0.03s linear, opacity 0.2s;
+      opacity: 0;
+      border: 2px solid white;
+    }
+    
+    .cursor-dot.active { opacity: 1; }
+    .cursor-dot.pinching { 
+      background: #4caf50; 
+      box-shadow: 0 0 20px rgba(76,175,80,0.6), 0 0 40px rgba(76,175,80,0.4);
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    
+    /* ==========================================
+       REVEAL SCREEN
+       ========================================== */
+    #revealScreen {
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .reveal-container {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .reveal-message {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: revealUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    
+    @keyframes revealUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .reveal-message .line { display: block; }
+    .reveal-message .line:nth-child(2) { animation-delay: 0.15s; }
+    .reveal-message .line:nth-child(3) { animation-delay: 0.3s; }
+    
+    .reveal-heart {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.5));
+      clip-path: polygon(50% 90%, 10% 40%, 0 50%, 50% 100%, 100% 50%, 90% 40%);
+      animation: heartBeat 1.2s ease-in-out infinite;
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+    
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+      60% { transform: scale(1); }
+    }
+    
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat 3s ease-out forwards;
+    }
+    
+    @keyframes particleFloat {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+    }
+    
+    /* ==========================================
+       RECORDING INDICATOR
+       ========================================== */
+    .rec-indicator {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-fast);
+    }
+    
+    .rec-indicator.active { opacity: 1; }
+    
+    .rec-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: recPulse 1s ease-in-out infinite;
+    }
+    
+    @keyframes recPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.85); }
+    }
+    
+    .rec-time { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: 0.9rem; }
+    
+    /* ==========================================
+       LOADING OVERLAY
+       ========================================== */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      z-index: 1000;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity var(--transition), visibility var(--transition);
+    }
+    
+    .loading-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    .loading-text { font-size: 0.9rem; color: var(--muted); }
+    
+    /* ==========================================
+       INSTRUCTION TOAST (subtle, top)
+       ========================================== */
+    .instruction-toast {
+      position: fixed;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      max-width: 90vw;
+      z-index: 40;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition);
+      pointer-events: none;
+    }
+    
+    .instruction-toast.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    
+    .instruction-toast .gesture-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--glass-strong);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin-left: 0.5rem;
+      font-size: 1.1em;
+    }
+    
+    /* ==========================================
+       RESPONSIVE
+       ========================================== */
+    @media (max-width: 480px) {
+      :root { --radius: 14px; }
+      .screen { padding: 1rem; }
+      .perm-grid { grid-template-columns: 1fr; }
+      .puzzle-board { gap: 3px; padding: 3px; }
+      .gesture-hud { width: 90vw; bottom: 1.5rem; }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- ==========================================
+       MAIN CANVAS (composited video + puzzle + blur)
+       ========================================== -->
+  <canvas id="mainCanvas"></canvas>
+  
+  <!-- ==========================================
+       VIDEO ELEMENT (feeds canvas; kept off-screen rather than
+       display:none, since Chrome throttles frame decoding on
+       display:none video elements)
+       ========================================== -->
+  <video id="videoInput" autoplay playsinline muted style="position:fixed; top:0; left:-9999px; width:1px; height:1px;"></video>
+  
+  <!-- ==========================================
+       LOADING OVERLAY
+       ========================================== -->
+  <div class="loading-overlay hidden" id="loadingOverlay">
+    <div class="spinner"></div>
+    <p class="loading-text" id="loadingText">Memuat...</p>
+  </div>
+  
+  <!-- ==========================================
+       INSTRUCTION TOAST (subtle, top)
+       ========================================== -->
+  <div class="instruction-toast" id="instructionToast">
+    <span id="toastText">Menginisialisasi kamera...</span>
+  </div>
+  
+  <!-- ==========================================
+       COUNTDOWN OVERLAY (for photo capture)
+       ========================================== -->
+  <div class="countdown-overlay" id="countdownOverlay">
+    <div class="countdown-number" id="countdownNumber">3</div>
+    <div class="countdown-text">Tahan gesture untuk foto</div>
+  </div>
+  
+  <!-- ==========================================
+       GESTURE HUD (progress bar during hold)
+       ========================================== -->
+  <div class="gesture-hud" id="gestureHud">
+    <div class="gesture-hud-label" id="hudLabel">Tahan gesture...</div>
+    <div class="gesture-progress">
+      <div class="gesture-progress-bar" id="hudProgress"></div>
+    </div>
+  </div>
+  
+  <!-- ==========================================
+       CURSOR DOT (index finger tip)
+       ========================================== -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  
+  <!-- ==========================================
+       REVEAL SCREEN (shown after thumbs up)
+       ========================================== -->
+  <div class="ui-layer">
+    <!-- ==========================================
+         SCREEN 5: REVEAL (shown after thumbs up)
+         ========================================== -->
+    <div class="screen" id="revealScreen" role="region" aria-label="Pesan Spesial">
+      <div class="particles" id="particles" aria-hidden="true"></div>
+      <div class="reveal-container">
+        <div class="reveal-message" id="revealMessage">
+          <span class="line">Ami,</span>
+          <span class="line">kamu bikin hari-hari jadi lebih berwarna</span>
+          <span class="line">❤️ Mau nggak jadi pacarku?</span>
+        </div>
+        <div class="reveal-heart" aria-hidden="true"></div>
+        <p class="puzzle-hint" id="revealHint">✋ Tahan Open Palm untuk unduh video reaksi &middot; ✌️ Tahan Peace untuk main lagi</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==========================================
+       PUZZLE OVERLAY (shown during puzzle step)
+       ========================================== -->
+  <div class="puzzle-overlay" id="puzzleOverlay">
+    <div class="puzzle-board" id="puzzleBoard" role="grid" aria-label="Puzzle 3x3"></div>
+    <p class="puzzle-hint" id="puzzleHint">Pinch (jempol+telunjuk) untuk ambil ubin, geser ke slot kosong</p>
+  </div>
+  
+  <!-- ==========================================
+       RECORDING INDICATOR
+       ========================================== -->
+  <div class="rec-indicator" id="recIndicator" aria-hidden="true" role="status" aria-live="polite">
+    <span class="rec-dot"></span>
+    <span class="rec-time" id="recTime">00:00</span>
+  </div>
+  
+  <!-- ==========================================
+       HIDDEN ELEMENTS
+       ========================================== -->
+  <canvas id="selfieCanvas" style="display:none"></canvas>
+  <canvas id="segCanvas" style="display:none"></canvas>
+  <audio id="bgMusic" preload="auto" loop style="display:none"></audio>
+  
+  <!-- ==========================================
+       MAIN SCRIPT
+       ========================================== -->
+  <script>
+    // ==========================================
+    // CONFIGURATION
+    // ==========================================
+    const CONFIG = {
+      // Model versions (pinned)
+      MP_HANDS_VERSION: '0.4.1675469240',
+      MP_SEG_VERSION: '0.1.1675469240',
+      
+      // Camera resolution for processing (balance perf/quality)
+      PROC_WIDTH: 640,
+      PROC_HEIGHT: 480,
+      
+      // Throttle render loop
+      TARGET_FPS: 30,
+      FRAME_INTERVAL: 1000 / 30,
+      
+      // Gesture hold time
+      GESTURE_HOLD_MS: 1000,
+      
+      // Delay before auto-retrying camera/mic permission after a denial
+      PERM_RETRY_DELAY_MS: 4000,
+      
+      // Recording
+      RECORDING_MAX_SECONDS: 180,
+      
+      // Music
+      musicUrl: 'music.mp3',
+      
+      // Reveal message
+      messageLines: [
+        'Ami,',
+        'kamu bikin hari-hari jadi lebih berwarna',
+        '❤️ Mau nggak jadi pacarku?'
+      ],
+      
+      // Puzzle
+      puzzleShuffleMoves: 50,
+    };
+    
+    // ==========================================
+    // RUNTIME MIME TYPE DETECTION (iOS Safari fix)
+    // ==========================================
+    function detectVideoMimeType() {
+      const candidates = [
+        'video/mp4',
+        'video/webm;codecs=vp9',
+        'video/webm;codecs=vp8',
+        'video/webm'
+      ];
+      for (const mime of candidates) {
+        if (MediaRecorder.isTypeSupported(mime)) return mime;
+      }
+      return ''; // browser default
+    }
+    
+    // ==========================================
+    // STATE
+    // ==========================================
+    const state = {
+      // Flow
+      currentStep: 'loading', // loading -> camera -> puzzle -> blur -> reveal
+
+      // Media
+      stream: null,
+      video: null,
+      videoWidth: 0,
+      videoHeight: 0,
+      canvas: null,
+      ctx: null,
+      animationId: null,
+      lastFrameTime: 0,
+      
+      // MediaPipe
+      hands: null,
+      segmentation: null,
+      handsLoaded: false,
+      segLoaded: false,
+      mpLoadError: null,
+      mpBusy: false,
+      
+      // Hand tracking
+      landmarks: null,
+      handedness: null,
+      indexTip: null, // {x, y} normalized 0-1
+      pinchDistance: null,
+      isPinching: false,
+      pinchStartPos: null,
+      
+      // Gesture detection
+      gestureState: 'none', // none -> detecting -> holding -> confirmed
+      gestureType: null, // 'open_palm' | 'peace' | 'thumbs_up'
+      gestureStartTime: 0,
+      gestureDebounceFrames: 0,
+      gestureDebounceRequired: 3,
+      
+      // Photo capture
+      photoBlob: null,
+      photoImage: null,
+      countdownActive: false,
+      countdownValue: 3,
+      
+      // Puzzle
+      tiles: [],
+      emptyIndex: 8,
+      puzzleSolved: false,
+      draggedTileIndex: null,
+      dragOffset: { x: 0, y: 0 },
+      
+      // Segmentation
+      segMask: null,
+      blurEnabled: false,
+      
+      // Music
+      musicReady: false,
+      
+      // Recording
+      mediaRecorder: null,
+      recordedChunks: [],
+      recordingStartTime: 0,
+      recordingTimer: null,
+      videoMimeType: '',
+      recordingBlobUrl: null,
+      recordingFileName: '',
+
+      // Canvas size
+      canvasWidth: 0,
+      canvasHeight: 0,
+    };
+    
+    // ==========================================
+    // DOM ELEMENTS
+    // ==========================================
+    const els = {
+      // Screens
+      revealScreen: document.getElementById('revealScreen'),
+
+      // Overlays
+      loadingOverlay: document.getElementById('loadingOverlay'),
+      loadingText: document.getElementById('loadingText'),
+      instructionToast: document.getElementById('instructionToast'),
+      toastText: document.getElementById('toastText'),
+      countdownOverlay: document.getElementById('countdownOverlay'),
+      countdownNumber: document.getElementById('countdownNumber'),
+      gestureHud: document.getElementById('gestureHud'),
+      hudLabel: document.getElementById('hudLabel'),
+      hudProgress: document.getElementById('hudProgress'),
+      cursorDot: document.getElementById('cursorDot'),
+      puzzleOverlay: document.getElementById('puzzleOverlay'),
+      puzzleBoard: document.getElementById('puzzleBoard'),
+      puzzleHint: document.getElementById('puzzleHint'),
+      particles: document.getElementById('particles'),
+      
+      // Reveal
+      revealMessage: document.getElementById('revealMessage'),
+      revealHint: document.getElementById('revealHint'),
+
+      // Recording
+      recIndicator: document.getElementById('recIndicator'),
+      recTime: document.getElementById('recTime'),
+
+      // Hidden
+      videoInput: document.getElementById('videoInput'),
+      mainCanvas: document.getElementById('mainCanvas'),
+      selfieCanvas: document.getElementById('selfieCanvas'),
+      segCanvas: document.getElementById('segCanvas'),
+      bgMusic: document.getElementById('bgMusic'),
+    };
+    
+    // ==========================================
+    // UTILITIES
+    // ==========================================
+    function showRevealScreen() {
+      els.revealScreen.classList.remove('hidden');
+      requestAnimationFrame(() => els.revealScreen.classList.add('active'));
+      state.currentStep = 'reveal';
+    }
+    
+    function showToast(text, duration = 4000) {
+      els.toastText.textContent = text;
+      els.instructionToast.classList.add('active');
+      if (duration > 0) {
+        setTimeout(() => els.instructionToast.classList.remove('active'), duration);
+      }
+    }
+    
+    function hideToast() {
+      els.instructionToast.classList.remove('active');
+    }
+    
+    function updateLoadingText(text) {
+      els.loadingText.textContent = text;
+    }
+    
+    function hideLoading() {
+      els.loadingOverlay.classList.add('hidden');
+    }
+    
+    function showLoading(text = 'Memuat...') {
+      updateLoadingText(text);
+      els.loadingOverlay.classList.remove('hidden');
+    }
+    
+    function formatTime(ms) {
+      const s = Math.floor(ms / 1000);
+      const m = Math.floor(s / 60);
+      const sec = s % 60;
+      return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+    
+    function createParticles(count = 40) {
+      const container = els.particles;
+      container.innerHTML = '';
+      const colors = ['#fff', 'rgba(255,255,255,0.8)', 'rgba(255,255,255,0.6)', 'rgba(255,255,255,0.4)'];
+      
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 8 + 4;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight * 0.5 + window.innerHeight * 0.3;
+        const tx = (Math.random() - 0.5) * 300;
+        const ty = -Math.random() * 400 - 100;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const delay = Math.random() * 0.5;
+        
+        p.style.cssText = `
+          left: ${x}px;
+          top: ${y}px;
+          width: ${size}px;
+          height: ${size}px;
+          background: ${color};
+          --tx: ${tx}px;
+          --ty: ${ty}px;
+          animation-delay: ${delay}s;
+        `;
+        container.appendChild(p);
+      }
+    }
+    
+    // ==========================================
+    // MUSIC HANDLING
+    // ==========================================
+    function initMusic() {
+      const audio = els.bgMusic;
+      audio.src = CONFIG.musicUrl;
+      audio.volume = 0.4;
+      audio.loop = true;
+      
+      function primeAudio() {
+        audio.play().then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+          state.musicReady = true;
+        }).catch(() => {});
+        document.removeEventListener('click', primeAudio);
+        document.removeEventListener('touchstart', primeAudio);
+      }
+      
+      document.addEventListener('click', primeAudio, { once: true });
+      document.addEventListener('touchstart', primeAudio, { once: true });
+      
+      audio.addEventListener('error', (e) => {
+        console.warn('Music load error:', e);
+      });
+    }
+    
+    function playMusic() {
+      if (state.musicReady) {
+        els.bgMusic.currentTime = 0;
+        els.bgMusic.play().catch(() => {});
+      }
+    }
+    
+    function stopMusic() {
+      els.bgMusic.pause();
+      els.bgMusic.currentTime = 0;
+    }
+    
+    // ==========================================
+    // MEDIAPIPE LAZY LOADING
+    // ==========================================
+    async function loadMediaPipeHands() {
+      if (state.handsLoaded) return true;
+      
+      const version = CONFIG.MP_HANDS_VERSION;
+      const url = `https://cdn.jsdelivr.net/npm/@mediapipe/hands@${version}/hands.js`;
+      
+      return new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Hands load timeout')), 8000);
+        const script = document.createElement('script');
+        script.src = url;
+        script.crossOrigin = 'anonymous';
+        script.onload = () => {
+          clearTimeout(timeout);
+          state.handsLoaded = true;
+          resolve(true);
+        };
+        script.onerror = (e) => {
+          clearTimeout(timeout);
+          state.mpLoadError = 'hands.js failed';
+          reject(e);
+        };
+        document.body.appendChild(script);
+      });
+    }
+    
+    async function loadMediaPipeSegmentation() {
+      if (state.segLoaded) return true;
+      
+      const version = CONFIG.MP_SEG_VERSION;
+      const url = `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@${version}/selfie_segmentation.js`;
+      
+      return new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Segmentation load timeout')), 8000);
+        const script = document.createElement('script');
+        script.src = url;
+        script.crossOrigin = 'anonymous';
+        script.onload = () => {
+          clearTimeout(timeout);
+          state.segLoaded = true;
+          resolve(true);
+        };
+        script.onerror = (e) => {
+          clearTimeout(timeout);
+          state.mpLoadError = 'selfie_segmentation.js failed';
+          reject(e);
+        };
+        document.body.appendChild(script);
+      });
+    }
+    
+    async function initMediaPipe() {
+      showLoading('Memuat model AI...');
+      
+      try {
+        // Load both in parallel
+        await Promise.all([
+          loadMediaPipeHands(),
+          loadMediaPipeSegmentation()
+        ]);
+        
+        // Initialize Hands
+        state.hands = new Hands({
+          locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands@${CONFIG.MP_HANDS_VERSION}/${file}`
+        });
+        
+        state.hands.setOptions({
+          maxNumHands: 1,
+          modelComplexity: 1,
+          minDetectionConfidence: 0.7,
+          minTrackingConfidence: 0.7
+        });
+        
+        state.hands.onResults(onHandResults);
+        
+        // Initialize Selfie Segmentation
+        state.segmentation = new SelfieSegmentation({
+          locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@${CONFIG.MP_SEG_VERSION}/${file}`
+        });
+        
+        state.segmentation.setOptions({
+          modelSelection: 1, // 0=general, 1=landscape (better for upper body)
+          minDetectionConfidence: 0.7
+        });
+        
+        state.segmentation.onResults(onSegResults);
+        
+        hideLoading();
+        return true;
+      } catch (err) {
+        console.error('MediaPipe init error:', err);
+        hideLoading();
+        state.mpLoadError = err.message;
+        return false;
+      }
+    }
+    
+    function onHandResults(results) {
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        state.landmarks = results.multiHandLandmarks[0];
+        state.handedness = results.multiHandedness?.[0]?.label || 'Right';
+        
+        // Index finger tip (landmark 8)
+        const tip = state.landmarks[8];
+        state.indexTip = { x: tip.x, y: tip.y };
+        
+        // Pinch distance: thumb tip (4) to index tip (8)
+        const thumb = state.landmarks[4];
+        const dx = thumb.x - tip.x;
+        const dy = thumb.y - tip.y;
+        state.pinchDistance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Detect gestures
+        detectGestures(state.landmarks);
+      } else {
+        state.landmarks = null;
+        state.indexTip = null;
+        state.pinchDistance = null;
+        resetGestureProgress();
+      }
+    }
+    
+    function onSegResults(results) {
+      if (results.segmentationMask) {
+        state.segMask = results.segmentationMask;
+      }
+    }
+    
+    // ==========================================
+    // GESTURE DETECTION
+    // ==========================================
+    function detectGestures(landmarks) {
+      // Finger tip and PIP indices
+      const tips = [4, 8, 12, 16, 20];
+      const pips = [3, 6, 10, 14, 18];
+      
+      const fingersExtended = [];
+      
+      for (let i = 0; i < 5; i++) {
+        if (i === 0) {
+          // Thumb: compare tip.x to IP.x (landmark 3)
+          // For right hand: extended if tip.x > ip.x (pointing right)
+          // For left hand: extended if tip.x < ip.x (pointing left)
+          // MediaPipe's handedness label assumes a mirrored (selfie) input
+          // image; we feed it the raw unmirrored video, so the label is
+          // backwards from the user's actual hand — invert it here.
+          const isRight = state.handedness === 'Left';
+          const extended = isRight 
+            ? landmarks[4].x > landmarks[3].x 
+            : landmarks[4].x < landmarks[3].x;
+          fingersExtended.push(extended);
+        } else {
+          // Other fingers: tip.y < pip.y means extended (pointing up)
+          const extended = landmarks[tips[i]].y < landmarks[pips[i]].y;
+          fingersExtended.push(extended);
+        }
+      }
+      
+      // OPEN PALM: all 5 fingers extended
+      const isOpenPalm = fingersExtended.every(f => f);
+      
+      // PEACE: index(1) + middle(2) extended, ring(3) + pinky(4) folded, thumb ignored
+      const isPeace = fingersExtended[1] && fingersExtended[2] && !fingersExtended[3] && !fingersExtended[4];
+      
+      // THUMBS UP: thumb extended, others folded
+      const isThumbsUp = fingersExtended[0] && !fingersExtended[1] && !fingersExtended[2] && !fingersExtended[3] && !fingersExtended[4];
+      
+      let detectedGesture = null;
+      if (isOpenPalm) detectedGesture = 'open_palm';
+      else if (isPeace) detectedGesture = 'peace';
+      else if (isThumbsUp) detectedGesture = 'thumbs_up';
+      
+      // Gesture state machine
+      const now = Date.now();
+      
+      if (detectedGesture) {
+        if (state.gestureState === 'none' || state.gestureType !== detectedGesture) {
+          state.gestureState = 'detecting';
+          state.gestureType = detectedGesture;
+          state.gestureStartTime = now;
+          state.gestureDebounceFrames = 1;
+        } else if (state.gestureState === 'detecting') {
+          state.gestureDebounceFrames++;
+          if (state.gestureDebounceFrames >= state.gestureDebounceRequired) {
+            state.gestureState = 'holding';
+          }
+        } else if (state.gestureState === 'holding') {
+          const held = now - state.gestureStartTime;
+          const progress = Math.min(held / CONFIG.GESTURE_HOLD_MS, 1);
+          
+          // Update HUD
+          updateGestureHUD(detectedGesture, progress);
+          
+          if (progress >= 1) {
+            state.gestureState = 'confirmed';
+            onGestureConfirmed(detectedGesture);
+          }
+        }
+      } else {
+        resetGestureProgress();
+      }
+    }
+    
+    function updateGestureHUD(gesture, progress) {
+      const labels = {
+        camera: { open_palm: 'Tahan ✋ Open Palm untuk foto' },
+        puzzle: { peace: 'Tahan ✌️ Peace untuk blur + lagu' },
+        blur: { thumbs_up: 'Tahan 👍 Thumbs Up untuk reveal' },
+        reveal: {
+          open_palm: 'Tahan ✋ Open Palm untuk unduh video',
+          peace: 'Tahan ✌️ Peace untuk main lagi'
+        }
+      };
+
+      els.hudLabel.textContent = labels[state.currentStep]?.[gesture] || 'Tahan gesture...';
+      els.hudProgress.style.width = `${progress * 100}%`;
+      els.gestureHud.classList.add('active');
+    }
+    
+    function resetGestureProgress() {
+      if (state.gestureState !== 'none') {
+        state.gestureState = 'none';
+        state.gestureType = null;
+        state.gestureStartTime = 0;
+        state.gestureDebounceFrames = 0;
+        els.gestureHud.classList.remove('active');
+      }
+    }
+    
+    function onGestureConfirmed(gesture) {
+      resetGestureProgress();
+
+      switch (gesture) {
+        case 'open_palm':
+          if (state.currentStep === 'camera') triggerPhotoCountdown();
+          else if (state.currentStep === 'reveal') downloadReactionVideo();
+          break;
+        case 'peace':
+          if (state.currentStep === 'puzzle') enableBlurAndMusic();
+          else if (state.currentStep === 'reveal') resetGame();
+          break;
+        case 'thumbs_up':
+          if (state.currentStep === 'blur') triggerReveal();
+          break;
+      }
+    }
+    
+    // ==========================================
+    // CAMERA SETUP
+    // ==========================================
+    async function setupCamera() {
+      showLoading();
+
+      try {
+        state.stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: 'user',
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+          },
+          audio: { echoCancellation: true, noiseSuppression: true }
+        });
+
+        state.video = els.videoInput;
+        state.video.srcObject = state.stream;
+        await state.video.play();
+
+        // Wait for video metadata
+        await new Promise(resolve => {
+          if (state.video.videoWidth > 0) resolve();
+          else state.video.onloadedmetadata = resolve;
+        });
+
+        state.videoWidth = state.video.videoWidth;
+        state.videoHeight = state.video.videoHeight;
+
+        // Setup canvas
+        state.canvas = els.mainCanvas;
+        state.ctx = state.canvas.getContext('2d', { alpha: false });
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        return true;
+      } catch (err) {
+        console.error('Camera error:', err);
+        return false;
+      }
+    }
+    
+    function resizeCanvas() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      state.canvasWidth = w;
+      state.canvasHeight = h;
+      state.canvas.width = w;
+      state.canvas.height = h;
+    }
+    
+    // ==========================================
+    // RENDER LOOP (compositing)
+    // ==========================================
+    function renderLoop(timestamp) {
+      state.animationId = requestAnimationFrame(renderLoop);
+
+      // Throttle FPS
+      if (timestamp - state.lastFrameTime < CONFIG.FRAME_INTERVAL) return;
+      state.lastFrameTime = timestamp;
+
+      if (!state.video || state.video.readyState < 2) return;
+
+      // Feed the current frame to MediaPipe (hands + segmentation never
+      // run otherwise). Self-throttling: skip while a prior send() is
+      // still resolving so frames don't pile up.
+      if (state.hands && state.segmentation && !state.mpBusy) {
+        state.mpBusy = true;
+        Promise.resolve(state.hands.send({ image: state.video }))
+          .then(() => state.segmentation.send({ image: state.video }))
+          .catch(() => {})
+          .finally(() => { state.mpBusy = false; });
+      }
+
+      const ctx = state.ctx;
+      const cw = state.canvasWidth;
+      const ch = state.canvasHeight;
+      const vw = state.videoWidth;
+      const vh = state.videoHeight;
+
+      // Calculate video draw rect (cover, centered)
+      const scale = Math.max(cw / vw, ch / vh);
+      const drawW = vw * scale;
+      const drawH = vh * scale;
+      const drawX = (cw - drawW) / 2;
+      const drawY = (ch - drawH) / 2;
+
+      // Clear
+      ctx.fillStyle = '#0a0a0a';
+      ctx.fillRect(0, 0, cw, ch);
+
+      // Draw video (mirrored for selfie view)
+      ctx.save();
+      ctx.scale(-1, 1);
+
+      if (state.blurEnabled && state.segMask) {
+        // Draw with background blur using segmentation mask
+        drawWithBlur(ctx, drawX, drawY, drawW, drawH, scale);
+      } else {
+        // Normal video
+        ctx.drawImage(state.video, -drawX - drawW, drawY, drawW, drawH);
+      }
+
+      ctx.restore();
+
+      // Handle pinch drag during puzzle
+      if (state.currentStep === 'puzzle') {
+        checkPinch();
+        handlePinchDrag();
+      }
+
+      // Draw cursor dot (index finger tip)
+      if (state.indexTip && state.currentStep !== 'loading' && state.currentStep !== 'reveal') {
+        drawCursorDot(ctx);
+      }
+
+      // Draw puzzle pieces (if in puzzle step)
+      if (state.currentStep === 'puzzle' && state.photoImage) {
+        drawPuzzle(ctx);
+      }
+    }
+
+    function drawWithBlur(ctx, drawX, drawY, drawW, drawH, scale) {
+      // Draw sharp video first
+      ctx.drawImage(state.video, -drawX - drawW, drawY, drawW, drawH);
+      
+      // Create blurred version on offscreen canvas
+      if (!state.blurCanvas) {
+        state.blurCanvas = document.createElement('canvas');
+        state.blurCtx = state.blurCanvas.getContext('2d');
+      }
+      state.blurCanvas.width = state.canvasWidth;
+      state.blurCanvas.height = state.canvasHeight;
+      state.blurCtx.filter = 'blur(30px)';
+      state.blurCtx.drawImage(state.video, -drawX - drawW, drawY, drawW, drawH);
+      state.blurCtx.filter = 'none';
+      
+      // Draw segmentation mask to segCanvas
+      if (!state.segCanvas) state.segCanvas = document.getElementById('segCanvas');
+      const segCtx = state.segCanvas.getContext('2d');
+      state.segCanvas.width = state.canvasWidth;
+      state.segCanvas.height = state.canvasHeight;
+      
+      // Draw mask (scaled to canvas)
+      segCtx.save();
+      segCtx.translate(state.canvasWidth, 0);
+      segCtx.scale(-1, 1);
+      segCtx.drawImage(state.segMask, 0, 0, state.canvasWidth, state.canvasHeight);
+      segCtx.restore();
+      
+      // Composite: sharp video where mask > 0.5, blurred where mask < 0.5
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.drawImage(state.segCanvas, 0, 0);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalCompositeOperation = 'destination-over';
+      ctx.drawImage(state.blurCanvas, 0, 0);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    
+    function drawCursorDot(ctx) {
+      // Convert normalized landmark to canvas coordinates (mirrored)
+      const x = (1 - state.indexTip.x) * state.canvasWidth;
+      const y = state.indexTip.y * state.canvasHeight;
+      
+      // Update DOM cursor dot
+      els.cursorDot.style.left = `${x}px`;
+      els.cursorDot.style.top = `${y}px`;
+      els.cursorDot.classList.add('active');
+      
+      if (state.isPinching) {
+        els.cursorDot.classList.add('pinching');
+      } else {
+        els.cursorDot.classList.remove('pinching');
+      }
+    }
+    
+    function drawPuzzle(ctx) {
+      const boardSize = Math.min(state.canvasWidth, state.canvasHeight) * 0.85;
+      const tileSize = boardSize / 3;
+      const startX = (state.canvasWidth - boardSize) / 2;
+      const startY = (state.canvasHeight - boardSize) / 2;
+      
+      // Draw board background
+      ctx.save();
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      ctx.lineWidth = 2;
+      ctx.roundRect(startX, startY, boardSize, boardSize, 16);
+      ctx.fill();
+      ctx.stroke();
+      ctx.clip();
+      
+      // Draw tiles
+      const posMap = new Array(9);
+      state.tiles.forEach(t => posMap[t.currentPos] = t);
+      
+      for (let pos = 0; pos < 9; pos++) {
+        const tile = posMap[pos];
+        if (!tile || tile.index === 8) continue; // skip empty
+        
+        const col = pos % 3;
+        const row = Math.floor(pos / 3);
+        const tx = startX + col * tileSize + 2;
+        const ty = startY + row * tileSize + 2;
+        const tSize = tileSize - 4;
+        
+        // If dragging, draw at cursor position
+        if (state.draggedTileIndex === tile.index && state.isPinching) {
+          const cx = (1 - state.indexTip.x) * state.canvasWidth;
+          const cy = state.indexTip.y * state.canvasHeight;
+          ctx.drawImage(state.photoImage, 
+            (tile.index % 3) * (state.photoImage.width / 3), 
+            Math.floor(tile.index / 3) * (state.photoImage.height / 3),
+            state.photoImage.width / 3, state.photoImage.height / 3,
+            cx - tSize/2 + state.dragOffset.x, cy - tSize/2 + state.dragOffset.y,
+            tSize, tSize
+          );
+        } else {
+          ctx.drawImage(state.photoImage,
+            (tile.index % 3) * (state.photoImage.width / 3),
+            Math.floor(tile.index / 3) * (state.photoImage.height / 3),
+            state.photoImage.width / 3, state.photoImage.height / 3,
+            tx, ty, tSize, tSize
+          );
+        }
+        
+        // Tile number
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.font = 'bold 14px Plus Jakarta Sans';
+        ctx.fillText(tile.index + 1, tx + tSize - 20, ty + tSize - 8);
+      }
+      
+      ctx.restore();
+    }
+    
+    // ==========================================
+    // PUZZLE LOGIC
+    // ==========================================
+    async function initPuzzle() {
+      // Create photo image from blob
+      state.photoImage = new Image();
+      state.photoImage.src = URL.createObjectURL(state.photoBlob);
+      
+      await new Promise(resolve => { state.photoImage.onload = resolve; });
+      
+      // Create tiles
+      state.tiles = [];
+      state.emptyIndex = 8;
+      
+      for (let i = 0; i < 9; i++) {
+        state.tiles.push({ index: i, currentPos: i });
+      }
+      
+      shufflePuzzle();
+      state.puzzleSolved = false;
+      state.currentStep = 'puzzle';
+
+      // Show puzzle overlay
+      els.puzzleOverlay.classList.add('active');
+      els.puzzleHint.textContent = 'Pinch (jempol+telunjuk) untuk ambil ubin, geser ke slot kosong';
+
+      // Start recording
+      startRecording();
+    }
+    
+    function shufflePuzzle() {
+      const directions = [-3, 3, -1, 1];
+      
+      for (let i = 0; i < CONFIG.puzzleShuffleMoves; i++) {
+        const emptyPos = state.emptyIndex;
+        const validMoves = [];
+        
+        if (emptyPos >= 3) validMoves.push(-3);
+        if (emptyPos < 6) validMoves.push(3);
+        if (emptyPos % 3 !== 0) validMoves.push(-1);
+        if (emptyPos % 3 !== 2) validMoves.push(1);
+        
+        const move = validMoves[Math.floor(Math.random() * validMoves.length)];
+        swapTiles(emptyPos, emptyPos + move);
+      }
+    }
+    
+    function swapTiles(pos1, pos2) {
+      const tile1 = state.tiles.find(t => t.currentPos === pos1);
+      const tile2 = state.tiles.find(t => t.currentPos === pos2);
+      if (tile1 && tile2) {
+        [tile1.currentPos, tile2.currentPos] = [tile2.currentPos, tile1.currentPos];
+      }
+      state.emptyIndex = pos1;
+    }
+    
+    function checkPuzzleSolved() {
+      return state.tiles.every(t => t.index === t.currentPos);
+    }
+    
+    function handlePinchDrag() {
+      if (!state.indexTip || !state.isPinching) return;
+      
+      const boardSize = Math.min(state.canvasWidth, state.canvasHeight) * 0.85;
+      const tileSize = boardSize / 3;
+      const startX = (state.canvasWidth - boardSize) / 2;
+      const startY = (state.canvasHeight - boardSize) / 2;
+      
+      // Cursor position in board coordinates
+      const cx = (1 - state.indexTip.x) * state.canvasWidth;
+      const cy = state.indexTip.y * state.canvasHeight;
+      
+      // Which tile is under cursor?
+      const relX = cx - startX;
+      const relY = cy - startY;
+      
+      if (relX < 0 || relX > boardSize || relY < 0 || relY > boardSize) return;
+      
+      const col = Math.floor(relX / tileSize);
+      const row = Math.floor(relY / tileSize);
+      const pos = row * 3 + col;
+      
+      if (pos < 0 || pos > 8) return;
+      
+      const tile = state.tiles.find(t => t.currentPos === pos);
+      if (!tile || tile.index === 8) return; // empty tile
+      
+      if (!state.draggedTileIndex) {
+        // Start drag
+        state.draggedTileIndex = tile.index;
+        state.dragOffset = { x: relX - col * tileSize - tileSize/2, y: relY - row * tileSize - tileSize/2 };
+      } else if (state.draggedTileIndex === tile.index) {
+        // Continue drag - check if over empty slot
+        const emptyPos = state.emptyIndex;
+        const emptyCol = emptyPos % 3;
+        const emptyRow = Math.floor(emptyPos / 3);
+        const emptyCenterX = startX + emptyCol * tileSize + tileSize/2;
+        const emptyCenterY = startY + emptyRow * tileSize + tileSize/2;
+        const dist = Math.hypot(cx - emptyCenterX, cy - emptyCenterY);
+        
+        if (dist < tileSize * 0.6) {
+          // Drop into empty slot
+          const draggedTile = state.tiles.find(t => t.index === state.draggedTileIndex);
+          if (draggedTile) {
+            swapTiles(draggedTile.currentPos, emptyPos);
+            state.draggedTileIndex = null;
+            
+            if (checkPuzzleSolved()) {
+              onPuzzleSolved();
+            }
+          }
+        }
+      }
+    }
+    
+    function onPuzzleSolved() {
+      state.puzzleSolved = true;
+      els.puzzleHint.textContent = 'Puzzle selesai! ✌️ Tahan Peace untuk blur + lagu';
+    }
+    
+    // ==========================================
+    // STEP HANDLERS
+    // ==========================================
+    async function triggerPhotoCountdown() {
+      if (state.countdownActive) return;
+      state.countdownActive = true;
+      state.countdownValue = 3;
+      
+      els.countdownOverlay.classList.add('active');
+      els.countdownNumber.textContent = '3';
+      
+      for (let i = 3; i >= 1; i--) {
+        els.countdownNumber.textContent = i;
+        await new Promise(r => setTimeout(r, 800));
+      }
+      
+      els.countdownNumber.textContent = '📸';
+      await capturePhoto();
+      
+      els.countdownOverlay.classList.remove('active');
+      state.countdownActive = false;
+    }
+    
+    async function capturePhoto() {
+      // Freeze current frame
+      const canvas = document.getElementById('selfieCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Use processing resolution for photo
+      canvas.width = state.videoWidth;
+      canvas.height = state.videoHeight;
+      
+      // Draw mirrored
+      ctx.save();
+      ctx.translate(canvas.width, 0);
+      ctx.scale(-1, 1);
+      ctx.drawImage(state.video, 0, 0, canvas.width, canvas.height);
+      ctx.restore();
+      
+      state.photoBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+      
+      // Transition to puzzle
+      showToast('Foto berhasil! 🎉 Puzzle dimulai...', 2000);
+      await initPuzzle();
+    }
+    
+    function enableBlurAndMusic() {
+      state.blurEnabled = true;
+      state.currentStep = 'blur';
+      playMusic();
+      showToast('Background blur aktif + lagu diputar 🎵', 3000);
+      els.puzzleHint.textContent = '👍 Tahan Thumbs Up untuk reveal pesan';
+    }
+    
+    function triggerReveal() {
+      stopRecording();
+      state.blurEnabled = false; // disable blur for reveal screen
+      els.puzzleOverlay.classList.remove('active');
+      
+      // Build message
+      els.revealMessage.innerHTML = CONFIG.messageLines.map((line, i) => 
+        `<span class="line" style="animation-delay: ${i * 0.15}s">${line}</span>`
+      ).join('<br>');
+      
+      createParticles(50);
+      showRevealScreen();
+    }
+    
+    // ==========================================
+    // RECORDING
+    // ==========================================
+    function startRecording() {
+      if (!state.stream) return;
+      
+      try {
+        state.videoMimeType = detectVideoMimeType();
+        console.log('Recording MIME:', state.videoMimeType || 'default');
+        
+        // Get canvas stream (composited)
+        const canvasStream = state.canvas.captureStream(30);
+        const videoTracks = canvasStream.getVideoTracks();
+        const audioTracks = state.stream.getAudioTracks();
+        
+        const combinedStream = new MediaStream([...videoTracks, ...audioTracks]);
+        
+        state.recordedChunks = [];
+        state.mediaRecorder = new MediaRecorder(combinedStream, {
+          mimeType: state.videoMimeType
+        });
+        
+        state.mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) state.recordedChunks.push(e.data);
+        };
+        
+        state.mediaRecorder.onstop = () => {
+          const blob = new Blob(state.recordedChunks, { type: state.mediaRecorder.mimeType });
+          saveRecording(blob);
+        };
+        
+        state.mediaRecorder.start(100);
+        state.recordingStartTime = Date.now();
+        
+        state.recordingTimer = setInterval(() => {
+          const elapsed = Date.now() - state.recordingStartTime;
+          els.recTime.textContent = formatTime(elapsed);
+          
+          if (elapsed >= CONFIG.RECORDING_MAX_SECONDS * 1000) {
+            stopRecording();
+          }
+        }, 200);
+        
+        els.recIndicator.classList.add('active');
+        
+      } catch (err) {
+        console.error('Recording error:', err);
+        tryFallbackRecording();
+      }
+    }
+    
+    function tryFallbackRecording() {
+      const fallbacks = ['video/webm;codecs=vp8', 'video/webm', 'video/mp4'];
+      
+      for (const type of fallbacks) {
+        try {
+          const canvasStream = state.canvas.captureStream(30);
+          const combinedStream = new MediaStream([
+            ...canvasStream.getVideoTracks(),
+            ...state.stream.getAudioTracks()
+          ]);
+          
+          state.mediaRecorder = new MediaRecorder(combinedStream, { mimeType: type });
+          setupRecorderCallbacks();
+          state.mediaRecorder.start(100);
+          state.recordingStartTime = Date.now();
+          state.recordingTimer = setInterval(() => {
+            els.recTime.textContent = formatTime(Date.now() - state.recordingStartTime);
+          }, 200);
+          els.recIndicator.classList.add('active');
+          return;
+        } catch (e) { continue; }
+      }
+      console.error('All recording formats failed');
+    }
+    
+    function setupRecorderCallbacks() {
+      state.mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) state.recordedChunks.push(e.data);
+      };
+      state.mediaRecorder.onstop = () => {
+        const blob = new Blob(state.recordedChunks, { type: state.mediaRecorder.mimeType });
+        saveRecording(blob);
+      };
+    }
+    
+    function stopRecording() {
+      if (state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+        state.mediaRecorder.stop();
+      }
+      if (state.recordingTimer) {
+        clearInterval(state.recordingTimer);
+        state.recordingTimer = null;
+      }
+      els.recIndicator.classList.remove('active');
+      stopMusic();
+    }
+    
+    function saveRecording(blob) {
+      if (state.recordingBlobUrl) URL.revokeObjectURL(state.recordingBlobUrl);
+      const ext = state.videoMimeType.includes('mp4') ? 'mp4' : 'webm';
+      state.recordingBlobUrl = URL.createObjectURL(blob);
+      state.recordingFileName = `reaction-ami-${Date.now()}.${ext}`;
+    }
+
+    // ==========================================
+    // GESTURE-TRIGGERED REVEAL ACTIONS
+    // ==========================================
+    function downloadReactionVideo() {
+      if (!state.recordingBlobUrl) return;
+      const a = document.createElement('a');
+      a.href = state.recordingBlobUrl;
+      a.download = state.recordingFileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Video reaksi diunduh ⬇️', 2500);
+    }
+
+    function resetGame() {
+      // Full reset
+      state.puzzleSolved = false;
+      state.blurEnabled = false;
+      state.photoBlob = null;
+      state.photoImage = null;
+      state.tiles = [];
+      state.emptyIndex = 8;
+      state.draggedTileIndex = null;
+      state.recordedChunks = [];
+      if (state.recordingBlobUrl) {
+        URL.revokeObjectURL(state.recordingBlobUrl);
+        state.recordingBlobUrl = null;
+      }
+      els.recIndicator.classList.remove('active');
+      els.recTime.textContent = '00:00';
+      els.gestureHud.classList.remove('active');
+      els.cursorDot.classList.remove('active');
+      els.puzzleOverlay.classList.remove('active');
+      els.particles.innerHTML = '';
+
+      // Restart from camera step (hide reveal screen, back to raw camera view)
+      els.revealScreen.classList.remove('active');
+      els.revealScreen.classList.add('hidden');
+      state.currentStep = 'camera';
+      showToast('Kembali ke kamera... ✋ Tahan Open Palm untuk ambil foto', 3000);
+    }
+
+    // ==========================================
+    // PINCH DETECTION
+    // ==========================================
+    function checkPinch() {
+      if (state.pinchDistance !== null) {
+        const pinching = state.pinchDistance < 0.05; // threshold
+        
+        if (pinching && !state.isPinching) {
+          state.isPinching = true;
+          state.pinchStartPos = { ...state.indexTip };
+        } else if (!pinching && state.isPinching) {
+          state.isPinching = false;
+          state.draggedTileIndex = null;
+        }
+      }
+    }
+    
+    // ==========================================
+    // ENTER CAMERA STEP (auto, once permission is granted)
+    // ==========================================
+    async function enterCameraStep() {
+      const ok = await initMediaPipe();
+      if (!ok) {
+        showToast('Model AI gagal load, coba refresh halaman', 5000);
+      }
+
+      state.lastFrameTime = performance.now();
+      renderLoop(0);
+
+      state.currentStep = 'camera';
+      showToast('✋ Tahan Open Palm (5 jari) untuk ambil foto', 5000);
+    }
+
+    // ==========================================
+    // CLEANUP
+    // ==========================================
+    window.addEventListener('beforeunload', () => {
+      if (state.stream) state.stream.getTracks().forEach(t => t.stop());
+      if (state.animationId) cancelAnimationFrame(state.animationId);
+      if (state.recordingTimer) clearInterval(state.recordingTimer);
+      stopMusic();
+    });
+
+    // ==========================================
+    // INIT - Auto-start camera flow on page load, no buttons anywhere:
+    // permission -> camera gestures -> puzzle -> blur -> reveal, all gesture-driven
+    // ==========================================
+    async function init() {
+      state.videoMimeType = detectVideoMimeType();
+      console.log('Video MIME type:', state.videoMimeType || 'browser default');
+      initMusic();
+      els.bgMusic.load();
+
+      // Retry permission automatically until granted (no retry button)
+      while (!(await setupCamera())) {
+        await new Promise(r => setTimeout(r, CONFIG.PERM_RETRY_DELAY_MS));
+      }
+
+      await enterCameraStep();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    
+  </script>
+</body>
+</html>
