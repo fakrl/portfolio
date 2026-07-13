@@ -1003,17 +1003,14 @@
       
       for (let i = 0; i < 5; i++) {
         if (i === 0) {
-          // Thumb: compare tip.x to IP.x (landmark 3)
-          // For right hand: extended if tip.x > ip.x (pointing right)
-          // For left hand: extended if tip.x < ip.x (pointing left)
-          // MediaPipe's handedness label assumes a mirrored (selfie) input
-          // image; we feed it the raw unmirrored video, so the label is
-          // backwards from the user's actual hand — invert it here.
-          const isRight = state.handedness === 'Left';
-          const extended = isRight 
-            ? landmarks[4].x > landmarks[3].x 
-            : landmarks[4].x < landmarks[3].x;
-          fingersExtended.push(extended);
+          // Thumb: extended if the tip sits farther from the pinky-side of
+          // the palm (landmark 17) than the thumb's own base joint does.
+          // Distance-based so it works regardless of left/right hand or
+          // how the hand is rotated toward the camera.
+          const tip = landmarks[4], base = landmarks[2], pinkyMcp = landmarks[17];
+          const dTip = Math.hypot(tip.x - pinkyMcp.x, tip.y - pinkyMcp.y);
+          const dBase = Math.hypot(base.x - pinkyMcp.x, base.y - pinkyMcp.y);
+          fingersExtended.push(dTip > dBase);
         } else {
           // Other fingers: tip.y < pip.y means extended (pointing up)
           const extended = landmarks[tips[i]].y < landmarks[pips[i]].y;
