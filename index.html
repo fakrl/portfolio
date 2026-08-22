@@ -16,7 +16,7 @@
     <!-- devicons for skill icons (jsdelivr — includes Postman, Tailwind, Go) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
     <meta name="description" content="Full Stack Developer — building production web apps with Laravel, Vue.js, and Golang. Backend REST APIs, modern frontends, end-to-end.">
     <meta name="keywords" content="Full Stack Developer, Laravel, PHP, Vue.js, Golang, REST API, Backend Developer, Frontend Developer, Software Engineer">
     <meta name="author" content="Fakhrul Mukhlisin">
@@ -1563,7 +1563,7 @@
     </ul>
 </nav>
 
-<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><span class="msym">dark_mode</span></button>
 
 <!-- WA Fixed Button -->
 <a href="https://wa.me/6281315324195" target="_blank" class="wa-fixed-btn" title="Chat on WhatsApp" aria-label="WhatsApp">
@@ -1637,7 +1637,7 @@
                 <h1 class="hero-name">Fakhrul<br>Mukhlisin</h1>
                 <p class="hero-role">Full Stack · Laravel · Vue.js · Golang</p>
                 <p class="hero-bio">
-                    Full Stack Developer Intern at PT Indotech Digital, building production Laravel apps end-to-end. Previously shipped a marketplace REST API in Golang (scored 90.91) and a Vue.js e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68.
+                    Full Stack Developer — most recently at PT Indotech Digital, where I shipped Laravel features to a live product with 20+ pull requests merged to production. Before that: a marketplace REST API in Golang (scored 90.91) and a Vue.js e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Available now</strong> for full-time, part-time, or internship roles.
                 </p>
                 <div class="hero-cta-group">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
@@ -1662,23 +1662,26 @@
                     <div>
                         <p class="exp-card-role">Full Stack Developer Intern</p>
                         <p class="exp-card-company">PT Indotech Digital Group</p>
-                        <p class="exp-card-meta">Jun 2026 – Present · Jakarta (Hybrid)</p>
+                        <p class="exp-card-meta">Jun – Aug 2026 · Jakarta (Hybrid)</p>
                     </div>
-                    <span class="exp-card-badge exp-card-badge--current">Current</span>
+                    <span class="exp-card-badge exp-card-badge--current">20+ PRs</span>
                 </div>
                 <ul class="exp-card-bullets">
-                    <li>Built the Nobel Akademi Bootcamp module end-to-end in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages.</li>
-                    <li>Eager-loaded Eloquent relations to avoid N+1 queries; implemented slug routing, YouTube embeds, and a ratings system.</li>
-                    <li>Worked in a real Git workflow — feature branches, pull requests, and code review.</li>
+                    <li>Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.</li>
+                    <li>Built the Bootcamp module end-to-end: normalized data model (6 related tables), backend, admin CMS, and public pages — with eager-loaded Eloquent relations to avoid N+1 queries.</li>
+                    <li>Delivered the Webinar module (registration flow, Mailable confirmation emails) plus e-portfolio, certification, and corporate pages.</li>
+                    <li>Debugged a production outage down to root cause: a corrupted vendor asset was silently halting JavaScript execution — fixed it and hardened the page so one failing library can't break unrelated features.</li>
                 </ul>
                 <div class="exp-card-tech">
                     <span class="exp-card-tech-label">Technologies Used</span>
                     <div class="exp-card-tags">
-                        <span class="tag">Laravel</span>
+                        <span class="tag">Laravel 11</span>
                         <span class="tag">PHP</span>
                         <span class="tag">MySQL</span>
                         <span class="tag">Eloquent</span>
-                        <span class="tag">Bootstrap</span>
+                        <span class="tag">Blade</span>
+                        <span class="tag">Git / PR Review</span>
+                        <span class="tag">WSL</span>
                     </div>
                 </div>
             </a>
@@ -1844,13 +1847,13 @@
                 </div>
                 <div class="work-card-body">
                     <div>
-                        <h3 class="work-card-title">Nobel Akademi — Bootcamp Module</h3>
+                        <h3 class="work-card-title">Nobel Akademi — LMS Features</h3>
                         <p class="work-card-sub">PT Indotech Digital · Production LMS</p>
                     </div>
-                    <p class="work-card-desc">End-to-end bootcamp module: data model, backend, admin CMS, and public pages. Eager-loaded Eloquent relations, slug routing, YouTube embeds, and ratings.</p>
+                    <p class="work-card-desc">Feature work on a live learning platform: Bootcamp module end-to-end (6-table data model, backend, admin CMS, public pages), Webinar registration with confirmation emails, plus e-portfolio and certification pages — shipped through PR review to production.</p>
                     <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">6</span><span class="work-metric-label">Related Tables</span></div>
-                        <div class="work-metric"><span class="work-metric-num">CMS</span><span class="work-metric-label">Admin Panel</span></div>
+                        <div class="work-metric"><span class="work-metric-num">20+</span><span class="work-metric-label">PRs Merged</span></div>
+                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label">Modules Shipped</span></div>
                     </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
@@ -1967,7 +1970,7 @@
                 <span class="edu-block-label">Education</span>
                 <p class="edu-block-title">Bachelor of Information Systems</p>
                 <p class="edu-block-sub">Universitas Pamulang · Tangerang Selatan</p>
-                <p class="edu-block-sub">Semester 6 · Sep 2023 – Oct 2027 (Expected)</p>
+                <p class="edu-block-sub">Sep 2023 – Oct 2027 (Expected) · 120 credits completed</p>
                 <span class="edu-gpa">GPA 3.68 / 4.00</span>
             </div>
 
@@ -2199,7 +2202,7 @@
         { icon: 'devicon-vscode-plain colored',          label: 'VS Code' },
         { icon: 'devicon-azure-plain colored',           label: 'Azure' },
         { icon: 'devicon-wordpress-plain colored',       label: 'WordPress' },
-        { icon: 'fa-solid fa-wand-magic-sparkles',       label: 'AI-Assisted Dev' },
+        { msym: 'auto_awesome',                          label: 'AI-Assisted Dev' },
     ];
 
     const wrap  = document.getElementById('skillsWrap');
@@ -2225,6 +2228,8 @@
         el.className = 'skill-sphere-item';
         el.innerHTML = s.svg
             ? `${s.svg}<span class="skill-sphere-label">${s.label}</span>`
+            : s.msym
+            ? `<span class="msym" style="font-size:1.9rem">${s.msym}</span><span class="skill-sphere-label">${s.label}</span>`
             : `<i class="${s.icon}"></i><span class="skill-sphere-label">${s.label}</span>`;
         sphere.appendChild(el);
 
@@ -2513,7 +2518,7 @@
             <div class="gb-main">
                 <div class="gb-head">
                     <span class="gb-name">Fakhrul</span>
-                    <span class="gb-badge"><i class="fa-solid fa-circle-check"></i> Owner</span>
+                    <span class="gb-badge"><span class="msym">check_circle</span> Owner</span>
                     <span class="gb-time">· ${relativeTime(r.waktu)}</span>
                 </div>
                 <p class="gb-text">${escapeHtml(r.pesan)}</p>
@@ -2593,7 +2598,7 @@
             document.getElementById("ownerLogoutBtn").addEventListener("click", () => signOut(auth));
         } else {
             bar.innerHTML =
-                `<button id="ownerLoginBtn" class="owner-auth-link"><i class="fa-brands fa-google"></i> Owner? Sign in to reply</button>`;
+                `<button id="ownerLoginBtn" class="owner-auth-link"><span class="msym">login</span> Owner? Sign in to reply</button>`;
             document.getElementById("ownerLoginBtn").addEventListener("click", doLogin);
         }
     }
