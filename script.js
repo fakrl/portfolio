@@ -14,10 +14,68 @@ function setTheme(theme) {
 function updateThemeButton(theme) {
     document.querySelectorAll('.theme-toggle').forEach(btn => {
         btn.innerHTML = theme === 'dark'
-            ? '<i class="fa-solid fa-sun"></i>'
-            : '<i class="fa-solid fa-moon"></i>';
+            ? '<span class="msym">light_mode</span>'
+            : '<span class="msym">dark_mode</span>';
     });
 }
+
+/* ── M3: ganti tema dengan circular reveal (View Transitions API) ── */
+function switchThemeAnimated(theme, evt) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Fallback: browser tanpa View Transitions (Safari/Firefox lama) → transisi CSS biasa
+    if (!document.startViewTransition || reduce) {
+        setTheme(theme);
+        return;
+    }
+
+    // Titik pusat animasi = posisi tombol yang diklik
+    const btn = evt && evt.currentTarget;
+    let x = window.innerWidth - 40, y = 40;
+    if (btn && btn.getBoundingClientRect) {
+        const r = btn.getBoundingClientRect();
+        x = r.left + r.width / 2;
+        y = r.top + r.height / 2;
+    }
+    const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => setTheme(theme));
+
+    transition.ready.then(() => {
+        document.documentElement.animate(
+            {
+                clipPath: [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${endRadius}px at ${x}px ${y}px)`
+                ]
+            },
+            {
+                duration: 520,
+                easing: 'cubic-bezier(0.2, 0, 0, 1)',
+                pseudoElement: '::view-transition-new(root)'
+            }
+        );
+    }).catch(() => {});
+}
+
+/* ── M3: ripple di semua tombol ── */
+document.addEventListener('pointerdown', function (e) {
+    const b = e.target.closest('.btn, .theme-toggle, button');
+    if (!b) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const r = b.getBoundingClientRect();
+    const d = Math.max(r.width, r.height);
+    const s = document.createElement('span');
+    s.className = 'ripple';
+    s.style.width = s.style.height = d + 'px';
+    s.style.left = (e.clientX - r.left - d / 2) + 'px';
+    s.style.top = (e.clientY - r.top - d / 2) + 'px';
+    b.appendChild(s);
+    setTimeout(() => s.remove(), 450);
+}, { passive: true });
 
 // Init theme on load
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,9 +93,9 @@ if (isNavPage) {
     // Theme toggle
     const navThemeBtn = document.getElementById('navThemeBtn');
     if (navThemeBtn) {
-        navThemeBtn.addEventListener('click', () => {
+        navThemeBtn.addEventListener('click', (e) => {
             const newTheme = document.body.classList.contains('light') ? 'dark' : 'light';
-            setTheme(newTheme);
+            switchThemeAnimated(newTheme, e);
         });
     }
 
