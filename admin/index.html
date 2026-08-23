@@ -53,15 +53,11 @@
         button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
         /* M3 ripple */
+        .rail-item{ position:relative; }
         .ripple{ position:absolute; border-radius:50%; transform:scale(0);
             background:currentColor; opacity:0.18; pointer-events:none;
             animation: m3ripple var(--m3-long) var(--m3-decelerate) forwards; }
         @keyframes m3ripple{ to{ transform:scale(2.4); opacity:0; } }
-
-        /* Tabs: M3 secondary-tab motion (animated indicator) */
-        .tabs{ position:relative; }
-        .tab{ transition: background var(--m3-short) var(--m3-standard),
-                          color var(--m3-short) var(--m3-standard); }
 
         /* Cards: emphasized entry */
         .photo-item, .gb-card, .analytics-card{
@@ -117,14 +113,6 @@
         .header-user img { width: 26px; height: 26px; border-radius: 50%; }
 
         /* Tabs */
-        .tabs { display: flex; gap: 0.4rem; padding: 1rem 1.5rem 0; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; }
-        .tab {
-            background: rgba(255,255,255,0.06); color: #aaa; border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px; padding: 0.4rem 1.1rem; font-size: 0.82rem; font-weight: 600;
-            display: inline-flex; align-items: center; gap: 0.45rem;
-        }
-        .tab.active { background: #fff; color: #0a0a0a; border-color: #fff; }
-        .tab:hover:not(.active) { background: rgba(255,255,255,0.12); }
 
         .panel { display: none; padding: 1.25rem 1.5rem 4rem; max-width: 1400px; margin: 0 auto; }
         .panel.active { display: block; }
@@ -178,6 +166,71 @@
         .gb-reply-row input { flex: 1; }
         .gb-reply-row button { white-space: nowrap; }
         .reply-line { display: flex; align-items: baseline; gap: 0.4rem; }
+
+        /* ===== Dashboard shell: M3 navigation rail ===== */
+        #main-screen{ display:none; }
+        #main-screen.ready{ display:flex; min-height:100vh; }
+
+        .rail{
+            width:88px; flex:0 0 88px; display:flex; flex-direction:column;
+            align-items:center; gap:.5rem; padding:.9rem .4rem 1rem;
+            background:var(--surf-1); border-right:1px solid var(--outline);
+            position:sticky; top:0; height:100vh;
+            transition: width var(--m3-medium) var(--m3-standard), flex-basis var(--m3-medium) var(--m3-standard);
+        }
+        .rail-brand{
+            display:flex; flex-direction:column; align-items:center; gap:.15rem;
+            color:#fff; font-size:.66rem; font-weight:700; letter-spacing:.4px;
+            padding:.35rem 0 .8rem; width:100%;
+        }
+        .rail-brand .msym{ font-size:1.5rem; }
+        .rail-nav{ display:flex; flex-direction:column; gap:.25rem; width:100%; }
+        .rail-foot{ margin-top:auto; display:flex; flex-direction:column; gap:.25rem; width:100%; }
+
+        .rail-item{
+            background:transparent; border:none; color:var(--on-surface-var);
+            width:100%; padding:.35rem 0 .3rem; border-radius:14px;
+            display:flex; flex-direction:column; align-items:center; gap:.18rem;
+            font-size:.64rem; font-weight:600; cursor:pointer; overflow:hidden;
+            transition: color var(--m3-short) var(--m3-standard);
+        }
+        /* M3: pil aktif membungkus ikon, bukan seluruh tombol */
+        .rail-ico{
+            width:56px; height:32px; border-radius:16px;
+            display:flex; align-items:center; justify-content:center;
+            transition: background var(--m3-medium) var(--m3-standard),
+                        color var(--m3-short) var(--m3-standard);
+        }
+        .rail-ico .msym{ font-size:1.35rem; }
+        .rail-item:hover .rail-ico{ background:var(--surf-2); }
+        .rail-item:hover{ color:var(--on-surface); }
+        .rail-item.active{ color:#fff; }
+        .rail-item.active .rail-ico{ background:var(--accent); color:#0a0a0a; }
+        .rail-item.active .msym{ font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24; }
+        .rail-lab{ line-height:1.15; text-align:center; }
+
+        .shell{ flex:1; min-width:0; display:flex; flex-direction:column; }
+        .shell header{ position:sticky; top:0; z-index:100; }
+        .shell header h1{ font-size:1.05rem; color:#fff; }
+        .panel{ padding:1.25rem 1.5rem 4rem; max-width:1200px; margin:0; }
+
+        /* ── Mobile: rail jadi navigation bar bawah ── */
+        @media (max-width: 820px){
+            #main-screen.ready{ flex-direction:column; }
+            .rail{
+                position:fixed; bottom:0; left:0; right:0; top:auto;
+                width:100%; flex-basis:auto; height:auto;
+                flex-direction:row; justify-content:space-around;
+                border-right:none; border-top:1px solid var(--outline);
+                padding:.4rem .5rem calc(.4rem + env(safe-area-inset-bottom));
+                background:rgba(15,15,15,.96); backdrop-filter:blur(12px); z-index:200;
+            }
+            .rail-brand, .rail-foot{ display:none; }
+            .rail-nav{ flex-direction:row; justify-content:space-around; }
+            .rail-item{ width:auto; flex:1; }
+            .panel{ padding:1rem 1rem 6rem; }
+            .shell header{ padding:.75rem 1rem; }
+        }
 
         /* Proof editor */
         .pf-bar{ display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; margin-bottom:1rem; }
@@ -257,21 +310,50 @@
 
 <!-- Main -->
 <div id="main-screen">
-    <header>
-        <h1><span class="msym filled">speed</span> Admin Panel</h1>
-        <div class="header-meta">
-            <span class="header-user" id="header-user"></span>
-            <button class="secondary" onclick="location.href='/'"><span class="msym">arrow_back</span> Site</button>
-            <button class="secondary" id="signout-btn">Sign out</button>
+    <!-- Navigation rail (M3) -->
+    <nav class="rail" id="rail" aria-label="Admin sections">
+        <div class="rail-brand" title="Admin Panel">
+            <span class="msym filled">speed</span>
+            <span class="rail-brand-txt">Admin</span>
         </div>
-    </header>
+        <div class="rail-nav">
+            <button class="rail-item active" data-panel="moments" title="Moments">
+                <span class="rail-ico"><span class="msym">photo_library</span></span>
+                <span class="rail-lab">Moments</span>
+            </button>
+            <button class="rail-item" data-panel="guestbook" title="Guestbook">
+                <span class="rail-ico"><span class="msym">forum</span></span>
+                <span class="rail-lab">Guestbook</span>
+            </button>
+            <button class="rail-item" data-panel="proof" title="Proof">
+                <span class="rail-ico"><span class="msym">workspace_premium</span></span>
+                <span class="rail-lab">Proof</span>
+            </button>
+            <button class="rail-item" data-panel="analytics" title="Analytics">
+                <span class="rail-ico"><span class="msym">bar_chart</span></span>
+                <span class="rail-lab">Analytics</span>
+            </button>
+        </div>
+        <div class="rail-foot">
+            <button class="rail-item" onclick="location.href='/'" title="Back to site">
+                <span class="rail-ico"><span class="msym">arrow_back</span></span>
+                <span class="rail-lab">Site</span>
+            </button>
+            <button class="rail-item" id="signout-btn" title="Sign out">
+                <span class="rail-ico"><span class="msym">logout</span></span>
+                <span class="rail-lab">Sign out</span>
+            </button>
+        </div>
+    </nav>
 
-    <div class="tabs">
-        <button class="tab active" data-panel="moments"><span class="msym">photo_library</span> Moments</button>
-        <button class="tab" data-panel="guestbook"><span class="msym">forum</span> Guestbook</button>
-        <button class="tab" data-panel="analytics"><span class="msym">bar_chart</span> Analytics</button>
-        <button class="tab" data-panel="proof"><span class="msym">workspace_premium</span> Proof</button>
-    </div>
+    <!-- Content -->
+    <div class="shell">
+        <header>
+            <h1 id="page-title">Moments</h1>
+            <div class="header-meta">
+                <span class="header-user" id="header-user"></span>
+            </div>
+        </header>
 
     <!-- Moments panel -->
     <section class="panel active" id="panel-moments">
@@ -357,6 +439,7 @@
         </div>
         <p id="an-status" class="an-status"></p>
     </section>
+    </div><!-- /shell -->
 </div>
 
 <script type="module">
@@ -393,7 +476,7 @@ onAuthStateChanged(auth, (user) => {
     const isOwner = user && user.uid === OWNER_UID;
     $("auth-screen").style.display   = user ? "none" : "flex";
     $("denied-screen").style.display = (user && !isOwner) ? "flex" : "none";
-    $("main-screen").style.display   = isOwner ? "block" : "none";
+    $("main-screen").classList.toggle("ready", !!isOwner);
     if (isOwner) {
         $("header-user").innerHTML =
             (user.photoURL ? `<img src="${user.photoURL}" alt="">` : "") +
@@ -402,16 +485,41 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// ── Tabs ──────────────────────────────────
-document.querySelector(".tabs").addEventListener("click", e => {
-    const tab = e.target.closest(".tab");
-    if (!tab) return;
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-    tab.classList.add("active");
-    $("panel-" + tab.dataset.panel).classList.add("active");
-    if (tab.dataset.panel === "analytics" && !anLoaded) { anLoaded = true; loadAnalytics(); }
-    if (tab.dataset.panel === "proof" && !pfLoaded) { pfLoaded = true; pfLoad(); }
+// ── Navigation rail ───────────────────────
+const PANEL_TITLES = {
+    moments: "Moments",
+    guestbook: "Guestbook",
+    proof: "Proof of Work",
+    analytics: "Analytics"
+};
+
+function goPanel(name) {
+    if (!PANEL_TITLES[name]) return;
+    document.querySelectorAll(".rail-item[data-panel]").forEach(b =>
+        b.classList.toggle("active", b.dataset.panel === name));
+    document.querySelectorAll(".panel").forEach(p =>
+        p.classList.toggle("active", p.id === "panel-" + name));
+    $("page-title").textContent = PANEL_TITLES[name];
+    if (location.hash.slice(1) !== name) history.replaceState(null, "", "#" + name);
+    if (name === "analytics" && !anLoaded) { anLoaded = true; loadAnalytics(); }
+    if (name === "proof" && !pfLoaded) { pfLoaded = true; pfLoad(); }
+}
+
+document.getElementById("rail").addEventListener("click", e => {
+    const item = e.target.closest(".rail-item[data-panel]");
+    if (item) goPanel(item.dataset.panel);
+});
+
+// buka panel dari hash (mis. /admin/#proof) — enak buat bookmark
+window.addEventListener("hashchange", () => goPanel(location.hash.slice(1)));
+if (PANEL_TITLES[location.hash.slice(1)]) goPanel(location.hash.slice(1));
+
+// keyboard: Alt+1..4
+document.addEventListener("keydown", e => {
+    if (!e.altKey) return;
+    const keys = Object.keys(PANEL_TITLES);
+    const i = parseInt(e.key, 10) - 1;
+    if (i >= 0 && i < keys.length) { e.preventDefault(); goPanel(keys[i]); }
 });
 
 // ── Analytics (Umami via Netlify function) ──
@@ -674,7 +782,7 @@ $("gb-list").addEventListener("click", async e => {
 <script>
 // M3 ripple on any button
 document.addEventListener('pointerdown', function(e){
-  var b = e.target.closest('button, .tab, .filter-btn');
+  var b = e.target.closest('button, .rail-item, .filter-btn');
   if(!b) return;
   var r = b.getBoundingClientRect();
   var d = Math.max(r.width, r.height);
