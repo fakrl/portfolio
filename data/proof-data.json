@@ -1,0 +1,463 @@
+{
+  "_note": "Sumber data proof page. Diedit lewat /admin/ (tab Proof) → export → timpa file ini → commit.",
+  "_warning": "ID tiap card = anchor yang dipakai di CV (mis. #bnsp, #yandex). JANGAN ganti ID tanpa update CV.",
+  "_generated": "2026-08-22 (diekstrak dari proof/index.html)",
+  "version": 1,
+  "certifications": [
+    {
+      "id": "bnsp",
+      "title": "Junior Web Developer",
+      "credential-id": "62010 2513 4 0005102 2023",
+      "images": [
+        "../image/cert-bnsp-1.webp",
+        "../image/cert-bnsp-2.webp",
+        "../image/cert-bnsp-3.webp",
+        "../image/cert-bnsp-4.webp"
+      ],
+      "link": "https://github.com/fakrl/juniorwebdev",
+      "link-label": "See Documentation →",
+      "badge": "BNSP",
+      "badgeTone": "gold",
+      "date": "Aug 2023",
+      "issuer": "BPPTIK Kominfo · Digitalent Scholarship",
+      "desc": "National professional certification in web development, issued by BNSP (Indonesia's national competency certification body).",
+      "kind": "National Certification",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "PHP",
+        "MySQL"
+      ]
+    },
+    {
+      "id": "evermos",
+      "featured": true,
+      "title": "Backend Developer Intern",
+      "images": [
+        "../image/cert-evermos.webp"
+      ],
+      "project": "#proj-evermos",
+      "project-label": "See Project →",
+      "youtube": "https://youtu.be/blat9DpMBJw",
+      "youtube-label": "Watch Presentation",
+      "badge": "90.91 / 100",
+      "badgeTone": "purple",
+      "date": "Dec 2025",
+      "issuer": "Evermos × Rakamin Academy",
+      "desc": "Built a production-grade marketplace REST API in Golang — 7 modules, clean architecture, JWT auth, multi-image upload, atomic transactions. Final score: 90.91 / 100 (Excellent).",
+      "kind": "Internship Certificate",
+      "tags": [
+        "Golang",
+        "Gin",
+        "MySQL",
+        "JWT",
+        "REST API"
+      ]
+    },
+    {
+      "id": "core-initiative",
+      "featured": true,
+      "title": "Frontend Developer Intern",
+      "images": [
+        "../image/cert-coreinit.webp"
+      ],
+      "project": "#proj-core-initiative",
+      "project-label": "See Project →",
+      "youtube": "https://youtu.be/1DamWnPyG4g",
+      "youtube-label": "Watch Presentation",
+      "badge": "87.79 / 100",
+      "badgeTone": "purple",
+      "date": "Nov 2025",
+      "issuer": "Core Initiative × Rakamin Academy",
+      "desc": "Delivered a pixel-perfect e-commerce catalog in Vue.js 2 — live REST API integration, 3 dynamic UI themes, Figma-to-code, deployed via GitLab CI/CD. Final score: 87.79 / 100 (Excellent).",
+      "kind": "Internship Certificate",
+      "tags": [
+        "Vue.js 2",
+        "REST API",
+        "Figma",
+        "CI/CD",
+        "Firebase"
+      ]
+    },
+    {
+      "id": "huawei",
+      "title": "HCIA Cloud Service",
+      "credential-id": "19511300840-121/FGA/BLSDM.Komdigi/2025",
+      "images": [
+        "../image/cert-huawei-1.webp",
+        "../image/cert-huawei-2.webp",
+        "../image/cert-huawei-3.webp",
+        "../image/cert-huawei-4.webp"
+      ],
+      "badge": "Huawei",
+      "badgeTone": "blue",
+      "date": "2025",
+      "issuer": "Huawei · Digitalent Scholarship KOMDIGI",
+      "desc": "40-hour cloud computing program — Huawei Cloud architecture, core services, and deployment fundamentals.",
+      "kind": "Cloud Computing",
+      "tags": [
+        "Huawei Cloud",
+        "Cloud Architecture"
+      ]
+    },
+    {
+      "id": "google-pm",
+      "title": "Fundamental Project Management",
+      "credential-id": "19510935840-24/FGA/BLSDM.Komdigi/2025",
+      "images": [
+        "../image/cert-pm-1.webp",
+        "../image/cert-pm-2.webp"
+      ],
+      "badge": "Google",
+      "badgeTone": "blue",
+      "date": "2025",
+      "issuer": "Google · Digitalent Scholarship KOMDIGI",
+      "desc": "10-hour Google-issued program covering project planning, execution, stakeholder communication, and team management.",
+      "kind": "Project Management",
+      "tags": [
+        "Agile",
+        "Planning",
+        "Team Management"
+      ]
+    },
+    {
+      "id": "lka-unpam",
+      "title": "Data Management Intern",
+      "images": [
+        "../image/cert-unpam-lka-1.webp",
+        "../image/cert-unpam-lka-2.webp",
+        "../image/cert-unpam-lka-3.webp",
+        "../image/cert-unpam-lka-4.webp"
+      ],
+      "link": "https://www.instagram.com/kemahasiswaanunpam.official/",
+      "link-label": "Instagram LKA →",
+      "badge": "Excellent",
+      "badgeTone": "green",
+      "date": "Jan – Jul 2025",
+      "issuer": "Lembaga Kemahasiswaan & Alumni UNPAM",
+      "desc": "Managed 500+ student records and 1,000+ digital archive files for Tracer Study & Alumni division. Final grade: Sangat Baik (Excellent).",
+      "kind": "Internship Certificate",
+      "tags": [
+        "Data Management",
+        "Excel",
+        "Digital Archiving"
+      ]
+    },
+    {
+      "id": "azure",
+      "title": "Azure AI Fundamentals (AI-900)",
+      "images": [
+        "../image/cert-azure-1.webp",
+        "../image/cert-azure-2.webp",
+        "../image/cert-azure-3.webp",
+        "../image/cert-azure-4.webp",
+        "../image/cert-azure-5.webp",
+        "../image/cert-azure-6.webp",
+        "../image/cert-azure-7.webp"
+      ],
+      "badge": "Microsoft",
+      "badgeTone": "blue",
+      "date": "May 2025",
+      "issuer": "Microsoft · elevAIte · Merdeka Academy",
+      "desc": "Completed Microsoft's Azure AI training — machine learning concepts, cognitive services, and responsible AI principles.",
+      "kind": "Training Certificate",
+      "tags": [
+        "Azure",
+        "Machine Learning",
+        "Cognitive Services"
+      ]
+    },
+    {
+      "id": "yandex",
+      "title": "Linear Models in Machine Learning",
+      "credential-id": "19510714840-160/FGA/BLSDM.Komdigi/2025",
+      "images": [
+        "../image/cert-ml-1.webp",
+        "../image/cert-ml-2.webp",
+        "../image/cert-ml-3.webp",
+        "../image/cert-ml-4.webp",
+        "../image/cert-ml-5.webp",
+        "../image/cert-ml-6.webp",
+        "../image/cert-ml-7.webp"
+      ],
+      "badge": "91 hrs",
+      "badgeTone": "green",
+      "date": "May – Jul 2025",
+      "issuer": "Yandex · Digitalent Scholarship KOMDIGI",
+      "desc": "91-hour intensive program: linear regression, classification, and model evaluation. Closed with an in-class hackathon — ranked #5 out of 926 participants.",
+      "kind": "Machine Learning",
+      "note": "trophy",
+      "tags": [
+        "Python",
+        "Machine Learning",
+        "scikit-learn"
+      ]
+    },
+    {
+      "id": "jurnal",
+      "title": "Academic Journal Publication",
+      "images": [
+        "../image/cert-jurnal.webp"
+      ],
+      "link": "https://portalpublikasi.com/index.php/inomatec/article/view/791",
+      "link-label": "See Journal →",
+      "badge": "Journal",
+      "badgeTone": "blue",
+      "date": "Jan 2026",
+      "issuer": "Information Systems · Universitas Pamulang",
+      "desc": "Published research: web-based decision support system for BLT recipient selection using the SAW (Simple Additive Weighting) method.",
+      "kind": "Academic Publication",
+      "tags": [
+        "PHP",
+        "MySQL",
+        "DSS",
+        "SAW Method"
+      ]
+    },
+    {
+      "id": "ukbi",
+      "title": "UKBI — Madya Level",
+      "credential-id": "SD-BB-1068600",
+      "images": [
+        "../image/cert-ukbi.webp"
+      ],
+      "badge": "Intermediate",
+      "badgeTone": "gold",
+      "date": "Sep 2025",
+      "issuer": "Language Development Agency · Kemdikbud",
+      "desc": "Official Indonesian language proficiency certification. Score: 549, Madya (Intermediate-Advanced) level. Valid until Sep 2027.",
+      "kind": "Language Certification"
+    }
+  ],
+  "awards": [
+    {
+      "id": "award-foto",
+      "title": "1st Place — Photography Competition",
+      "images": [
+        "../image/award-foto-1.webp",
+        "../image/award-foto-2.webp",
+        "../image/award-foto-3.webp"
+      ],
+      "link": "https://www.instagram.com/p/Cn-ast7Sc7k/?img_index=2",
+      "link-label": "See on Instagram →",
+      "badge": "1st Place",
+      "badgeTone": "gold",
+      "date": "Feb 2023",
+      "issuer": "Digital Creation 2 · OPMAZ Ma'had Al-Zaytun",
+      "desc": "Won first place in a creative photography competition at pesantren level — Digital Creation 2 event.",
+      "kind": "Photography Competition"
+    },
+    {
+      "id": "award-ketum",
+      "title": "Chairman — Journalism Study Forum",
+      "images": [
+        "../image/award-ketum-jurnalis.webp",
+        "../image/award-ketum-jurnalis-2.webp",
+        "../image/award-ketum-jurnalis-3.webp"
+      ],
+      "link": "https://www.instagram.com/official_fsj/",
+      "link-label": "Instagram FSJ →",
+      "badge": "Chairman",
+      "badgeTone": "gold",
+      "date": "Oct 2021 – Nov 2022",
+      "issuer": "Forum Studi Jurnalis · Ma'had Al-Zaytun",
+      "desc": "Led 300+ members as Chairman of the Journalism Study Forum. Coordinated 15+ events and technical seminars over a one-year tenure.",
+      "kind": "Leadership"
+    },
+    {
+      "id": "award-diploy",
+      "title": "Active Participant — DiploY × NyokKerja",
+      "images": [
+        "../image/award-event.webp",
+        "../image/award-event-2.webp",
+        "../image/award-event-3.webp",
+        "../image/award-event-4.webp"
+      ],
+      "link": "https://www.instagram.com/p/DNFCqssTKyb/",
+      "link-label": "See Event →",
+      "badge": "Active",
+      "badgeTone": "blue",
+      "date": "2025",
+      "issuer": "DiploY × NyokKerja · 2025",
+      "desc": "Recognized as an active participant in DiploY × NyokKerja 2025 — a career development and entrepreneurship program for young professionals.",
+      "kind": "Career Development"
+    },
+    {
+      "id": "award-lka",
+      "title": "Internship Completion — LKA UNPAM",
+      "images": [
+        "../image/award-lka.webp",
+        "../image/award-lka-2.webp",
+        "../image/award-lka-3.webp",
+        "../image/award-lka-4.webp"
+      ],
+      "link": "https://www.instagram.com/kemahasiswaanunpam.official/",
+      "link-label": "Instagram LKA →",
+      "badge": "Excellent",
+      "badgeTone": "green",
+      "date": "Jan – Jul 2025",
+      "issuer": "Lembaga Kemahasiswaan & Alumni · Universitas Pamulang",
+      "desc": "Certificate handover ceremony — completing a 6-month Data Management internship. Managed 500+ student records and 1,000+ digital archive files. Grade: Sangat Baik (Excellent).",
+      "kind": "Internship"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-nobel",
+      "featured": true,
+      "title": "Nobel Akademi — Bootcamp Module",
+      "images": [],
+      "badge": "Laravel 11",
+      "badgeTone": "purple",
+      "date": "Jun 2026 – Present",
+      "issuer": "PT Indotech Digital Group — Full Stack Internship",
+      "desc": "End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.",
+      "tags": [
+        "Laravel 11",
+        "Eloquent",
+        "Admin CMS",
+        "MySQL",
+        "Bootstrap"
+      ]
+    },
+    {
+      "id": "proj-evermos",
+      "featured": true,
+      "title": "Marketplace REST API",
+      "images": [
+        "../image/proj-evermos-1.webp",
+        "../image/proj-evermos-2.webp",
+        "../image/proj-evermos-3.webp",
+        "../image/proj-evermos-4.webp",
+        "../image/proj-evermos-5.webp",
+        "../image/proj-evermos-6.webp",
+        "../image/proj-evermos-7.webp",
+        "../image/proj-evermos-8.webp",
+        "../image/proj-evermos-9.webp",
+        "../image/proj-evermos-10.webp",
+        "../image/proj-evermos-11.webp",
+        "../image/proj-evermos-12.webp",
+        "../image/proj-evermos-13.webp",
+        "../image/proj-evermos-14.webp"
+      ],
+      "github": "https://github.com/fakrl/evermos-backend",
+      "github-label": "GitHub",
+      "youtube": "https://youtu.be/blat9DpMBJw",
+      "youtube-label": "YouTube",
+      "badge": "Internship",
+      "badgeTone": "purple",
+      "date": "Dec 2025",
+      "issuer": "Evermos × Rakamin — Backend Internship",
+      "desc": "Full marketplace API: Golang, Gin, MySQL, JWT. 7 modul, clean architecture, pagination, multi-image upload, atomic transactions.",
+      "tags": [
+        "Golang",
+        "Gin",
+        "MySQL",
+        "JWT",
+        "REST API"
+      ]
+    },
+    {
+      "id": "proj-core-initiative",
+      "featured": true,
+      "title": "E-Commerce Catalog",
+      "images": [
+        "../image/proj-coreinitiative-1.webp",
+        "../image/proj-coreinitiative-2.webp",
+        "../image/proj-coreinitiative-3.webp",
+        "../image/proj-coreinitiative-4.webp",
+        "../image/proj-coreinitiative-5.webp",
+        "../image/proj-coreinitiative-6.webp",
+        "../image/proj-coreinitiative-7.webp",
+        "../image/proj-coreinitiative-8.webp",
+        "../image/proj-coreinitiative-9.webp",
+        "../image/proj-coreinitiative-10.webp",
+        "../image/proj-coreinitiative-11.webp"
+      ],
+      "github": "https://github.com/fakrl/ecommerce-catalog",
+      "github-label": "GitHub",
+      "youtube": "https://youtu.be/1DamWnPyG4g",
+      "youtube-label": "YouTube",
+      "badge": "Internship",
+      "badgeTone": "purple",
+      "date": "Oct – Nov 2025",
+      "issuer": "Core Initiative × Rakamin — Frontend Internship",
+      "desc": "Katalog e-commerce Vue.js 2, live REST API, 3 dynamic UI themes, pixel-perfect Figma, deployed via GitLab CI/CD.",
+      "tags": [
+        "Vue.js 2",
+        "REST API",
+        "CI/CD",
+        "Firebase"
+      ]
+    },
+    {
+      "id": "proj-cms",
+      "title": "Brand Social Media Presence",
+      "images": [
+        "../image/proj-cms-1.webp",
+        "../image/proj-cms-2.webp",
+        "../image/proj-cms-3.webp",
+        "../image/proj-cms-4.webp"
+      ],
+      "instagram": "https://www.instagram.com/cms_project.id/",
+      "instagram-label": "Instagram",
+      "badge": "Marketing",
+      "badgeTone": "gold",
+      "date": "Jul 2024 – Jul 2025",
+      "issuer": "PT. Cahaya Millenial Sejahtera",
+      "desc": "Part of a 3-person team building and maintaining the company's social media presence from scratch — consistent posting cadence, brand voice, and AI-assisted copywriting via prompt engineering.",
+      "tags": [
+        "Content Strategy",
+        "Prompt Engineering",
+        "AI Tools",
+        "Brand Identity"
+      ]
+    },
+    {
+      "id": "proj-ypkb",
+      "title": "WordPress Web Developer",
+      "images": [
+        "../image/proj-ypkb-1.webp",
+        "../image/proj-ypkb-2.webp",
+        "../image/proj-ypkb-3.webp",
+        "../image/proj-ypkb-4.webp"
+      ],
+      "instagram": "https://www.instagram.com/ypkb_indonesia/",
+      "instagram-label": "Instagram",
+      "badge": "Volunteer",
+      "badgeTone": "blue",
+      "date": "2023 – 2024",
+      "issuer": "Yayasan Peduli Kesejahteraan Bersama (YPKB)",
+      "desc": "Volunteer developer building and maintaining the foundation's website on WordPress. Also appeared as on-camera talent in several Instagram content pieces for @ypkb_indonesia.",
+      "tags": [
+        "WordPress",
+        "Web Development",
+        "Volunteer"
+      ]
+    },
+    {
+      "id": "proj-groomy",
+      "title": "Groomy — Mobile App UI/UX",
+      "images": [
+        "../image/proj-groomy-1.webp",
+        "../image/proj-groomy-2.webp",
+        "../image/proj-groomy-3.webp",
+        "../image/proj-groomy-4.webp"
+      ],
+      "link": "https://www.figma.com/proto/QOROH8IRGJ7lOC9Pv0WlHk/Groomy.uas?node-id=16-5&t=r2QERRCyyFLjK0nr-1",
+      "link-label": "View Prototype →",
+      "badge": "UI/UX",
+      "badgeTone": "purple",
+      "date": "2024",
+      "issuer": "UAS Project · Information Systems · UNPAM",
+      "desc": "End-to-end mobile UI/UX design for an on-demand grooming and beauty service booking app. Covers user flows, component library, and interactive prototype.",
+      "tags": [
+        "Figma",
+        "UI/UX",
+        "Prototyping",
+        "Mobile Design"
+      ]
+    }
+  ]
+}
