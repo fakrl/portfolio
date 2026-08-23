@@ -179,6 +179,31 @@
         .gb-reply-row button { white-space: nowrap; }
         .reply-line { display: flex; align-items: baseline; gap: 0.4rem; }
 
+        /* Proof editor */
+        .pf-bar{ display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; margin-bottom:1rem; }
+        .pf-cats{ display:flex; gap:.4rem; flex-wrap:wrap; }
+        .pf-actions{ margin-left:auto; display:flex; gap:.5rem; }
+        .pf-hint{ font-size:.78rem; color:var(--on-surface-var); margin-bottom:.9rem; }
+        .pf-list{ display:flex; flex-direction:column; gap:.75rem; max-width:900px; }
+        .pf-card{ background:var(--surf-1); border:1px solid var(--outline); border-radius:12px; overflow:hidden; }
+        .pf-card__head{ display:flex; align-items:center; gap:.6rem; padding:.75rem 1rem; cursor:pointer; }
+        .pf-card__head:hover{ background:var(--surf-2); }
+        .pf-card__id{ font-size:.7rem; color:var(--on-surface-var); font-family:ui-monospace,monospace; background:var(--surf-2); padding:2px 8px; border-radius:20px; }
+        .pf-card__t{ font-size:.9rem; font-weight:600; color:#fff; flex:1; }
+        .pf-card__body{ display:none; padding:0 1rem 1rem; flex-direction:column; gap:.6rem; }
+        .pf-card.open .pf-card__body{ display:flex; }
+        .pf-card.dirty{ border-color:rgba(255,255,255,.34); }
+        .pf-row{ display:flex; flex-direction:column; gap:.25rem; }
+        .pf-row label{ font-size:.72rem; color:var(--on-surface-var); text-transform:uppercase; letter-spacing:.4px; }
+        .pf-row input, .pf-row textarea{ width:100%; }
+        .pf-row textarea{ min-height:60px; resize:vertical; }
+        .pf-warn{ font-size:.72rem; color:var(--state-warn); }
+        .pf-export-box{ margin-top:1.25rem; background:var(--surf-1); border:1px solid var(--outline); border-radius:12px; padding:1rem; max-width:900px; }
+        .pf-export-head{ display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.5rem; flex-wrap:wrap; }
+        .pf-steps{ font-size:.78rem; color:var(--on-surface-var); margin-bottom:.6rem; }
+        .pf-steps code{ background:var(--surf-2); padding:1px 6px; border-radius:4px; }
+        #pf-json{ width:100%; min-height:260px; font-family:ui-monospace,monospace; font-size:.72rem; line-height:1.5; resize:vertical; }
+
         /* Analytics */
         .analytics-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem; max-width: 620px; }
         .analytics-card h3 { color: #fff; font-size: 1rem; margin-bottom: 0.5rem; }
@@ -245,6 +270,7 @@
         <button class="tab active" data-panel="moments"><span class="msym">photo_library</span> Moments</button>
         <button class="tab" data-panel="guestbook"><span class="msym">forum</span> Guestbook</button>
         <button class="tab" data-panel="analytics"><span class="msym">bar_chart</span> Analytics</button>
+        <button class="tab" data-panel="proof"><span class="msym">workspace_premium</span> Proof</button>
     </div>
 
     <!-- Moments panel -->
@@ -285,6 +311,36 @@
     </section>
 
     <!-- Analytics panel -->
+    <!-- Proof panel: editor data/proof-data.json -->
+    <section class="panel" id="panel-proof">
+        <div class="pf-bar">
+            <div class="pf-cats">
+                <button class="filter-btn active" data-pf="certifications">Certifications</button>
+                <button class="filter-btn" data-pf="awards">Awards</button>
+                <button class="filter-btn" data-pf="projects">Projects</button>
+            </div>
+            <div class="pf-actions">
+                <button class="secondary" id="pf-add"><span class="msym">add</span> Tambah</button>
+                <button id="pf-export"><span class="msym">download</span> Export JSON</button>
+            </div>
+        </div>
+        <p class="pf-hint" id="pf-hint">Memuat…</p>
+        <div id="pf-list" class="pf-list"></div>
+
+        <div class="pf-export-box" id="pf-export-box" hidden>
+            <div class="pf-export-head">
+                <strong>Hasil export</strong>
+                <div>
+                    <button class="secondary" id="pf-copy"><span class="msym">content_copy</span> Copy</button>
+                    <button class="secondary" id="pf-dl"><span class="msym">save</span> Download</button>
+                    <button class="danger" id="pf-close"><span class="msym">close</span></button>
+                </div>
+            </div>
+            <p class="pf-steps">Timpa <code>data/proof-data.json</code> di repo → commit → push. Proof page langsung ikut berubah.</p>
+            <textarea id="pf-json" spellcheck="false"></textarea>
+        </div>
+    </section>
+
     <section class="panel" id="panel-analytics">
         <div class="analytics-head">
             <div class="analytics-range">
@@ -355,6 +411,7 @@ document.querySelector(".tabs").addEventListener("click", e => {
     tab.classList.add("active");
     $("panel-" + tab.dataset.panel).classList.add("active");
     if (tab.dataset.panel === "analytics" && !anLoaded) { anLoaded = true; loadAnalytics(); }
+    if (tab.dataset.panel === "proof" && !pfLoaded) { pfLoaded = true; pfLoad(); }
 });
 
 // ── Analytics (Umami via Netlify function) ──
@@ -629,6 +686,161 @@ document.addEventListener('pointerdown', function(e){
   b.appendChild(s);
   setTimeout(function(){ s.remove(); }, 450);
 }, {passive:true});
+
+// ── Proof editor (data/proof-data.json) ──
+let pfLoaded = false, pfData = null, pfCat = "certifications", pfDirty = false;
+
+const PF_FIELDS = [
+  ["title","Judul"],["issuer","Issuer / sub-judul"],["date","Tanggal (mis. Aug 2023)"],
+  ["badge","Badge"],["badgeTone","Badge tone (gold/purple/…)"],["kind","Jenis (mis. National Certification)"],
+  ["desc","Deskripsi"],["credential-id","Credential ID"],["note","Catatan kecil"],
+  ["link","Link"],["link-label","Label link"],
+  ["github","GitHub"],["github-label","Label GitHub"],
+  ["youtube","YouTube"],["youtube-label","Label YouTube"],
+  ["instagram","Instagram"],["instagram-label","Label Instagram"],
+  ["project","Anchor project (mis. #proj-evermos)"],["project-label","Label project"]
+];
+
+async function pfLoad() {
+  const hint = $("pf-hint");
+  try {
+    const r = await fetch("/data/proof-data.json?v=" + Date.now());
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    pfData = await r.json();
+    pfRender();
+  } catch (err) {
+    hint.textContent = "Gagal memuat /data/proof-data.json — " + err.message;
+    hint.style.color = "var(--state-warn)";
+  }
+}
+
+function pfCount() {
+  return ["certifications","awards","projects"]
+    .map(c => `${c}: ${(pfData[c]||[]).length}`).join(" · ");
+}
+
+function pfRender() {
+  const list = $("pf-list");
+  const items = pfData[pfCat] || [];
+  $("pf-hint").innerHTML = pfCount() +
+    ' — <strong>ID = anchor yang dipakai di CV</strong>, jangan diganti sembarangan.';
+  list.innerHTML = "";
+  items.forEach((it, i) => list.appendChild(pfCard(it, i)));
+}
+
+function pfCard(it, idx) {
+  const el = document.createElement("div");
+  el.className = "pf-card";
+  const imgs = (it.images || []).join("\n");
+  el.innerHTML = `
+    <div class="pf-card__head">
+      <span class="msym">${it.featured ? "star" : "workspace_premium"}</span>
+      <span class="pf-card__t">${it.title || "(tanpa judul)"}</span>
+      <span class="pf-card__id">#${it.id}</span>
+      <span class="msym">expand_more</span>
+    </div>
+    <div class="pf-card__body">
+      <div class="pf-row">
+        <label>ID / anchor</label>
+        <input data-k="id" value="${(it.id||"").replace(/"/g,"&quot;")}">
+        <span class="pf-warn">Mengubah ini bisa mematikan link di CV yang sudah dikirim.</span>
+      </div>
+      ${PF_FIELDS.map(([k,lab]) => `
+        <div class="pf-row">
+          <label>${lab}</label>
+          ${k === "desc"
+            ? `<textarea data-k="${k}">${it[k] ? String(it[k]).replace(/</g,"&lt;") : ""}</textarea>`
+            : `<input data-k="${k}" value="${it[k] ? String(it[k]).replace(/"/g,"&quot;") : ""}">`}
+        </div>`).join("")}
+      <div class="pf-row">
+        <label>Gambar (satu URL per baris)</label>
+        <textarea data-k="images">${imgs}</textarea>
+      </div>
+      <div class="pf-row">
+        <label>Tag (pisahkan dengan koma)</label>
+        <input data-k="tags" value="${(it.tags||[]).join(", ").replace(/"/g,"&quot;")}">
+      </div>
+      <div class="photo-actions">
+        <button class="secondary" data-act="dup"><span class="msym">content_copy</span> Duplikat</button>
+        <button class="danger" data-act="del"><span class="msym">delete</span> Hapus</button>
+      </div>
+    </div>`;
+
+  el.querySelector(".pf-card__head").addEventListener("click", () => el.classList.toggle("open"));
+
+  el.querySelectorAll("[data-k]").forEach(inp => {
+    inp.addEventListener("input", () => {
+      const k = inp.dataset.k;
+      let v = inp.value;
+      const obj = pfData[pfCat][idx];
+      if (k === "images") obj.images = v.split("\n").map(x => x.trim()).filter(Boolean);
+      else if (k === "tags") obj.tags = v.split(",").map(x => x.trim()).filter(Boolean);
+      else if (v === "") delete obj[k];
+      else obj[k] = v;
+      el.classList.add("dirty");
+      pfDirty = true;
+      if (k === "title") el.querySelector(".pf-card__t").textContent = v || "(tanpa judul)";
+      if (k === "id") el.querySelector(".pf-card__id").textContent = "#" + v;
+    });
+  });
+
+  el.querySelector('[data-act="del"]').addEventListener("click", () => {
+    if (!confirm(`Hapus "${it.title || it.id}"? Link #${it.id} di CV akan mati.`)) return;
+    pfData[pfCat].splice(idx, 1); pfDirty = true; pfRender();
+  });
+  el.querySelector('[data-act="dup"]').addEventListener("click", () => {
+    const copy = JSON.parse(JSON.stringify(pfData[pfCat][idx]));
+    copy.id = copy.id + "-copy";
+    pfData[pfCat].splice(idx + 1, 0, copy); pfDirty = true; pfRender();
+  });
+  return el;
+}
+
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-pf]");
+  if (c) {
+    document.querySelectorAll("[data-pf]").forEach(b => b.classList.remove("active"));
+    c.classList.add("active"); pfCat = c.dataset.pf; pfRender();
+  }
+});
+
+$("pf-add")?.addEventListener("click", () => {
+  if (!pfData) return;
+  pfData[pfCat].unshift({ id: "baru-" + Date.now().toString(36), title: "Judul baru", images: [] });
+  pfDirty = true; pfRender();
+});
+
+$("pf-export")?.addEventListener("click", () => {
+  if (!pfData) return;
+  const ordered = {
+    _note: pfData._note, _warning: pfData._warning,
+    _generated: new Date().toISOString().slice(0, 10),
+    version: (pfData.version || 1),
+    certifications: pfData.certifications || [],
+    awards: pfData.awards || [],
+    projects: pfData.projects || []
+  };
+  $("pf-json").value = JSON.stringify(ordered, null, 2) + "\n";
+  $("pf-export-box").hidden = false;
+  $("pf-export-box").scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+
+$("pf-copy")?.addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("pf-json").value); alert("JSON dicopy."); }
+  catch { $("pf-json").select(); }
+});
+$("pf-dl")?.addEventListener("click", () => {
+  const b = new Blob([$("pf-json").value], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(b); a.download = "proof-data.json"; a.click();
+  URL.revokeObjectURL(a.href);
+});
+$("pf-close")?.addEventListener("click", () => { $("pf-export-box").hidden = true; });
+
+window.addEventListener("beforeunload", e => {
+  if (pfDirty) { e.preventDefault(); e.returnValue = ""; }
+});
+
 </script>
 </body>
 </html>
