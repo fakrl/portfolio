@@ -228,6 +228,24 @@
       "issuer": "Language Development Agency · Kemdikbud",
       "desc": "Official Indonesian language proficiency certification. Score: 549, Madya (Intermediate-Advanced) level. Valid until Sep 2027.",
       "kind": "Language Certification"
+    },
+    {
+      "id": "ensa",
+      "title": "Enterprise Networking, Security & Automation (ENSA)",
+      "images": [],
+      "badge": "96%",
+      "badgeTone": "blue",
+      "date": "2026",
+      "issuer": "Cisco Networking Academy",
+      "desc": "Course-completion exam covering enterprise routing/switching, security hardening, and network automation — final assessment completed in Cisco Packet Tracer Physical Mode (rack-mounting, cabling, OSPFv2, NAT/PAT, ACLs, SSH, TFTP backup, IOS upgrade). Score: 96%.",
+      "kind": "Networking",
+      "tags": [
+        "Cisco IOS",
+        "OSPFv2",
+        "NAT/PAT",
+        "ACL",
+        "Network Security"
+      ]
     }
   ],
   "awards": [

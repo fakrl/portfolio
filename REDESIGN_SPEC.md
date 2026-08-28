@@ -96,6 +96,75 @@ Disusun: 16 Jun 2026. Jalankan section per section sambil cek preview live.
 
 ---
 
+---
+
+## FASE 3 — Adaptasi referensi Renlenon (renlenon.vercel.app) · Aug 2026
+
+Konteks: Fase 1 & 2 di atas SEBAGIAN BESAR SUDAH SELESAI (M3 icons, admin Google auth, guestbook threaded, Umami terpasang, positioning Full Stack). Section ini adalah lapisan baru, bukan pengganti — pertahankan glassmorphism + dark/light toggle yang sudah ada. **Ren pakai flat dark minimal — kita TIDAK ikut visual itu, cuma struktur/kontennya.**
+
+Referensi hidup: https://renlenon.vercel.app/ (homepage) dan https://renlenon.vercel.app/keepr (case-study page).
+
+### T9. Featured Build spotlight (baru, di bawah hero, sebelum "Featured Works" grid)
+- 1 project tunggal di-highlight besar (bukan grid): screenshot besar + judul + 1 paragraf cerita + tag stack + tombol "Read case study →" (link ke halaman case-study, lihat T13).
+- Kandidat pertama: **Nobel Akademi — Bootcamp Module** (butuh screenshot dulu, masih placeholder — lihat catatan blocker lama) ATAU **Evermos** (sudah ada 14 screenshot siap pakai di `image/proj-evermos-*.webp`).
+- Acceptance: ada 1 section baru "Featured Build" yang jelas beda dari grid "Featured Works" biasa.
+
+### T10. Tech chip inline di hero-bio
+- Ganti sebagian `<p class="hero-bio">` (baris ±1639-1641) supaya nama teknologi utama (Laravel, Golang, Vue.js) tampil sebagai chip kecil inline di tengah kalimat, bukan teks polos. Style baru `.bio-chip` (badge kecil, ikon devicon + label, inline-block, vertical-align middle).
+- Acceptance: minimal 3 tech chip inline di kalimat hero-bio.
+
+### T11. Badge "IN PROGRESS" di project card
+- Tambah varian badge baru di card project (`.exp-card-badge--progress` atau sejenis di `components.css`), dipakai kalau ada project yang statusnya belum kelar (misal NobiLive nanti pas sudah masuk).
+- Acceptance: badge siap dipakai, tidak harus langsung dipasang di project manapun sekarang (belum ada yang berstatus progress di homepage).
+
+### T12. "Outside the IDE" section (baru, sebelum footer)
+- Section ringkas: judul + 1 kalimat pembuka + tag list hobi (Main Gitar, Naik Gunung/Camping, Nonton — Interstellar/CODA/The 100, Podcast — Raditya Dika/Malaka Project). Ambil dari `info dasar about fakrul.md` bagian "KEHIDUPAN & MINAT".
+- Style: konsisten glass-card, bukan flat kaya Ren.
+- Acceptance: section baru muncul, singkat (tidak lebih dari 4-5 baris + tag row).
+
+### T13. Template case-study project (halaman dinamis, opsi 2 yang dipilih)
+- File baru: `project/index.html` (satu template, dipakai semua project, dibedakan lewat query param `?id=`).
+- Baca data dari `data/proof-data.json` (field id harus match salah satu entry di `projects[]`).
+- **Field baru yang perlu ditambah ke schema `proof-data.json` per project** (opsional per-item, kalau kosong section terkait disembunyikan):
+  ```
+  "caseStudy": {
+    "whyBuilt": "...",       // 1 paragraf, personal motivation
+    "goal": "...",           // 1 paragraf, tujuan project
+    "overview": { "role": "...", "period": "...", "type": "...", "architecture": "..." },
+    "whatItDoes": ["...", "..."],           // checklist bullets
+    "screens": [
+      { "icon": "msym-name", "title": "...", "desc": "...", "images": ["../image/..."] }
+    ],
+    "techNote": "..."        // 1 paragraf technical-depth (kenapa pilih teknologi X)
+  }
+  ```
+- Layout template: breadcrumb "← Back to Home" → eyebrow "FEATURED BUILD" + judul + ringkasan → hero image besar → 2 kolom "Why Built It" / "Project Goal" → grid meta "Project Overview" → checklist "What It Does" → "Key Screens" (per screen: ikon+judul+desc+carousel gambar, dots pagination kalau >1 image) → "Tech Stack" (chip + `techNote`) → CTA penutup ("Open to opportunities" + link CV/email, BUKAN "let's collaborate" ala freelance Ren).
+- Kalau `caseStudy` kosong untuk suatu id → tampilkan pesan graceful "Case study coming soon" + link balik, JANGAN page kosong/error.
+- Pilot pertama: **Evermos** (`proj-evermos`, bahan lengkap) atau **Core Initiative** (`proj-core-initiative`).
+- Acceptance: `project/index.html?id=proj-evermos` render lengkap dari data JSON, tidak ada hardcode per-project di HTML.
+
+### T14. Redesign Skills section — dari 3D sphere ke grouped chip list
+- **Keputusan berubah dari REDESIGN_SPEC lama (yang bilang "pertahankan skill globe")** — setelah lihat referensi Ren, disepakati static chip lebih scannable buat recruiter. Turunkan prioritas 3D sphere, boleh disimpan sebagai elemen dekoratif kecil di tempat lain (opsional), tapi BUKAN representasi utama skill lagi.
+- Ganti isi `<section id="skills">` (baris ±1954-1960 di `index.html`) dan hapus/nonaktifkan script sphere (baris ±2182-akhir file, cari `Skills 3D Sphere`).
+- Data SKILLS yang sudah ada (baris 2185-2206) dipindah, dikelompokkan per kategori mengikuti struktur CV (`gen_cv.js` skillLine): **Languages** (PHP, JavaScript, Golang, SQL, HTML5, CSS3), **Frameworks** (Laravel, Vue.js, Bootstrap, Tailwind), **Databases** (MySQL, Firebase), **Tools & DevOps** (Git, GitHub, Postman, VS Code, Figma), **AI & Cloud** (Azure, AI-Assisted Dev).
+- Layout: per kategori = label kecil + row chip (ikon devicon + nama), pakai `.tag`/glass-chip style yang sudah ada di `components.css` (konsisten sama tag di exp-card), BUKAN card flat ala Ren.
+- Acceptance: semua 20 skill lama tetap ada, tersusun per kategori, bisa di-scan tanpa interaksi drag/hover apapun.
+
+### T15. Redesign project card layout (grid "Featured Works" & proof cards)
+- Adaptasi urutan info dari Ren: gambar besar di atas (frame/bezel tipis) → judul (bold) → role/subtitle di baris terpisah (bukan digabung ke judul) → 1-2 kalimat desc → tag teknologi row di paling bawah.
+- Terapkan ke `.exp-card` grid Featured Works di `index.html` DAN card di `proof/index.html` biar konsisten.
+- **Pertahankan** glass-card surface (blur/translucency) yang sudah ada — cuma urutan & hierarki info yang diadaptasi, bukan visual base-nya.
+- Acceptance: card project baru punya pemisahan judul/role/desc/tag yang jelas, masih terlihat glassmorphic bukan flat.
+
+### T16. Visitor counter (Firebase, bukan expose Umami)
+- Reuse Firebase project yang sudah dipakai admin/guestbook. Tambah 1 collection/document counter (misal `stats/visits`, field `count`).
+- Client-side: on page load, cek `localStorage.getItem('rb_visited')` — kalau belum ada, increment counter via Firebase (transaction/increment atom) lalu set flag localStorage supaya refresh berikutnya nggak nge-gandain angka.
+- Tampilkan sebagai pill kecil di footer: "Visited by {count} people" + opsional avatar stack dekoratif (pakai ikon generik/dicebear, BUKAN foto asli — privasi).
+- **JANGAN** coba tarik angka dari Umami Cloud API di client-side (butuh token privat, risiko bocor kalau ditaro di JS publik).
+- Acceptance: angka bertambah 1 per visitor unik (per browser), tidak reset kalau di-refresh berkali-kali oleh orang yang sama.
+
+---
+
 ## Catatan & blocker
 - Nobel: izin SUDAH di-ACC lead. Butuh screenshot UI buat kartu Featured Works (sementara placeholder). Tetap sensor kredensial/data/kode internal.
 - Jangan klaim "Claude" sebagai skill inti — framing "AI-assisted development".
