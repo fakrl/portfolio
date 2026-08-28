@@ -780,6 +780,13 @@ $("gb-list").addEventListener("click", async e => {
 <!-- Admin page intentionally not tracked by analytics -->
 
 <script>
+// NOTE: this is a classic <script> block, separate from the <script type="module">
+// above (which owns Firebase + `const $`). Module scope isn't shared with classic
+// scripts, so `$` must be redefined here too — otherwise every $() call below throws
+// "$ is not defined" and silently kills this whole block (that's what was breaking
+// the Proof panel: pfLoad() threw before it could ever call pfRender()).
+const $ = id => document.getElementById(id);
+
 // M3 ripple on any button
 document.addEventListener('pointerdown', function(e){
   var b = e.target.closest('button, .rail-item, .filter-btn');
