@@ -122,8 +122,14 @@ Referensi hidup: https://renlenon.vercel.app/ (homepage) dan https://renlenon.ve
 - Style: konsisten glass-card, bukan flat kaya Ren.
 - Acceptance: section baru muncul, singkat (tidak lebih dari 4-5 baris + tag row).
 
-### T13. Template case-study project (halaman dinamis, opsi 2 yang dipilih)
-- File baru: `project/index.html` (satu template, dipakai semua project, dibedakan lewat query param `?id=`).
+### T13. Template case-study project (opsi 2, DIREVISI — generate statis, bukan query-param)
+- **Revisi 26 Agu 2026**: bukan `project/index.html?id=...` yang baca JSON client-side saat runtime. Alasan: kalau link case-study di-share (WhatsApp/LinkedIn preview, atau ditaro di lamaran kerja), meta tag `<title>`/`og:image`/`og:description` bakal SAMA buat semua project (satu file HTML, beda cuma query string) — preview link jadi generik, nggak nunjukin project yang dimaksud.
+- **Pendekatan baru: generate file HTML statis per project dari template + JSON, mirip pola `gen_cv.js`.**
+- Bikin script baru `gen_case_studies.js` (Node, taruh di root repo bareng `gen_cv.js`):
+  - Baca `data/proof-data.json`, loop tiap project yang punya field `caseStudy` terisi.
+  - Render dari 1 template HTML (mis. `templates/case-study.template.html` dengan placeholder `{{title}}`, `{{whyBuilt}}`, dst — simple string replace, tidak perlu library templating).
+  - Output ke folder sesuai `id` project, misal `proj-evermos` → `evermos/index.html`, `proj-core-initiative` → `core-initiative/index.html`. Tiap file punya `<title>`, `og:title`, `og:image`, `og:description` YANG BEDA sesuai project itu.
+  - Jalanin manual tiap kali `proof-data.json` berubah (`node gen_case_studies.js`), commit hasil generate-nya juga (bukan cuma source template) — biar Netlify serve file statis langsung tanpa build step tambahan.
 - Baca data dari `data/proof-data.json` (field id harus match salah satu entry di `projects[]`).
 - **Field baru yang perlu ditambah ke schema `proof-data.json` per project** (opsional per-item, kalau kosong section terkait disembunyikan):
   ```
@@ -139,9 +145,9 @@ Referensi hidup: https://renlenon.vercel.app/ (homepage) dan https://renlenon.ve
   }
   ```
 - Layout template: breadcrumb "← Back to Home" → eyebrow "FEATURED BUILD" + judul + ringkasan → hero image besar → 2 kolom "Why Built It" / "Project Goal" → grid meta "Project Overview" → checklist "What It Does" → "Key Screens" (per screen: ikon+judul+desc+carousel gambar, dots pagination kalau >1 image) → "Tech Stack" (chip + `techNote`) → CTA penutup ("Open to opportunities" + link CV/email, BUKAN "let's collaborate" ala freelance Ren).
-- Kalau `caseStudy` kosong untuk suatu id → tampilkan pesan graceful "Case study coming soon" + link balik, JANGAN page kosong/error.
+- Kalau `caseStudy` kosong untuk suatu id → jangan generate file-nya sama sekali (link "Read case study" di card cukup disembunyikan/nonaktif kalau data belum ada), JANGAN generate page kosong/error.
 - Pilot pertama: **Evermos** (`proj-evermos`, bahan lengkap) atau **Core Initiative** (`proj-core-initiative`).
-- Acceptance: `project/index.html?id=proj-evermos` render lengkap dari data JSON, tidak ada hardcode per-project di HTML.
+- Acceptance: `node gen_case_studies.js` menghasilkan `evermos/index.html` (dan project lain yang punya `caseStudy`) dengan meta tag unik per halaman, isi lengkap dari data JSON, tidak ada hardcode per-project di template.
 
 ### T14. Redesign Skills section — dari 3D sphere ke grouped chip list
 - **Keputusan berubah dari REDESIGN_SPEC lama (yang bilang "pertahankan skill globe")** — setelah lihat referensi Ren, disepakati static chip lebih scannable buat recruiter. Turunkan prioritas 3D sphere, boleh disimpan sebagai elemen dekoratif kecil di tempat lain (opsional), tapi BUKAN representasi utama skill lagi.
