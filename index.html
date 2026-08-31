@@ -731,6 +731,32 @@
     body.light .exp-card-badge--current { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
     body.dark  .exp-card-badge--current { background: #f0f0f0; color: #0a0a0a; border-color: #f0f0f0; }
 
+    /* Honest "still in progress" badge — dipakai kalau ada project yang belum kelar (mis. NobiLive nanti) */
+    .exp-card-badge--progress {
+        background: transparent !important;
+        border-style: dashed !important;
+    }
+    body.light .exp-card-badge--progress { color: #a15c00; border-color: #d99a3a !important; }
+    body.dark  .exp-card-badge--progress { color: #e8b563; border-color: #a97a34 !important; }
+
+    /* Inline tech chip di dalam kalimat (hero-bio, dsb) */
+    .bio-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 1px 9px 1px 6px;
+        border-radius: var(--radius-pill);
+        font-weight: 600;
+        font-size: 0.85em;
+        white-space: nowrap;
+        vertical-align: middle;
+        transition: background var(--transition-theme), color var(--transition-theme);
+    }
+    .bio-chip i { font-size: 0.95em; }
+    .hero-verified { vertical-align: middle; margin-left: 2px; }
+    body.light .bio-chip { background: rgba(0,0,0,0.06); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.10); }
+    body.dark  .bio-chip { background: rgba(255,255,255,0.08); color: var(--text-primary-dark); border: 1px solid rgba(255,255,255,0.12); }
+
     .exp-card-desc {
         font-size: 0.83rem;
         line-height: 1.65;
@@ -830,6 +856,29 @@
     }
 
     .work-card:hover .work-card-media img { transform: scale(1.05); }
+
+    /* Featured Build spotlight — reuse .work-card, layout jadi 2 kolom di desktop */
+    .spotlight-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    body.light .spotlight-eyebrow { color: #999; }
+    body.dark  .spotlight-eyebrow { color: #666; }
+
+    .spotlight-card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    @media (min-width: 860px) {
+        .spotlight-card { flex-direction: row; }
+        .spotlight-card .work-card-media { width: 46%; height: auto; }
+        .spotlight-card .work-card-body { flex: 1; padding: 2rem 2.2rem; }
+    }
 
     .work-card-media--placeholder {
         display: flex;
@@ -1634,10 +1683,10 @@
             <!-- Text side -->
             <div class="hero-text-side">
                 <span class="hero-label">Full Stack Developer</span>
-                <h1 class="hero-name">Fakhrul<br>Mukhlisin</h1>
+                <h1 class="hero-name">Fakhrul<br>Mukhlisin <svg class="hero-verified" width="0.55em" height="0.55em" viewBox="0 0 24 24" fill="#3b9eff" title="Available for hire"><path d="M12 1l2.39 2.42 3.34-.73.7 3.36 3.36.7-.73 3.34L23 12l-2.34 2.41.73 3.34-3.36.7-.7 3.36-3.34-.73L12 23l-2.39-2.42-3.34.73-.7-3.36-3.36-.7.73-3.34L1 12l2.34-2.41-.73-3.34 3.36-.7.7-3.36 3.34.73L12 1zm-1.2 14.6l6.1-6.1-1.4-1.42-4.7 4.7-2.1-2.1-1.4 1.42 3.5 3.5z"/></svg></h1>
                 <p class="hero-role">Full Stack · Laravel · Vue.js · Golang</p>
                 <p class="hero-bio">
-                    Full Stack Developer — currently a Full Stack Developer Intern at PT Indotech Digital, where I've shipped Laravel features to a live product with 20+ pull requests merged to production. Before that: a marketplace REST API in Golang (scored 90.91) and a Vue.js e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Open to full-time opportunities</strong> alongside my current internship.
+                    Full Stack Developer — currently a Full Stack Developer Intern at PT Indotech Digital, shipping features with <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> on a live product with 20+ pull requests merged to production. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Open to full-time opportunities</strong> alongside my current internship.
                 </p>
                 <div class="hero-cta-group">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
@@ -1831,6 +1880,37 @@
     </section>
 
     <!-- ══════════════════════════════════════
+         FEATURED BUILD — 1 project spotlight
+    ══════════════════════════════════════ -->
+    <section id="featured-build" class="section">
+        <span class="spotlight-eyebrow">Featured Build</span>
+        <a href="https://github.com/fakrl/evermos-backend" target="_blank" rel="noopener" class="work-card spotlight-card glass-card visible">
+            <div class="work-card-media">
+                <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
+                <span class="work-card-tag">Golang</span>
+            </div>
+            <div class="work-card-body">
+                <div>
+                    <h3 class="work-card-title">Marketplace REST API — Evermos</h3>
+                    <p class="work-card-sub">Backend Developer Intern · Evermos × Rakamin Academy</p>
+                </div>
+                <p class="work-card-desc">A full marketplace REST API built solo in Golang: 7 modules (Auth, User, Store, Address, Category, Product, Transaction), JWT auth with RBAC, multi-image upload, price-range filtering, and atomic DB transactions using Clean Architecture. Scored 90.91/100 — the highest-scored project I've shipped, and the one I can defend line-by-line in an interview.</p>
+                <div class="work-card-metrics">
+                    <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label">Modules</span></div>
+                    <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label">Score / 100</span></div>
+                </div>
+                <div class="work-card-foot">
+                    <div class="work-card-tech">
+                        <i class="devicon-go-plain colored" title="Golang"></i>
+                        <i class="devicon-mysql-plain colored" title="MySQL"></i>
+                    </div>
+                    <span class="work-card-link">GitHub →</span>
+                </div>
+            </div>
+        </a>
+    </section>
+
+    <!-- ══════════════════════════════════════
          FEATURED WORKS
     ══════════════════════════════════════ -->
     <section id="featured" class="section">
@@ -1946,6 +2026,7 @@
             </a>
 
         </div>
+        <p style="text-align:center; margin-top:1.6rem;"><a href="/proof/" class="work-card-link">Explore all projects & certifications →</a></p>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -2009,6 +2090,23 @@
             <div class="glass-card visible stat-item">
                 <span class="stat-number">91<span style="font-size:1.1rem">hrs</span></span>
                 <span class="stat-label">ML Training</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         OUTSIDE THE IDE
+    ══════════════════════════════════════ -->
+    <section id="outside" class="section">
+        <h2 class="section-title">Outside the IDE</h2>
+        <div class="glass-card visible" style="padding: 1.4rem 1.6rem;">
+            <p class="exp-card-desc" style="margin-bottom: 0.9rem;">When I'm not shipping features, I recharge with music, movies, and the outdoors.</p>
+            <div class="exp-card-tags">
+                <span class="tag">Guitar</span>
+                <span class="tag">Hiking & Camping</span>
+                <span class="tag">Home Workouts</span>
+                <span class="tag">Interstellar · CODA · The 100</span>
+                <span class="tag">Podcasts — Raditya Dika, Malaka Project</span>
             </div>
         </div>
     </section>
