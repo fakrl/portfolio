@@ -1634,16 +1634,17 @@
         <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#featured">Work</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+        <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+        <li><a href="#featured" data-i18n="nav.work">Work</a></li>
+        <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+        <li><a href="#education" data-i18n="nav.education">Education</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
 </nav>
 
 <button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><span class="msym">dark_mode</span></button>
+<button class="lang-toggle" id="navLangBtn" aria-label="Switch Language">EN</button>
 
 <!-- WA Fixed Button -->
 <a href="https://wa.me/6281315324195" target="_blank" class="wa-fixed-btn" title="Chat on WhatsApp" aria-label="WhatsApp">
@@ -1682,16 +1683,16 @@
 
                 <h3 class="hero-profile-name">Fakhrul Mukhlisin</h3>
                 <p class="hero-profile-handle">@fak.rl</p>
-                <p class="hero-profile-role-tag">Full Stack Developer</p>
+                <p class="hero-profile-role-tag" data-i18n="hero.roleTag">Full Stack Developer</p>
 
                 <div class="hero-availability">
                     <span class="hero-avail-dot"></span>
-                    Online · Open to Work
+                    <span data-i18n="hero.online">Online · Open to Work</span>
                 </div>
 
                 <div class="hero-profile-actions">
-                    <a href="#contact" class="btn btn-primary">Contact Me</a>
-                    <a href="cv/CV_Fakhrul_Mukhlisin_2026_FullStack.pdf" download class="btn btn-secondary">Download CV</a>
+                    <a href="#contact" class="btn btn-primary" data-i18n="hero.contactBtn">Contact Me</a>
+                    <a href="cv/CV_Fakhrul_Mukhlisin_2026_FullStack.pdf" download class="btn btn-secondary" data-i18n="hero.downloadCv">Download CV</a>
                 </div>
 
                 <div class="hero-socials">
@@ -1713,15 +1714,15 @@
 
             <!-- Text side -->
             <div class="hero-text-side">
-                <span class="hero-label">Full Stack Developer</span>
+                <span class="hero-label" data-i18n="hero.label">Full Stack Developer</span>
                 <h1 class="hero-name">Fakhrul<br>Mukhlisin <svg class="hero-verified" width="0.55em" height="0.55em" viewBox="0 0 24 24" fill="#3b9eff" title="Available for hire"><path d="M12 1l2.39 2.42 3.34-.73.7 3.36 3.36.7-.73 3.34L23 12l-2.34 2.41.73 3.34-3.36.7-.7 3.36-3.34-.73L12 23l-2.39-2.42-3.34.73-.7-3.36-3.36-.7.73-3.34L1 12l2.34-2.41-.73-3.34 3.36-.7.7-3.36 3.34.73L12 1zm-1.2 14.6l6.1-6.1-1.4-1.42-4.7 4.7-2.1-2.1-1.4 1.42 3.5 3.5z"/></svg></h1>
-                <p class="hero-role">Full Stack · Laravel · Vue.js · Golang</p>
-                <p class="hero-bio">
+                <p class="hero-role" data-i18n="hero.roleLine">Full Stack · Laravel · Vue.js · Golang</p>
+                <p class="hero-bio" data-i18n-html="hero.bio">
                     Full Stack Developer — currently a Full Stack Developer Intern at PT Indotech Digital, shipping features with <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> on a live product with 20+ pull requests merged to production. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Open to full-time opportunities</strong> alongside my current internship.
                 </p>
                 <div class="hero-cta-group">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="/projects/" class="btn btn-secondary">Proof of Work</a>
+                    <a href="#contact" class="btn btn-primary" data-i18n="hero.getInTouch">Get In Touch</a>
+                    <a href="/projects/" class="btn btn-secondary" data-i18n="nav.proof">Proof of Work</a>
                 </div>
             </div>
 
@@ -1732,7 +1733,7 @@
          EXPERIENCE — TIMELINE
     ══════════════════════════════════════ -->
     <section id="experience" class="section">
-        <h2 class="section-title">Experience</h2>
+        <h2 class="section-title" data-i18n="exp.title">Experience</h2>
 
         <div class="exp-cards">
 
@@ -1740,20 +1741,20 @@
             <a href="#featured" class="exp-card exp-card--current glass-card visible">
                 <div class="exp-card-head">
                     <div>
-                        <p class="exp-card-role">Full Stack Developer Intern</p>
+                        <p class="exp-card-role" data-i18n="exp.indotech.role">Full Stack Developer Intern</p>
                         <p class="exp-card-company">PT Indotech Digital Group</p>
-                        <p class="exp-card-meta">Jun 2026 – Present · Jakarta (Hybrid)</p>
+                        <p class="exp-card-meta" data-i18n="exp.indotech.meta">Jun 2026 – Present · Jakarta (Hybrid)</p>
                     </div>
                     <span class="exp-card-badge exp-card-badge--current">20+ PRs</span>
                 </div>
                 <ul class="exp-card-bullets">
-                    <li>Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.</li>
-                    <li>Built the Bootcamp module end-to-end: normalized data model (6 related tables), backend, admin CMS, and public pages — with eager-loaded Eloquent relations to avoid N+1 queries.</li>
-                    <li>Delivered the Webinar module (registration flow, Mailable confirmation emails) plus e-portfolio, certification, and corporate pages.</li>
-                    <li>Debugged a production outage down to root cause: a corrupted vendor asset was silently halting JavaScript execution — fixed it and hardened the page so one failing library can't break unrelated features.</li>
+                    <li data-i18n-html="exp.indotech.bullet1">Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.</li>
+                    <li data-i18n-html="exp.indotech.bullet2">Built the Bootcamp module end-to-end: normalized data model (6 related tables), backend, admin CMS, and public pages — with eager-loaded Eloquent relations to avoid N+1 queries.</li>
+                    <li data-i18n-html="exp.indotech.bullet3">Delivered the Webinar module (registration flow, Mailable confirmation emails) plus e-portfolio, certification, and corporate pages.</li>
+                    <li data-i18n-html="exp.indotech.bullet4">Debugged a production outage down to root cause: a corrupted vendor asset was silently halting JavaScript execution — fixed it and hardened the page so one failing library can't break unrelated features.</li>
                 </ul>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
                     <div class="exp-card-tags">
                         <span class="tag">Laravel 11</span>
                         <span class="tag">PHP</span>
@@ -1770,15 +1771,15 @@
             <a href="/projects/#proj-evermos" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
-                        <p class="exp-card-role">Backend Developer Intern</p>
+                        <p class="exp-card-role" data-i18n="exp.evermos.role">Backend Developer Intern</p>
                         <p class="exp-card-company">Evermos × Rakamin Academy</p>
-                        <p class="exp-card-meta">Dec 2025 · Remote</p>
+                        <p class="exp-card-meta" data-i18n="exp.evermos.meta">Dec 2025 · Remote</p>
                     </div>
                     <span class="exp-card-badge">90.91 / 100</span>
                 </div>
-                <p class="exp-card-desc">Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
+                <p class="exp-card-desc" data-i18n="exp.evermos.desc">Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
                     <div class="exp-card-tags">
                         <span class="tag">Golang</span>
                         <span class="tag">Gin</span>
@@ -1792,15 +1793,15 @@
             <a href="/projects/#proj-core-initiative" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
-                        <p class="exp-card-role">Frontend Developer Intern</p>
+                        <p class="exp-card-role" data-i18n="exp.core.role">Frontend Developer Intern</p>
                         <p class="exp-card-company">Core Initiative × Rakamin Academy</p>
-                        <p class="exp-card-meta">Oct – Nov 2025 · Remote</p>
+                        <p class="exp-card-meta" data-i18n="exp.core.meta">Oct – Nov 2025 · Remote</p>
                     </div>
                     <span class="exp-card-badge">87.79 / 100</span>
                 </div>
-                <p class="exp-card-desc">E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
+                <p class="exp-card-desc" data-i18n="exp.core.desc">E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
                     <div class="exp-card-tags">
                         <span class="tag">Vue.js 2</span>
                         <span class="tag">REST API</span>
@@ -1814,15 +1815,15 @@
             <a href="/certifications/#yandex" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
-                        <p class="exp-card-role">Machine Learning Program</p>
+                        <p class="exp-card-role" data-i18n="exp.yandex.role">Machine Learning Program</p>
                         <p class="exp-card-company">Yandex · Digitalent KOMDIGI</p>
-                        <p class="exp-card-meta">May – Jul 2025 · Online</p>
+                        <p class="exp-card-meta" data-i18n="exp.yandex.meta">May – Jul 2025 · Online</p>
                     </div>
                     <span class="exp-card-badge">#5 / 926</span>
                 </div>
-                <p class="exp-card-desc">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
+                <p class="exp-card-desc" data-i18n="exp.yandex.desc">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
                     <div class="exp-card-tags">
                         <span class="tag">Python</span>
                         <span class="tag">ML</span>
@@ -1834,15 +1835,15 @@
             <a href="/certifications/#lka-unpam" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
-                        <p class="exp-card-role">Data Management Intern</p>
+                        <p class="exp-card-role" data-i18n="exp.lka.role">Data Management Intern</p>
                         <p class="exp-card-company">LKA UNPAM</p>
                         <p class="exp-card-meta">Jan – Jul 2025 · Tangerang Selatan</p>
                     </div>
                     <span class="exp-card-badge">Excellent</span>
                 </div>
-                <p class="exp-card-desc">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
+                <p class="exp-card-desc" data-i18n="exp.lka.desc">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Technologies Used</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
                     <div class="exp-card-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">Data</span>
@@ -1854,13 +1855,13 @@
             <a href="/moments/?filter=momen" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
-                        <p class="exp-card-role">Computer Operator</p>
+                        <p class="exp-card-role" data-i18n="exp.kesbang.role">Computer Operator</p>
                         <p class="exp-card-company">Kesbang</p>
-                        <p class="exp-card-meta">Nov – Dec 2025 · Jakarta Pusat</p>
+                        <p class="exp-card-meta" data-i18n="exp.kesbang.meta">Nov – Dec 2025 · Jakarta Pusat</p>
                     </div>
                 </div>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Focus</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
                     <div class="exp-card-tags">
                         <span class="tag">Government</span>
                         <span class="tag">Admin</span>
@@ -1877,9 +1878,9 @@
                         <p class="exp-card-meta">Jul 2024 – Jul 2025</p>
                     </div>
                 </div>
-                <p class="exp-card-desc">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
+                <p class="exp-card-desc" data-i18n="exp.cms.desc">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Focus</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
                     <div class="exp-card-tags">
                         <span class="tag">Copywriting</span>
                         <span class="tag">Photography</span>
@@ -1892,14 +1893,14 @@
             <a href="/awards/#award-ketum" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
-                        <p class="exp-card-role">President</p>
+                        <p class="exp-card-role" data-i18n="exp.fsj.role">President</p>
                         <p class="exp-card-company">Forum Studi Jurnalis</p>
-                        <p class="exp-card-meta">Oct 2021 – Nov 2022</p>
+                        <p class="exp-card-meta" data-i18n="exp.fsj.meta">Oct 2021 – Nov 2022</p>
                     </div>
                     <span class="exp-card-badge">300+ Members</span>
                 </div>
                 <div class="exp-card-tech">
-                    <span class="exp-card-tech-label">Focus</span>
+                    <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
                     <div class="exp-card-tags">
                         <span class="tag">Leadership</span>
                         <span class="tag">15+ Events</span>
@@ -1914,7 +1915,7 @@
          FEATURED BUILD — 1 project spotlight
     ══════════════════════════════════════ -->
     <section id="featured-build" class="section">
-        <span class="spotlight-eyebrow">Featured Build</span>
+        <span class="spotlight-eyebrow" data-i18n="spotlight.eyebrow">Featured Build</span>
         <a href="/evermos/" class="work-card spotlight-card glass-card visible">
             <div class="work-card-media">
                 <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
@@ -1922,20 +1923,20 @@
             </div>
             <div class="work-card-body">
                 <div>
-                    <h3 class="work-card-title">Marketplace REST API — Evermos</h3>
-                    <p class="work-card-sub">Backend Developer Intern · Evermos × Rakamin Academy</p>
+                    <h3 class="work-card-title" data-i18n="spotlight.evermos.title">Marketplace REST API — Evermos</h3>
+                    <p class="work-card-sub" data-i18n="spotlight.evermos.sub">Backend Developer Intern · Evermos × Rakamin Academy</p>
                 </div>
-                <p class="work-card-desc">A full marketplace REST API built solo in Golang: 7 modules (Auth, User, Store, Address, Category, Product, Transaction), JWT auth with RBAC, multi-image upload, price-range filtering, and atomic DB transactions using Clean Architecture. Scored 90.91/100 — the highest-scored project I've shipped, and the one I can defend line-by-line in an interview.</p>
+                <p class="work-card-desc" data-i18n="spotlight.evermos.desc">A full marketplace REST API built solo in Golang: 7 modules (Auth, User, Store, Address, Category, Product, Transaction), JWT auth with RBAC, multi-image upload, price-range filtering, and atomic DB transactions using Clean Architecture. Scored 90.91/100 — the highest-scored project I've shipped, and the one I can defend line-by-line in an interview.</p>
                 <div class="work-card-metrics">
-                    <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label">Modules</span></div>
-                    <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label">Score / 100</span></div>
+                    <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label" data-i18n="metric.modules">Modules</span></div>
+                    <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label" data-i18n="metric.score">Score / 100</span></div>
                 </div>
                 <div class="work-card-foot">
                     <div class="work-card-tech">
                         <i class="devicon-go-plain colored" title="Golang"></i>
                         <i class="devicon-mysql-plain colored" title="MySQL"></i>
                     </div>
-                    <span class="work-card-link">Read case study →</span>
+                    <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                 </div>
             </div>
         </a>
@@ -1945,7 +1946,7 @@
          FEATURED WORKS
     ══════════════════════════════════════ -->
     <section id="featured" class="section">
-        <h2 class="section-title">Featured Works</h2>
+        <h2 class="section-title" data-i18n="featured.title">Featured Works</h2>
 
         <div class="work-grid">
 
@@ -1958,13 +1959,13 @@
                 </div>
                 <div class="work-card-body">
                     <div>
-                        <h3 class="work-card-title">Nobel Akademi — LMS Features</h3>
-                        <p class="work-card-sub">PT Indotech Digital · Production LMS</p>
+                        <h3 class="work-card-title" data-i18n="work.nobel.title">Nobel Akademi — LMS Features</h3>
+                        <p class="work-card-sub" data-i18n="work.nobel.sub">PT Indotech Digital · Production LMS</p>
                     </div>
-                    <p class="work-card-desc">Feature work on a live learning platform: Bootcamp module end-to-end (6-table data model, backend, admin CMS, public pages), Webinar registration with confirmation emails, plus e-portfolio and certification pages — shipped through PR review to production.</p>
+                    <p class="work-card-desc" data-i18n="work.nobel.desc">Feature work on a live learning platform: Bootcamp module end-to-end (6-table data model, backend, admin CMS, public pages), Webinar registration with confirmation emails, plus e-portfolio and certification pages — shipped through PR review to production.</p>
                     <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">20+</span><span class="work-metric-label">PRs Merged</span></div>
-                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label">Modules Shipped</span></div>
+                        <div class="work-metric"><span class="work-metric-num">20+</span><span class="work-metric-label" data-i18n="metric.prsMerged">PRs Merged</span></div>
+                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label" data-i18n="metric.modulesShipped">Modules Shipped</span></div>
                     </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
@@ -1973,7 +1974,7 @@
                             <i class="devicon-mysql-plain colored" title="MySQL"></i>
                             <i class="devicon-bootstrap-plain colored" title="Bootstrap"></i>
                         </div>
-                        <span class="work-card-link">View details →</span>
+                        <span class="work-card-link" data-i18n="work.viewDetails">View details →</span>
                     </div>
                 </div>
             </a>
@@ -1986,20 +1987,20 @@
                 </div>
                 <div class="work-card-body">
                     <div>
-                        <h3 class="work-card-title">Marketplace REST API</h3>
-                        <p class="work-card-sub">Evermos · Backend</p>
+                        <h3 class="work-card-title" data-i18n="work.evermos.title">Marketplace REST API</h3>
+                        <p class="work-card-sub" data-i18n="work.evermos.sub">Evermos · Backend</p>
                     </div>
-                    <p class="work-card-desc">Full marketplace REST API in Golang with Gin, MySQL, and JWT auth — clean architecture and atomic transactions across 7 modules.</p>
+                    <p class="work-card-desc" data-i18n="work.evermos.desc">Full marketplace REST API in Golang with Gin, MySQL, and JWT auth — clean architecture and atomic transactions across 7 modules.</p>
                     <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label">Modules</span></div>
-                        <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label">Score / 100</span></div>
+                        <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label" data-i18n="metric.modules">Modules</span></div>
+                        <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label" data-i18n="metric.score">Score / 100</span></div>
                     </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
                             <i class="devicon-go-plain colored" title="Golang"></i>
                             <i class="devicon-mysql-plain colored" title="MySQL"></i>
                         </div>
-                        <span class="work-card-link">Read case study →</span>
+                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                     </div>
                 </div>
             </a>
@@ -2012,13 +2013,13 @@
                 </div>
                 <div class="work-card-body">
                     <div>
-                        <h3 class="work-card-title">E-Commerce Catalog</h3>
-                        <p class="work-card-sub">Core Initiative · Frontend</p>
+                        <h3 class="work-card-title" data-i18n="work.core.title">E-Commerce Catalog</h3>
+                        <p class="work-card-sub" data-i18n="work.core.sub">Core Initiative · Frontend</p>
                     </div>
-                    <p class="work-card-desc">E-commerce catalog in Vue.js 2 with 3 dynamic UI themes, pixel-perfect Figma implementation, and CI/CD to Firebase.</p>
+                    <p class="work-card-desc" data-i18n="work.core.desc">E-commerce catalog in Vue.js 2 with 3 dynamic UI themes, pixel-perfect Figma implementation, and CI/CD to Firebase.</p>
                     <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">3</span><span class="work-metric-label">Dynamic Themes</span></div>
-                        <div class="work-metric"><span class="work-metric-num">87.79</span><span class="work-metric-label">Score / 100</span></div>
+                        <div class="work-metric"><span class="work-metric-num">3</span><span class="work-metric-label" data-i18n="metric.dynamicThemes">Dynamic Themes</span></div>
+                        <div class="work-metric"><span class="work-metric-num">87.79</span><span class="work-metric-label" data-i18n="metric.score">Score / 100</span></div>
                     </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
@@ -2026,7 +2027,7 @@
                             <i class="devicon-javascript-plain colored" title="JavaScript"></i>
                             <i class="devicon-firebase-plain colored" title="Firebase"></i>
                         </div>
-                        <span class="work-card-link">Read case study →</span>
+                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                     </div>
                 </div>
             </a>
@@ -2039,32 +2040,32 @@
                 </div>
                 <div class="work-card-body">
                     <div>
-                        <h3 class="work-card-title">Groomy</h3>
-                        <p class="work-card-sub">Mobile App · UI/UX Design</p>
+                        <h3 class="work-card-title" data-i18n="work.groomy.title">Groomy</h3>
+                        <p class="work-card-sub" data-i18n="work.groomy.sub">Mobile App · UI/UX Design</p>
                     </div>
-                    <p class="work-card-desc">Pet grooming mobile app concept — full UI/UX design and interactive Figma prototype, from wireframes to polished screens.</p>
+                    <p class="work-card-desc" data-i18n="work.groomy.desc">Pet grooming mobile app concept — full UI/UX design and interactive Figma prototype, from wireframes to polished screens.</p>
                     <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label">Key Screens</span></div>
-                        <div class="work-metric"><span class="work-metric-num">Figma</span><span class="work-metric-label">Prototype</span></div>
+                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label" data-i18n="metric.keyScreens">Key Screens</span></div>
+                        <div class="work-metric"><span class="work-metric-num">Figma</span><span class="work-metric-label" data-i18n="metric.prototype">Prototype</span></div>
                     </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
                             <i class="devicon-figma-plain colored" title="Figma"></i>
                         </div>
-                        <span class="work-card-link">View →</span>
+                        <span class="work-card-link" data-i18n="work.view">View →</span>
                     </div>
                 </div>
             </a>
 
         </div>
-        <p style="text-align:center; margin-top:1.6rem;"><a href="/projects/" class="work-card-link">Explore all projects & certifications →</a></p>
+        <p style="text-align:center; margin-top:1.6rem;"><a href="/projects/" class="work-card-link" data-i18n="featured.exploreAll">Explore all projects & certifications →</a></p>
     </section>
 
     <!-- ══════════════════════════════════════
          SKILLS — 3D SPHERE
     ══════════════════════════════════════ -->
     <section id="skills" class="section">
-        <h2 class="section-title">Technical Skills</h2>
+        <h2 class="section-title" data-i18n="skills.title">Technical Skills</h2>
         <div class="glass-card visible skill-board">
             <div class="skill-groups skill-groups--flat">
                 <div class="skill-group">
@@ -2126,7 +2127,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/tech-tools/" class="skill-board-more">See full stack breakdown <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
+            <a href="/tech-tools/" class="skill-board-more"><span data-i18n="skills.seeMore">See full stack breakdown</span> <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
         </div>
     </section>
 
@@ -2134,19 +2135,19 @@
          EDUCATION + STATS
     ══════════════════════════════════════ -->
     <section id="education" class="section" style="padding-top:0">
-        <h2 class="section-title">Education & Certification</h2>
+        <h2 class="section-title" data-i18n="education.title">Education & Certification</h2>
 
         <div class="glass-card visible edu-timeline-card">
             <div class="edu-timeline">
                 <div class="edu-timeline-item">
                     <span class="edu-timeline-dot edu-timeline-dot--edu"></span>
                     <div class="edu-timeline-content">
-                        <span class="edu-timeline-date">Sep 2023 – Present</span>
-                        <h3 class="edu-timeline-title">Bachelor of Information Systems</h3>
-                        <p class="edu-timeline-sub">Universitas Pamulang · Tangerang Selatan · 120 credits completed</p>
+                        <span class="edu-timeline-date" data-i18n="education.eduDate">Sep 2023 – Present</span>
+                        <h3 class="edu-timeline-title" data-i18n="education.degree">Bachelor of Information Systems</h3>
+                        <p class="edu-timeline-sub" data-i18n="education.school">Universitas Pamulang · Tangerang Selatan · 120 credits completed</p>
                         <div class="edu-timeline-extra">
                             <span class="edu-gpa">GPA 3.68 / 4.00</span>
-                            <span class="edu-timeline-lang">Indonesian (Native · UKBI Madya) · English (Conversational)</span>
+                            <span class="edu-timeline-lang" data-i18n="education.lang">Indonesian (Native · UKBI Madya) · English (Conversational)</span>
                         </div>
                     </div>
                 </div>
@@ -2155,8 +2156,8 @@
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">Dec 2025</span>
-                        <h3 class="edu-timeline-title">Backend Developer Intern Certificate</h3>
-                        <p class="edu-timeline-sub">Evermos × Rakamin Academy · Final score 90.91 / 100</p>
+                        <h3 class="edu-timeline-title" data-i18n="education.cert.evermos.title">Backend Developer Intern Certificate</h3>
+                        <p class="edu-timeline-sub" data-i18n="education.cert.evermos.sub">Evermos × Rakamin Academy · Final score 90.91 / 100</p>
                     </div>
                 </div>
 
@@ -2164,8 +2165,8 @@
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">Nov 2025</span>
-                        <h3 class="edu-timeline-title">Frontend Developer Intern Certificate</h3>
-                        <p class="edu-timeline-sub">Core Initiative × Rakamin Academy · Final score 87.79 / 100</p>
+                        <h3 class="edu-timeline-title" data-i18n="education.cert.core.title">Frontend Developer Intern Certificate</h3>
+                        <p class="edu-timeline-sub" data-i18n="education.cert.core.sub">Core Initiative × Rakamin Academy · Final score 87.79 / 100</p>
                     </div>
                 </div>
 
@@ -2173,8 +2174,8 @@
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">May 2025</span>
-                        <h3 class="edu-timeline-title">Azure AI Fundamentals (AI-900)</h3>
-                        <p class="edu-timeline-sub">Microsoft · elevAIte · Merdeka Academy</p>
+                        <h3 class="edu-timeline-title" data-i18n="education.cert.azure.title">Azure AI Fundamentals (AI-900)</h3>
+                        <p class="edu-timeline-sub" data-i18n="education.cert.azure.sub">Microsoft · elevAIte · Merdeka Academy</p>
                     </div>
                 </div>
 
@@ -2182,8 +2183,8 @@
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">2025</span>
-                        <h3 class="edu-timeline-title">Fundamental Project Management</h3>
-                        <p class="edu-timeline-sub">Google · Digitalent Scholarship KOMDIGI</p>
+                        <h3 class="edu-timeline-title" data-i18n="education.cert.googlepm.title">Fundamental Project Management</h3>
+                        <p class="edu-timeline-sub" data-i18n="education.cert.googlepm.sub">Google · Digitalent Scholarship KOMDIGI</p>
                     </div>
                 </div>
 
@@ -2191,34 +2192,34 @@
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">Aug 2023</span>
-                        <h3 class="edu-timeline-title">Junior Web Developer (BNSP)</h3>
-                        <p class="edu-timeline-sub">BPPTIK Kominfo · Digitalent Scholarship</p>
+                        <h3 class="edu-timeline-title" data-i18n="education.cert.bnsp.title">Junior Web Developer (BNSP)</h3>
+                        <p class="edu-timeline-sub" data-i18n="education.cert.bnsp.sub">BPPTIK Kominfo · Digitalent Scholarship</p>
                     </div>
                 </div>
             </div>
-            <a href="/certifications/" class="edu-timeline-more">See all certifications <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
+            <a href="/certifications/" class="edu-timeline-more"><span data-i18n="education.seeAllCerts">See all certifications</span> <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
         </div>
 
         <div class="stats-row">
             <div class="glass-card visible stat-item">
                 <span class="stat-number">3.68</span>
-                <span class="stat-label">GPA / 4.00</span>
+                <span class="stat-label" data-i18n="stats.gpa">GPA / 4.00</span>
             </div>
             <div class="glass-card visible stat-item">
                 <span class="stat-number">90.91</span>
-                <span class="stat-label">Evermos Score</span>
+                <span class="stat-label" data-i18n="stats.evermos">Evermos Score</span>
             </div>
             <div class="glass-card visible stat-item">
                 <span class="stat-number">87.79</span>
-                <span class="stat-label">Core Initiative Score</span>
+                <span class="stat-label" data-i18n="stats.core">Core Initiative Score</span>
             </div>
             <div class="glass-card visible stat-item">
                 <span class="stat-number">#5<span style="font-size:1.1rem">/926</span></span>
-                <span class="stat-label">Yandex ML Competition</span>
+                <span class="stat-label" data-i18n="stats.yandex">Yandex ML Competition</span>
             </div>
             <div class="glass-card visible stat-item">
                 <span class="stat-number">91<span style="font-size:1.1rem">hrs</span></span>
-                <span class="stat-label">ML Training</span>
+                <span class="stat-label" data-i18n="stats.ml">ML Training</span>
             </div>
         </div>
     </section>
@@ -2227,14 +2228,14 @@
          HIT ME UP
     ══════════════════════════════════════ -->
     <section id="contact" class="section">
-        <h2 class="section-title">Hit Me Up</h2>
+        <h2 class="section-title" data-i18n="contact.title">Hit Me Up</h2>
 
         <div class="cv-download-wrapper">
             <a href="cv/CV_Fakhrul_Mukhlisin_2026_FullStack.pdf" download
-               class="cv-download-btn btn btn-primary">
+               class="cv-download-btn btn btn-primary" data-i18n="hero.downloadCv">
                 Download CV
             </a>
-            <p class="cv-download-hint">PDF · Updated 2026</p>
+            <p class="cv-download-hint" data-i18n="contact.downloadHint">PDF · Updated 2026</p>
         </div>
 
         <div class="social-cards">
@@ -2251,9 +2252,9 @@
                 <div class="social-profile-info">
                     <p class="social-profile-name">Fakhrul Mukhlisin</p>
                     <p class="social-profile-handle">@fak.rl</p>
-                    <p class="social-profile-desc">Developer · Photographer · Creating things</p>
+                    <p class="social-profile-desc" data-i18n="contact.igDesc">Developer · Photographer · Creating things</p>
                 </div>
-                <div class="social-profile-cta social-profile-cta--ig">Follow</div>
+                <div class="social-profile-cta social-profile-cta--ig" data-i18n="contact.igFollow">Follow</div>
             </a>
 
             <a href="https://linkedin.com/in/fakrl" target="_blank"
@@ -2269,26 +2270,26 @@
                 <div class="social-profile-info">
                     <p class="social-profile-name">Fakhrul Mukhlisin</p>
                     <p class="social-profile-handle">linkedin.com/in/fakrl</p>
-                    <p class="social-profile-desc">Software Engineer · Open to Work</p>
+                    <p class="social-profile-desc" data-i18n="contact.liDesc">Software Engineer · Open to Work</p>
                 </div>
-                <div class="social-profile-cta social-profile-cta--li">Connect</div>
+                <div class="social-profile-cta social-profile-cta--li" data-i18n="contact.liConnect">Connect</div>
             </a>
         </div>
 
         <div class="glass-card visible contact-form-card" style="max-width:640px; margin:0 auto;">
-            <h3 class="contact-info-heading" style="text-align:center;">Let's talk.</h3>
+            <h3 class="contact-info-heading" style="text-align:center;" data-i18n="contact.letsTalk">Let's talk.</h3>
             <form class="contact-form" id="contactForm">
                 <div class="contact-form-row">
                     <input type="text" name="name" placeholder="Your name"
-                           class="feedback-input" required maxlength="60">
+                           class="feedback-input" required maxlength="60" data-i18n-attr="placeholder:contact.namePh">
                     <input type="email" name="email" placeholder="Your email"
-                           class="feedback-input" required maxlength="80">
+                           class="feedback-input" required maxlength="80" data-i18n-attr="placeholder:contact.emailPh">
                 </div>
                 <textarea name="message" placeholder="What's on your mind?"
                           class="feedback-input" style="min-height:140px; resize:vertical; flex:1"
-                          required maxlength="600"></textarea>
+                          required maxlength="600" data-i18n-attr="placeholder:contact.messagePh"></textarea>
                 <div class="contact-form-actions">
-                    <button type="submit" class="btn btn-primary" style="flex:1" id="formSubmitBtn">
+                    <button type="submit" class="btn btn-primary" style="flex:1" id="formSubmitBtn" data-i18n="contact.send">
                         Send Message
                     </button>
                     <a href="https://wa.me/6281315324195" target="_blank"
@@ -2321,20 +2322,20 @@
          FEEDBACK
     ══════════════════════════════════════ -->
     <section id="feedback" class="section">
-        <h2 class="section-title">Leave a Feedback</h2>
+        <h2 class="section-title" data-i18n="feedback.title">Leave a Feedback</h2>
         <div class="feedback-wrapper">
             <div class="glass-card visible feedback-form-card">
-                <p class="feedback-desc">Got something to say? Drop a message — shows up instantly.</p>
+                <p class="feedback-desc" data-i18n="feedback.desc">Got something to say? Drop a message — shows up instantly.</p>
                 <div class="feedback-form">
                     <input type="text" id="feedbackName" placeholder="Your name"
-                           class="feedback-input" maxlength="50"/>
+                           class="feedback-input" maxlength="50" data-i18n-attr="placeholder:feedback.namePh"/>
                     <input type="text" id="feedbackFrom"
                            placeholder="From where do you know this guy?"
-                           class="feedback-input" maxlength="80"/>
+                           class="feedback-input" maxlength="80" data-i18n-attr="placeholder:feedback.fromPh"/>
                     <textarea id="feedbackMessage" placeholder="Your message..."
                               class="feedback-input feedback-textarea"
-                              maxlength="300" rows="3"></textarea>
-                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn">
+                              maxlength="300" rows="3" data-i18n-attr="placeholder:feedback.messagePh"></textarea>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn" data-i18n="feedback.send">
                         Send Message
                     </button>
                 </div>
@@ -2342,7 +2343,7 @@
             </div>
             <div id="feedbackList" class="feedback-list">
                 <div class="feedback-empty" id="feedbackEmpty">
-                    <p>No feedback yet. Be the first!</p>
+                    <p data-i18n="feedback.empty">No feedback yet. Be the first!</p>
                 </div>
             </div>
         </div>
@@ -2350,7 +2351,7 @@
 
     <footer class="footer" style="padding-bottom: 5rem;">
         <p>&copy; 2026 Fakhrul Mukhlisin.</p>
-        <p class="visitor-pill" id="visitorPill" style="display:none;"><span class="msym" style="font-size:1em;vertical-align:-2px">group</span> Visited by <strong id="visitorCount">–</strong> people</p>
+        <p class="visitor-pill" id="visitorPill" style="display:none;"><span class="msym" style="font-size:1em;vertical-align:-2px">group</span> <span data-i18n="footer.visitedPrefix">Visited by</span> <strong id="visitorCount">–</strong> <span data-i18n="footer.visited">people</span></p>
     </footer>
 
 </main>
@@ -2361,18 +2362,19 @@
         <span class="floating-pill__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </span>
-        <span class="floating-pill__label">Proof</span>
+        <span class="floating-pill__label" data-i18n="nav.proofShort">Proof</span>
     </a>
     <div class="floating-pill__divider"></div>
     <a href="/moments/" class="floating-pill__item" title="Moments">
         <span class="floating-pill__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
         </span>
-        <span class="floating-pill__label">Moments</span>
+        <span class="floating-pill__label" data-i18n="nav.moments">Moments</span>
     </a>
 </div>
 
 <script src="script.js"></script>
+<script src="i18n.js"></script>
 
 <!-- Hero photo cycling -->
 <script>
