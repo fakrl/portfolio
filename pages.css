@@ -1139,3 +1139,31 @@ body.dark .skeleton-avatar {
     .lightbox__nav--next { right: 0.5rem; }
     .cert-modal__img { max-height: 50vh; }
 }
+
+/* ==========================================
+   PROJECT TECH ICONS
+   ========================================== */
+.proof-card__tech {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.4rem;
+    margin-top: 0.9rem;
+}
+body.light .proof-card__tech i { color: #555; }
+body.dark  .proof-card__tech i { color: #bbb; }
+.proof-card__tech i.colored { color: unset; }
+
+/* ==========================================
+   HIDDEN ADMIN ENTRY
+   ========================================== */
+.contribute-btn {
+    position: fixed; bottom: 28px; left: 28px; width: 48px; height: 48px;
+    border-radius: 50%; cursor: pointer; z-index: 999;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    display: flex; align-items: center; justify-content: center; text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+body.light .contribute-btn { background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.10); color: #555; box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+body.dark  .contribute-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #aaa; box-shadow: 0 4px 16px rgba(0,0,0,0.40); }
+.contribute-btn:hover { transform: scale(1.08); }

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awards — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/png" href="/image/favicon.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="stylesheet" href="../animations.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
+    <meta name="description" content="Awards and recognitions earned by Fakhrul Mukhlisin.">
+    <meta property="og:title" content="Awards — Fakhrul Mukhlisin">
+    <meta property="og:description" content="Awards and recognitions earned by Fakhrul Mukhlisin.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
+    <meta property="og:url" content="https://fakrul.netlify.app/awards/">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="light">
+
+<div class="floating-pill" id="floatingPill">
+    <a href="/" class="floating-pill__item" title="Home">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></span>
+        <span class="floating-pill__label">Home</span>
+    </a>
+    <div class="floating-pill__divider"></div>
+    <a href="/moments/" class="floating-pill__item" title="Moments">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></span>
+        <span class="floating-pill__label">Moments</span>
+    </a>
+</div>
+
+<nav class="navbar">
+    <div class="nav-logo">
+        <img src="/image/favicon.webp" alt="FM Logo" style="height:32px; width:auto; object-fit:contain; vertical-align:middle;">
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects/">Proof of Work</a></li>
+        <li><a href="/moments/">Moments</a></li>
+    </ul>
+</nav>
+
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><span class="msym">dark_mode</span></button>
+
+<main>
+
+    <div class="proof-filter-bar" id="proofFilterBar" style="margin-top:72px">
+        <span class="proof-filter-bar__title">Proof of Work</span>
+        <div class="proof-tabs">
+            <a href="/projects/" class="proof-tab"><span class="msym">code</span> Projects</a>
+            <a href="/certifications/" class="proof-tab"><span class="msym">workspace_premium</span> Certifications</a>
+            <a href="/awards/" class="proof-tab proof-tab--active"><span class="msym">trophy</span> Awards</a>
+        </div>
+    </div>
+
+    <section class="section proof-section" id="tab-awards">
+
+        <div class="proof-grid">
+
+            <div id="award-foto" class="glass-card proof-card award-card"
+                 data-title="Juara 1 Lomba Photography — Digital Creation 2"
+                 data-images='["../image/award-foto-1.webp","../image/award-foto-2.webp","../image/award-foto-3.webp"]'
+                 data-link="https://www.instagram.com/p/Cn-ast7Sc7k/?img_index=2"
+                 data-link-label="See on Instagram →">
+                <div class="proof-card__img">
+                    <img src="../image/award-foto-1.webp" alt="Juara Fotografi"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--gold">1st Place</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Feb 2023</span>
+                    <h3 class="proof-card__title">1st Place — Photography Competition</h3>
+                    <p class="proof-card__issuer">Digital Creation 2 · OPMAZ Ma'had Al-Zaytun</p>
+                    <p class="proof-card__desc">Won first place in a creative photography competition at pesantren level — Digital Creation 2 event.</p>
+                    <span class="proof-card__tag tag">Photography Competition</span>
+                </div>
+            </div>
+
+            <div id="award-ketum" class="glass-card proof-card award-card"
+                 data-title="Ketua Umum Forum Studi Jurnalis"
+                 data-images='["../image/award-ketum-jurnalis.webp", "../image/award-ketum-jurnalis-2.webp", "../image/award-ketum-jurnalis-3.webp"]'
+                 data-link="https://www.instagram.com/official_fsj/"
+                 data-link-label="Instagram FSJ →">
+                <div class="proof-card__img">
+                    <img src="../image/award-ketum-jurnalis.webp" alt="Ketua Jurnalis"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--gold">Chairman</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Oct 2021 – Nov 2022</span>
+                    <h3 class="proof-card__title">Chairman — Journalism Study Forum</h3>
+                    <p class="proof-card__issuer">Forum Studi Jurnalis · Ma'had Al-Zaytun</p>
+                    <p class="proof-card__desc">Led 300+ members as Chairman of the Journalism Study Forum. Coordinated 15+ events and technical seminars over a one-year tenure.</p>
+                    <span class="proof-card__tag tag">Leadership</span>
+                </div>
+            </div>
+
+            <div id="award-diploy" class="glass-card proof-card award-card"
+                 data-title="Peserta Aktif — DiploY × NyokKerja 2025"
+                 data-images='["../image/award-event.webp", "../image/award-event-2.webp", "../image/award-event-3.webp", "../image/award-event-4.webp"]'
+                 data-link="https://www.instagram.com/p/DNFCqssTKyb/"
+                 data-link-label="See Event →">
+                <div class="proof-card__img">
+                    <img src="../image/award-event.webp" alt="DiploY NyokKerja"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--blue">Active</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">2025</span>
+                    <h3 class="proof-card__title">Active Participant — DiploY × NyokKerja</h3>
+                    <p class="proof-card__issuer">DiploY × NyokKerja · 2025</p>
+                    <p class="proof-card__desc">Recognized as an active participant in DiploY × NyokKerja 2025 — a career development and entrepreneurship program for young professionals.</p>
+                    <span class="proof-card__tag tag">Career Development</span>
+                </div>
+            </div>
+
+            <div id="award-lka" class="glass-card proof-card award-card"
+                 data-title="Internship Completion — LKA UNPAM"
+                 data-images='["../image/award-lka.webp", "../image/award-lka-2.webp", "../image/award-lka-3.webp", "../image/award-lka-4.webp"]'
+                 data-link="https://www.instagram.com/kemahasiswaanunpam.official/"
+                 data-link-label="Instagram LKA →">
+                <div class="proof-card__img">
+                    <img src="../image/award-lka.webp" alt="Sertifikat Magang LKA"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--green">Excellent</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jan – Jul 2025</span>
+                    <h3 class="proof-card__title">Internship Completion — LKA UNPAM</h3>
+                    <p class="proof-card__issuer">Lembaga Kemahasiswaan & Alumni · Universitas Pamulang</p>
+                    <p class="proof-card__desc">Certificate handover ceremony — completing a 6-month Data Management internship. Managed 500+ student records and 1,000+ digital archive files. Grade: <strong>Sangat Baik (Excellent)</strong>.</p>
+                    <span class="proof-card__tag tag">Internship</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Cert Modal -->
+    <div class="cert-modal-overlay" id="certModal">
+        <div class="cert-modal" id="certModalInner">
+            <div class="cert-modal__header">
+                <span class="cert-modal__title" id="certModalTitle">Award</span>
+                <span class="cert-modal__counter" id="certModalCounter"></span>
+                <button class="cert-modal__close" id="certModalClose">✕</button>
+            </div>
+            <div class="cert-modal__viewer">
+                <img class="cert-modal__img" id="certModalImg" src="" alt="">
+                <div class="cert-modal__placeholder" id="certModalPlaceholder" style="display:none">
+                    <span class="cert-modal__placeholder-icon"><span class="msym">image</span></span>
+                    <p class="cert-modal__placeholder-text">Screenshots coming soon</p>
+                </div>
+                <button class="cert-modal__nav cert-modal__nav--prev" id="certModalPrev">‹</button>
+                <button class="cert-modal__nav cert-modal__nav--next" id="certModalNext">›</button>
+            </div>
+            <div class="cert-modal__dots" id="certModalDots"></div>
+            <div class="cert-modal__footer" id="certModalFooter"></div>
+        </div>
+    </div>
+
+    <footer class="footer" style="padding-bottom:5rem;">
+        <p>&copy; 2026 Fakhrul Mukhlisin.</p>
+    </footer>
+
+    <!-- Hidden admin entry -->
+    <a href="/admin/" class="contribute-btn" title="Admin" aria-label="Admin">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </a>
+
+</main>
+
+<script src="../script.js"></script>
+<script src="../proof.js"></script>
+<script>
+document.querySelectorAll('.proof-card__img img').forEach(img => {
+    const wrap = img.parentElement;
+    wrap.classList.add('skeleton');
+    const done = () => wrap.classList.remove('skeleton');
+    if (img.complete) done();
+    else { img.addEventListener('load', done); img.addEventListener('error', done); }
+});
+</script>
+<script>
+(function() {
+    const pill = document.getElementById('floatingPill');
+    if (pill) {
+        const update = () => pill.classList.toggle('visible', window.scrollY > 200);
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+    }
+})();
+
+(function() {
+    const overlay  = document.getElementById('certModal');
+    const modalImg = document.getElementById('certModalImg');
+    const modalPH  = document.getElementById('certModalPlaceholder');
+    const titleEl  = document.getElementById('certModalTitle');
+    const counter  = document.getElementById('certModalCounter');
+    const dotsEl   = document.getElementById('certModalDots');
+    const footer   = document.getElementById('certModalFooter');
+    const btnPrev  = document.getElementById('certModalPrev');
+    const btnNext  = document.getElementById('certModalNext');
+    const btnClose = document.getElementById('certModalClose');
+
+    let images = [], current = 0;
+
+    function showImg(index) {
+        current = index;
+        modalImg.classList.add('fading');
+        modalImg.classList.remove('zoomed');
+        modalPH.style.display = 'none';
+        modalImg.style.display = 'block';
+
+        setTimeout(() => {
+            modalImg.src = images[index];
+            modalImg.onload  = () => modalImg.classList.remove('fading');
+            modalImg.onerror = () => {
+                modalImg.style.display = 'none';
+                modalPH.style.display = 'flex';
+                modalImg.classList.remove('fading');
+            };
+        }, 150);
+
+        counter.textContent = images.length > 1 ? `${index + 1} / ${images.length}` : '';
+        dotsEl.querySelectorAll('.cert-modal__dot').forEach((d, i) =>
+            d.classList.toggle('active', i === index));
+        btnPrev.disabled = index === 0;
+        btnNext.disabled = index === images.length - 1;
+    }
+
+    function openModal(card) {
+        images  = JSON.parse(card.dataset.images || '[]');
+        current = 0;
+        titleEl.textContent = card.dataset.title || 'Award';
+
+        dotsEl.innerHTML = '';
+        if (images.length > 1) {
+            images.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'cert-modal__dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => showImg(i));
+                dotsEl.appendChild(dot);
+            });
+        }
+
+        const SVG = {
+            instagram: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>'
+        };
+
+        function makeBtn(href, cls, svgKey, label) {
+            const a = document.createElement('a');
+            a.href = href; a.target = '_blank'; a.rel = 'noopener';
+            a.className = `cert-modal__btn ${cls}`;
+            a.innerHTML = `${SVG[svgKey] || ''} ${label}`;
+            return a;
+        }
+
+        footer.innerHTML = '';
+        const { link, linkLabel, credentialId } = card.dataset;
+
+        if (card.dataset.instagram) {
+            footer.appendChild(makeBtn(card.dataset.instagram, 'cert-modal__btn--instagram', 'instagram', card.dataset.instagramLabel || 'Instagram'));
+        }
+        if (link) {
+            const a = document.createElement('a');
+            a.href = link; a.target = '_blank'; a.rel = 'noopener';
+            let btnClass = 'cert-modal__btn--primary';
+            if (link.includes('instagram.com')) btnClass = 'cert-modal__btn--instagram';
+            a.className = `cert-modal__btn ${btnClass}`;
+            if (link.includes('instagram.com')) a.innerHTML = SVG.instagram + ' ' + (linkLabel || 'Instagram');
+            else a.textContent = linkLabel || 'Open';
+            footer.appendChild(a);
+        }
+        if (credentialId) {
+            const btn = document.createElement('button');
+            btn.className = 'cert-modal__copy-id';
+            btn.innerHTML = `<span class="msym">content_copy</span> <span>Copy Credential ID</span>`;
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(credentialId).then(() => {
+                    btn.classList.add('copied');
+                    btn.querySelector('span').textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.querySelector('span').textContent = 'Copy Credential ID';
+                    }, 2000);
+                });
+            });
+            footer.appendChild(btn);
+        }
+
+        footer.style.display = footer.children.length ? 'flex' : 'none';
+        showImg(0);
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.proof-card').forEach(card => {
+        card.addEventListener('click', e => {
+            if (e.target.closest('a, button')) return;
+            if (!card.dataset.images) return;
+            openModal(card);
+        });
+    });
+
+    modalImg.addEventListener('click', () => modalImg.classList.toggle('zoomed'));
+    btnPrev.addEventListener('click', () => { if (current > 0) showImg(current - 1); });
+    btnNext.addEventListener('click', () => { if (current < images.length - 1) showImg(current + 1); });
+    btnClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+    document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeModal();
+        if (e.key === 'ArrowLeft' && current > 0) showImg(current - 1);
+        if (e.key === 'ArrowRight' && current < images.length - 1) showImg(current + 1);
+    });
+
+    let touchStartX = 0;
+    const inner = document.getElementById('certModalInner');
+    inner.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    inner.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0 && current < images.length - 1) showImg(current + 1);
+        if (dx > 0 && current > 0) showImg(current - 1);
+    }, { passive: true });
+
+    // Deep link via URL hash — e.g. /awards/#award-foto
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+        const card = document.getElementById(hash);
+        if (card) {
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (card.dataset.images) setTimeout(() => card.click(), 400);
+            }, 200);
+        }
+    }
+})();
+</script>
+<!-- Umami Analytics -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="b47339d6-c2d4-42f9-bfed-19a95a9ffc48"></script>
+</body>
+</html>

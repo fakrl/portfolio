@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Tech Stack — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/png" href="/image/favicon.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="stylesheet" href="../animations.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
+    <meta name="description" content="Comprehensive list of every language, framework, database, and tool Fakhrul Mukhlisin uses.">
+    <meta property="og:title" content="Full Tech Stack — Fakhrul Mukhlisin">
+    <meta property="og:description" content="Comprehensive list of every language, framework, database, and tool Fakhrul Mukhlisin uses.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
+    <meta property="og:url" content="https://fakrul.netlify.app/tech-tools/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        .tt-wrap { max-width: 760px; margin: 0 auto; padding: 100px 1.4rem 4rem; }
+        .tt-back { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.6rem; text-decoration: none; }
+        body.light .tt-back { color: var(--text-secondary-light); }
+        body.dark  .tt-back { color: var(--text-secondary-dark); }
+        .tt-eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        body.light .tt-eyebrow { color: #999; }
+        body.dark  .tt-eyebrow { color: #666; }
+        .tt-title { font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.7rem; }
+        .tt-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 2.6rem; }
+        body.light .tt-summary { color: var(--text-secondary-light); }
+        body.dark  .tt-summary { color: var(--text-secondary-dark); }
+
+        .tt-group { padding: 1.8rem 0; }
+        .tt-group:not(:last-child) { border-bottom: 1px dashed rgba(128,128,128,0.25); }
+        .tt-group-label { font-size: 1rem; font-weight: 800; margin-bottom: 1.1rem; }
+
+        .tt-chip-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .tt-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            font-size: 0.88rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: transform 0.15s ease, background var(--transition-theme), color var(--transition-theme);
+        }
+        .tt-chip:hover { transform: translateY(-2px); }
+        .tt-chip i, .tt-chip .msym { font-size: 1.1em; }
+        body.light .tt-chip { background: rgba(0,0,0,0.05); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.09); }
+        body.dark  .tt-chip { background: rgba(255,255,255,0.06); color: var(--text-primary-dark); border: 1px solid rgba(255,255,255,0.10); }
+    </style>
+</head>
+<body class="light">
+
+<div class="floating-pill" id="floatingPill">
+    <a href="/" class="floating-pill__item" title="Home">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></span>
+        <span class="floating-pill__label">Home</span>
+    </a>
+    <div class="floating-pill__divider"></div>
+    <a href="/projects/" class="floating-pill__item" title="Proof of Work">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+        <span class="floating-pill__label">Proof of Work</span>
+    </a>
+</div>
+
+<nav class="navbar">
+    <div class="nav-logo">
+        <img src="/image/favicon.webp" alt="FM Logo" style="height:32px; width:auto; object-fit:contain; vertical-align:middle;">
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects/">Proof of Work</a></li>
+        <li><a href="/moments/">Moments</a></li>
+    </ul>
+</nav>
+
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><span class="msym">dark_mode</span></button>
+
+<main>
+    <div class="tt-wrap">
+        <a href="/#skills" class="tt-back"><span class="msym" style="font-size:1.1rem">arrow_back</span> Back to Home</a>
+
+        <span class="tt-eyebrow">Tech Stack</span>
+        <h1 class="tt-title">Full Tech Stack</h1>
+        <p class="tt-summary">Comprehensive list of the languages, frameworks, and tools I use day to day.</p>
+
+        <div class="tt-group">
+            <h2 class="tt-group-label">Languages</h2>
+            <div class="tt-chip-row">
+                <span class="tt-chip"><i class="devicon-php-plain colored"></i>PHP</span>
+                <span class="tt-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                <span class="tt-chip"><i class="devicon-go-plain colored"></i>Golang</span>
+                <span class="tt-chip"><i class="devicon-html5-plain colored"></i>HTML5</span>
+                <span class="tt-chip"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                <span class="tt-chip"><i class="devicon-python-plain colored"></i>Python</span>
+            </div>
+        </div>
+
+        <div class="tt-group">
+            <h2 class="tt-group-label">Frameworks</h2>
+            <div class="tt-chip-row">
+                <span class="tt-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                <span class="tt-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
+                <span class="tt-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
+                <span class="tt-chip"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+            </div>
+        </div>
+
+        <div class="tt-group">
+            <h2 class="tt-group-label">Databases</h2>
+            <div class="tt-chip-row">
+                <span class="tt-chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                <span class="tt-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+            </div>
+        </div>
+
+        <div class="tt-group">
+            <h2 class="tt-group-label">Tools & DevOps</h2>
+            <div class="tt-chip-row">
+                <span class="tt-chip"><i class="devicon-git-plain colored"></i>Git</span>
+                <span class="tt-chip"><i class="devicon-github-original colored"></i>GitHub</span>
+                <span class="tt-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
+                <span class="tt-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                <span class="tt-chip"><i class="devicon-figma-plain colored"></i>Figma</span>
+                <span class="tt-chip"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+            </div>
+        </div>
+
+        <div class="tt-group">
+            <h2 class="tt-group-label">AI & Cloud</h2>
+            <div class="tt-chip-row">
+                <span class="tt-chip"><i class="devicon-azure-plain colored"></i>Azure</span>
+                <span class="tt-chip"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="../script.js"></script>
+<script>
+    // Floating pill — show only after scrolling
+    (function() {
+        const pill = document.getElementById('floatingPill');
+        if (!pill) return;
+        const update = () => pill.classList.toggle('visible', window.scrollY > 200);
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+    })();
+</script>
+<!-- Umami Analytics -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="b47339d6-c2d4-42f9-bfed-19a95a9ffc48"></script>
+</body>
+</html>

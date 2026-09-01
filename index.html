@@ -772,6 +772,22 @@
     /* Skills — bounded board + horizontal marquee per category (ganti 3D sphere) */
     .skill-board { padding: 1.8rem 0; overflow: hidden; }
     .skill-groups { display: flex; flex-direction: column; gap: 1.5rem; }
+    .skill-groups--flat { gap: 0.8rem; }
+    .skill-board-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 1.4rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(128,128,128,0.15);
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .skill-board-more:hover { opacity: 0.75; }
+    body.light .skill-board-more { color: var(--text-secondary-light); }
+    body.dark  .skill-board-more { color: var(--text-secondary-dark); }
     .skill-group-label {
         display: block;
         font-size: 0.72rem;
@@ -1100,48 +1116,98 @@
     /* ==========================================
        EDUCATION + STATS
        ========================================== */
-    .edu-lang-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        max-width: 1000px;
+    .edu-timeline-card {
+        max-width: 700px;
         margin: 0 auto 2.5rem;
+        padding: 2rem 2rem 1.4rem;
     }
 
-    .edu-block {
+    .edu-timeline { position: relative; }
+    .edu-timeline::before {
+        content: '';
+        position: absolute;
+        left: 9px;
+        top: 8px;
+        bottom: 8px;
+        width: 2px;
+        background: linear-gradient(180deg, #2563eb, rgba(128,128,128,0.15));
+    }
+
+    .edu-timeline-item {
         display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
+        gap: 1.1rem;
+        padding-bottom: 1.7rem;
+        position: relative;
+    }
+    .edu-timeline-item:last-child { padding-bottom: 0; }
+
+    .edu-timeline-dot {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .edu-timeline-dot::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(128,128,128,0.4);
+        z-index: 1;
+    }
+    .edu-timeline-dot--edu::after {
+        width: 12px;
+        height: 12px;
+        background: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
     }
 
-    .edu-block-label {
+    .edu-timeline-content { flex: 1; padding-top: 1px; }
+
+    .edu-timeline-date {
+        display: block;
         font-size: 0.70rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.8px;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.25rem;
         transition: color var(--transition-theme);
     }
+    body.light .edu-timeline-date { color: #999; }
+    body.dark  .edu-timeline-date { color: #666; }
 
-    body.light .edu-block-label { color: #777; }
-    body.dark  .edu-block-label { color: #666; }
-
-    .edu-block-title {
-        font-size: 1rem;
+    .edu-timeline-title {
+        font-size: 0.95rem;
         font-weight: 700;
         transition: color var(--transition-theme);
     }
+    body.light .edu-timeline-title { color: #1a1a1a; }
+    body.dark  .edu-timeline-title { color: #ffffff; }
 
-    body.light .edu-block-title { color: #1a1a1a; }
-    body.dark  .edu-block-title { color: #ffffff; }
-
-    .edu-block-sub {
-        font-size: 0.85rem;
+    .edu-timeline-sub {
+        font-size: 0.83rem;
+        margin-top: 0.15rem;
         transition: color var(--transition-theme);
     }
+    body.light .edu-timeline-sub { color: #666; }
+    body.dark  .edu-timeline-sub { color: #aaa; }
 
-    body.light .edu-block-sub { color: #666; }
-    body.dark  .edu-block-sub { color: #aaa; }
+    .edu-timeline-extra {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+    }
+
+    .edu-timeline-lang {
+        font-size: 0.78rem;
+        transition: color var(--transition-theme);
+    }
+    body.light .edu-timeline-lang { color: #777; }
+    body.dark  .edu-timeline-lang { color: #999; }
 
     .edu-gpa {
         display: inline-block;
@@ -1149,7 +1215,6 @@
         font-weight: 700;
         padding: 0.2rem 0.7rem;
         border-radius: 20px;
-        margin-top: 0.3rem;
         width: fit-content;
         transition: background var(--transition-theme), border-color var(--transition-theme), color var(--transition-theme);
     }
@@ -1157,43 +1222,21 @@
     body.light .edu-gpa { background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.10); color: #555; }
     body.dark  .edu-gpa { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: #aaa; }
 
-    .lang-list {
+    .edu-timeline-more {
         display: flex;
-        flex-direction: column;
-        gap: 0.7rem;
-        margin-top: 0.3rem;
-    }
-
-    .lang-item {
-        display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    body.dark .lang-item { border-bottom-color: rgba(255,255,255,0.06); }
-    .lang-item:last-child { border-bottom: none; }
-
-    .lang-name {
-        font-size: 0.9rem;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 1.6rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(128,128,128,0.15);
+        font-size: 0.85rem;
         font-weight: 600;
-        transition: color var(--transition-theme);
+        text-decoration: none;
     }
-
-    body.light .lang-name { color: #1a1a1a; }
-    body.dark  .lang-name { color: #ffffff; }
-
-    .lang-badge {
-        font-size: 0.70rem;
-        font-weight: 700;
-        padding: 0.2rem 0.7rem;
-        border-radius: 20px;
-        transition: background var(--transition-theme), color var(--transition-theme);
-    }
-
-    body.light .lang-badge { background: rgba(0,0,0,0.07); color: #333; }
-    body.dark  .lang-badge { background: rgba(255,255,255,0.10); color: #ddd; }
+    .edu-timeline-more:hover { opacity: 0.75; }
+    body.light .edu-timeline-more { color: var(--text-secondary-light); }
+    body.dark  .edu-timeline-more { color: var(--text-secondary-dark); }
 
     /* Stats row */
     .stats-row {
@@ -1552,7 +1595,7 @@
         .bento-card--small  { grid-column: span 1; }
         .contact-grid { grid-template-columns: 1fr; }
         .contact-form-row { grid-template-columns: 1fr; }
-        .edu-lang-grid { grid-template-columns: 1fr; }
+        .edu-timeline-card { padding: 1.6rem 1.3rem 1.2rem; }
         .stat-item { min-width: 130px; }
         .stat-number { font-size: 1.6rem; }
     }
@@ -1678,7 +1721,7 @@
                 </p>
                 <div class="hero-cta-group">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="/proof/" class="btn btn-secondary">Proof of Work</a>
+                    <a href="/projects/" class="btn btn-secondary">Proof of Work</a>
                 </div>
             </div>
 
@@ -1724,7 +1767,7 @@
             </a>
 
             <!-- Evermos -->
-            <a href="/proof/#proj-evermos" class="exp-card glass-card visible">
+            <a href="/projects/#proj-evermos" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
                         <p class="exp-card-role">Backend Developer Intern</p>
@@ -1746,7 +1789,7 @@
             </a>
 
             <!-- Core Initiative -->
-            <a href="/proof/#proj-core-initiative" class="exp-card glass-card visible">
+            <a href="/projects/#proj-core-initiative" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
                         <p class="exp-card-role">Frontend Developer Intern</p>
@@ -1768,7 +1811,7 @@
             </a>
 
             <!-- Yandex ML -->
-            <a href="/proof/#yandex" class="exp-card glass-card visible">
+            <a href="/certifications/#yandex" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
                         <p class="exp-card-role">Machine Learning Program</p>
@@ -1788,7 +1831,7 @@
             </a>
 
             <!-- LKA UNPAM -->
-            <a href="/proof/#lka-unpam" class="exp-card glass-card visible">
+            <a href="/certifications/#lka-unpam" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
                         <p class="exp-card-role">Data Management Intern</p>
@@ -1826,7 +1869,7 @@
             </a>
 
             <!-- PT CMS -->
-            <a href="/proof/#proj-cms" class="exp-card glass-card visible">
+            <a href="/projects/#proj-cms" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
                         <p class="exp-card-role">Content Creator & Copywriter</p>
@@ -1846,7 +1889,7 @@
             </a>
 
             <!-- FSJ President -->
-            <a href="/proof/#award-ketum" class="exp-card glass-card visible">
+            <a href="/awards/#award-ketum" class="exp-card glass-card visible">
                 <div class="exp-card-head">
                     <div>
                         <p class="exp-card-role">President</p>
@@ -1907,7 +1950,7 @@
         <div class="work-grid">
 
             <!-- Nobel Akademi (placeholder screenshot) -->
-            <a href="/proof/#proj-nobel" class="work-card glass-card visible">
+            <a href="/projects/#proj-nobel" class="work-card glass-card visible">
                 <div class="work-card-media work-card-media--placeholder">
                     <i class="devicon-laravel-original"></i>
                     <span>Screenshot coming soon</span>
@@ -1989,7 +2032,7 @@
             </a>
 
             <!-- Groomy UI/UX -->
-            <a href="/proof/#proj-groomy" class="work-card glass-card visible">
+            <a href="/projects/#proj-groomy" class="work-card glass-card visible">
                 <div class="work-card-media">
                     <img src="image/proj-groomy-1.webp" alt="Groomy UI/UX design" loading="lazy">
                     <span class="work-card-tag">UI/UX</span>
@@ -2014,7 +2057,7 @@
             </a>
 
         </div>
-        <p style="text-align:center; margin-top:1.6rem;"><a href="/proof/" class="work-card-link">Explore all projects & certifications →</a></p>
+        <p style="text-align:center; margin-top:1.6rem;"><a href="/projects/" class="work-card-link">Explore all projects & certifications →</a></p>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -2023,83 +2066,67 @@
     <section id="skills" class="section">
         <h2 class="section-title">Technical Skills</h2>
         <div class="glass-card visible skill-board">
-            <div class="skill-groups">
+            <div class="skill-groups skill-groups--flat">
                 <div class="skill-group">
-                    <span class="skill-group-label">Languages</span>
+                    <div class="skill-marquee">
+                        <div class="skill-track skill-track--left">
+                            <span class="skill-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                            <span class="skill-chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                            <span class="skill-chip"><i class="devicon-go-plain colored"></i>Golang</span>
+                            <span class="skill-chip"><i class="devicon-figma-plain colored"></i>Figma</span>
+                            <span class="skill-chip"><i class="devicon-git-plain colored"></i>Git</span>
+                            <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                            <span class="skill-chip"><i class="devicon-azure-plain colored"></i>Azure</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-go-plain colored"></i>Golang</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-figma-plain colored"></i>Figma</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-git-plain colored"></i>Git</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-azure-plain colored"></i>Azure</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <div class="skill-marquee">
+                        <div class="skill-track skill-track--right">
+                            <span class="skill-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
+                            <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
+                            <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub</span>
+                            <span class="skill-chip"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+                            <span class="skill-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                            <span class="skill-chip"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+                            <span class="skill-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-python-plain colored"></i>Python</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-github-original colored"></i>GitHub</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-postman-plain colored"></i>Postman</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-group">
                     <div class="skill-marquee">
                         <div class="skill-track skill-track--left">
                             <span class="skill-chip"><i class="devicon-php-plain colored"></i>PHP</span>
-                            <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
-                            <span class="skill-chip"><i class="devicon-go-plain colored"></i>Golang</span>
                             <span class="skill-chip"><i class="devicon-html5-plain colored"></i>HTML5</span>
-                            <span class="skill-chip"><i class="devicon-css3-plain colored"></i>CSS3</span>
-                            <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-php-plain colored"></i>PHP</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-go-plain colored"></i>Golang</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-html5-plain colored"></i>HTML5</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-css3-plain colored"></i>CSS3</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-python-plain colored"></i>Python</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <span class="skill-group-label">Frameworks</span>
-                    <div class="skill-marquee">
-                        <div class="skill-track skill-track--right">
-                            <span class="skill-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
-                            <span class="skill-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
-                            <span class="skill-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
-                            <span class="skill-chip"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-laravel-plain colored"></i>Laravel</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <span class="skill-group-label">Databases</span>
-                    <div class="skill-marquee">
-                        <div class="skill-track skill-track--left">
-                            <span class="skill-chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
-                            <span class="skill-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-mysql-plain colored"></i>MySQL</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-firebase-plain colored"></i>Firebase</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <span class="skill-group-label">Tools & DevOps</span>
-                    <div class="skill-marquee">
-                        <div class="skill-track skill-track--right">
-                            <span class="skill-chip"><i class="devicon-git-plain colored"></i>Git</span>
-                            <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub</span>
-                            <span class="skill-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
                             <span class="skill-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
-                            <span class="skill-chip"><i class="devicon-figma-plain colored"></i>Figma</span>
-                            <span class="skill-chip"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-git-plain colored"></i>Git</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-github-original colored"></i>GitHub</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-postman-plain colored"></i>Postman</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-vscode-plain colored"></i>VS Code</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-figma-plain colored"></i>Figma</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group">
-                    <span class="skill-group-label">AI & Cloud</span>
-                    <div class="skill-marquee">
-                        <div class="skill-track skill-track--left">
-                            <span class="skill-chip"><i class="devicon-azure-plain colored"></i>Azure</span>
+                            <span class="skill-chip"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                            <span class="skill-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
                             <span class="skill-chip"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
-                            <span class="skill-chip" aria-hidden="true"><i class="devicon-azure-plain colored"></i>Azure</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-php-plain colored"></i>PHP</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-html5-plain colored"></i>HTML5</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
                             <span class="skill-chip" aria-hidden="true"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
                         </div>
                     </div>
                 </div>
             </div>
+            <a href="/tech-tools/" class="skill-board-more">See full stack breakdown <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
         </div>
     </section>
 
@@ -2107,30 +2134,69 @@
          EDUCATION + STATS
     ══════════════════════════════════════ -->
     <section id="education" class="section" style="padding-top:0">
-        <h2 class="section-title">Education & Languages</h2>
+        <h2 class="section-title">Education & Certification</h2>
 
-        <div class="edu-lang-grid">
-            <div class="glass-card visible edu-block">
-                <span class="edu-block-label">Education</span>
-                <p class="edu-block-title">Bachelor of Information Systems</p>
-                <p class="edu-block-sub">Universitas Pamulang · Tangerang Selatan</p>
-                <p class="edu-block-sub">Sep 2023 – Oct 2027 (Expected) · 120 credits completed</p>
-                <span class="edu-gpa">GPA 3.68 / 4.00</span>
-            </div>
-
-            <div class="glass-card visible edu-block">
-                <span class="edu-block-label">Languages</span>
-                <div class="lang-list">
-                    <div class="lang-item">
-                        <span class="lang-name">Indonesian</span>
-                        <span class="lang-badge">Native · UKBI Madya</span>
+        <div class="glass-card visible edu-timeline-card">
+            <div class="edu-timeline">
+                <div class="edu-timeline-item">
+                    <span class="edu-timeline-dot edu-timeline-dot--edu"></span>
+                    <div class="edu-timeline-content">
+                        <span class="edu-timeline-date">Sep 2023 – Present</span>
+                        <h3 class="edu-timeline-title">Bachelor of Information Systems</h3>
+                        <p class="edu-timeline-sub">Universitas Pamulang · Tangerang Selatan · 120 credits completed</p>
+                        <div class="edu-timeline-extra">
+                            <span class="edu-gpa">GPA 3.68 / 4.00</span>
+                            <span class="edu-timeline-lang">Indonesian (Native · UKBI Madya) · English (Conversational)</span>
+                        </div>
                     </div>
-                    <div class="lang-item">
-                        <span class="lang-name">English</span>
-                        <span class="lang-badge">Conversational</span>
+                </div>
+
+                <div class="edu-timeline-item">
+                    <span class="edu-timeline-dot"></span>
+                    <div class="edu-timeline-content">
+                        <span class="edu-timeline-date">Dec 2025</span>
+                        <h3 class="edu-timeline-title">Backend Developer Intern Certificate</h3>
+                        <p class="edu-timeline-sub">Evermos × Rakamin Academy · Final score 90.91 / 100</p>
+                    </div>
+                </div>
+
+                <div class="edu-timeline-item">
+                    <span class="edu-timeline-dot"></span>
+                    <div class="edu-timeline-content">
+                        <span class="edu-timeline-date">Nov 2025</span>
+                        <h3 class="edu-timeline-title">Frontend Developer Intern Certificate</h3>
+                        <p class="edu-timeline-sub">Core Initiative × Rakamin Academy · Final score 87.79 / 100</p>
+                    </div>
+                </div>
+
+                <div class="edu-timeline-item">
+                    <span class="edu-timeline-dot"></span>
+                    <div class="edu-timeline-content">
+                        <span class="edu-timeline-date">May 2025</span>
+                        <h3 class="edu-timeline-title">Azure AI Fundamentals (AI-900)</h3>
+                        <p class="edu-timeline-sub">Microsoft · elevAIte · Merdeka Academy</p>
+                    </div>
+                </div>
+
+                <div class="edu-timeline-item">
+                    <span class="edu-timeline-dot"></span>
+                    <div class="edu-timeline-content">
+                        <span class="edu-timeline-date">2025</span>
+                        <h3 class="edu-timeline-title">Fundamental Project Management</h3>
+                        <p class="edu-timeline-sub">Google · Digitalent Scholarship KOMDIGI</p>
+                    </div>
+                </div>
+
+                <div class="edu-timeline-item">
+                    <span class="edu-timeline-dot"></span>
+                    <div class="edu-timeline-content">
+                        <span class="edu-timeline-date">Aug 2023</span>
+                        <h3 class="edu-timeline-title">Junior Web Developer (BNSP)</h3>
+                        <p class="edu-timeline-sub">BPPTIK Kominfo · Digitalent Scholarship</p>
                     </div>
                 </div>
             </div>
+            <a href="/certifications/" class="edu-timeline-more">See all certifications <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
         </div>
 
         <div class="stats-row">
@@ -2210,7 +2276,7 @@
         </div>
 
         <div class="glass-card visible contact-form-card" style="max-width:640px; margin:0 auto;">
-            <h3 class="contact-info-heading">Let's talk.</h3>
+            <h3 class="contact-info-heading" style="text-align:center;">Let's talk.</h3>
             <form class="contact-form" id="contactForm">
                 <div class="contact-form-row">
                     <input type="text" name="name" placeholder="Your name"
@@ -2240,12 +2306,6 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     </span>
                     fahrulmukhlisin13@gmail.com
-                </a>
-                <a href="https://linkedin.com/in/fakrl" target="_blank" class="contact-link-item">
-                    <span class="contact-link-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </span>
-                    linkedin.com/in/fakrl
                 </a>
                 <a href="https://github.com/fakrl" target="_blank" class="contact-link-item">
                     <span class="contact-link-icon">
@@ -2297,7 +2357,7 @@
 
 <!-- Floating Pill -->
 <div class="floating-pill" id="floatingPill">
-    <a href="/proof/" class="floating-pill__item" title="Proof of Work">
+    <a href="/projects/" class="floating-pill__item" title="Proof of Work">
         <span class="floating-pill__icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </span>
