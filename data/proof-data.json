@@ -32,7 +32,7 @@
     },
     {
       "id": "evermos",
-      "featured": true,
+      "featured": false,
       "title": "Backend Developer Intern",
       "images": [
         "../image/cert-evermos.webp"
@@ -57,7 +57,7 @@
     },
     {
       "id": "core-initiative",
-      "featured": true,
+      "featured": false,
       "title": "Frontend Developer Intern",
       "images": [
         "../image/cert-coreinit.webp"

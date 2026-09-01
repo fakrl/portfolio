@@ -100,10 +100,11 @@ document.addEventListener('keydown', e => {
             let card = document.getElementById(item.id);
 
             // Card baru (belum ada di HTML statis) → bikin skeleton
+            // Certifications pakai layout timeline (modifier class), Awards & Projects tetap card image-first.
             if (!card) {
                 card = document.createElement('div');
                 card.id = item.id;
-                card.className = 'glass-card proof-card' + (item.featured ? ' proof-card--featured' : '');
+                card.className = 'glass-card proof-card' + (item.featured ? ' proof-card--featured' : '') + (cat === 'certifications' ? ' proof-card--timeline' : '');
                 card.innerHTML = `
                     <div class="proof-card__img">
                         <img alt="${esc(item.title)}"
