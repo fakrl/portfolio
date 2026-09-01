@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/png" href="/image/favicon.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="stylesheet" href="../animations.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
+    <meta name="description" content="Certifications earned by Fakhrul Mukhlisin — national competency certification, internships, and cloud/AI training.">
+    <meta property="og:title" content="Certifications — Fakhrul Mukhlisin">
+    <meta property="og:description" content="Certifications earned by Fakhrul Mukhlisin — national competency certification, internships, and cloud/AI training.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
+    <meta property="og:url" content="https://fakrul.netlify.app/certifications/">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="light">
+
+<div class="floating-pill" id="floatingPill">
+    <a href="/" class="floating-pill__item" title="Home">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></span>
+        <span class="floating-pill__label">Home</span>
+    </a>
+    <div class="floating-pill__divider"></div>
+    <a href="/moments/" class="floating-pill__item" title="Moments">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></span>
+        <span class="floating-pill__label">Moments</span>
+    </a>
+</div>
+
+<nav class="navbar">
+    <div class="nav-logo">
+        <img src="/image/favicon.webp" alt="FM Logo" style="height:32px; width:auto; object-fit:contain; vertical-align:middle;">
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects/">Proof of Work</a></li>
+        <li><a href="/moments/">Moments</a></li>
+    </ul>
+</nav>
+
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><span class="msym">dark_mode</span></button>
+
+<main>
+
+    <div class="proof-filter-bar" id="proofFilterBar" style="margin-top:72px">
+        <span class="proof-filter-bar__title">Proof of Work</span>
+        <div class="proof-tabs">
+            <a href="/projects/" class="proof-tab"><span class="msym">code</span> Projects</a>
+            <a href="/certifications/" class="proof-tab proof-tab--active"><span class="msym">workspace_premium</span> Certifications</a>
+            <a href="/awards/" class="proof-tab"><span class="msym">trophy</span> Awards</a>
+        </div>
+    </div>
+
+    <section class="section proof-section" id="tab-certifications">
+        <div class="proof-grid">
+
+            <!-- BNSP -->
+            <div id="bnsp" class="glass-card proof-card proof-card--timeline"
+                 data-title="Junior Web Developer — BNSP"
+                 data-credential-id="62010 2513 4 0005102 2023"
+                 data-images='["../image/cert-bnsp-1.webp","../image/cert-bnsp-2.webp","../image/cert-bnsp-3.webp","../image/cert-bnsp-4.webp"]'
+                 data-link="https://github.com/fakrl/juniorwebdev"
+                 data-link-label="See Documentation →">
+                <div class="proof-card__img">
+                    <img src="../image/cert-bnsp-1.webp" alt="BNSP"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--gold">BNSP</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Aug 2023</span>
+                    <h3 class="proof-card__title">Junior Web Developer</h3>
+                    <p class="proof-card__issuer">BPPTIK Kominfo · Digitalent Scholarship</p>
+                    <p class="proof-card__desc">National professional certification in web development, issued by BNSP (Indonesia's national competency certification body).</p>
+                    <span class="proof-card__tag tag">National Certification</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evermos -->
+            <div id="evermos" class="glass-card proof-card proof-card--timeline"
+                 data-title="Backend Developer Intern — Evermos"
+                 data-images='["../image/cert-evermos.webp"]'
+                 data-project="#proj-evermos"
+                 data-project-label="See Project →"
+                 data-youtube="https://youtu.be/blat9DpMBJw"
+                 data-youtube-label="Watch Presentation">
+                <div class="proof-card__img">
+                    <img src="../image/cert-evermos.webp" alt="Evermos"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--purple">90.91 / 100</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Dec 2025</span>
+                    <h3 class="proof-card__title">Backend Developer Intern</h3>
+                    <p class="proof-card__issuer">Evermos × Rakamin Academy</p>
+                    <p class="proof-card__desc">Built a production-grade marketplace REST API in Golang — 7 modules, clean architecture, JWT auth, multi-image upload, atomic transactions. Final score: <strong>90.91 / 100 (Excellent)</strong>.</p>
+                    <span class="proof-card__tag tag">Internship Certificate</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Golang</span><span class="tag">Gin</span><span class="tag">MySQL</span><span class="tag">JWT</span><span class="tag">REST API</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Initiative -->
+            <div id="core-initiative" class="glass-card proof-card proof-card--timeline"
+                 data-title="Frontend Developer Intern — Core Initiative"
+                 data-images='["../image/cert-coreinit.webp"]'
+                 data-project="#proj-core-initiative"
+                 data-project-label="See Project →"
+                 data-youtube="https://youtu.be/1DamWnPyG4g"
+                 data-youtube-label="Watch Presentation">
+                <div class="proof-card__img">
+                    <img src="../image/cert-coreinit.webp" alt="Core Initiative"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--purple">87.79 / 100</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Nov 2025</span>
+                    <h3 class="proof-card__title">Frontend Developer Intern</h3>
+                    <p class="proof-card__issuer">Core Initiative × Rakamin Academy</p>
+                    <p class="proof-card__desc">Delivered a pixel-perfect e-commerce catalog in Vue.js 2 — live REST API integration, 3 dynamic UI themes, Figma-to-code, deployed via GitLab CI/CD. Final score: <strong>87.79 / 100 (Excellent)</strong>.</p>
+                    <span class="proof-card__tag tag">Internship Certificate</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Vue.js 2</span><span class="tag">REST API</span><span class="tag">Figma</span><span class="tag">CI/CD</span><span class="tag">Firebase</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Huawei HCIA -->
+            <div id="huawei" class="glass-card proof-card proof-card--timeline"
+                data-title="HCIA Cloud Service — Huawei"
+                data-credential-id="19511300840-121/FGA/BLSDM.Komdigi/2025"
+                data-images='["../image/cert-huawei-1.webp","../image/cert-huawei-2.webp","../image/cert-huawei-3.webp","../image/cert-huawei-4.webp"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-huawei-1.webp" alt="Huawei HCIA"
+                        onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--blue">Huawei</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">2025</span>
+                    <h3 class="proof-card__title">HCIA Cloud Service</h3>
+                    <p class="proof-card__issuer">Huawei · Digitalent Scholarship KOMDIGI</p>
+                    <p class="proof-card__desc">40-hour cloud computing program — Huawei Cloud architecture, core services, and deployment fundamentals.</p>
+                    <span class="proof-card__tag tag">Cloud Computing</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Huawei Cloud</span><span class="tag">Cloud Architecture</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google PM -->
+            <div id="google-pm" class="glass-card proof-card proof-card--timeline"
+                data-title="Fundamental Project Management — Google"
+                data-credential-id="19510935840-24/FGA/BLSDM.Komdigi/2025"
+                data-images='["../image/cert-pm-1.webp","../image/cert-pm-2.webp"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-pm-1.webp" alt="Google PM"
+                        onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--blue">Google</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">2025</span>
+                    <h3 class="proof-card__title">Fundamental Project Management</h3>
+                    <p class="proof-card__issuer">Google · Digitalent Scholarship KOMDIGI</p>
+                    <p class="proof-card__desc">10-hour Google-issued program covering project planning, execution, stakeholder communication, and team management.</p>
+                    <span class="proof-card__tag tag">Project Management</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Agile</span><span class="tag">Planning</span><span class="tag">Team Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LKA UNPAM -->
+            <div id="lka-unpam" class="glass-card proof-card proof-card--timeline"
+                 data-title="Data Management Intern — LKA UNPAM"
+                 data-images='["../image/cert-unpam-lka-1.webp","../image/cert-unpam-lka-2.webp","../image/cert-unpam-lka-3.webp","../image/cert-unpam-lka-4.webp"]'
+                 data-link="https://www.instagram.com/kemahasiswaanunpam.official/"
+                 data-link-label="Instagram LKA →">
+                <div class="proof-card__img">
+                    <img src="../image/cert-unpam-lka-1.webp" alt="LKA UNPAM"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--green">Excellent</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jan – Jul 2025</span>
+                    <h3 class="proof-card__title">Data Management Intern</h3>
+                    <p class="proof-card__issuer">Lembaga Kemahasiswaan & Alumni UNPAM</p>
+                    <p class="proof-card__desc">Managed 500+ student records and 1,000+ digital archive files for Tracer Study & Alumni division. Final grade: <strong>Sangat Baik (Excellent)</strong>.</p>
+                    <span class="proof-card__tag tag">Internship Certificate</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Data Management</span><span class="tag">Excel</span><span class="tag">Digital Archiving</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Azure AI-900 -->
+            <!-- NOTE: Exam attempted but not passed (686/700). Card shows as Training Only to match CV. -->
+            <div id="azure" class="glass-card proof-card proof-card--timeline"
+                 data-title="Azure AI Fundamentals (AI-900)"
+                 data-images='["../image/cert-azure-1.webp","../image/cert-azure-2.webp","../image/cert-azure-3.webp","../image/cert-azure-4.webp","../image/cert-azure-5.webp","../image/cert-azure-6.webp","../image/cert-azure-7.webp"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-azure-1.webp" alt="Azure AI"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--blue">Microsoft</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">May 2025</span>
+                    <h3 class="proof-card__title">Azure AI Fundamentals (AI-900)</h3>
+                    <p class="proof-card__issuer">Microsoft · elevAIte · Merdeka Academy</p>
+                    <p class="proof-card__desc">Completed Microsoft's Azure AI training — machine learning concepts, cognitive services, and responsible AI principles.</p>
+                    <span class="proof-card__tag tag">Training Certificate</span>
+                    <p class="proof-card__credential">ID: 2299753990-5246/MS/BLSDM.Komdigi/2025</p>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Azure</span><span class="tag">Machine Learning</span><span class="tag">Cognitive Services</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yandex ML -->
+            <div id="yandex" class="glass-card proof-card proof-card--timeline"
+                 data-title="Linear Models in Machine Learning"
+                 data-credential-id="19510714840-160/FGA/BLSDM.Komdigi/2025"
+                 data-images='["../image/cert-ml-1.webp","../image/cert-ml-2.webp","../image/cert-ml-3.webp","../image/cert-ml-4.webp","../image/cert-ml-5.webp","../image/cert-ml-6.webp","../image/cert-ml-7.webp"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-ml-1.webp" alt="Machine Learning"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--green">91 hrs</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">May – Jul 2025</span>
+                    <h3 class="proof-card__title">Linear Models in Machine Learning</h3>
+                    <p class="proof-card__issuer">Yandex · Digitalent Scholarship KOMDIGI</p>
+                    <p class="proof-card__desc">91-hour intensive program: linear regression, classification, and model evaluation. Closed with an in-class hackathon — <strong>ranked #5 out of 926 participants</strong>.</p>
+                    <span class="proof-card__tag tag">Machine Learning</span>
+                    <span class="proof-card__attempt"><span class="msym">trophy</span> #5 / 926 · Yandex Hackathon</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">scikit-learn</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jurnal -->
+            <div id="jurnal" class="glass-card proof-card proof-card--timeline"
+                 data-title="Publikasi Jurnal Ilmiah"
+                 data-images='["../image/cert-jurnal.webp"]'
+                 data-link="https://portalpublikasi.com/index.php/inomatec/article/view/791"
+                 data-link-label="See Journal →">
+                <div class="proof-card__img">
+                    <img src="../image/cert-jurnal.webp" alt="Publikasi Jurnal"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--blue">Journal</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Jan 2026</span>
+                    <h3 class="proof-card__title">Academic Journal Publication</h3>
+                    <p class="proof-card__issuer">Information Systems · Universitas Pamulang</p>
+                    <p class="proof-card__desc">Published research: web-based decision support system for BLT recipient selection using the SAW (Simple Additive Weighting) method.</p>
+                    <span class="proof-card__tag tag">Academic Publication</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">DSS</span><span class="tag">SAW Method</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UKBI -->
+            <div id="ukbi" class="glass-card proof-card proof-card--timeline"
+                 data-title="UKBI — Uji Kemahiran Berbahasa Indonesia"
+                 data-credential-id="SD-BB-1068600"
+                 data-images='["../image/cert-ukbi.webp"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-ukbi.webp" alt="UKBI Madya"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--gold">Intermediate</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">Sep 2025</span>
+                    <h3 class="proof-card__title">UKBI — Madya Level</h3>
+                    <p class="proof-card__issuer">Language Development Agency · Kemdikbud</p>
+                    <p class="proof-card__desc">Official Indonesian language proficiency certification. Score: 549, Madya (Intermediate-Advanced) level. Valid until Sep 2027.</p>
+                    <span class="proof-card__tag tag">Language Certification</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Cert Modal -->
+    <div class="cert-modal-overlay" id="certModal">
+        <div class="cert-modal" id="certModalInner">
+            <div class="cert-modal__header">
+                <span class="cert-modal__title" id="certModalTitle">Certificate</span>
+                <span class="cert-modal__counter" id="certModalCounter"></span>
+                <button class="cert-modal__close" id="certModalClose">✕</button>
+            </div>
+            <div class="cert-modal__viewer">
+                <img class="cert-modal__img" id="certModalImg" src="" alt="">
+                <div class="cert-modal__placeholder" id="certModalPlaceholder" style="display:none">
+                    <span class="cert-modal__placeholder-icon"><span class="msym">image</span></span>
+                    <p class="cert-modal__placeholder-text">Screenshots coming soon</p>
+                </div>
+                <button class="cert-modal__nav cert-modal__nav--prev" id="certModalPrev">‹</button>
+                <button class="cert-modal__nav cert-modal__nav--next" id="certModalNext">›</button>
+            </div>
+            <div class="cert-modal__dots" id="certModalDots"></div>
+            <div class="cert-modal__footer" id="certModalFooter"></div>
+        </div>
+    </div>
+
+    <footer class="footer" style="padding-bottom:5rem;">
+        <p>&copy; 2026 Fakhrul Mukhlisin.</p>
+    </footer>
+
+    <!-- Hidden admin entry -->
+    <a href="/admin/" class="contribute-btn" title="Admin" aria-label="Admin">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </a>
+
+</main>
+
+<script src="../script.js"></script>
+<script src="../proof.js"></script>
+<script>
+// Skeleton shimmer on proof card images until loaded
+document.querySelectorAll('.proof-card__img img').forEach(img => {
+    const wrap = img.parentElement;
+    wrap.classList.add('skeleton');
+    const done = () => wrap.classList.remove('skeleton');
+    if (img.complete) done();
+    else { img.addEventListener('load', done); img.addEventListener('error', done); }
+});
+</script>
+<script>
+(function() {
+    const pill = document.getElementById('floatingPill');
+    if (pill) {
+        const update = () => pill.classList.toggle('visible', window.scrollY > 200);
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+    }
+})();
+
+// ── Cert Modal ────────────────────────────────────────
+(function() {
+    const overlay  = document.getElementById('certModal');
+    const modalImg = document.getElementById('certModalImg');
+    const modalPH  = document.getElementById('certModalPlaceholder');
+    const titleEl  = document.getElementById('certModalTitle');
+    const counter  = document.getElementById('certModalCounter');
+    const dotsEl   = document.getElementById('certModalDots');
+    const footer   = document.getElementById('certModalFooter');
+    const btnPrev  = document.getElementById('certModalPrev');
+    const btnNext  = document.getElementById('certModalNext');
+    const btnClose = document.getElementById('certModalClose');
+
+    let images = [], current = 0;
+
+    function showImg(index) {
+        current = index;
+        modalImg.classList.add('fading');
+        modalImg.classList.remove('zoomed');
+        modalPH.style.display = 'none';
+        modalImg.style.display = 'block';
+
+        setTimeout(() => {
+            modalImg.src = images[index];
+            modalImg.onload  = () => modalImg.classList.remove('fading');
+            modalImg.onerror = () => {
+                modalImg.style.display = 'none';
+                modalPH.style.display = 'flex';
+                modalImg.classList.remove('fading');
+            };
+        }, 150);
+
+        counter.textContent = images.length > 1 ? `${index + 1} / ${images.length}` : '';
+        dotsEl.querySelectorAll('.cert-modal__dot').forEach((d, i) =>
+            d.classList.toggle('active', i === index));
+        btnPrev.disabled = index === 0;
+        btnNext.disabled = index === images.length - 1;
+    }
+
+    function openModal(card) {
+        images  = JSON.parse(card.dataset.images || '[]');
+        current = 0;
+        titleEl.textContent = card.dataset.title || 'Certificate';
+
+        dotsEl.innerHTML = '';
+        if (images.length > 1) {
+            images.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'cert-modal__dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => showImg(i));
+                dotsEl.appendChild(dot);
+            });
+        }
+
+        const SVG = {
+            github: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+            youtube: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
+            instagram: '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>'
+        };
+
+        function makeBtn(href, cls, svgKey, label) {
+            const a = document.createElement('a');
+            a.href = href; a.target = '_blank'; a.rel = 'noopener';
+            a.className = `cert-modal__btn ${cls}`;
+            a.innerHTML = `${SVG[svgKey] || ''} ${label}`;
+            return a;
+        }
+
+        footer.innerHTML = '';
+        const { link, linkLabel, credentialId } = card.dataset;
+
+        // Cross-page link: certification → its related project (now a separate page).
+        if (card.dataset.project) {
+            const btn = document.createElement('a');
+            btn.className = 'cert-modal__btn cert-modal__btn--ghost';
+            btn.textContent = card.dataset.projectLabel || 'See Project';
+            btn.href = '/projects/' + card.dataset.project;
+            footer.appendChild(btn);
+        }
+        if (card.dataset.github) {
+            footer.appendChild(makeBtn(card.dataset.github, 'cert-modal__btn--github', 'github', card.dataset.githubLabel || 'GitHub'));
+        }
+        if (card.dataset.youtube) {
+            footer.appendChild(makeBtn(card.dataset.youtube, 'cert-modal__btn--youtube', 'youtube', card.dataset.youtubeLabel || 'YouTube'));
+        }
+        if (card.dataset.instagram) {
+            footer.appendChild(makeBtn(card.dataset.instagram, 'cert-modal__btn--instagram', 'instagram', card.dataset.instagramLabel || 'Instagram'));
+        }
+        if (link) {
+            const a = document.createElement('a');
+            a.href = link; a.target = '_blank'; a.rel = 'noopener';
+            let btnClass = 'cert-modal__btn--primary';
+            if (link.includes('github.com')) btnClass = 'cert-modal__btn--github';
+            else if (link.includes('instagram.com')) btnClass = 'cert-modal__btn--instagram';
+            a.className = `cert-modal__btn ${btnClass}`;
+            if (link.includes('github.com')) a.innerHTML = SVG.github + ' ' + (linkLabel || 'GitHub');
+            else if (link.includes('instagram.com')) a.innerHTML = SVG.instagram + ' ' + (linkLabel || 'Instagram');
+            else a.textContent = linkLabel || 'Open';
+            footer.appendChild(a);
+        }
+        if (credentialId) {
+            const btn = document.createElement('button');
+            btn.className = 'cert-modal__copy-id';
+            btn.innerHTML = `<span class="msym">content_copy</span> <span>Copy Credential ID</span>`;
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(credentialId).then(() => {
+                    btn.classList.add('copied');
+                    btn.querySelector('span').textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.querySelector('span').textContent = 'Copy Credential ID';
+                    }, 2000);
+                });
+            });
+            footer.appendChild(btn);
+        }
+
+        footer.style.display = footer.children.length ? 'flex' : 'none';
+        showImg(0);
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.proof-card').forEach(card => {
+        card.addEventListener('click', e => {
+            if (e.target.closest('a, button')) return;
+            if (!card.dataset.images) return;
+            openModal(card);
+        });
+    });
+
+    modalImg.addEventListener('click', () => modalImg.classList.toggle('zoomed'));
+    btnPrev.addEventListener('click', () => { if (current > 0) showImg(current - 1); });
+    btnNext.addEventListener('click', () => { if (current < images.length - 1) showImg(current + 1); });
+    btnClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+    document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeModal();
+        if (e.key === 'ArrowLeft' && current > 0) showImg(current - 1);
+        if (e.key === 'ArrowRight' && current < images.length - 1) showImg(current + 1);
+    });
+
+    let touchStartX = 0;
+    const inner = document.getElementById('certModalInner');
+    inner.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    inner.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0 && current < images.length - 1) showImg(current + 1);
+        if (dx > 0 && current > 0) showImg(current - 1);
+    }, { passive: true });
+
+    // Deep link via URL hash — e.g. /certifications/#bnsp
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+        const card = document.getElementById(hash);
+        if (card) {
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (card.dataset.images) setTimeout(() => card.click(), 400);
+            }, 200);
+        }
+    }
+})();
+</script>
+<!-- Umami Analytics -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="b47339d6-c2d4-42f9-bfed-19a95a9ffc48"></script>
+</body>
+</html>
