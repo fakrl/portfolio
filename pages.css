@@ -227,6 +227,52 @@ body.dark .proof-card__badge {
     color: inherit;
 }
 
+/* Certifications — compact timeline row instead of image-first card.
+   Keeps .proof-card class (and all data-* attrs) so the existing modal
+   click handler in proof/index.html keeps working unchanged — this is
+   purely a CSS layout override via a modifier class. */
+.proof-card--timeline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.1rem;
+    padding: 1rem 1.4rem;
+}
+.proof-card--timeline .proof-card__img {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    order: 2;
+}
+.proof-card--timeline .proof-card__badge,
+.proof-card--timeline .proof-card__click-hint {
+    display: none;
+}
+.proof-card--timeline .proof-card__body {
+    flex: 1;
+    padding: 0;
+    order: 1;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+}
+.proof-card--timeline .proof-card__date {
+    flex-shrink: 0;
+    width: 92px;
+}
+.proof-card--timeline .proof-card__title { font-size: 0.92rem; }
+.proof-card--timeline .proof-card__issuer { font-size: 0.8rem; }
+.proof-card--timeline .proof-card__desc,
+.proof-card--timeline .skill-tags {
+    display: none; /* still in the DOM for the modal, just hidden from the compact row */
+}
+@media (max-width: 560px) {
+    .proof-card--timeline { flex-wrap: wrap; }
+    .proof-card--timeline .proof-card__date { width: auto; }
+}
+
 /* Card body */
 .proof-card__body {
     padding: 1.4rem;

@@ -769,19 +769,43 @@
     body.light .visitor-pill { background: rgba(0,0,0,0.05); color: var(--text-secondary-light); }
     body.dark  .visitor-pill { background: rgba(255,255,255,0.06); color: var(--text-secondary-dark); }
 
-    /* Skills — grouped chip list (ganti 3D sphere, prioritas scannability) */
-    .skill-groups { display: flex; flex-direction: column; gap: 1.3rem; }
+    /* Skills — bounded board + horizontal marquee per category (ganti 3D sphere) */
+    .skill-board { padding: 1.8rem 0; overflow: hidden; }
+    .skill-groups { display: flex; flex-direction: column; gap: 1.5rem; }
     .skill-group-label {
         display: block;
         font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        margin-bottom: 0.55rem;
+        margin-bottom: 0.6rem;
+        padding: 0 1.8rem;
     }
     body.light .skill-group-label { color: #999; }
     body.dark  .skill-group-label { color: #666; }
-    .skill-chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .skill-marquee {
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+    .skill-track {
+        display: flex;
+        width: max-content;
+        gap: 0.5rem;
+        animation: skillScrollLeft 26s linear infinite;
+    }
+    .skill-track--right { animation-name: skillScrollRight; animation-duration: 30s; }
+    .skill-marquee:hover .skill-track { animation-play-state: paused; }
+
+    @keyframes skillScrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes skillScrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+        .skill-track { animation: none; }
+        .skill-marquee { overflow-x: auto; }
+    }
+
     .skill-chip {
         display: inline-flex;
         align-items: center;
@@ -790,10 +814,11 @@
         border-radius: var(--radius-pill);
         font-size: 0.85rem;
         font-weight: 600;
-        transition: background var(--transition-theme), color var(--transition-theme), transform var(--transition-base);
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background var(--transition-theme), color var(--transition-theme);
     }
     .skill-chip i, .skill-chip .msym { font-size: 1.05em; }
-    .skill-chip:hover { transform: translateY(-2px); }
     body.light .skill-chip { background: rgba(0,0,0,0.05); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.09); }
     body.dark  .skill-chip { background: rgba(255,255,255,0.06); color: var(--text-primary-dark); border: 1px solid rgba(255,255,255,0.10); }
     body.light .bio-chip { background: rgba(0,0,0,0.06); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.10); }
@@ -1997,50 +2022,82 @@
     ══════════════════════════════════════ -->
     <section id="skills" class="section">
         <h2 class="section-title">Technical Skills</h2>
-        <div class="skill-groups">
-            <div class="skill-group">
-                <span class="skill-group-label">Languages</span>
-                <div class="skill-chip-row">
-                    <span class="skill-chip"><i class="devicon-php-plain colored"></i>PHP</span>
-                    <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
-                    <span class="skill-chip"><i class="devicon-go-plain colored"></i>Golang</span>
-                    <span class="skill-chip"><i class="devicon-html5-plain colored"></i>HTML5</span>
-                    <span class="skill-chip"><i class="devicon-css3-plain colored"></i>CSS3</span>
-                    <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
+        <div class="glass-card visible skill-board">
+            <div class="skill-groups">
+                <div class="skill-group">
+                    <span class="skill-group-label">Languages</span>
+                    <div class="skill-marquee">
+                        <div class="skill-track skill-track--left">
+                            <span class="skill-chip"><i class="devicon-php-plain colored"></i>PHP</span>
+                            <span class="skill-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                            <span class="skill-chip"><i class="devicon-go-plain colored"></i>Golang</span>
+                            <span class="skill-chip"><i class="devicon-html5-plain colored"></i>HTML5</span>
+                            <span class="skill-chip"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                            <span class="skill-chip"><i class="devicon-python-plain colored"></i>Python</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-php-plain colored"></i>PHP</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-go-plain colored"></i>Golang</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-html5-plain colored"></i>HTML5</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-python-plain colored"></i>Python</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-group">
-                <span class="skill-group-label">Frameworks</span>
-                <div class="skill-chip-row">
-                    <span class="skill-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
-                    <span class="skill-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
-                    <span class="skill-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
-                    <span class="skill-chip"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+                <div class="skill-group">
+                    <span class="skill-group-label">Frameworks</span>
+                    <div class="skill-marquee">
+                        <div class="skill-track skill-track--right">
+                            <span class="skill-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                            <span class="skill-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
+                            <span class="skill-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
+                            <span class="skill-chip"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-group">
-                <span class="skill-group-label">Databases</span>
-                <div class="skill-chip-row">
-                    <span class="skill-chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
-                    <span class="skill-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                <div class="skill-group">
+                    <span class="skill-group-label">Databases</span>
+                    <div class="skill-marquee">
+                        <div class="skill-track skill-track--left">
+                            <span class="skill-chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                            <span class="skill-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-group">
-                <span class="skill-group-label">Tools & DevOps</span>
-                <div class="skill-chip-row">
-                    <span class="skill-chip"><i class="devicon-git-plain colored"></i>Git</span>
-                    <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub</span>
-                    <span class="skill-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
-                    <span class="skill-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
-                    <span class="skill-chip"><i class="devicon-figma-plain colored"></i>Figma</span>
-                    <span class="skill-chip"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+                <div class="skill-group">
+                    <span class="skill-group-label">Tools & DevOps</span>
+                    <div class="skill-marquee">
+                        <div class="skill-track skill-track--right">
+                            <span class="skill-chip"><i class="devicon-git-plain colored"></i>Git</span>
+                            <span class="skill-chip"><i class="devicon-github-original colored"></i>GitHub</span>
+                            <span class="skill-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
+                            <span class="skill-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                            <span class="skill-chip"><i class="devicon-figma-plain colored"></i>Figma</span>
+                            <span class="skill-chip"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-git-plain colored"></i>Git</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-github-original colored"></i>GitHub</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-postman-plain colored"></i>Postman</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-figma-plain colored"></i>Figma</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="skill-group">
-                <span class="skill-group-label">AI & Cloud</span>
-                <div class="skill-chip-row">
-                    <span class="skill-chip"><i class="devicon-azure-plain colored"></i>Azure</span>
-                    <span class="skill-chip"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
+                <div class="skill-group">
+                    <span class="skill-group-label">AI & Cloud</span>
+                    <div class="skill-marquee">
+                        <div class="skill-track skill-track--left">
+                            <span class="skill-chip"><i class="devicon-azure-plain colored"></i>Azure</span>
+                            <span class="skill-chip"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
+                            <span class="skill-chip" aria-hidden="true"><i class="devicon-azure-plain colored"></i>Azure</span>
+                            <span class="skill-chip" aria-hidden="true"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2101,23 +2158,6 @@
     </section>
 
     <!-- ══════════════════════════════════════
-         OUTSIDE THE IDE
-    ══════════════════════════════════════ -->
-    <section id="outside" class="section">
-        <h2 class="section-title">Outside the IDE</h2>
-        <div class="glass-card visible" style="padding: 1.4rem 1.6rem;">
-            <p class="exp-card-desc" style="margin-bottom: 0.9rem;">When I'm not shipping features, I recharge with music, movies, and the outdoors.</p>
-            <div class="exp-card-tags">
-                <span class="tag">Guitar</span>
-                <span class="tag">Hiking & Camping</span>
-                <span class="tag">Home Workouts</span>
-                <span class="tag">Interstellar · CODA · The 100</span>
-                <span class="tag">Podcasts — Raditya Dika, Malaka Project</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════
          HIT ME UP
     ══════════════════════════════════════ -->
     <section id="contact" class="section">
@@ -2169,60 +2209,50 @@
             </a>
         </div>
 
-        <div class="contact-grid">
-            <!-- Info side -->
-            <div class="glass-card visible contact-info">
-                <div>
-                    <h3 class="contact-info-heading">Let's talk.</h3>
-                    <p class="contact-info-sub">Open to full-time, part-time, remote, or internship — frontend, backend, or anything tech. Evening classes 18:00–22:00; mornings & afternoons free.</p>
+        <div class="glass-card visible contact-form-card" style="max-width:640px; margin:0 auto;">
+            <h3 class="contact-info-heading">Let's talk.</h3>
+            <form class="contact-form" id="contactForm">
+                <div class="contact-form-row">
+                    <input type="text" name="name" placeholder="Your name"
+                           class="feedback-input" required maxlength="60">
+                    <input type="email" name="email" placeholder="Your email"
+                           class="feedback-input" required maxlength="80">
                 </div>
-                <div class="contact-links">
-                    <a href="mailto:fahrulmukhlisin13@gmail.com" class="contact-link-item">
-                        <span class="contact-link-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                        </span>
-                        fahrulmukhlisin13@gmail.com
-                    </a>
-                    <a href="https://linkedin.com/in/fakrl" target="_blank" class="contact-link-item">
-                        <span class="contact-link-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </span>
-                        linkedin.com/in/fakrl
-                    </a>
-                    <a href="https://github.com/fakrl" target="_blank" class="contact-link-item">
-                        <span class="contact-link-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                        </span>
-                        github.com/fakrl
+                <textarea name="message" placeholder="What's on your mind?"
+                          class="feedback-input" style="min-height:140px; resize:vertical; flex:1"
+                          required maxlength="600"></textarea>
+                <div class="contact-form-actions">
+                    <button type="submit" class="btn btn-primary" style="flex:1" id="formSubmitBtn">
+                        Send Message
+                    </button>
+                    <a href="https://wa.me/6281315324195" target="_blank"
+                       class="wa-float-btn" title="Chat on WhatsApp">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
                     </a>
                 </div>
-            </div>
-
-            <!-- Form side -->
-            <div class="glass-card visible contact-form-card">
-                <form class="contact-form" id="contactForm">
-                    <div class="contact-form-row">
-                        <input type="text" name="name" placeholder="Your name"
-                               class="feedback-input" required maxlength="60">
-                        <input type="email" name="email" placeholder="Your email"
-                               class="feedback-input" required maxlength="80">
-                    </div>
-                    <textarea name="message" placeholder="What's on your mind?"
-                              class="feedback-input" style="min-height:140px; resize:vertical; flex:1"
-                              required maxlength="600"></textarea>
-                    <div class="contact-form-actions">
-                        <button type="submit" class="btn btn-primary" style="flex:1" id="formSubmitBtn">
-                            Send Message
-                        </button>
-                        <a href="https://wa.me/6281315324195" target="_blank"
-                           class="wa-float-btn" title="Chat on WhatsApp">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <p id="formStatus"></p>
-                </form>
+                <p id="formStatus"></p>
+            </form>
+            <div class="contact-links" style="margin-top:1.4rem; padding-top:1.2rem; border-top:1px solid rgba(128,128,128,0.15);">
+                <a href="mailto:fahrulmukhlisin13@gmail.com" class="contact-link-item">
+                    <span class="contact-link-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </span>
+                    fahrulmukhlisin13@gmail.com
+                </a>
+                <a href="https://linkedin.com/in/fakrl" target="_blank" class="contact-link-item">
+                    <span class="contact-link-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </span>
+                    linkedin.com/in/fakrl
+                </a>
+                <a href="https://github.com/fakrl" target="_blank" class="contact-link-item">
+                    <span class="contact-link-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </span>
+                    github.com/fakrl
+                </a>
             </div>
         </div>
     </section>
@@ -2439,6 +2469,8 @@
 
     let latestData  = null;
     let currentUser = null;
+    const FEEDBACK_PAGE_SIZE = 3;
+    let feedbackVisibleCount = FEEDBACK_PAGE_SIZE;
     const isOwner = () => !!currentUser && !!OWNER_UID && currentUser.uid === OWNER_UID;
 
     function escapeHtml(str) {
@@ -2479,13 +2511,33 @@
         </div>`;
     }
 
+    function updateFeedbackLoadMoreBtn(total) {
+        let btn = document.getElementById("feedbackLoadMoreBtn");
+        const remaining = total - feedbackVisibleCount;
+        if (!btn) {
+            btn = document.createElement("button");
+            btn.id = "feedbackLoadMoreBtn";
+            btn.className = "btn btn-secondary";
+            btn.style.cssText = "display:block; margin: 1.4rem auto 0;";
+            document.getElementById("feedback").querySelector(".feedback-wrapper").appendChild(btn);
+            btn.addEventListener("click", () => {
+                feedbackVisibleCount += FEEDBACK_PAGE_SIZE;
+                render();
+            });
+        }
+        if (remaining <= 0) { btn.style.display = "none"; }
+        else { btn.style.display = "block"; btn.textContent = `Load More (${remaining} remaining)`; }
+    }
+
     function render() {
         const list  = document.getElementById("feedbackList");
         const empty = document.getElementById("feedbackEmpty");
         list.querySelectorAll(".gb-post").forEach(el => el.remove());
-        if (!latestData) { empty.style.display = "block"; return; }
+        if (!latestData) { empty.style.display = "block"; updateFeedbackLoadMoreBtn(0); return; }
         empty.style.display = "none";
-        Object.entries(latestData).reverse().forEach(([key, item]) => {
+        const allEntries = Object.entries(latestData).reverse();
+        updateFeedbackLoadMoreBtn(allEntries.length);
+        allEntries.slice(0, feedbackVisibleCount).forEach(([key, item]) => {
             const replies = item.replies ? Object.values(item.replies) : [];
             const repliesHtml = replies.length
                 ? `<div class="gb-replies">${replies.map(replyHtml).join("")}</div>` : "";
