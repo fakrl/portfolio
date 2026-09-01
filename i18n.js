@@ -93,14 +93,23 @@ const I18N = {
     'exp.fsj.role': { en: 'President', id: 'Ketua' },
     'exp.fsj.meta': { en: 'Oct 2021 – Nov 2022', id: 'Okt 2021 – Nov 2022' },
 
+    // ── GitHub Activity ──
+    'ghActivity.title': { en: 'GitHub Activity', id: 'Aktivitas GitHub' },
+    'ghActivity.loading': { en: 'Loading activity…', id: 'Memuat aktivitas…' },
+    'ghActivity.captionSuffix': { en: 'contributions in the last year', id: 'kontribusi dalam setahun terakhir' },
+    'ghActivity.error': { en: "Couldn't load activity — view on GitHub →", id: 'Gagal memuat aktivitas — lihat di GitHub →' },
+
     // ── Featured Build ──
     'spotlight.eyebrow': { en: 'Featured Build', id: 'Karya Unggulan' },
-    'spotlight.evermos.title': { en: 'Marketplace REST API — Evermos', id: 'Marketplace REST API — Evermos' },
-    'spotlight.evermos.sub': { en: 'Backend Developer Intern · Evermos × Rakamin Academy', id: 'Magang Backend Developer · Evermos × Rakamin Academy' },
-    'spotlight.evermos.desc': {
-        en: "A full marketplace REST API built solo in Golang: 7 modules (Auth, User, Store, Address, Category, Product, Transaction), JWT auth with RBAC, multi-image upload, price-range filtering, and atomic DB transactions using Clean Architecture. Scored 90.91/100 — the highest-scored project I've shipped, and the one I can defend line-by-line in an interview.",
-        id: 'REST API marketplace lengkap yang dibangun sendirian dengan Golang: 7 modul (Auth, User, Store, Address, Category, Product, Transaction), JWT auth dengan RBAC, multi-image upload, filter rentang harga, dan atomic DB transactions dengan Clean Architecture. Skor 90.91/100 — proyek dengan skor tertinggi yang pernah saya rilis, dan yang bisa saya jelaskan baris per baris saat interview.'
+    'spotlight.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
+    'spotlight.jbtb.sub': { en: 'Solo Full Stack Developer · Capstone (Project Work track)', id: 'Full Stack Developer Solo · Capstone (jalur Project Work)' },
+    'spotlight.jbtb.desc': {
+        en: "A 7-role casting & talent management system built solo in Laravel 13 for a real casting agency: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows — end to end, not a tutorial-scale CRUD app.",
+        id: 'Sistem manajemen casting & talent 7-role yang dibangun sendirian dengan Laravel 13 untuk agensi casting sungguhan: kontrak digital, PII terenkripsi, gateway notifikasi WhatsApp self-hosted, dan alur review berjenjang sesuai peran — dikerjain end-to-end, bukan CRUD skala tutorial.'
     },
+    'extra.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
+    'extra.nobel.sub': { en: 'Production LMS · PT Indotech Digital', id: 'LMS Production · PT Indotech Digital' },
+    'extra.visitSite': { en: 'Visit Site', id: 'Kunjungi Situs' },
 
     // ── Featured Works ──
     'featured.title': { en: 'Featured Works', id: 'Karya Pilihan' },
@@ -109,6 +118,7 @@ const I18N = {
     'work.readCaseStudy': { en: 'Read case study →', id: 'Baca studi kasus →' },
     'work.viewDetails': { en: 'View details →', id: 'Lihat detail →' },
     'work.view': { en: 'View →', id: 'Lihat →' },
+    'work.viewOnGithub': { en: 'View on GitHub →', id: 'Lihat di GitHub →' },
 
     'metric.modules': { en: 'Modules', id: 'Modul' },
     'metric.score': { en: 'Score / 100', id: 'Skor / 100' },
@@ -117,13 +127,8 @@ const I18N = {
     'metric.dynamicThemes': { en: 'Dynamic Themes', id: 'Tema Dinamis' },
     'metric.keyScreens': { en: 'Key Screens', id: 'Layar Utama' },
     'metric.prototype': { en: 'Prototype', id: 'Prototipe' },
-
-    'work.nobel.title': { en: 'Nobel Akademi — LMS Features', id: 'Nobel Akademi — Fitur LMS' },
-    'work.nobel.sub': { en: 'PT Indotech Digital · Production LMS', id: 'PT Indotech Digital · LMS Production' },
-    'work.nobel.desc': {
-        en: 'Feature work on a live learning platform: Bootcamp module end-to-end (6-table data model, backend, admin CMS, public pages), Webinar registration with confirmation emails, plus e-portfolio and certification pages — shipped through PR review to production.',
-        id: 'Mengerjakan fitur di platform pembelajaran yang sudah live: modul Bootcamp end-to-end (data model 6 tabel, backend, admin CMS, halaman publik), pendaftaran Webinar dengan email konfirmasi, plus halaman e-portfolio dan sertifikasi — dirilis lewat review PR ke production.'
-    },
+    'metric.roles': { en: 'Roles (RBAC)', id: 'Peran (RBAC)' },
+    'metric.developer': { en: 'Developer', id: 'Developer' },
 
     'work.evermos.title': { en: 'Marketplace REST API', id: 'Marketplace REST API' },
     'work.evermos.sub': { en: 'Evermos · Backend', id: 'Evermos · Backend' },
@@ -393,6 +398,7 @@ const I18N = {
     'cs.ctaText': { en: 'Open to full-time Full Stack Developer opportunities.', id: 'Terbuka untuk peluang full-time sebagai Full Stack Developer.' },
     'cs.downloadCv': { en: 'Download CV', id: 'Unduh CV' },
     'cs.emailMe': { en: 'Email Me', id: 'Email Saya' },
+    'cs.screenshotSoon': { en: 'Screenshot coming soon', id: 'Screenshot menyusul' },
 };
 
 function getLang() {

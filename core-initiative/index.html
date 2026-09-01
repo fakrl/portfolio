@@ -35,6 +35,15 @@
         body.dark  .cs-summary { color: var(--text-secondary-dark); }
         .cs-hero { width: 100%; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2.4rem; }
         .cs-hero img { width: 100%; display: block; }
+        .cs-hero--placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; height: 280px; }
+        body.light .cs-hero--placeholder { background: linear-gradient(135deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02)); }
+        body.dark  .cs-hero--placeholder { background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); }
+        .cs-hero--placeholder .msym { font-size: 2.6rem; }
+        body.light .cs-hero--placeholder .msym { color: rgba(0,0,0,0.30); }
+        body.dark  .cs-hero--placeholder .msym { color: rgba(255,255,255,0.30); }
+        .cs-hero--placeholder span.cs-hero-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; }
+        body.light .cs-hero--placeholder span.cs-hero-label { color: var(--text-muted-light); }
+        body.dark  .cs-hero--placeholder span.cs-hero-label { color: var(--text-muted-dark); }
         .cs-2col { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.4rem; }
         @media (min-width: 640px) { .cs-2col { grid-template-columns: 1fr 1fr; } }
         .cs-box { padding: 1.4rem 1.6rem; }

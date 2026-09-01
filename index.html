@@ -770,7 +770,7 @@
     body.dark  .visitor-pill { background: rgba(255,255,255,0.06); color: var(--text-secondary-dark); }
 
     /* Skills — bounded board + horizontal marquee per category (ganti 3D sphere) */
-    .skill-board { padding: 1.8rem 0; overflow: hidden; }
+    .skill-board { padding: 1.8rem 0; overflow: hidden; max-width: 960px; margin: 0 auto; }
     .skill-groups { display: flex; flex-direction: column; gap: 1.5rem; }
     .skill-groups--flat { gap: 0.8rem; }
     .skill-board-more {
@@ -956,11 +956,57 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        max-width: 960px;
+        margin: 0 auto;
     }
     @media (min-width: 860px) {
         .spotlight-card { flex-direction: row; }
         .spotlight-card .work-card-media { width: 46%; height: auto; }
         .spotlight-card .work-card-body { flex: 1; padding: 2rem 2.2rem; }
+    }
+
+    /* Featured Build "extras" — Ren Lenon-style project row: external link, no case study */
+    .build-extras { display: flex; flex-direction: column; gap: 0.8rem; max-width: 960px; margin: 1rem auto 0; }
+    .build-extra-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.4rem;
+        text-decoration: none;
+        transition: transform var(--transition-base);
+    }
+    .build-extra-card:hover { transform: translateY(-2px); }
+    .build-extra-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+    }
+    body.light .build-extra-icon { background: rgba(0,0,0,0.05); }
+    body.dark  .build-extra-icon { background: rgba(255,255,255,0.06); }
+    .build-extra-body { flex: 1; min-width: 0; }
+    .build-extra-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .build-extra-body p { font-size: 0.8rem; }
+    body.light .build-extra-body p { color: var(--text-secondary-light); }
+    body.dark  .build-extra-body p { color: var(--text-secondary-dark); }
+    .build-extra-link {
+        font-size: 0.78rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    body.light .build-extra-link { color: var(--text-primary-light); }
+    body.dark  .build-extra-link { color: var(--text-primary-dark); }
+    @media (max-width: 600px) {
+        .build-extra-card { flex-wrap: wrap; }
+        .build-extra-link { margin-left: 60px; }
     }
 
     .work-card-media--placeholder {
@@ -1111,6 +1157,73 @@
 
     @media (max-width: 720px) {
         .work-grid { grid-template-columns: 1fr; max-width: 460px; }
+    }
+
+    /* ==========================================
+       GITHUB ACTIVITY
+       ========================================== */
+    .gh-activity-card {
+        display: block;
+        max-width: 700px;
+        margin: 0 auto 2.5rem;
+        padding: 1.8rem 1.8rem 1.4rem;
+        text-decoration: none;
+        border-style: dashed !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .gh-activity-card:hover { transform: translateY(-3px); }
+
+    .gh-activity-months {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 13px;
+        gap: 3px;
+        margin-bottom: 4px;
+        padding-left: 2px;
+        font-size: 0.68rem;
+        font-weight: 600;
+        overflow: hidden;
+    }
+    body.light .gh-activity-months { color: #999; }
+    body.dark  .gh-activity-months { color: #666; }
+
+    .gh-activity-grid {
+        display: grid;
+        grid-template-rows: repeat(7, 11px);
+        grid-auto-flow: column;
+        grid-auto-columns: 11px;
+        gap: 3px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+    }
+    .gh-activity-day {
+        width: 11px;
+        height: 11px;
+        border-radius: 2px;
+    }
+    .gh-activity-day--empty { visibility: hidden; }
+    body.light .gh-activity-day[data-level="0"] { background: rgba(0,0,0,0.06); }
+    body.dark  .gh-activity-day[data-level="0"] { background: rgba(255,255,255,0.07); }
+    .gh-activity-day[data-level="1"] { background: rgba(37,99,235,0.28); }
+    .gh-activity-day[data-level="2"] { background: rgba(37,99,235,0.52); }
+    .gh-activity-day[data-level="3"] { background: rgba(37,99,235,0.76); }
+    .gh-activity-day[data-level="4"] { background: #2563eb; }
+
+    .gh-activity-caption {
+        margin-top: 0.9rem;
+        font-size: 0.82rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    body.light .gh-activity-caption { color: var(--text-secondary-light); }
+    body.dark  .gh-activity-caption { color: var(--text-secondary-dark); }
+
+    @media (max-width: 600px) {
+        .gh-activity-grid, .gh-activity-months { grid-auto-columns: 9px; }
+        .gh-activity-grid { grid-template-rows: repeat(7, 9px); }
+        .gh-activity-day { width: 9px; height: 9px; }
     }
 
     /* ==========================================
@@ -1916,30 +2029,47 @@
     ══════════════════════════════════════ -->
     <section id="featured-build" class="section">
         <span class="spotlight-eyebrow" data-i18n="spotlight.eyebrow">Featured Build</span>
-        <a href="/evermos/" class="work-card spotlight-card glass-card visible">
-            <div class="work-card-media">
-                <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
-                <span class="work-card-tag">Golang</span>
+        <a href="/casting-jbtb/" class="work-card spotlight-card glass-card visible">
+            <div class="work-card-media work-card-media--placeholder">
+                <i class="devicon-laravel-plain"></i>
+                <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
+                <span class="work-card-tag">Laravel 13</span>
             </div>
             <div class="work-card-body">
                 <div>
-                    <h3 class="work-card-title" data-i18n="spotlight.evermos.title">Marketplace REST API — Evermos</h3>
-                    <p class="work-card-sub" data-i18n="spotlight.evermos.sub">Backend Developer Intern · Evermos × Rakamin Academy</p>
+                    <h3 class="work-card-title" data-i18n="spotlight.jbtb.title">SIM Casting — PT. JBTB Casting Creative Group</h3>
+                    <p class="work-card-sub" data-i18n="spotlight.jbtb.sub">Solo Full Stack Developer · Capstone (Project Work track)</p>
                 </div>
-                <p class="work-card-desc" data-i18n="spotlight.evermos.desc">A full marketplace REST API built solo in Golang: 7 modules (Auth, User, Store, Address, Category, Product, Transaction), JWT auth with RBAC, multi-image upload, price-range filtering, and atomic DB transactions using Clean Architecture. Scored 90.91/100 — the highest-scored project I've shipped, and the one I can defend line-by-line in an interview.</p>
+                <p class="work-card-desc" data-i18n="spotlight.jbtb.desc">A 7-role casting & talent management system built solo in Laravel 13 for a real casting agency: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows — end to end, not a tutorial-scale CRUD app.</p>
                 <div class="work-card-metrics">
-                    <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label" data-i18n="metric.modules">Modules</span></div>
-                    <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label" data-i18n="metric.score">Score / 100</span></div>
+                    <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label" data-i18n="metric.roles">Roles (RBAC)</span></div>
+                    <div class="work-metric"><span class="work-metric-num">Solo</span><span class="work-metric-label" data-i18n="metric.developer">Developer</span></div>
                 </div>
                 <div class="work-card-foot">
                     <div class="work-card-tech">
-                        <i class="devicon-go-plain colored" title="Golang"></i>
+                        <i class="devicon-laravel-plain colored" title="Laravel"></i>
+                        <i class="devicon-php-plain colored" title="PHP"></i>
                         <i class="devicon-mysql-plain colored" title="MySQL"></i>
                     </div>
                     <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                 </div>
             </div>
         </a>
+
+        <!-- Secondary "extras" row — Ren Lenon-style project cards: click goes straight
+             to the live site, no internal case study. Nobiplay card intentionally left
+             out for now: its consumer-facing app has no public domain yet (still
+             localhost per .env.example) — add it once Fakrul gives a real reachable URL. -->
+        <div class="build-extras">
+            <a href="https://nobelakademi.id" target="_blank" rel="noopener" class="build-extra-card glass-card visible">
+                <div class="build-extra-icon"><i class="devicon-laravel-plain colored"></i></div>
+                <div class="build-extra-body">
+                    <h4 data-i18n="extra.nobel.title">Nobel Akademi</h4>
+                    <p data-i18n="extra.nobel.sub">Production LMS · PT Indotech Digital</p>
+                </div>
+                <span class="build-extra-link" data-i18n="extra.visitSite">Visit Site <span class="msym" style="font-size:1em">arrow_outward</span></span>
+            </a>
+        </div>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -1950,37 +2080,9 @@
 
         <div class="work-grid">
 
-            <!-- Nobel Akademi (placeholder screenshot) -->
-            <a href="/projects/#proj-nobel" class="work-card glass-card visible">
-                <div class="work-card-media work-card-media--placeholder">
-                    <i class="devicon-laravel-original"></i>
-                    <span>Screenshot coming soon</span>
-                    <span class="work-card-tag">Laravel 11</span>
-                </div>
-                <div class="work-card-body">
-                    <div>
-                        <h3 class="work-card-title" data-i18n="work.nobel.title">Nobel Akademi — LMS Features</h3>
-                        <p class="work-card-sub" data-i18n="work.nobel.sub">PT Indotech Digital · Production LMS</p>
-                    </div>
-                    <p class="work-card-desc" data-i18n="work.nobel.desc">Feature work on a live learning platform: Bootcamp module end-to-end (6-table data model, backend, admin CMS, public pages), Webinar registration with confirmation emails, plus e-portfolio and certification pages — shipped through PR review to production.</p>
-                    <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">20+</span><span class="work-metric-label" data-i18n="metric.prsMerged">PRs Merged</span></div>
-                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label" data-i18n="metric.modulesShipped">Modules Shipped</span></div>
-                    </div>
-                    <div class="work-card-foot">
-                        <div class="work-card-tech">
-                            <i class="devicon-laravel-original colored" title="Laravel"></i>
-                            <i class="devicon-php-plain colored" title="PHP"></i>
-                            <i class="devicon-mysql-plain colored" title="MySQL"></i>
-                            <i class="devicon-bootstrap-plain colored" title="Bootstrap"></i>
-                        </div>
-                        <span class="work-card-link" data-i18n="work.viewDetails">View details →</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Evermos backend -->
-            <a href="/evermos/" class="work-card glass-card visible">
+            <!-- Evermos backend — links out to GitHub repo now (moved from spotlight,
+                 case-study page /evermos/ still exists, just not linked from here) -->
+            <a href="https://github.com/fakrl/evermos-backend" target="_blank" rel="noopener" class="work-card glass-card visible">
                 <div class="work-card-media">
                     <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
                     <span class="work-card-tag">Golang</span>
@@ -2000,13 +2102,13 @@
                             <i class="devicon-go-plain colored" title="Golang"></i>
                             <i class="devicon-mysql-plain colored" title="MySQL"></i>
                         </div>
-                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
+                        <span class="work-card-link" data-i18n="work.viewOnGithub">View on GitHub →</span>
                     </div>
                 </div>
             </a>
 
-            <!-- Core Initiative frontend -->
-            <a href="/core-initiative/" class="work-card glass-card visible">
+            <!-- Core Initiative frontend — links out to GitHub repo now -->
+            <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" rel="noopener" class="work-card glass-card visible">
                 <div class="work-card-media">
                     <img src="image/proj-coreinitiative-1.webp" alt="Core Initiative e-commerce catalog" loading="lazy">
                     <span class="work-card-tag">Vue.js</span>
@@ -2027,7 +2129,7 @@
                             <i class="devicon-javascript-plain colored" title="JavaScript"></i>
                             <i class="devicon-firebase-plain colored" title="Firebase"></i>
                         </div>
-                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
+                        <span class="work-card-link" data-i18n="work.viewOnGithub">View on GitHub →</span>
                     </div>
                 </div>
             </a>
@@ -2129,6 +2231,21 @@
             </div>
             <a href="/tech-tools/" class="skill-board-more"><span data-i18n="skills.seeMore">See full stack breakdown</span> <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
         </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         GITHUB ACTIVITY
+    ══════════════════════════════════════ -->
+    <section id="github-activity" class="section" style="padding-top:0">
+        <h2 class="section-title" data-i18n="ghActivity.title">GitHub Activity</h2>
+        <a href="https://github.com/fakrl" target="_blank" rel="noopener"
+           class="gh-activity-card glass-card visible" id="ghActivityCard">
+            <div class="gh-activity-months" id="ghActivityMonths"></div>
+            <div class="gh-activity-grid" id="ghActivityGrid"></div>
+            <p class="gh-activity-caption" id="ghActivityCaption">
+                <span class="msym" style="font-size:1.05em">refresh</span> <span data-i18n="ghActivity.loading">Loading activity…</span>
+            </p>
+        </a>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -2307,12 +2424,6 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     </span>
                     fahrulmukhlisin13@gmail.com
-                </a>
-                <a href="https://github.com/fakrl" target="_blank" class="contact-link-item">
-                    <span class="contact-link-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    </span>
-                    github.com/fakrl
                 </a>
             </div>
         </div>
@@ -2776,6 +2887,112 @@
                 pill.style.display = 'inline-flex';
             })
             .catch(() => { /* silent — no counter shown if the DB call fails */ });
+    })();
+    </script>
+
+    <!-- GitHub Activity — public, unauthenticated contributions API (no token needed,
+         CORS-open). Renders a GitHub-style calendar heatmap. Fails silently (shows a
+         "view on GitHub" fallback) if the API is unreachable — this is a third-party
+         community API, not GitHub itself, so it can occasionally be down. -->
+    <script>
+    (function() {
+        const GH_USER = 'fakrl';
+        const API_URL = `https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=last`;
+        const grid = document.getElementById('ghActivityGrid');
+        const monthsRow = document.getElementById('ghActivityMonths');
+        const caption = document.getElementById('ghActivityCaption');
+        if (!grid || !monthsRow || !caption) return;
+
+        const MONTH_NAMES = {
+            en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+            id: ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
+        };
+
+        function currentLang() {
+            return localStorage.getItem('lang') === 'id' ? 'id' : 'en';
+        }
+
+        function buildWeeks(contributions) {
+            const weeks = [];
+            let week = [];
+            const firstDay = new Date(contributions[0].date + 'T00:00:00').getDay();
+            for (let i = 0; i < firstDay; i++) week.push(null);
+            contributions.forEach(day => {
+                week.push(day);
+                if (week.length === 7) { weeks.push(week); week = []; }
+            });
+            if (week.length) {
+                while (week.length < 7) week.push(null);
+                weeks.push(week);
+            }
+            return weeks;
+        }
+
+        function render(data) {
+            const weeks = buildWeeks(data.contributions);
+
+            grid.innerHTML = '';
+            weeks.forEach(week => {
+                week.forEach(day => {
+                    const cell = document.createElement('div');
+                    if (!day) {
+                        cell.className = 'gh-activity-day gh-activity-day--empty';
+                    } else {
+                        cell.className = 'gh-activity-day';
+                        cell.dataset.level = day.level;
+                        cell.title = `${day.count} · ${day.date}`;
+                    }
+                    grid.appendChild(cell);
+                });
+            });
+
+            monthsRow.innerHTML = '';
+            let lastMonth = -1;
+            weeks.forEach(week => {
+                const firstReal = week.find(d => d);
+                const label = document.createElement('span');
+                if (firstReal) {
+                    const m = new Date(firstReal.date + 'T00:00:00').getMonth();
+                    const dom = new Date(firstReal.date + 'T00:00:00').getDate();
+                    if (m !== lastMonth && dom <= 7) {
+                        label.textContent = MONTH_NAMES[currentLang()][m];
+                        lastMonth = m;
+                    }
+                }
+                monthsRow.appendChild(label);
+            });
+
+            renderCaption(data.total.lastYear);
+        }
+
+        function renderCaption(total) {
+            const lang = currentLang();
+            const entry = I18N['ghActivity.captionSuffix'];
+            const suffix = entry ? (entry[lang] || entry.en) : 'contributions in the last year';
+            caption.innerHTML = `<span class="msym" style="font-size:1.05em">history</span> ${total.toLocaleString(lang === 'id' ? 'id-ID' : 'en-US')} ${suffix}`;
+        }
+
+        let lastData = null;
+
+        fetch(API_URL)
+            .then(r => { if (!r.ok) throw new Error('bad response'); return r.json(); })
+            .then(data => {
+                lastData = data;
+                render(data);
+            })
+            .catch(() => {
+                const lang = currentLang();
+                const entry = I18N['ghActivity.error'];
+                caption.textContent = entry ? (entry[lang] || entry.en) : "Couldn't load activity — view on GitHub →";
+            });
+
+        // Re-render month labels/caption in the new language when the toggle is clicked,
+        // without re-fetching (data doesn't change, just the labels).
+        document.querySelectorAll('.lang-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setTimeout(() => { if (lastData) render(lastData); }, 0);
+            });
+        });
     })();
     </script>
 
