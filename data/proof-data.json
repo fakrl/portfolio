@@ -340,6 +340,40 @@
       ]
     },
     {
+      "id": "proj-jbtb-casting",
+      "featured": true,
+      "title": "SIM Casting — PT. JBTB Casting Creative Group",
+      "images": [],
+      "github": "https://github.com/fakrl/extras",
+      "github-label": "GitHub",
+      "badge": "Capstone",
+      "badgeTone": "purple",
+      "date": "Sep 2026 – Present",
+      "issuer": "Solo Full Stack Developer · Project Work (capstone) track",
+      "desc": "A 7-role casting & talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.",
+      "tags": [
+        "Laravel 13",
+        "PHP 8.3",
+        "MySQL",
+        "Blade",
+        "WhatsApp Gateway"
+      ],
+      "caseStudy": {
+        "whyBuilt": "I wanted my capstone to be something with real users and real constraints, not a tutorial-scale CRUD app — so I took on a live casting agency's actual operational system as my Project Work track final project, solo, end to end.",
+        "goal": "Build a management system covering the full casting workflow for PT. JBTB Casting Creative Group: talent profile verification, project/slot management, applications with schedule-conflict detection, Casting Director review and approval, digital contracts, and fee handling — across 7 distinct roles with different access levels.",
+        "overview": { "role": "Solo Full Stack Developer", "period": "Sep 2026 – Present", "type": "Capstone (Project Work track)", "architecture": "Laravel 13, Blade, role-scoped access control" },
+        "whatItDoes": [
+          "7-role RBAC — from Super Admin down to Extras (talent) — with one source-of-truth dashboard router instead of scattered per-page checks",
+          "Encrypted NIK storage with a separate hashed lookup column so duplicate-ID checks don't require decrypting every record",
+          "Digital contract lifecycle with reversible voiding (audit trail preserved) and crash-safe PDF regeneration",
+          "Self-hosted WhatsApp notification gateway running as a queued job, decoupled so a failed message never blocks the action that triggered it",
+          "Public shareable event links for casting calls with return-to-intent login — apply right after registering, not dumped on a generic dashboard"
+        ],
+        "screens": [],
+        "techNote": "Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production — so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself."
+      }
+    },
+    {
       "id": "proj-evermos",
       "featured": true,
       "title": "Marketplace REST API",

@@ -20,6 +20,7 @@ const template = fs.readFileSync(TEMPLATE_PATH, "utf8");
 
 // project id -> output folder slug (clean URL, e.g. /evermos/ not /project/?id=proj-evermos)
 const SLUGS = {
+  "proj-jbtb-casting": "casting-jbtb",
   "proj-evermos": "evermos",
   "proj-core-initiative": "core-initiative",
   "proj-nobel": "nobel-akademi",
@@ -45,6 +46,16 @@ function renderScreens(screens) {
         </div>`
     )
     .join("\n");
+}
+
+function renderHero(heroImage, title) {
+  if (heroImage) {
+    return `            <img src="${esc(heroImage)}" alt="${esc(title)} screenshot" fetchpriority="high">`;
+  }
+  return `            <div class="cs-hero--placeholder">
+                <span class="msym">photo_camera</span>
+                <span class="cs-hero-label" data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
+            </div>`;
 }
 
 function renderTechChips(tags) {
@@ -78,7 +89,7 @@ for (const item of data.projects || []) {
     .replace(/{{OG_URL}}/g, ogUrl)
     .replace(/{{PROJECT_TITLE}}/g, esc(item.title))
     .replace(/{{PROJECT_SUMMARY}}/g, esc(item.desc))
-    .replace(/{{HERO_IMAGE}}/g, esc(heroImage.replace("../", "/")))
+    .replace(/{{HERO_BLOCK}}/g, renderHero(heroImage ? heroImage.replace("../", "/") : "", item.title))
     .replace(/{{WHY_BUILT}}/g, esc(cs.whyBuilt))
     .replace(/{{GOAL}}/g, esc(cs.goal))
     .replace(/{{OVERVIEW_ROLE}}/g, esc(cs.overview?.role))

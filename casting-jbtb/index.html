@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{TITLE}} — Fakhrul Mukhlisin</title>
+    <title>SIM Casting — PT. JBTB Casting Creative Group — Fakhrul Mukhlisin</title>
     <link rel="icon" type="image/png" href="/image/favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="../pages.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
-    <meta name="description" content="{{META_DESCRIPTION}}">
-    <meta property="og:title" content="{{TITLE}} — Fakhrul Mukhlisin">
-    <meta property="og:description" content="{{META_DESCRIPTION}}">
-    <meta property="og:image" content="{{OG_IMAGE}}">
-    <meta property="og:url" content="{{OG_URL}}">
+    <meta name="description" content="A 7-role casting &amp; talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.">
+    <meta property="og:title" content="SIM Casting — PT. JBTB Casting Creative Group — Fakhrul Mukhlisin">
+    <meta property="og:description" content="A 7-role casting &amp; talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
+    <meta property="og:url" content="https://fakrul.netlify.app/casting-jbtb/">
     <meta name="twitter:card" content="summary_large_image">
 
     <style>
@@ -114,44 +114,55 @@
         <a href="/#featured" class="cs-back"><span class="msym" style="font-size:1.1rem">arrow_back</span> <span data-i18n="cs.back">Back to Home</span></a>
 
         <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
-        <h1 class="cs-title">{{PROJECT_TITLE}}</h1>
-        <p class="cs-summary">{{PROJECT_SUMMARY}}</p>
+        <h1 class="cs-title">SIM Casting — PT. JBTB Casting Creative Group</h1>
+        <p class="cs-summary">A 7-role casting &amp; talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.</p>
 
         <div class="cs-hero glass-card visible">
-{{HERO_BLOCK}}
+            <div class="cs-hero--placeholder">
+                <span class="msym">photo_camera</span>
+                <span class="cs-hero-label" data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
+            </div>
         </div>
 
         <div class="cs-2col">
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.whyBuilt">Why I Built It</h3>
-                <p>{{WHY_BUILT}}</p>
+                <p>I wanted my capstone to be something with real users and real constraints, not a tutorial-scale CRUD app — so I took on a live casting agency's actual operational system as my Project Work track final project, solo, end to end.</p>
             </div>
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.goal">Project Goal</h3>
-                <p>{{GOAL}}</p>
+                <p>Build a management system covering the full casting workflow for PT. JBTB Casting Creative Group: talent profile verification, project/slot management, applications with schedule-conflict detection, Casting Director review and approval, digital contracts, and fee handling — across 7 distinct roles with different access levels.</p>
             </div>
         </div>
 
         <div class="cs-overview glass-card visible">
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val">{{OVERVIEW_ROLE}}</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val">{{OVERVIEW_PERIOD}}</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val">{{OVERVIEW_TYPE}}</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val">{{OVERVIEW_ARCH}}</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val">Solo Full Stack Developer</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val">Sep 2026 – Present</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val">Capstone (Project Work track)</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val">Laravel 13, Blade, role-scoped access control</span></div>
         </div>
 
         <h2 class="cs-section-title" data-i18n="cs.whatItDoes">What It Does</h2>
         <ul class="cs-checklist">
-{{WHAT_IT_DOES}}
+            <li><span class="msym">check_circle</span>7-role RBAC — from Super Admin down to Extras (talent) — with one source-of-truth dashboard router instead of scattered per-page checks</li>
+            <li><span class="msym">check_circle</span>Encrypted NIK storage with a separate hashed lookup column so duplicate-ID checks don't require decrypting every record</li>
+            <li><span class="msym">check_circle</span>Digital contract lifecycle with reversible voiding (audit trail preserved) and crash-safe PDF regeneration</li>
+            <li><span class="msym">check_circle</span>Self-hosted WhatsApp notification gateway running as a queued job, decoupled so a failed message never blocks the action that triggered it</li>
+            <li><span class="msym">check_circle</span>Public shareable event links for casting calls with return-to-intent login — apply right after registering, not dumped on a generic dashboard</li>
         </ul>
 
         <h2 class="cs-section-title" data-i18n="cs.keyScreens">Key Screens</h2>
-{{SCREENS}}
+
 
         <h2 class="cs-section-title" style="margin-top:1.6rem;" data-i18n="cs.techStack">Tech Stack</h2>
         <div class="cs-tech-chips">
-{{TECH_CHIPS}}
+            <span class="skill-chip">Laravel 13</span>
+            <span class="skill-chip">PHP 8.3</span>
+            <span class="skill-chip">MySQL</span>
+            <span class="skill-chip">Blade</span>
+            <span class="skill-chip">WhatsApp Gateway</span>
         </div>
-        <p class="cs-tech-note">{{TECH_NOTE}}</p>
+        <p class="cs-tech-note">Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production — so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself.</p>
 
         <div class="cs-cta glass-card visible">
             <p data-i18n="cs.ctaText">Open to full-time Full Stack Developer opportunities.</p>
