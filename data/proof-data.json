@@ -374,7 +374,24 @@
         "MySQL",
         "JWT",
         "REST API"
-      ]
+      ],
+      "caseStudy": {
+        "whyBuilt": "I wanted hands-on proof that I could design a backend from scratch, not just consume APIs someone else built. Evermos x Rakamin's brief was open enough to let me make real architectural calls instead of following a fixed spec.",
+        "goal": "Build a marketplace REST API that could plausibly sit behind a real e-commerce app: sellers manage stores and products, buyers browse and transact, everything auth-gated and consistent even under concurrent writes.",
+        "overview": { "role": "Solo Backend Developer", "period": "Dec 2025", "type": "Internship Project", "architecture": "Clean Architecture (Handler-Service-Repository)" },
+        "whatItDoes": [
+          "JWT authentication with role-based access control",
+          "Store, address, and category management per seller",
+          "Multi-image product upload with pagination and price-range filtering",
+          "Atomic transactions for order/checkout consistency"
+        ],
+        "screens": [
+          { "icon": "api", "title": "Auth & User", "desc": "JWT-based login/register with role checks enforced at the middleware layer, not scattered across handlers.", "images": ["../image/proj-evermos-2.webp"] },
+          { "icon": "store", "title": "Store & Product", "desc": "Sellers manage store profiles and products with multi-image upload and category assignment.", "images": ["../image/proj-evermos-5.webp"] },
+          { "icon": "receipt_long", "title": "Transaction", "desc": "Checkout flow wrapped in atomic DB transactions so a failure partway through never leaves stock or balances inconsistent.", "images": ["../image/proj-evermos-9.webp"] }
+        ],
+        "techNote": "Clean Architecture (Handler-Service-Repository) was the deliberate choice here over a quick MVC dump: it keeps business logic in the Service layer testable and independent of Gin's request/response types, so swapping the HTTP framework later wouldn't touch the domain logic at all. Atomic transactions on the Transaction module specifically guard against the classic race condition where two requests read the same stock count before either writes back."
+      }
     },
     {
       "id": "proj-core-initiative",
@@ -407,7 +424,23 @@
         "REST API",
         "CI/CD",
         "Firebase"
-      ]
+      ],
+      "caseStudy": {
+        "whyBuilt": "After a backend-heavy project (Evermos), I wanted to prove the frontend side too: taking a Figma design and live API data and shipping something pixel-accurate, not just functional.",
+        "goal": "Build an e-commerce catalog frontend in Vue.js 2 that consumes a live REST API and supports multiple brand themes without duplicating components per theme.",
+        "overview": { "role": "Solo Frontend Developer", "period": "Oct – Nov 2025", "type": "Internship Project", "architecture": "Vue.js 2, component-based" },
+        "whatItDoes": [
+          "Live REST API integration for product listings",
+          "3 dynamic UI themes switchable via class binding + CSS variables",
+          "Pixel-perfect implementation from Figma source files",
+          "Deployed via GitLab CI/CD to Firebase Hosting"
+        ],
+        "screens": [
+          { "icon": "storefront", "title": "Catalog Listing", "desc": "Product grid pulling live data from the REST API, with the active theme controlling color tokens and imagery.", "images": ["../image/proj-coreinitiative-2.webp"] },
+          { "icon": "palette", "title": "Theme Switching", "desc": "3 distinct brand themes toggled at runtime via a single class binding, backed by CSS custom properties rather than separate stylesheets.", "images": ["../image/proj-coreinitiative-6.webp"] }
+        ],
+        "techNote": "Themes are implemented as CSS custom properties swapped via one root class binding, not three separate component trees — this kept the Figma-to-code work honest to pixel-perfect specs per theme while avoiding 3x the maintenance surface if a layout bug showed up later."
+      }
     },
     {
       "id": "proj-cms",

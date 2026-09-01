@@ -141,8 +141,12 @@ body.dark  .proof-card:hover { box-shadow: var(--shadow-hover-dark); }
     position: relative;
     height: 210px;
     overflow: hidden;
-    transition: background var(--transition-theme);
+    transition: background var(--transition-theme), border-color var(--transition-theme);
 }
+
+/* Subtle bezel/frame around the screenshot — reads like a mockup, not a raw crop */
+body.light .proof-card__img { border-bottom: 1px solid rgba(0, 0, 0, 0.07); }
+body.dark  .proof-card__img { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 
 body.light .proof-card__img { background: rgba(0, 0, 0, 0.04); }
 body.dark  .proof-card__img { background: rgba(255, 255, 255, 0.04); }
@@ -254,7 +258,7 @@ body.dark  .proof-card__title { color: var(--text-primary-dark); }
 
 .proof-card__issuer {
     font-size: 0.82rem;
-    font-style: italic;
+    font-weight: 600;
     transition: color var(--transition-theme);
 }
 

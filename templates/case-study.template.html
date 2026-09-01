@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/png" href="/image/favicon.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../components.css">
+    <link rel="stylesheet" href="../animations.css">
+    <link rel="stylesheet" href="../pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
+    <meta name="description" content="{{META_DESCRIPTION}}">
+    <meta property="og:title" content="{{TITLE}} — Fakhrul Mukhlisin">
+    <meta property="og:description" content="{{META_DESCRIPTION}}">
+    <meta property="og:image" content="{{OG_IMAGE}}">
+    <meta property="og:url" content="{{OG_URL}}">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        .cs-wrap { max-width: 820px; margin: 0 auto; padding: 100px 1.4rem 4rem; }
+        .cs-back { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.6rem; text-decoration: none; }
+        body.light .cs-back { color: var(--text-secondary-light); }
+        body.dark  .cs-back { color: var(--text-secondary-dark); }
+        .cs-eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        body.light .cs-eyebrow { color: #999; }
+        body.dark  .cs-eyebrow { color: #666; }
+        .cs-title { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.7rem; }
+        .cs-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; }
+        body.light .cs-summary { color: var(--text-secondary-light); }
+        body.dark  .cs-summary { color: var(--text-secondary-dark); }
+        .cs-hero { width: 100%; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2.4rem; }
+        .cs-hero img { width: 100%; display: block; }
+        .cs-2col { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.4rem; }
+        @media (min-width: 640px) { .cs-2col { grid-template-columns: 1fr 1fr; } }
+        .cs-box { padding: 1.4rem 1.6rem; }
+        .cs-box h3 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem; }
+        body.light .cs-box h3 { color: #999; }
+        body.dark  .cs-box h3 { color: #666; }
+        .cs-box p { font-size: 0.9rem; line-height: 1.65; }
+        .cs-overview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1.4rem 1.6rem; margin-bottom: 2.4rem; }
+        @media (min-width: 640px) { .cs-overview { grid-template-columns: repeat(4, 1fr); } }
+        .cs-overview-item span { display: block; }
+        .cs-overview-item .cs-ov-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        body.light .cs-overview-item .cs-ov-label { color: #999; }
+        body.dark  .cs-overview-item .cs-ov-label { color: #666; }
+        .cs-overview-item .cs-ov-val { font-size: 0.88rem; font-weight: 600; }
+        .cs-section-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.9rem; }
+        body.light .cs-section-title { color: #999; }
+        body.dark  .cs-section-title { color: #666; }
+        .cs-checklist { list-style: none; padding: 0; margin: 0 0 2.4rem; display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+        @media (min-width: 640px) { .cs-checklist { grid-template-columns: 1fr 1fr; } }
+        .cs-checklist li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; line-height: 1.5; }
+        .cs-checklist .msym { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+        .cs-screen { padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; }
+        .cs-screen-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem; }
+        .cs-screen-head h4 { font-size: 1rem; font-weight: 700; }
+        .cs-screen p { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.9rem; }
+        body.light .cs-screen p { color: var(--text-secondary-light); }
+        body.dark  .cs-screen p { color: var(--text-secondary-dark); }
+        .cs-screen img { width: 100%; border-radius: var(--radius-md); display: block; }
+        body.light .cs-screen img { border: 1px solid rgba(0,0,0,0.08); }
+        body.dark  .cs-screen img { border: 1px solid rgba(255,255,255,0.10); }
+        .cs-tech-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem; }
+        .cs-tech-note { font-size: 0.9rem; line-height: 1.7; }
+        .cs-cta { text-align: center; padding: 2.2rem 1.6rem; margin-top: 1rem; }
+        .cs-cta p { margin-bottom: 1rem; font-size: 0.92rem; }
+    </style>
+</head>
+<body class="light">
+
+<div class="floating-pill" id="floatingPill">
+    <a href="/" class="floating-pill__item" title="Home">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></span>
+        <span class="floating-pill__label">Home</span>
+    </a>
+    <div class="floating-pill__divider"></div>
+    <a href="/proof/" class="floating-pill__item" title="Proof of Work">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+        <span class="floating-pill__label">Proof of Work</span>
+    </a>
+</div>
+
+<nav class="navbar">
+    <div class="nav-logo">
+        <img src="/image/favicon.webp" alt="FM Logo" style="height:32px; width:auto; object-fit:contain; vertical-align:middle;">
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/proof/">Proof of Work</a></li>
+        <li><a href="/moments/">Moments</a></li>
+    </ul>
+</nav>
+
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><span class="msym">dark_mode</span></button>
+
+<main>
+    <div class="cs-wrap">
+        <a href="/#featured" class="cs-back"><span class="msym" style="font-size:1.1rem">arrow_back</span> Back to Home</a>
+
+        <span class="cs-eyebrow">Featured Build</span>
+        <h1 class="cs-title">{{PROJECT_TITLE}}</h1>
+        <p class="cs-summary">{{PROJECT_SUMMARY}}</p>
+
+        <div class="cs-hero glass-card visible">
+            <img src="{{HERO_IMAGE}}" alt="{{PROJECT_TITLE}} screenshot" loading="lazy">
+        </div>
+
+        <div class="cs-2col">
+            <div class="cs-box glass-card visible">
+                <h3>Why I Built It</h3>
+                <p>{{WHY_BUILT}}</p>
+            </div>
+            <div class="cs-box glass-card visible">
+                <h3>Project Goal</h3>
+                <p>{{GOAL}}</p>
+            </div>
+        </div>
+
+        <div class="cs-overview glass-card visible">
+            <div class="cs-overview-item"><span class="cs-ov-label">Role</span><span class="cs-ov-val">{{OVERVIEW_ROLE}}</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label">Period</span><span class="cs-ov-val">{{OVERVIEW_PERIOD}}</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label">Type</span><span class="cs-ov-val">{{OVERVIEW_TYPE}}</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label">Architecture</span><span class="cs-ov-val">{{OVERVIEW_ARCH}}</span></div>
+        </div>
+
+        <h2 class="cs-section-title">What It Does</h2>
+        <ul class="cs-checklist">
+{{WHAT_IT_DOES}}
+        </ul>
+
+        <h2 class="cs-section-title">Key Screens</h2>
+{{SCREENS}}
+
+        <h2 class="cs-section-title" style="margin-top:1.6rem;">Tech Stack</h2>
+        <div class="cs-tech-chips">
+{{TECH_CHIPS}}
+        </div>
+        <p class="cs-tech-note">{{TECH_NOTE}}</p>
+
+        <div class="cs-cta glass-card visible">
+            <p>Open to full-time Full Stack Developer opportunities.</p>
+            <a href="/cv/CV_Fakhrul_Mukhlisin_2026.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download CV</a>
+            <a href="mailto:fahrulmukhlisin13@gmail.com" class="btn btn-secondary">Email Me</a>
+        </div>
+    </div>
+</main>
+
+<script src="../script.js"></script>
+</body>
+</html>
