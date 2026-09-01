@@ -297,6 +297,102 @@ const I18N = {
         id: 'Sertifikasi resmi kemahiran berbahasa Indonesia. Skor: 549, tingkat Madya. Berlaku sampai Sep 2027.'
     },
     'cert.ukbi.tag': { en: 'Language Certification', id: 'Sertifikasi Bahasa' },
+
+    // ── Project cards ──
+    'proj.nobel.date': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
+    'proj.nobel.title': { en: 'Nobel Akademi — Bootcamp Module', id: 'Nobel Akademi — Modul Bootcamp' },
+    'proj.nobel.screenshotSoon': { en: 'Screenshot coming soon', id: 'Screenshot menyusul' },
+    'proj.nobel.desc': {
+        en: 'End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.',
+        id: 'Modul LMS bootcamp end-to-end dengan Laravel 11 — data model (6 tabel terkait), backend, admin CMS, dan halaman publik. Eager-loaded Eloquent relations (bebas N+1), slug routing, embed YouTube, dan sistem rating.'
+    },
+    'proj.nobel.credential': { en: 'Internal production project · code & data under NDA', id: 'Proyek production internal · kode & data di bawah NDA' },
+
+    'proj.evermos.badge': { en: 'Internship', id: 'Magang' },
+    'proj.evermos.title': { en: 'Marketplace REST API', id: 'Marketplace REST API' },
+    'proj.evermos.issuer': { en: 'Evermos × Rakamin — Backend Internship', id: 'Evermos × Rakamin — Magang Backend' },
+    'proj.evermos.desc': {
+        en: 'Full marketplace API: Golang, Gin, MySQL, JWT. 7 modul, clean architecture, pagination, multi-image upload, atomic transactions.',
+        id: 'API marketplace lengkap: Golang, Gin, MySQL, JWT. 7 modul, clean architecture, pagination, multi-image upload, atomic transactions.'
+    },
+
+    'proj.core.date': { en: 'Oct – Nov 2025', id: 'Okt – Nov 2025' },
+    'proj.core.title': { en: 'E-Commerce Catalog', id: 'Katalog E-Commerce' },
+    'proj.core.issuer': { en: 'Core Initiative × Rakamin — Frontend Internship', id: 'Core Initiative × Rakamin — Magang Frontend' },
+    'proj.core.desc': {
+        en: 'Katalog e-commerce Vue.js 2, live REST API, 3 dynamic UI themes, pixel-perfect Figma, deployed via GitLab CI/CD.',
+        id: 'Katalog e-commerce Vue.js 2, REST API live, 3 tema UI dinamis, Figma pixel-perfect, deploy lewat GitLab CI/CD.'
+    },
+
+    'proj.cms.badge': { en: 'Marketing', id: 'Marketing' },
+    'proj.cms.title': { en: 'Brand Social Media Presence', id: 'Kehadiran Brand di Media Sosial' },
+    'proj.cms.desc': {
+        en: "Part of a 3-person team building and maintaining the company's social media presence from scratch — consistent posting cadence, brand voice, and AI-assisted copywriting via prompt engineering.",
+        id: 'Bagian dari tim 3 orang yang membangun dan mengelola kehadiran media sosial perusahaan dari nol — jadwal posting konsisten, brand voice, dan copywriting berbantuan AI lewat prompt engineering.'
+    },
+
+    'proj.ypkb.badge': { en: 'Volunteer', id: 'Relawan' },
+    'proj.ypkb.title': { en: 'WordPress Web Developer', id: 'WordPress Web Developer' },
+    'proj.ypkb.desc': {
+        en: "Volunteer developer building and maintaining the foundation's website on WordPress. Also appeared as on-camera talent in several Instagram content pieces for @ypkb_indonesia.",
+        id: 'Developer relawan yang membangun dan mengelola website yayasan dengan WordPress. Juga tampil di depan kamera untuk beberapa konten Instagram @ypkb_indonesia.'
+    },
+
+    'proj.groomy.badge': { en: 'UI/UX', id: 'UI/UX' },
+    'proj.groomy.title': { en: 'Groomy — Mobile App UI/UX', id: 'Groomy — UI/UX Aplikasi Mobile' },
+    'proj.groomy.issuer': { en: 'UAS Project · Information Systems · UNPAM', id: 'Proyek UAS · Sistem Informasi · UNPAM' },
+    'proj.groomy.desc': {
+        en: 'End-to-end mobile UI/UX design for an on-demand grooming and beauty service booking app. Covers user flows, component library, and interactive prototype.',
+        id: 'Desain UI/UX mobile end-to-end untuk aplikasi booking layanan grooming dan kecantikan on-demand. Mencakup user flow, component library, dan prototipe interaktif.'
+    },
+
+    // ── Award cards ──
+    'award.foto.badge': { en: '1st Place', id: 'Juara 1' },
+    'award.foto.title': { en: '1st Place — Photography Competition', id: 'Juara 1 — Kompetisi Fotografi' },
+    'award.foto.desc': {
+        en: 'Won first place in a creative photography competition at pesantren level — Digital Creation 2 event.',
+        id: 'Meraih juara 1 dalam kompetisi fotografi kreatif tingkat pesantren — acara Digital Creation 2.'
+    },
+    'award.foto.tag': { en: 'Photography Competition', id: 'Kompetisi Fotografi' },
+
+    'award.ketum.badge': { en: 'Chairman', id: 'Ketua' },
+    'award.ketum.title': { en: 'Chairman — Journalism Study Forum', id: 'Ketua — Forum Studi Jurnalis' },
+    'award.ketum.desc': {
+        en: 'Led 300+ members as Chairman of the Journalism Study Forum. Coordinated 15+ events and technical seminars over a one-year tenure.',
+        id: 'Memimpin 300+ anggota sebagai Ketua Forum Studi Jurnalis. Mengoordinasi 15+ acara dan seminar teknis selama satu tahun masa jabatan.'
+    },
+    'award.ketum.tag': { en: 'Leadership', id: 'Kepemimpinan' },
+
+    'award.diploy.badge': { en: 'Active', id: 'Aktif' },
+    'award.diploy.title': { en: 'Active Participant — DiploY × NyokKerja', id: 'Peserta Aktif — DiploY × NyokKerja' },
+    'award.diploy.desc': {
+        en: 'Recognized as an active participant in DiploY × NyokKerja 2025 — a career development and entrepreneurship program for young professionals.',
+        id: 'Diakui sebagai peserta aktif di DiploY × NyokKerja 2025 — program pengembangan karier dan kewirausahaan untuk profesional muda.'
+    },
+    'award.diploy.tag': { en: 'Career Development', id: 'Pengembangan Karier' },
+
+    'award.lka.title': { en: 'Internship Completion — LKA UNPAM', id: 'Penyelesaian Magang — LKA UNPAM' },
+    'award.lka.desc': {
+        en: 'Certificate handover ceremony — completing a 6-month Data Management internship. Managed 500+ student records and 1,000+ digital archive files. Grade: <strong>Sangat Baik (Excellent)</strong>.',
+        id: 'Seremoni penyerahan sertifikat — menyelesaikan magang Manajemen Data selama 6 bulan. Mengelola 500+ arsip data mahasiswa dan 1.000+ file arsip digital. Nilai: <strong>Sangat Baik (Excellent)</strong>.'
+    },
+    'award.lka.tag': { en: 'Internship', id: 'Magang' },
+
+    // ── Case study page labels ──
+    'cs.back': { en: 'Back to Home', id: 'Kembali ke Beranda' },
+    'cs.eyebrow': { en: 'Featured Build', id: 'Karya Unggulan' },
+    'cs.whyBuilt': { en: 'Why I Built It', id: 'Kenapa Saya Bikin Ini' },
+    'cs.goal': { en: 'Project Goal', id: 'Tujuan Proyek' },
+    'cs.role': { en: 'Role', id: 'Peran' },
+    'cs.period': { en: 'Period', id: 'Periode' },
+    'cs.type': { en: 'Type', id: 'Tipe' },
+    'cs.architecture': { en: 'Architecture', id: 'Arsitektur' },
+    'cs.whatItDoes': { en: 'What It Does', id: 'Yang Dilakukan' },
+    'cs.keyScreens': { en: 'Key Screens', id: 'Layar Utama' },
+    'cs.techStack': { en: 'Tech Stack', id: 'Tech Stack' },
+    'cs.ctaText': { en: 'Open to full-time Full Stack Developer opportunities.', id: 'Terbuka untuk peluang full-time sebagai Full Stack Developer.' },
+    'cs.downloadCv': { en: 'Download CV', id: 'Unduh CV' },
+    'cs.emailMe': { en: 'Email Me', id: 'Email Saya' },
 };
 
 function getLang() {
