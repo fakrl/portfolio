@@ -153,6 +153,48 @@ body.portfolio-page .theme-toggle {
 }
 
 /* ==========================================
+   LANGUAGE TOGGLE BUTTON (EN/ID) — stacked above theme-toggle
+   ========================================== */
+.lang-toggle {
+    position: fixed;
+    bottom: 84px;
+    right: 28px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all var(--transition-base);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.light .lang-toggle {
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-light);
+    color: var(--text-primary-light);
+}
+
+body.dark .lang-toggle {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--border-dark);
+    box-shadow: var(--shadow-dark);
+    color: var(--text-primary-dark);
+}
+
+.lang-toggle:hover {
+    transform: scale(1.08);
+}
+
+/* ==========================================
    SCROLL PROGRESS BAR
    ========================================== */
 .scroll-progress {
