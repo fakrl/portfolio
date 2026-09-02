@@ -948,6 +948,9 @@
         text-transform: uppercase;
         margin-bottom: 0.5rem;
         display: block;
+        max-width: 760px;
+        margin-left: auto;
+        margin-right: auto;
     }
     body.light .spotlight-eyebrow { color: #999; }
     body.dark  .spotlight-eyebrow { color: #666; }
@@ -956,7 +959,7 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        max-width: 960px;
+        max-width: 760px;
         margin: 0 auto;
     }
     @media (min-width: 860px) {
@@ -966,7 +969,7 @@
     }
 
     /* Featured Build "extras" — Ren Lenon-style project row: external link, no case study */
-    .build-extras { display: flex; flex-direction: column; gap: 0.8rem; max-width: 960px; margin: 1rem auto 0; }
+    .build-extras { display: flex; flex-direction: column; gap: 0.8rem; max-width: 760px; margin: 1rem auto 0; }
     .build-extra-card {
         display: flex;
         align-items: center;
@@ -1203,12 +1206,16 @@
         border-radius: 2px;
     }
     .gh-activity-day--empty { visibility: hidden; }
-    body.light .gh-activity-day[data-level="0"] { background: rgba(0,0,0,0.06); }
-    body.dark  .gh-activity-day[data-level="0"] { background: rgba(255,255,255,0.07); }
-    .gh-activity-day[data-level="1"] { background: rgba(37,99,235,0.28); }
-    .gh-activity-day[data-level="2"] { background: rgba(37,99,235,0.52); }
-    .gh-activity-day[data-level="3"] { background: rgba(37,99,235,0.76); }
-    .gh-activity-day[data-level="4"] { background: #2563eb; }
+    body.light .gh-activity-day[data-level="0"] { background: #ebedf0; }
+    body.dark  .gh-activity-day[data-level="0"] { background: #161b22; }
+    body.light .gh-activity-day[data-level="1"] { background: #9be9a8; }
+    body.dark  .gh-activity-day[data-level="1"] { background: #0e4429; }
+    body.light .gh-activity-day[data-level="2"] { background: #40c463; }
+    body.dark  .gh-activity-day[data-level="2"] { background: #006d32; }
+    body.light .gh-activity-day[data-level="3"] { background: #30a14e; }
+    body.dark  .gh-activity-day[data-level="3"] { background: #26a641; }
+    body.light .gh-activity-day[data-level="4"] { background: #216e39; }
+    body.dark  .gh-activity-day[data-level="4"] { background: #39d353; }
 
     .gh-activity-caption {
         margin-top: 0.9rem;
@@ -1253,6 +1260,52 @@
         position: relative;
     }
     .edu-timeline-item:last-child { padding-bottom: 0; }
+
+    .edu-timeline-item--cert { cursor: pointer; border-radius: var(--radius-md); transition: background var(--transition-fast); }
+    body.light .edu-timeline-item--cert:hover { background: rgba(0,0,0,0.03); }
+    body.dark  .edu-timeline-item--cert:hover { background: rgba(255,255,255,0.04); }
+    .edu-timeline-view {
+        flex-shrink: 0;
+        align-self: center;
+        font-size: 1.2rem;
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+        margin-right: 0.4rem;
+    }
+    .edu-timeline-item--cert:hover .edu-timeline-view { opacity: 0.5; }
+    body.light .edu-timeline-view { color: var(--text-secondary-light); }
+    body.dark  .edu-timeline-view { color: var(--text-secondary-dark); }
+
+    /* Cert image popup — LinkedIn-style small centered viewer */
+    .edu-cert-modal-overlay {
+        position: fixed; inset: 0; z-index: 3000;
+        background: rgba(0,0,0,0.72);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.2s ease;
+        padding: 2rem;
+    }
+    .edu-cert-modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .edu-cert-modal { position: relative; max-width: 520px; width: 100%; }
+    .edu-cert-modal__img { width: 100%; border-radius: var(--radius-md); display: block; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .edu-cert-modal__close {
+        position: absolute; top: -40px; right: 0;
+        background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer;
+    }
+    .edu-cert-modal__nav {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        background: rgba(255,255,255,0.15); border: none; color: #fff;
+        width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .edu-cert-modal__nav:hover { background: rgba(255,255,255,0.28); }
+    .edu-cert-modal__nav--prev { left: -50px; }
+    .edu-cert-modal__nav--next { right: -50px; }
+    .edu-cert-modal__counter { text-align: center; color: rgba(255,255,255,0.7); font-size: 0.8rem; margin-top: 0.6rem; }
+    @media (max-width: 640px) {
+        .edu-cert-modal__nav--prev { left: 4px; }
+        .edu-cert-modal__nav--next { right: 4px; }
+    }
 
     .edu-timeline-dot {
         flex-shrink: 0;
@@ -1352,43 +1405,6 @@
     body.dark  .edu-timeline-more { color: var(--text-secondary-dark); }
 
     /* Stats row */
-    .stats-row {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-
-    .stat-item {
-        flex: 1;
-        min-width: 160px;
-        text-align: center;
-        padding: 1.4rem 1rem;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-        font-weight: 800;
-        display: block;
-        line-height: 1.1;
-        margin-bottom: 0.3rem;
-        transition: color var(--transition-theme);
-    }
-
-    body.light .stat-number { color: #0a0a0a; }
-    body.dark  .stat-number { color: #f0f0f0; }
-
-    .stat-label {
-        font-size: 0.78rem;
-        font-weight: 500;
-        transition: color var(--transition-theme);
-    }
-
-    body.light .stat-label { color: #777; }
-    body.dark  .stat-label { color: #aaa; }
-
     /* ==========================================
        CONTACT — formspree form
        ========================================== */
@@ -1709,8 +1725,6 @@
         .contact-grid { grid-template-columns: 1fr; }
         .contact-form-row { grid-template-columns: 1fr; }
         .edu-timeline-card { padding: 1.6rem 1.3rem 1.2rem; }
-        .stat-item { min-width: 130px; }
-        .stat-number { font-size: 1.6rem; }
     }
 
     @media (max-width: 480px) {
@@ -2038,12 +2052,12 @@
             <div class="work-card-body">
                 <div>
                     <h3 class="work-card-title" data-i18n="spotlight.jbtb.title">SIM Casting — PT. JBTB Casting Creative Group</h3>
-                    <p class="work-card-sub" data-i18n="spotlight.jbtb.sub">Solo Full Stack Developer · Capstone (Project Work track)</p>
+                    <p class="work-card-sub" data-i18n="spotlight.jbtb.sub">Full Stack Developer · Final Year Project (team of 3)</p>
                 </div>
-                <p class="work-card-desc" data-i18n="spotlight.jbtb.desc">A 7-role casting & talent management system built solo in Laravel 13 for a real casting agency: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows — end to end, not a tutorial-scale CRUD app.</p>
+                <p class="work-card-desc" data-i18n="spotlight.jbtb.desc">A 7-role casting & talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows, end to end.</p>
                 <div class="work-card-metrics">
                     <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label" data-i18n="metric.roles">Roles (RBAC)</span></div>
-                    <div class="work-metric"><span class="work-metric-num">Solo</span><span class="work-metric-label" data-i18n="metric.developer">Developer</span></div>
+                    <div class="work-metric"><span class="work-metric-num">3</span><span class="work-metric-label" data-i18n="metric.teamSize">Team Size</span></div>
                 </div>
                 <div class="work-card-foot">
                     <div class="work-card-tech">
@@ -2080,9 +2094,9 @@
 
         <div class="work-grid">
 
-            <!-- Evermos backend — links out to GitHub repo now (moved from spotlight,
-                 case-study page /evermos/ still exists, just not linked from here) -->
-            <a href="https://github.com/fakrl/evermos-backend" target="_blank" rel="noopener" class="work-card glass-card visible">
+            <!-- Evermos backend — links to its own case-study page (GitHub/YouTube
+                 links live inside that page now) -->
+            <a href="/evermos/" class="work-card glass-card visible">
                 <div class="work-card-media">
                     <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
                     <span class="work-card-tag">Golang</span>
@@ -2102,13 +2116,13 @@
                             <i class="devicon-go-plain colored" title="Golang"></i>
                             <i class="devicon-mysql-plain colored" title="MySQL"></i>
                         </div>
-                        <span class="work-card-link" data-i18n="work.viewOnGithub">View on GitHub →</span>
+                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                     </div>
                 </div>
             </a>
 
-            <!-- Core Initiative frontend — links out to GitHub repo now -->
-            <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" rel="noopener" class="work-card glass-card visible">
+            <!-- Core Initiative frontend — links to its own case-study page -->
+            <a href="/core-initiative/" class="work-card glass-card visible">
                 <div class="work-card-media">
                     <img src="image/proj-coreinitiative-1.webp" alt="Core Initiative e-commerce catalog" loading="lazy">
                     <span class="work-card-tag">Vue.js</span>
@@ -2129,13 +2143,13 @@
                             <i class="devicon-javascript-plain colored" title="JavaScript"></i>
                             <i class="devicon-firebase-plain colored" title="Firebase"></i>
                         </div>
-                        <span class="work-card-link" data-i18n="work.viewOnGithub">View on GitHub →</span>
+                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                     </div>
                 </div>
             </a>
 
             <!-- Groomy UI/UX -->
-            <a href="/projects/#proj-groomy" class="work-card glass-card visible">
+            <a href="/groomy/" class="work-card glass-card visible">
                 <div class="work-card-media">
                     <img src="image/proj-groomy-1.webp" alt="Groomy UI/UX design" loading="lazy">
                     <span class="work-card-tag">UI/UX</span>
@@ -2154,7 +2168,7 @@
                         <div class="work-card-tech">
                             <i class="devicon-figma-plain colored" title="Figma"></i>
                         </div>
-                        <span class="work-card-link" data-i18n="work.view">View →</span>
+                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                     </div>
                 </div>
             </a>
@@ -2269,77 +2283,69 @@
                     </div>
                 </div>
 
-                <div class="edu-timeline-item">
+                <div class="edu-timeline-item edu-timeline-item--cert" data-images='["image/cert-evermos.webp"]'>
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">Dec 2025</span>
                         <h3 class="edu-timeline-title" data-i18n="education.cert.evermos.title">Backend Developer Intern Certificate</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.evermos.sub">Evermos × Rakamin Academy · Final score 90.91 / 100</p>
                     </div>
+                    <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
-                <div class="edu-timeline-item">
+                <div class="edu-timeline-item edu-timeline-item--cert" data-images='["image/cert-coreinit.webp"]'>
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">Nov 2025</span>
                         <h3 class="edu-timeline-title" data-i18n="education.cert.core.title">Frontend Developer Intern Certificate</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.core.sub">Core Initiative × Rakamin Academy · Final score 87.79 / 100</p>
                     </div>
+                    <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
-                <div class="edu-timeline-item">
+                <div class="edu-timeline-item edu-timeline-item--cert" data-images='["image/cert-azure-1.webp","image/cert-azure-2.webp","image/cert-azure-3.webp","image/cert-azure-4.webp","image/cert-azure-5.webp","image/cert-azure-6.webp","image/cert-azure-7.webp"]'>
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">May 2025</span>
                         <h3 class="edu-timeline-title" data-i18n="education.cert.azure.title">Azure AI Fundamentals (AI-900)</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.azure.sub">Microsoft · elevAIte · Merdeka Academy</p>
                     </div>
+                    <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
-                <div class="edu-timeline-item">
+                <div class="edu-timeline-item edu-timeline-item--cert" data-images='["image/cert-pm-1.webp","image/cert-pm-2.webp"]'>
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">2025</span>
                         <h3 class="edu-timeline-title" data-i18n="education.cert.googlepm.title">Fundamental Project Management</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.googlepm.sub">Google · Digitalent Scholarship KOMDIGI</p>
                     </div>
+                    <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
-                <div class="edu-timeline-item">
+                <div class="edu-timeline-item edu-timeline-item--cert" data-images='["image/cert-bnsp-1.webp","image/cert-bnsp-2.webp","image/cert-bnsp-3.webp","image/cert-bnsp-4.webp"]'>
                     <span class="edu-timeline-dot"></span>
                     <div class="edu-timeline-content">
                         <span class="edu-timeline-date">Aug 2023</span>
                         <h3 class="edu-timeline-title" data-i18n="education.cert.bnsp.title">Junior Web Developer (BNSP)</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.bnsp.sub">BPPTIK Kominfo · Digitalent Scholarship</p>
                     </div>
+                    <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
             </div>
             <a href="/certifications/" class="edu-timeline-more"><span data-i18n="education.seeAllCerts">See all certifications</span> <span class="msym" style="font-size:1.1em">arrow_forward</span></a>
         </div>
-
-        <div class="stats-row">
-            <div class="glass-card visible stat-item">
-                <span class="stat-number">3.68</span>
-                <span class="stat-label" data-i18n="stats.gpa">GPA / 4.00</span>
-            </div>
-            <div class="glass-card visible stat-item">
-                <span class="stat-number">90.91</span>
-                <span class="stat-label" data-i18n="stats.evermos">Evermos Score</span>
-            </div>
-            <div class="glass-card visible stat-item">
-                <span class="stat-number">87.79</span>
-                <span class="stat-label" data-i18n="stats.core">Core Initiative Score</span>
-            </div>
-            <div class="glass-card visible stat-item">
-                <span class="stat-number">#5<span style="font-size:1.1rem">/926</span></span>
-                <span class="stat-label" data-i18n="stats.yandex">Yandex ML Competition</span>
-            </div>
-            <div class="glass-card visible stat-item">
-                <span class="stat-number">91<span style="font-size:1.1rem">hrs</span></span>
-                <span class="stat-label" data-i18n="stats.ml">ML Training</span>
-            </div>
-        </div>
     </section>
+
+    <div class="edu-cert-modal-overlay" id="eduCertModal">
+        <div class="edu-cert-modal">
+            <button class="edu-cert-modal__close" id="eduCertModalClose">✕</button>
+            <button class="edu-cert-modal__nav edu-cert-modal__nav--prev" id="eduCertModalPrev">‹</button>
+            <img class="edu-cert-modal__img" id="eduCertModalImg" src="" alt="Certificate">
+            <button class="edu-cert-modal__nav edu-cert-modal__nav--next" id="eduCertModalNext">›</button>
+            <div class="edu-cert-modal__counter" id="eduCertModalCounter"></div>
+        </div>
+    </div>
 
     <!-- ══════════════════════════════════════
          HIT ME UP
@@ -2394,7 +2400,7 @@
         </div>
 
         <div class="glass-card visible contact-form-card" style="max-width:640px; margin:0 auto;">
-            <h3 class="contact-info-heading" style="text-align:center;" data-i18n="contact.letsTalk">Let's talk.</h3>
+            <h3 class="contact-info-heading" style="text-align:center; margin-bottom:1.4rem;" data-i18n="contact.letsTalk">Let's talk.</h3>
             <form class="contact-form" id="contactForm">
                 <div class="contact-form-row">
                     <input type="text" name="name" placeholder="Your name"
@@ -2418,14 +2424,6 @@
                 </div>
                 <p id="formStatus"></p>
             </form>
-            <div class="contact-links" style="margin-top:1.4rem; padding-top:1.2rem; border-top:1px solid rgba(128,128,128,0.15);">
-                <a href="mailto:fahrulmukhlisin13@gmail.com" class="contact-link-item">
-                    <span class="contact-link-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    </span>
-                    fahrulmukhlisin13@gmail.com
-                </a>
-            </div>
         </div>
     </section>
 
@@ -2897,7 +2895,8 @@
     <script>
     (function() {
         const GH_USER = 'fakrl';
-        const API_URL = `https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=last`;
+        const GH_YEAR = new Date().getFullYear();
+        const API_URL = `https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=${GH_YEAR}`;
         const grid = document.getElementById('ghActivityGrid');
         const monthsRow = document.getElementById('ghActivityMonths');
         const caption = document.getElementById('ghActivityCaption');
@@ -2910,6 +2909,17 @@
 
         function currentLang() {
             return localStorage.getItem('lang') === 'id' ? 'id' : 'en';
+        }
+
+        function formatTooltip(day) {
+            const lang = currentLang();
+            const locale = lang === 'id' ? 'id-ID' : 'en-US';
+            const dateStr = new Date(day.date + 'T00:00:00').toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' });
+            if (lang === 'id') {
+                return day.count === 0 ? `Tidak ada kontribusi pada ${dateStr}` : `${day.count} kontribusi pada ${dateStr}`;
+            }
+            const noun = day.count === 1 ? 'contribution' : 'contributions';
+            return day.count === 0 ? `No contributions on ${dateStr}` : `${day.count} ${noun} on ${dateStr}`;
         }
 
         function buildWeeks(contributions) {
@@ -2940,7 +2950,7 @@
                     } else {
                         cell.className = 'gh-activity-day';
                         cell.dataset.level = day.level;
-                        cell.title = `${day.count} · ${day.date}`;
+                        cell.title = formatTooltip(day);
                     }
                     grid.appendChild(cell);
                 });
@@ -2962,14 +2972,14 @@
                 monthsRow.appendChild(label);
             });
 
-            renderCaption(data.total.lastYear);
+            renderCaption(data.total[GH_YEAR] || 0);
         }
 
         function renderCaption(total) {
             const lang = currentLang();
             const entry = I18N['ghActivity.captionSuffix'];
-            const suffix = entry ? (entry[lang] || entry.en) : 'contributions in the last year';
-            caption.innerHTML = `<span class="msym" style="font-size:1.05em">history</span> ${total.toLocaleString(lang === 'id' ? 'id-ID' : 'en-US')} ${suffix}`;
+            const suffix = entry ? (entry[lang] || entry.en) : `contributions in ${GH_YEAR}`;
+            caption.innerHTML = `<span class="msym" style="font-size:1.05em">history</span> ${total.toLocaleString(lang === 'id' ? 'id-ID' : 'en-US')} ${suffix.replace('{year}', GH_YEAR)}`;
         }
 
         let lastData = null;
@@ -2992,6 +3002,62 @@
             btn.addEventListener('click', () => {
                 setTimeout(() => { if (lastData) render(lastData); }, 0);
             });
+        });
+    })();
+    </script>
+
+    <!-- Education timeline cert image popup — small centered viewer, LinkedIn-cert-style -->
+    <script>
+    (function() {
+        const overlay = document.getElementById('eduCertModal');
+        const imgEl = document.getElementById('eduCertModalImg');
+        const counterEl = document.getElementById('eduCertModalCounter');
+        const btnPrev = document.getElementById('eduCertModalPrev');
+        const btnNext = document.getElementById('eduCertModalNext');
+        const btnClose = document.getElementById('eduCertModalClose');
+        if (!overlay || !imgEl) return;
+
+        let images = [];
+        let current = 0;
+
+        function show(i) {
+            current = i;
+            imgEl.src = images[i];
+            counterEl.textContent = images.length > 1 ? `${i + 1} / ${images.length}` : '';
+            btnPrev.style.display = images.length > 1 ? 'flex' : 'none';
+            btnNext.style.display = images.length > 1 ? 'flex' : 'none';
+        }
+
+        function open(imgList) {
+            images = imgList;
+            show(0);
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function close() {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.edu-timeline-item--cert').forEach(item => {
+            item.addEventListener('click', () => {
+                try {
+                    const imgs = JSON.parse(item.dataset.images || '[]');
+                    if (imgs.length) open(imgs);
+                } catch (e) { /* ignore malformed data-images */ }
+            });
+        });
+
+        btnPrev.addEventListener('click', () => { if (current > 0) show(current - 1); });
+        btnNext.addEventListener('click', () => { if (current < images.length - 1) show(current + 1); });
+        btnClose.addEventListener('click', close);
+        overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+        document.addEventListener('keydown', e => {
+            if (!overlay.classList.contains('open')) return;
+            if (e.key === 'Escape') close();
+            if (e.key === 'ArrowLeft' && current > 0) show(current - 1);
+            if (e.key === 'ArrowRight' && current < images.length - 1) show(current + 1);
         });
     })();
     </script>

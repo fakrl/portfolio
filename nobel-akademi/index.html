@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{TITLE}} — Fakhrul Mukhlisin</title>
+    <title>Nobel Akademi — Bootcamp Module — Fakhrul Mukhlisin</title>
     <link rel="icon" type="image/png" href="/image/favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="../pages.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
-    <meta name="description" content="{{META_DESCRIPTION}}">
-    <meta property="og:title" content="{{TITLE}} — Fakhrul Mukhlisin">
-    <meta property="og:description" content="{{META_DESCRIPTION}}">
-    <meta property="og:image" content="{{OG_IMAGE}}">
-    <meta property="og:url" content="{{OG_URL}}">
+    <meta name="description" content="End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.">
+    <meta property="og:title" content="Nobel Akademi — Bootcamp Module — Fakhrul Mukhlisin">
+    <meta property="og:description" content="End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.">
+    <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
+    <meta property="og:url" content="https://fakrul.netlify.app/nobel-akademi/">
     <meta name="twitter:card" content="summary_large_image">
 
     <style>
@@ -125,46 +125,59 @@
         <a href="/#featured" class="cs-back"><span class="msym" style="font-size:1.1rem">arrow_back</span> <span data-i18n="cs.back">Back to Home</span></a>
 
         <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
-        <h1 class="cs-title">{{PROJECT_TITLE}}</h1>
-        <p class="cs-summary">{{PROJECT_SUMMARY}}</p>
+        <h1 class="cs-title">Nobel Akademi — Bootcamp Module</h1>
+        <p class="cs-summary">End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.</p>
 
-{{PROJECT_LINKS}}
+        <div class="cs-links">
+            <a href="https://nobelakademi.id" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">open_in_new</span> Visit Site</a>
+        </div>
 
         <div class="cs-hero glass-card visible">
-{{HERO_BLOCK}}
+            <div class="cs-hero--placeholder">
+                <span class="msym">photo_camera</span>
+                <span class="cs-hero-label" data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
+            </div>
         </div>
 
         <div class="cs-2col">
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.whyBuilt">Why I Built It</h3>
-                <p>{{WHY_BUILT}}</p>
+                <p>This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital — a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.</p>
             </div>
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.goal">Project Goal</h3>
-                <p>{{GOAL}}</p>
+                <p>Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.</p>
             </div>
         </div>
 
         <div class="cs-overview glass-card visible">
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val">{{OVERVIEW_ROLE}}</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val">{{OVERVIEW_PERIOD}}</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val">{{OVERVIEW_TYPE}}</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val">{{OVERVIEW_ARCH}}</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val">Full Stack Developer (feature team)</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val">Jun 2026 – Present</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val">Production feature work (internship)</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val">Laravel 11, MVC, eager-loaded Eloquent relations</span></div>
         </div>
 
         <h2 class="cs-section-title" data-i18n="cs.whatItDoes">What It Does</h2>
         <ul class="cs-checklist">
-{{WHAT_IT_DOES}}
+            <li><span class="msym">check_circle</span>Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations</li>
+            <li><span class="msym">check_circle</span>Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries</li>
+            <li><span class="msym">check_circle</span>Slug-based routing, YouTube embed, and an inline video player on detail pages</li>
+            <li><span class="msym">check_circle</span>Admin CMS with full CRUD for bootcamps, categories, and curriculum modules/items</li>
+            <li><span class="msym">check_circle</span>firstOrFail() for clean not-found handling, plus is_active scoping to keep drafts off public pages</li>
         </ul>
 
         <h2 class="cs-section-title" data-i18n="cs.keyScreens">Key Screens</h2>
-{{SCREENS}}
+
 
         <h2 class="cs-section-title" style="margin-top:1.6rem;" data-i18n="cs.techStack">Tech Stack</h2>
         <div class="cs-tech-chips">
-{{TECH_CHIPS}}
+            <span class="skill-chip">Laravel 11</span>
+            <span class="skill-chip">Eloquent</span>
+            <span class="skill-chip">Admin CMS</span>
+            <span class="skill-chip">MySQL</span>
+            <span class="skill-chip">Bootstrap</span>
         </div>
-        <p class="cs-tech-note">{{TECH_NOTE}}</p>
+        <p class="cs-tech-note">The UI came from designs the team already had — my part was turning that into a working data model and the full-stack logic behind it: normalizing what could've been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row.</p>
 
         <div class="cs-cta glass-card visible">
             <p data-i18n="cs.ctaText">Open to full-time Full Stack Developer opportunities.</p>
