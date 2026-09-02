@@ -125,8 +125,8 @@
         <a href="/#featured" class="cs-back"><span class="msym" style="font-size:1.1rem">arrow_back</span> <span data-i18n="cs.back">Back to Home</span></a>
 
         <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
-        <h1 class="cs-title">Nobel Akademi — Bootcamp Module</h1>
-        <p class="cs-summary">End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.</p>
+        <h1 class="cs-title" data-i18n="cs.nobel.title">Nobel Akademi — Bootcamp Module</h1>
+        <p class="cs-summary" data-i18n="cs.nobel.summary">End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.</p>
 
         <div class="cs-links">
             <a href="https://nobelakademi.id" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">open_in_new</span> Visit Site</a>
@@ -142,28 +142,28 @@
         <div class="cs-2col">
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.whyBuilt">Why I Built It</h3>
-                <p>This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital — a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.</p>
+                <p data-i18n="cs.nobel.whyBuilt">This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital — a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.</p>
             </div>
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.goal">Project Goal</h3>
-                <p>Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.</p>
+                <p data-i18n="cs.nobel.goal">Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.</p>
             </div>
         </div>
 
         <div class="cs-overview glass-card visible">
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val">Full Stack Developer (feature team)</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val">Jun 2026 – Present</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val">Production feature work (internship)</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val">Laravel 11, MVC, eager-loaded Eloquent relations</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val" data-i18n="cs.nobel.role">Full Stack Developer (feature team)</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val" data-i18n="cs.nobel.period">Jun 2026 – Present</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val" data-i18n="cs.nobel.type">Production feature work (internship)</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val" data-i18n="cs.nobel.arch">Laravel 11, MVC, eager-loaded Eloquent relations</span></div>
         </div>
 
         <h2 class="cs-section-title" data-i18n="cs.whatItDoes">What It Does</h2>
         <ul class="cs-checklist">
-            <li><span class="msym">check_circle</span>Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations</li>
-            <li><span class="msym">check_circle</span>Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries</li>
-            <li><span class="msym">check_circle</span>Slug-based routing, YouTube embed, and an inline video player on detail pages</li>
-            <li><span class="msym">check_circle</span>Admin CMS with full CRUD for bootcamps, categories, and curriculum modules/items</li>
-            <li><span class="msym">check_circle</span>firstOrFail() for clean not-found handling, plus is_active scoping to keep drafts off public pages</li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobel.step0">Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobel.step1">Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobel.step2">Slug-based routing, YouTube embed, and an inline video player on detail pages</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobel.step3">Admin CMS with full CRUD for bootcamps, categories, and curriculum modules/items</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobel.step4">firstOrFail() for clean not-found handling, plus is_active scoping to keep drafts off public pages</span></li>
         </ul>
 
         <h2 class="cs-section-title" data-i18n="cs.keyScreens">Key Screens</h2>
@@ -177,7 +177,7 @@
             <span class="skill-chip">MySQL</span>
             <span class="skill-chip">Bootstrap</span>
         </div>
-        <p class="cs-tech-note">The UI came from designs the team already had — my part was turning that into a working data model and the full-stack logic behind it: normalizing what could've been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row.</p>
+        <p class="cs-tech-note" data-i18n="cs.nobel.techNote">The UI came from designs the team already had — my part was turning that into a working data model and the full-stack logic behind it: normalizing what could've been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row.</p>
 
         <div class="cs-cta glass-card visible">
             <p data-i18n="cs.ctaText">Open to full-time Full Stack Developer opportunities.</p>

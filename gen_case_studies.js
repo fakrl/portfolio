@@ -29,22 +29,34 @@ const SLUGS = {
   "proj-groomy": "groomy",
 };
 
+// project id -> i18n key namespace (short, stable — used as "cs.<ns>.field" keys in
+// i18n.js so case-study body content actually translates on language toggle).
+const NS = {
+  "proj-jbtb-casting": "jbtb",
+  "proj-evermos": "evermos",
+  "proj-core-initiative": "core",
+  "proj-nobel": "nobel",
+  "proj-cms": "cms",
+  "proj-ypkb": "ypkb",
+  "proj-groomy": "groomy",
+};
+
 function esc(str) {
   return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function renderChecklist(items) {
+function renderChecklist(items, ns) {
   return (items || [])
-    .map((t) => `            <li><span class="msym">check_circle</span>${esc(t)}</li>`)
+    .map((t, i) => `            <li><span class="msym">check_circle</span><span data-i18n="cs.${ns}.step${i}">${esc(t)}</span></li>`)
     .join("\n");
 }
 
-function renderScreens(screens) {
+function renderScreens(screens, ns) {
   return (screens || [])
     .map(
-      (s) => `        <div class="cs-screen glass-card visible">
-            <div class="cs-screen-head"><span class="msym">${esc(s.icon || "dashboard")}</span><h4>${esc(s.title)}</h4></div>
-            <p>${esc(s.desc)}</p>
+      (s, i) => `        <div class="cs-screen glass-card visible">
+            <div class="cs-screen-head"><span class="msym">${esc(s.icon || "dashboard")}</span><h4 data-i18n="cs.${ns}.screen${i}Title">${esc(s.title)}</h4></div>
+            <p data-i18n="cs.${ns}.screen${i}Desc">${esc(s.desc)}</p>
             ${s.images && s.images[0] ? `<img src="${esc(s.images[0])}" alt="${esc(s.title)}" loading="lazy">` : ""}
         </div>`
     )
@@ -98,12 +110,18 @@ for (const item of data.projects || []) {
     console.warn(`No output slug mapped for "${item.id}" — add it to SLUGS in gen_case_studies.js. Skipping.`);
     continue;
   }
+  const ns = NS[item.id];
+  if (!ns) {
+    console.warn(`No i18n namespace mapped for "${item.id}" — add it to NS in gen_case_studies.js. Skipping.`);
+    continue;
+  }
 
   const cs = item.caseStudy;
   const heroImage = (item.images && item.images[0]) || "";
   const ogUrl = `https://fakrul.netlify.app/${slug}/`;
 
   let html = template
+    .replace(/{{NS}}/g, ns)
     .replace(/{{TITLE}}/g, esc(item.title))
     .replace(/{{META_DESCRIPTION}}/g, esc(item.desc))
     .replace(/{{OG_IMAGE}}/g, heroImage ? `https://fakrul.netlify.app/${heroImage.replace("../", "")}` : "https://fakrul.netlify.app/image/og-image.webp")
@@ -118,8 +136,8 @@ for (const item of data.projects || []) {
     .replace(/{{OVERVIEW_PERIOD}}/g, esc(cs.overview?.period))
     .replace(/{{OVERVIEW_TYPE}}/g, esc(cs.overview?.type))
     .replace(/{{OVERVIEW_ARCH}}/g, esc(cs.overview?.architecture))
-    .replace(/{{WHAT_IT_DOES}}/g, renderChecklist(cs.whatItDoes))
-    .replace(/{{SCREENS}}/g, renderScreens(cs.screens))
+    .replace(/{{WHAT_IT_DOES}}/g, renderChecklist(cs.whatItDoes, ns))
+    .replace(/{{SCREENS}}/g, renderScreens(cs.screens, ns))
     .replace(/{{TECH_CHIPS}}/g, renderTechChips(item.tags))
     .replace(/{{TECH_NOTE}}/g, esc(cs.techNote));
 
