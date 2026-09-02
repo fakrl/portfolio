@@ -731,19 +731,8 @@
     .bio-chip i { font-size: 0.95em; }
     .hero-verified { vertical-align: middle; margin-left: 2px; }
 
-    .visitor-pill {
-        display: inline-flex !important;
-        align-items: center;
-        gap: 5px;
-        margin-top: 0.6rem;
-        padding: 4px 12px;
-        border-radius: var(--radius-pill);
-        font-size: 0.75rem;
-        font-weight: 600;
-        transition: background var(--transition-theme), color var(--transition-theme);
-    }
-    body.light .visitor-pill { background: rgba(0,0,0,0.05); color: var(--text-secondary-light); }
-    body.dark  .visitor-pill { background: rgba(255,255,255,0.06); color: var(--text-secondary-dark); }
+    /* .visitor-pill now lives in components.css so every page (not just the
+       homepage) can show the same footer visitor counter. */
 
     /* Skills — bounded board + horizontal marquee per category (ganti 3D sphere) */
     .skill-board { padding: 1.8rem 0; overflow: hidden; max-width: 760px; margin: 0 auto; }

@@ -185,9 +185,39 @@
             <a href="mailto:fahrulmukhlisin13@gmail.com" class="btn btn-secondary" data-i18n="cs.emailMe">Email Me</a>
         </div>
     </div>
+<footer class="footer" style="padding-bottom:5rem;">
+    <p>&copy; 2026 Fakhrul Mukhlisin.</p>
+    <p class="visitor-pill" id="visitorPill" style="display:none;"><span class="msym" style="font-size:1em;vertical-align:-2px">group</span> <span data-i18n="footer.visitedPrefix">Visited by</span> <strong id="visitorCount">–</strong> <span data-i18n="footer.visited">people</span></p>
+</footer>
 </main>
 
 <script src="../script.js"></script>
 <script src="../i18n.js"></script>
+<script>
+(function() {
+    const DB_URL = 'https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app/stats/visits/count.json';
+    const pill = document.getElementById('visitorPill');
+    const countEl = document.getElementById('visitorCount');
+    if (!pill || !countEl) return;
+
+    const alreadyCounted = localStorage.getItem('rb_visited') === '1';
+
+    fetch(DB_URL)
+        .then(r => r.json())
+        .then(current => {
+            current = typeof current === 'number' ? current : 0;
+            if (!alreadyCounted) {
+                const next = current + 1;
+                localStorage.setItem('rb_visited', '1');
+                countEl.textContent = next.toLocaleString('en-US');
+                fetch(DB_URL, { method: 'PUT', body: JSON.stringify(next) }).catch(() => {});
+            } else {
+                countEl.textContent = current.toLocaleString('en-US');
+            }
+            pill.style.display = 'inline-flex';
+        })
+        .catch(() => { /* silent — no counter shown if the DB call fails */ });
+})();
+</script>
 </body>
 </html>
