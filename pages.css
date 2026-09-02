@@ -67,7 +67,9 @@ body.dark .proof-tab {
     background: rgba(0, 0, 0, 0.82) !important;
     color: #f0f0f0 !important;
     border-color: transparent !important;
+    transform: translateY(-2px);
 }
+.proof-tab:active { transform: scale(0.95); }
 
 body.dark .proof-tab--active,
 body.dark .proof-tab:hover {

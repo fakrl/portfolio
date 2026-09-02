@@ -39,13 +39,15 @@
             transition: transform 0.15s ease;
         }
         .cs-link-btn:hover { transform: translateY(-2px); }
+        .cs-link-btn:active { transform: scale(0.95); }
         body.light .cs-link-btn { background: rgba(0,0,0,0.06); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.10); }
         body.dark  .cs-link-btn { background: rgba(255,255,255,0.07); color: var(--text-primary-dark); border: 1px solid rgba(255,255,255,0.12); }
         .cs-link-btn i, .cs-link-btn .msym { font-size: 1.1em; }
         body.light .cs-summary { color: var(--text-secondary-light); }
         body.dark  .cs-summary { color: var(--text-secondary-dark); }
         .cs-hero { width: 100%; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2.4rem; }
-        .cs-hero img { width: 100%; display: block; }
+        .cs-hero img { width: 100%; display: block; transition: transform 0.5s ease; }
+        .cs-hero:hover img { transform: scale(1.03); }
         .cs-hero--placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; height: 280px; }
         body.light .cs-hero--placeholder { background: linear-gradient(135deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02)); }
         body.dark  .cs-hero--placeholder { background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); }
@@ -57,7 +59,8 @@
         body.dark  .cs-hero--placeholder span.cs-hero-label { color: var(--text-muted-dark); }
         .cs-2col { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.4rem; }
         @media (min-width: 640px) { .cs-2col { grid-template-columns: 1fr 1fr; } }
-        .cs-box { padding: 1.4rem 1.6rem; }
+        .cs-box { padding: 1.4rem 1.6rem; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .cs-box:hover { transform: translateY(-4px); }
         .cs-box h3 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem; }
         body.light .cs-box h3 { color: #999; }
         body.dark  .cs-box h3 { color: #666; }
@@ -76,7 +79,10 @@
         @media (min-width: 640px) { .cs-checklist { grid-template-columns: 1fr 1fr; } }
         .cs-checklist li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; line-height: 1.5; }
         .cs-checklist .msym { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-        .cs-screen { padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; }
+        .cs-screen { padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .cs-screen:hover { transform: translateY(-4px); }
+        .cs-screen img { transition: transform 0.4s ease; }
+        .cs-screen:hover img { transform: scale(1.015); }
         .cs-screen-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem; }
         .cs-screen-head h4 { font-size: 1rem; font-weight: 700; }
         .cs-screen p { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.9rem; }
@@ -138,17 +144,17 @@
         </div>
 
         <div class="cs-2col">
-            <div class="cs-box glass-card visible">
+            <div class="cs-box glass-card">
                 <h3 data-i18n="cs.whyBuilt">Why I Built It</h3>
                 <p data-i18n="cs.evermos.whyBuilt">I wanted hands-on proof that I could design a backend from scratch, not just consume APIs someone else built. Evermos x Rakamin's brief was open enough to let me make real architectural calls instead of following a fixed spec.</p>
             </div>
-            <div class="cs-box glass-card visible">
+            <div class="cs-box glass-card">
                 <h3 data-i18n="cs.goal">Project Goal</h3>
                 <p data-i18n="cs.evermos.goal">Build a marketplace REST API that could plausibly sit behind a real e-commerce app: sellers manage stores and products, buyers browse and transact, everything auth-gated and consistent even under concurrent writes.</p>
             </div>
         </div>
 
-        <div class="cs-overview glass-card visible">
+        <div class="cs-overview glass-card">
             <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val" data-i18n="cs.evermos.role">Solo Backend Developer</span></div>
             <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val" data-i18n="cs.evermos.period">Dec 2025</span></div>
             <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val" data-i18n="cs.evermos.type">Internship Project</span></div>
@@ -164,17 +170,17 @@
         </ul>
 
         <h2 class="cs-section-title" data-i18n="cs.keyScreens">Key Screens</h2>
-        <div class="cs-screen glass-card visible">
+        <div class="cs-screen glass-card">
             <div class="cs-screen-head"><span class="msym">api</span><h4 data-i18n="cs.evermos.screen0Title">Auth &amp; User</h4></div>
             <p data-i18n="cs.evermos.screen0Desc">JWT-based login/register with role checks enforced at the middleware layer, not scattered across handlers.</p>
             <img src="../image/proj-evermos-2.webp" alt="Auth &amp; User" loading="lazy">
         </div>
-        <div class="cs-screen glass-card visible">
+        <div class="cs-screen glass-card">
             <div class="cs-screen-head"><span class="msym">store</span><h4 data-i18n="cs.evermos.screen1Title">Store &amp; Product</h4></div>
             <p data-i18n="cs.evermos.screen1Desc">Sellers manage store profiles and products with multi-image upload and category assignment.</p>
             <img src="../image/proj-evermos-5.webp" alt="Store &amp; Product" loading="lazy">
         </div>
-        <div class="cs-screen glass-card visible">
+        <div class="cs-screen glass-card">
             <div class="cs-screen-head"><span class="msym">receipt_long</span><h4 data-i18n="cs.evermos.screen2Title">Transaction</h4></div>
             <p data-i18n="cs.evermos.screen2Desc">Checkout flow wrapped in atomic DB transactions so a failure partway through never leaves stock or balances inconsistent.</p>
             <img src="../image/proj-evermos-9.webp" alt="Transaction" loading="lazy">
@@ -190,7 +196,7 @@
         </div>
         <p class="cs-tech-note" data-i18n="cs.evermos.techNote">Clean Architecture (Handler-Service-Repository) was the deliberate choice here over a quick MVC dump: it keeps business logic in the Service layer testable and independent of Gin's request/response types, so swapping the HTTP framework later wouldn't touch the domain logic at all. Atomic transactions on the Transaction module specifically guard against the classic race condition where two requests read the same stock count before either writes back.</p>
 
-        <div class="cs-cta glass-card visible">
+        <div class="cs-cta glass-card">
             <p data-i18n="cs.ctaText">Open to full-time Full Stack Developer opportunities.</p>
             <a href="/cv/CV_Fakhrul_Mukhlisin_2026.pdf" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cs.downloadCv">Download CV</a>
             <a href="mailto:fahrulmukhlisin13@gmail.com" class="btn btn-secondary" data-i18n="cs.emailMe">Email Me</a>

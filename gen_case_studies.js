@@ -54,7 +54,7 @@ function renderChecklist(items, ns) {
 function renderScreens(screens, ns) {
   return (screens || [])
     .map(
-      (s, i) => `        <div class="cs-screen glass-card visible">
+      (s, i) => `        <div class="cs-screen glass-card">
             <div class="cs-screen-head"><span class="msym">${esc(s.icon || "dashboard")}</span><h4 data-i18n="cs.${ns}.screen${i}Title">${esc(s.title)}</h4></div>
             <p data-i18n="cs.${ns}.screen${i}Desc">${esc(s.desc)}</p>
             ${s.images && s.images[0] ? `<img src="${esc(s.images[0])}" alt="${esc(s.title)}" loading="lazy">` : ""}
