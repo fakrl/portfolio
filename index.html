@@ -614,6 +614,7 @@
         gap: 1.4rem;
         padding: 1.6rem 0;
         text-decoration: none;
+        transition: transform 0.25s ease, padding-left 0.25s ease;
         /* strip the boxed glass-card look — keep only its scroll-reveal behavior */
         background: none !important;
         border: none !important;
@@ -623,6 +624,10 @@
         border-radius: 0 !important;
     }
     .exp-row:not(:last-child) { border-bottom: 1px dashed rgba(128,128,128,0.22) !important; }
+    .exp-row:hover { transform: translateX(6px); }
+    @media (max-width: 640px) {
+        .exp-row:hover { transform: none; }
+    }
 
     .exp-row-date {
         font-size: 0.78rem;
@@ -751,6 +756,8 @@
         text-decoration: none;
     }
     .skill-board-more:hover { opacity: 0.75; }
+    .skill-board-more .msym { transition: transform 0.2s ease; }
+    .skill-board-more:hover .msym { transform: translateX(4px); }
     body.light .skill-board-more { color: var(--text-secondary-light); }
     body.dark  .skill-board-more { color: var(--text-secondary-dark); }
     .skill-group-label {
@@ -1213,6 +1220,12 @@
         width: 9px;
         height: 9px;
         border-radius: 2px;
+        transition: transform 0.15s ease;
+    }
+    .gh-activity-day:not(.gh-activity-day--empty):hover {
+        transform: scale(1.6);
+        outline: 1px solid rgba(128,128,128,0.5);
+        outline-offset: -1px;
     }
     .gh-activity-day--empty { visibility: hidden; }
     body.light .gh-activity-day[data-level="0"] { background: #ebedf0; }
@@ -1281,7 +1294,9 @@
         border-radius: var(--radius-sm, 6px);
         object-fit: cover;
         border: 1px solid rgba(128,128,128,0.18);
+        transition: transform 0.25s ease;
     }
+    .edu-timeline-item--cert:hover .edu-timeline-thumb { transform: scale(1.12) rotate(-2deg); }
     @media (max-width: 480px) {
         .edu-timeline-thumb { width: 36px; height: 36px; }
     }
@@ -1423,6 +1438,8 @@
         text-decoration: none;
     }
     .edu-timeline-more:hover { opacity: 0.75; }
+    .edu-timeline-more .msym { transition: transform 0.2s ease; }
+    .edu-timeline-more:hover .msym { transform: translateX(4px); }
     body.light .edu-timeline-more { color: var(--text-secondary-light); }
     body.dark  .edu-timeline-more { color: var(--text-secondary-dark); }
 
@@ -1887,7 +1904,7 @@
         <div class="exp-list">
 
             <!-- Indotech (current) -->
-            <a href="#featured" class="exp-row exp-row--current glass-card visible">
+            <a href="#featured" class="exp-row exp-row--current glass-card">
                 <span class="exp-row-date" data-i18n="exp.indotech.meta">Jun 2026 – Present · Jakarta (Hybrid)</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -1919,7 +1936,7 @@
             </a>
 
             <!-- Evermos -->
-            <a href="/projects/#proj-evermos" class="exp-row glass-card visible">
+            <a href="/projects/#proj-evermos" class="exp-row glass-card">
                 <span class="exp-row-date" data-i18n="exp.evermos.meta">Dec 2025 · Remote</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -1943,7 +1960,7 @@
             </a>
 
             <!-- Core Initiative -->
-            <a href="/projects/#proj-core-initiative" class="exp-row glass-card visible">
+            <a href="/projects/#proj-core-initiative" class="exp-row glass-card">
                 <span class="exp-row-date" data-i18n="exp.core.meta">Oct – Nov 2025 · Remote</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -1967,7 +1984,7 @@
             </a>
 
             <!-- Yandex ML -->
-            <a href="/certifications/#yandex" class="exp-row glass-card visible">
+            <a href="/certifications/#yandex" class="exp-row glass-card">
                 <span class="exp-row-date" data-i18n="exp.yandex.meta">May – Jul 2025 · Online</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -1989,7 +2006,7 @@
             </a>
 
             <!-- LKA UNPAM -->
-            <a href="/certifications/#lka-unpam" class="exp-row glass-card visible">
+            <a href="/certifications/#lka-unpam" class="exp-row glass-card">
                 <span class="exp-row-date">Jan – Jul 2025 · Tangerang Selatan</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -2011,7 +2028,7 @@
             </a>
 
             <!-- Kesbang -->
-            <a href="/moments/?filter=momen" class="exp-row glass-card visible">
+            <a href="/moments/?filter=momen" class="exp-row glass-card">
                 <span class="exp-row-date" data-i18n="exp.kesbang.meta">Nov – Dec 2025 · Jakarta Pusat</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -2032,7 +2049,7 @@
             </a>
 
             <!-- PT CMS -->
-            <a href="/projects/#proj-cms" class="exp-row glass-card visible">
+            <a href="/projects/#proj-cms" class="exp-row glass-card">
                 <span class="exp-row-date">Jul 2024 – Jul 2025</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -2054,7 +2071,7 @@
             </a>
 
             <!-- FSJ President -->
-            <a href="/awards/#award-ketum" class="exp-row glass-card visible">
+            <a href="/awards/#award-ketum" class="exp-row glass-card">
                 <span class="exp-row-date" data-i18n="exp.fsj.meta">Oct 2021 – Nov 2022</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
@@ -2083,7 +2100,7 @@
     ══════════════════════════════════════ -->
     <section id="featured-build" class="section">
         <span class="spotlight-eyebrow" data-i18n="spotlight.eyebrow">Featured Build</span>
-        <a href="/casting-jbtb/" class="work-card spotlight-card glass-card visible">
+        <a href="/casting-jbtb/" class="work-card spotlight-card glass-card">
             <div class="work-card-media work-card-media--placeholder">
                 <i class="devicon-laravel-plain"></i>
                 <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
@@ -2120,7 +2137,7 @@
         <div class="work-grid">
 
             <!-- Nobel Akademi — Visit Site style, external link to the live production LMS -->
-            <a href="https://nobelakademi.id" target="_blank" rel="noopener" class="work-card glass-card visible">
+            <a href="https://nobelakademi.id" target="_blank" rel="noopener" class="work-card glass-card">
                 <div class="work-card-media work-card-media--placeholder">
                     <i class="devicon-laravel-plain"></i>
                     <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
@@ -2146,7 +2163,7 @@
                  consumer-facing app has no public domain (still localhost per its own
                  .env.example) — swap this wrapper element from a div back to an anchor
                  once he gives a real reachable URL to the livestream section specifically. -->
-            <div class="work-card glass-card visible work-card--disabled">
+            <div class="work-card glass-card work-card--disabled">
                 <div class="work-card-media work-card-media--placeholder">
                     <i class="devicon-laravel-plain"></i>
                     <span data-i18n="work.nobiplay.comingSoon">Coming soon — pending public URL</span>
@@ -2168,7 +2185,7 @@
             </div>
 
             <!-- Core Initiative frontend — links to its own case-study page -->
-            <a href="/core-initiative/" class="work-card glass-card visible">
+            <a href="/core-initiative/" class="work-card glass-card">
                 <div class="work-card-media">
                     <img src="image/proj-coreinitiative-1.webp" alt="Core Initiative e-commerce catalog" loading="lazy">
                     <span class="work-card-tag">Vue.js</span>
@@ -2192,7 +2209,7 @@
 
             <!-- Evermos backend — links to its own case-study page (GitHub/YouTube
                  links live inside that page now) -->
-            <a href="/evermos/" class="work-card glass-card visible">
+            <a href="/evermos/" class="work-card glass-card">
                 <div class="work-card-media">
                     <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
                     <span class="work-card-tag">Golang</span>
@@ -2411,7 +2428,7 @@
 
         <div class="social-cards">
             <a href="https://www.instagram.com/fak.rl/" target="_blank"
-               class="glass-card visible social-profile-card">
+               class="glass-card social-profile-card">
                 <div class="social-profile-top">
                     <div class="social-profile-avatar-wrap social-profile-avatar-wrap--ig">
                         <img src="image/profile-3.webp" alt="Instagram" class="social-profile-avatar">
@@ -2429,7 +2446,7 @@
             </a>
 
             <a href="https://linkedin.com/in/fakrl" target="_blank"
-               class="glass-card visible social-profile-card">
+               class="glass-card social-profile-card">
                 <div class="social-profile-top">
                     <div class="social-profile-avatar-wrap social-profile-avatar-wrap--li">
                         <img src="image/profile.webp" alt="LinkedIn" class="social-profile-avatar">
@@ -2447,7 +2464,7 @@
             </a>
         </div>
 
-        <div class="glass-card visible contact-form-card" style="max-width:640px; margin:0 auto;">
+        <div class="glass-card contact-form-card" style="max-width:640px; margin:0 auto;">
             <h3 class="contact-info-heading" style="text-align:center; margin-bottom:1.4rem;" data-i18n="contact.letsTalk">Let's talk.</h3>
             <form class="contact-form" id="contactForm">
                 <div class="contact-form-row">
@@ -2481,7 +2498,7 @@
     <section id="feedback" class="section">
         <h2 class="section-title" data-i18n="feedback.title">Leave a Feedback</h2>
         <div class="feedback-wrapper">
-            <div class="glass-card visible feedback-form-card">
+            <div class="glass-card feedback-form-card">
                 <p class="feedback-desc" data-i18n="feedback.desc">Got something to say? Drop a message — shows up instantly.</p>
                 <div class="feedback-form">
                     <input type="text" id="feedbackName" placeholder="Your name"
@@ -2498,7 +2515,7 @@
                 </div>
                 <div class="owner-auth-bar" id="ownerAuthBar"></div>
             </div>
-            <div class="feedback-carousel glass-card visible">
+            <div class="feedback-carousel glass-card">
                 <div id="feedbackList" class="feedback-list">
                     <div class="feedback-empty" id="feedbackEmpty">
                         <p data-i18n="feedback.empty">No feedback yet. Be the first!</p>
@@ -2912,6 +2929,20 @@
                 card.style.transform = `perspective(820px) rotateY(${px * 7}deg) rotateX(${-py * 7}deg)`;
             });
             wrap.addEventListener('mouseleave', () => { card.style.transform = ''; });
+        }
+
+        // Same tilt treatment on the Featured Build spotlight card — a smaller
+        // angle since it's a much wider element than the hero photo.
+        const spotlight = document.querySelector('.spotlight-card');
+        if (spotlight && motionOK && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            spotlight.style.transition = 'transform 0.18s ease, box-shadow 0.18s ease';
+            spotlight.addEventListener('mousemove', (e) => {
+                const r = spotlight.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width - 0.5;
+                const py = (e.clientY - r.top) / r.height - 0.5;
+                spotlight.style.transform = `perspective(1400px) rotateY(${px * 3}deg) rotateX(${-py * 3}deg) translateY(-4px)`;
+            });
+            spotlight.addEventListener('mouseleave', () => { spotlight.style.transform = ''; });
         }
 
         // Count-up for Featured Works metric numbers
