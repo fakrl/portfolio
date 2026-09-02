@@ -599,73 +599,49 @@
     }
 
     /* ==========================================
-       EXPERIENCE — CARDS
+       EXPERIENCE — CLEAN LIST (date column + content, no boxed cards)
        ========================================== */
-    .exp-cards {
-        max-width: 760px;
+    .exp-list {
+        max-width: 780px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 1.1rem;
-        position: relative;
-        padding-left: 34px;
     }
 
-    /* timeline rail */
-    .exp-cards::before {
-        content: '';
-        position: absolute;
-        left: 6px;
-        top: 10px;
-        bottom: 10px;
-        width: 2px;
-        transition: background var(--transition-theme);
-    }
-    body.light .exp-cards::before { background: rgba(0,0,0,0.10); }
-    body.dark  .exp-cards::before { background: rgba(255,255,255,0.12); }
-
-    .exp-card {
-        padding: 1.4rem 1.5rem;
+    .exp-row {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        gap: 1.4rem;
+        padding: 1.6rem 0;
         text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        gap: 0.8rem;
-        position: relative;
-        transition: transform var(--transition-base), box-shadow var(--transition-base),
-                    background var(--transition-theme), border-color var(--transition-theme);
+        /* strip the boxed glass-card look — keep only its scroll-reveal behavior */
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-radius: 0 !important;
     }
+    .exp-row:not(:last-child) { border-bottom: 1px dashed rgba(128,128,128,0.22) !important; }
 
-    /* timeline dot */
-    .exp-card::before {
-        content: '';
-        position: absolute;
-        left: -34px;
-        top: 1.5rem;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        border: 3px solid;
-        transition: background var(--transition-theme), border-color var(--transition-theme);
-        z-index: 1;
+    .exp-row-date {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding-top: 0.2rem;
+        transition: color var(--transition-theme);
     }
-    body.light .exp-card::before { background: #f4f4f2; border-color: rgba(0,0,0,0.22); }
-    body.dark  .exp-card::before { background: #0a0a0a; border-color: rgba(255,255,255,0.28); }
+    body.light .exp-row-date { color: #999; }
+    body.dark  .exp-row-date { color: #888; }
+    body.light .exp-row--current .exp-row-date { color: #555; font-weight: 700; }
+    body.dark  .exp-row--current .exp-row-date { color: #ccc; font-weight: 700; }
 
-    .exp-card:hover { transform: translateY(-3px); }
+    .exp-row-body { display: flex; flex-direction: column; gap: 0.8rem; min-width: 0; }
 
-    body.light .exp-card:hover { box-shadow: var(--shadow-hover-light); }
-    body.dark  .exp-card:hover { box-shadow: var(--shadow-hover-dark); }
+    .exp-row:hover .exp-card-role { text-decoration: underline; text-underline-offset: 3px; }
 
-    body.light .exp-card--current { border-color: rgba(0,0,0,0.30); }
-    body.dark  .exp-card--current { border-color: rgba(255,255,255,0.32); }
-    /* current = filled accent dot */
-    body.light .exp-card--current::before { background: #0a0a0a; border-color: #0a0a0a; }
-    body.dark  .exp-card--current::before { background: #f0f0f0; border-color: #f0f0f0; }
-
-    @media (max-width: 600px) {
-        .exp-cards { padding-left: 26px; }
-        .exp-cards::before { left: 5px; }
-        .exp-card::before { left: -26px; top: 1.3rem; width: 12px; height: 12px; }
+    @media (max-width: 640px) {
+        .exp-row { grid-template-columns: 1fr; gap: 0.35rem; padding: 1.3rem 0; }
+        .exp-row-date { padding-top: 0; }
     }
 
     .exp-card-head {
@@ -832,7 +808,21 @@
         font-weight: 600;
         white-space: nowrap;
         flex-shrink: 0;
-        transition: background var(--transition-theme), color var(--transition-theme);
+        transition: background var(--transition-theme), color var(--transition-theme),
+                    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+        opacity: 0;
+        transform: translate(var(--sx, 0px), var(--sy, 0px)) rotate(var(--sr, 0deg)) scale(0.75);
+    }
+    .skill-chip:hover {
+        transform: translateY(-3px) scale(1.06) !important;
+        transition: transform 0.2s ease, background var(--transition-theme), color var(--transition-theme);
+    }
+    .skill-board.in-view .skill-chip {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .skill-chip { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     .skill-chip i, .skill-chip .msym { font-size: 1.05em; }
     body.light .skill-chip { background: rgba(0,0,0,0.05); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.09); }
@@ -921,7 +911,7 @@
 
     .work-card-media {
         position: relative;
-        height: 190px;
+        height: 150px;
         overflow: hidden;
         flex-shrink: 0;
         transition: background var(--transition-theme), border-color var(--transition-theme);
@@ -1062,10 +1052,10 @@
     body.dark  .work-card-tag { background: rgba(0,0,0,0.70); color: #f0f0f0; border: 1px solid rgba(255,255,255,0.10); }
 
     .work-card-body {
-        padding: 1.3rem 1.4rem;
+        padding: 1.1rem 1.3rem;
         display: flex;
         flex-direction: column;
-        gap: 0.7rem;
+        gap: 0.55rem;
         flex: 1;
     }
 
@@ -1093,6 +1083,10 @@
         font-size: 0.8rem;
         line-height: 1.6;
         transition: color var(--transition-theme);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     body.light .work-card-desc { color: var(--text-secondary-light); }
@@ -1862,175 +1856,191 @@
     <section id="experience" class="section">
         <h2 class="section-title" data-i18n="exp.title">Experience</h2>
 
-        <div class="exp-cards">
+        <div class="exp-list">
 
             <!-- Indotech (current) -->
-            <a href="#featured" class="exp-card exp-card--current glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role" data-i18n="exp.indotech.role">Full Stack Developer Intern</p>
-                        <p class="exp-card-company">PT Indotech Digital Group</p>
-                        <p class="exp-card-meta" data-i18n="exp.indotech.meta">Jun 2026 – Present · Jakarta (Hybrid)</p>
+            <a href="#featured" class="exp-row exp-row--current glass-card visible">
+                <span class="exp-row-date" data-i18n="exp.indotech.meta">Jun 2026 – Present · Jakarta (Hybrid)</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role" data-i18n="exp.indotech.role">Full Stack Developer Intern</p>
+                            <p class="exp-card-company">PT Indotech Digital Group</p>
+                        </div>
+                        <span class="exp-card-badge exp-card-badge--current">20+ PRs</span>
                     </div>
-                    <span class="exp-card-badge exp-card-badge--current">20+ PRs</span>
-                </div>
-                <ul class="exp-card-bullets">
-                    <li data-i18n-html="exp.indotech.bullet1">Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.</li>
-                    <li data-i18n-html="exp.indotech.bullet2">Built the Bootcamp module end-to-end: normalized data model (6 related tables), backend, admin CMS, and public pages — with eager-loaded Eloquent relations to avoid N+1 queries.</li>
-                    <li data-i18n-html="exp.indotech.bullet3">Delivered the Webinar module (registration flow, Mailable confirmation emails) plus e-portfolio, certification, and corporate pages.</li>
-                    <li data-i18n-html="exp.indotech.bullet4">Debugged a production outage down to root cause: a corrupted vendor asset was silently halting JavaScript execution — fixed it and hardened the page so one failing library can't break unrelated features.</li>
-                </ul>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">Laravel 11</span>
-                        <span class="tag">PHP</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">Eloquent</span>
-                        <span class="tag">Blade</span>
-                        <span class="tag">Git / PR Review</span>
-                        <span class="tag">WSL</span>
+                    <ul class="exp-card-bullets">
+                        <li data-i18n-html="exp.indotech.bullet1">Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.</li>
+                        <li data-i18n-html="exp.indotech.bullet2">Built the Bootcamp module end-to-end: normalized data model (6 related tables), backend, admin CMS, and public pages — with eager-loaded Eloquent relations to avoid N+1 queries.</li>
+                        <li data-i18n-html="exp.indotech.bullet3">Delivered the Webinar module (registration flow, Mailable confirmation emails) plus e-portfolio, certification, and corporate pages.</li>
+                        <li data-i18n-html="exp.indotech.bullet4">Debugged a production outage down to root cause: a corrupted vendor asset was silently halting JavaScript execution — fixed it and hardened the page so one failing library can't break unrelated features.</li>
+                    </ul>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">Laravel 11</span>
+                            <span class="tag">PHP</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Eloquent</span>
+                            <span class="tag">Blade</span>
+                            <span class="tag">Git / PR Review</span>
+                            <span class="tag">WSL</span>
+                        </div>
                     </div>
                 </div>
             </a>
 
             <!-- Evermos -->
-            <a href="/projects/#proj-evermos" class="exp-card glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role" data-i18n="exp.evermos.role">Backend Developer Intern</p>
-                        <p class="exp-card-company">Evermos × Rakamin Academy</p>
-                        <p class="exp-card-meta" data-i18n="exp.evermos.meta">Dec 2025 · Remote</p>
+            <a href="/projects/#proj-evermos" class="exp-row glass-card visible">
+                <span class="exp-row-date" data-i18n="exp.evermos.meta">Dec 2025 · Remote</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role" data-i18n="exp.evermos.role">Backend Developer Intern</p>
+                            <p class="exp-card-company">Evermos × Rakamin Academy</p>
+                        </div>
+                        <span class="exp-card-badge">90.91 / 100</span>
                     </div>
-                    <span class="exp-card-badge">90.91 / 100</span>
-                </div>
-                <p class="exp-card-desc" data-i18n="exp.evermos.desc">Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">Golang</span>
-                        <span class="tag">Gin</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">JWT</span>
+                    <p class="exp-card-desc" data-i18n="exp.evermos.desc">Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.</p>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">Golang</span>
+                            <span class="tag">Gin</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JWT</span>
+                        </div>
                     </div>
                 </div>
             </a>
 
             <!-- Core Initiative -->
-            <a href="/projects/#proj-core-initiative" class="exp-card glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role" data-i18n="exp.core.role">Frontend Developer Intern</p>
-                        <p class="exp-card-company">Core Initiative × Rakamin Academy</p>
-                        <p class="exp-card-meta" data-i18n="exp.core.meta">Oct – Nov 2025 · Remote</p>
+            <a href="/projects/#proj-core-initiative" class="exp-row glass-card visible">
+                <span class="exp-row-date" data-i18n="exp.core.meta">Oct – Nov 2025 · Remote</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role" data-i18n="exp.core.role">Frontend Developer Intern</p>
+                            <p class="exp-card-company">Core Initiative × Rakamin Academy</p>
+                        </div>
+                        <span class="exp-card-badge">87.79 / 100</span>
                     </div>
-                    <span class="exp-card-badge">87.79 / 100</span>
-                </div>
-                <p class="exp-card-desc" data-i18n="exp.core.desc">E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">Vue.js 2</span>
-                        <span class="tag">REST API</span>
-                        <span class="tag">CI/CD</span>
-                        <span class="tag">Firebase</span>
+                    <p class="exp-card-desc" data-i18n="exp.core.desc">E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.</p>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">Vue.js 2</span>
+                            <span class="tag">REST API</span>
+                            <span class="tag">CI/CD</span>
+                            <span class="tag">Firebase</span>
+                        </div>
                     </div>
                 </div>
             </a>
 
             <!-- Yandex ML -->
-            <a href="/certifications/#yandex" class="exp-card glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role" data-i18n="exp.yandex.role">Machine Learning Program</p>
-                        <p class="exp-card-company">Yandex · Digitalent KOMDIGI</p>
-                        <p class="exp-card-meta" data-i18n="exp.yandex.meta">May – Jul 2025 · Online</p>
+            <a href="/certifications/#yandex" class="exp-row glass-card visible">
+                <span class="exp-row-date" data-i18n="exp.yandex.meta">May – Jul 2025 · Online</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role" data-i18n="exp.yandex.role">Machine Learning Program</p>
+                            <p class="exp-card-company">Yandex · Digitalent KOMDIGI</p>
+                        </div>
+                        <span class="exp-card-badge">#5 / 926</span>
                     </div>
-                    <span class="exp-card-badge">#5 / 926</span>
-                </div>
-                <p class="exp-card-desc" data-i18n="exp.yandex.desc">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">ML</span>
+                    <p class="exp-card-desc" data-i18n="exp.yandex.desc">Ranked #5 out of 926 participants. Built ML models across 91 hrs of intensive Python curriculum.</p>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">ML</span>
+                        </div>
                     </div>
                 </div>
             </a>
 
             <!-- LKA UNPAM -->
-            <a href="/certifications/#lka-unpam" class="exp-card glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role" data-i18n="exp.lka.role">Data Management Intern</p>
-                        <p class="exp-card-company">LKA UNPAM</p>
-                        <p class="exp-card-meta">Jan – Jul 2025 · Tangerang Selatan</p>
+            <a href="/certifications/#lka-unpam" class="exp-row glass-card visible">
+                <span class="exp-row-date">Jan – Jul 2025 · Tangerang Selatan</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role" data-i18n="exp.lka.role">Data Management Intern</p>
+                            <p class="exp-card-company">LKA UNPAM</p>
+                        </div>
+                        <span class="exp-card-badge">Excellent</span>
                     </div>
-                    <span class="exp-card-badge">Excellent</span>
-                </div>
-                <p class="exp-card-desc" data-i18n="exp.lka.desc">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Data</span>
+                    <p class="exp-card-desc" data-i18n="exp.lka.desc">Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.</p>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Data</span>
+                        </div>
                     </div>
                 </div>
             </a>
 
             <!-- Kesbang -->
-            <a href="/moments/?filter=momen" class="exp-card glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role" data-i18n="exp.kesbang.role">Computer Operator</p>
-                        <p class="exp-card-company">Kesbang</p>
-                        <p class="exp-card-meta" data-i18n="exp.kesbang.meta">Nov – Dec 2025 · Jakarta Pusat</p>
+            <a href="/moments/?filter=momen" class="exp-row glass-card visible">
+                <span class="exp-row-date" data-i18n="exp.kesbang.meta">Nov – Dec 2025 · Jakarta Pusat</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role" data-i18n="exp.kesbang.role">Computer Operator</p>
+                            <p class="exp-card-company">Kesbang</p>
+                        </div>
                     </div>
-                </div>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">Government</span>
-                        <span class="tag">Admin</span>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">Government</span>
+                            <span class="tag">Admin</span>
+                        </div>
                     </div>
                 </div>
             </a>
 
             <!-- PT CMS -->
-            <a href="/projects/#proj-cms" class="exp-card glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role">Content Creator & Copywriter</p>
-                        <p class="exp-card-company">PT. Cahaya Millenial Sejahtera</p>
-                        <p class="exp-card-meta">Jul 2024 – Jul 2025</p>
+            <a href="/projects/#proj-cms" class="exp-row glass-card visible">
+                <span class="exp-row-date">Jul 2024 – Jul 2025</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role">Content Creator & Copywriter</p>
+                            <p class="exp-card-company">PT. Cahaya Millenial Sejahtera</p>
+                        </div>
                     </div>
-                </div>
-                <p class="exp-card-desc" data-i18n="exp.cms.desc">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">Copywriting</span>
-                        <span class="tag">Photography</span>
-                        <span class="tag">AI Tools</span>
+                    <p class="exp-card-desc" data-i18n="exp.cms.desc">Wrote content scripts, led main footage capture (photo & video), contributed to digital marketing strategy.</p>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">Copywriting</span>
+                            <span class="tag">Photography</span>
+                            <span class="tag">AI Tools</span>
+                        </div>
                     </div>
                 </div>
             </a>
 
             <!-- FSJ President -->
-            <a href="/awards/#award-ketum" class="exp-card glass-card visible">
-                <div class="exp-card-head">
-                    <div>
-                        <p class="exp-card-role" data-i18n="exp.fsj.role">President</p>
-                        <p class="exp-card-company">Forum Studi Jurnalis</p>
-                        <p class="exp-card-meta" data-i18n="exp.fsj.meta">Oct 2021 – Nov 2022</p>
+            <a href="/awards/#award-ketum" class="exp-row glass-card visible">
+                <span class="exp-row-date" data-i18n="exp.fsj.meta">Oct 2021 – Nov 2022</span>
+                <div class="exp-row-body">
+                    <div class="exp-card-head">
+                        <div>
+                            <p class="exp-card-role" data-i18n="exp.fsj.role">President</p>
+                            <p class="exp-card-company">Forum Studi Jurnalis</p>
+                        </div>
+                        <span class="exp-card-badge">300+ Members</span>
                     </div>
-                    <span class="exp-card-badge">300+ Members</span>
-                </div>
-                <div class="exp-card-tech">
-                    <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
-                    <div class="exp-card-tags">
-                        <span class="tag">Leadership</span>
-                        <span class="tag">15+ Events</span>
+                    <div class="exp-card-tech">
+                        <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
+                        <div class="exp-card-tags">
+                            <span class="tag">Leadership</span>
+                            <span class="tag">15+ Events</span>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -2107,10 +2117,6 @@
                         <p class="work-card-sub" data-i18n="work.evermos.sub">Evermos · Backend</p>
                     </div>
                     <p class="work-card-desc" data-i18n="work.evermos.desc">Full marketplace REST API in Golang with Gin, MySQL, and JWT auth — clean architecture and atomic transactions across 7 modules.</p>
-                    <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">7</span><span class="work-metric-label" data-i18n="metric.modules">Modules</span></div>
-                        <div class="work-metric"><span class="work-metric-num">90.91</span><span class="work-metric-label" data-i18n="metric.score">Score / 100</span></div>
-                    </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
                             <i class="devicon-go-plain colored" title="Golang"></i>
@@ -2133,10 +2139,6 @@
                         <p class="work-card-sub" data-i18n="work.core.sub">Core Initiative · Frontend</p>
                     </div>
                     <p class="work-card-desc" data-i18n="work.core.desc">E-commerce catalog in Vue.js 2 with 3 dynamic UI themes, pixel-perfect Figma implementation, and CI/CD to Firebase.</p>
-                    <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">3</span><span class="work-metric-label" data-i18n="metric.dynamicThemes">Dynamic Themes</span></div>
-                        <div class="work-metric"><span class="work-metric-num">87.79</span><span class="work-metric-label" data-i18n="metric.score">Score / 100</span></div>
-                    </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
                             <i class="devicon-vuejs-plain colored" title="Vue.js"></i>
@@ -2160,10 +2162,6 @@
                         <p class="work-card-sub" data-i18n="work.groomy.sub">Mobile App · UI/UX Design</p>
                     </div>
                     <p class="work-card-desc" data-i18n="work.groomy.desc">Pet grooming mobile app concept — full UI/UX design and interactive Figma prototype, from wireframes to polished screens.</p>
-                    <div class="work-card-metrics">
-                        <div class="work-metric"><span class="work-metric-num">4</span><span class="work-metric-label" data-i18n="metric.keyScreens">Key Screens</span></div>
-                        <div class="work-metric"><span class="work-metric-num">Figma</span><span class="work-metric-label" data-i18n="metric.prototype">Prototype</span></div>
-                    </div>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
                             <i class="devicon-figma-plain colored" title="Figma"></i>
@@ -3003,6 +3001,35 @@
                 setTimeout(() => { if (lastData) render(lastData); }, 0);
             });
         });
+    })();
+    </script>
+
+    <!-- Skills marquee — "scatter to rows" entrance: each chip starts at a random
+         offset/rotation and settles into place, staggered, once the section scrolls
+         into view. Runs once per page load; respects prefers-reduced-motion via CSS. -->
+    <script>
+    (function() {
+        const board = document.querySelector('.skill-board');
+        if (!board) return;
+        const chips = board.querySelectorAll('.skill-chip');
+        chips.forEach((chip, i) => {
+            const sx = (Math.random() * 70 - 35).toFixed(0) + 'px';
+            const sy = (Math.random() * 40 - 20).toFixed(0) + 'px';
+            const sr = (Math.random() * 30 - 15).toFixed(0) + 'deg';
+            chip.style.setProperty('--sx', sx);
+            chip.style.setProperty('--sy', sy);
+            chip.style.setProperty('--sr', sr);
+            chip.style.transitionDelay = `${(i % 14) * 25}ms`;
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                board.classList.add('in-view');
+                observer.unobserve(board);
+            });
+        }, { threshold: 0.15 });
+        observer.observe(board);
     })();
     </script>
 
