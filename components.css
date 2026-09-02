@@ -160,17 +160,20 @@ body.portfolio-page .theme-toggle {
     position: fixed;
     top: 18px;
     right: 28px;
-    width: 48px;
-    height: 48px;
+    /* Sized to match the navbar's actual rendered height (set as --navbar-h by
+       script.js), so it reads as "the same size as the navbar", not a small
+       button floating next to it. Falls back to 48px before JS measures it. */
+    width: var(--navbar-h, 48px);
+    height: var(--navbar-h, 48px);
     border-radius: 50%;
     border: none;
-    font-size: 13px;
+    font-size: clamp(11px, calc(var(--navbar-h, 48px) * 0.26), 17px);
     font-weight: 800;
     letter-spacing: 0.02em;
     cursor: pointer;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    transition: all var(--transition-base);
+    transition: width var(--transition-base), height var(--transition-base), transform var(--transition-base), background var(--transition-theme);
     z-index: 1001;
     display: flex;
     align-items: center;
@@ -665,19 +668,19 @@ body.dark  .skill-card h3 { color: var(--text-primary-dark); }
         left: 0.75rem;
         transform: none;
         gap: 0.8rem;
-        width: calc(100% - 1.5rem - 4.25rem);
-        max-width: calc(100% - 1.5rem - 4.25rem);
+        /* Reserve space equal to the lang-toggle's own size (--navbar-h) + its
+           right offset + a small gap, so the two never overlap regardless of
+           how tall the navbar actually renders. */
+        width: calc(100% - 1.5rem - var(--navbar-h, 48px) - 24px);
+        max-width: calc(100% - 1.5rem - var(--navbar-h, 48px) - 24px);
         padding: 0.55rem 0.7rem 0.55rem 1.3rem;
     }
 
-    /* Lang-toggle jadi lebih kecil & mepet pojok di mobile, navbar di atas
-       udah dipersempit (lihat rule .navbar di atas) biar nggak numpuk */
+    /* Lang-toggle mepet pojok di mobile — ukurannya tetap sama dengan navbar
+       (lihat --navbar-h di atas), cuma posisinya lebih dekat ke tepi */
     .lang-toggle {
         top: 14px;
         right: 12px;
-        width: 42px;
-        height: 42px;
-        font-size: 11px;
     }
 
     .nav-logo { margin: 0; }

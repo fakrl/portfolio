@@ -39,9 +39,28 @@
         .tt-group-label { font-size: 1rem; font-weight: 800; margin-bottom: 1.1rem; }
 
         .tt-chip-marquee {
+            position: relative;
             overflow: hidden;
-            -webkit-mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
-            mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 24%, #000 76%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 24%, #000 76%, transparent);
+        }
+        .tt-chip-marquee::before,
+        .tt-chip-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 64px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .tt-chip-marquee::before { left: 0; }
+        .tt-chip-marquee::after  { right: 0; }
+        body.light .tt-chip-marquee::before { background: linear-gradient(to right, #f8f8f6, transparent); }
+        body.light .tt-chip-marquee::after  { background: linear-gradient(to left,  #f8f8f6, transparent); }
+        body.dark  .tt-chip-marquee::before { background: linear-gradient(to right, #080808, transparent); }
+        body.dark  .tt-chip-marquee::after  { background: linear-gradient(to left,  #080808, transparent); }
+        @media (max-width: 600px) {
+            .tt-chip-marquee::before, .tt-chip-marquee::after { width: 32px; }
         }
         .tt-chip-track {
             display: flex;

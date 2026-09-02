@@ -90,6 +90,19 @@ const isNavPage = document.querySelector('.navbar');
 if (isNavPage) {
     document.body.classList.add('portfolio-page');
 
+    // Lang-toggle is sized to match the navbar's real rendered height (see
+    // --navbar-h in components.css) instead of a hardcoded px value, so it
+    // always reads as "same size as the navbar" on any breakpoint or font load.
+    const syncNavbarHeight = () => {
+        document.documentElement.style.setProperty('--navbar-h', isNavPage.offsetHeight + 'px');
+    };
+    syncNavbarHeight();
+    window.addEventListener('resize', syncNavbarHeight, { passive: true });
+    window.addEventListener('load', syncNavbarHeight);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncNavbarHeight).catch(() => {});
+    }
+
     // Theme toggle
     const navThemeBtn = document.getElementById('navThemeBtn');
     if (navThemeBtn) {
