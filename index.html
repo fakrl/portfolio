@@ -777,9 +777,31 @@
     body.dark  .skill-group-label { color: #666; }
 
     .skill-marquee {
+        position: relative;
         overflow: hidden;
-        -webkit-mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
-        mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 24%, #000 76%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 24%, #000 76%, transparent);
+    }
+    /* Solid-color fade overlay as a fallback/reinforcement on top of the mask —
+       mask-image compositing can be unreliable across browsers/stacking contexts,
+       this guarantees chips never appear hard-clipped at the row edges. */
+    .skill-marquee::before,
+    .skill-marquee::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        width: 64px;
+        z-index: 2;
+        pointer-events: none;
+    }
+    .skill-marquee::before { left: 0; }
+    .skill-marquee::after  { right: 0; }
+    body.light .skill-marquee::before { background: linear-gradient(to right, #f8f8f6, transparent); }
+    body.light .skill-marquee::after  { background: linear-gradient(to left,  #f8f8f6, transparent); }
+    body.dark  .skill-marquee::before { background: linear-gradient(to right, #080808, transparent); }
+    body.dark  .skill-marquee::after  { background: linear-gradient(to left,  #080808, transparent); }
+    @media (max-width: 600px) {
+        .skill-marquee::before, .skill-marquee::after { width: 32px; }
     }
     .skill-track {
         display: flex;
@@ -891,7 +913,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.4rem;
-        max-width: 960px;
+        max-width: 760px;
         margin: 0 auto;
     }
 
@@ -2202,26 +2224,8 @@
                 </div>
             </a>
 
-            <!-- Groomy UI/UX -->
-            <a href="/groomy/" class="work-card glass-card visible">
-                <div class="work-card-media">
-                    <img src="image/proj-groomy-1.webp" alt="Groomy UI/UX design" loading="lazy">
-                    <span class="work-card-tag">UI/UX</span>
-                </div>
-                <div class="work-card-body">
-                    <div>
-                        <h3 class="work-card-title" data-i18n="work.groomy.title">Groomy</h3>
-                        <p class="work-card-sub" data-i18n="work.groomy.sub">Mobile App · UI/UX Design</p>
-                    </div>
-                    <p class="work-card-desc" data-i18n="work.groomy.desc">Pet grooming mobile app concept — full UI/UX design and interactive Figma prototype, from wireframes to polished screens.</p>
-                    <div class="work-card-foot">
-                        <div class="work-card-tech">
-                            <i class="devicon-figma-plain colored" title="Figma"></i>
-                        </div>
-                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
-                    </div>
-                </div>
-            </a>
+            <!-- Groomy (Figma UI/UX) intentionally NOT shown here — Fakrul wants it
+                 on the proof page only (/projects/), not the homepage grid. -->
 
         </div>
         <p style="text-align:center; margin-top:1.6rem;"><a href="/projects/" class="work-card-link" data-i18n="featured.exploreAll">Explore all projects & certifications →</a></p>
