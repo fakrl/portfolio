@@ -778,8 +778,8 @@
 
     .skill-marquee {
         overflow: hidden;
-        -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-        mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent);
     }
     .skill-track {
         display: flex;
@@ -923,7 +923,7 @@
     .work-card-media img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         display: block;
         transition: transform 0.4s ease;
     }
@@ -1141,6 +1141,10 @@
     body.dark  .work-card-tech i { color: #bbb; }
     .work-card-tech i.colored { color: unset; }
 
+    .work-card--disabled { cursor: default; opacity: 0.72; }
+    .work-card--disabled:hover { transform: none; }
+    .work-card-link--muted { font-weight: 600 !important; opacity: 0.7; }
+
     .work-card-link {
         font-size: 0.78rem;
         font-weight: 700;
@@ -1173,8 +1177,8 @@
     .gh-activity-months {
         display: grid;
         grid-auto-flow: column;
-        grid-auto-columns: 13px;
-        gap: 3px;
+        grid-auto-columns: 9px;
+        gap: 2px;
         margin-bottom: 4px;
         padding-left: 2px;
         font-size: 0.68rem;
@@ -1186,17 +1190,17 @@
 
     .gh-activity-grid {
         display: grid;
-        grid-template-rows: repeat(7, 11px);
+        grid-template-rows: repeat(7, 9px);
         grid-auto-flow: column;
-        grid-auto-columns: 11px;
-        gap: 3px;
-        overflow-x: auto;
+        grid-auto-columns: 9px;
+        gap: 2px;
+        overflow-x: visible;
         overflow-y: hidden;
         padding-bottom: 2px;
     }
     .gh-activity-day {
-        width: 11px;
-        height: 11px;
+        width: 9px;
+        height: 9px;
         border-radius: 2px;
     }
     .gh-activity-day--empty { visibility: hidden; }
@@ -1222,9 +1226,9 @@
     body.dark  .gh-activity-caption { color: var(--text-secondary-dark); }
 
     @media (max-width: 600px) {
-        .gh-activity-grid, .gh-activity-months { grid-auto-columns: 9px; }
-        .gh-activity-grid { grid-template-rows: repeat(7, 9px); }
-        .gh-activity-day { width: 9px; height: 9px; }
+        .gh-activity-grid, .gh-activity-months { grid-auto-columns: 7px; gap: 2px; }
+        .gh-activity-grid { grid-template-rows: repeat(7, 7px); }
+        .gh-activity-day { width: 7px; height: 7px; }
     }
 
     /* ==========================================
@@ -1258,6 +1262,19 @@
     .edu-timeline-item--cert { cursor: pointer; border-radius: var(--radius-md); transition: background var(--transition-fast); }
     body.light .edu-timeline-item--cert:hover { background: rgba(0,0,0,0.03); }
     body.dark  .edu-timeline-item--cert:hover { background: rgba(255,255,255,0.04); }
+    .edu-timeline-thumb {
+        flex-shrink: 0;
+        align-self: center;
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-sm, 6px);
+        object-fit: cover;
+        border: 1px solid rgba(128,128,128,0.18);
+    }
+    @media (max-width: 480px) {
+        .edu-timeline-thumb { width: 36px; height: 36px; }
+    }
+
     .edu-timeline-view {
         flex-shrink: 0;
         align-self: center;
@@ -1992,6 +2009,7 @@
                             <p class="exp-card-company">Kesbang</p>
                         </div>
                     </div>
+                    <p class="exp-card-desc" data-i18n="exp.kesbang.desc">Handled day-to-day data entry and document digitization for a government office — encoding records into internal systems and keeping physical/digital archives in sync.</p>
                     <div class="exp-card-tech">
                         <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
                         <div class="exp-card-tags">
@@ -2035,6 +2053,7 @@
                         </div>
                         <span class="exp-card-badge">300+ Members</span>
                     </div>
+                    <p class="exp-card-desc" data-i18n="exp.fsj.desc">Led a 300+ member student journalism org — set editorial direction, organized 15+ events, and managed the internal team structure end to end.</p>
                     <div class="exp-card-tech">
                         <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
                         <div class="exp-card-tags">
@@ -2079,21 +2098,6 @@
                 </div>
             </div>
         </a>
-
-        <!-- Secondary "extras" row — Ren Lenon-style project cards: click goes straight
-             to the live site, no internal case study. Nobiplay card intentionally left
-             out for now: its consumer-facing app has no public domain yet (still
-             localhost per .env.example) — add it once Fakrul gives a real reachable URL. -->
-        <div class="build-extras">
-            <a href="https://nobelakademi.id" target="_blank" rel="noopener" class="build-extra-card glass-card visible">
-                <div class="build-extra-icon"><i class="devicon-laravel-plain colored"></i></div>
-                <div class="build-extra-body">
-                    <h4 data-i18n="extra.nobel.title">Nobel Akademi</h4>
-                    <p data-i18n="extra.nobel.sub">Production LMS · PT Indotech Digital</p>
-                </div>
-                <span class="build-extra-link" data-i18n="extra.visitSite">Visit Site <span class="msym" style="font-size:1em">arrow_outward</span></span>
-            </a>
-        </div>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -2104,28 +2108,53 @@
 
         <div class="work-grid">
 
-            <!-- Evermos backend — links to its own case-study page (GitHub/YouTube
-                 links live inside that page now) -->
-            <a href="/evermos/" class="work-card glass-card visible">
-                <div class="work-card-media">
-                    <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
-                    <span class="work-card-tag">Golang</span>
+            <!-- Nobel Akademi — Visit Site style, external link to the live production LMS -->
+            <a href="https://nobelakademi.id" target="_blank" rel="noopener" class="work-card glass-card visible">
+                <div class="work-card-media work-card-media--placeholder">
+                    <i class="devicon-laravel-plain"></i>
+                    <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
+                    <span class="work-card-tag">Laravel 11</span>
                 </div>
                 <div class="work-card-body">
                     <div>
-                        <h3 class="work-card-title" data-i18n="work.evermos.title">Marketplace REST API</h3>
-                        <p class="work-card-sub" data-i18n="work.evermos.sub">Evermos · Backend</p>
+                        <h3 class="work-card-title" data-i18n="extra.nobel.title">Nobel Akademi</h3>
+                        <p class="work-card-sub" data-i18n="extra.nobel.sub">Production LMS · PT Indotech Digital</p>
                     </div>
-                    <p class="work-card-desc" data-i18n="work.evermos.desc">Full marketplace REST API in Golang with Gin, MySQL, and JWT auth — clean architecture and atomic transactions across 7 modules.</p>
+                    <p class="work-card-desc" data-i18n="work.nobel.desc">End-to-end Bootcamp module on a live LMS — data model, backend, admin CMS, and public pages, implemented from provided designs.</p>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
-                            <i class="devicon-go-plain colored" title="Golang"></i>
+                            <i class="devicon-laravel-plain colored" title="Laravel"></i>
                             <i class="devicon-mysql-plain colored" title="MySQL"></i>
                         </div>
-                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
+                        <span class="work-card-link" data-i18n="extra.visitSite">Visit Site <span class="msym" style="font-size:1em">arrow_outward</span></span>
                     </div>
                 </div>
             </a>
+
+            <!-- Nobiplay — livestream module Fakrul built. Not clickable yet: the
+                 consumer-facing app has no public domain (still localhost per its own
+                 .env.example) — swap this wrapper element from a div back to an anchor
+                 once he gives a real reachable URL to the livestream section specifically. -->
+            <div class="work-card glass-card visible work-card--disabled">
+                <div class="work-card-media work-card-media--placeholder">
+                    <i class="devicon-laravel-plain"></i>
+                    <span data-i18n="work.nobiplay.comingSoon">Coming soon — pending public URL</span>
+                    <span class="work-card-tag">Laravel</span>
+                </div>
+                <div class="work-card-body">
+                    <div>
+                        <h3 class="work-card-title" data-i18n="work.nobiplay.title">NobiPlay — Live Streaming Module</h3>
+                        <p class="work-card-sub" data-i18n="work.nobiplay.sub">Full Stack Developer · Live Streaming Feature</p>
+                    </div>
+                    <p class="work-card-desc" data-i18n="work.nobiplay.desc">The live-streaming module I built for NobiPlay's platform — not linked yet since the consumer app isn't publicly deployed.</p>
+                    <div class="work-card-foot">
+                        <div class="work-card-tech">
+                            <i class="devicon-laravel-plain colored" title="Laravel"></i>
+                        </div>
+                        <span class="work-card-link work-card-link--muted" data-i18n="work.nobiplay.comingSoon">Coming soon — pending public URL</span>
+                    </div>
+                </div>
+            </div>
 
             <!-- Core Initiative frontend — links to its own case-study page -->
             <a href="/core-initiative/" class="work-card glass-card visible">
@@ -2144,6 +2173,29 @@
                             <i class="devicon-vuejs-plain colored" title="Vue.js"></i>
                             <i class="devicon-javascript-plain colored" title="JavaScript"></i>
                             <i class="devicon-firebase-plain colored" title="Firebase"></i>
+                        </div>
+                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Evermos backend — links to its own case-study page (GitHub/YouTube
+                 links live inside that page now) -->
+            <a href="/evermos/" class="work-card glass-card visible">
+                <div class="work-card-media">
+                    <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
+                    <span class="work-card-tag">Golang</span>
+                </div>
+                <div class="work-card-body">
+                    <div>
+                        <h3 class="work-card-title" data-i18n="work.evermos.title">Marketplace REST API</h3>
+                        <p class="work-card-sub" data-i18n="work.evermos.sub">Evermos · Backend</p>
+                    </div>
+                    <p class="work-card-desc" data-i18n="work.evermos.desc">Full marketplace REST API in Golang with Gin, MySQL, and JWT auth — clean architecture and atomic transactions across 7 modules.</p>
+                    <div class="work-card-foot">
+                        <div class="work-card-tech">
+                            <i class="devicon-go-plain colored" title="Golang"></i>
+                            <i class="devicon-mysql-plain colored" title="MySQL"></i>
                         </div>
                         <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                     </div>
@@ -2288,6 +2340,7 @@
                         <h3 class="edu-timeline-title" data-i18n="education.cert.evermos.title">Backend Developer Intern Certificate</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.evermos.sub">Evermos × Rakamin Academy · Final score 90.91 / 100</p>
                     </div>
+                    <img class="edu-timeline-thumb" src="image/cert-evermos.webp" alt="" loading="lazy">
                     <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
@@ -2298,6 +2351,7 @@
                         <h3 class="edu-timeline-title" data-i18n="education.cert.core.title">Frontend Developer Intern Certificate</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.core.sub">Core Initiative × Rakamin Academy · Final score 87.79 / 100</p>
                     </div>
+                    <img class="edu-timeline-thumb" src="image/cert-coreinit.webp" alt="" loading="lazy">
                     <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
@@ -2308,6 +2362,7 @@
                         <h3 class="edu-timeline-title" data-i18n="education.cert.azure.title">Azure AI Fundamentals (AI-900)</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.azure.sub">Microsoft · elevAIte · Merdeka Academy</p>
                     </div>
+                    <img class="edu-timeline-thumb" src="image/cert-azure-1.webp" alt="" loading="lazy">
                     <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
@@ -2318,6 +2373,7 @@
                         <h3 class="edu-timeline-title" data-i18n="education.cert.googlepm.title">Fundamental Project Management</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.googlepm.sub">Google · Digitalent Scholarship KOMDIGI</p>
                     </div>
+                    <img class="edu-timeline-thumb" src="image/cert-pm-1.webp" alt="" loading="lazy">
                     <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
 
@@ -2328,6 +2384,7 @@
                         <h3 class="edu-timeline-title" data-i18n="education.cert.bnsp.title">Junior Web Developer (BNSP)</h3>
                         <p class="edu-timeline-sub" data-i18n="education.cert.bnsp.sub">BPPTIK Kominfo · Digitalent Scholarship</p>
                     </div>
+                    <img class="edu-timeline-thumb" src="image/cert-bnsp-1.webp" alt="" loading="lazy">
                     <span class="edu-timeline-view msym" title="View certificate">visibility</span>
                 </div>
             </div>
@@ -2448,10 +2505,13 @@
                 </div>
                 <div class="owner-auth-bar" id="ownerAuthBar"></div>
             </div>
-            <div id="feedbackList" class="feedback-list">
-                <div class="feedback-empty" id="feedbackEmpty">
-                    <p data-i18n="feedback.empty">No feedback yet. Be the first!</p>
+            <div class="feedback-carousel glass-card visible">
+                <div id="feedbackList" class="feedback-list">
+                    <div class="feedback-empty" id="feedbackEmpty">
+                        <p data-i18n="feedback.empty">No feedback yet. Be the first!</p>
+                    </div>
                 </div>
+                <div class="feedback-dots" id="feedbackDots"></div>
             </div>
         </div>
     </section>
@@ -2638,8 +2698,11 @@
 
     let latestData  = null;
     let currentUser = null;
-    const FEEDBACK_PAGE_SIZE = 3;
-    let feedbackVisibleCount = FEEDBACK_PAGE_SIZE;
+    let feedbackEntries = [];
+    let carouselIndex = 0;
+    let carouselTimer = null;
+    let carouselPaused = false;
+    const CAROUSEL_INTERVAL = 6000;
     const isOwner = () => !!currentUser && !!OWNER_UID && currentUser.uid === OWNER_UID;
 
     function escapeHtml(str) {
@@ -2680,61 +2743,97 @@
         </div>`;
     }
 
-    function updateFeedbackLoadMoreBtn(total) {
-        let btn = document.getElementById("feedbackLoadMoreBtn");
-        const remaining = total - feedbackVisibleCount;
-        if (!btn) {
-            btn = document.createElement("button");
-            btn.id = "feedbackLoadMoreBtn";
-            btn.className = "btn btn-secondary";
-            btn.style.cssText = "display:block; margin: 1.4rem auto 0;";
-            document.getElementById("feedback").querySelector(".feedback-wrapper").appendChild(btn);
-            btn.addEventListener("click", () => {
-                feedbackVisibleCount += FEEDBACK_PAGE_SIZE;
-                render();
-            });
-        }
-        if (remaining <= 0) { btn.style.display = "none"; }
-        else { btn.style.display = "block"; btn.textContent = `Load More (${remaining} remaining)`; }
+    function renderDots() {
+        const wrap = document.getElementById("feedbackDots");
+        if (!wrap) return;
+        if (feedbackEntries.length <= 1) { wrap.innerHTML = ""; wrap.style.display = "none"; return; }
+        wrap.style.display = "flex";
+        wrap.innerHTML = feedbackEntries.map((_, i) =>
+            `<button class="feedback-dot${i === carouselIndex ? " active" : ""}" data-idx="${i}" aria-label="Feedback ${i + 1}"></button>`
+        ).join("");
+    }
+
+    function renderPost() {
+        const list = document.getElementById("feedbackList");
+        list.querySelectorAll(".gb-post").forEach(el => el.remove());
+        if (!feedbackEntries.length) return;
+        const [key, item] = feedbackEntries[carouselIndex];
+        const replies = item.replies ? Object.values(item.replies) : [];
+        const repliesHtml = replies.length
+            ? `<div class="gb-replies">${replies.map(replyHtml).join("")}</div>` : "";
+        const replyForm = isOwner()
+            ? `<div class="gb-reply-to">Replying to <strong>${escapeHtml(item.nama)}</strong></div>
+               <div class="gb-reply-form">
+                    <input class="feedback-input gb-reply-input" placeholder="Post your reply…" maxlength="300">
+                    <button class="gb-reply-send" data-key="${key}">Reply</button>
+               </div>` : "";
+        const fromLine = item.dari ? `<div class="gb-from">${escapeHtml(item.dari)}</div>` : "";
+        const post = document.createElement("article");
+        post.className = "gb-post gb-post--carousel fade-in";
+        post.innerHTML = `
+            <span class="gb-avatar">${escapeHtml((item.nama || "?").charAt(0).toUpperCase())}</span>
+            <div class="gb-main">
+                <div class="gb-head">
+                    <span class="gb-name">${escapeHtml(item.nama)}</span>
+                    <span class="gb-time">· ${relativeTime(item.waktu)}</span>
+                </div>
+                ${fromLine}
+                <p class="gb-text">${escapeHtml(item.pesan)}</p>
+                ${repliesHtml}
+                ${replyForm}
+            </div>
+        `;
+        list.appendChild(post);
+        renderDots();
+    }
+
+    function goTo(i) {
+        if (!feedbackEntries.length) return;
+        carouselIndex = ((i % feedbackEntries.length) + feedbackEntries.length) % feedbackEntries.length;
+        renderPost();
+    }
+
+    function stopCarousel() {
+        if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
+    }
+
+    function startCarousel() {
+        stopCarousel();
+        if (feedbackEntries.length <= 1) return;
+        carouselTimer = setInterval(() => {
+            if (carouselPaused) return;
+            goTo(carouselIndex + 1);
+        }, CAROUSEL_INTERVAL);
     }
 
     function render() {
-        const list  = document.getElementById("feedbackList");
         const empty = document.getElementById("feedbackEmpty");
-        list.querySelectorAll(".gb-post").forEach(el => el.remove());
-        if (!latestData) { empty.style.display = "block"; updateFeedbackLoadMoreBtn(0); return; }
+        if (!latestData) {
+            empty.style.display = "block";
+            feedbackEntries = [];
+            document.getElementById("feedbackList").querySelectorAll(".gb-post").forEach(el => el.remove());
+            renderDots();
+            stopCarousel();
+            return;
+        }
         empty.style.display = "none";
-        const allEntries = Object.entries(latestData).reverse();
-        updateFeedbackLoadMoreBtn(allEntries.length);
-        allEntries.slice(0, feedbackVisibleCount).forEach(([key, item]) => {
-            const replies = item.replies ? Object.values(item.replies) : [];
-            const repliesHtml = replies.length
-                ? `<div class="gb-replies">${replies.map(replyHtml).join("")}</div>` : "";
-            const replyForm = isOwner()
-                ? `<div class="gb-reply-to">Replying to <strong>${escapeHtml(item.nama)}</strong></div>
-                   <div class="gb-reply-form">
-                        <input class="feedback-input gb-reply-input" placeholder="Post your reply…" maxlength="300">
-                        <button class="gb-reply-send" data-key="${key}">Reply</button>
-                   </div>` : "";
-            const fromLine = item.dari ? `<div class="gb-from">${escapeHtml(item.dari)}</div>` : "";
-            const post = document.createElement("article");
-            post.className = "gb-post fade-in";
-            post.innerHTML = `
-                <span class="gb-avatar">${escapeHtml((item.nama || "?").charAt(0).toUpperCase())}</span>
-                <div class="gb-main">
-                    <div class="gb-head">
-                        <span class="gb-name">${escapeHtml(item.nama)}</span>
-                        <span class="gb-time">· ${relativeTime(item.waktu)}</span>
-                    </div>
-                    ${fromLine}
-                    <p class="gb-text">${escapeHtml(item.pesan)}</p>
-                    ${repliesHtml}
-                    ${replyForm}
-                </div>
-            `;
-            list.appendChild(post);
-        });
+        feedbackEntries = Object.entries(latestData).reverse();
+        if (carouselIndex >= feedbackEntries.length) carouselIndex = 0;
+        renderPost();
+        startCarousel();
     }
+
+    // Pause auto-rotation while the user is reading/hovering, resume on leave.
+    document.getElementById("feedbackList").addEventListener("mouseenter", () => { carouselPaused = true; });
+    document.getElementById("feedbackList").addEventListener("mouseleave", () => { carouselPaused = false; });
+
+    // Dot navigation — jump to a specific feedback and reset the timer.
+    document.getElementById("feedbackDots").addEventListener("click", (e) => {
+        const btn = e.target.closest(".feedback-dot");
+        if (!btn) return;
+        goTo(Number(btn.dataset.idx));
+        startCarousel();
+    });
 
     onValue(commentsRef, (snapshot) => { latestData = snapshot.val(); render(); });
 
@@ -2920,6 +3019,12 @@
             return day.count === 0 ? `No contributions on ${dateStr}` : `${day.count} ${noun} on ${dateStr}`;
         }
 
+        function filterRange(contributions) {
+            const start = `${GH_YEAR}-04-01`;
+            const today = new Date().toISOString().slice(0, 10);
+            return contributions.filter(d => d.date >= start && d.date <= today);
+        }
+
         function buildWeeks(contributions) {
             const weeks = [];
             let week = [];
@@ -2937,7 +3042,8 @@
         }
 
         function render(data) {
-            const weeks = buildWeeks(data.contributions);
+            const ranged = filterRange(data.contributions);
+            const weeks = buildWeeks(ranged);
 
             grid.innerHTML = '';
             weeks.forEach(week => {
@@ -2970,13 +3076,14 @@
                 monthsRow.appendChild(label);
             });
 
-            renderCaption(data.total[GH_YEAR] || 0);
+            const total = ranged.reduce((sum, d) => sum + d.count, 0);
+            renderCaption(total);
         }
 
         function renderCaption(total) {
             const lang = currentLang();
             const entry = I18N['ghActivity.captionSuffix'];
-            const suffix = entry ? (entry[lang] || entry.en) : `contributions in ${GH_YEAR}`;
+            const suffix = entry ? (entry[lang] || entry.en) : `contributions since Apr ${GH_YEAR}`;
             caption.innerHTML = `<span class="msym" style="font-size:1.05em">history</span> ${total.toLocaleString(lang === 'id' ? 'id-ID' : 'en-US')} ${suffix.replace('{year}', GH_YEAR)}`;
         }
 
