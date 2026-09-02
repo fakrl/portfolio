@@ -38,7 +38,25 @@
         .tt-group:not(:last-child) { border-bottom: 1px dashed rgba(128,128,128,0.25); }
         .tt-group-label { font-size: 1rem; font-weight: 800; margin-bottom: 1.1rem; }
 
-        .tt-chip-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .tt-chip-marquee {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        }
+        .tt-chip-track {
+            display: flex;
+            width: max-content;
+            gap: 0.6rem;
+            animation: ttScrollLeft 28s linear infinite;
+        }
+        .tt-chip-track--right { animation-name: ttScrollRight; animation-duration: 32s; }
+        .tt-chip-marquee:hover .tt-chip-track { animation-play-state: paused; }
+        @keyframes ttScrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes ttScrollRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            .tt-chip-track { animation: none; }
+            .tt-chip-marquee { overflow-x: auto; }
+        }
         .tt-chip {
             display: inline-flex;
             align-items: center;
@@ -48,6 +66,7 @@
             font-size: 0.88rem;
             font-weight: 600;
             white-space: nowrap;
+            flex-shrink: 0;
             transition: transform 0.15s ease, background var(--transition-theme), color var(--transition-theme);
         }
         .tt-chip:hover { transform: translateY(-2px); }
@@ -95,51 +114,81 @@
 
         <div class="tt-group">
             <h2 class="tt-group-label" data-i18n="tt.languages">Languages</h2>
-            <div class="tt-chip-row">
-                <span class="tt-chip"><i class="devicon-php-plain colored"></i>PHP</span>
-                <span class="tt-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
-                <span class="tt-chip"><i class="devicon-go-plain colored"></i>Golang</span>
-                <span class="tt-chip"><i class="devicon-html5-plain colored"></i>HTML5</span>
-                <span class="tt-chip"><i class="devicon-css3-plain colored"></i>CSS3</span>
-                <span class="tt-chip"><i class="devicon-python-plain colored"></i>Python</span>
+            <div class="tt-chip-marquee">
+                <div class="tt-chip-track">
+                    <span class="tt-chip"><i class="devicon-php-plain colored"></i>PHP</span>
+                    <span class="tt-chip"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                    <span class="tt-chip"><i class="devicon-go-plain colored"></i>Golang</span>
+                    <span class="tt-chip"><i class="devicon-html5-plain colored"></i>HTML5</span>
+                    <span class="tt-chip"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                    <span class="tt-chip"><i class="devicon-python-plain colored"></i>Python</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-php-plain colored"></i>PHP</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-go-plain colored"></i>Golang</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-html5-plain colored"></i>HTML5</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-python-plain colored"></i>Python</span>
+                </div>
             </div>
         </div>
 
         <div class="tt-group">
             <h2 class="tt-group-label" data-i18n="tt.frameworks">Frameworks</h2>
-            <div class="tt-chip-row">
-                <span class="tt-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
-                <span class="tt-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
-                <span class="tt-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
-                <span class="tt-chip"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+            <div class="tt-chip-marquee">
+                <div class="tt-chip-track tt-chip-track--right">
+                    <span class="tt-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                    <span class="tt-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
+                    <span class="tt-chip"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
+                    <span class="tt-chip"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-laravel-plain colored"></i>Laravel</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-vuejs-plain colored"></i>Vue.js</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-bootstrap-plain colored"></i>Bootstrap</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-tailwindcss-plain colored"></i>Tailwind</span>
+                </div>
             </div>
         </div>
 
         <div class="tt-group">
             <h2 class="tt-group-label" data-i18n="tt.databases">Databases</h2>
-            <div class="tt-chip-row">
-                <span class="tt-chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
-                <span class="tt-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+            <div class="tt-chip-marquee">
+                <div class="tt-chip-track">
+                    <span class="tt-chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                    <span class="tt-chip"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-firebase-plain colored"></i>Firebase</span>
+                </div>
             </div>
         </div>
 
         <div class="tt-group">
             <h2 class="tt-group-label" data-i18n="tt.tools">Tools & DevOps</h2>
-            <div class="tt-chip-row">
-                <span class="tt-chip"><i class="devicon-git-plain colored"></i>Git</span>
-                <span class="tt-chip"><i class="devicon-github-original colored"></i>GitHub</span>
-                <span class="tt-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
-                <span class="tt-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
-                <span class="tt-chip"><i class="devicon-figma-plain colored"></i>Figma</span>
-                <span class="tt-chip"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+            <div class="tt-chip-marquee">
+                <div class="tt-chip-track tt-chip-track--right">
+                    <span class="tt-chip"><i class="devicon-git-plain colored"></i>Git</span>
+                    <span class="tt-chip"><i class="devicon-github-original colored"></i>GitHub</span>
+                    <span class="tt-chip"><i class="devicon-postman-plain colored"></i>Postman</span>
+                    <span class="tt-chip"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                    <span class="tt-chip"><i class="devicon-figma-plain colored"></i>Figma</span>
+                    <span class="tt-chip"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-git-plain colored"></i>Git</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-github-original colored"></i>GitHub</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-postman-plain colored"></i>Postman</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-vscode-plain colored"></i>VS Code</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-figma-plain colored"></i>Figma</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-wordpress-plain colored"></i>WordPress</span>
+                </div>
             </div>
         </div>
 
         <div class="tt-group">
             <h2 class="tt-group-label" data-i18n="tt.ai">AI & Cloud</h2>
-            <div class="tt-chip-row">
-                <span class="tt-chip"><i class="devicon-azure-plain colored"></i>Azure</span>
-                <span class="tt-chip"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
+            <div class="tt-chip-marquee">
+                <div class="tt-chip-track">
+                    <span class="tt-chip"><i class="devicon-azure-plain colored"></i>Azure</span>
+                    <span class="tt-chip"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
+                    <span class="tt-chip" aria-hidden="true"><i class="devicon-azure-plain colored"></i>Azure</span>
+                    <span class="tt-chip" aria-hidden="true"><span class="msym" style="font-size:1.1em">auto_awesome</span>AI-Assisted Dev</span>
+                </div>
             </div>
         </div>
     </div>

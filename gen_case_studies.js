@@ -24,6 +24,9 @@ const SLUGS = {
   "proj-evermos": "evermos",
   "proj-core-initiative": "core-initiative",
   "proj-nobel": "nobel-akademi",
+  "proj-cms": "cms-project",
+  "proj-ypkb": "ypkb",
+  "proj-groomy": "groomy",
 };
 
 function esc(str) {
@@ -58,6 +61,24 @@ function renderHero(heroImage, title) {
             </div>`;
 }
 
+function renderLinks(item) {
+  const buttons = [];
+  if (item.github) {
+    buttons.push(`            <a href="${esc(item.github)}" target="_blank" rel="noopener" class="cs-link-btn"><i class="devicon-github-original colored"></i> ${esc(item["github-label"] || "GitHub")}</a>`);
+  }
+  if (item.youtube) {
+    buttons.push(`            <a href="${esc(item.youtube)}" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">play_circle</span> ${esc(item["youtube-label"] || "YouTube")}</a>`);
+  }
+  if (item.instagram) {
+    buttons.push(`            <a href="${esc(item.instagram)}" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">photo_camera</span> ${esc(item["instagram-label"] || "Instagram")}</a>`);
+  }
+  if (item.link && !item.github && !item.youtube) {
+    buttons.push(`            <a href="${esc(item.link)}" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">open_in_new</span> ${esc(item["link-label"] || "View")}</a>`);
+  }
+  if (!buttons.length) return "";
+  return `        <div class="cs-links">\n${buttons.join("\n")}\n        </div>`;
+}
+
 function renderTechChips(tags) {
   return (tags || [])
     .map((t) => `            <span class="skill-chip">${esc(t)}</span>`)
@@ -89,6 +110,7 @@ for (const item of data.projects || []) {
     .replace(/{{OG_URL}}/g, ogUrl)
     .replace(/{{PROJECT_TITLE}}/g, esc(item.title))
     .replace(/{{PROJECT_SUMMARY}}/g, esc(item.desc))
+    .replace(/{{PROJECT_LINKS}}/g, renderLinks(item))
     .replace(/{{HERO_BLOCK}}/g, renderHero(heroImage ? heroImage.replace("../", "/") : "", item.title))
     .replace(/{{WHY_BUILT}}/g, esc(cs.whyBuilt))
     .replace(/{{GOAL}}/g, esc(cs.goal))

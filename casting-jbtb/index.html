@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="../pages.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
-    <meta name="description" content="A 7-role casting &amp; talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.">
+    <meta name="description" content="A 7-role casting &amp; talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: data model, backend, and full-stack logic end to end.">
     <meta property="og:title" content="SIM Casting — PT. JBTB Casting Creative Group — Fakhrul Mukhlisin">
-    <meta property="og:description" content="A 7-role casting &amp; talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.">
+    <meta property="og:description" content="A 7-role casting &amp; talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: data model, backend, and full-stack logic end to end.">
     <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
     <meta property="og:url" content="https://fakrul.netlify.app/casting-jbtb/">
     <meta name="twitter:card" content="summary_large_image">
@@ -30,7 +30,18 @@
         body.light .cs-eyebrow { color: #999; }
         body.dark  .cs-eyebrow { color: #666; }
         .cs-title { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.7rem; }
-        .cs-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; }
+        .cs-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 1.4rem; }
+        .cs-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 2rem; }
+        .cs-link-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1.1rem; border-radius: var(--radius-pill);
+            font-size: 0.85rem; font-weight: 600; text-decoration: none;
+            transition: transform 0.15s ease;
+        }
+        .cs-link-btn:hover { transform: translateY(-2px); }
+        body.light .cs-link-btn { background: rgba(0,0,0,0.06); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.10); }
+        body.dark  .cs-link-btn { background: rgba(255,255,255,0.07); color: var(--text-primary-dark); border: 1px solid rgba(255,255,255,0.12); }
+        .cs-link-btn i, .cs-link-btn .msym { font-size: 1.1em; }
         body.light .cs-summary { color: var(--text-secondary-light); }
         body.dark  .cs-summary { color: var(--text-secondary-dark); }
         .cs-hero { width: 100%; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2.4rem; }
@@ -115,7 +126,11 @@
 
         <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
         <h1 class="cs-title">SIM Casting — PT. JBTB Casting Creative Group</h1>
-        <p class="cs-summary">A 7-role casting &amp; talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.</p>
+        <p class="cs-summary">A 7-role casting &amp; talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: data model, backend, and full-stack logic end to end.</p>
+
+        <div class="cs-links">
+            <a href="https://github.com/fakrl/extras" target="_blank" rel="noopener" class="cs-link-btn"><i class="devicon-github-original colored"></i> GitHub</a>
+        </div>
 
         <div class="cs-hero glass-card visible">
             <div class="cs-hero--placeholder">
@@ -127,7 +142,7 @@
         <div class="cs-2col">
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.whyBuilt">Why I Built It</h3>
-                <p>I wanted my capstone to be something with real users and real constraints, not a tutorial-scale CRUD app — so I took on a live casting agency's actual operational system as my Project Work track final project, solo, end to end.</p>
+                <p>I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app — so our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.</p>
             </div>
             <div class="cs-box glass-card visible">
                 <h3 data-i18n="cs.goal">Project Goal</h3>
@@ -136,9 +151,9 @@
         </div>
 
         <div class="cs-overview glass-card visible">
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val">Solo Full Stack Developer</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val">Full Stack Developer (system &amp; full-stack logic)</span></div>
             <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val">Sep 2026 – Present</span></div>
-            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val">Capstone (Project Work track)</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val">Final Year Project · team of 3</span></div>
             <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val">Laravel 13, Blade, role-scoped access control</span></div>
         </div>
 

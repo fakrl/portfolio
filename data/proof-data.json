@@ -326,6 +326,8 @@
       "featured": true,
       "title": "Nobel Akademi — Bootcamp Module",
       "images": [],
+      "link": "https://nobelakademi.id",
+      "link-label": "Visit Site",
       "badge": "Laravel 11",
       "badgeTone": "purple",
       "date": "Jun 2026 – Present",
@@ -337,7 +339,21 @@
         "Admin CMS",
         "MySQL",
         "Bootstrap"
-      ]
+      ],
+      "caseStudy": {
+        "whyBuilt": "This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital — a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.",
+        "goal": "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.",
+        "overview": { "role": "Full Stack Developer (feature team)", "period": "Jun 2026 – Present", "type": "Production feature work (internship)", "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations" },
+        "whatItDoes": [
+          "Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations",
+          "Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries",
+          "Slug-based routing, YouTube embed, and an inline video player on detail pages",
+          "Admin CMS with full CRUD for bootcamps, categories, and curriculum modules/items",
+          "firstOrFail() for clean not-found handling, plus is_active scoping to keep drafts off public pages"
+        ],
+        "screens": [],
+        "techNote": "The UI came from designs the team already had — my part was turning that into a working data model and the full-stack logic behind it: normalizing what could've been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row."
+      }
     },
     {
       "id": "proj-jbtb-casting",
@@ -346,11 +362,11 @@
       "images": [],
       "github": "https://github.com/fakrl/extras",
       "github-label": "GitHub",
-      "badge": "Capstone",
+      "badge": "Final Year Project",
       "badgeTone": "purple",
       "date": "Sep 2026 – Present",
-      "issuer": "Solo Full Stack Developer · Project Work (capstone) track",
-      "desc": "A 7-role casting & talent management system built solo in Laravel 13 for a real casting agency — digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows.",
+      "issuer": "Full Stack Developer · Final Year Project (team of 3)",
+      "desc": "A 7-role casting & talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: data model, backend, and full-stack logic end to end.",
       "tags": [
         "Laravel 13",
         "PHP 8.3",
@@ -359,9 +375,9 @@
         "WhatsApp Gateway"
       ],
       "caseStudy": {
-        "whyBuilt": "I wanted my capstone to be something with real users and real constraints, not a tutorial-scale CRUD app — so I took on a live casting agency's actual operational system as my Project Work track final project, solo, end to end.",
+        "whyBuilt": "I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app — so our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.",
         "goal": "Build a management system covering the full casting workflow for PT. JBTB Casting Creative Group: talent profile verification, project/slot management, applications with schedule-conflict detection, Casting Director review and approval, digital contracts, and fee handling — across 7 distinct roles with different access levels.",
-        "overview": { "role": "Solo Full Stack Developer", "period": "Sep 2026 – Present", "type": "Capstone (Project Work track)", "architecture": "Laravel 13, Blade, role-scoped access control" },
+        "overview": { "role": "Full Stack Developer (system & full-stack logic)", "period": "Sep 2026 – Present", "type": "Final Year Project · team of 3", "architecture": "Laravel 13, Blade, role-scoped access control" },
         "whatItDoes": [
           "7-role RBAC — from Super Admin down to Extras (talent) — with one source-of-truth dashboard router instead of scattered per-page checks",
           "Encrypted NIK storage with a separate hashed lookup column so duplicate-ID checks don't require decrypting every record",
@@ -497,7 +513,22 @@
         "Prompt Engineering",
         "AI Tools",
         "Brand Identity"
-      ]
+      ],
+      "caseStudy": {
+        "whyBuilt": "The brand had no social presence at all — this was a chance to build one from zero with a small team, and to test how far prompt engineering could scale content production without making the brand voice feel robotic.",
+        "goal": "Establish and maintain a consistent brand voice and posting cadence for PT. Cahaya Millenial Sejahtera's social channels over a full year, not a short campaign burst.",
+        "overview": { "role": "Content & AI Workflow (team of 3)", "period": "Jul 2024 – Jul 2025", "type": "Marketing engagement", "architecture": "Instagram + prompt-engineered content pipeline" },
+        "whatItDoes": [
+          "Consistent posting cadence sustained over a full year, not a short campaign",
+          "Brand voice guidelines established and applied consistently across all content",
+          "AI-assisted copywriting via prompt engineering, used to scale output across the team without losing consistency"
+        ],
+        "screens": [
+          { "icon": "campaign", "title": "Brand Content", "desc": "Consistent visual and voice identity applied across posts, maintained over a full year rather than a short campaign burst.", "images": ["../image/proj-cms-1.webp"] },
+          { "icon": "smart_toy", "title": "AI-Assisted Copywriting", "desc": "Prompt engineering used to scale content output across a 3-person team while keeping the brand voice consistent.", "images": ["../image/proj-cms-3.webp"] }
+        ],
+        "techNote": "The interesting part wasn't the posting itself — it was building prompt templates specific enough that 3 different people writing copy still sounded like one consistent brand voice, instead of needing a single bottleneck writer to review everything."
+      }
     },
     {
       "id": "proj-ypkb",
@@ -519,7 +550,20 @@
         "WordPress",
         "Web Development",
         "Volunteer"
-      ]
+      ],
+      "caseStudy": {
+        "whyBuilt": "A nonprofit foundation needed a working website and someone to keep it maintained — a straightforward volunteer commitment that kept my WordPress skills active outside of the PHP/Laravel work I was doing elsewhere.",
+        "goal": "Build and maintain a functional WordPress website for Yayasan Peduli Kesejahteraan Bersama, keeping content current without requiring the foundation's own staff to touch code.",
+        "overview": { "role": "Volunteer WordPress Developer", "period": "2023 – 2024", "type": "Volunteer work", "architecture": "WordPress" },
+        "whatItDoes": [
+          "Website build and ongoing maintenance on WordPress for a nonprofit foundation",
+          "Content updates handled without requiring foundation staff to edit code directly"
+        ],
+        "screens": [
+          { "icon": "volunteer_activism", "title": "Foundation Website", "desc": "A maintained WordPress site for the foundation's public-facing presence.", "images": ["../image/proj-ypkb-1.webp"] }
+        ],
+        "techNote": "Domain has since expired, so this one's no longer live — kept here as a record of the volunteer work rather than a demoable site."
+      }
     },
     {
       "id": "proj-groomy",
@@ -542,7 +586,22 @@
         "UI/UX",
         "Prototyping",
         "Mobile Design"
-      ]
+      ],
+      "caseStudy": {
+        "whyBuilt": "I wanted a complete UI/UX piece for my coursework that went past static mockups — full user flows, a reusable component library, and an interactive prototype someone could actually click through.",
+        "goal": "Design an on-demand grooming and beauty service booking app end to end in Figma: from user flows through a reusable component library to a clickable, interactive prototype.",
+        "overview": { "role": "UI/UX Designer", "period": "2024", "type": "Coursework project (UAS)", "architecture": "Figma, component-based design system" },
+        "whatItDoes": [
+          "End-to-end user flows for browsing, booking, and managing grooming service appointments",
+          "Reusable component library instead of one-off screens, so variants stay visually consistent",
+          "Interactive, clickable prototype covering the key screens"
+        ],
+        "screens": [
+          { "icon": "design_services", "title": "Booking Flow", "desc": "Core user flow from browsing services to confirming a booking.", "images": ["../image/proj-groomy-2.webp"] },
+          { "icon": "widgets", "title": "Component Library", "desc": "Reusable components kept the design consistent across screens instead of one-off layouts per screen.", "images": ["../image/proj-groomy-3.webp"] }
+        ],
+        "techNote": "Built as a component library first, screens second — every button, card, and input state was a reusable component before a single full screen was assembled, which is what made the prototype's interactions consistent instead of each screen behaving slightly differently."
+      }
     }
   ]
 }

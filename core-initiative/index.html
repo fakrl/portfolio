@@ -30,7 +30,18 @@
         body.light .cs-eyebrow { color: #999; }
         body.dark  .cs-eyebrow { color: #666; }
         .cs-title { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.7rem; }
-        .cs-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 2rem; }
+        .cs-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 1.4rem; }
+        .cs-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 2rem; }
+        .cs-link-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1.1rem; border-radius: var(--radius-pill);
+            font-size: 0.85rem; font-weight: 600; text-decoration: none;
+            transition: transform 0.15s ease;
+        }
+        .cs-link-btn:hover { transform: translateY(-2px); }
+        body.light .cs-link-btn { background: rgba(0,0,0,0.06); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.10); }
+        body.dark  .cs-link-btn { background: rgba(255,255,255,0.07); color: var(--text-primary-dark); border: 1px solid rgba(255,255,255,0.12); }
+        .cs-link-btn i, .cs-link-btn .msym { font-size: 1.1em; }
         body.light .cs-summary { color: var(--text-secondary-light); }
         body.dark  .cs-summary { color: var(--text-secondary-dark); }
         .cs-hero { width: 100%; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2.4rem; }
@@ -116,6 +127,11 @@
         <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
         <h1 class="cs-title">E-Commerce Catalog</h1>
         <p class="cs-summary">Katalog e-commerce Vue.js 2, live REST API, 3 dynamic UI themes, pixel-perfect Figma, deployed via GitLab CI/CD.</p>
+
+        <div class="cs-links">
+            <a href="https://github.com/fakrl/ecommerce-catalog" target="_blank" rel="noopener" class="cs-link-btn"><i class="devicon-github-original colored"></i> GitHub</a>
+            <a href="https://youtu.be/1DamWnPyG4g" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">play_circle</span> YouTube</a>
+        </div>
 
         <div class="cs-hero glass-card visible">
             <img src="/image/proj-coreinitiative-1.webp" alt="E-Commerce Catalog screenshot" fetchpriority="high">

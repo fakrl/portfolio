@@ -96,16 +96,16 @@ const I18N = {
     // ── GitHub Activity ──
     'ghActivity.title': { en: 'GitHub Activity', id: 'Aktivitas GitHub' },
     'ghActivity.loading': { en: 'Loading activity…', id: 'Memuat aktivitas…' },
-    'ghActivity.captionSuffix': { en: 'contributions in the last year', id: 'kontribusi dalam setahun terakhir' },
+    'ghActivity.captionSuffix': { en: 'contributions in {year}', id: 'kontribusi di tahun {year}' },
     'ghActivity.error': { en: "Couldn't load activity — view on GitHub →", id: 'Gagal memuat aktivitas — lihat di GitHub →' },
 
     // ── Featured Build ──
     'spotlight.eyebrow': { en: 'Featured Build', id: 'Karya Unggulan' },
     'spotlight.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
-    'spotlight.jbtb.sub': { en: 'Solo Full Stack Developer · Capstone (Project Work track)', id: 'Full Stack Developer Solo · Capstone (jalur Project Work)' },
+    'spotlight.jbtb.sub': { en: 'Full Stack Developer · Final Year Project (team of 3)', id: 'Full Stack Developer · Tugas Akhir (tim 3 orang)' },
     'spotlight.jbtb.desc': {
-        en: "A 7-role casting & talent management system built solo in Laravel 13 for a real casting agency: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows — end to end, not a tutorial-scale CRUD app.",
-        id: 'Sistem manajemen casting & talent 7-role yang dibangun sendirian dengan Laravel 13 untuk agensi casting sungguhan: kontrak digital, PII terenkripsi, gateway notifikasi WhatsApp self-hosted, dan alur review berjenjang sesuai peran — dikerjain end-to-end, bukan CRUD skala tutorial.'
+        en: "A 7-role casting & talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows, end to end.",
+        id: 'Sistem manajemen casting & talent 7-role dengan Laravel 13 untuk agensi casting sungguhan, sebagai tugas akhir tim — saya yang pegang sistemnya: kontrak digital, PII terenkripsi, gateway notifikasi WhatsApp self-hosted, dan alur review berjenjang sesuai peran, end-to-end.'
     },
     'extra.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'extra.nobel.sub': { en: 'Production LMS · PT Indotech Digital', id: 'LMS Production · PT Indotech Digital' },
@@ -128,7 +128,7 @@ const I18N = {
     'metric.keyScreens': { en: 'Key Screens', id: 'Layar Utama' },
     'metric.prototype': { en: 'Prototype', id: 'Prototipe' },
     'metric.roles': { en: 'Roles (RBAC)', id: 'Peran (RBAC)' },
-    'metric.developer': { en: 'Developer', id: 'Developer' },
+    'metric.teamSize': { en: 'Team Size', id: 'Jumlah Tim' },
 
     'work.evermos.title': { en: 'Marketplace REST API', id: 'Marketplace REST API' },
     'work.evermos.sub': { en: 'Evermos · Backend', id: 'Evermos · Backend' },
@@ -178,13 +178,6 @@ const I18N = {
     'education.cert.googlepm.sub': { en: 'Google · Digitalent Scholarship KOMDIGI', id: 'Google · Digitalent Scholarship KOMDIGI' },
     'education.cert.bnsp.title': { en: 'Junior Web Developer (BNSP)', id: 'Junior Web Developer (BNSP)' },
     'education.cert.bnsp.sub': { en: 'BPPTIK Kominfo · Digitalent Scholarship', id: 'BPPTIK Kominfo · Digitalent Scholarship' },
-
-    // ── Stats ──
-    'stats.gpa': { en: 'GPA / 4.00', id: 'IPK / 4.00' },
-    'stats.evermos': { en: 'Evermos Score', id: 'Skor Evermos' },
-    'stats.core': { en: 'Core Initiative Score', id: 'Skor Core Initiative' },
-    'stats.yandex': { en: 'Yandex ML Competition', id: 'Kompetisi ML Yandex' },
-    'stats.ml': { en: 'ML Training', id: 'Pelatihan ML' },
 
     // ── Contact ──
     'contact.title': { en: 'Hit Me Up', id: 'Hubungi Saya' },
