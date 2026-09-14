@@ -331,7 +331,7 @@
       "link-label": "Visit Site",
       "badge": "Laravel 11",
       "badgeTone": "purple",
-      "date": "Jun 2026 – Present",
+      "date": "Jun – Aug 2026",
       "issuer": "PT Indotech Digital Group — Full Stack Internship",
       "desc": "End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.",
       "tags": [
@@ -344,7 +344,7 @@
       "caseStudy": {
         "whyBuilt": "This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital — a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.",
         "goal": "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.",
-        "overview": { "role": "Full Stack Developer (feature team)", "period": "Jun 2026 – Present", "type": "Production feature work (internship)", "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations" },
+        "overview": { "role": "Full Stack Developer (feature team)", "period": "Jun – Aug 2026", "type": "Production feature work (internship)", "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations" },
         "whatItDoes": [
           "Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations",
           "Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries",

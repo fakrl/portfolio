@@ -27,8 +27,8 @@ const I18N = {
     'hero.downloadCv': { en: 'Download CV', id: 'Unduh CV' },
     'hero.getInTouch': { en: 'Get In Touch', id: 'Hubungi Saya' },
     'hero.bio': {
-        en: 'Full Stack Developer — currently a Full Stack Developer Intern at PT Indotech Digital, shipping features with <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> on a live product with 20+ pull requests merged to production. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Open to full-time opportunities</strong> alongside my current internship.',
-        id: 'Full Stack Developer — saat ini menjalani internship sebagai Full Stack Developer di PT Indotech Digital, merilis fitur dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> di produk yang sudah live dengan 20+ pull request yang sudah merge ke production. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.68. <strong>Terbuka untuk peluang full-time</strong> di samping internship yang sedang berjalan.'
+        en: 'Full Stack Developer building a T-shaped range — currently a Data Analyst (OJT) at APIKpreneur, Bakti Pemuda Foundation, after shipping 20+ pull requests to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Available now for full-time opportunities.</strong>',
+        id: 'Full Stack Developer yang lagi membangun T-shaped range — saat ini menjalani OJT sebagai Data Analyst di APIKpreneur, Bakti Pemuda Foundation, setelah merilis 20+ pull request ke LMS yang sudah live dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> di PT Indotech Digital. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.68. <strong>Tersedia sekarang untuk peluang full-time.</strong>'
     },
 
     // ── Experience ──
@@ -36,8 +36,15 @@ const I18N = {
     'exp.techLabel': { en: 'Technologies Used', id: 'Teknologi yang Digunakan' },
     'exp.focusLabel': { en: 'Focus', id: 'Fokus' },
 
+    'exp.apik.role': { en: 'Data Analyst (On-the-Job Training)', id: 'Data Analyst (OJT)' },
+    'exp.apik.meta': { en: 'Sep 2026 – Present', id: 'Sep 2026 – Sekarang' },
+    'exp.apik.desc': {
+        en: '1-year on-the-job training program in data analysis — paid fieldwork (Tue–Wed) combined with technical and soft-skill training, through APIKpreneur, Bakti Pemuda Foundation.',
+        id: 'Program OJT 1 tahun di bidang data analyst — kerja lapangan berbayar (Sel–Rab) digabung pelatihan hard skill & soft skill, lewat APIKpreneur, Bakti Pemuda Foundation.'
+    },
+
     'exp.indotech.role': { en: 'Full Stack Developer Intern', id: 'Magang Full Stack Developer' },
-    'exp.indotech.meta': { en: 'Jun 2026 – Present · Jakarta (Hybrid)', id: 'Jun 2026 – Sekarang · Jakarta (Hybrid)' },
+    'exp.indotech.meta': { en: 'Jun – Aug 2026 · Jakarta (Hybrid)', id: 'Jun – Agu 2026 · Jakarta (Hybrid)' },
     'exp.indotech.bullet1': {
         en: 'Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.',
         id: 'Merilis fitur ke LMS yang sudah live dengan Laravel 11 — <strong>20+ pull request sudah merge ke production</strong> lewat alur review dev → staging → main.'
@@ -316,7 +323,7 @@ const I18N = {
     'cert.ukbi.tag': { en: 'Language Certification', id: 'Sertifikasi Bahasa' },
 
     // ── Project cards ──
-    'proj.nobel.date': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
+    'proj.nobel.date': { en: 'Jun – Aug 2026', id: 'Jun – Agu 2026' },
     'proj.nobel.title': { en: 'Nobel Akademi — Bootcamp Module', id: 'Nobel Akademi — Modul Bootcamp' },
     'proj.nobel.screenshotSoon': { en: 'Screenshot coming soon', id: 'Screenshot menyusul' },
     'proj.nobel.desc': {
@@ -428,7 +435,7 @@ const I18N = {
         id: 'Membangun modul Bootcamp untuk LMS Nobel Akademi secara end-to-end: data layer yang ternormalisasi, admin CMS untuk mengelola konten bootcamp, serta halaman listing/detail publik — mengimplementasikan UI dari desain yang sudah disiapkan tim, sementara data model dan logic full-stack-nya saya yang pegang sendiri.'
     },
     'cs.nobel.role': { en: 'Full Stack Developer (feature team)', id: 'Full Stack Developer (tim feature)' },
-    'cs.nobel.period': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
+    'cs.nobel.period': { en: 'Jun – Aug 2026', id: 'Jun – Agu 2026' },
     'cs.nobel.type': { en: 'Production feature work (internship)', id: 'Kerjaan feature production (magang)' },
     'cs.nobel.arch': { en: 'Laravel 11, MVC, eager-loaded Eloquent relations', id: 'Laravel 11, MVC, Eloquent relations eager-loaded' },
     'cs.nobel.step0': {
