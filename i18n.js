@@ -359,13 +359,13 @@ const I18N = {
     'proj.nobilive.date': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
     'proj.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'proj.nobilive.desc': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS, stream scheduling, and live chat moderation. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis — studio CMS berbasis role, penjadwalan siaran, dan moderasi live chat. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis — studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
     },
     'proj.nobilive.credential': { en: 'Pre-launch product · shown with mentor permission', id: 'Produk belum rilis · ditampilkan dengan izin mentor' },
 
     'proj.nobel.date': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
-    'proj.nobel.title': { en: 'Nobel Akademi — Bootcamp Module', id: 'Nobel Akademi — Modul Bootcamp' },
+    'proj.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'proj.nobel.screenshotSoon': { en: 'Screenshot coming soon', id: 'Screenshot menyusul' },
     'proj.nobel.desc': {
         en: 'End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.',
@@ -462,7 +462,7 @@ const I18N = {
 
     // ── Case study body content — per project (cs.<ns>.*) ──
     // Nobel Akademi
-    'cs.nobel.title': { en: 'Nobel Akademi — Bootcamp Module', id: 'Nobel Akademi — Modul Bootcamp' },
+    'cs.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'cs.nobel.summary': {
         en: 'End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.',
         id: 'Modul LMS bootcamp end-to-end dengan Laravel 11 — data model (6 tabel berelasi), backend, admin CMS, dan halaman publik. Eloquent relations eager-loaded (bebas N+1), routing berbasis slug, embed YouTube, dan sistem rating.'
@@ -507,16 +507,16 @@ const I18N = {
     // NobiPlay — Live Streaming Module
     'cs.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'cs.nobilive.summary': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS, stream scheduling, and live chat moderation. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik — studio CMS berbasis role, penjadwalan siaran, dan moderasi live chat. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik — studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
     },
     'cs.nobilive.whyBuilt': {
         en: 'A second product line at PT Indotech Digital Group alongside Nobel Akademi — feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.',
         id: 'Lini produk kedua di PT Indotech Digital Group selain Nobel Akademi — kerjaan feature di platform live-streaming yang belum rilis publik. Ditampilkan di sini dengan izin eksplisit dari mentor saya buat direferensikan sebagai proof of work, tanpa membuka source code.'
     },
     'cs.nobilive.goal': {
-        en: 'Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, plus a first pass at chat moderation so live sessions stay safe by default.',
-        id: 'Berkontribusi ke modul live-streaming: CMS sisi studio buat host dan admin mengelola siaran dan jadwal, plus iterasi pertama moderasi chat biar sesi live aman secara default.'
+        en: 'Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules.',
+        id: 'Berkontribusi ke modul live-streaming: CMS sisi studio buat host dan admin mengelola siaran dan jadwal.'
     },
     'cs.nobilive.role': { en: 'Full Stack Engineer (feature team)', id: 'Full Stack Engineer (tim feature)' },
     'cs.nobilive.period': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
@@ -524,10 +524,6 @@ const I18N = {
     'cs.nobilive.arch': { en: 'Laravel 13, role-based access control', id: 'Laravel 13, role-based access control' },
     'cs.nobilive.step0': { en: 'Role-based Studio CMS for hosts and admins', id: 'Studio CMS berbasis role buat host dan admin' },
     'cs.nobilive.step1': { en: 'Stream scheduling consolidated into a single Live Studio flow', id: 'Penjadwalan siaran digabung jadi satu alur Live Studio' },
-    'cs.nobilive.step2': {
-        en: 'Foundational live chat moderation — automatic word filtering plus per-stream account blocking',
-        id: 'Fondasi moderasi live chat — filter kata otomatis plus blokir akun per-siaran'
-    },
     'cs.nobilive.techNote': {
         en: 'The product is pre-launch and under NDA — this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live.',
         id: 'Produknya belum rilis publik dan terikat NDA — halaman ini sengaja berhenti di scope dan peran, bukan detail implementasi. Nggak ada source code, skema database, atau metrik bisnis yang dibagikan. Link publik akan ditambahkan begitu domain consumer-facing-nya aktif.'

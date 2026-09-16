@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nobel Akademi — Bootcamp Module — Fakhrul Mukhlisin</title>
+    <title>Nobel Akademi — Fakhrul Mukhlisin</title>
     <link rel="icon" type="image/webp" href="/image/favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
     <meta name="description" content="End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.">
-    <meta property="og:title" content="Nobel Akademi — Bootcamp Module — Fakhrul Mukhlisin">
+    <meta property="og:title" content="Nobel Akademi — Fakhrul Mukhlisin">
     <meta property="og:description" content="End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.">
     <meta property="og:image" content="https://fakrul.netlify.app/image/og-image.webp">
     <meta property="og:url" content="https://fakrul.netlify.app/project/nobel-akademi/">
@@ -30,6 +30,8 @@
         body.light .cs-eyebrow { color: #999; }
         body.dark  .cs-eyebrow { color: #666; }
         .cs-title { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.7rem; }
+        body.light .cs-title { color: var(--text-primary-light); }
+        body.dark  .cs-title { color: var(--text-primary-dark); }
         .cs-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 1.4rem; }
         .cs-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 2rem; }
         .cs-link-btn {
@@ -65,6 +67,8 @@
         body.light .cs-box h3 { color: #999; }
         body.dark  .cs-box h3 { color: #666; }
         .cs-box p { font-size: 0.9rem; line-height: 1.65; }
+        body.light .cs-box p { color: var(--text-secondary-light); }
+        body.dark  .cs-box p { color: var(--text-secondary-dark); }
         .cs-overview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1.4rem 1.6rem; margin-bottom: 2.4rem; }
         @media (min-width: 640px) { .cs-overview { grid-template-columns: repeat(4, 1fr); } }
         .cs-overview-item span { display: block; }
@@ -72,12 +76,16 @@
         body.light .cs-overview-item .cs-ov-label { color: #999; }
         body.dark  .cs-overview-item .cs-ov-label { color: #666; }
         .cs-overview-item .cs-ov-val { font-size: 0.88rem; font-weight: 600; }
+        body.light .cs-overview-item .cs-ov-val { color: var(--text-primary-light); }
+        body.dark  .cs-overview-item .cs-ov-val { color: var(--text-primary-dark); }
         .cs-section-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.9rem; }
         body.light .cs-section-title { color: #999; }
         body.dark  .cs-section-title { color: #666; }
         .cs-checklist { list-style: none; padding: 0; margin: 0 0 2.4rem; display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
         @media (min-width: 640px) { .cs-checklist { grid-template-columns: 1fr 1fr; } }
         .cs-checklist li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; line-height: 1.5; }
+        body.light .cs-checklist li { color: var(--text-secondary-light); }
+        body.dark  .cs-checklist li { color: var(--text-secondary-dark); }
         .cs-checklist .msym { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
         .cs-screen { padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .cs-screen:hover { transform: translateY(-4px); }
@@ -85,6 +93,8 @@
         .cs-screen:hover img { transform: scale(1.015); }
         .cs-screen-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem; }
         .cs-screen-head h4 { font-size: 1rem; font-weight: 700; }
+        body.light .cs-screen-head h4 { color: var(--text-primary-light); }
+        body.dark  .cs-screen-head h4 { color: var(--text-primary-dark); }
         .cs-screen p { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.9rem; }
         body.light .cs-screen p { color: var(--text-secondary-light); }
         body.dark  .cs-screen p { color: var(--text-secondary-dark); }
@@ -93,8 +103,12 @@
         body.dark  .cs-screen img { border: 1px solid rgba(255,255,255,0.10); }
         .cs-tech-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem; }
         .cs-tech-note { font-size: 0.9rem; line-height: 1.7; }
+        body.light .cs-tech-note { color: var(--text-secondary-light); }
+        body.dark  .cs-tech-note { color: var(--text-secondary-dark); }
         .cs-cta { text-align: center; padding: 2.2rem 1.6rem; margin-top: 1rem; }
         .cs-cta p { margin-bottom: 1rem; font-size: 0.92rem; }
+        body.light .cs-cta p { color: var(--text-secondary-light); }
+        body.dark  .cs-cta p { color: var(--text-secondary-dark); }
     </style>
 </head>
 <body class="light">
@@ -131,7 +145,7 @@
         <a href="/projects/" class="cs-back"><span class="msym" style="font-size:1.1rem">arrow_back</span> <span data-i18n="cs.back">Back to Proof of Work</span></a>
 
         <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
-        <h1 class="cs-title" data-i18n="cs.nobel.title">Nobel Akademi — Bootcamp Module</h1>
+        <h1 class="cs-title" data-i18n="cs.nobel.title">Nobel Akademi</h1>
         <p class="cs-summary" data-i18n="cs.nobel.summary">End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.</p>
 
         <div class="cs-links">
