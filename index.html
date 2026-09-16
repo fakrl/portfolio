@@ -1884,7 +1884,7 @@
                 <h1 class="hero-name">Fakhrul<br>Mukhlisin <svg class="hero-verified" width="0.55em" height="0.55em" viewBox="0 0 24 24" fill="#3b9eff" title="Available for hire"><path d="M12 1l2.39 2.42 3.34-.73.7 3.36 3.36.7-.73 3.34L23 12l-2.34 2.41.73 3.34-3.36.7-.7 3.36-3.34-.73L12 23l-2.39-2.42-3.34.73-.7-3.36-3.36-.7.73-3.34L1 12l2.34-2.41-.73-3.34 3.36-.7.7-3.36 3.34.73L12 1zm-1.2 14.6l6.1-6.1-1.4-1.42-4.7 4.7-2.1-2.1-1.4 1.42 3.5 3.5z"/></svg></h1>
                 <p class="hero-role" data-i18n="hero.roleLine">Full Stack · Laravel · Vue.js · Golang</p>
                 <p class="hero-bio" data-i18n-html="hero.bio">
-                    Full Stack Developer — currently a Full Stack Developer Intern at PT Indotech Digital, shipping features with <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> on a live product with 20+ pull requests merged to production. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Open to full-time opportunities</strong> alongside my current internship.
+                    Full Stack Developer building a T-shaped range — currently a Data Analyst (OJT) at APIKpreneur, Bakti Pemuda Foundation, after shipping 20+ pull requests to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>
                 </p>
                 <div class="hero-cta-group">
                     <a href="#contact" class="btn btn-primary" data-i18n="hero.getInTouch">Get In Touch</a>
@@ -1903,37 +1903,45 @@
 
         <div class="exp-list">
 
-            <!-- APIKpreneur (current) -->
-            <div class="exp-row exp-row--current glass-card">
-                <span class="exp-row-date" data-i18n="exp.apik.meta">Sep 2026 – Present</span>
+            <!-- APIKpreneur (current, rotates mitra ~3mo — currently Gatra Data) -->
+            <a href="/experience/apikpreneur/" class="exp-row exp-row--current glass-card">
+                <span class="exp-row-date" data-i18n="exp.apik.meta">Aug 2026 – Present</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
                         <div>
-                            <p class="exp-card-role" data-i18n="exp.apik.role">Data Analyst (On-the-Job Training)</p>
+                            <p class="exp-card-role" data-i18n="exp.apik.role">Data Analyst (OJT)</p>
                             <p class="exp-card-company">APIKpreneur · Bakti Pemuda Foundation</p>
                         </div>
+                        <span class="exp-card-badge exp-card-badge--current">16K+ Records</span>
                     </div>
-                    <p class="exp-card-desc" data-i18n="exp.apik.desc">1-year on-the-job training program in data analysis — paid fieldwork (Tue–Wed) combined with technical and soft-skill training, through APIKpreneur, Bakti Pemuda Foundation.</p>
+                    <ul class="exp-card-bullets">
+                        <li data-i18n-html="exp.apik.bullet1">Scholarship-funded on-the-job training program — rotates every ~3 months across Bakti Pemuda Foundation's affiliated partner organizations; currently placed with <strong>Gatra Data</strong>, a data-analytics partner.</li>
+                        <li data-i18n-html="exp.apik.bullet2">Built an automated donor segmentation engine in Google Apps Script for a 16,000+ row transaction sheet — hierarchical RFM-style logic (Potential/Loyal/Active/New/Passive) plus a sub-level engagement-health status, recalculated in one batched read/write pass instead of per-row calls. Resolved an ambiguous multi-label-vs-hierarchy requirement directly with stakeholders before finalizing the logic.</li>
+                        <li data-i18n-html="exp.apik.bullet3">Designed a self-service Dashboard sheet — global favorite-program ranking plus a cumulative month-over-month segment growth table — so non-technical teammates and the mentor could read trends without touching the underlying data.</li>
+                        <li data-i18n-html="exp.apik.bullet4">Automated the whole pipeline with a daily time-driven trigger, replacing manual reruns — including debugging a getUi() execution-context error along the way.</li>
+                    </ul>
                     <div class="exp-card-tech">
-                        <span class="exp-card-tech-label" data-i18n="exp.focusLabel">Focus</span>
+                        <span class="exp-card-tech-label" data-i18n="exp.techLabel">Technologies Used</span>
                         <div class="exp-card-tags">
-                            <span class="tag">Data Analysis</span>
-                            <span class="tag">OJT</span>
+                            <span class="tag">Google Apps Script</span>
+                            <span class="tag">Data Segmentation</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Dashboard Reporting</span>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Indotech -->
-            <a href="#featured" class="exp-row glass-card">
-                <span class="exp-row-date" data-i18n="exp.indotech.meta">Jun – Aug 2026 · Jakarta (Hybrid)</span>
+            <a href="/experience/indotech/" class="exp-row exp-row--current glass-card">
+                <span class="exp-row-date" data-i18n="exp.indotech.meta">Jun 2026 – Present · Jakarta (Hybrid)</span>
                 <div class="exp-row-body">
                     <div class="exp-card-head">
                         <div>
-                            <p class="exp-card-role" data-i18n="exp.indotech.role">Full Stack Developer Intern</p>
+                            <p class="exp-card-role" data-i18n="exp.indotech.role">Full Stack Engineer</p>
                             <p class="exp-card-company">PT Indotech Digital Group</p>
                         </div>
-                        <span class="exp-card-badge">20+ PRs</span>
+                        <span class="exp-card-badge exp-card-badge--current">20+ PRs</span>
                     </div>
                     <ul class="exp-card-bullets">
                         <li data-i18n-html="exp.indotech.bullet1">Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.</li>
@@ -2121,7 +2129,7 @@
     ══════════════════════════════════════ -->
     <section id="featured-build" class="section">
         <span class="spotlight-eyebrow" data-i18n="spotlight.eyebrow">Featured Build</span>
-        <a href="/casting-jbtb/" class="work-card spotlight-card glass-card">
+        <a href="/project/casting-jbtb/" class="work-card spotlight-card glass-card">
             <div class="work-card-media work-card-media--placeholder">
                 <i class="devicon-laravel-plain"></i>
                 <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
@@ -2180,33 +2188,33 @@
                 </div>
             </a>
 
-            <!-- Nobiplay — livestream module Fakrul built. Not clickable yet: the
-                 consumer-facing app has no public domain (still localhost per its own
-                 .env.example) — swap this wrapper element from a div back to an anchor
-                 once he gives a real reachable URL to the livestream section specifically. -->
-            <div class="work-card glass-card work-card--disabled">
+            <!-- Nobiplay — livestream module Fakrul built. Case-study page now exists
+                 at /project/nobilive/ (proof-of-work, NDA-safe scope), so this is
+                 clickable again — but the CONSUMER product itself still has no public
+                 domain, so that distinction stays in the description + inside the page. -->
+            <a href="/project/nobilive/" class="work-card glass-card">
                 <div class="work-card-media work-card-media--placeholder">
                     <i class="devicon-laravel-plain"></i>
-                    <span data-i18n="work.nobiplay.comingSoon">Coming soon — pending public URL</span>
-                    <span class="work-card-tag">Laravel</span>
+                    <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
+                    <span class="work-card-tag">Laravel 13</span>
                 </div>
                 <div class="work-card-body">
                     <div>
                         <h3 class="work-card-title" data-i18n="work.nobiplay.title">NobiPlay — Live Streaming Module</h3>
-                        <p class="work-card-sub" data-i18n="work.nobiplay.sub">Full Stack Developer · Live Streaming Feature</p>
+                        <p class="work-card-sub" data-i18n="work.nobiplay.sub">PT Indotech Digital Group · Live Streaming Feature</p>
                     </div>
-                    <p class="work-card-desc" data-i18n="work.nobiplay.desc">The live-streaming module I built for NobiPlay's platform — not linked yet since the consumer app isn't publicly deployed.</p>
+                    <p class="work-card-desc" data-i18n="work.nobiplay.desc">The live-streaming module I built for NobiPlay's platform — shown with my mentor's permission; the consumer app itself isn't publicly deployed yet.</p>
                     <div class="work-card-foot">
                         <div class="work-card-tech">
                             <i class="devicon-laravel-plain colored" title="Laravel"></i>
                         </div>
-                        <span class="work-card-link work-card-link--muted" data-i18n="work.nobiplay.comingSoon">Coming soon — pending public URL</span>
+                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Core Initiative frontend — links to its own case-study page -->
-            <a href="/core-initiative/" class="work-card glass-card">
+            <a href="/project/core-initiative/" class="work-card glass-card">
                 <div class="work-card-media">
                     <img src="image/proj-coreinitiative-1.webp" alt="Core Initiative e-commerce catalog" loading="lazy">
                     <span class="work-card-tag">Vue.js</span>
@@ -2230,7 +2238,7 @@
 
             <!-- Evermos backend — links to its own case-study page (GitHub/YouTube
                  links live inside that page now) -->
-            <a href="/evermos/" class="work-card glass-card">
+            <a href="/project/evermos/" class="work-card glass-card">
                 <div class="work-card-media">
                     <img src="image/proj-evermos-1.webp" alt="Evermos marketplace REST API" loading="lazy">
                     <span class="work-card-tag">Golang</span>
@@ -2358,7 +2366,7 @@
                         <h3 class="edu-timeline-title" data-i18n="education.degree">Bachelor of Information Systems</h3>
                         <p class="edu-timeline-sub" data-i18n="education.school">Universitas Pamulang · Tangerang Selatan · 120 credits completed</p>
                         <div class="edu-timeline-extra">
-                            <span class="edu-gpa">GPA 3.68 / 4.00</span>
+                            <span class="edu-gpa">GPA 3.70 / 4.00</span>
                             <span class="edu-timeline-lang" data-i18n="education.lang">Indonesian (Native · UKBI Madya) · English (Conversational)</span>
                         </div>
                     </div>

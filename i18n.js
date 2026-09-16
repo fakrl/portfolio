@@ -27,8 +27,8 @@ const I18N = {
     'hero.downloadCv': { en: 'Download CV', id: 'Unduh CV' },
     'hero.getInTouch': { en: 'Get In Touch', id: 'Hubungi Saya' },
     'hero.bio': {
-        en: 'Full Stack Developer building a T-shaped range — currently a Data Analyst (OJT) at APIKpreneur, Bakti Pemuda Foundation, after shipping 20+ pull requests to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.68. <strong>Available now for full-time opportunities.</strong>',
-        id: 'Full Stack Developer yang lagi membangun T-shaped range — saat ini menjalani OJT sebagai Data Analyst di APIKpreneur, Bakti Pemuda Foundation, setelah merilis 20+ pull request ke LMS yang sudah live dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> di PT Indotech Digital. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.68. <strong>Tersedia sekarang untuk peluang full-time.</strong>'
+        en: 'Full Stack Developer building a T-shaped range — currently a Data Analyst (OJT) at APIKpreneur, Bakti Pemuda Foundation, and a Full Stack Engineer at PT Indotech Digital, where 20+ pull requests have been merged to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>. Previously: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>',
+        id: 'Full Stack Developer yang lagi membangun T-shaped range — saat ini menjalani OJT sebagai Data Analyst di APIKpreneur, Bakti Pemuda Foundation, sekaligus Full Stack Engineer di PT Indotech Digital, dengan 20+ pull request yang sudah merge ke LMS yang sudah live dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span>. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.70. <strong>Tersedia sekarang untuk peluang full-time.</strong>'
     },
 
     // ── Experience ──
@@ -36,15 +36,48 @@ const I18N = {
     'exp.techLabel': { en: 'Technologies Used', id: 'Teknologi yang Digunakan' },
     'exp.focusLabel': { en: 'Focus', id: 'Fokus' },
 
-    'exp.apik.role': { en: 'Data Analyst (On-the-Job Training)', id: 'Data Analyst (OJT)' },
-    'exp.apik.meta': { en: 'Sep 2026 – Present', id: 'Sep 2026 – Sekarang' },
-    'exp.apik.desc': {
-        en: '1-year on-the-job training program in data analysis — paid fieldwork (Tue–Wed) combined with technical and soft-skill training, through APIKpreneur, Bakti Pemuda Foundation.',
-        id: 'Program OJT 1 tahun di bidang data analyst — kerja lapangan berbayar (Sel–Rab) digabung pelatihan hard skill & soft skill, lewat APIKpreneur, Bakti Pemuda Foundation.'
+    'exp.apik.role': { en: 'Data Analyst (OJT)', id: 'Data Analyst (OJT)' },
+    'exp.apik.meta': { en: 'Aug 2026 – Present', id: 'Agu 2026 – Sekarang' },
+    'exp.apik.bullet1': {
+        en: 'Scholarship-funded on-the-job training program — rotates every ~3 months across Bakti Pemuda Foundation\'s affiliated partner organizations; currently placed with <strong>Gatra Data</strong>, a data-analytics partner.',
+        id: 'Program OJT beasiswa — rotasi tiap ~3 bulan ke organisasi mitra yang terafiliasi Bakti Pemuda Foundation; saat ini ditempatkan di <strong>Gatra Data</strong>, mitra data analytics.'
+    },
+    'exp.apik.bullet2': {
+        en: 'Built an automated donor segmentation engine in Google Apps Script for a 16,000+ row transaction sheet — hierarchical RFM-style logic (Potential/Loyal/Active/New/Passive) plus a sub-level engagement-health status, recalculated in one batched read/write pass instead of per-row calls. Resolved an ambiguous multi-label-vs-hierarchy requirement directly with stakeholders before finalizing the logic.',
+        id: 'Membangun mesin segmentasi donatur otomatis dengan Google Apps Script untuk sheet transaksi 16.000+ baris — logic hierarkis ala RFM (Potensial/Loyal/Aktif/Baru/Pasif) plus sub-status kesehatan keaktifan, dihitung ulang dalam satu batch read/write, bukan per baris. Menyelesaikan ambiguitas requirement multi-label vs hierarki langsung sama stakeholder sebelum logic-nya difinalkan.'
+    },
+    'exp.apik.bullet3': {
+        en: 'Designed a self-service Dashboard sheet — global favorite-program ranking plus a cumulative month-over-month segment growth table — so non-technical teammates and the mentor could read trends without touching the underlying data.',
+        id: 'Mendesain sheet Dashboard self-service — ranking program favorit secara global plus tabel pertumbuhan segmen kumulatif per bulan — biar tim & mentor yang nggak teknis bisa baca tren tanpa nyentuh data mentahnya.'
+    },
+    'exp.apik.bullet4': {
+        en: 'Automated the whole pipeline with a daily time-driven trigger, replacing manual reruns — including debugging a getUi() execution-context error along the way.',
+        id: 'Mengotomasi seluruh pipeline-nya dengan daily time-driven trigger, gantiin rerun manual — termasuk debug error konteks eksekusi getUi() di tengah jalan.'
+    },
+    'exp.apik.hub.summary': {
+        en: 'APIKpreneur (Bakti Pemuda Foundation) is a scholarship-funded on-the-job training program — it rotates recipients across affiliated partner organizations roughly every 3 months rather than placing them permanently at one company. The card below is my current placement.',
+        id: 'APIKpreneur (Bakti Pemuda Foundation) adalah program OJT berbasis beasiswa — penerimanya dirotasi ke organisasi mitra terafiliasi kira-kira tiap 3 bulan, bukan ditempatkan permanen di satu perusahaan. Card di bawah ini penempatan saya saat ini.'
     },
 
-    'exp.indotech.role': { en: 'Full Stack Developer Intern', id: 'Magang Full Stack Developer' },
-    'exp.indotech.meta': { en: 'Jun – Aug 2026 · Jakarta (Hybrid)', id: 'Jun – Agu 2026 · Jakarta (Hybrid)' },
+    // Experience hub pages (/experience/<slug>/) — shared strings
+    'exp.hub.back': { en: 'Back to Experience', id: 'Kembali ke Pengalaman' },
+    'exp.hub.eyebrow': { en: 'Experience', id: 'Pengalaman' },
+    'exp.hub.employmentType': { en: 'Employment Type', id: 'Jenis Kerja' },
+    'exp.hub.internship': { en: 'Internship', id: 'Magang' },
+    'exp.hub.scholarshipOjt': { en: 'Scholarship OJT', id: 'OJT Beasiswa' },
+    'exp.hub.currentPlacement': { en: 'Current Placement', id: 'Penempatan Saat Ini' },
+    'exp.hub.productsLabel': { en: 'Products', id: 'Produk' },
+    'exp.hub.productionLms': { en: 'Production LMS', id: 'LMS Production' },
+    'exp.hub.preLaunch': { en: 'Pre-launch product', id: 'Produk Pre-launch' },
+    'exp.hub.projectsTitle': { en: 'Projects I Worked On', id: 'Project yang Saya Kerjakan' },
+
+    'exp.indotech.hub.summary': {
+        en: "PT Indotech Digital Group is a software agency running two Laravel product lines I've shipped features to: Nobel Akademi's LMS and NobiPlay's live-streaming platform. Both cards below link to their own proof-of-work case study.",
+        id: 'PT Indotech Digital Group adalah software agency yang menjalankan dua lini produk Laravel yang saya kerjakan fiturnya: LMS Nobel Akademi dan platform live-streaming NobiPlay. Kedua card di bawah ini nyambung ke case study proof-of-work masing-masing.'
+    },
+
+    'exp.indotech.role': { en: 'Full Stack Engineer', id: 'Full Stack Engineer' },
+    'exp.indotech.meta': { en: 'Jun 2026 – Present · Jakarta (Hybrid)', id: 'Jun 2026 – Sekarang · Jakarta (Hybrid)' },
     'exp.indotech.bullet1': {
         en: 'Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.',
         id: 'Merilis fitur ke LMS yang sudah live dengan Laravel 11 — <strong>20+ pull request sudah merge ke production</strong> lewat alur review dev → staging → main.'
@@ -150,10 +183,10 @@ const I18N = {
         id: 'Modul Bootcamp end-to-end di LMS yang sudah live — data model, backend, admin CMS, dan halaman publik, diimplementasikan dari desain yang udah disediakan.'
     },
     'work.nobiplay.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
-    'work.nobiplay.sub': { en: 'Full Stack Developer · Live Streaming Feature', id: 'Full Stack Developer · Fitur Live Streaming' },
+    'work.nobiplay.sub': { en: 'PT Indotech Digital Group · Live Streaming Feature', id: 'PT Indotech Digital Group · Fitur Live Streaming' },
     'work.nobiplay.desc': {
-        en: "The live-streaming module I built for NobiPlay's platform — not linked yet since the consumer app isn't publicly deployed.",
-        id: 'Modul live-streaming yang saya bangun untuk platform NobiPlay — belum di-link karena app consumer-nya belum di-deploy publik.'
+        en: "The live-streaming module I built for NobiPlay's platform — shown with my mentor's permission; the consumer app itself isn't publicly deployed yet.",
+        id: 'Modul live-streaming yang saya bangun untuk platform NobiPlay — ditampilkan dengan izin mentor saya; app consumer-nya sendiri belum di-deploy publik.'
     },
     'work.nobiplay.comingSoon': { en: 'Coming soon — pending public URL', id: 'Segera hadir — nunggu URL publik' },
     'work.evermos.title': { en: 'Marketplace REST API', id: 'Marketplace REST API' },
@@ -323,7 +356,7 @@ const I18N = {
     'cert.ukbi.tag': { en: 'Language Certification', id: 'Sertifikasi Bahasa' },
 
     // ── Project cards ──
-    'proj.nobel.date': { en: 'Jun – Aug 2026', id: 'Jun – Agu 2026' },
+    'proj.nobel.date': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
     'proj.nobel.title': { en: 'Nobel Akademi — Bootcamp Module', id: 'Nobel Akademi — Modul Bootcamp' },
     'proj.nobel.screenshotSoon': { en: 'Screenshot coming soon', id: 'Screenshot menyusul' },
     'proj.nobel.desc': {
@@ -403,7 +436,7 @@ const I18N = {
     'award.lka.tag': { en: 'Internship', id: 'Magang' },
 
     // ── Case study page labels ──
-    'cs.back': { en: 'Back to Home', id: 'Kembali ke Beranda' },
+    'cs.back': { en: 'Back to Proof of Work', id: 'Kembali ke Bukti Karya' },
     'cs.eyebrow': { en: 'Featured Build', id: 'Karya Unggulan' },
     'cs.whyBuilt': { en: 'Why I Built It', id: 'Kenapa Saya Bikin Ini' },
     'cs.goal': { en: 'Project Goal', id: 'Tujuan Proyek' },
@@ -434,8 +467,8 @@ const I18N = {
         en: "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.",
         id: 'Membangun modul Bootcamp untuk LMS Nobel Akademi secara end-to-end: data layer yang ternormalisasi, admin CMS untuk mengelola konten bootcamp, serta halaman listing/detail publik — mengimplementasikan UI dari desain yang sudah disiapkan tim, sementara data model dan logic full-stack-nya saya yang pegang sendiri.'
     },
-    'cs.nobel.role': { en: 'Full Stack Developer (feature team)', id: 'Full Stack Developer (tim feature)' },
-    'cs.nobel.period': { en: 'Jun – Aug 2026', id: 'Jun – Agu 2026' },
+    'cs.nobel.role': { en: 'Full Stack Engineer (feature team)', id: 'Full Stack Engineer (tim feature)' },
+    'cs.nobel.period': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
     'cs.nobel.type': { en: 'Production feature work (internship)', id: 'Kerjaan feature production (magang)' },
     'cs.nobel.arch': { en: 'Laravel 11, MVC, eager-loaded Eloquent relations', id: 'Laravel 11, MVC, Eloquent relations eager-loaded' },
     'cs.nobel.step0': {
@@ -461,6 +494,74 @@ const I18N = {
     'cs.nobel.techNote': {
         en: 'The UI came from designs the team already had — my part was turning that into a working data model and the full-stack logic behind it: normalizing what could\'ve been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row.',
         id: 'UI-nya dari desain yang sudah disiapkan tim — bagian saya adalah mengubahnya jadi data model yang jalan plus logic full-stack di baliknya: menormalisasi yang tadinya bisa jadi satu tabel flat menjadi 6 tabel yang saling berelasi, lalu eager-load semua yang dibutuhkan halaman detail dalam satu query, bukan N+1 lazy load per baris module, tool, dan learning.'
+    },
+
+    // NobiPlay — Live Streaming Module
+    'cs.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
+    'cs.nobilive.summary': {
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS, stream scheduling, and live chat moderation. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik — studio CMS berbasis role, penjadwalan siaran, dan moderasi live chat. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
+    },
+    'cs.nobilive.whyBuilt': {
+        en: 'A second product line at PT Indotech Digital Group alongside Nobel Akademi — feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.',
+        id: 'Lini produk kedua di PT Indotech Digital Group selain Nobel Akademi — kerjaan feature di platform live-streaming yang belum rilis publik. Ditampilkan di sini dengan izin eksplisit dari mentor saya buat direferensikan sebagai proof of work, tanpa membuka source code.'
+    },
+    'cs.nobilive.goal': {
+        en: 'Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, plus a first pass at chat moderation so live sessions stay safe by default.',
+        id: 'Berkontribusi ke modul live-streaming: CMS sisi studio buat host dan admin mengelola siaran dan jadwal, plus iterasi pertama moderasi chat biar sesi live aman secara default.'
+    },
+    'cs.nobilive.role': { en: 'Full Stack Engineer (feature team)', id: 'Full Stack Engineer (tim feature)' },
+    'cs.nobilive.period': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
+    'cs.nobilive.type': { en: 'Production feature work (internship)', id: 'Kerjaan feature production (magang)' },
+    'cs.nobilive.arch': { en: 'Laravel 13, role-based access control', id: 'Laravel 13, role-based access control' },
+    'cs.nobilive.step0': { en: 'Role-based Studio CMS for hosts and admins', id: 'Studio CMS berbasis role buat host dan admin' },
+    'cs.nobilive.step1': { en: 'Stream scheduling consolidated into a single Live Studio flow', id: 'Penjadwalan siaran digabung jadi satu alur Live Studio' },
+    'cs.nobilive.step2': {
+        en: 'Foundational live chat moderation — automatic word filtering plus per-stream account blocking',
+        id: 'Fondasi moderasi live chat — filter kata otomatis plus blokir akun per-siaran'
+    },
+    'cs.nobilive.techNote': {
+        en: 'The product is pre-launch and under NDA — this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live.',
+        id: 'Produknya belum rilis publik dan terikat NDA — halaman ini sengaja berhenti di scope dan peran, bukan detail implementasi. Nggak ada source code, skema database, atau metrik bisnis yang dibagikan. Link publik akan ditambahkan begitu domain consumer-facing-nya aktif.'
+    },
+
+    // Gatra Data — Donor Segmentation Automation
+    'cs.gatra.title': { en: 'Donor Segmentation & Reporting Automation', id: 'Otomasi Segmentasi & Pelaporan Donatur' },
+    'cs.gatra.summary': {
+        en: 'Automated donor segmentation and a self-service reporting dashboard in Google Apps Script for a 16,000+ row donation dataset. Client and donor data are confidential — this page describes the system, not the underlying data.',
+        id: 'Otomasi segmentasi donatur dan dashboard pelaporan self-service dengan Google Apps Script untuk dataset donasi 16.000+ baris. Data klien dan donatur bersifat rahasia — halaman ini menjelaskan sistemnya, bukan data mentahnya.'
+    },
+    'cs.gatra.whyBuilt': {
+        en: 'Placed with Gatra Data, a data-analytics partner, as part of the APIKpreneur on-the-job-training program. The client needed donor activity turned into segments a non-technical team could act on, without paying for a BI tool.',
+        id: 'Ditempatkan di Gatra Data, mitra data analytics, sebagai bagian program OJT APIKpreneur. Klien butuh aktivitas donatur diubah jadi segmen yang bisa langsung ditindaklanjuti tim non-teknis, tanpa perlu bayar tool BI.'
+    },
+    'cs.gatra.goal': {
+        en: 'Turn a 16,000+ row raw transaction sheet into an always-up-to-date donor segmentation and a dashboard non-technical teammates and the mentor could read without touching the underlying data.',
+        id: 'Mengubah sheet transaksi mentah 16.000+ baris jadi segmentasi donatur yang selalu ter-update dan dashboard yang bisa dibaca tim non-teknis serta mentor tanpa perlu menyentuh data mentahnya.'
+    },
+    'cs.gatra.role': { en: 'Data Analyst (OJT)', id: 'Data Analyst (OJT)' },
+    'cs.gatra.period': { en: 'Aug 2026 – Present', id: 'Agu 2026 – Sekarang' },
+    'cs.gatra.type': { en: 'Client engagement (scholarship OJT placement)', id: 'Kerjaan klien (penempatan OJT beasiswa)' },
+    'cs.gatra.arch': { en: 'Google Apps Script, Google Sheets', id: 'Google Apps Script, Google Sheets' },
+    'cs.gatra.step0': {
+        en: 'Hierarchical RFM-style segmentation (Potential/Loyal/Active/New/Passive) plus a sub-level engagement-health status, recalculated in one batched read/write pass instead of per-row calls',
+        id: 'Segmentasi hierarkis ala RFM (Potensial/Loyal/Aktif/Baru/Pasif) plus sub-status kesehatan keaktifan, dihitung ulang dalam satu batch read/write, bukan per baris'
+    },
+    'cs.gatra.step1': {
+        en: 'Self-service Dashboard sheet — global favorite-program ranking plus a cumulative month-over-month segment growth table',
+        id: 'Sheet Dashboard self-service — ranking program favorit global plus tabel pertumbuhan segmen kumulatif per bulan'
+    },
+    'cs.gatra.step2': {
+        en: 'Daily time-driven trigger automating the whole pipeline, replacing manual reruns',
+        id: 'Time-driven trigger harian yang mengotomasi seluruh pipeline, menggantikan rerun manual'
+    },
+    'cs.gatra.step3': {
+        en: 'Resolved ambiguous requirements (multi-label vs. hierarchy, monthly snapshot vs. overwrite) directly with stakeholders before finalizing the logic',
+        id: 'Menyelesaikan requirement ambigu (multi-label vs hierarki, snapshot bulanan vs nimpa data) langsung sama stakeholder sebelum logic-nya difinalkan'
+    },
+    'cs.gatra.techNote': {
+        en: 'Donor names, contact details, and the underlying spreadsheet are confidential — screenshots on this page (once added) will show the segmentation logic and dashboard structure with all donor-identifying data redacted.',
+        id: 'Nama donatur, kontak, dan spreadsheet mentahnya bersifat rahasia — screenshot di halaman ini (kalau sudah ditambahkan) akan menampilkan logic segmentasi dan struktur dashboard dengan semua data identitas donatur disensor.'
     },
 
     // SIM Casting JBTB
