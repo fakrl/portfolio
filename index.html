@@ -341,20 +341,7 @@
     body.light .hero-profile-status { border: 3px solid #f1f1ef; }
     body.dark  .hero-profile-status { border: 3px solid #161616; }
 
-    .hero-verified-badge {
-        position: absolute;
-        top: 2px;
-        right: 2px;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2;
-    }
-    body.light .hero-verified-badge { background: #fff; border: 3px solid #f1f1ef; }
-    body.dark  .hero-verified-badge { background: #0c0c0c; border: 3px solid #161616; }
+    .hero-profile-name .hero-verified { vertical-align: middle; margin-left: 3px; }
 
     .hero-profile-name {
         font-size: 1.18rem;
@@ -1857,14 +1844,11 @@
                         </div>
                     </div>
                     <span class="hero-profile-status" title="Online"></span>
-                    <span class="hero-verified-badge" title="Available for hire">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="#3b9eff"><path d="M12 1l2.39 2.42 3.34-.73.7 3.36 3.36.7-.73 3.34L23 12l-2.34 2.41.73 3.34-3.36.7-.7 3.36-3.34-.73L12 23l-2.39-2.42-3.34.73-.7-3.36-3.36-.7.73-3.34L1 12l2.34-2.41-.73-3.34 3.36-.7.7-3.36 3.34.73L12 1zm-1.2 14.6l6.1-6.1-1.4-1.42-4.7 4.7-2.1-2.1-1.4 1.42 3.5 3.5z"/></svg>
-                    </span>
                 </div>
 
                 <div class="hero-photo-dots" id="heroDots"></div>
 
-                <h3 class="hero-profile-name">Fakhrul Mukhlisin</h3>
+                <h3 class="hero-profile-name">Fakhrul Mukhlisin <svg class="hero-verified" width="0.62em" height="0.62em" viewBox="0 0 24 24" fill="#3b9eff" title="Available for hire"><path d="M12 1l2.39 2.42 3.34-.73.7 3.36 3.36.7-.73 3.34L23 12l-2.34 2.41.73 3.34-3.36.7-.7 3.36-3.34-.73L12 23l-2.39-2.42-3.34.73-.7-3.36-3.36-.7.73-3.34L1 12l2.34-2.41-.73-3.34 3.36-.7.7-3.36 3.34.73L12 1zm-1.2 14.6l6.1-6.1-1.4-1.42-4.7 4.7-2.1-2.1-1.4 1.42 3.5 3.5z"/></svg></h3>
                 <p class="hero-profile-handle">@fak.rl</p>
                 <p class="hero-profile-role-tag" data-i18n="hero.roleTag">Full Stack Developer</p>
 
@@ -1901,7 +1885,7 @@
                 <h1 class="hero-name">Fakhrul<br>Mukhlisin</h1>
                 <p class="hero-role" data-i18n="hero.roleLine">Full Stack · Laravel · Vue.js · Golang</p>
                 <p class="hero-bio" data-i18n-html="hero.bio">
-                    Full Stack Developer building a T-shaped range — currently a Data Analyst (OJT) at APIKpreneur, Bakti Pemuda Foundation, after shipping 20+ pull requests to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital. Before that: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>
+                    Full Stack Developer currently shipping features to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital — 20+ pull requests merged to production. Previously: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>
                 </p>
                 <div class="hero-cta-group">
                     <a href="#contact" class="btn btn-primary" data-i18n="hero.getInTouch">Get In Touch</a>
