@@ -356,6 +356,14 @@ const I18N = {
     'cert.ukbi.tag': { en: 'Language Certification', id: 'Sertifikasi Bahasa' },
 
     // ── Project cards ──
+    'proj.nobilive.date': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
+    'proj.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
+    'proj.nobilive.desc': {
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS, stream scheduling, and live chat moderation. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis — studio CMS berbasis role, penjadwalan siaran, dan moderasi live chat. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
+    },
+    'proj.nobilive.credential': { en: 'Pre-launch product · shown with mentor permission', id: 'Produk belum rilis · ditampilkan dengan izin mentor' },
+
     'proj.nobel.date': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
     'proj.nobel.title': { en: 'Nobel Akademi — Bootcamp Module', id: 'Nobel Akademi — Modul Bootcamp' },
     'proj.nobel.screenshotSoon': { en: 'Screenshot coming soon', id: 'Screenshot menyusul' },
