@@ -18,15 +18,19 @@ const TEMPLATE_PATH = path.join(ROOT, "templates", "case-study.template.html");
 const data = JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
 const template = fs.readFileSync(TEMPLATE_PATH, "utf8");
 
-// project id -> output folder slug (clean URL, e.g. /evermos/ not /project/?id=proj-evermos)
+// project id -> output folder slug (clean URL, e.g. /project/evermos/ not /project/?id=proj-evermos)
+// All project case studies live under /project/<slug>/. Experience-hub pages
+// (/experience/<company>/) are separate, hand-authored pages that link INTO these.
 const SLUGS = {
-  "proj-jbtb-casting": "casting-jbtb",
-  "proj-evermos": "evermos",
-  "proj-core-initiative": "core-initiative",
-  "proj-nobel": "nobel-akademi",
-  "proj-cms": "cms-project",
-  "proj-ypkb": "ypkb",
-  "proj-groomy": "groomy",
+  "proj-jbtb-casting": "project/casting-jbtb",
+  "proj-evermos": "project/evermos",
+  "proj-core-initiative": "project/core-initiative",
+  "proj-nobel": "project/nobel-akademi",
+  "proj-cms": "project/cms-project",
+  "proj-ypkb": "project/ypkb",
+  "proj-groomy": "project/groomy",
+  "proj-nobilive": "project/nobilive",
+  "proj-gatra": "project/gatra-data",
 };
 
 // project id -> i18n key namespace (short, stable — used as "cs.<ns>.field" keys in
@@ -39,6 +43,8 @@ const NS = {
   "proj-cms": "cms",
   "proj-ypkb": "ypkb",
   "proj-groomy": "groomy",
+  "proj-nobilive": "nobilive",
+  "proj-gatra": "gatra",
 };
 
 function esc(str) {

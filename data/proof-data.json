@@ -331,8 +331,8 @@
       "link-label": "Visit Site",
       "badge": "Laravel 11",
       "badgeTone": "purple",
-      "date": "Jun – Aug 2026",
-      "issuer": "PT Indotech Digital Group — Full Stack Internship",
+      "date": "Jun 2026 – Present",
+      "issuer": "PT Indotech Digital Group — Full Stack Engineer",
       "desc": "End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.",
       "tags": [
         "Laravel 11",
@@ -344,7 +344,7 @@
       "caseStudy": {
         "whyBuilt": "This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital — a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.",
         "goal": "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.",
-        "overview": { "role": "Full Stack Developer (feature team)", "period": "Jun – Aug 2026", "type": "Production feature work (internship)", "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations" },
+        "overview": { "role": "Full Stack Engineer (feature team)", "period": "Jun 2026 – Present", "type": "Production feature work (internship)", "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations" },
         "whatItDoes": [
           "Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations",
           "Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries",
@@ -602,6 +602,65 @@
           { "icon": "widgets", "title": "Component Library", "desc": "Reusable components kept the design consistent across screens instead of one-off layouts per screen.", "images": ["../image/proj-groomy-3.webp"] }
         ],
         "techNote": "Built as a component library first, screens second — every button, card, and input state was a reusable component before a single full screen was assembled, which is what made the prototype's interactions consistent instead of each screen behaving slightly differently."
+      }
+    },
+    {
+      "id": "proj-nobilive",
+      "featured": false,
+      "title": "NobiPlay — Live Streaming Module",
+      "images": [],
+      "badge": "Laravel 13",
+      "badgeTone": "purple",
+      "date": "Jul 2026 – Present",
+      "issuer": "PT Indotech Digital Group — Full Stack Engineer",
+      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS, stream scheduling, and live chat moderation. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
+      "tags": [
+        "Laravel 13",
+        "RBAC",
+        "Live Chat Moderation",
+        "Studio CMS"
+      ],
+      "caseStudy": {
+        "whyBuilt": "A second product line at PT Indotech Digital Group alongside Nobel Akademi — feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.",
+        "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, plus a first pass at chat moderation so live sessions stay safe by default.",
+        "overview": { "role": "Full Stack Engineer (feature team)", "period": "Jul 2026 – Present", "type": "Production feature work (internship)", "architecture": "Laravel 13, role-based access control" },
+        "whatItDoes": [
+          "Role-based Studio CMS for hosts and admins",
+          "Stream scheduling consolidated into a single Live Studio flow",
+          "Foundational live chat moderation — automatic word filtering plus per-stream account blocking"
+        ],
+        "screens": [],
+        "techNote": "The product is pre-launch and under NDA — this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live."
+      }
+    },
+    {
+      "id": "proj-gatra",
+      "featured": false,
+      "title": "Donor Segmentation & Reporting Automation",
+      "images": [],
+      "badge": "Google Apps Script",
+      "badgeTone": "blue",
+      "date": "Aug 2026 – Present",
+      "issuer": "Gatra Data — Data Analyst (OJT via APIKpreneur)",
+      "desc": "Automated donor segmentation and a self-service reporting dashboard in Google Apps Script for a 16,000+ row donation dataset. Client and donor data are confidential — this page describes the system, not the underlying data.",
+      "tags": [
+        "Google Apps Script",
+        "Data Segmentation",
+        "Automation",
+        "Dashboard Reporting"
+      ],
+      "caseStudy": {
+        "whyBuilt": "Placed with Gatra Data, a data-analytics partner, as part of the APIKpreneur on-the-job-training program. The client needed donor activity turned into a segment a non-technical team could act on, without paying for a BI tool.",
+        "goal": "Turn a 16,000+ row raw transaction sheet into an always-up-to-date donor segmentation and a dashboard non-technical teammates and the mentor could read without touching the underlying data.",
+        "overview": { "role": "Data Analyst (OJT)", "period": "Aug 2026 – Present", "type": "Client engagement (scholarship OJT placement)", "architecture": "Google Apps Script, Google Sheets" },
+        "whatItDoes": [
+          "Hierarchical RFM-style segmentation (Potential/Loyal/Active/New/Passive) plus a sub-level engagement-health status, recalculated in one batched read/write pass instead of per-row calls",
+          "Self-service Dashboard sheet — global favorite-program ranking plus a cumulative month-over-month segment growth table",
+          "Daily time-driven trigger automating the whole pipeline, replacing manual reruns",
+          "Resolved ambiguous requirements (multi-label vs. hierarchy, monthly snapshot vs. overwrite) directly with stakeholders before finalizing the logic"
+        ],
+        "screens": [],
+        "techNote": "Donor names, contact details, and the underlying spreadsheet are confidential — screenshots on this page (once added) will show the segmentation logic and dashboard structure with all donor-identifying data redacted."
       }
     }
   ]

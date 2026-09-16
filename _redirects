@@ -6,5 +6,22 @@
 /moments    /moments/index.html 200
 /moments/   /moments/index.html 200
 
+# 16 Sep 2026 — case studies moved under /project/<slug>/
+# 301s so links already shared (LinkedIn, Rakamin, Glints, CV) don't 404.
+/evermos/*          /project/evermos/:splat            301
+/evermos            /project/evermos/                  301
+/core-initiative/*  /project/core-initiative/:splat    301
+/core-initiative    /project/core-initiative/          301
+/nobel-akademi/*    /project/nobel-akademi/:splat      301
+/nobel-akademi      /project/nobel-akademi/            301
+/casting-jbtb/*     /project/casting-jbtb/:splat       301
+/casting-jbtb       /project/casting-jbtb/             301
+/cms-project/*      /project/cms-project/:splat        301
+/cms-project        /project/cms-project/              301
+/ypkb/*             /project/ypkb/:splat               301
+/ypkb               /project/ypkb/                     301
+/groomy/*           /project/groomy/:splat             301
+/groomy             /project/groomy/                   301
+
 # Catch-all SPA fallback (opsional, aktifkan kalau ada 404 lain)
 # /*    /index.html   200
