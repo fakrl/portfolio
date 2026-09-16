@@ -45,6 +45,15 @@
         body.dark  .cs-section-title { color: #666; }
         .exp-hub-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.4rem; }
         @media (min-width: 640px) { .exp-hub-grid { grid-template-columns: 1fr 1fr; } }
+        .hub-proj-card { display: block; text-decoration: none; overflow: hidden; border-radius: inherit; transition: transform 0.2s ease; }
+        .hub-proj-card:hover { transform: translateY(-3px); }
+        .hub-proj-media { aspect-ratio: 16/10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 600; }
+        .hub-proj-media .msym { font-size: 2rem; opacity: 0.45; }
+        body.light .hub-proj-media { background: rgba(0,0,0,0.04); color: #999; }
+        body.dark  .hub-proj-media { background: rgba(255,255,255,0.06); color: #888; }
+        .hub-proj-name { padding: 0.9rem 1.1rem; font-size: 0.92rem; font-weight: 700; line-height: 1.4; }
+        body.light .hub-proj-name { color: var(--text-primary-light); }
+        body.dark  .hub-proj-name { color: var(--text-primary-dark); }
         .cs-cta { text-align: center; padding: 2.2rem 1.6rem; margin-top: 1rem; }
         .cs-cta p { margin-bottom: 1rem; font-size: 0.92rem; }
     </style>
@@ -95,41 +104,19 @@
 
         <h2 class="cs-section-title" data-i18n="exp.hub.projectsTitle">Projects I Worked On</h2>
         <div class="exp-hub-grid">
-            <a href="/project/nobel-akademi/" class="work-card glass-card">
-                <div class="work-card-media work-card-media--placeholder">
-                    <i class="devicon-laravel-plain"></i>
+            <a href="/project/nobel-akademi/" class="hub-proj-card glass-card">
+                <div class="hub-proj-media">
+                    <span class="msym">image</span>
                     <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
-                    <span class="work-card-tag">Laravel 11</span>
                 </div>
-                <div class="work-card-body">
-                    <div>
-                        <h3 class="work-card-title" data-i18n="cs.nobel.title">Nobel Akademi — Bootcamp Module</h3>
-                        <p class="work-card-sub" data-i18n="exp.hub.productionLms">Production LMS</p>
-                    </div>
-                    <p class="work-card-desc" data-i18n="cs.nobel.summary">End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages.</p>
-                    <div class="work-card-foot">
-                        <div class="work-card-tech"><i class="devicon-laravel-plain colored" title="Laravel"></i></div>
-                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
-                    </div>
-                </div>
+                <p class="hub-proj-name" data-i18n="cs.nobel.title">Nobel Akademi — Bootcamp Module</p>
             </a>
-            <a href="/project/nobilive/" class="work-card glass-card">
-                <div class="work-card-media work-card-media--placeholder">
-                    <i class="devicon-laravel-plain"></i>
+            <a href="/project/nobilive/" class="hub-proj-card glass-card">
+                <div class="hub-proj-media">
+                    <span class="msym">image</span>
                     <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
-                    <span class="work-card-tag">Laravel 13</span>
                 </div>
-                <div class="work-card-body">
-                    <div>
-                        <h3 class="work-card-title" data-i18n="cs.nobilive.title">NobiPlay — Live Streaming Module</h3>
-                        <p class="work-card-sub" data-i18n="exp.hub.preLaunch">Pre-launch product</p>
-                    </div>
-                    <p class="work-card-desc" data-i18n="cs.nobilive.summary">Feature work on the live-streaming module of NobiPlay — role-based studio CMS, stream scheduling, and live chat moderation.</p>
-                    <div class="work-card-foot">
-                        <div class="work-card-tech"><i class="devicon-laravel-plain colored" title="Laravel"></i></div>
-                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
-                    </div>
-                </div>
+                <p class="hub-proj-name" data-i18n="cs.nobilive.title">NobiPlay — Live Streaming Module</p>
             </a>
         </div>
 

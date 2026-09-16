@@ -45,6 +45,15 @@
         body.dark  .cs-section-title { color: #666; }
         .exp-hub-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.4rem; }
         @media (min-width: 640px) { .exp-hub-grid { grid-template-columns: 1fr 1fr; } }
+        .hub-proj-card { display: block; text-decoration: none; overflow: hidden; border-radius: inherit; transition: transform 0.2s ease; }
+        .hub-proj-card:hover { transform: translateY(-3px); }
+        .hub-proj-media { aspect-ratio: 16/10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 600; }
+        .hub-proj-media .msym { font-size: 2rem; opacity: 0.45; }
+        body.light .hub-proj-media { background: rgba(0,0,0,0.04); color: #999; }
+        body.dark  .hub-proj-media { background: rgba(255,255,255,0.06); color: #888; }
+        .hub-proj-name { padding: 0.9rem 1.1rem; font-size: 0.92rem; font-weight: 700; line-height: 1.4; }
+        body.light .hub-proj-name { color: var(--text-primary-light); }
+        body.dark  .hub-proj-name { color: var(--text-primary-dark); }
         .cs-cta { text-align: center; padding: 2.2rem 1.6rem; margin-top: 1rem; }
         .cs-cta p { margin-bottom: 1rem; font-size: 0.92rem; }
     </style>
@@ -95,23 +104,12 @@
 
         <h2 class="cs-section-title" data-i18n="exp.hub.projectsTitle">Projects I Worked On</h2>
         <div class="exp-hub-grid">
-            <a href="/project/gatra-data/" class="work-card glass-card">
-                <div class="work-card-media work-card-media--placeholder">
-                    <i class="msym" style="font-size:2.2rem;">bar_chart</i>
+            <a href="/project/gatra-data/" class="hub-proj-card glass-card">
+                <div class="hub-proj-media">
+                    <span class="msym">image</span>
                     <span data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
-                    <span class="work-card-tag">Apps Script</span>
                 </div>
-                <div class="work-card-body">
-                    <div>
-                        <h3 class="work-card-title" data-i18n="cs.gatra.title">Donor Segmentation & Reporting Automation</h3>
-                        <p class="work-card-sub" data-i18n="exp.hub.currentPlacement">Current Placement — Gatra Data</p>
-                    </div>
-                    <p class="work-card-desc" data-i18n="cs.gatra.summary">Automated donor segmentation and a self-service reporting dashboard in Google Apps Script for a 16,000+ row donation dataset.</p>
-                    <div class="work-card-foot">
-                        <div class="work-card-tech"><i class="msym" style="font-size:1.1em;">bar_chart</i></div>
-                        <span class="work-card-link" data-i18n="work.readCaseStudy">Read case study →</span>
-                    </div>
-                </div>
+                <p class="hub-proj-name" data-i18n="cs.gatra.title">Donor Segmentation & Reporting Automation</p>
             </a>
         </div>
 
