@@ -325,7 +325,7 @@
     {
       "id": "proj-nobel",
       "featured": true,
-      "title": "Nobel Akademi — Bootcamp Module",
+      "title": "Nobel Akademi",
       "images": [],
       "link": "https://nobelakademi.id",
       "link-label": "Visit Site",
@@ -613,21 +613,19 @@
       "badgeTone": "purple",
       "date": "Jul 2026 – Present",
       "issuer": "PT Indotech Digital Group — Full Stack Engineer",
-      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS, stream scheduling, and live chat moderation. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
+      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS and stream scheduling. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
       "tags": [
         "Laravel 13",
         "RBAC",
-        "Live Chat Moderation",
         "Studio CMS"
       ],
       "caseStudy": {
         "whyBuilt": "A second product line at PT Indotech Digital Group alongside Nobel Akademi — feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.",
-        "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, plus a first pass at chat moderation so live sessions stay safe by default.",
+        "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules.",
         "overview": { "role": "Full Stack Engineer (feature team)", "period": "Jul 2026 – Present", "type": "Production feature work (internship)", "architecture": "Laravel 13, role-based access control" },
         "whatItDoes": [
           "Role-based Studio CMS for hosts and admins",
-          "Stream scheduling consolidated into a single Live Studio flow",
-          "Foundational live chat moderation — automatic word filtering plus per-stream account blocking"
+          "Stream scheduling consolidated into a single Live Studio flow"
         ],
         "screens": [],
         "techNote": "The product is pre-launch and under NDA — this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live."
