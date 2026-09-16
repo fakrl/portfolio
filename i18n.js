@@ -27,8 +27,8 @@ const I18N = {
     'hero.downloadCv': { en: 'Download CV', id: 'Unduh CV' },
     'hero.getInTouch': { en: 'Get In Touch', id: 'Hubungi Saya' },
     'hero.bio': {
-        en: 'Full Stack Developer currently shipping features to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital — 20+ pull requests merged to production — and building a 7-role casting &amp; talent management system in Laravel as my final year project. Previously: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>',
-        id: 'Full Stack Developer yang saat ini ngerjain fitur-fitur di LMS yang sudah live dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> di PT Indotech Digital — 20+ pull request udah merge ke production — sambil bangun sistem casting &amp; talent management 7-role dengan Laravel buat tugas akhir. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.70. <strong>Tersedia sekarang untuk peluang full-time.</strong>'
+        en: 'Full Stack Developer currently shipping features to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital, with 20+ pull requests merged to production, while also building a 7-role casting &amp; talent management system in Laravel as my final year project. Previously: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>',
+        id: 'Full Stack Developer yang saat ini ngerjain fitur-fitur di LMS yang sudah live dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> di PT Indotech Digital, dengan 20+ pull request udah merge ke production, sambil bangun sistem casting &amp; talent management 7-role dengan Laravel buat tugas akhir. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.70. <strong>Tersedia sekarang untuk peluang full-time.</strong>'
     },
 
     // ── Experience ──
@@ -39,24 +39,24 @@ const I18N = {
     'exp.apik.role': { en: 'Data Analyst (OJT)', id: 'Data Analyst (OJT)' },
     'exp.apik.meta': { en: 'Aug 2026 – Present', id: 'Agu 2026 – Sekarang' },
     'exp.apik.bullet1': {
-        en: 'Scholarship-funded on-the-job training program — rotates every ~3 months across Bakti Pemuda Foundation\'s affiliated partner organizations; currently placed with <strong>Gatra Data</strong>, a data-analytics partner.',
-        id: 'Program OJT beasiswa — rotasi tiap ~3 bulan ke organisasi mitra yang terafiliasi Bakti Pemuda Foundation; saat ini ditempatkan di <strong>Gatra Data</strong>, mitra data analytics.'
+        en: 'Scholarship-funded on-the-job training program, rotating every ~3 months across Bakti Pemuda Foundation\'s affiliated partner organizations; currently placed with <strong>Gatra Data</strong>, a data-analytics partner.',
+        id: 'Program OJT beasiswa, rotasi tiap ~3 bulan ke organisasi mitra yang terafiliasi Bakti Pemuda Foundation; saat ini ditempatkan di <strong>Gatra Data</strong>, mitra data analytics.'
     },
     'exp.apik.bullet2': {
-        en: 'Built an automated donor segmentation engine in Google Apps Script for a 16,000+ row transaction sheet — hierarchical RFM-style logic (Potential/Loyal/Active/New/Passive) plus a sub-level engagement-health status, recalculated in one batched read/write pass instead of per-row calls. Resolved an ambiguous multi-label-vs-hierarchy requirement directly with stakeholders before finalizing the logic.',
-        id: 'Membangun mesin segmentasi donatur otomatis dengan Google Apps Script untuk sheet transaksi 16.000+ baris — logic hierarkis ala RFM (Potensial/Loyal/Aktif/Baru/Pasif) plus sub-status kesehatan keaktifan, dihitung ulang dalam satu batch read/write, bukan per baris. Menyelesaikan ambiguitas requirement multi-label vs hierarki langsung sama stakeholder sebelum logic-nya difinalkan.'
+        en: 'Built an automated donor segmentation engine and self-service dashboard in Google Apps Script for a 16,000+ row dataset, fully automated with zero manual reruns.',
+        id: 'Membangun mesin segmentasi donatur otomatis dan dashboard self-service dengan Google Apps Script untuk dataset 16.000+ baris, sepenuhnya otomatis tanpa rerun manual.'
     },
     'exp.apik.bullet3': {
-        en: 'Designed a self-service Dashboard sheet — global favorite-program ranking plus a cumulative month-over-month segment growth table — so non-technical teammates and the mentor could read trends without touching the underlying data.',
-        id: 'Mendesain sheet Dashboard self-service — ranking program favorit secara global plus tabel pertumbuhan segmen kumulatif per bulan — biar tim & mentor yang nggak teknis bisa baca tren tanpa nyentuh data mentahnya.'
+        en: 'Designed a self-service Dashboard sheet, with a global favorite-program ranking plus a cumulative month-over-month segment growth table, so non-technical teammates and the mentor could read trends without touching the underlying data.',
+        id: 'Mendesain sheet Dashboard self-service, dengan ranking program favorit secara global plus tabel pertumbuhan segmen kumulatif per bulan, biar tim & mentor yang nggak teknis bisa baca tren tanpa nyentuh data mentahnya.'
     },
     'exp.apik.bullet4': {
-        en: 'Automated the whole pipeline with a daily time-driven trigger, replacing manual reruns — including debugging a getUi() execution-context error along the way.',
-        id: 'Mengotomasi seluruh pipeline-nya dengan daily time-driven trigger, gantiin rerun manual — termasuk debug error konteks eksekusi getUi() di tengah jalan.'
+        en: 'Automated the whole pipeline with a daily time-driven trigger, replacing manual reruns, including debugging a getUi() execution-context error along the way.',
+        id: 'Mengotomasi seluruh pipeline-nya dengan daily time-driven trigger, gantiin rerun manual, termasuk debug error konteks eksekusi getUi() di tengah jalan.'
     },
     'exp.apik.hub.summary': {
-        en: 'APIKpreneur (Bakti Pemuda Foundation) is a scholarship-funded on-the-job training program — it rotates recipients across affiliated partner organizations roughly every 3 months rather than placing them permanently at one company. The card below is my current placement.',
-        id: 'APIKpreneur (Bakti Pemuda Foundation) adalah program OJT berbasis beasiswa — penerimanya dirotasi ke organisasi mitra terafiliasi kira-kira tiap 3 bulan, bukan ditempatkan permanen di satu perusahaan. Card di bawah ini penempatan saya saat ini.'
+        en: 'APIKpreneur (Bakti Pemuda Foundation) is a scholarship-funded on-the-job training program. It rotates recipients across affiliated partner organizations roughly every 3 months rather than placing them permanently at one company. The card below is my current placement.',
+        id: 'APIKpreneur (Bakti Pemuda Foundation) adalah program OJT berbasis beasiswa. Penerimanya dirotasi ke organisasi mitra terafiliasi kira-kira tiap 3 bulan, bukan ditempatkan permanen di satu perusahaan. Card di bawah ini penempatan saya saat ini.'
     },
 
     // Experience hub pages (/experience/<slug>/) — shared strings
@@ -79,34 +79,34 @@ const I18N = {
     'exp.indotech.role': { en: 'Full Stack Engineer', id: 'Full Stack Engineer' },
     'exp.indotech.meta': { en: 'Jun 2026 – Present · Jakarta (Hybrid)', id: 'Jun 2026 – Sekarang · Jakarta (Hybrid)' },
     'exp.indotech.bullet1': {
-        en: 'Shipping features to a live LMS in Laravel 11 — <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.',
-        id: 'Merilis fitur ke LMS yang sudah live dengan Laravel 11 — <strong>20+ pull request sudah merge ke production</strong> lewat alur review dev → staging → main.'
+        en: 'Shipping features to a live LMS in Laravel 11, with <strong>20+ pull requests merged to production</strong> through a dev → staging → main review flow.',
+        id: 'Merilis fitur ke LMS yang sudah live dengan Laravel 11, dengan <strong>20+ pull request sudah merge ke production</strong> lewat alur review dev → staging → main.'
     },
     'exp.indotech.bullet2': {
-        en: 'Built the Bootcamp module end-to-end: normalized data model (6 related tables), backend, admin CMS, and public pages — with eager-loaded Eloquent relations to avoid N+1 queries.',
-        id: 'Membangun modul Bootcamp end-to-end: data model ternormalisasi (6 tabel terkait), backend, admin CMS, dan halaman publik — dengan eager-loaded Eloquent relations untuk menghindari N+1 queries.'
+        en: "Two product lines shipped: Nobel Akademi's Bootcamp module end-to-end, and a feature slice of NobiPlay's live-streaming platform.",
+        id: 'Dua lini produk yang dikerjakan: modul Bootcamp Nobel Akademi end-to-end, dan sebagian fitur platform live-streaming NobiPlay.'
     },
     'exp.indotech.bullet3': {
         en: 'Delivered the Webinar module (registration flow, Mailable confirmation emails) plus e-portfolio, certification, and corporate pages.',
         id: 'Merilis modul Webinar (alur pendaftaran, email konfirmasi via Mailable) plus halaman e-portfolio, sertifikasi, dan korporat.'
     },
     'exp.indotech.bullet4': {
-        en: "Debugged a production outage down to root cause: a corrupted vendor asset was silently halting JavaScript execution — fixed it and hardened the page so one failing library can't break unrelated features.",
-        id: 'Melacak root cause sebuah production outage: vendor asset yang corrupt diam-diam menghentikan eksekusi JavaScript — diperbaiki dan halamannya diperkuat supaya satu library yang gagal nggak bisa merusak fitur lain.'
+        en: "Debugged a production outage down to root cause: a corrupted vendor asset was silently halting JavaScript execution. Fixed it and hardened the page so one failing library can't break unrelated features.",
+        id: 'Melacak root cause sebuah production outage: vendor asset yang corrupt diam-diam menghentikan eksekusi JavaScript. Diperbaiki dan halamannya diperkuat supaya satu library yang gagal nggak bisa merusak fitur lain.'
     },
 
     'exp.evermos.role': { en: 'Backend Developer Intern', id: 'Magang Backend Developer' },
     'exp.evermos.meta': { en: 'Dec 2025 · Remote', id: 'Des 2025 · Remote' },
     'exp.evermos.desc': {
-        en: 'Full marketplace REST API in Golang — Gin, MySQL, JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.',
-        id: 'REST API marketplace lengkap dengan Golang — Gin, MySQL, JWT. 7 modul, clean architecture, atomic transactions. Skor: Excellent.'
+        en: 'Full marketplace REST API in Golang, using Gin, MySQL, and JWT. 7 modules, clean architecture, atomic transactions. Score: Excellent.',
+        id: 'REST API marketplace lengkap dengan Golang, pakai Gin, MySQL, dan JWT. 7 modul, clean architecture, atomic transactions. Skor: Excellent.'
     },
 
     'exp.core.role': { en: 'Frontend Developer Intern', id: 'Magang Frontend Developer' },
     'exp.core.meta': { en: 'Oct – Nov 2025 · Remote', id: 'Okt – Nov 2025 · Remote' },
     'exp.core.desc': {
-        en: 'E-commerce catalog in Vue.js 2 — 3 dynamic UI themes, pixel-perfect Figma, CI/CD to Firebase. Score: Excellent.',
-        id: 'Katalog e-commerce dengan Vue.js 2 — 3 tema UI dinamis, Figma pixel-perfect, CI/CD ke Firebase. Skor: Excellent.'
+        en: 'E-commerce catalog in Vue.js 2 with 3 dynamic UI themes, pixel-perfect Figma, and CI/CD to Firebase. Score: Excellent.',
+        id: 'Katalog e-commerce dengan Vue.js 2, 3 tema UI dinamis, Figma pixel-perfect, dan CI/CD ke Firebase. Skor: Excellent.'
     },
 
     'exp.yandex.role': { en: 'Machine Learning Program', id: 'Program Machine Learning' },
@@ -118,8 +118,8 @@ const I18N = {
 
     'exp.lka.role': { en: 'Data Management Intern', id: 'Magang Manajemen Data' },
     'exp.lka.desc': {
-        en: 'Digitized 500+ records, built JS automation to archive 1,000+ files — eliminated manual processing.',
-        id: 'Mendigitalkan 500+ arsip, membangun otomatisasi JS untuk mengarsipkan 1.000+ file — menghilangkan proses manual.'
+        en: 'Digitized 500+ records and built JS automation to archive 1,000+ files, eliminating manual processing.',
+        id: 'Mendigitalkan 500+ arsip dan membangun otomatisasi JS untuk mengarsipkan 1.000+ file, menghilangkan proses manual.'
     },
 
     'exp.kesbang.role': { en: 'Computer Operator', id: 'Operator Komputer' },
@@ -133,27 +133,27 @@ const I18N = {
     'exp.fsj.role': { en: 'President', id: 'Ketua' },
     'exp.fsj.meta': { en: 'Oct 2021 – Nov 2022', id: 'Okt 2021 – Nov 2022' },
     'exp.fsj.desc': {
-        en: 'Led a 300+ member student journalism org — set editorial direction, organized 15+ events, and managed the internal team structure end to end.',
-        id: 'Memimpin organisasi jurnalistik mahasiswa 300+ anggota — nentuin arah editorial, ngatur 15+ acara, dan pegang struktur tim internal end-to-end.'
+        en: 'Led a 300+ member student journalism org: set editorial direction, organized 15+ events, and managed the internal team structure end to end.',
+        id: 'Memimpin organisasi jurnalistik mahasiswa 300+ anggota: nentuin arah editorial, ngatur 15+ acara, dan pegang struktur tim internal end-to-end.'
     },
     'exp.kesbang.desc': {
-        en: 'Handled day-to-day data entry and document digitization for a government office — encoding records into internal systems and keeping physical/digital archives in sync.',
-        id: 'Nanganin input data harian dan digitalisasi dokumen di kantor pemerintahan — encode data ke sistem internal dan jaga arsip fisik/digital tetap sinkron.'
+        en: 'Handled day-to-day data entry and document digitization for a government office, encoding records into internal systems and keeping physical/digital archives in sync.',
+        id: 'Nanganin input data harian dan digitalisasi dokumen di kantor pemerintahan, encode data ke sistem internal dan jaga arsip fisik/digital tetap sinkron.'
     },
 
     // ── GitHub Activity ──
     'ghActivity.title': { en: 'GitHub Activity', id: 'Aktivitas GitHub' },
     'ghActivity.loading': { en: 'Loading activity…', id: 'Memuat aktivitas…' },
     'ghActivity.captionSuffix': { en: 'contributions since Apr {year}', id: 'kontribusi sejak Apr {year}' },
-    'ghActivity.error': { en: "Couldn't load activity — view on GitHub →", id: 'Gagal memuat aktivitas — lihat di GitHub →' },
+    'ghActivity.error': { en: "Couldn't load activity. View on GitHub →", id: 'Gagal memuat aktivitas. Lihat di GitHub →' },
 
     // ── Featured Build ──
     'spotlight.eyebrow': { en: 'Featured Build', id: 'Karya Unggulan' },
     'spotlight.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
     'spotlight.jbtb.sub': { en: 'Full Stack Developer · Final Year Project (team of 3)', id: 'Full Stack Developer · Tugas Akhir (tim 3 orang)' },
     'spotlight.jbtb.desc': {
-        en: "A 7-role casting & talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows, end to end.",
-        id: 'Sistem manajemen casting & talent 7-role dengan Laravel 13 untuk agensi casting sungguhan, sebagai tugas akhir tim — saya yang pegang sistemnya: kontrak digital, PII terenkripsi, gateway notifikasi WhatsApp self-hosted, dan alur review berjenjang sesuai peran, end-to-end.'
+        en: "A 7-role casting & talent management system built in Laravel 13 for a real casting agency, built as a team final year project. I own the system: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows, end to end.",
+        id: 'Sistem manajemen casting & talent 7-role dengan Laravel 13 untuk agensi casting sungguhan, dibangun sebagai tugas akhir tim. Saya yang pegang sistemnya: kontrak digital, PII terenkripsi, gateway notifikasi WhatsApp self-hosted, dan alur review berjenjang sesuai peran, end-to-end.'
     },
     'extra.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'extra.nobel.sub': { en: 'Production LMS · PT Indotech Digital', id: 'LMS Production · PT Indotech Digital' },
@@ -179,21 +179,21 @@ const I18N = {
     'metric.teamSize': { en: 'Team Size', id: 'Jumlah Tim' },
 
     'work.nobel.desc': {
-        en: 'End-to-end Bootcamp module on a live LMS — data model, backend, admin CMS, and public pages, implemented from provided designs.',
-        id: 'Modul Bootcamp end-to-end di LMS yang sudah live — data model, backend, admin CMS, dan halaman publik, diimplementasikan dari desain yang udah disediakan.'
+        en: 'End-to-end Bootcamp module on a live LMS: data model, backend, admin CMS, and public pages, implemented from provided designs.',
+        id: 'Modul Bootcamp end-to-end di LMS yang sudah live: data model, backend, admin CMS, dan halaman publik, diimplementasikan dari desain yang udah disediakan.'
     },
     'work.nobiplay.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'work.nobiplay.sub': { en: 'PT Indotech Digital Group · Live Streaming Feature', id: 'PT Indotech Digital Group · Fitur Live Streaming' },
     'work.nobiplay.desc': {
-        en: "The live-streaming module I built for NobiPlay's platform — shown with my mentor's permission; the consumer app itself isn't publicly deployed yet.",
-        id: 'Modul live-streaming yang saya bangun untuk platform NobiPlay — ditampilkan dengan izin mentor saya; app consumer-nya sendiri belum di-deploy publik.'
+        en: "The live-streaming module I built for NobiPlay's platform, shown with my mentor's permission; the consumer app itself isn't publicly deployed yet.",
+        id: 'Modul live-streaming yang saya bangun untuk platform NobiPlay, ditampilkan dengan izin mentor saya; app consumer-nya sendiri belum di-deploy publik.'
     },
-    'work.nobiplay.comingSoon': { en: 'Coming soon — pending public URL', id: 'Segera hadir — nunggu URL publik' },
+    'work.nobiplay.comingSoon': { en: 'Coming soon, pending public URL', id: 'Segera hadir, nunggu URL publik' },
     'work.evermos.title': { en: 'Marketplace REST API', id: 'Marketplace REST API' },
     'work.evermos.sub': { en: 'Evermos · Backend', id: 'Evermos · Backend' },
     'work.evermos.desc': {
-        en: 'Full marketplace REST API in Golang with Gin, MySQL, and JWT auth — clean architecture and atomic transactions across 7 modules.',
-        id: 'REST API marketplace lengkap dengan Golang, Gin, MySQL, dan JWT auth — clean architecture dan atomic transactions di 7 modul.'
+        en: 'Full marketplace REST API in Golang with Gin, MySQL, and JWT auth: clean architecture and atomic transactions across 7 modules.',
+        id: 'REST API marketplace lengkap dengan Golang, Gin, MySQL, dan JWT auth: clean architecture dan atomic transactions di 7 modul.'
     },
 
     'work.core.title': { en: 'E-Commerce Catalog', id: 'Katalog E-Commerce' },
@@ -206,8 +206,8 @@ const I18N = {
     'work.groomy.title': { en: 'Groomy', id: 'Groomy' },
     'work.groomy.sub': { en: 'Mobile App · UI/UX Design', id: 'Aplikasi Mobile · Desain UI/UX' },
     'work.groomy.desc': {
-        en: 'Pet grooming mobile app concept — full UI/UX design and interactive Figma prototype, from wireframes to polished screens.',
-        id: 'Konsep aplikasi mobile pet grooming — desain UI/UX lengkap dan prototipe interaktif Figma, dari wireframe sampai layar jadi.'
+        en: 'Pet grooming mobile app concept: full UI/UX design and interactive Figma prototype, from wireframes to polished screens.',
+        id: 'Konsep aplikasi mobile pet grooming: desain UI/UX lengkap dan prototipe interaktif Figma, dari wireframe sampai layar jadi.'
     },
 
     // ── Skills ──
@@ -253,7 +253,7 @@ const I18N = {
 
     // ── Feedback ──
     'feedback.title': { en: 'Leave a Feedback', id: 'Tinggalkan Kesan' },
-    'feedback.desc': { en: 'Got something to say? Drop a message — shows up instantly.', id: 'Ada yang mau disampaikan? Tulis pesan — langsung muncul.' },
+    'feedback.desc': { en: 'Got something to say? Drop a message, it shows up instantly.', id: 'Ada yang mau disampaikan? Tulis pesan, langsung muncul.' },
     'feedback.namePh': { en: 'Your name', id: 'Nama kamu' },
     'feedback.fromPh': { en: 'From where do you know this guy?', id: 'Kenal dari mana sama orang ini?' },
     'feedback.messagePh': { en: 'Your message...', id: 'Pesan kamu...' },
@@ -294,22 +294,22 @@ const I18N = {
 
     'cert.evermos.title': { en: 'Backend Developer Intern', id: 'Magang Backend Developer' },
     'cert.evermos.desc': {
-        en: 'Built a production-grade marketplace REST API in Golang — 7 modules, clean architecture, JWT auth, multi-image upload, atomic transactions. Final score: <strong>90.91 / 100 (Excellent)</strong>.',
-        id: 'Membangun REST API marketplace kelas production dengan Golang — 7 modul, clean architecture, JWT auth, multi-image upload, atomic transactions. Skor akhir: <strong>90.91 / 100 (Excellent)</strong>.'
+        en: 'Built a production-grade marketplace REST API in Golang: 7 modules, clean architecture, JWT auth, multi-image upload, atomic transactions. Final score: <strong>90.91 / 100 (Excellent)</strong>.',
+        id: 'Membangun REST API marketplace kelas production dengan Golang: 7 modul, clean architecture, JWT auth, multi-image upload, atomic transactions. Skor akhir: <strong>90.91 / 100 (Excellent)</strong>.'
     },
     'cert.evermos.tag': { en: 'Internship Certificate', id: 'Sertifikat Magang' },
 
     'cert.core.title': { en: 'Frontend Developer Intern', id: 'Magang Frontend Developer' },
     'cert.core.desc': {
-        en: 'Delivered a pixel-perfect e-commerce catalog in Vue.js 2 — live REST API integration, 3 dynamic UI themes, Figma-to-code, deployed via GitLab CI/CD. Final score: <strong>87.79 / 100 (Excellent)</strong>.',
-        id: 'Merilis katalog e-commerce pixel-perfect dengan Vue.js 2 — integrasi REST API live, 3 tema UI dinamis, Figma-to-code, deploy lewat GitLab CI/CD. Skor akhir: <strong>87.79 / 100 (Excellent)</strong>.'
+        en: 'Delivered a pixel-perfect e-commerce catalog in Vue.js 2: live REST API integration, 3 dynamic UI themes, Figma-to-code, deployed via GitLab CI/CD. Final score: <strong>87.79 / 100 (Excellent)</strong>.',
+        id: 'Merilis katalog e-commerce pixel-perfect dengan Vue.js 2: integrasi REST API live, 3 tema UI dinamis, Figma-to-code, deploy lewat GitLab CI/CD. Skor akhir: <strong>87.79 / 100 (Excellent)</strong>.'
     },
     'cert.core.tag': { en: 'Internship Certificate', id: 'Sertifikat Magang' },
 
     'cert.huawei.title': { en: 'HCIA Cloud Service', id: 'HCIA Cloud Service' },
     'cert.huawei.desc': {
-        en: '40-hour cloud computing program — Huawei Cloud architecture, core services, and deployment fundamentals.',
-        id: 'Program cloud computing 40 jam — arsitektur Huawei Cloud, layanan inti, dan dasar-dasar deployment.'
+        en: '40-hour cloud computing program covering Huawei Cloud architecture, core services, and deployment fundamentals.',
+        id: 'Program cloud computing 40 jam yang mencakup arsitektur Huawei Cloud, layanan inti, dan dasar-dasar deployment.'
     },
     'cert.huawei.tag': { en: 'Cloud Computing', id: 'Cloud Computing' },
 
@@ -328,15 +328,15 @@ const I18N = {
     'cert.lka.tag': { en: 'Internship Certificate', id: 'Sertifikat Magang' },
 
     'cert.azure.desc': {
-        en: "Completed Microsoft's Azure AI training — machine learning concepts, cognitive services, and responsible AI principles.",
-        id: 'Menyelesaikan pelatihan Azure AI dari Microsoft — konsep machine learning, cognitive services, dan prinsip responsible AI.'
+        en: "Completed Microsoft's Azure AI training, covering machine learning concepts, cognitive services, and responsible AI principles.",
+        id: 'Menyelesaikan pelatihan Azure AI dari Microsoft, mencakup konsep machine learning, cognitive services, dan prinsip responsible AI.'
     },
     'cert.azure.tag': { en: 'Training Certificate', id: 'Sertifikat Pelatihan' },
 
     'cert.yandex.title': { en: 'Linear Models in Machine Learning', id: 'Linear Models in Machine Learning' },
     'cert.yandex.desc': {
-        en: '91-hour intensive program: linear regression, classification, and model evaluation. Closed with an in-class hackathon — <strong>ranked #5 out of 926 participants</strong>.',
-        id: 'Program intensif 91 jam: linear regression, klasifikasi, dan evaluasi model. Ditutup dengan hackathon internal — <strong>peringkat #5 dari 926 peserta</strong>.'
+        en: '91-hour intensive program: linear regression, classification, and model evaluation. Closed with an in-class hackathon, <strong>ranked #5 out of 926 participants</strong>.',
+        id: 'Program intensif 91 jam: linear regression, klasifikasi, dan evaluasi model. Ditutup dengan hackathon internal, <strong>peringkat #5 dari 926 peserta</strong>.'
     },
     'cert.yandex.tag': { en: 'Machine Learning', id: 'Machine Learning' },
     'cert.yandex.attempt': { en: '#5 / 926 · Yandex Hackathon', id: '#5 / 926 · Hackathon Yandex' },
@@ -359,8 +359,8 @@ const I18N = {
     'proj.nobilive.date': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
     'proj.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'proj.nobilive.desc': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis — studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis: studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
     },
     'proj.nobilive.credential': { en: 'Pre-launch product · shown with mentor permission', id: 'Produk belum rilis · ditampilkan dengan izin mentor' },
 
@@ -368,8 +368,8 @@ const I18N = {
     'proj.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'proj.nobel.screenshotSoon': { en: 'Screenshot coming soon', id: 'Screenshot menyusul' },
     'proj.nobel.desc': {
-        en: 'End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.',
-        id: 'Modul LMS bootcamp end-to-end dengan Laravel 11 — data model (6 tabel terkait), backend, admin CMS, dan halaman publik. Eager-loaded Eloquent relations (bebas N+1), slug routing, embed YouTube, dan sistem rating.'
+        en: 'End-to-end bootcamp LMS module in Laravel 11, covering the data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.',
+        id: 'Modul LMS bootcamp end-to-end dengan Laravel 11, mencakup data model (6 tabel terkait), backend, admin CMS, dan halaman publik. Eager-loaded Eloquent relations (bebas N+1), slug routing, embed YouTube, dan sistem rating.'
     },
     'proj.nobel.credential': { en: 'Internal production project · code & data under NDA', id: 'Proyek production internal · kode & data di bawah NDA' },
 
@@ -392,8 +392,8 @@ const I18N = {
     'proj.cms.badge': { en: 'Marketing', id: 'Marketing' },
     'proj.cms.title': { en: 'Brand Social Media Presence', id: 'Kehadiran Brand di Media Sosial' },
     'proj.cms.desc': {
-        en: "Part of a 3-person team building and maintaining the company's social media presence from scratch — consistent posting cadence, brand voice, and AI-assisted copywriting via prompt engineering.",
-        id: 'Bagian dari tim 3 orang yang membangun dan mengelola kehadiran media sosial perusahaan dari nol — jadwal posting konsisten, brand voice, dan copywriting berbantuan AI lewat prompt engineering.'
+        en: "Part of a 3-person team building and maintaining the company's social media presence from scratch: consistent posting cadence, brand voice, and AI-assisted copywriting via prompt engineering.",
+        id: 'Bagian dari tim 3 orang yang membangun dan mengelola kehadiran media sosial perusahaan dari nol: jadwal posting konsisten, brand voice, dan copywriting berbantuan AI lewat prompt engineering.'
     },
 
     'proj.ypkb.badge': { en: 'Volunteer', id: 'Relawan' },
@@ -415,8 +415,8 @@ const I18N = {
     'award.foto.badge': { en: '1st Place', id: 'Juara 1' },
     'award.foto.title': { en: '1st Place — Photography Competition', id: 'Juara 1 — Kompetisi Fotografi' },
     'award.foto.desc': {
-        en: 'Won first place in a creative photography competition at pesantren level — Digital Creation 2 event.',
-        id: 'Meraih juara 1 dalam kompetisi fotografi kreatif tingkat pesantren — acara Digital Creation 2.'
+        en: 'Won first place in a creative photography competition at pesantren level, part of the Digital Creation 2 event.',
+        id: 'Meraih juara 1 dalam kompetisi fotografi kreatif tingkat pesantren, bagian dari acara Digital Creation 2.'
     },
     'award.foto.tag': { en: 'Photography Competition', id: 'Kompetisi Fotografi' },
 
@@ -431,15 +431,15 @@ const I18N = {
     'award.diploy.badge': { en: 'Active', id: 'Aktif' },
     'award.diploy.title': { en: 'Active Participant — DiploY × NyokKerja', id: 'Peserta Aktif — DiploY × NyokKerja' },
     'award.diploy.desc': {
-        en: 'Recognized as an active participant in DiploY × NyokKerja 2025 — a career development and entrepreneurship program for young professionals.',
-        id: 'Diakui sebagai peserta aktif di DiploY × NyokKerja 2025 — program pengembangan karier dan kewirausahaan untuk profesional muda.'
+        en: 'Recognized as an active participant in DiploY × NyokKerja 2025, a career development and entrepreneurship program for young professionals.',
+        id: 'Diakui sebagai peserta aktif di DiploY × NyokKerja 2025, program pengembangan karier dan kewirausahaan untuk profesional muda.'
     },
     'award.diploy.tag': { en: 'Career Development', id: 'Pengembangan Karier' },
 
     'award.lka.title': { en: 'Internship Completion — LKA UNPAM', id: 'Penyelesaian Magang — LKA UNPAM' },
     'award.lka.desc': {
-        en: 'Certificate handover ceremony — completing a 6-month Data Management internship. Managed 500+ student records and 1,000+ digital archive files. Grade: <strong>Sangat Baik (Excellent)</strong>.',
-        id: 'Seremoni penyerahan sertifikat — menyelesaikan magang Manajemen Data selama 6 bulan. Mengelola 500+ arsip data mahasiswa dan 1.000+ file arsip digital. Nilai: <strong>Sangat Baik (Excellent)</strong>.'
+        en: 'Certificate handover ceremony marking the completion of a 6-month Data Management internship. Managed 500+ student records and 1,000+ digital archive files. Grade: <strong>Sangat Baik (Excellent)</strong>.',
+        id: 'Seremoni penyerahan sertifikat menandai selesainya magang Manajemen Data selama 6 bulan. Mengelola 500+ arsip data mahasiswa dan 1.000+ file arsip digital. Nilai: <strong>Sangat Baik (Excellent)</strong>.'
     },
     'award.lka.tag': { en: 'Internship', id: 'Magang' },
 
@@ -464,16 +464,16 @@ const I18N = {
     // Nobel Akademi
     'cs.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'cs.nobel.summary': {
-        en: 'End-to-end bootcamp LMS module in Laravel 11 — data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.',
-        id: 'Modul LMS bootcamp end-to-end dengan Laravel 11 — data model (6 tabel berelasi), backend, admin CMS, dan halaman publik. Eloquent relations eager-loaded (bebas N+1), routing berbasis slug, embed YouTube, dan sistem rating.'
+        en: 'End-to-end bootcamp LMS module in Laravel 11, covering the data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.',
+        id: 'Modul LMS bootcamp end-to-end dengan Laravel 11, mencakup data model (6 tabel berelasi), backend, admin CMS, dan halaman publik. Eloquent relations eager-loaded (bebas N+1), routing berbasis slug, embed YouTube, dan sistem rating.'
     },
     'cs.nobel.whyBuilt': {
-        en: 'This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital — a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.',
-        id: 'Ini kerjaan feature di LMS production yang sudah live, selama magang Full Stack saya di PT Indotech Digital — kesempatan buat ship satu modul lengkap dari ujung ke ujung (data model sampai halaman publik) di dalam codebase Laravel besar yang sudah ada, bukan proyek dari nol.'
+        en: 'This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital, and a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.',
+        id: 'Ini kerjaan feature di LMS production yang sudah live, selama magang Full Stack saya di PT Indotech Digital, sekaligus kesempatan buat ship satu modul lengkap dari ujung ke ujung (data model sampai halaman publik) di dalam codebase Laravel besar yang sudah ada, bukan proyek dari nol.'
     },
     'cs.nobel.goal': {
-        en: "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages — implementing the UI from designs the team already had, while owning the data model and full-stack logic myself.",
-        id: 'Membangun modul Bootcamp untuk LMS Nobel Akademi secara end-to-end: data layer yang ternormalisasi, admin CMS untuk mengelola konten bootcamp, serta halaman listing/detail publik — mengimplementasikan UI dari desain yang sudah disiapkan tim, sementara data model dan logic full-stack-nya saya yang pegang sendiri.'
+        en: "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages. I implemented the UI from designs the team already had, while owning the data model and full-stack logic myself.",
+        id: 'Membangun modul Bootcamp untuk LMS Nobel Akademi secara end-to-end: data layer yang ternormalisasi, admin CMS untuk mengelola konten bootcamp, serta halaman listing/detail publik. Saya mengimplementasikan UI dari desain yang sudah disiapkan tim, sementara data model dan logic full-stack-nya saya yang pegang sendiri.'
     },
     'cs.nobel.role': { en: 'Full Stack Engineer (feature team)', id: 'Full Stack Engineer (tim feature)' },
     'cs.nobel.period': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
@@ -500,19 +500,19 @@ const I18N = {
         id: "firstOrFail() buat handling not-found yang rapi, plus scoping is_active biar draft nggak nongol di halaman publik"
     },
     'cs.nobel.techNote': {
-        en: 'The UI came from designs the team already had — my part was turning that into a working data model and the full-stack logic behind it: normalizing what could\'ve been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row.',
-        id: 'UI-nya dari desain yang sudah disiapkan tim — bagian saya adalah mengubahnya jadi data model yang jalan plus logic full-stack di baliknya: menormalisasi yang tadinya bisa jadi satu tabel flat menjadi 6 tabel yang saling berelasi, lalu eager-load semua yang dibutuhkan halaman detail dalam satu query, bukan N+1 lazy load per baris module, tool, dan learning.'
+        en: 'The UI came from designs the team already had. My part was turning that into a working data model and the full-stack logic behind it: normalizing what could\'ve been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row.',
+        id: 'UI-nya dari desain yang sudah disiapkan tim. Bagian saya adalah mengubahnya jadi data model yang jalan plus logic full-stack di baliknya: menormalisasi yang tadinya bisa jadi satu tabel flat menjadi 6 tabel yang saling berelasi, lalu eager-load semua yang dibutuhkan halaman detail dalam satu query, bukan N+1 lazy load per baris module, tool, dan learning.'
     },
 
     // NobiPlay — Live Streaming Module
     'cs.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'cs.nobilive.summary': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product — role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik — studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik: studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
     },
     'cs.nobilive.whyBuilt': {
-        en: 'A second product line at PT Indotech Digital Group alongside Nobel Akademi — feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.',
-        id: 'Lini produk kedua di PT Indotech Digital Group selain Nobel Akademi — kerjaan feature di platform live-streaming yang belum rilis publik. Ditampilkan di sini dengan izin eksplisit dari mentor saya buat direferensikan sebagai proof of work, tanpa membuka source code.'
+        en: 'A second product line at PT Indotech Digital Group alongside Nobel Akademi, feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.',
+        id: 'Lini produk kedua di PT Indotech Digital Group selain Nobel Akademi, kerjaan feature di platform live-streaming yang belum rilis publik. Ditampilkan di sini dengan izin eksplisit dari mentor saya buat direferensikan sebagai proof of work, tanpa membuka source code.'
     },
     'cs.nobilive.goal': {
         en: 'Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules.',
@@ -525,15 +525,15 @@ const I18N = {
     'cs.nobilive.step0': { en: 'Role-based Studio CMS for hosts and admins', id: 'Studio CMS berbasis role buat host dan admin' },
     'cs.nobilive.step1': { en: 'Stream scheduling consolidated into a single Live Studio flow', id: 'Penjadwalan siaran digabung jadi satu alur Live Studio' },
     'cs.nobilive.techNote': {
-        en: 'The product is pre-launch and under NDA — this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live.',
-        id: 'Produknya belum rilis publik dan terikat NDA — halaman ini sengaja berhenti di scope dan peran, bukan detail implementasi. Nggak ada source code, skema database, atau metrik bisnis yang dibagikan. Link publik akan ditambahkan begitu domain consumer-facing-nya aktif.'
+        en: 'The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live.',
+        id: 'Produknya belum rilis publik dan terikat NDA, jadi halaman ini sengaja berhenti di scope dan peran, bukan detail implementasi. Nggak ada source code, skema database, atau metrik bisnis yang dibagikan. Link publik akan ditambahkan begitu domain consumer-facing-nya aktif.'
     },
 
     // Gatra Data — Donor Segmentation Automation
     'cs.gatra.title': { en: 'Donor Segmentation & Reporting Automation', id: 'Otomasi Segmentasi & Pelaporan Donatur' },
     'cs.gatra.summary': {
-        en: 'Automated donor segmentation and a self-service reporting dashboard in Google Apps Script for a 16,000+ row donation dataset. Client and donor data are confidential — this page describes the system, not the underlying data.',
-        id: 'Otomasi segmentasi donatur dan dashboard pelaporan self-service dengan Google Apps Script untuk dataset donasi 16.000+ baris. Data klien dan donatur bersifat rahasia — halaman ini menjelaskan sistemnya, bukan data mentahnya.'
+        en: 'Automated donor segmentation and a self-service reporting dashboard in Google Apps Script for a 16,000+ row donation dataset. Client and donor data are confidential, so this page describes the system, not the underlying data.',
+        id: 'Otomasi segmentasi donatur dan dashboard pelaporan self-service dengan Google Apps Script untuk dataset donasi 16.000+ baris. Data klien dan donatur bersifat rahasia, jadi halaman ini menjelaskan sistemnya, bukan data mentahnya.'
     },
     'cs.gatra.whyBuilt': {
         en: 'Placed with Gatra Data, a data-analytics partner, as part of the APIKpreneur on-the-job-training program. The client needed donor activity turned into segments a non-technical team could act on, without paying for a BI tool.',
@@ -552,8 +552,8 @@ const I18N = {
         id: 'Segmentasi hierarkis ala RFM (Potensial/Loyal/Aktif/Baru/Pasif) plus sub-status kesehatan keaktifan, dihitung ulang dalam satu batch read/write, bukan per baris'
     },
     'cs.gatra.step1': {
-        en: 'Self-service Dashboard sheet — global favorite-program ranking plus a cumulative month-over-month segment growth table',
-        id: 'Sheet Dashboard self-service — ranking program favorit global plus tabel pertumbuhan segmen kumulatif per bulan'
+        en: 'Self-service Dashboard sheet with a global favorite-program ranking plus a cumulative month-over-month segment growth table',
+        id: 'Sheet Dashboard self-service dengan ranking program favorit global plus tabel pertumbuhan segmen kumulatif per bulan'
     },
     'cs.gatra.step2': {
         en: 'Daily time-driven trigger automating the whole pipeline, replacing manual reruns',
@@ -564,31 +564,31 @@ const I18N = {
         id: 'Menyelesaikan requirement ambigu (multi-label vs hierarki, snapshot bulanan vs nimpa data) langsung sama stakeholder sebelum logic-nya difinalkan'
     },
     'cs.gatra.techNote': {
-        en: 'Donor names, contact details, and the underlying spreadsheet are confidential — screenshots on this page (once added) will show the segmentation logic and dashboard structure with all donor-identifying data redacted.',
-        id: 'Nama donatur, kontak, dan spreadsheet mentahnya bersifat rahasia — screenshot di halaman ini (kalau sudah ditambahkan) akan menampilkan logic segmentasi dan struktur dashboard dengan semua data identitas donatur disensor.'
+        en: 'Donor names, contact details, and the underlying spreadsheet are confidential. Screenshots on this page (once added) will show the segmentation logic and dashboard structure with all donor-identifying data redacted.',
+        id: 'Nama donatur, kontak, dan spreadsheet mentahnya bersifat rahasia. Screenshot di halaman ini (kalau sudah ditambahkan) akan menampilkan logic segmentasi dan struktur dashboard dengan semua data identitas donatur disensor.'
     },
 
     // SIM Casting JBTB
     'cs.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
     'cs.jbtb.summary': {
-        en: 'A 7-role casting & talent management system built in Laravel 13 for a real casting agency, as a team final year project — I own the system: data model, backend, and full-stack logic end to end.',
-        id: 'Sistem manajemen casting & talent 7-role dengan Laravel 13 untuk agensi casting sungguhan, sebagai tugas akhir tim — saya yang pegang sistemnya: data model, backend, dan logic full-stack end-to-end.'
+        en: 'A 7-role casting & talent management system built in Laravel 13 for a real casting agency, built as a team final year project. I own the system: data model, backend, and full-stack logic end to end.',
+        id: 'Sistem manajemen casting & talent 7-role dengan Laravel 13 untuk agensi casting sungguhan, dibangun sebagai tugas akhir tim. Saya yang pegang sistemnya: data model, backend, dan logic full-stack end-to-end.'
     },
     'cs.jbtb.whyBuilt': {
-        en: "I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app — so our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.",
-        id: 'Saya pengen tugas akhir yang punya user dan constraint beneran, bukan CRUD app skala tutorial — jadi tim kami ambil sistem operasional asli dari agensi casting yang beneran jalan, dengan saya yang pegang pembangunan sistemnya end-to-end sementara rekan tim handle dokumentasi akademiknya.'
+        en: "I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app. So our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.",
+        id: 'Saya pengen tugas akhir yang punya user dan constraint beneran, bukan CRUD app skala tutorial. Jadi tim kami ambil sistem operasional asli dari agensi casting yang beneran jalan, dengan saya yang pegang pembangunan sistemnya end-to-end sementara rekan tim handle dokumentasi akademiknya.'
     },
     'cs.jbtb.goal': {
-        en: 'Build a management system covering the full casting workflow for PT. JBTB Casting Creative Group: talent profile verification, project/slot management, applications with schedule-conflict detection, Casting Director review and approval, digital contracts, and fee handling — across 7 distinct roles with different access levels.',
-        id: 'Membangun sistem manajemen yang mencakup seluruh alur kerja casting untuk PT. JBTB Casting Creative Group: verifikasi profil talent, manajemen project/slot, aplikasi dengan deteksi bentrok jadwal, review & approval oleh Casting Director, kontrak digital, dan handling fee — mencakup 7 role berbeda dengan level akses masing-masing.'
+        en: 'Build a management system covering the full casting workflow for PT. JBTB Casting Creative Group: talent profile verification, project/slot management, applications with schedule-conflict detection, Casting Director review and approval, digital contracts, and fee handling, across 7 distinct roles with different access levels.',
+        id: 'Membangun sistem manajemen yang mencakup seluruh alur kerja casting untuk PT. JBTB Casting Creative Group: verifikasi profil talent, manajemen project/slot, aplikasi dengan deteksi bentrok jadwal, review & approval oleh Casting Director, kontrak digital, dan handling fee, mencakup 7 role berbeda dengan level akses masing-masing.'
     },
     'cs.jbtb.role': { en: 'Full Stack Developer (system & full-stack logic)', id: 'Full Stack Developer (sistem & logic full-stack)' },
     'cs.jbtb.period': { en: 'Sep 2026 – Present', id: 'Sep 2026 – Sekarang' },
     'cs.jbtb.type': { en: 'Final Year Project · team of 3', id: 'Tugas Akhir · tim 3 orang' },
     'cs.jbtb.arch': { en: 'Laravel 13, Blade, role-scoped access control', id: 'Laravel 13, Blade, access control berbasis role' },
     'cs.jbtb.step0': {
-        en: '7-role RBAC — from Super Admin down to Extras (talent) — with one source-of-truth dashboard router instead of scattered per-page checks',
-        id: 'RBAC 7 role — dari Super Admin sampai Extras (talent) — dengan satu dashboard router sebagai source-of-truth, bukan pengecekan yang tersebar di tiap halaman'
+        en: '7-role RBAC, from Super Admin down to Extras (talent), with one source-of-truth dashboard router instead of scattered per-page checks',
+        id: 'RBAC 7 role, dari Super Admin sampai Extras (talent), dengan satu dashboard router sebagai source-of-truth, bukan pengecekan yang tersebar di tiap halaman'
     },
     'cs.jbtb.step1': {
         en: "Encrypted NIK storage with a separate hashed lookup column so duplicate-ID checks don't require decrypting every record",
@@ -603,12 +603,12 @@ const I18N = {
         id: 'Gateway notifikasi WhatsApp self-hosted yang jalan sebagai queued job, di-decouple biar pesan yang gagal kirim nggak pernah nge-block action yang men-trigger-nya'
     },
     'cs.jbtb.step4': {
-        en: 'Public shareable event links for casting calls with return-to-intent login — apply right after registering, not dumped on a generic dashboard',
-        id: 'Link event publik yang bisa dishare untuk casting call dengan return-to-intent login — langsung apply setelah daftar, nggak dilempar ke dashboard generik'
+        en: 'Public shareable event links for casting calls with return-to-intent login: apply right after registering, not dumped on a generic dashboard',
+        id: 'Link event publik yang bisa dishare untuk casting call dengan return-to-intent login: langsung apply setelah daftar, nggak dilempar ke dashboard generik'
     },
     'cs.jbtb.techNote': {
-        en: 'Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production — so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself.',
-        id: "Mass assignment pakai attribute-based (PHP 8 #[Fillable]) bukan property $fillable klasik, dipasangkan dengan Model::preventSilentlyDiscardingAttributes() di non-production — jadi kalau ada kolom baru yang kelupaan, langsung throw error pas development, bukan diam-diam ke-drop datanya pas production. Lookup NIK pakai kolom hash HMAC terpisah (key-nya independen dari APP_KEY) khusus supaya query deteksi duplikat nggak pernah perlu decrypt kolom NIK yang terenkripsi itu sendiri."
+        en: 'Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production, so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself.',
+        id: "Mass assignment pakai attribute-based (PHP 8 #[Fillable]) bukan property $fillable klasik, dipasangkan dengan Model::preventSilentlyDiscardingAttributes() di non-production, jadi kalau ada kolom baru yang kelupaan, langsung throw error pas development, bukan diam-diam ke-drop datanya pas production. Lookup NIK pakai kolom hash HMAC terpisah (key-nya independen dari APP_KEY) khusus supaya query deteksi duplikat nggak pernah perlu decrypt kolom NIK yang terenkripsi itu sendiri."
     },
 
     // Evermos
@@ -686,19 +686,19 @@ const I18N = {
         id: 'Tiga brand theme berbeda yang di-toggle saat runtime lewat satu class binding, didukung CSS custom properties, bukan stylesheet terpisah-pisah.'
     },
     'cs.core.techNote': {
-        en: 'Themes are implemented as CSS custom properties swapped via one root class binding, not three separate component trees — this kept the Figma-to-code work honest to pixel-perfect specs per theme while avoiding 3x the maintenance surface if a layout bug showed up later.',
-        id: 'Theme diimplementasikan sebagai CSS custom properties yang di-swap lewat satu root class binding, bukan tiga component tree terpisah — ini bikin kerjaan Figma-to-code tetap setia ke spec pixel-perfect tiap theme, sambil menghindari maintenance surface 3x lipat kalau nanti ada bug layout.'
+        en: 'Themes are implemented as CSS custom properties swapped via one root class binding, not three separate component trees. This kept the Figma-to-code work honest to pixel-perfect specs per theme while avoiding 3x the maintenance surface if a layout bug showed up later.',
+        id: 'Theme diimplementasikan sebagai CSS custom properties yang di-swap lewat satu root class binding, bukan tiga component tree terpisah. Ini bikin kerjaan Figma-to-code tetap setia ke spec pixel-perfect tiap theme, sambil menghindari maintenance surface 3x lipat kalau nanti ada bug layout.'
     },
 
     // Brand Social Media Presence (CMS)
     'cs.cms.title': { en: 'Brand Social Media Presence', id: 'Kehadiran Brand di Media Sosial' },
     'cs.cms.summary': {
-        en: "Part of a 3-person team building and maintaining the company's social media presence from scratch — consistent posting cadence, brand voice, and AI-assisted copywriting via prompt engineering.",
-        id: 'Bagian dari tim 3 orang yang membangun dan menjaga kehadiran media sosial perusahaan dari nol — ritme posting yang konsisten, brand voice, dan copywriting berbantuan AI lewat prompt engineering.'
+        en: "Part of a 3-person team building and maintaining the company's social media presence from scratch: consistent posting cadence, brand voice, and AI-assisted copywriting via prompt engineering.",
+        id: 'Bagian dari tim 3 orang yang membangun dan menjaga kehadiran media sosial perusahaan dari nol: ritme posting yang konsisten, brand voice, dan copywriting berbantuan AI lewat prompt engineering.'
     },
     'cs.cms.whyBuilt': {
-        en: 'The brand had no social presence at all — this was a chance to build one from zero with a small team, and to test how far prompt engineering could scale content production without making the brand voice feel robotic.',
-        id: 'Brand-nya belum punya presence sosial media sama sekali — ini kesempatan buat bangun dari nol bareng tim kecil, sekaligus nguji sejauh mana prompt engineering bisa scale produksi konten tanpa bikin brand voice-nya kerasa robotik.'
+        en: 'The brand had no social presence at all. This was a chance to build one from zero with a small team, and to test how far prompt engineering could scale content production without making the brand voice feel robotic.',
+        id: 'Brand-nya belum punya presence sosial media sama sekali. Ini kesempatan buat bangun dari nol bareng tim kecil, sekaligus nguji sejauh mana prompt engineering bisa scale produksi konten tanpa bikin brand voice-nya kerasa robotik.'
     },
     'cs.cms.goal': {
         en: "Establish and maintain a consistent brand voice and posting cadence for PT. Cahaya Millenial Sejahtera's social channels over a full year, not a short campaign burst.",
@@ -725,8 +725,8 @@ const I18N = {
         id: 'Prompt engineering dipakai buat scale output konten di tim 3 orang sambil tetap menjaga brand voice konsisten.'
     },
     'cs.cms.techNote': {
-        en: "The interesting part wasn't the posting itself — it was building prompt templates specific enough that 3 different people writing copy still sounded like one consistent brand voice, instead of needing a single bottleneck writer to review everything.",
-        id: 'Bagian menariknya bukan posting-nya — tapi bikin prompt template yang cukup spesifik sampai 3 orang berbeda yang nulis copy tetap kedengeran kayak satu brand voice yang konsisten, tanpa perlu satu penulis jadi bottleneck buat review semuanya.'
+        en: "The interesting part wasn't the posting itself. It was building prompt templates specific enough that 3 different people writing copy still sounded like one consistent brand voice, instead of needing a single bottleneck writer to review everything.",
+        id: 'Bagian menariknya bukan posting-nya. Tapi bikin prompt template yang cukup spesifik sampai 3 orang berbeda yang nulis copy tetap kedengeran kayak satu brand voice yang konsisten, tanpa perlu satu penulis jadi bottleneck buat review semuanya.'
     },
 
     // YPKB
@@ -736,8 +736,8 @@ const I18N = {
         id: 'Developer relawan yang membangun dan maintain website yayasan di WordPress. Juga tampil sebagai talent on-camera di beberapa konten Instagram @ypkb_indonesia.'
     },
     'cs.ypkb.whyBuilt': {
-        en: "A nonprofit foundation needed a working website and someone to keep it maintained — a straightforward volunteer commitment that kept my WordPress skills active outside of the PHP/Laravel work I was doing elsewhere.",
-        id: 'Sebuah yayasan nonprofit butuh website yang jalan dan ada yang maintain — komitmen relawan yang cukup straightforward, sekaligus bikin skill WordPress saya tetap kepakai di luar kerjaan PHP/Laravel yang saya lakuin di tempat lain.'
+        en: "A nonprofit foundation needed a working website and someone to keep it maintained, a straightforward volunteer commitment that kept my WordPress skills active outside of the PHP/Laravel work I was doing elsewhere.",
+        id: 'Sebuah yayasan nonprofit butuh website yang jalan dan ada yang maintain, komitmen relawan yang cukup straightforward, sekaligus bikin skill WordPress saya tetap kepakai di luar kerjaan PHP/Laravel yang saya lakuin di tempat lain.'
     },
     'cs.ypkb.goal': {
         en: "Build and maintain a functional WordPress website for Yayasan Peduli Kesejahteraan Bersama, keeping content current without requiring the foundation's own staff to touch code.",
@@ -755,8 +755,8 @@ const I18N = {
         id: 'Situs WordPress yang di-maintain buat presence publik yayasan.'
     },
     'cs.ypkb.techNote': {
-        en: "Domain has since expired, so this one's no longer live — kept here as a record of the volunteer work rather than a demoable site.",
-        id: 'Domainnya sudah expired, jadi yang ini udah nggak live lagi — disimpan di sini sebagai catatan kerja relawan, bukan sebagai site yang bisa didemoin.'
+        en: "Domain has since expired, so this one's no longer live. It's kept here as a record of the volunteer work rather than a demoable site.",
+        id: 'Domainnya sudah expired, jadi yang ini udah nggak live lagi. Disimpan di sini sebagai catatan kerja relawan, bukan sebagai site yang bisa didemoin.'
     },
 
     // Groomy
@@ -766,8 +766,8 @@ const I18N = {
         id: 'Desain UI/UX mobile end-to-end untuk aplikasi booking layanan grooming dan kecantikan on-demand. Mencakup user flow, component library, dan prototype interaktif.'
     },
     'cs.groomy.whyBuilt': {
-        en: 'I wanted a complete UI/UX piece for my coursework that went past static mockups — full user flows, a reusable component library, and an interactive prototype someone could actually click through.',
-        id: 'Saya pengen bikin karya UI/UX yang lengkap buat tugas kuliah, yang lebih dari sekadar mockup statis — user flow lengkap, component library yang reusable, dan prototype interaktif yang beneran bisa diklik-klik orang.'
+        en: 'I wanted a complete UI/UX piece for my coursework that went past static mockups: full user flows, a reusable component library, and an interactive prototype someone could actually click through.',
+        id: 'Saya pengen bikin karya UI/UX yang lengkap buat tugas kuliah, yang lebih dari sekadar mockup statis: user flow lengkap, component library yang reusable, dan prototype interaktif yang beneran bisa diklik-klik orang.'
     },
     'cs.groomy.goal': {
         en: 'Design an on-demand grooming and beauty service booking app end to end in Figma: from user flows through a reusable component library to a clickable, interactive prototype.',
@@ -797,8 +797,8 @@ const I18N = {
         id: 'Komponen reusable menjaga desain tetap konsisten di semua screen, bukan layout satu-satu per screen.'
     },
     'cs.groomy.techNote': {
-        en: "Built as a component library first, screens second — every button, card, and input state was a reusable component before a single full screen was assembled, which is what made the prototype's interactions consistent instead of each screen behaving slightly differently.",
-        id: 'Dibangun component library dulu, baru screen — tiap button, card, dan input state jadi komponen reusable sebelum satu full screen pun dirakit, dan itu yang bikin interaksi prototype-nya konsisten, bukan tiap screen kelakuannya beda-beda dikit.'
+        en: "Built as a component library first, screens second. Every button, card, and input state was a reusable component before a single full screen was assembled, which is what made the prototype's interactions consistent instead of each screen behaving slightly differently.",
+        id: 'Dibangun component library dulu, baru screen. Tiap button, card, dan input state jadi komponen reusable sebelum satu full screen pun dirakit, dan itu yang bikin interaksi prototype-nya konsisten, bukan tiap screen kelakuannya beda-beda dikit.'
     },
 };
 
