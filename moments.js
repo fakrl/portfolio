@@ -225,7 +225,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') lightboxNav(1);
 });
 
-// ── Feedback (Threads-style guestbook, same as homepage) ──
+// ── Feedback (carousel, same as homepage) ──
 function relativeTime(ts) {
     if (!ts) return "";
     const diff = Date.now() - ts;
@@ -245,7 +245,7 @@ function replyHtml(r) {
         <div class="gb-main">
             <div class="gb-head">
                 <span class="gb-name">Fakhrul</span>
-                <span class="gb-badge"><i class="fa-solid fa-circle-check"></i> Owner</span>
+                <span class="gb-badge"><span class="msym">check_circle</span> Owner</span>
                 <span class="gb-time">· ${relativeTime(r.waktu)}</span>
             </div>
             <p class="gb-text">${escapeHtml(r.pesan)}</p>
@@ -253,43 +253,105 @@ function replyHtml(r) {
     </div>`;
 }
 
-function renderFeedback() {
-    const list  = document.getElementById("feedbackList");
-    const empty = document.getElementById("feedbackEmpty");
+let feedbackEntries = [];
+let carouselIndex = 0;
+let carouselTimer = null;
+let carouselPaused = false;
+const CAROUSEL_INTERVAL = 6000;
+
+function renderDots() {
+    const wrap = document.getElementById("feedbackDots");
+    if (!wrap) return;
+    if (feedbackEntries.length <= 1) { wrap.innerHTML = ""; wrap.style.display = "none"; return; }
+    wrap.style.display = "flex";
+    wrap.innerHTML = feedbackEntries.map((_, i) =>
+        `<button class="feedback-dot${i === carouselIndex ? " active" : ""}" data-idx="${i}" aria-label="Feedback ${i + 1}"></button>`
+    ).join("");
+}
+
+function renderPost() {
+    const list = document.getElementById("feedbackList");
     list.querySelectorAll(".gb-post").forEach(el => el.remove());
-    if (!latestFeedback) { empty.style.display = "block"; return; }
-    empty.style.display = "none";
-    Object.entries(latestFeedback).reverse().forEach(([key, item]) => {
-        const replies = item.replies ? Object.values(item.replies) : [];
-        const repliesHtml = replies.length
-            ? `<div class="gb-replies">${replies.map(replyHtml).join("")}</div>` : "";
-        const replyForm = isOwner()
-            ? `<div class="gb-reply-to">Replying to <strong>${escapeHtml(item.nama)}</strong></div>
-               <div class="gb-reply-form">
-                    <input class="feedback-input gb-reply-input" placeholder="Post your reply…" maxlength="300">
-                    <button class="gb-reply-send" data-key="${key}">Reply</button>
-               </div>` : "";
-        const fromLine = item.dari ? `<div class="gb-from">${escapeHtml(item.dari)}</div>` : "";
-        const post = document.createElement("article");
-        post.className = "gb-post fade-in";
-        post.innerHTML = `
-            <span class="gb-avatar">${escapeHtml((item.nama || "?").charAt(0).toUpperCase())}</span>
-            <div class="gb-main">
-                <div class="gb-head">
-                    <span class="gb-name">${escapeHtml(item.nama)}</span>
-                    <span class="gb-time">· ${relativeTime(item.waktu)}</span>
-                </div>
-                ${fromLine}
-                <p class="gb-text">${escapeHtml(item.pesan)}</p>
-                ${repliesHtml}
-                ${replyForm}
+    if (!feedbackEntries.length) return;
+    const [key, item] = feedbackEntries[carouselIndex];
+    const replies = item.replies ? Object.values(item.replies) : [];
+    const repliesHtml = replies.length
+        ? `<div class="gb-replies">${replies.map(replyHtml).join("")}</div>` : "";
+    const replyForm = isOwner()
+        ? `<div class="gb-reply-to">Replying to <strong>${escapeHtml(item.nama)}</strong></div>
+           <div class="gb-reply-form">
+                <input class="feedback-input gb-reply-input" placeholder="Post your reply…" maxlength="300">
+                <button class="gb-reply-send" data-key="${key}">Reply</button>
+           </div>` : "";
+    const fromLine = item.dari ? `<div class="gb-from">${escapeHtml(item.dari)}</div>` : "";
+    const post = document.createElement("article");
+    post.className = "gb-post gb-post--carousel fade-in";
+    post.innerHTML = `
+        <span class="gb-avatar">${escapeHtml((item.nama || "?").charAt(0).toUpperCase())}</span>
+        <div class="gb-main">
+            <div class="gb-head">
+                <span class="gb-name">${escapeHtml(item.nama)}</span>
+                <span class="gb-time">· ${relativeTime(item.waktu)}</span>
             </div>
-        `;
-        list.appendChild(post);
-    });
+            ${fromLine}
+            <p class="gb-text">${escapeHtml(item.pesan)}</p>
+            ${repliesHtml}
+            ${replyForm}
+        </div>
+    `;
+    list.appendChild(post);
+    renderDots();
+}
+
+function goTo(i) {
+    if (!feedbackEntries.length) return;
+    carouselIndex = ((i % feedbackEntries.length) + feedbackEntries.length) % feedbackEntries.length;
+    renderPost();
+}
+
+function stopCarousel() {
+    if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
+}
+
+function startCarousel() {
+    stopCarousel();
+    if (feedbackEntries.length <= 1) return;
+    carouselTimer = setInterval(() => {
+        if (carouselPaused) return;
+        goTo(carouselIndex + 1);
+    }, CAROUSEL_INTERVAL);
+}
+
+function renderFeedback() {
+    const empty = document.getElementById("feedbackEmpty");
+    if (!latestFeedback) {
+        empty.style.display = "block";
+        feedbackEntries = [];
+        document.getElementById("feedbackList").querySelectorAll(".gb-post").forEach(el => el.remove());
+        renderDots();
+        stopCarousel();
+        return;
+    }
+    empty.style.display = "none";
+    feedbackEntries = Object.entries(latestFeedback).reverse();
+    if (carouselIndex >= feedbackEntries.length) carouselIndex = 0;
+    renderPost();
+    startCarousel();
 }
 
 onValue(commentsRef, (snapshot) => { latestFeedback = snapshot.val(); renderFeedback(); });
+
+// Pause auto-rotation while the user is reading/hovering, resume on leave.
+document.getElementById("feedbackList").addEventListener("mouseenter", () => { carouselPaused = true; });
+document.getElementById("feedbackList").addEventListener("mouseleave", () => { carouselPaused = false; });
+
+// Dot navigation — jump to a specific feedback and reset the timer.
+document.getElementById("feedbackDots").addEventListener("click", (e) => {
+    const btn = e.target.closest(".feedback-dot");
+    if (!btn) return;
+    goTo(Number(btn.dataset.idx));
+    startCarousel();
+});
 
 document.getElementById("feedbackSubmit").addEventListener("click", async () => {
     const nameEl = document.getElementById("feedbackName");
@@ -303,7 +365,7 @@ document.getElementById("feedbackSubmit").addEventListener("click", async () => 
         await push(commentsRef, { nama, dari: dari || "Anonymous", pesan, waktu: serverTimestamp() });
         nameEl.value = ""; fromEl.value = ""; msgEl.value = "";
     } catch(err) { alert("Failed to send, try again."); console.error(err); }
-    finally { btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message'; btn.disabled = false; }
+    finally { btn.textContent = "Send Message"; btn.disabled = false; }
 });
 
 // ── Owner auth (Google sign-in) ──
@@ -323,7 +385,7 @@ function updateAuthBar() {
         document.getElementById("ownerLogoutBtn").addEventListener("click", () => signOut(auth));
     } else {
         bar.innerHTML =
-            `<button id="ownerLoginBtn" class="owner-auth-link"><i class="fa-brands fa-google"></i> Owner? Sign in to reply</button>`;
+            `<button id="ownerLoginBtn" class="owner-auth-link"><span class="msym">login</span> Owner? Sign in to reply</button>`;
         document.getElementById("ownerLoginBtn").addEventListener("click", doLogin);
     }
 }
