@@ -117,22 +117,32 @@
 
     <!-- ── FEEDBACK ──────────────────────────────── -->
     <section id="feedback" class="section">
-        <h2 class="section-title">Leave a Feedback</h2>
+        <h2 class="section-title" data-i18n="feedback.title">Leave a Feedback</h2>
         <div class="feedback-wrapper">
             <div class="glass-card feedback-form-card">
-                <p class="feedback-desc">Got something to say? Drop a message, it shows up instantly.</p>
+                <p class="feedback-desc" data-i18n="feedback.desc">Got something to say? Drop a message, it shows up instantly.</p>
                 <div class="feedback-form">
-                    <input type="text" id="feedbackName" placeholder="Your name" class="feedback-input" maxlength="50"/>
-                    <input type="text" id="feedbackFrom" placeholder="from where you know this guy? " class="feedback-input" maxlength="80"/>
-                    <textarea id="feedbackMessage" placeholder="Your message..." class="feedback-input feedback-textarea" maxlength="300" rows="3"></textarea>
-                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn"><span class="msym">send</span> Send Message</button>
+                    <input type="text" id="feedbackName" placeholder="Your name"
+                           class="feedback-input" maxlength="50" data-i18n-attr="placeholder:feedback.namePh"/>
+                    <input type="text" id="feedbackFrom"
+                           placeholder="From where do you know this guy?"
+                           class="feedback-input" maxlength="80" data-i18n-attr="placeholder:feedback.fromPh"/>
+                    <textarea id="feedbackMessage" placeholder="Your message..."
+                              class="feedback-input feedback-textarea"
+                              maxlength="300" rows="3" data-i18n-attr="placeholder:feedback.messagePh"></textarea>
+                    <button id="feedbackSubmit" class="btn btn-primary feedback-btn" data-i18n="feedback.send">
+                        Send Message
+                    </button>
                 </div>
                 <div class="owner-auth-bar" id="ownerAuthBar"></div>
             </div>
-            <div id="feedbackList" class="feedback-list">
-                <div class="feedback-empty" id="feedbackEmpty">
-                    <p>No feedback yet. Be the first!</p>
+            <div class="feedback-carousel glass-card">
+                <div id="feedbackList" class="feedback-list">
+                    <div class="feedback-empty" id="feedbackEmpty">
+                        <p data-i18n="feedback.empty">No feedback yet. Be the first!</p>
+                    </div>
                 </div>
+                <div class="feedback-dots" id="feedbackDots"></div>
             </div>
         </div>
     </section>
