@@ -7,7 +7,12 @@ function getTheme() {
 
 function setTheme(theme) {
     localStorage.setItem('theme', theme);
-    document.body.className = theme;
+    // Swap only the light/dark class, don't touch other classes the body
+    // may already have (hero-in entrance animation, portfolio-page, etc.) —
+    // a blanket `body.className = theme` used to wipe those out on every
+    // toggle, which is why the hero section would vanish until a reload.
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
     updateThemeButton(theme);
 }
 
