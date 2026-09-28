@@ -27,8 +27,8 @@ const I18N = {
     'hero.downloadCv': { en: 'Download CV', id: 'Unduh CV' },
     'hero.getInTouch': { en: 'Get In Touch', id: 'Hubungi Saya' },
     'hero.bio': {
-        en: 'Full Stack Developer currently shipping features to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital, with 20+ pull requests merged to production, while also building a 7-role casting &amp; talent management system in Laravel as my final year project. Previously: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>',
-        id: 'Full Stack Developer yang saat ini ngerjain fitur-fitur di LMS yang sudah live dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> di PT Indotech Digital, dengan 20+ pull request udah merge ke production, sambil bangun sistem casting &amp; talent management 7-role dengan Laravel buat tugas akhir. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.70. <strong>Tersedia sekarang untuk peluang full-time.</strong>'
+        en: 'Full Stack Developer currently shipping features to a live LMS in <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> at PT Indotech Digital, with 20+ pull requests merged to production, while also replacing a casting agency\'s manual WhatsApp-and-spreadsheet workflow with a centralized Laravel system as my final year project. Previously: a marketplace REST API in <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (scored 90.91) and a <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> e-commerce frontend (87.79). Ranked #5 of 926 in Yandex ML. GPA 3.70. <strong>Available now for full-time opportunities.</strong>',
+        id: 'Full Stack Developer yang saat ini ngerjain fitur-fitur di LMS yang sudah live dengan <span class="bio-chip"><i class="devicon-laravel-plain colored"></i>Laravel</span> di PT Indotech Digital, dengan 20+ pull request udah merge ke production, sambil ngeganti alur kerja manual WhatsApp-dan-spreadsheet punya agensi casting jadi sistem Laravel terpusat buat tugas akhir. Sebelumnya: REST API marketplace dengan <span class="bio-chip"><i class="devicon-go-plain colored"></i>Golang</span> (skor 90.91) dan frontend e-commerce <span class="bio-chip"><i class="devicon-vuejs-plain colored"></i>Vue.js</span> (87.79). Peringkat #5 dari 926 di kompetisi Yandex ML. IPK 3.70. <strong>Tersedia sekarang untuk peluang full-time.</strong>'
     },
 
     // ── Experience ──
@@ -152,8 +152,8 @@ const I18N = {
     'spotlight.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
     'spotlight.jbtb.sub': { en: 'Full Stack Developer · Final Year Project (team of 3)', id: 'Full Stack Developer · Tugas Akhir (tim 3 orang)' },
     'spotlight.jbtb.desc': {
-        en: "A 7-role casting & talent management system built in Laravel 13 for a real casting agency, built as a team final year project. I own the system: digital contracts, encrypted PII, a self-hosted WhatsApp notification gateway, and role-scoped review workflows, end to end.",
-        id: 'Sistem manajemen casting & talent 7-role dengan Laravel 13 untuk agensi casting sungguhan, dibangun sebagai tugas akhir tim. Saya yang pegang sistemnya: kontrak digital, PII terenkripsi, gateway notifikasi WhatsApp self-hosted, dan alur review berjenjang sesuai peran, end-to-end.'
+        en: "PT. JBTB Casting Creative Group ran recruitment and payment through WhatsApp groups, spreadsheets, and Google Drive, where fee deals and staff honor were easy to dispute after the fact. I built the Laravel 13 system that replaced it, as a team final year project: negotiated fees and contracts get logged and can't be argued with, and staff finally get a real payslip.",
+        id: 'PT. JBTB Casting Creative Group jalanin rekrutmen dan pembayaran lewat grup WhatsApp, spreadsheet, dan Google Drive, di mana kesepakatan fee dan honor staf gampang dibantah belakangan. Saya bangun sistem Laravel 13 yang gantiin itu, sebagai tugas akhir tim: nego fee dan kontrak tercatat dan nggak bisa dibantah, staf akhirnya dapet slip gaji beneran.'
     },
     'extra.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'extra.nobel.sub': { en: 'Production LMS · PT Indotech Digital', id: 'LMS Production · PT Indotech Digital' },
@@ -571,16 +571,16 @@ const I18N = {
     // SIM Casting JBTB
     'cs.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
     'cs.jbtb.summary': {
-        en: 'A 7-role casting & talent management system built in Laravel 13 for a real casting agency, built as a team final year project. I own the system: data model, backend, and full-stack logic end to end.',
-        id: 'Sistem manajemen casting & talent 7-role dengan Laravel 13 untuk agensi casting sungguhan, dibangun sebagai tugas akhir tim. Saya yang pegang sistemnya: data model, backend, dan logic full-stack end-to-end.'
+        en: 'A Laravel 13 system that replaced a real casting agency\'s manual WhatsApp-and-spreadsheet workflow, so fee agreements and staff honor payouts get logged instead of disputed after the fact. Built as a team final year project — I own the system: data model, backend, and full-stack logic end to end.',
+        id: 'Sistem Laravel 13 yang gantiin alur kerja manual WhatsApp-dan-spreadsheet punya agensi casting beneran, biar kesepakatan fee dan honor staf tercatat, bukan dibantah belakangan. Dibangun sebagai tugas akhir tim — saya yang pegang sistemnya: data model, backend, dan logic full-stack end-to-end.'
     },
     'cs.jbtb.whyBuilt': {
         en: "I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app. So our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.",
         id: 'Saya pengen tugas akhir yang punya user dan constraint beneran, bukan CRUD app skala tutorial. Jadi tim kami ambil sistem operasional asli dari agensi casting yang beneran jalan, dengan saya yang pegang pembangunan sistemnya end-to-end sementara rekan tim handle dokumentasi akademiknya.'
     },
     'cs.jbtb.goal': {
-        en: 'Build a management system covering the full casting workflow for PT. JBTB Casting Creative Group: talent profile verification, project/slot management, applications with schedule-conflict detection, Casting Director review and approval, digital contracts, and fee handling, across 7 distinct roles with different access levels.',
-        id: 'Membangun sistem manajemen yang mencakup seluruh alur kerja casting untuk PT. JBTB Casting Creative Group: verifikasi profil talent, manajemen project/slot, aplikasi dengan deteksi bentrok jadwal, review & approval oleh Casting Director, kontrak digital, dan handling fee, mencakup 7 role berbeda dengan level akses masing-masing.'
+        en: "Replace PT. JBTB Casting Creative Group's manual recruitment-and-payment process (WhatsApp groups, Excel, Google Drive) with a centralized system that solves two concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, and staff honor (Talco, Korlap, Sosmed) that finally gets a real payslip instead of a guess.",
+        id: 'Ganti proses rekrutmen-dan-pembayaran manual PT. JBTB Casting Creative Group (grup WhatsApp, Excel, Google Drive) jadi sistem terpusat yang nyelesain dua masalah konkret: kesepakatan fee antara Admin dan Extras yang nggak bisa dibantah belakangan, dan honor staf (Talco, Korlap, Sosmed) yang akhirnya dapet slip gaji beneran, bukan kira-kira.'
     },
     'cs.jbtb.role': { en: 'Full Stack Developer (system & full-stack logic)', id: 'Full Stack Developer (sistem & logic full-stack)' },
     'cs.jbtb.period': { en: 'Sep 2026 – Present', id: 'Sep 2026 – Sekarang' },
