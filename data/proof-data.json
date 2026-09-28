@@ -367,7 +367,7 @@
       "badgeTone": "purple",
       "date": "Sep 2026 – Present",
       "issuer": "Full Stack Developer · Final Year Project (team of 3)",
-      "desc": "A 7-role casting & talent management system built in Laravel 13 for a real casting agency, built as a team final year project. I own the system: data model, backend, and full-stack logic end to end.",
+      "desc": "PT. JBTB Casting Creative Group ran recruitment and payment through WhatsApp groups, spreadsheets, and Google Drive, where fee deals and staff honor were easy to dispute after the fact. I built the Laravel 13 system that replaced it, as a team final year project: negotiated fees and contracts get logged and can't be argued with, and staff finally get a real payslip.",
       "tags": [
         "Laravel 13",
         "PHP 8.3",
@@ -377,7 +377,7 @@
       ],
       "caseStudy": {
         "whyBuilt": "I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app. So our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.",
-        "goal": "Build a management system covering the full casting workflow for PT. JBTB Casting Creative Group: talent profile verification, project/slot management, applications with schedule-conflict detection, Casting Director review and approval, digital contracts, and fee handling, across 7 distinct roles with different access levels.",
+        "goal": "Replace PT. JBTB Casting Creative Group's manual recruitment-and-payment process (WhatsApp groups, Excel, Google Drive) with a centralized system that solves two concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, and staff honor (Talco, Korlap, Sosmed) that finally gets a real payslip instead of a guess.",
         "overview": { "role": "Full Stack Developer (system & full-stack logic)", "period": "Sep 2026 – Present", "type": "Final Year Project · team of 3", "architecture": "Laravel 13, Blade, role-scoped access control" },
         "whatItDoes": [
           "7-role RBAC, from Super Admin down to Extras (talent), with one source-of-truth dashboard router instead of scattered per-page checks",
