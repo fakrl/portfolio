@@ -587,24 +587,24 @@ const I18N = {
     'cs.jbtb.type': { en: 'Final Year Project · team of 3', id: 'Tugas Akhir · tim 3 orang' },
     'cs.jbtb.arch': { en: 'Laravel 13, Blade, role-scoped access control', id: 'Laravel 13, Blade, access control berbasis role' },
     'cs.jbtb.step0': {
-        en: '7-role RBAC, from Super Admin down to Extras (talent), with one source-of-truth dashboard router instead of scattered per-page checks',
-        id: 'RBAC 7 role, dari Super Admin sampai Extras (talent), dengan satu dashboard router sebagai source-of-truth, bukan pengecekan yang tersebar di tiap halaman'
+        en: "In-app multi-round fee negotiation between Admin and Extras, every offer logged until there's a deal, so what got agreed to is never up for dispute later",
+        id: 'Nego fee multi-round in-app antara Admin dan Extras, tiap tawaran tercatat sampai deal, jadi kesepakatan yang udah dibuat nggak bisa dibantah belakangan'
     },
     'cs.jbtb.step1': {
+        en: 'Automated honor slip (PDF) generation for support staff once a project wraps, replacing a guessed number with an actual payslip',
+        id: 'Generate slip honor (PDF) otomatis buat staf pendukung begitu proyek kelar, gantiin nominal kira-kira jadi slip gaji beneran'
+    },
+    'cs.jbtb.step2': {
         en: "Encrypted NIK storage with a separate hashed lookup column so duplicate-ID checks don't require decrypting every record",
         id: 'Penyimpanan NIK terenkripsi dengan kolom lookup hash terpisah, jadi pengecekan ID duplikat nggak perlu decrypt tiap record'
     },
-    'cs.jbtb.step2': {
+    'cs.jbtb.step3': {
         en: 'Digital contract lifecycle with reversible voiding (audit trail preserved) and crash-safe PDF regeneration',
         id: 'Lifecycle kontrak digital dengan pembatalan yang reversible (audit trail tetap tersimpan) dan regenerasi PDF yang crash-safe'
     },
-    'cs.jbtb.step3': {
+    'cs.jbtb.step4': {
         en: 'Self-hosted WhatsApp notification gateway running as a queued job, decoupled so a failed message never blocks the action that triggered it',
         id: 'Gateway notifikasi WhatsApp self-hosted yang jalan sebagai queued job, di-decouple biar pesan yang gagal kirim nggak pernah nge-block action yang men-trigger-nya'
-    },
-    'cs.jbtb.step4': {
-        en: 'Public shareable event links for casting calls with return-to-intent login: apply right after registering, not dumped on a generic dashboard',
-        id: 'Link event publik yang bisa dishare untuk casting call dengan return-to-intent login: langsung apply setelah daftar, nggak dilempar ke dashboard generik'
     },
     'cs.jbtb.techNote': {
         en: 'Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production, so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself.',
