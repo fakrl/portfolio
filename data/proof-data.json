@@ -366,8 +366,8 @@
       "badge": "Final Year Project",
       "badgeTone": "purple",
       "date": "Sep 2026 – Present",
-      "issuer": "Full Stack Developer · Final Year Project (team of 3)",
-      "desc": "PT. JBTB Casting Creative Group ran recruitment and payment through WhatsApp groups, spreadsheets, and Google Drive, where fee deals and staff honor were easy to dispute after the fact. I built the Laravel 13 system that replaced it, as a team final year project: negotiated fees and contracts get logged and can't be argued with, and staff finally get a real payslip.",
+      "issuer": "Project Lead & Lead Developer · Final Year Project (team of 3)",
+      "desc": "PT. JBTB Casting Creative Group ran recruitment and payment for its extras through WhatsApp groups, spreadsheets, and Google Drive, so fee deals, staff honor, and project money were easy to dispute or lose track of. I built the Laravel 13 system that replaced it as our final year project: fee negotiation is logged round by round, staff get real payslips, and every project's income, receivables, and expenses live in one place.",
       "tags": [
         "Laravel 13",
         "PHP 8.3",
@@ -376,15 +376,17 @@
         "WhatsApp Gateway"
       ],
       "caseStudy": {
-        "whyBuilt": "I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app. So our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.",
-        "goal": "Replace PT. JBTB Casting Creative Group's manual recruitment-and-payment process (WhatsApp groups, Excel, Google Drive) with a centralized system that solves two concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, and staff honor (Talco, Korlap, Sosmed) that finally gets a real payslip instead of a guess.",
-        "overview": { "role": "Full Stack Developer (system & full-stack logic)", "period": "Sep 2026 – Present", "type": "Final Year Project · team of 3", "architecture": "Laravel 13, Blade, role-scoped access control" },
+        "summary": "A Laravel 13 system that replaced a casting agency's manual WhatsApp, Excel, and Drive workflow, so fee agreements, staff honor, and project finances are recorded instead of argued over later. Built as a team final year project, where I lead the build: data model, backend, and full-stack logic end to end.",
+        "whyBuilt": "I wanted my final year project to solve a real problem for a real company, not be a tutorial-scale CRUD app. The agency's own team described how fee deals and pay were tracked across chat threads and spreadsheets, and our team took that on as the project, with me leading the system build while teammates cover the academic documentation.",
+        "goal": "Replace the agency's manual recruitment-and-payment process with one system that solves three concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, staff honor that comes with a clear payslip per project instead of a guess, and project finances (income, receivables, expenses, balance, projection) computed from a single source instead of scattered spreadsheets.",
+        "overview": { "role": "Project Lead & Lead Developer", "period": "Sep 2026 – Present", "type": "Final Year Project · team of 3", "architecture": "Laravel 13, Blade, role-based access control" },
         "whatItDoes": [
           "In-app multi-round fee negotiation between Admin and Extras, every offer logged until there's a deal, so what got agreed to is never up for dispute later",
-          "Automated honor slip (PDF) generation for support staff once a project wraps, replacing a guessed number with an actual payslip",
-          "Encrypted NIK storage with a separate hashed lookup column so duplicate-ID checks don't require decrypting every record",
-          "Digital contract lifecycle with reversible voiding (audit trail preserved) and crash-safe PDF regeneration",
-          "Self-hosted WhatsApp notification gateway running as a queued job, decoupled so a failed message never blocks the action that triggered it"
+          "Staff honor set per event, with a payslip PDF generated automatically once the project wraps, replacing a guessed number with an actual slip",
+          "Project finance view (income, receivables, expenses, balance, projection) computed from one source, with invoices that get signed and marked paid",
+          "Digital contract generated automatically when a candidate is confirmed, signed on screen, and voided automatically if the booking is cancelled (audit trail preserved)",
+          "Field attendance: Extras check in with a selfie, the on-site coordinator validates or rejects it, and notes or sanctions are logged per person",
+          "In-app notifications as the primary channel, plus a self-hosted WhatsApp gateway running as a queued job so a failed message never blocks the action that triggered it"
         ],
         "screens": [],
         "techNote": "Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production, so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself."

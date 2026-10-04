@@ -133,7 +133,7 @@ for (const item of data.projects || []) {
     .replace(/{{OG_IMAGE}}/g, heroImage ? `https://fakrul.netlify.app/${heroImage.replace("../", "")}` : "https://fakrul.netlify.app/image/og-image.webp")
     .replace(/{{OG_URL}}/g, ogUrl)
     .replace(/{{PROJECT_TITLE}}/g, esc(item.title))
-    .replace(/{{PROJECT_SUMMARY}}/g, esc(item.desc))
+    .replace(/{{PROJECT_SUMMARY}}/g, esc(cs.summary || item.desc))
     .replace(/{{PROJECT_LINKS}}/g, renderLinks(item))
     .replace(/{{HERO_BLOCK}}/g, renderHero(heroImage ? heroImage.replace("../", "/") : "", item.title))
     .replace(/{{WHY_BUILT}}/g, esc(cs.whyBuilt))
