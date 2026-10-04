@@ -150,10 +150,10 @@ const I18N = {
     // ── Featured Build ──
     'spotlight.eyebrow': { en: 'Featured Build', id: 'Karya Unggulan' },
     'spotlight.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
-    'spotlight.jbtb.sub': { en: 'Full Stack Developer · Final Year Project (team of 3)', id: 'Full Stack Developer · Tugas Akhir (tim 3 orang)' },
+    'spotlight.jbtb.sub': { en: 'Project Lead & Lead Developer · Final Year Project (team of 3)', id: 'Project Lead & Lead Developer · Tugas Akhir (tim 3 orang)' },
     'spotlight.jbtb.desc': {
-        en: "PT. JBTB Casting Creative Group ran recruitment and payment through WhatsApp groups, spreadsheets, and Google Drive, where fee deals and staff honor were easy to dispute after the fact. I built the Laravel 13 system that replaced it, as a team final year project: negotiated fees and contracts get logged and can't be argued with, and staff finally get a real payslip.",
-        id: 'PT. JBTB Casting Creative Group jalanin rekrutmen dan pembayaran lewat grup WhatsApp, spreadsheet, dan Google Drive, di mana kesepakatan fee dan honor staf gampang dibantah belakangan. Saya bangun sistem Laravel 13 yang gantiin itu, sebagai tugas akhir tim: nego fee dan kontrak tercatat dan nggak bisa dibantah, staf akhirnya dapet slip gaji beneran.'
+        en: "PT. JBTB Casting Creative Group ran recruitment and payment for its extras through WhatsApp groups, spreadsheets, and Google Drive, so fee deals, staff honor, and project money were easy to dispute or lose track of. I built the Laravel 13 system that replaced it as our final year project: fee negotiation is logged round by round, staff get real payslips, and every project's income, receivables, and expenses live in one place.",
+        id: 'PT. JBTB Casting Creative Group ngurus rekrutmen dan pembayaran extras lewat grup WhatsApp, spreadsheet, dan Google Drive, jadi kesepakatan fee, honor staf, dan uang proyek gampang dibantah atau nggak ketelusuran. Saya bangun sistem Laravel 13 yang gantiin itu sebagai tugas akhir kami: nego fee tercatat tiap ronde, staf dapet slip honor beneran, dan pemasukan, piutang, serta pengeluaran tiap proyek ada di satu tempat.'
     },
     'extra.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'extra.nobel.sub': { en: 'Production LMS · PT Indotech Digital', id: 'LMS Production · PT Indotech Digital' },
@@ -175,7 +175,7 @@ const I18N = {
     'metric.dynamicThemes': { en: 'Dynamic Themes', id: 'Tema Dinamis' },
     'metric.keyScreens': { en: 'Key Screens', id: 'Layar Utama' },
     'metric.prototype': { en: 'Prototype', id: 'Prototipe' },
-    'metric.roles': { en: 'Roles (RBAC)', id: 'Peran (RBAC)' },
+    'metric.problems': { en: 'Core Problems Solved', id: 'Masalah Inti Diselesaikan' },
     'metric.teamSize': { en: 'Team Size', id: 'Jumlah Tim' },
 
     'work.nobel.desc': {
@@ -571,40 +571,44 @@ const I18N = {
     // SIM Casting JBTB
     'cs.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
     'cs.jbtb.summary': {
-        en: 'A Laravel 13 system that replaced a real casting agency\'s manual WhatsApp-and-spreadsheet workflow, so fee agreements and staff honor payouts get logged instead of disputed after the fact. Built as a team final year project — I own the system: data model, backend, and full-stack logic end to end.',
-        id: 'Sistem Laravel 13 yang gantiin alur kerja manual WhatsApp-dan-spreadsheet punya agensi casting beneran, biar kesepakatan fee dan honor staf tercatat, bukan dibantah belakangan. Dibangun sebagai tugas akhir tim — saya yang pegang sistemnya: data model, backend, dan logic full-stack end-to-end.'
+        en: "A Laravel 13 system that replaced a casting agency's manual WhatsApp, Excel, and Drive workflow, so fee agreements, staff honor, and project finances are recorded instead of argued over later. Built as a team final year project, where I lead the build: data model, backend, and full-stack logic end to end.",
+        id: 'Sistem Laravel 13 yang gantiin alur kerja manual WhatsApp, Excel, dan Drive punya agensi casting, biar kesepakatan fee, honor staf, dan keuangan proyek tercatat, bukan dibantah belakangan. Dibangun sebagai tugas akhir tim, di mana saya yang mimpin pembangunannya: data model, backend, dan logic full-stack end-to-end.'
     },
     'cs.jbtb.whyBuilt': {
-        en: "I wanted my final year project to be something with real users and real constraints, not a tutorial-scale CRUD app. So our team took on a live casting agency's actual operational system, with me owning the system build end to end while teammates cover the surrounding academic documentation.",
-        id: 'Saya pengen tugas akhir yang punya user dan constraint beneran, bukan CRUD app skala tutorial. Jadi tim kami ambil sistem operasional asli dari agensi casting yang beneran jalan, dengan saya yang pegang pembangunan sistemnya end-to-end sementara rekan tim handle dokumentasi akademiknya.'
+        en: "I wanted my final year project to solve a real problem for a real company, not be a tutorial-scale CRUD app. The agency's own team described how fee deals and pay were tracked across chat threads and spreadsheets, and our team took that on as the project, with me leading the system build while teammates cover the academic documentation.",
+        id: 'Saya pengen tugas akhir yang nyelesain masalah beneran buat perusahaan beneran, bukan CRUD app skala tutorial. Tim agensinya sendiri cerita kalau kesepakatan fee dan pembayaran dicatat di thread chat dan spreadsheet, dan tim kami ambil itu sebagai proyek, dengan saya yang mimpin pembangunan sistemnya sementara rekan tim handle dokumentasi akademiknya.'
     },
     'cs.jbtb.goal': {
-        en: "Replace PT. JBTB Casting Creative Group's manual recruitment-and-payment process (WhatsApp groups, Excel, Google Drive) with a centralized system that solves two concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, and staff honor (Talco, Korlap, Sosmed) that finally gets a real payslip instead of a guess.",
-        id: 'Ganti proses rekrutmen-dan-pembayaran manual PT. JBTB Casting Creative Group (grup WhatsApp, Excel, Google Drive) jadi sistem terpusat yang nyelesain dua masalah konkret: kesepakatan fee antara Admin dan Extras yang nggak bisa dibantah belakangan, dan honor staf (Talco, Korlap, Sosmed) yang akhirnya dapet slip gaji beneran, bukan kira-kira.'
+        en: "Replace the agency's manual recruitment-and-payment process with one system that solves three concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, staff honor that comes with a clear payslip per project instead of a guess, and project finances (income, receivables, expenses, balance, projection) computed from a single source instead of scattered spreadsheets.",
+        id: 'Ganti proses rekrutmen-dan-pembayaran manual agensi jadi satu sistem yang nyelesain tiga masalah konkret: kesepakatan fee antara Admin dan Extras yang nggak bisa dibantah belakangan, honor staf yang ada slip jelasnya per proyek, bukan kira-kira, dan keuangan proyek (pemasukan, piutang, pengeluaran, saldo, proyeksi) yang dihitung dari satu sumber, bukan spreadsheet yang tersebar.'
     },
-    'cs.jbtb.role': { en: 'Full Stack Developer (system & full-stack logic)', id: 'Full Stack Developer (sistem & logic full-stack)' },
+    'cs.jbtb.role': { en: 'Project Lead & Lead Developer', id: 'Project Lead & Lead Developer' },
     'cs.jbtb.period': { en: 'Sep 2026 – Present', id: 'Sep 2026 – Sekarang' },
     'cs.jbtb.type': { en: 'Final Year Project · team of 3', id: 'Tugas Akhir · tim 3 orang' },
-    'cs.jbtb.arch': { en: 'Laravel 13, Blade, role-scoped access control', id: 'Laravel 13, Blade, access control berbasis role' },
+    'cs.jbtb.arch': { en: 'Laravel 13, Blade, role-based access control', id: 'Laravel 13, Blade, access control berbasis role' },
     'cs.jbtb.step0': {
         en: "In-app multi-round fee negotiation between Admin and Extras, every offer logged until there's a deal, so what got agreed to is never up for dispute later",
         id: 'Nego fee multi-round in-app antara Admin dan Extras, tiap tawaran tercatat sampai deal, jadi kesepakatan yang udah dibuat nggak bisa dibantah belakangan'
     },
     'cs.jbtb.step1': {
-        en: 'Automated honor slip (PDF) generation for support staff once a project wraps, replacing a guessed number with an actual payslip',
-        id: 'Generate slip honor (PDF) otomatis buat staf pendukung begitu proyek kelar, gantiin nominal kira-kira jadi slip gaji beneran'
+        en: 'Staff honor set per event, with a payslip PDF generated automatically once the project wraps, replacing a guessed number with an actual slip',
+        id: 'Honor staf ditetapkan per event, dengan slip honor PDF yang digenerate otomatis begitu proyek kelar, gantiin nominal kira-kira jadi slip beneran'
     },
     'cs.jbtb.step2': {
-        en: "Encrypted NIK storage with a separate hashed lookup column so duplicate-ID checks don't require decrypting every record",
-        id: 'Penyimpanan NIK terenkripsi dengan kolom lookup hash terpisah, jadi pengecekan ID duplikat nggak perlu decrypt tiap record'
+        en: 'Project finance view (income, receivables, expenses, balance, projection) computed from one source, with invoices that get signed and marked paid',
+        id: 'Tampilan keuangan proyek (pemasukan, piutang, pengeluaran, saldo, proyeksi) yang dihitung dari satu sumber, dengan invoice yang ditandatangani dan ditandai lunas'
     },
     'cs.jbtb.step3': {
-        en: 'Digital contract lifecycle with reversible voiding (audit trail preserved) and crash-safe PDF regeneration',
-        id: 'Lifecycle kontrak digital dengan pembatalan yang reversible (audit trail tetap tersimpan) dan regenerasi PDF yang crash-safe'
+        en: 'Digital contract generated automatically when a candidate is confirmed, signed on screen, and voided automatically if the booking is cancelled (audit trail preserved)',
+        id: 'Kontrak digital yang digenerate otomatis saat kandidat dikonfirmasi, ditandatangani di layar, dan otomatis di-void kalau booking dibatalkan (audit trail tetap tersimpan)'
     },
     'cs.jbtb.step4': {
-        en: 'Self-hosted WhatsApp notification gateway running as a queued job, decoupled so a failed message never blocks the action that triggered it',
-        id: 'Gateway notifikasi WhatsApp self-hosted yang jalan sebagai queued job, di-decouple biar pesan yang gagal kirim nggak pernah nge-block action yang men-trigger-nya'
+        en: 'Field attendance: Extras check in with a selfie, the on-site coordinator validates or rejects it, and notes or sanctions are logged per person',
+        id: 'Absensi lapangan: Extras check-in pakai selfie, koordinator lapangan memvalidasi atau menolaknya, dan catatan atau sanksi tercatat per orang'
+    },
+    'cs.jbtb.step5': {
+        en: 'In-app notifications as the primary channel, plus a self-hosted WhatsApp gateway running as a queued job so a failed message never blocks the action that triggered it',
+        id: 'Notifikasi in-app sebagai kanal utama, ditambah gateway WhatsApp self-hosted yang jalan sebagai queued job, biar pesan yang gagal kirim nggak pernah nge-block action yang men-trigger-nya'
     },
     'cs.jbtb.techNote': {
         en: 'Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production, so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself.',
