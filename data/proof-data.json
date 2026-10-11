@@ -233,12 +233,14 @@
     {
       "id": "ensa",
       "title": "Enterprise Networking, Security & Automation (ENSA)",
-      "images": [],
+      "images": [
+        "../image/cert-ensa.webp"
+      ],
       "badge": "96%",
       "badgeTone": "blue",
       "date": "2026",
       "issuer": "Cisco Networking Academy",
-      "desc": "Course-completion exam covering enterprise routing/switching, security hardening, and network automation. Final assessment completed in Cisco Packet Tracer Physical Mode (rack-mounting, cabling, OSPFv2, NAT/PAT, ACLs, SSH, TFTP backup, IOS upgrade). Score: 96%.",
+      "desc": "Cisco Networking Academy course on enterprise routing and switching, network security hardening, and network automation. The final assessment was done in Cisco Packet Tracer Physical Mode: rack-mounting, cabling, OSPFv2, NAT/PAT, ACLs, SSH, TFTP backup, and an IOS upgrade. Score: 96%.",
       "kind": "Networking",
       "tags": [
         "Cisco IOS",

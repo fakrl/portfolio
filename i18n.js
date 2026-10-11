@@ -355,6 +355,13 @@ const I18N = {
     },
     'cert.ukbi.tag': { en: 'Language Certification', id: 'Sertifikasi Bahasa' },
 
+    'cert.ensa.title': { en: 'Enterprise Networking, Security & Automation (ENSA)', id: 'Enterprise Networking, Security & Automation (ENSA)' },
+    'cert.ensa.desc': {
+        en: 'Cisco Networking Academy course on enterprise routing and switching, network security hardening, and network automation. The final assessment was done in Cisco Packet Tracer Physical Mode: rack-mounting, cabling, OSPFv2, NAT/PAT, ACLs, SSH, TFTP backup, and an IOS upgrade. Score: 96%.',
+        id: 'Kursus Cisco Networking Academy tentang routing dan switching enterprise, pengamanan jaringan, dan otomasi jaringan. Ujian akhirnya dikerjakan di Cisco Packet Tracer Physical Mode: rack-mounting, pemasangan kabel, OSPFv2, NAT/PAT, ACL, SSH, backup TFTP, dan upgrade IOS. Skor: 96%.'
+    },
+    'cert.ensa.tag': { en: 'Networking', id: 'Jaringan' },
+
     // ── Project cards ──
     'proj.nobilive.date': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
     'proj.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
