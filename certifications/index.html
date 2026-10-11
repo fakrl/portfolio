@@ -303,6 +303,32 @@
                 </div>
             </div>
 
+            <!-- Cisco ENSA
+                 Placeholder: image/cert-ensa.webp belum ada. Card otomatis nampilin placeholder (onerror)
+                 dan modal nampilin "Screenshots coming soon" sampai file-nya ditaruh di /image/.
+                 TODO pas file sertifikat ada: taruh image/cert-ensa.webp, isi data-credential-id (kalau ada),
+                 cek ulang tanggal terbit + skor, lalu naikkan ke timeline "Education & Certification" di homepage. -->
+            <div id="ensa" class="glass-card proof-card proof-card--timeline"
+                 data-title="Enterprise Networking, Security &amp; Automation (ENSA)"
+                 data-images='["../image/cert-ensa.webp"]'>
+                <div class="proof-card__img">
+                    <img src="../image/cert-ensa.webp" alt="Cisco ENSA"
+                         onerror="this.parentElement.classList.add('proof-card__img--placeholder')">
+                    <span class="proof-card__badge proof-card__badge--blue">96%</span>
+                    <span class="proof-card__click-hint"><span class="msym">open_in_full</span></span>
+                </div>
+                <div class="proof-card__body">
+                    <span class="proof-card__date">2026</span>
+                    <h3 class="proof-card__title" data-i18n="cert.ensa.title">Enterprise Networking, Security &amp; Automation (ENSA)</h3>
+                    <p class="proof-card__issuer">Cisco Networking Academy</p>
+                    <p class="proof-card__desc" data-i18n="cert.ensa.desc">Cisco Networking Academy course on enterprise routing and switching, network security hardening, and network automation. The final assessment was done in Cisco Packet Tracer Physical Mode: rack-mounting, cabling, OSPFv2, NAT/PAT, ACLs, SSH, TFTP backup, and an IOS upgrade. Score: 96%.</p>
+                    <span class="proof-card__tag tag" data-i18n="cert.ensa.tag">Networking</span>
+                    <div class="skill-tags" style="margin-top:0.6rem">
+                        <span class="tag">Cisco IOS</span><span class="tag">OSPFv2</span><span class="tag">NAT/PAT</span><span class="tag">ACL</span><span class="tag">Network Security</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
