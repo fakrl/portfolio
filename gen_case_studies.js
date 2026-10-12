@@ -124,13 +124,13 @@ for (const item of data.projects || []) {
 
   const cs = item.caseStudy;
   const heroImage = (item.images && item.images[0]) || "";
-  const ogUrl = `https://fakrul.netlify.app/${slug}/`;
+  const ogUrl = `https://fakrul.dev/${slug}/`;
 
   let html = template
     .replace(/{{NS}}/g, ns)
     .replace(/{{TITLE}}/g, esc(item.title))
     .replace(/{{META_DESCRIPTION}}/g, esc(item.desc))
-    .replace(/{{OG_IMAGE}}/g, heroImage ? `https://fakrul.netlify.app/${heroImage.replace("../", "")}` : "https://fakrul.netlify.app/image/og-image.webp")
+    .replace(/{{OG_IMAGE}}/g, heroImage ? `https://fakrul.dev/${heroImage.replace("../", "")}` : "https://fakrul.dev/image/og-image.webp")
     .replace(/{{OG_URL}}/g, ogUrl)
     .replace(/{{PROJECT_TITLE}}/g, esc(item.title))
     .replace(/{{PROJECT_SUMMARY}}/g, esc(cs.summary || item.desc))
