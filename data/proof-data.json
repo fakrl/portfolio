@@ -454,10 +454,7 @@
       "id": "proj-redaily",
       "featured": true,
       "title": "Re:Daily Coffee Website",
-      "images": [
-        "../image/proj-redaily-1.webp",
-        "../image/proj-redaily-2.webp"
-      ],
+      "images": [],
       "github": "https://github.com/fakrl/re-daily",
       "github-label": "GitHub",
       "link": "https://re-daily.my.id/",

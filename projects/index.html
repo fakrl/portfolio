@@ -96,6 +96,7 @@
 
             <div id="proj-nobilive" class="glass-card proof-card proof-card--featured"
                  data-title="NobiPlay — Live Streaming Module"
+                 data-embed="https://www.nobiplay.com"
                  data-case-study="/project/nobilive/"
                  data-link="https://www.nobiplay.com"
                  data-link-label="Visit NobiPlay →"
@@ -125,6 +126,7 @@
 
             <div id="proj-nobel" class="glass-card proof-card proof-card--featured"
                  data-title="Nobel Akademi"
+                 data-embed="https://nobelakademi.id"
                  data-case-study="/project/nobel-akademi/"
                  data-link="https://nobelakademi.id"
                  data-link-label="Visit site →"
@@ -155,7 +157,8 @@
 
             <div id="proj-redaily" class="glass-card proof-card proof-card--featured"
                  data-title="Re:Daily Coffee Website"
-                 data-images='["../image/proj-redaily-1.webp","../image/proj-redaily-2.webp"]'
+                 data-embed="https://re-daily.my.id/"
+                 data-images='[]'
                  data-case-study="/project/re-daily/"
                  data-link="https://re-daily.my.id/"
                  data-link-label="Visit site →"
@@ -187,6 +190,7 @@
 
             <div id="proj-notes" class="glass-card proof-card proof-card--featured"
                  data-title="Notes: Personal Blog"
+                 data-embed="https://notes.fakrul.dev/"
                  data-images='[]'
                  data-case-study="/project/notes/"
                  data-link="https://notes.fakrul.dev/"
@@ -376,6 +380,7 @@
                     <span class="cert-modal__placeholder-icon"><span class="msym">image</span></span>
                     <p class="cert-modal__placeholder-text">Screenshots coming soon</p>
                 </div>
+                <div class="live-embed live-embed--hero live-embed--modal" id="certModalEmbed" style="display:none"><iframe title="Live preview" sandbox="allow-scripts allow-same-origin allow-popups" referrerpolicy="no-referrer"></iframe></div>
                 <button class="cert-modal__nav cert-modal__nav--prev" id="certModalPrev">‹</button>
                 <button class="cert-modal__nav cert-modal__nav--next" id="certModalNext">›</button>
             </div>
@@ -561,12 +566,33 @@ document.querySelectorAll('.proof-card__img img').forEach(img => {
         }
 
         footer.style.display = footer.children.length ? 'flex' : 'none';
-        showImg(0);
+        const embedUrl = card.dataset.embed;
+        const emb = document.getElementById('certModalEmbed');
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
+        if (embedUrl) {
+            modalImg.style.display = 'none';
+            modalPH.style.display = 'none';
+            counter.textContent = '';
+            dotsEl.style.display = 'none';
+            btnPrev.style.display = 'none';
+            btnNext.style.display = 'none';
+            emb.style.display = 'block';
+            emb.querySelector('iframe').src = embedUrl;
+            if (window.LiveEmbed) window.LiveEmbed.fit(emb);
+        } else {
+            emb.style.display = 'none';
+            emb.querySelector('iframe').src = 'about:blank';
+            dotsEl.style.display = '';
+            btnPrev.style.display = '';
+            btnNext.style.display = '';
+            showImg(0);
+        }
     }
 
     function closeModal() {
+        const f = document.querySelector('#certModalEmbed iframe');
+        if (f) f.src = 'about:blank';
         overlay.classList.remove('open');
         document.body.style.overflow = '';
     }
