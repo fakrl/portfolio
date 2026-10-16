@@ -73,7 +73,10 @@ function renderScreens(screens, ns) {
     .join("\n");
 }
 
-function renderHero(heroImage, title) {
+function renderHero(heroImage, title, embed) {
+  if (embed) {
+    return `            <div class="live-embed live-embed--hero"><iframe src="${esc(embed)}" title="${esc(title)} live preview" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups" referrerpolicy="no-referrer"></iframe></div>`;
+  }
   if (heroImage) {
     return `            <img src="${esc(heroImage)}" alt="${esc(title)} screenshot" fetchpriority="high">`;
   }
@@ -142,7 +145,7 @@ for (const item of data.projects || []) {
     .replace(/{{PROJECT_TITLE}}/g, esc(item.title))
     .replace(/{{PROJECT_SUMMARY}}/g, esc(cs.summary || item.desc))
     .replace(/{{PROJECT_LINKS}}/g, renderLinks(item))
-    .replace(/{{HERO_BLOCK}}/g, renderHero(heroImage ? heroImage.replace("../", "/") : "", item.title))
+    .replace(/{{HERO_BLOCK}}/g, renderHero(heroImage ? heroImage.replace("../", "/") : "", item.title, item.embed))
     .replace(/{{WHY_BUILT}}/g, esc(cs.whyBuilt))
     .replace(/{{GOAL}}/g, esc(cs.goal))
     .replace(/{{OVERVIEW_ROLE}}/g, esc(cs.overview?.role))
