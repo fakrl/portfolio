@@ -1169,3 +1169,8 @@ body.dark  .proof-card__tech i { color: #bbb; }
 body.light .contribute-btn { background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.10); color: #555; box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
 body.dark  .contribute-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #aaa; box-shadow: 0 4px 16px rgba(0,0,0,0.40); }
 .contribute-btn:hover { transform: scale(1.08); }
+/* Live site preview (iframe scaled from a 1280px desktop viewport) */
+.live-embed { position: relative; width: 100%; height: 100%; min-height: 240px; overflow: hidden; background: #fff; }
+.live-embed iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform-origin: 0 0; pointer-events: none; }
+.live-embed--hero { height: auto; min-height: 0; aspect-ratio: 16 / 10; border-radius: var(--radius-lg); margin-bottom: 2.4rem; border: 1px solid rgba(128, 128, 128, 0.25); }
+.live-embed--hero iframe { pointer-events: auto; }

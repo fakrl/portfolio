@@ -325,45 +325,6 @@
   ],
   "projects": [
     {
-      "id": "proj-nobel",
-      "featured": true,
-      "title": "Nobel Akademi",
-      "images": [],
-      "link": "https://nobelakademi.id",
-      "link-label": "Visit Site",
-      "badge": "Laravel 11",
-      "badgeTone": "purple",
-      "date": "Jun 2026 – Present",
-      "issuer": "PT Indotech Digital Group — Full Stack Engineer",
-      "desc": "End-to-end bootcamp LMS module in Laravel 11, covering the data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.",
-      "tags": [
-        "Laravel 11",
-        "Eloquent",
-        "Admin CMS",
-        "MySQL",
-        "Bootstrap"
-      ],
-      "caseStudy": {
-        "whyBuilt": "This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital, and a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.",
-        "goal": "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages. I implemented the UI from designs the team already had, while owning the data model and full-stack logic myself.",
-        "overview": {
-          "role": "Full Stack Engineer (feature team)",
-          "period": "Jun 2026 – Present",
-          "type": "Production feature work (internship)",
-          "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations"
-        },
-        "whatItDoes": [
-          "Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations",
-          "Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries",
-          "Slug-based routing, YouTube embed, and an inline video player on detail pages",
-          "Admin CMS with full CRUD for bootcamps, categories, and curriculum modules/items",
-          "firstOrFail() for clean not-found handling, plus is_active scoping to keep drafts off public pages"
-        ],
-        "screens": [],
-        "techNote": "The UI came from designs the team already had. My part was turning that into a working data model and the full-stack logic behind it: normalizing what could've been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row."
-      }
-    },
-    {
       "id": "proj-jbtb-casting",
       "featured": true,
       "title": "SIM Casting — PT. JBTB Casting Creative Group",
@@ -406,6 +367,175 @@
         "screens": [],
         "techNote": "Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production, so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself."
       }
+    },
+    {
+      "id": "proj-nobilive",
+      "featured": false,
+      "title": "NobiPlay — Live Streaming Module",
+      "images": [],
+      "badge": "Laravel 13",
+      "badgeTone": "purple",
+      "date": "Jul 2026 – Present",
+      "issuer": "PT Indotech Digital Group — Full Stack Engineer",
+      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
+      "tags": [
+        "Laravel 13",
+        "RBAC",
+        "Studio CMS",
+        "Live Streaming"
+      ],
+      "caseStudy": {
+        "whyBuilt": "A second product line at PT Indotech Digital Group alongside Nobel Akademi, feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.",
+        "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, and the automation that prepares a stream channel.",
+        "overview": {
+          "role": "Full Stack Engineer (feature team)",
+          "period": "Jul 2026 – Present",
+          "type": "Production feature work (internship)",
+          "architecture": "Laravel 13, role-based access control"
+        },
+        "whatItDoes": [
+          "Role-based Studio CMS for hosts and admins",
+          "Stream scheduling consolidated into a single Live Studio flow",
+          "Automated stream-channel setup from the Studio, with a live health indicator and readable error messages when the streaming provider refuses a request",
+          "Guards so the automation only ever touches channels the app itself created, plus login throttling and viewing rules per stream visibility",
+          "Pause and end controls for hosts and admins, backed by a test suite that stays green (442 tests)"
+        ],
+        "screens": [],
+        "techNote": "The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live."
+      }
+    },
+    {
+      "id": "proj-nobel",
+      "featured": true,
+      "title": "Nobel Akademi",
+      "images": [],
+      "link": "https://nobelakademi.id",
+      "link-label": "Visit Site",
+      "badge": "Laravel 11",
+      "badgeTone": "purple",
+      "date": "Jun 2026 – Present",
+      "issuer": "PT Indotech Digital Group — Full Stack Engineer",
+      "desc": "End-to-end bootcamp LMS module in Laravel 11, covering the data model (6 related tables), backend, admin CMS, and public pages. Eager-loaded Eloquent relations (no N+1), slug routing, YouTube embeds, and a ratings system.",
+      "tags": [
+        "Laravel 11",
+        "Eloquent",
+        "Admin CMS",
+        "MySQL",
+        "Bootstrap"
+      ],
+      "caseStudy": {
+        "whyBuilt": "This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital, and a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.",
+        "goal": "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages. I implemented the UI from designs the team already had, while owning the data model and full-stack logic myself.",
+        "overview": {
+          "role": "Full Stack Engineer (feature team)",
+          "period": "Jun 2026 – Present",
+          "type": "Production feature work (internship)",
+          "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations"
+        },
+        "whatItDoes": [
+          "Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations",
+          "Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries",
+          "Slug-based routing, YouTube embed, and an inline video player on detail pages",
+          "Admin CMS with full CRUD for bootcamps, categories, and curriculum modules/items",
+          "firstOrFail() for clean not-found handling, plus is_active scoping to keep drafts off public pages"
+        ],
+        "screens": [],
+        "techNote": "The UI came from designs the team already had. My part was turning that into a working data model and the full-stack logic behind it: normalizing what could've been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row."
+      }
+    },
+    {
+      "id": "proj-redaily",
+      "featured": true,
+      "title": "Re:Daily Coffee Website",
+      "images": [
+        "../image/proj-redaily-1.webp",
+        "../image/proj-redaily-2.webp"
+      ],
+      "github": "https://github.com/fakrl/re-daily",
+      "github-label": "GitHub",
+      "link": "https://re-daily.my.id/",
+      "link-label": "Visit site →",
+      "live": "https://re-daily.my.id/",
+      "badge": "Live",
+      "badgeTone": "green",
+      "date": "Oct 2026",
+      "issuer": "Solo build for a friend's café · Pamulang",
+      "desc": "Website for Re:Daily Coffee, a café near Universitas Pamulang that a friend owns. Home, a full menu with prices, a location page with map, and visitor reviews, built with a zero-dependency Node generator and hosted on GitHub Pages under the café's own domain.",
+      "tags": [
+        "Node.js",
+        "HTML/CSS",
+        "GitHub Pages",
+        "GitHub Actions",
+        "SEO",
+        "Schema.org"
+      ],
+      "caseStudy": {
+        "summary": "A fast, mobile-first website for a local café: menu, location, and reviews in one place, with the structured data and metadata search engines need. Built and deployed solo for a friend's business.",
+        "whyBuilt": "The café had a Google Maps listing and an old Blogger page, but no proper site of its own. A friend owns it, so I built an official one, and used it to practice local SEO on something real.",
+        "goal": "Answer what people ask before they visit (what is on the menu, how much, where, until when) on one fast page set that Google can read and index.",
+        "overview": {
+          "role": "Solo developer",
+          "period": "Oct 2026",
+          "type": "Client site for a friend's café",
+          "architecture": "Static HTML from a Node build script, GitHub Pages"
+        },
+        "whatItDoes": [
+          "Home, full menu in four categories with the café's own prices, and a location page with an embedded map",
+          "Visitor reviews section built from real Google Maps comments",
+          "Local SEO: café structured data (address, hours, menu), sitemap, robots, canonical tags, and social previews per page",
+          "Light and dark themes with a floating pill navigation, checked at phone widths",
+          "Anonymous visitor counter on a small realtime database"
+        ],
+        "screens": [],
+        "techNote": "A zero-dependency Node script writes plain HTML into dist/, and a GitHub Actions workflow deploys it to GitHub Pages on the custom domain. Internal links are relative, so the same build works on a sub-path preview and at the domain root. I moved hosting off Netlify after its free tier injected a platform badge into the pages."
+      },
+      "embed": "https://re-daily.my.id/"
+    },
+    {
+      "id": "proj-notes",
+      "featured": true,
+      "title": "Notes: Personal Blog",
+      "images": [],
+      "github": "https://github.com/fakrl/notes",
+      "github-label": "GitHub",
+      "link": "https://notes.fakrul.dev/",
+      "link-label": "Visit site →",
+      "live": "https://notes.fakrul.dev/",
+      "badge": "Live",
+      "badgeTone": "green",
+      "date": "Oct 2026",
+      "issuer": "Personal project · notes.fakrul.dev",
+      "desc": "My own blog, built on a static site generator I wrote: Markdown posts with front matter, per-post SEO, light and dark themes, a visitor counter, and GitHub-based comments, deployed to GitHub Pages on a custom subdomain.",
+      "tags": [
+        "Node.js",
+        "Markdown",
+        "SEO",
+        "JSON-LD",
+        "GitHub Pages",
+        "Giscus"
+      ],
+      "caseStudy": {
+        "summary": "A personal blog where publishing a post means writing one Markdown file, and every page ships the metadata search engines and link previews need. I wrote the generator myself instead of using a theme.",
+        "whyBuilt": "I wanted a place to write about coding, campus life, and the cafés I work from, and a real site to practice SEO on. Building the generator myself meant knowing exactly what every tag on the page is for.",
+        "goal": "A fast blog with no database to run, where a new post is a file, and every page is correct for search, sharing, and reading on a phone.",
+        "overview": {
+          "role": "Solo developer",
+          "period": "Oct 2026",
+          "type": "Personal project",
+          "architecture": "Static HTML from a Node build script (marked), GitHub Pages"
+        },
+        "whatItDoes": [
+          "Markdown posts with front matter for tags, cover image, and a draft flag; the build fails if a placeholder is left in a published post",
+          "Per-page SEO: canonical, Open Graph and Twitter cards, JSON-LD (BlogPosting, breadcrumbs, Person), sitemap, RSS, and robots",
+          "An author page with Person schema linking my profiles, so search engines can tie them to one identity",
+          "Floating pill navigation, sidebar with latest posts and topics, and light and dark themes",
+          "Comments through Giscus (GitHub Discussions), so there is no backend to run",
+          "Anonymous visitor counter on a small realtime database"
+        ],
+        "screens": [],
+        "techNote": "One Node script with marked as its only dependency writes dist/, and GitHub Actions deploys it to GitHub Pages. Comments use Giscus with strict matching on the page path; the trade-off is that commenters need a GitHub account, which suits a developer audience but not every post."
+      },
+      "embed": "https://notes.fakrul.dev/"
     },
     {
       "id": "proj-evermos",
@@ -714,134 +844,6 @@
           }
         ],
         "techNote": "Built as a component library first, screens second. Every button, card, and input state was a reusable component before a single full screen was assembled, which is what made the prototype's interactions consistent instead of each screen behaving slightly differently."
-      }
-    },
-    {
-      "id": "proj-nobilive",
-      "featured": false,
-      "title": "NobiPlay — Live Streaming Module",
-      "images": [],
-      "badge": "Laravel 13",
-      "badgeTone": "purple",
-      "date": "Jul 2026 – Present",
-      "issuer": "PT Indotech Digital Group — Full Stack Engineer",
-      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
-      "tags": [
-        "Laravel 13",
-        "RBAC",
-        "Studio CMS",
-        "Live Streaming"
-      ],
-      "caseStudy": {
-        "whyBuilt": "A second product line at PT Indotech Digital Group alongside Nobel Akademi, feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.",
-        "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, and the automation that prepares a stream channel.",
-        "overview": {
-          "role": "Full Stack Engineer (feature team)",
-          "period": "Jul 2026 – Present",
-          "type": "Production feature work (internship)",
-          "architecture": "Laravel 13, role-based access control"
-        },
-        "whatItDoes": [
-          "Role-based Studio CMS for hosts and admins",
-          "Stream scheduling consolidated into a single Live Studio flow",
-          "Automated stream-channel setup from the Studio, with a live health indicator and readable error messages when the streaming provider refuses a request",
-          "Guards so the automation only ever touches channels the app itself created, plus login throttling and viewing rules per stream visibility",
-          "Pause and end controls for hosts and admins, backed by a test suite that stays green (442 tests)"
-        ],
-        "screens": [],
-        "techNote": "The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live."
-      }
-    },
-    {
-      "id": "proj-redaily",
-      "featured": true,
-      "title": "Re:Daily Coffee Website",
-      "images": [
-        "../image/proj-redaily-1.webp",
-        "../image/proj-redaily-2.webp"
-      ],
-      "github": "https://github.com/fakrl/re-daily",
-      "github-label": "GitHub",
-      "link": "https://re-daily.my.id/",
-      "link-label": "Visit site →",
-      "live": "https://re-daily.my.id/",
-      "badge": "Live",
-      "badgeTone": "green",
-      "date": "Oct 2026",
-      "issuer": "Solo build for a friend's café · Pamulang",
-      "desc": "Website for Re:Daily Coffee, a café near Universitas Pamulang that a friend owns. Home, a full menu with prices, a location page with map, and visitor reviews, built with a zero-dependency Node generator and hosted on GitHub Pages under the café's own domain.",
-      "tags": [
-        "Node.js",
-        "HTML/CSS",
-        "GitHub Pages",
-        "GitHub Actions",
-        "SEO",
-        "Schema.org"
-      ],
-      "caseStudy": {
-        "summary": "A fast, mobile-first website for a local café: menu, location, and reviews in one place, with the structured data and metadata search engines need. Built and deployed solo for a friend's business.",
-        "whyBuilt": "The café had a Google Maps listing and an old Blogger page, but no proper site of its own. A friend owns it, so I built an official one, and used it to practice local SEO on something real.",
-        "goal": "Answer what people ask before they visit (what is on the menu, how much, where, until when) on one fast page set that Google can read and index.",
-        "overview": {
-          "role": "Solo developer",
-          "period": "Oct 2026",
-          "type": "Client site for a friend's café",
-          "architecture": "Static HTML from a Node build script, GitHub Pages"
-        },
-        "whatItDoes": [
-          "Home, full menu in four categories with the café's own prices, and a location page with an embedded map",
-          "Visitor reviews section built from real Google Maps comments",
-          "Local SEO: café structured data (address, hours, menu), sitemap, robots, canonical tags, and social previews per page",
-          "Light and dark themes with a floating pill navigation, checked at phone widths",
-          "Anonymous visitor counter on a small realtime database"
-        ],
-        "screens": [],
-        "techNote": "A zero-dependency Node script writes plain HTML into dist/, and a GitHub Actions workflow deploys it to GitHub Pages on the custom domain. Internal links are relative, so the same build works on a sub-path preview and at the domain root. I moved hosting off Netlify after its free tier injected a platform badge into the pages."
-      }
-    },
-    {
-      "id": "proj-notes",
-      "featured": true,
-      "title": "Notes: Personal Blog",
-      "images": [],
-      "github": "https://github.com/fakrl/notes",
-      "github-label": "GitHub",
-      "link": "https://notes.fakrul.dev/",
-      "link-label": "Visit site →",
-      "live": "https://notes.fakrul.dev/",
-      "badge": "Live",
-      "badgeTone": "green",
-      "date": "Oct 2026",
-      "issuer": "Personal project · notes.fakrul.dev",
-      "desc": "My own blog, built on a static site generator I wrote: Markdown posts with front matter, per-post SEO, light and dark themes, a visitor counter, and GitHub-based comments, deployed to GitHub Pages on a custom subdomain.",
-      "tags": [
-        "Node.js",
-        "Markdown",
-        "SEO",
-        "JSON-LD",
-        "GitHub Pages",
-        "Giscus"
-      ],
-      "caseStudy": {
-        "summary": "A personal blog where publishing a post means writing one Markdown file, and every page ships the metadata search engines and link previews need. I wrote the generator myself instead of using a theme.",
-        "whyBuilt": "I wanted a place to write about coding, campus life, and the cafés I work from, and a real site to practice SEO on. Building the generator myself meant knowing exactly what every tag on the page is for.",
-        "goal": "A fast blog with no database to run, where a new post is a file, and every page is correct for search, sharing, and reading on a phone.",
-        "overview": {
-          "role": "Solo developer",
-          "period": "Oct 2026",
-          "type": "Personal project",
-          "architecture": "Static HTML from a Node build script (marked), GitHub Pages"
-        },
-        "whatItDoes": [
-          "Markdown posts with front matter for tags, cover image, and a draft flag; the build fails if a placeholder is left in a published post",
-          "Per-page SEO: canonical, Open Graph and Twitter cards, JSON-LD (BlogPosting, breadcrumbs, Person), sitemap, RSS, and robots",
-          "An author page with Person schema linking my profiles, so search engines can tie them to one identity",
-          "Floating pill navigation, sidebar with latest posts and topics, and light and dark themes",
-          "Comments through Giscus (GitHub Discussions), so there is no backend to run",
-          "Anonymous visitor counter on a small realtime database"
-        ],
-        "screens": [],
-        "techNote": "One Node script with marked as its only dependency writes dist/, and GitHub Actions deploys it to GitHub Pages. Comments use Giscus with strict matching on the page path; the trade-off is that commenters need a GitHub account, which suits a developer audience but not every post."
       }
     },
     {
