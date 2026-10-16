@@ -346,7 +346,12 @@
       "caseStudy": {
         "whyBuilt": "This was feature work on a live production LMS during my Full Stack internship at PT Indotech Digital, and a chance to ship a complete module end to end (data model to public pages) inside an existing large Laravel codebase, not a greenfield project.",
         "goal": "Build the Bootcamp module for Nobel Akademi's LMS end to end: a normalized data layer, an admin CMS for managing bootcamp content, and public listing/detail pages. I implemented the UI from designs the team already had, while owning the data model and full-stack logic myself.",
-        "overview": { "role": "Full Stack Engineer (feature team)", "period": "Jun 2026 – Present", "type": "Production feature work (internship)", "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations" },
+        "overview": {
+          "role": "Full Stack Engineer (feature team)",
+          "period": "Jun 2026 – Present",
+          "type": "Production feature work (internship)",
+          "architecture": "Laravel 11, MVC, eager-loaded Eloquent relations"
+        },
         "whatItDoes": [
           "Normalized 6-table data model (Bootcamp, Category, Learning, Tool, Module, ModuleItem) across 7 migrations, including banner/video schema iterations",
           "Public listing + detail pages with eager-loaded relations (category, instructor, learnings, tools, modules.items) to avoid N+1 queries",
@@ -369,7 +374,7 @@
       "badgeTone": "purple",
       "date": "Sep 2026 – Present",
       "issuer": "Project Lead & Lead Developer · Final Year Project (team of 3)",
-      "desc": "PT. JBTB Casting Creative Group ran recruitment and payment for its extras through WhatsApp groups, spreadsheets, and Google Drive, so fee deals, staff honor, and project money were easy to dispute or lose track of. I built the Laravel 13 system that replaced it as our final year project: fee negotiation is logged round by round, staff get real payslips, and every project's income, receivables, and expenses live in one place.",
+      "desc": "PT. JBTB Casting Creative Group ran recruitment and payment for its extras through WhatsApp groups, spreadsheets, and Google Drive, so fee deals, staff honor, and project money were easy to dispute or lose track of. I built the Laravel 13 system that replaced it as our final year project: fee negotiation is logged round by round, staff get real payslips, and each project's honor, invoices, and costs are recorded in one place.",
       "tags": [
         "Laravel 13",
         "PHP 8.3",
@@ -380,15 +385,23 @@
       "caseStudy": {
         "summary": "A Laravel 13 system that replaced a casting agency's manual WhatsApp, Excel, and Drive workflow, so fee agreements, staff honor, and project finances are recorded instead of argued over later. Built as a team final year project, where I lead the build: data model, backend, and full-stack logic end to end.",
         "whyBuilt": "I wanted my final year project to solve a real problem for a real company, not be a tutorial-scale CRUD app. The agency's own team described how fee deals and pay were tracked across chat threads and spreadsheets, and our team took that on as the project, with me leading the system build while teammates cover the academic documentation.",
-        "goal": "Replace the agency's manual recruitment-and-payment process with one system that solves three concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, staff honor that comes with a clear payslip per project instead of a guess, and project finances (income, receivables, expenses, balance, projection) computed from a single source instead of scattered spreadsheets.",
-        "overview": { "role": "Project Lead & Lead Developer", "period": "Sep 2026 – Present", "type": "Final Year Project · team of 3", "architecture": "Laravel 13, Blade, role-based access control" },
+        "goal": "Replace the agency's manual recruitment-and-payment process with one system that solves three concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, staff honor that comes with a clear payslip per project instead of a guess, and project money (honor, invoices, other costs) recorded in one place instead of scattered spreadsheets.",
+        "overview": {
+          "role": "Project Lead & Lead Developer",
+          "period": "Sep 2026 – Present",
+          "type": "Final Year Project · team of 3",
+          "architecture": "Laravel 13, Blade, role-based access control"
+        },
         "whatItDoes": [
           "In-app multi-round fee negotiation between Admin and Extras, every offer logged until there's a deal, so what got agreed to is never up for dispute later",
           "Staff honor set per event, with a payslip PDF generated automatically once the project wraps, replacing a guessed number with an actual slip",
-          "Project finance view (income, receivables, expenses, balance, projection) computed from one source, with invoices that get signed and marked paid",
+          "Project money kept as records, not guesses: honor per Extras, staff payroll with payslips and work history, and invoices that get signed and marked paid",
           "Digital contract generated automatically when a candidate is confirmed, signed on screen, and voided automatically if the booking is cancelled (audit trail preserved)",
           "Field attendance: Extras check in with a selfie, the on-site coordinator validates or rejects it, and notes or sanctions are logged per person",
-          "In-app notifications as the primary channel, plus a self-hosted WhatsApp gateway running as a queued job so a failed message never blocks the action that triggered it"
+          "In-app notifications as the primary channel, plus a self-hosted WhatsApp gateway running as a queued job so a failed message never blocks the action that triggered it",
+          "Invite an Extras to a project in-app (tracked), with a WhatsApp button so the admin can follow up manually",
+          "Payment disputes can be resolved: Extras flag a problem, the admin is notified, adds a resolution note and optional new proof, and the payment returns for confirmation",
+          "Checked by 769 automated tests (SQLite, then MySQL) and a 198-finding UX audit across five roles, with the fixes shipped in batches"
         ],
         "screens": [],
         "techNote": "Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production, so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself."
@@ -433,7 +446,12 @@
       "caseStudy": {
         "whyBuilt": "I wanted hands-on proof that I could design a backend from scratch, not just consume APIs someone else built. Evermos x Rakamin's brief was open enough to let me make real architectural calls instead of following a fixed spec.",
         "goal": "Build a marketplace REST API that could plausibly sit behind a real e-commerce app: sellers manage stores and products, buyers browse and transact, everything auth-gated and consistent even under concurrent writes.",
-        "overview": { "role": "Solo Backend Developer", "period": "Dec 2025", "type": "Internship Project", "architecture": "Clean Architecture (Handler-Service-Repository)" },
+        "overview": {
+          "role": "Solo Backend Developer",
+          "period": "Dec 2025",
+          "type": "Internship Project",
+          "architecture": "Clean Architecture (Handler-Service-Repository)"
+        },
         "whatItDoes": [
           "JWT authentication with role-based access control",
           "Store, address, and category management per seller",
@@ -441,9 +459,30 @@
           "Atomic transactions for order/checkout consistency"
         ],
         "screens": [
-          { "icon": "api", "title": "Auth & User", "desc": "JWT-based login/register with role checks enforced at the middleware layer, not scattered across handlers.", "images": ["../image/proj-evermos-2.webp"] },
-          { "icon": "store", "title": "Store & Product", "desc": "Sellers manage store profiles and products with multi-image upload and category assignment.", "images": ["../image/proj-evermos-5.webp"] },
-          { "icon": "receipt_long", "title": "Transaction", "desc": "Checkout flow wrapped in atomic DB transactions so a failure partway through never leaves stock or balances inconsistent.", "images": ["../image/proj-evermos-9.webp"] }
+          {
+            "icon": "api",
+            "title": "Auth & User",
+            "desc": "JWT-based login/register with role checks enforced at the middleware layer, not scattered across handlers.",
+            "images": [
+              "../image/proj-evermos-2.webp"
+            ]
+          },
+          {
+            "icon": "store",
+            "title": "Store & Product",
+            "desc": "Sellers manage store profiles and products with multi-image upload and category assignment.",
+            "images": [
+              "../image/proj-evermos-5.webp"
+            ]
+          },
+          {
+            "icon": "receipt_long",
+            "title": "Transaction",
+            "desc": "Checkout flow wrapped in atomic DB transactions so a failure partway through never leaves stock or balances inconsistent.",
+            "images": [
+              "../image/proj-evermos-9.webp"
+            ]
+          }
         ],
         "techNote": "Clean Architecture (Handler-Service-Repository) was the deliberate choice here over a quick MVC dump: it keeps business logic in the Service layer testable and independent of Gin's request/response types, so swapping the HTTP framework later wouldn't touch the domain logic at all. Atomic transactions on the Transaction module specifically guard against the classic race condition where two requests read the same stock count before either writes back."
       }
@@ -483,7 +522,12 @@
       "caseStudy": {
         "whyBuilt": "After a backend-heavy project (Evermos), I wanted to prove the frontend side too: taking a Figma design and live API data and shipping something pixel-accurate, not just functional.",
         "goal": "Build an e-commerce catalog frontend in Vue.js 2 that consumes a live REST API and supports multiple brand themes without duplicating components per theme.",
-        "overview": { "role": "Solo Frontend Developer", "period": "Oct – Nov 2025", "type": "Internship Project", "architecture": "Vue.js 2, component-based" },
+        "overview": {
+          "role": "Solo Frontend Developer",
+          "period": "Oct – Nov 2025",
+          "type": "Internship Project",
+          "architecture": "Vue.js 2, component-based"
+        },
         "whatItDoes": [
           "Live REST API integration for product listings",
           "3 dynamic UI themes switchable via class binding + CSS variables",
@@ -491,8 +535,22 @@
           "Deployed via GitLab CI/CD to Firebase Hosting"
         ],
         "screens": [
-          { "icon": "storefront", "title": "Catalog Listing", "desc": "Product grid pulling live data from the REST API, with the active theme controlling color tokens and imagery.", "images": ["../image/proj-coreinitiative-2.webp"] },
-          { "icon": "palette", "title": "Theme Switching", "desc": "3 distinct brand themes toggled at runtime via a single class binding, backed by CSS custom properties rather than separate stylesheets.", "images": ["../image/proj-coreinitiative-6.webp"] }
+          {
+            "icon": "storefront",
+            "title": "Catalog Listing",
+            "desc": "Product grid pulling live data from the REST API, with the active theme controlling color tokens and imagery.",
+            "images": [
+              "../image/proj-coreinitiative-2.webp"
+            ]
+          },
+          {
+            "icon": "palette",
+            "title": "Theme Switching",
+            "desc": "3 distinct brand themes toggled at runtime via a single class binding, backed by CSS custom properties rather than separate stylesheets.",
+            "images": [
+              "../image/proj-coreinitiative-6.webp"
+            ]
+          }
         ],
         "techNote": "Themes are implemented as CSS custom properties swapped via one root class binding, not three separate component trees. This kept the Figma-to-code work honest to pixel-perfect specs per theme while avoiding 3x the maintenance surface if a layout bug showed up later."
       }
@@ -522,15 +580,34 @@
       "caseStudy": {
         "whyBuilt": "The brand had no social presence at all. This was a chance to build one from zero with a small team, and to test how far prompt engineering could scale content production without making the brand voice feel robotic.",
         "goal": "Establish and maintain a consistent brand voice and posting cadence for PT. Cahaya Millenial Sejahtera's social channels over a full year, not a short campaign burst.",
-        "overview": { "role": "Content & AI Workflow (team of 3)", "period": "Jul 2024 – Jul 2025", "type": "Marketing engagement", "architecture": "Instagram + prompt-engineered content pipeline" },
+        "overview": {
+          "role": "Content & AI Workflow (team of 3)",
+          "period": "Jul 2024 – Jul 2025",
+          "type": "Marketing engagement",
+          "architecture": "Instagram + prompt-engineered content pipeline"
+        },
         "whatItDoes": [
           "Consistent posting cadence sustained over a full year, not a short campaign",
           "Brand voice guidelines established and applied consistently across all content",
           "AI-assisted copywriting via prompt engineering, used to scale output across the team without losing consistency"
         ],
         "screens": [
-          { "icon": "campaign", "title": "Brand Content", "desc": "Consistent visual and voice identity applied across posts, maintained over a full year rather than a short campaign burst.", "images": ["../image/proj-cms-1.webp"] },
-          { "icon": "smart_toy", "title": "AI-Assisted Copywriting", "desc": "Prompt engineering used to scale content output across a 3-person team while keeping the brand voice consistent.", "images": ["../image/proj-cms-3.webp"] }
+          {
+            "icon": "campaign",
+            "title": "Brand Content",
+            "desc": "Consistent visual and voice identity applied across posts, maintained over a full year rather than a short campaign burst.",
+            "images": [
+              "../image/proj-cms-1.webp"
+            ]
+          },
+          {
+            "icon": "smart_toy",
+            "title": "AI-Assisted Copywriting",
+            "desc": "Prompt engineering used to scale content output across a 3-person team while keeping the brand voice consistent.",
+            "images": [
+              "../image/proj-cms-3.webp"
+            ]
+          }
         ],
         "techNote": "The interesting part wasn't the posting itself. It was building prompt templates specific enough that 3 different people writing copy still sounded like one consistent brand voice, instead of needing a single bottleneck writer to review everything."
       }
@@ -559,13 +636,25 @@
       "caseStudy": {
         "whyBuilt": "A nonprofit foundation needed a working website and someone to keep it maintained, a straightforward volunteer commitment that kept my WordPress skills active outside of the PHP/Laravel work I was doing elsewhere.",
         "goal": "Build and maintain a functional WordPress website for Yayasan Peduli Kesejahteraan Bersama, keeping content current without requiring the foundation's own staff to touch code.",
-        "overview": { "role": "Volunteer WordPress Developer", "period": "2023 – 2024", "type": "Volunteer work", "architecture": "WordPress" },
+        "overview": {
+          "role": "Volunteer WordPress Developer",
+          "period": "2023 – 2024",
+          "type": "Volunteer work",
+          "architecture": "WordPress"
+        },
         "whatItDoes": [
           "Website build and ongoing maintenance on WordPress for a nonprofit foundation",
           "Content updates handled without requiring foundation staff to edit code directly"
         ],
         "screens": [
-          { "icon": "volunteer_activism", "title": "Foundation Website", "desc": "A maintained WordPress site for the foundation's public-facing presence.", "images": ["../image/proj-ypkb-1.webp"] }
+          {
+            "icon": "volunteer_activism",
+            "title": "Foundation Website",
+            "desc": "A maintained WordPress site for the foundation's public-facing presence.",
+            "images": [
+              "../image/proj-ypkb-1.webp"
+            ]
+          }
         ],
         "techNote": "Domain has since expired, so this one's no longer live. It's kept here as a record of the volunteer work rather than a demoable site."
       }
@@ -595,15 +684,34 @@
       "caseStudy": {
         "whyBuilt": "I wanted a complete UI/UX piece for my coursework that went past static mockups: full user flows, a reusable component library, and an interactive prototype someone could actually click through.",
         "goal": "Design an on-demand grooming and beauty service booking app end to end in Figma: from user flows through a reusable component library to a clickable, interactive prototype.",
-        "overview": { "role": "UI/UX Designer", "period": "2024", "type": "Coursework project (UAS)", "architecture": "Figma, component-based design system" },
+        "overview": {
+          "role": "UI/UX Designer",
+          "period": "2024",
+          "type": "Coursework project (UAS)",
+          "architecture": "Figma, component-based design system"
+        },
         "whatItDoes": [
           "End-to-end user flows for browsing, booking, and managing grooming service appointments",
           "Reusable component library instead of one-off screens, so variants stay visually consistent",
           "Interactive, clickable prototype covering the key screens"
         ],
         "screens": [
-          { "icon": "design_services", "title": "Booking Flow", "desc": "Core user flow from browsing services to confirming a booking.", "images": ["../image/proj-groomy-2.webp"] },
-          { "icon": "widgets", "title": "Component Library", "desc": "Reusable components kept the design consistent across screens instead of one-off layouts per screen.", "images": ["../image/proj-groomy-3.webp"] }
+          {
+            "icon": "design_services",
+            "title": "Booking Flow",
+            "desc": "Core user flow from browsing services to confirming a booking.",
+            "images": [
+              "../image/proj-groomy-2.webp"
+            ]
+          },
+          {
+            "icon": "widgets",
+            "title": "Component Library",
+            "desc": "Reusable components kept the design consistent across screens instead of one-off layouts per screen.",
+            "images": [
+              "../image/proj-groomy-3.webp"
+            ]
+          }
         ],
         "techNote": "Built as a component library first, screens second. Every button, card, and input state was a reusable component before a single full screen was assembled, which is what made the prototype's interactions consistent instead of each screen behaving slightly differently."
       }
@@ -617,22 +725,123 @@
       "badgeTone": "purple",
       "date": "Jul 2026 – Present",
       "issuer": "PT Indotech Digital Group — Full Stack Engineer",
-      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
+      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
       "tags": [
         "Laravel 13",
         "RBAC",
-        "Studio CMS"
+        "Studio CMS",
+        "Live Streaming"
       ],
       "caseStudy": {
         "whyBuilt": "A second product line at PT Indotech Digital Group alongside Nobel Akademi, feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.",
-        "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules.",
-        "overview": { "role": "Full Stack Engineer (feature team)", "period": "Jul 2026 – Present", "type": "Production feature work (internship)", "architecture": "Laravel 13, role-based access control" },
+        "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, and the automation that prepares a stream channel.",
+        "overview": {
+          "role": "Full Stack Engineer (feature team)",
+          "period": "Jul 2026 – Present",
+          "type": "Production feature work (internship)",
+          "architecture": "Laravel 13, role-based access control"
+        },
         "whatItDoes": [
           "Role-based Studio CMS for hosts and admins",
-          "Stream scheduling consolidated into a single Live Studio flow"
+          "Stream scheduling consolidated into a single Live Studio flow",
+          "Automated stream-channel setup from the Studio, with a live health indicator and readable error messages when the streaming provider refuses a request",
+          "Guards so the automation only ever touches channels the app itself created, plus login throttling and viewing rules per stream visibility",
+          "Pause and end controls for hosts and admins, backed by a test suite that stays green (442 tests)"
         ],
         "screens": [],
         "techNote": "The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live."
+      }
+    },
+    {
+      "id": "proj-redaily",
+      "featured": true,
+      "title": "Re:Daily Coffee Website",
+      "images": [
+        "../image/proj-redaily-1.webp",
+        "../image/proj-redaily-2.webp"
+      ],
+      "github": "https://github.com/fakrl/re-daily",
+      "github-label": "GitHub",
+      "link": "https://re-daily.my.id/",
+      "link-label": "Visit site →",
+      "live": "https://re-daily.my.id/",
+      "badge": "Live",
+      "badgeTone": "green",
+      "date": "Oct 2026",
+      "issuer": "Solo build for a friend's café · Pamulang",
+      "desc": "Website for Re:Daily Coffee, a café near Universitas Pamulang that a friend owns. Home, a full menu with prices, a location page with map, and visitor reviews, built with a zero-dependency Node generator and hosted on GitHub Pages under the café's own domain.",
+      "tags": [
+        "Node.js",
+        "HTML/CSS",
+        "GitHub Pages",
+        "GitHub Actions",
+        "SEO",
+        "Schema.org"
+      ],
+      "caseStudy": {
+        "summary": "A fast, mobile-first website for a local café: menu, location, and reviews in one place, with the structured data and metadata search engines need. Built and deployed solo for a friend's business.",
+        "whyBuilt": "The café had a Google Maps listing and an old Blogger page, but no proper site of its own. A friend owns it, so I built an official one, and used it to practice local SEO on something real.",
+        "goal": "Answer what people ask before they visit (what is on the menu, how much, where, until when) on one fast page set that Google can read and index.",
+        "overview": {
+          "role": "Solo developer",
+          "period": "Oct 2026",
+          "type": "Client site for a friend's café",
+          "architecture": "Static HTML from a Node build script, GitHub Pages"
+        },
+        "whatItDoes": [
+          "Home, full menu in four categories with the café's own prices, and a location page with an embedded map",
+          "Visitor reviews section built from real Google Maps comments",
+          "Local SEO: café structured data (address, hours, menu), sitemap, robots, canonical tags, and social previews per page",
+          "Light and dark themes with a floating pill navigation, checked at phone widths",
+          "Anonymous visitor counter on a small realtime database"
+        ],
+        "screens": [],
+        "techNote": "A zero-dependency Node script writes plain HTML into dist/, and a GitHub Actions workflow deploys it to GitHub Pages on the custom domain. Internal links are relative, so the same build works on a sub-path preview and at the domain root. I moved hosting off Netlify after its free tier injected a platform badge into the pages."
+      }
+    },
+    {
+      "id": "proj-notes",
+      "featured": true,
+      "title": "Notes: Personal Blog",
+      "images": [],
+      "github": "https://github.com/fakrl/notes",
+      "github-label": "GitHub",
+      "link": "https://notes.fakrul.dev/",
+      "link-label": "Visit site →",
+      "live": "https://notes.fakrul.dev/",
+      "badge": "Live",
+      "badgeTone": "green",
+      "date": "Oct 2026",
+      "issuer": "Personal project · notes.fakrul.dev",
+      "desc": "My own blog, built on a static site generator I wrote: Markdown posts with front matter, per-post SEO, light and dark themes, a visitor counter, and GitHub-based comments, deployed to GitHub Pages on a custom subdomain.",
+      "tags": [
+        "Node.js",
+        "Markdown",
+        "SEO",
+        "JSON-LD",
+        "GitHub Pages",
+        "Giscus"
+      ],
+      "caseStudy": {
+        "summary": "A personal blog where publishing a post means writing one Markdown file, and every page ships the metadata search engines and link previews need. I wrote the generator myself instead of using a theme.",
+        "whyBuilt": "I wanted a place to write about coding, campus life, and the cafés I work from, and a real site to practice SEO on. Building the generator myself meant knowing exactly what every tag on the page is for.",
+        "goal": "A fast blog with no database to run, where a new post is a file, and every page is correct for search, sharing, and reading on a phone.",
+        "overview": {
+          "role": "Solo developer",
+          "period": "Oct 2026",
+          "type": "Personal project",
+          "architecture": "Static HTML from a Node build script (marked), GitHub Pages"
+        },
+        "whatItDoes": [
+          "Markdown posts with front matter for tags, cover image, and a draft flag; the build fails if a placeholder is left in a published post",
+          "Per-page SEO: canonical, Open Graph and Twitter cards, JSON-LD (BlogPosting, breadcrumbs, Person), sitemap, RSS, and robots",
+          "An author page with Person schema linking my profiles, so search engines can tie them to one identity",
+          "Floating pill navigation, sidebar with latest posts and topics, and light and dark themes",
+          "Comments through Giscus (GitHub Discussions), so there is no backend to run",
+          "Anonymous visitor counter on a small realtime database"
+        ],
+        "screens": [],
+        "techNote": "One Node script with marked as its only dependency writes dist/, and GitHub Actions deploys it to GitHub Pages. Comments use Giscus with strict matching on the page path; the trade-off is that commenters need a GitHub account, which suits a developer audience but not every post."
       }
     },
     {
@@ -654,7 +863,12 @@
       "caseStudy": {
         "whyBuilt": "Placed with Gatra Data, a data-analytics partner, as part of the APIKpreneur on-the-job-training program. The client needed donor activity turned into a segment a non-technical team could act on, without paying for a BI tool.",
         "goal": "Turn a 16,000+ row raw transaction sheet into an always-up-to-date donor segmentation and a dashboard non-technical teammates and the mentor could read without touching the underlying data.",
-        "overview": { "role": "Data Analyst (OJT)", "period": "Aug 2026 – Present", "type": "Client engagement (scholarship OJT placement)", "architecture": "Google Apps Script, Google Sheets" },
+        "overview": {
+          "role": "Data Analyst (OJT)",
+          "period": "Aug 2026 – Present",
+          "type": "Client engagement (scholarship OJT placement)",
+          "architecture": "Google Apps Script, Google Sheets"
+        },
         "whatItDoes": [
           "Hierarchical RFM-style segmentation (Potential/Loyal/Active/New/Passive) plus a sub-level engagement-health status, recalculated in one batched read/write pass instead of per-row calls",
           "Self-service Dashboard sheet with a global favorite-program ranking plus a cumulative month-over-month segment growth table",

@@ -31,6 +31,8 @@ const SLUGS = {
   "proj-groomy": "project/groomy",
   "proj-nobilive": "project/nobilive",
   "proj-gatra": "project/gatra-data",
+  "proj-redaily": "project/re-daily",
+  "proj-notes": "project/notes",
 };
 
 // project id -> i18n key namespace (short, stable — used as "cs.<ns>.field" keys in
@@ -45,6 +47,8 @@ const NS = {
   "proj-groomy": "groomy",
   "proj-nobilive": "nobilive",
   "proj-gatra": "gatra",
+  "proj-redaily": "redaily",
+  "proj-notes": "notes",
 };
 
 function esc(str) {
@@ -90,7 +94,10 @@ function renderLinks(item) {
   if (item.instagram) {
     buttons.push(`            <a href="${esc(item.instagram)}" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">photo_camera</span> ${esc(item["instagram-label"] || "Instagram")}</a>`);
   }
-  if (item.link && !item.github && !item.youtube) {
+  if (item.live) {
+    buttons.unshift(`            <a href="${esc(item.live)}" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">open_in_new</span> ${esc(item["link-label"] || "Visit site")}</a>`);
+  }
+  if (item.link && !item.live && !item.github && !item.youtube) {
     buttons.push(`            <a href="${esc(item.link)}" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">open_in_new</span> ${esc(item["link-label"] || "View")}</a>`);
   }
   if (!buttons.length) return "";

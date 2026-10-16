@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="../../pages.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
-    <meta name="description" content="Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.">
+    <meta name="description" content="Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.">
     <meta property="og:title" content="NobiPlay — Live Streaming Module — Fakhrul Mukhlisin">
-    <meta property="og:description" content="Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.">
+    <meta property="og:description" content="Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.">
     <meta property="og:image" content="https://fakrul.dev/image/og-image.webp">
     <meta property="og:url" content="https://fakrul.dev/project/nobilive/">
     <link rel="canonical" href="https://fakrul.dev/project/nobilive/">
@@ -147,7 +147,7 @@
 
         <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
         <h1 class="cs-title" data-i18n="cs.nobilive.title">NobiPlay — Live Streaming Module</h1>
-        <p class="cs-summary" data-i18n="cs.nobilive.summary">Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.</p>
+        <p class="cs-summary" data-i18n="cs.nobilive.summary">Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.</p>
 
 
 
@@ -165,7 +165,7 @@
             </div>
             <div class="cs-box glass-card">
                 <h3 data-i18n="cs.goal">Project Goal</h3>
-                <p data-i18n="cs.nobilive.goal">Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules.</p>
+                <p data-i18n="cs.nobilive.goal">Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, and the automation that prepares a stream channel.</p>
             </div>
         </div>
 
@@ -180,6 +180,9 @@
         <ul class="cs-checklist">
             <li><span class="msym">check_circle</span><span data-i18n="cs.nobilive.step0">Role-based Studio CMS for hosts and admins</span></li>
             <li><span class="msym">check_circle</span><span data-i18n="cs.nobilive.step1">Stream scheduling consolidated into a single Live Studio flow</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobilive.step2">Automated stream-channel setup from the Studio, with a live health indicator and readable error messages when the streaming provider refuses a request</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobilive.step3">Guards so the automation only ever touches channels the app itself created, plus login throttling and viewing rules per stream visibility</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.nobilive.step4">Pause and end controls for hosts and admins, backed by a test suite that stays green (442 tests)</span></li>
         </ul>
 
         <h2 class="cs-section-title" data-i18n="cs.keyScreens">Key Screens</h2>
@@ -190,6 +193,7 @@
             <span class="skill-chip">Laravel 13</span>
             <span class="skill-chip">RBAC</span>
             <span class="skill-chip">Studio CMS</span>
+            <span class="skill-chip">Live Streaming</span>
         </div>
         <p class="cs-tech-note" data-i18n="cs.nobilive.techNote">The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live.</p>
 
