@@ -366,17 +366,12 @@ const I18N = {
     'proj.nobilive.date': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
     'proj.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'proj.nobilive.desc': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis: studio CMS berbasis role, penjadwalan siaran, dan setup channel siaran otomatis. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
+        en: "Feature work on the live-streaming module of NobiPlay, Indonesia's streaming platform: role-based studio CMS, stream scheduling, and automated stream-channel setup. The preview shows NobiPlay's public site; my work is limited to the live-streaming module behind it, which is not visible on the homepage. Shown with my mentor's permission.",
+        id: "Kerjaan feature di modul live-streaming NobiPlay, platform streaming Indonesia: studio CMS berbasis role, penjadwalan siaran, dan setup channel siaran otomatis. Preview menampilkan situs publik NobiPlay; kerjaan saya terbatas di modul live-streaming di baliknya, yang tidak terlihat di beranda. Ditampilkan dengan izin mentor."
     },
-    'proj.nobilive.credential': { en: 'Pre-launch product · shown with mentor permission', id: 'Produk belum rilis · ditampilkan dengan izin mentor' },
-
-    'proj.redaily.date': { en: "Oct 2026", id: "Okt 2026" },
-    'proj.redaily.title': { en: "Re:Daily Coffee Website", id: "Website Re:Daily Coffee" },
-    'proj.redaily.issuer': { en: "Solo build for a friend's café · Pamulang", id: "Dibuat sendiri buat kafe teman · Pamulang" },
-    'proj.redaily.desc': {
-        en: "Website for Re:Daily Coffee, a café near Universitas Pamulang that a friend owns. Home, a full menu with prices, a location page with map, and visitor reviews, built with a zero-dependency Node generator and hosted on GitHub Pages under the café's own domain.",
-        id: "Website Re:Daily Coffee, kafe dekat Universitas Pamulang milik teman saya. Isinya beranda, menu lengkap dengan harga, halaman lokasi dengan peta, dan ulasan pengunjung, dibangun dengan generator Node tanpa dependency dan di-host di GitHub Pages pakai domain kafenya sendiri."
+    'proj.nobilive.credential': {
+        en: "Live product · my scope: live-streaming module only · shown with mentor permission",
+        id: "Produk live · scope saya: modul live-streaming saja · ditampilkan dengan izin mentor"
     },
 
     'proj.notes.date': { en: "Oct 2026", id: "Okt 2026" },
@@ -530,12 +525,12 @@ const I18N = {
     // NobiPlay — Live Streaming Module
     'cs.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'cs.nobilive.summary': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik: studio CMS berbasis role, penjadwalan siaran, dan setup channel siaran otomatis. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
+        en: "Feature work on the live-streaming module of NobiPlay, Indonesia's streaming platform: role-based studio CMS, stream scheduling, and automated stream-channel setup. The preview shows NobiPlay's public site; my work is limited to the live-streaming module behind it, which is not visible on the homepage. Shown with my mentor's permission.",
+        id: "Kerjaan feature di modul live-streaming NobiPlay, platform streaming Indonesia: studio CMS berbasis role, penjadwalan siaran, dan setup channel siaran otomatis. Preview menampilkan situs publik NobiPlay; kerjaan saya terbatas di modul live-streaming di baliknya, yang tidak terlihat di beranda. Ditampilkan dengan izin mentor."
     },
     'cs.nobilive.whyBuilt': {
-        en: 'A second product line at PT Indotech Digital Group alongside Nobel Akademi, feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.',
-        id: 'Lini produk kedua di PT Indotech Digital Group selain Nobel Akademi, kerjaan feature di platform live-streaming yang belum rilis publik. Ditampilkan di sini dengan izin eksplisit dari mentor saya buat direferensikan sebagai proof of work, tanpa membuka source code.'
+        en: "A second product line at PT Indotech Digital Group alongside Nobel Akademi: feature work on the live-streaming module of the NobiPlay streaming platform. Shared here with explicit permission from my mentor, without exposing source code.",
+        id: "Lini produk kedua di PT Indotech Digital Group selain Nobel Akademi: kerjaan feature di modul live-streaming platform streaming NobiPlay. Ditampilkan di sini dengan izin eksplisit dari mentor saya, tanpa membuka source code."
     },
     'cs.nobilive.goal': {
         en: 'Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules.',
@@ -560,8 +555,8 @@ const I18N = {
         id: 'Kontrol jeda dan akhiri siaran buat host dan admin, dengan test suite yang tetap hijau (442 test)'
     },
     'cs.nobilive.techNote': {
-        en: 'The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live.',
-        id: 'Produknya belum rilis publik dan terikat NDA, jadi halaman ini sengaja berhenti di scope dan peran, bukan detail implementasi. Nggak ada source code, skema database, atau metrik bisnis yang dibagikan. Link publik akan ditambahkan begitu domain consumer-facing-nya aktif.'
+        en: "The live preview is NobiPlay's public site. My contribution is only the live-streaming module (studio CMS and stream setup), which sits behind the creator and admin logins and is not visible there. No source code, database schema, or business metrics are shared.",
+        id: "Preview live adalah situs publik NobiPlay. Kontribusi saya hanya modul live-streaming (studio CMS dan setup siaran), yang ada di balik login creator dan admin dan tidak terlihat di sana. Tidak ada source code, skema database, atau metrik bisnis yang dibagikan."
     },
 
     // Gatra Data — Donor Segmentation Automation

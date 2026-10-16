@@ -377,7 +377,7 @@
       "badgeTone": "purple",
       "date": "Jul 2026 – Present",
       "issuer": "PT Indotech Digital Group — Full Stack Engineer",
-      "desc": "Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor's permission as proof of work; source code and consumer-facing link are not public yet.",
+      "desc": "Feature work on the live-streaming module of NobiPlay, Indonesia's streaming platform: role-based studio CMS, stream scheduling, and automated stream-channel setup. The preview shows NobiPlay's public site; my work is limited to the live-streaming module behind it, which is not visible on the homepage. Shown with my mentor's permission.",
       "tags": [
         "Laravel 13",
         "RBAC",
@@ -385,7 +385,7 @@
         "Live Streaming"
       ],
       "caseStudy": {
-        "whyBuilt": "A second product line at PT Indotech Digital Group alongside Nobel Akademi, feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.",
+        "whyBuilt": "A second product line at PT Indotech Digital Group alongside Nobel Akademi: feature work on the live-streaming module of the NobiPlay streaming platform. Shared here with explicit permission from my mentor, without exposing source code.",
         "goal": "Contribute to the live-streaming module: a studio-side CMS for hosts and admins to manage streams and schedules, and the automation that prepares a stream channel.",
         "overview": {
           "role": "Full Stack Engineer (feature team)",
@@ -401,8 +401,13 @@
           "Pause and end controls for hosts and admins, backed by a test suite that stays green (442 tests)"
         ],
         "screens": [],
-        "techNote": "The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live."
-      }
+        "techNote": "The live preview is NobiPlay's public site. My contribution is only the live-streaming module (studio CMS and stream setup), which sits behind the creator and admin logins and is not visible there. No source code, database schema, or business metrics are shared.",
+        "summary": "Feature work on the live-streaming module of NobiPlay, Indonesia's streaming platform: role-based studio CMS, stream scheduling, and automated stream-channel setup. The preview shows NobiPlay's public site; my work is limited to the live-streaming module behind it, which is not visible on the homepage. Shown with my mentor's permission."
+      },
+      "link": "https://www.nobiplay.com",
+      "link-label": "Visit NobiPlay →",
+      "live": "https://www.nobiplay.com",
+      "embed": "https://www.nobiplay.com"
     },
     {
       "id": "proj-nobel",
