@@ -185,8 +185,8 @@ const I18N = {
     'work.nobiplay.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'work.nobiplay.sub': { en: 'PT Indotech Digital Group · Live Streaming Feature', id: 'PT Indotech Digital Group · Fitur Live Streaming' },
     'work.nobiplay.desc': {
-        en: "The live-streaming module I built for NobiPlay's platform, shown with my mentor's permission; the consumer app itself isn't publicly deployed yet.",
-        id: 'Modul live-streaming yang saya bangun untuk platform NobiPlay, ditampilkan dengan izin mentor saya; app consumer-nya sendiri belum di-deploy publik.'
+        en: "The live-streaming module I built for NobiPlay's platform, shown with my mentor's permission. The preview is NobiPlay's public site; my part is the live-streaming module behind it.",
+        id: "Modul live-streaming yang saya bangun untuk platform NobiPlay, ditampilkan dengan izin mentor. Preview-nya situs publik NobiPlay; bagian saya adalah modul live-streaming di baliknya."
     },
     'work.nobiplay.comingSoon': { en: 'Coming soon, pending public URL', id: 'Segera hadir, nunggu URL publik' },
     'work.evermos.title': { en: 'Marketplace REST API', id: 'Marketplace REST API' },
