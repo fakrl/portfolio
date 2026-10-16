@@ -152,8 +152,8 @@ const I18N = {
     'spotlight.jbtb.title': { en: 'SIM Casting — PT. JBTB Casting Creative Group', id: 'SIM Casting — PT. JBTB Casting Creative Group' },
     'spotlight.jbtb.sub': { en: 'Project Lead & Lead Developer · Final Year Project (team of 3)', id: 'Project Lead & Lead Developer · Tugas Akhir (tim 3 orang)' },
     'spotlight.jbtb.desc': {
-        en: "PT. JBTB Casting Creative Group ran recruitment and payment for its extras through WhatsApp groups, spreadsheets, and Google Drive, so fee deals, staff honor, and project money were easy to dispute or lose track of. I built the Laravel 13 system that replaced it as our final year project: fee negotiation is logged round by round, staff get real payslips, and every project's income, receivables, and expenses live in one place.",
-        id: 'PT. JBTB Casting Creative Group ngurus rekrutmen dan pembayaran extras lewat grup WhatsApp, spreadsheet, dan Google Drive, jadi kesepakatan fee, honor staf, dan uang proyek gampang dibantah atau nggak ketelusuran. Saya bangun sistem Laravel 13 yang gantiin itu sebagai tugas akhir kami: nego fee tercatat tiap ronde, staf dapet slip honor beneran, dan pemasukan, piutang, serta pengeluaran tiap proyek ada di satu tempat.'
+        en: "PT. JBTB Casting Creative Group ran recruitment and payment for its extras through WhatsApp groups, spreadsheets, and Google Drive, so fee deals, staff honor, and project money were easy to dispute or lose track of. I built the Laravel 13 system that replaced it as our final year project: fee negotiation is logged round by round, staff get real payslips, and each project's honor, invoices, and costs are recorded in one place.",
+        id: 'PT. JBTB Casting Creative Group ngurus rekrutmen dan pembayaran extras lewat grup WhatsApp, spreadsheet, dan Google Drive, jadi kesepakatan fee, honor staf, dan uang proyek gampang dibantah atau nggak ketelusuran. Saya bangun sistem Laravel 13 yang gantiin itu sebagai tugas akhir kami: nego fee tercatat tiap ronde, staf dapet slip honor beneran, dan honor, invoice, serta biaya tiap proyek tercatat di satu tempat.'
     },
     'extra.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
     'extra.nobel.sub': { en: 'Production LMS · PT Indotech Digital', id: 'LMS Production · PT Indotech Digital' },
@@ -366,10 +366,26 @@ const I18N = {
     'proj.nobilive.date': { en: 'Jul 2026 – Present', id: 'Jul 2026 – Sekarang' },
     'proj.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'proj.nobilive.desc': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis: studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis: studio CMS berbasis role, penjadwalan siaran, dan setup channel siaran otomatis. Ditampilkan dengan izin mentor sebagai bukti karya; source code dan link konsumen belum publik.'
     },
     'proj.nobilive.credential': { en: 'Pre-launch product · shown with mentor permission', id: 'Produk belum rilis · ditampilkan dengan izin mentor' },
+
+    'proj.redaily.date': { en: "Oct 2026", id: "Okt 2026" },
+    'proj.redaily.title': { en: "Re:Daily Coffee Website", id: "Website Re:Daily Coffee" },
+    'proj.redaily.issuer': { en: "Solo build for a friend's café · Pamulang", id: "Dibuat sendiri buat kafe teman · Pamulang" },
+    'proj.redaily.desc': {
+        en: "Website for Re:Daily Coffee, a café near Universitas Pamulang that a friend owns. Home, a full menu with prices, a location page with map, and visitor reviews, built with a zero-dependency Node generator and hosted on GitHub Pages under the café's own domain.",
+        id: "Website Re:Daily Coffee, kafe dekat Universitas Pamulang milik teman saya. Isinya beranda, menu lengkap dengan harga, halaman lokasi dengan peta, dan ulasan pengunjung, dibangun dengan generator Node tanpa dependency dan di-host di GitHub Pages pakai domain kafenya sendiri."
+    },
+
+    'proj.notes.date': { en: "Oct 2026", id: "Okt 2026" },
+    'proj.notes.title': { en: "Notes: Personal Blog", id: "Notes: Blog Pribadi" },
+    'proj.notes.issuer': { en: "Personal project · notes.fakrul.dev", id: "Proyek pribadi · notes.fakrul.dev" },
+    'proj.notes.desc': {
+        en: "My own blog, built on a static site generator I wrote: Markdown posts with front matter, per-post SEO, light and dark themes, a visitor counter, and GitHub-based comments, deployed to GitHub Pages on a custom subdomain.",
+        id: "Blog saya sendiri, dibangun di atas generator situs statis yang saya tulis: post Markdown dengan front matter, SEO per post, tema terang dan gelap, penghitung pengunjung, dan komentar berbasis GitHub, di-deploy ke GitHub Pages di subdomain custom."
+    },
 
     'proj.nobel.date': { en: 'Jun 2026 – Present', id: 'Jun 2026 – Sekarang' },
     'proj.nobel.title': { en: 'Nobel Akademi', id: 'Nobel Akademi' },
@@ -514,8 +530,8 @@ const I18N = {
     // NobiPlay — Live Streaming Module
     'cs.nobilive.title': { en: 'NobiPlay — Live Streaming Module', id: 'NobiPlay — Modul Live Streaming' },
     'cs.nobilive.summary': {
-        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS and stream scheduling. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
-        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik: studio CMS berbasis role dan penjadwalan siaran. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
+        en: 'Feature work on the live-streaming module of NobiPlay, a pre-launch streaming product: role-based studio CMS, stream scheduling, and automated stream-channel setup. Shown with my mentor\'s permission as proof of work; source code and consumer-facing link are not public yet.',
+        id: 'Kerjaan feature di modul live-streaming NobiPlay, produk streaming yang belum rilis publik: studio CMS berbasis role, penjadwalan siaran, dan setup channel siaran otomatis. Ditampilkan dengan izin mentor saya sebagai proof of work; source code dan link consumer-facing belum publik.'
     },
     'cs.nobilive.whyBuilt': {
         en: 'A second product line at PT Indotech Digital Group alongside Nobel Akademi, feature work on a pre-launch live-streaming platform. Shared here with explicit permission from my mentor to reference it as proof of work, without exposing source code.',
@@ -531,6 +547,18 @@ const I18N = {
     'cs.nobilive.arch': { en: 'Laravel 13, role-based access control', id: 'Laravel 13, role-based access control' },
     'cs.nobilive.step0': { en: 'Role-based Studio CMS for hosts and admins', id: 'Studio CMS berbasis role buat host dan admin' },
     'cs.nobilive.step1': { en: 'Stream scheduling consolidated into a single Live Studio flow', id: 'Penjadwalan siaran digabung jadi satu alur Live Studio' },
+    'cs.nobilive.step2': {
+        en: 'Automated stream-channel setup from the Studio, with a live health indicator and readable error messages when the streaming provider refuses a request',
+        id: 'Setup channel siaran otomatis dari Studio, dengan indikator kesehatan live dan pesan error yang terbaca saat provider streaming menolak request'
+    },
+    'cs.nobilive.step3': {
+        en: 'Guards so the automation only ever touches channels the app itself created, plus login throttling and viewing rules per stream visibility',
+        id: 'Pengaman supaya otomasi cuma pernah menyentuh channel yang dibuat app sendiri, plus throttle login dan aturan menonton per visibilitas siaran'
+    },
+    'cs.nobilive.step4': {
+        en: 'Pause and end controls for hosts and admins, backed by a test suite that stays green (442 tests)',
+        id: 'Kontrol jeda dan akhiri siaran buat host dan admin, dengan test suite yang tetap hijau (442 test)'
+    },
     'cs.nobilive.techNote': {
         en: 'The product is pre-launch and under NDA, so this page intentionally stops at scope and role rather than implementation detail. No source code, database schema, or business metrics are shared. A public link will be added once the consumer-facing domain goes live.',
         id: 'Produknya belum rilis publik dan terikat NDA, jadi halaman ini sengaja berhenti di scope dan peran, bukan detail implementasi. Nggak ada source code, skema database, atau metrik bisnis yang dibagikan. Link publik akan ditambahkan begitu domain consumer-facing-nya aktif.'
@@ -586,8 +614,8 @@ const I18N = {
         id: 'Saya pengen tugas akhir yang nyelesain masalah beneran buat perusahaan beneran, bukan CRUD app skala tutorial. Tim agensinya sendiri cerita kalau kesepakatan fee dan pembayaran dicatat di thread chat dan spreadsheet, dan tim kami ambil itu sebagai proyek, dengan saya yang mimpin pembangunan sistemnya sementara rekan tim handle dokumentasi akademiknya.'
     },
     'cs.jbtb.goal': {
-        en: "Replace the agency's manual recruitment-and-payment process with one system that solves three concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, staff honor that comes with a clear payslip per project instead of a guess, and project finances (income, receivables, expenses, balance, projection) computed from a single source instead of scattered spreadsheets.",
-        id: 'Ganti proses rekrutmen-dan-pembayaran manual agensi jadi satu sistem yang nyelesain tiga masalah konkret: kesepakatan fee antara Admin dan Extras yang nggak bisa dibantah belakangan, honor staf yang ada slip jelasnya per proyek, bukan kira-kira, dan keuangan proyek (pemasukan, piutang, pengeluaran, saldo, proyeksi) yang dihitung dari satu sumber, bukan spreadsheet yang tersebar.'
+        en: "Replace the agency's manual recruitment-and-payment process with one system that solves three concrete problems: fee agreements between Admin and Extras that can't be disputed after the fact, staff honor that comes with a clear payslip per project instead of a guess, and project money (honor, invoices, other costs) recorded in one place instead of scattered spreadsheets.",
+        id: 'Ganti proses rekrutmen-dan-pembayaran manual agensi jadi satu sistem yang nyelesain tiga masalah konkret: kesepakatan fee antara Admin dan Extras yang nggak bisa dibantah belakangan, honor staf yang ada slip jelasnya per proyek, bukan kira-kira, dan uang proyek (honor, invoice, biaya lain) yang tercatat di satu tempat, bukan spreadsheet yang tersebar.'
     },
     'cs.jbtb.role': { en: 'Project Lead & Lead Developer', id: 'Project Lead & Lead Developer' },
     'cs.jbtb.period': { en: 'Sep 2026 – Present', id: 'Sep 2026 – Sekarang' },
@@ -602,8 +630,8 @@ const I18N = {
         id: 'Honor staf ditetapkan per event, dengan slip honor PDF yang digenerate otomatis begitu proyek kelar, gantiin nominal kira-kira jadi slip beneran'
     },
     'cs.jbtb.step2': {
-        en: 'Project finance view (income, receivables, expenses, balance, projection) computed from one source, with invoices that get signed and marked paid',
-        id: 'Tampilan keuangan proyek (pemasukan, piutang, pengeluaran, saldo, proyeksi) yang dihitung dari satu sumber, dengan invoice yang ditandatangani dan ditandai lunas'
+        en: 'Project money kept as records, not guesses: honor per Extras, staff payroll with payslips and work history, and invoices that get signed and marked paid',
+        id: 'Uang proyek dicatat sebagai rekaman, bukan kira-kira: honor per Extras, penggajian staf dengan slip dan riwayat kerja, dan invoice yang ditandatangani dan ditandai lunas'
     },
     'cs.jbtb.step3': {
         en: 'Digital contract generated automatically when a candidate is confirmed, signed on screen, and voided automatically if the booking is cancelled (audit trail preserved)',
@@ -617,9 +645,111 @@ const I18N = {
         en: 'In-app notifications as the primary channel, plus a self-hosted WhatsApp gateway running as a queued job so a failed message never blocks the action that triggered it',
         id: 'Notifikasi in-app sebagai kanal utama, ditambah gateway WhatsApp self-hosted yang jalan sebagai queued job, biar pesan yang gagal kirim nggak pernah nge-block action yang men-trigger-nya'
     },
+    'cs.jbtb.step6': {
+        en: 'Invite an Extras to a project in-app (tracked), with a WhatsApp button so the admin can follow up manually',
+        id: 'Undang Extras ke proyek lewat app (tercatat), dengan tombol WhatsApp biar admin bisa follow up manual'
+    },
+    'cs.jbtb.step7': {
+        en: 'Payment disputes can be resolved: Extras flag a problem, the admin is notified, adds a resolution note and optional new proof, and the payment returns for confirmation',
+        id: 'Sengketa pembayaran bisa diselesaikan: Extras lapor masalah, admin dinotifikasi, isi catatan penyelesaian dan bukti baru (opsional), lalu pembayaran kembali untuk dikonfirmasi'
+    },
+    'cs.jbtb.step8': {
+        en: 'Checked by 769 automated tests (SQLite, then MySQL) and a 198-finding UX audit across five roles, with the fixes shipped in batches',
+        id: 'Dicek 769 test otomatis (SQLite, lalu MySQL) dan audit UX 198 temuan dari lima role, dengan perbaikan yang dirilis per batch'
+    },
     'cs.jbtb.techNote': {
         en: 'Mass assignment is attribute-based (PHP 8 #[Fillable]) rather than the classic $fillable property, paired with Model::preventSilentlyDiscardingAttributes() in non-production, so a forgotten column on a new field throws immediately in dev instead of silently dropping data in production. NIK lookups use a separate HMAC-hashed column (keyed independently from APP_KEY) specifically so duplicate-detection queries never need to decrypt the encrypted NIK column itself.',
         id: "Mass assignment pakai attribute-based (PHP 8 #[Fillable]) bukan property $fillable klasik, dipasangkan dengan Model::preventSilentlyDiscardingAttributes() di non-production, jadi kalau ada kolom baru yang kelupaan, langsung throw error pas development, bukan diam-diam ke-drop datanya pas production. Lookup NIK pakai kolom hash HMAC terpisah (key-nya independen dari APP_KEY) khusus supaya query deteksi duplikat nggak pernah perlu decrypt kolom NIK yang terenkripsi itu sendiri."
+    },
+
+    // Re:Daily Coffee Website
+    'cs.redaily.title': { en: "Re:Daily Coffee Website", id: "Website Re:Daily Coffee" },
+    'cs.redaily.summary': {
+        en: "A fast, mobile-first website for a local café: menu, location, and reviews in one place, with the structured data and metadata search engines need. Built and deployed solo for a friend's business.",
+        id: "Website cepat dan mobile-first buat kafe lokal: menu, lokasi, dan ulasan di satu tempat, lengkap dengan structured data dan metadata yang dibutuhkan mesin pencari. Dibangun dan di-deploy sendiri buat bisnis teman."
+    },
+    'cs.redaily.whyBuilt': {
+        en: "The café had a Google Maps listing and an old Blogger page, but no proper site of its own. A friend owns it, so I built an official one, and used it to practice local SEO on something real.",
+        id: "Kafenya punya listing Google Maps dan halaman Blogger lama, tapi belum punya website sendiri. Karena pemiliknya teman saya, saya bikinin yang resmi, sekalian latihan SEO lokal di sesuatu yang nyata."
+    },
+    'cs.redaily.goal': {
+        en: "Answer what people ask before they visit (what is on the menu, how much, where, until when) on one fast page set that Google can read and index.",
+        id: "Jawab apa yang orang tanyain sebelum datang (menunya apa, berapa harganya, di mana, tutup jam berapa) di satu set halaman cepat yang bisa dibaca dan diindeks Google."
+    },
+    'cs.redaily.role': { en: "Solo developer", id: "Developer tunggal" },
+    'cs.redaily.period': { en: "Oct 2026", id: "Okt 2026" },
+    'cs.redaily.type': { en: "Client site for a friend's café", id: "Website klien, kafe milik teman" },
+    'cs.redaily.arch': { en: "Static HTML from a Node build script, GitHub Pages", id: "HTML statis dari script build Node, GitHub Pages" },
+    'cs.redaily.step0': {
+        en: "Home, full menu in four categories with the café's own prices, and a location page with an embedded map",
+        id: "Beranda, menu lengkap dalam empat kategori dengan harga asli kafenya, dan halaman lokasi dengan peta tertanam"
+    },
+    'cs.redaily.step1': {
+        en: "Visitor reviews section built from real Google Maps comments",
+        id: "Bagian ulasan pengunjung dari komentar asli Google Maps"
+    },
+    'cs.redaily.step2': {
+        en: "Local SEO: café structured data (address, hours, menu), sitemap, robots, canonical tags, and social previews per page",
+        id: "SEO lokal: structured data kafe (alamat, jam buka, menu), sitemap, robots, tag canonical, dan preview sosial per halaman"
+    },
+    'cs.redaily.step3': {
+        en: "Light and dark themes with a floating pill navigation, checked at phone widths",
+        id: "Tema terang dan gelap dengan navigasi pill melayang, dicek di lebar layar HP"
+    },
+    'cs.redaily.step4': {
+        en: "Anonymous visitor counter on a small realtime database",
+        id: "Penghitung pengunjung anonim di realtime database kecil"
+    },
+    'cs.redaily.techNote': {
+        en: "A zero-dependency Node script writes plain HTML into dist/, and a GitHub Actions workflow deploys it to GitHub Pages on the custom domain. Internal links are relative, so the same build works on a sub-path preview and at the domain root. I moved hosting off Netlify after its free tier injected a platform badge into the pages.",
+        id: "Script Node tanpa dependency menulis HTML biasa ke dist/, dan workflow GitHub Actions men-deploy-nya ke GitHub Pages di domain custom. Link internalnya relatif, jadi build yang sama jalan di preview sub-path maupun di root domain. Saya pindah hosting dari Netlify setelah free tier-nya menyisipkan badge platform ke halaman."
+    },
+
+    // Notes: Personal Blog
+    'cs.notes.title': { en: "Notes: Personal Blog", id: "Notes: Blog Pribadi" },
+    'cs.notes.summary': {
+        en: "A personal blog where publishing a post means writing one Markdown file, and every page ships the metadata search engines and link previews need. I wrote the generator myself instead of using a theme.",
+        id: "Blog pribadi di mana publish post berarti nulis satu file Markdown, dan tiap halaman membawa metadata yang dibutuhkan mesin pencari dan preview link. Generator-nya saya tulis sendiri, bukan pakai tema."
+    },
+    'cs.notes.whyBuilt': {
+        en: "I wanted a place to write about coding, campus life, and the cafés I work from, and a real site to practice SEO on. Building the generator myself meant knowing exactly what every tag on the page is for.",
+        id: "Saya pengen punya tempat nulis soal ngoding, kehidupan kampus, dan kafe tempat saya kerja, dan situs nyata buat latihan SEO. Dengan nulis generator sendiri, saya tahu persis fungsi tiap tag di halaman."
+    },
+    'cs.notes.goal': {
+        en: "A fast blog with no database to run, where a new post is a file, and every page is correct for search, sharing, and reading on a phone.",
+        id: "Blog cepat tanpa database yang harus dijalankan, di mana post baru cukup satu file, dan tiap halaman benar untuk pencarian, berbagi, dan dibaca di HP."
+    },
+    'cs.notes.role': { en: "Solo developer", id: "Developer tunggal" },
+    'cs.notes.period': { en: "Oct 2026", id: "Okt 2026" },
+    'cs.notes.type': { en: "Personal project", id: "Proyek pribadi" },
+    'cs.notes.arch': { en: "Static HTML from a Node build script (marked), GitHub Pages", id: "HTML statis dari script build Node (marked), GitHub Pages" },
+    'cs.notes.step0': {
+        en: "Markdown posts with front matter for tags, cover image, and a draft flag; the build fails if a placeholder is left in a published post",
+        id: "Post Markdown dengan front matter untuk tag, cover, dan flag draft; build gagal kalau ada placeholder tersisa di post yang dipublikasikan"
+    },
+    'cs.notes.step1': {
+        en: "Per-page SEO: canonical, Open Graph and Twitter cards, JSON-LD (BlogPosting, breadcrumbs, Person), sitemap, RSS, and robots",
+        id: "SEO per halaman: canonical, Open Graph dan Twitter card, JSON-LD (BlogPosting, breadcrumb, Person), sitemap, RSS, dan robots"
+    },
+    'cs.notes.step2': {
+        en: "An author page with Person schema linking my profiles, so search engines can tie them to one identity",
+        id: "Halaman penulis dengan schema Person yang menautkan profil saya, supaya mesin pencari bisa menyatukannya sebagai satu identitas"
+    },
+    'cs.notes.step3': {
+        en: "Floating pill navigation, sidebar with latest posts and topics, and light and dark themes",
+        id: "Navigasi pill melayang, sidebar berisi post terbaru dan topik, dan tema terang dan gelap"
+    },
+    'cs.notes.step4': {
+        en: "Comments through Giscus (GitHub Discussions), so there is no backend to run",
+        id: "Komentar lewat Giscus (GitHub Discussions), jadi tidak ada backend yang dijalankan"
+    },
+    'cs.notes.step5': {
+        en: "Anonymous visitor counter on a small realtime database",
+        id: "Penghitung pengunjung anonim di realtime database kecil"
+    },
+    'cs.notes.techNote': {
+        en: "One Node script with marked as its only dependency writes dist/, and GitHub Actions deploys it to GitHub Pages. Comments use Giscus with strict matching on the page path; the trade-off is that commenters need a GitHub account, which suits a developer audience but not every post.",
+        id: "Satu script Node dengan marked sebagai satu-satunya dependency menulis dist/, dan GitHub Actions men-deploy-nya ke GitHub Pages. Komentar pakai Giscus dengan strict matching pada path halaman; konsekuensinya komentator butuh akun GitHub, cocok buat pembaca developer tapi tidak buat semua post."
     },
 
     // Evermos

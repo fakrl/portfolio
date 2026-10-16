@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes: Personal Blog — Fakhrul Mukhlisin</title>
+    <link rel="icon" type="image/webp" href="/image/favicon.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../components.css">
+    <link rel="stylesheet" href="../../animations.css">
+    <link rel="stylesheet" href="../../pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css">
+    <meta name="description" content="My own blog, built on a static site generator I wrote: Markdown posts with front matter, per-post SEO, light and dark themes, a visitor counter, and GitHub-based comments, deployed to GitHub Pages on a custom subdomain.">
+    <meta property="og:title" content="Notes: Personal Blog — Fakhrul Mukhlisin">
+    <meta property="og:description" content="My own blog, built on a static site generator I wrote: Markdown posts with front matter, per-post SEO, light and dark themes, a visitor counter, and GitHub-based comments, deployed to GitHub Pages on a custom subdomain.">
+    <meta property="og:image" content="https://fakrul.dev/image/og-image.webp">
+    <meta property="og:url" content="https://fakrul.dev/project/notes/">
+    <link rel="canonical" href="https://fakrul.dev/project/notes/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        .cs-wrap { max-width: 820px; margin: 0 auto; padding: 100px 1.4rem 4rem; }
+        .cs-back { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.6rem; text-decoration: none; }
+        body.light .cs-back { color: var(--text-secondary-light); }
+        body.dark  .cs-back { color: var(--text-secondary-dark); }
+        .cs-eyebrow { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        body.light .cs-eyebrow { color: #999; }
+        body.dark  .cs-eyebrow { color: #666; }
+        .cs-title { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; line-height: 1.2; margin-bottom: 0.7rem; }
+        body.light .cs-title { color: var(--text-primary-light); }
+        body.dark  .cs-title { color: var(--text-primary-dark); }
+        .cs-summary { font-size: 1rem; line-height: 1.7; margin-bottom: 1.4rem; }
+        .cs-links { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 2rem; }
+        .cs-link-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 0.55rem 1.1rem; border-radius: var(--radius-pill);
+            font-size: 0.85rem; font-weight: 600; text-decoration: none;
+            transition: transform 0.15s ease;
+        }
+        .cs-link-btn:hover { transform: translateY(-2px); }
+        .cs-link-btn:active { transform: scale(0.95); }
+        body.light .cs-link-btn { background: rgba(0,0,0,0.06); color: var(--text-primary-light); border: 1px solid rgba(0,0,0,0.10); }
+        body.dark  .cs-link-btn { background: rgba(255,255,255,0.07); color: var(--text-primary-dark); border: 1px solid rgba(255,255,255,0.12); }
+        .cs-link-btn i, .cs-link-btn .msym { font-size: 1.1em; }
+        body.light .cs-summary { color: var(--text-secondary-light); }
+        body.dark  .cs-summary { color: var(--text-secondary-dark); }
+        .cs-hero { width: 100%; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2.4rem; }
+        .cs-hero img { width: 100%; display: block; transition: transform 0.5s ease; }
+        .cs-hero:hover img { transform: scale(1.03); }
+        .cs-hero--placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; height: 280px; }
+        body.light .cs-hero--placeholder { background: linear-gradient(135deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02)); }
+        body.dark  .cs-hero--placeholder { background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); }
+        .cs-hero--placeholder .msym { font-size: 2.6rem; }
+        body.light .cs-hero--placeholder .msym { color: rgba(0,0,0,0.30); }
+        body.dark  .cs-hero--placeholder .msym { color: rgba(255,255,255,0.30); }
+        .cs-hero--placeholder span.cs-hero-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; }
+        body.light .cs-hero--placeholder span.cs-hero-label { color: var(--text-muted-light); }
+        body.dark  .cs-hero--placeholder span.cs-hero-label { color: var(--text-muted-dark); }
+        .cs-2col { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-bottom: 2.4rem; }
+        @media (min-width: 640px) { .cs-2col { grid-template-columns: 1fr 1fr; } }
+        .cs-box { padding: 1.4rem 1.6rem; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .cs-box:hover { transform: translateY(-4px); }
+        .cs-box h3 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.6rem; }
+        body.light .cs-box h3 { color: #999; }
+        body.dark  .cs-box h3 { color: #666; }
+        .cs-box p { font-size: 0.9rem; line-height: 1.65; }
+        body.light .cs-box p { color: var(--text-secondary-light); }
+        body.dark  .cs-box p { color: var(--text-secondary-dark); }
+        .cs-overview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1.4rem 1.6rem; margin-bottom: 2.4rem; }
+        @media (min-width: 640px) { .cs-overview { grid-template-columns: repeat(4, 1fr); } }
+        .cs-overview-item span { display: block; }
+        .cs-overview-item .cs-ov-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        body.light .cs-overview-item .cs-ov-label { color: #999; }
+        body.dark  .cs-overview-item .cs-ov-label { color: #666; }
+        .cs-overview-item .cs-ov-val { font-size: 0.88rem; font-weight: 600; }
+        body.light .cs-overview-item .cs-ov-val { color: var(--text-primary-light); }
+        body.dark  .cs-overview-item .cs-ov-val { color: var(--text-primary-dark); }
+        .cs-section-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.9rem; }
+        body.light .cs-section-title { color: #999; }
+        body.dark  .cs-section-title { color: #666; }
+        .cs-checklist { list-style: none; padding: 0; margin: 0 0 2.4rem; display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+        @media (min-width: 640px) { .cs-checklist { grid-template-columns: 1fr 1fr; } }
+        .cs-checklist li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; line-height: 1.5; }
+        body.light .cs-checklist li { color: var(--text-secondary-light); }
+        body.dark  .cs-checklist li { color: var(--text-secondary-dark); }
+        .cs-checklist .msym { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+        .cs-screen { padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .cs-screen:hover { transform: translateY(-4px); }
+        .cs-screen img { transition: transform 0.4s ease; }
+        .cs-screen:hover img { transform: scale(1.015); }
+        .cs-screen-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem; }
+        .cs-screen-head h4 { font-size: 1rem; font-weight: 700; }
+        body.light .cs-screen-head h4 { color: var(--text-primary-light); }
+        body.dark  .cs-screen-head h4 { color: var(--text-primary-dark); }
+        .cs-screen p { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.9rem; }
+        body.light .cs-screen p { color: var(--text-secondary-light); }
+        body.dark  .cs-screen p { color: var(--text-secondary-dark); }
+        .cs-screen img { width: 100%; border-radius: var(--radius-md); display: block; }
+        body.light .cs-screen img { border: 1px solid rgba(0,0,0,0.08); }
+        body.dark  .cs-screen img { border: 1px solid rgba(255,255,255,0.10); }
+        .cs-tech-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem; }
+        .cs-tech-note { font-size: 0.9rem; line-height: 1.7; }
+        body.light .cs-tech-note { color: var(--text-secondary-light); }
+        body.dark  .cs-tech-note { color: var(--text-secondary-dark); }
+        .cs-cta { text-align: center; padding: 2.2rem 1.6rem; margin-top: 1rem; }
+        .cs-cta p { margin-bottom: 1rem; font-size: 0.92rem; }
+        body.light .cs-cta p { color: var(--text-secondary-light); }
+        body.dark  .cs-cta p { color: var(--text-secondary-dark); }
+    </style>
+</head>
+<body class="light">
+
+<div class="floating-pill" id="floatingPill">
+    <a href="/" class="floating-pill__item" title="Home">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></span>
+        <span class="floating-pill__label" data-i18n="nav.home">Home</span>
+    </a>
+    <div class="floating-pill__divider"></div>
+    <a href="/projects/" class="floating-pill__item" title="Proof of Work">
+        <span class="floating-pill__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+        <span class="floating-pill__label" data-i18n="nav.proof">Proof of Work</span>
+    </a>
+</div>
+
+<nav class="navbar">
+    <div class="nav-logo">
+        <img src="/image/favicon.webp" alt="FM Logo" style="height:32px; width:auto; object-fit:contain; vertical-align:middle;">
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/" data-i18n="nav.home">Home</a></li>
+        <li><a href="/projects/" data-i18n="nav.proof">Proof of Work</a></li>
+        <li><a href="/moments/" data-i18n="nav.moments">Moments</a></li>
+    </ul>
+</nav>
+
+<button class="theme-toggle" id="navThemeBtn" aria-label="Toggle Theme"><span class="msym">dark_mode</span></button>
+<button class="lang-toggle" id="navLangBtn" aria-label="Switch Language">EN</button>
+
+<main>
+    <div class="cs-wrap">
+        <a href="/projects/" class="cs-back"><span class="msym" style="font-size:1.1rem">arrow_back</span> <span data-i18n="cs.back">Back to Proof of Work</span></a>
+
+        <span class="cs-eyebrow" data-i18n="cs.eyebrow">Featured Build</span>
+        <h1 class="cs-title" data-i18n="cs.notes.title">Notes: Personal Blog</h1>
+        <p class="cs-summary" data-i18n="cs.notes.summary">A personal blog where publishing a post means writing one Markdown file, and every page ships the metadata search engines and link previews need. I wrote the generator myself instead of using a theme.</p>
+
+        <div class="cs-links">
+            <a href="https://notes.fakrul.dev/" target="_blank" rel="noopener" class="cs-link-btn"><span class="msym">open_in_new</span> Visit site →</a>
+            <a href="https://github.com/fakrl/notes" target="_blank" rel="noopener" class="cs-link-btn"><i class="devicon-github-original colored"></i> GitHub</a>
+        </div>
+
+        <div class="cs-hero glass-card visible">
+            <div class="cs-hero--placeholder">
+                <span class="msym">photo_camera</span>
+                <span class="cs-hero-label" data-i18n="cs.screenshotSoon">Screenshot coming soon</span>
+            </div>
+        </div>
+
+        <div class="cs-2col">
+            <div class="cs-box glass-card">
+                <h3 data-i18n="cs.whyBuilt">Why I Built It</h3>
+                <p data-i18n="cs.notes.whyBuilt">I wanted a place to write about coding, campus life, and the cafés I work from, and a real site to practice SEO on. Building the generator myself meant knowing exactly what every tag on the page is for.</p>
+            </div>
+            <div class="cs-box glass-card">
+                <h3 data-i18n="cs.goal">Project Goal</h3>
+                <p data-i18n="cs.notes.goal">A fast blog with no database to run, where a new post is a file, and every page is correct for search, sharing, and reading on a phone.</p>
+            </div>
+        </div>
+
+        <div class="cs-overview glass-card">
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.role">Role</span><span class="cs-ov-val" data-i18n="cs.notes.role">Solo developer</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.period">Period</span><span class="cs-ov-val" data-i18n="cs.notes.period">Oct 2026</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.type">Type</span><span class="cs-ov-val" data-i18n="cs.notes.type">Personal project</span></div>
+            <div class="cs-overview-item"><span class="cs-ov-label" data-i18n="cs.architecture">Architecture</span><span class="cs-ov-val" data-i18n="cs.notes.arch">Static HTML from a Node build script (marked), GitHub Pages</span></div>
+        </div>
+
+        <h2 class="cs-section-title" data-i18n="cs.whatItDoes">What It Does</h2>
+        <ul class="cs-checklist">
+            <li><span class="msym">check_circle</span><span data-i18n="cs.notes.step0">Markdown posts with front matter for tags, cover image, and a draft flag; the build fails if a placeholder is left in a published post</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.notes.step1">Per-page SEO: canonical, Open Graph and Twitter cards, JSON-LD (BlogPosting, breadcrumbs, Person), sitemap, RSS, and robots</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.notes.step2">An author page with Person schema linking my profiles, so search engines can tie them to one identity</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.notes.step3">Floating pill navigation, sidebar with latest posts and topics, and light and dark themes</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.notes.step4">Comments through Giscus (GitHub Discussions), so there is no backend to run</span></li>
+            <li><span class="msym">check_circle</span><span data-i18n="cs.notes.step5">Anonymous visitor counter on a small realtime database</span></li>
+        </ul>
+
+        <h2 class="cs-section-title" data-i18n="cs.keyScreens">Key Screens</h2>
+
+
+        <h2 class="cs-section-title" style="margin-top:1.6rem;" data-i18n="cs.techStack">Tech Stack</h2>
+        <div class="cs-tech-chips">
+            <span class="skill-chip">Node.js</span>
+            <span class="skill-chip">Markdown</span>
+            <span class="skill-chip">SEO</span>
+            <span class="skill-chip">JSON-LD</span>
+            <span class="skill-chip">GitHub Pages</span>
+            <span class="skill-chip">Giscus</span>
+        </div>
+        <p class="cs-tech-note" data-i18n="cs.notes.techNote">One Node script with marked as its only dependency writes dist/, and GitHub Actions deploys it to GitHub Pages. Comments use Giscus with strict matching on the page path; the trade-off is that commenters need a GitHub account, which suits a developer audience but not every post.</p>
+
+        <div class="cs-cta glass-card">
+            <p data-i18n="cs.ctaText">Open to full-time Full Stack Developer opportunities.</p>
+            <a href="/cv/CV_Fakhrul_Mukhlisin_2026.pdf" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cs.downloadCv">Download CV</a>
+            <a href="mailto:hi@fakrul.dev" class="btn btn-secondary" data-i18n="cs.emailMe">Email Me</a>
+        </div>
+    </div>
+<footer class="footer" style="padding-bottom:5rem;">
+    <p>&copy; 2026 Fakhrul Mukhlisin.</p>
+    <p class="visitor-pill" id="visitorPill" style="display:none;"><span class="msym" style="font-size:1em;vertical-align:-2px">group</span> <span data-i18n="footer.visitedPrefix">Visited by</span> <strong id="visitorCount">–</strong> <span data-i18n="footer.visited">people</span></p>
+</footer>
+</main>
+
+<script src="../../script.js"></script>
+<script src="../../i18n.js"></script>
+<script>
+(function() {
+    const DB_URL = 'https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app/stats/visits/count.json';
+    const pill = document.getElementById('visitorPill');
+    const countEl = document.getElementById('visitorCount');
+    if (!pill || !countEl) return;
+
+    const alreadyCounted = localStorage.getItem('rb_visited') === '1';
+
+    fetch(DB_URL)
+        .then(r => r.json())
+        .then(current => {
+            current = typeof current === 'number' ? current : 0;
+            if (!alreadyCounted) {
+                const next = current + 1;
+                localStorage.setItem('rb_visited', '1');
+                countEl.textContent = next.toLocaleString('en-US');
+                fetch(DB_URL, { method: 'PUT', body: JSON.stringify(next) }).catch(() => {});
+            } else {
+                countEl.textContent = current.toLocaleString('en-US');
+            }
+            pill.style.display = 'inline-flex';
+        })
+        .catch(() => { /* silent — no counter shown if the DB call fails */ });
+})();
+</script>
+</body>
+</html>
