@@ -410,7 +410,7 @@
       "title": "Nobel Akademi",
       "images": [],
       "link": "https://nobelakademi.id",
-      "link-label": "Visit Site",
+      "link-label": "Visit site →",
       "badge": "Laravel 11",
       "badgeTone": "purple",
       "date": "Jun 2026 – Present",
@@ -441,7 +441,9 @@
         ],
         "screens": [],
         "techNote": "The UI came from designs the team already had. My part was turning that into a working data model and the full-stack logic behind it: normalizing what could've been one flat table into 6 related tables, then eager-loading everything a detail page needs in one query instead of N+1 lazy loads per related module, tool, and learning row."
-      }
+      },
+      "live": "https://nobelakademi.id",
+      "embed": "https://nobelakademi.id"
     },
     {
       "id": "proj-redaily",
