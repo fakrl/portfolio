@@ -82,6 +82,7 @@ document.getElementById('proofTabs')?.addEventListener('click', e => {
             const attrs = {
                 'data-title': item.title,
                 'data-credential-id': item['credential-id'],
+                'data-embed': item.embed,
                 'data-link': item.link,
                 'data-link-label': item['link-label'],
                 'data-github': item.github,

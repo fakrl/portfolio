@@ -12,6 +12,7 @@
     f.style.height = h + 'px';
     f.style.transform = 'scale(' + s + ')';
   }
+  window.LiveEmbed = { fit: fit };
   function init() {
     var boxes = document.querySelectorAll('.live-embed');
     if (!boxes.length) return;

@@ -1174,3 +1174,4 @@ body.dark  .contribute-btn { background: rgba(255,255,255,0.08); border: 1px sol
 .live-embed iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform-origin: 0 0; pointer-events: none; }
 .live-embed--hero { height: auto; min-height: 0; aspect-ratio: 16 / 10; border-radius: var(--radius-lg); margin-bottom: 2.4rem; border: 1px solid rgba(128, 128, 128, 0.25); }
 .live-embed--hero iframe { pointer-events: auto; }
+.live-embed--modal { width: min(100%, calc(62vh * 1.6)); margin: 0.5rem auto; border-radius: 12px; }
