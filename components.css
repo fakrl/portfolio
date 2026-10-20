@@ -556,6 +556,17 @@ body.dark  .floating-pill__divider { background: var(--border-dark); }
 
 /* Mobile floating pill */
 @media (max-width: 768px) {
+    /* Tombol theme di pojok: tinggi disamakan dengan floating pill (~42px), sejajar bawahnya */
+    .theme-toggle,
+    body.portfolio-page .theme-toggle {
+        width: 42px;
+        height: 42px;
+        bottom: 1.5rem;
+        right: 0.75rem;
+        font-size: 18px;
+    }
+    .theme-toggle .msym { font-size: 20px; }
+
     .floating-pill {
         right: auto;
         left: 50%;
