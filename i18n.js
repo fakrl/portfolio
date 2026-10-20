@@ -231,6 +231,8 @@ const I18N = {
     'education.cert.evermos.sub': { en: 'Evermos × Rakamin Academy · Final score 90.91 / 100', id: 'Evermos × Rakamin Academy · Skor akhir 90.91 / 100' },
     'education.cert.core.title': { en: 'Frontend Developer Intern Certificate', id: 'Sertifikat Frontend Developer Intern' },
     'education.cert.core.sub': { en: 'Core Initiative × Rakamin Academy · Final score 87.79 / 100', id: 'Core Initiative × Rakamin Academy · Skor akhir 87.79 / 100' },
+    'education.cert.ensa.title': { en: 'CCNA: Enterprise Networking, Security & Automation', id: 'CCNA: Enterprise Networking, Security & Automation' },
+    'education.cert.ensa.sub': { en: 'Cisco Networking Academy · Score 96%', id: 'Cisco Networking Academy · Skor 96%' },
     'education.cert.azure.title': { en: 'Azure AI Fundamentals (AI-900)', id: 'Azure AI Fundamentals (AI-900)' },
     'education.cert.azure.sub': { en: 'Microsoft · elevAIte · Merdeka Academy', id: 'Microsoft · elevAIte · Merdeka Academy' },
     'education.cert.googlepm.title': { en: 'Fundamental Project Management', id: 'Fundamental Project Management' },
@@ -355,10 +357,10 @@ const I18N = {
     },
     'cert.ukbi.tag': { en: 'Language Certification', id: 'Sertifikasi Bahasa' },
 
-    'cert.ensa.title': { en: 'Enterprise Networking, Security & Automation (ENSA)', id: 'Enterprise Networking, Security & Automation (ENSA)' },
+    'cert.ensa.title': { en: "CCNA: Enterprise Networking, Security & Automation (ENSA)", id: "CCNA: Enterprise Networking, Security & Automation (ENSA)" },
     'cert.ensa.desc': {
-        en: 'Cisco Networking Academy course on enterprise routing and switching, network security hardening, and network automation. The final assessment was done in Cisco Packet Tracer Physical Mode: rack-mounting, cabling, OSPFv2, NAT/PAT, ACLs, SSH, TFTP backup, and an IOS upgrade. Score: 96%.',
-        id: 'Kursus Cisco Networking Academy tentang routing dan switching enterprise, pengamanan jaringan, dan otomasi jaringan. Ujian akhirnya dikerjakan di Cisco Packet Tracer Physical Mode: rack-mounting, pemasangan kabel, OSPFv2, NAT/PAT, ACL, SSH, backup TFTP, dan upgrade IOS. Skor: 96%.'
+        en: "Cisco Networking Academy CCNA course on enterprise networking: single-area OSPFv2, IPv4 access control lists, NAT, WAN and QoS concepts, security best practices, and network automation. Student-level credential, verifiable on Credly. The final assessment was done in Cisco Packet Tracer Physical Mode. Score: 96%.",
+        id: "Kursus CCNA Cisco Networking Academy tentang jaringan enterprise: OSPFv2 single-area, ACL IPv4, NAT, konsep WAN dan QoS, praktik keamanan, dan otomasi jaringan. Credential tingkat student, bisa diverifikasi di Credly. Ujian akhirnya dikerjakan di Cisco Packet Tracer Physical Mode. Skor: 96%."
     },
     'cert.ensa.tag': { en: 'Networking', id: 'Jaringan' },
 
