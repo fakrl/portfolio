@@ -232,23 +232,27 @@
     },
     {
       "id": "ensa",
-      "title": "Enterprise Networking, Security & Automation (ENSA)",
+      "title": "CCNA: Enterprise Networking, Security & Automation (ENSA)",
       "images": [
-        "../image/cert-ensa.webp"
+        "../image/cert-ensa-1.webp",
+        "../image/cert-ensa-2.webp"
       ],
       "badge": "96%",
       "badgeTone": "blue",
-      "date": "2026",
+      "date": "Sep 2026",
       "issuer": "Cisco Networking Academy",
-      "desc": "Cisco Networking Academy course on enterprise routing and switching, network security hardening, and network automation. The final assessment was done in Cisco Packet Tracer Physical Mode: rack-mounting, cabling, OSPFv2, NAT/PAT, ACLs, SSH, TFTP backup, and an IOS upgrade. Score: 96%.",
+      "desc": "Cisco Networking Academy CCNA course on enterprise networking: single-area OSPFv2, IPv4 access control lists, NAT, WAN and QoS concepts, security best practices, and network automation. Student-level credential, verifiable on Credly. The final assessment was done in Cisco Packet Tracer Physical Mode. Score: 96%.",
       "kind": "Networking",
       "tags": [
         "Cisco IOS",
         "OSPFv2",
-        "NAT/PAT",
+        "NAT",
         "ACL",
-        "Network Security"
-      ]
+        "Network Security",
+        "Network Automation"
+      ],
+      "link": "https://www.credly.com/badges/96d14238-7884-4b73-97e5-da6a1d270ba1",
+      "link-label": "Verify on Credly →"
     }
   ],
   "awards": [
