@@ -429,15 +429,15 @@ function initCursorCrew() {
                 await sleep(170);
                 return;
             }
-            const pressure = Math.max(0.75, 1 / (1 + Math.min(queue.length, 12) * 0.05));
+            const pressure = 1;
             const jitter = rand(0.9, 1.15);
 
             const tx = clamp(q.left, 6, vw - 6);
             await moveTo(c, tx, clamp(topNow(), 6, vh - 6),
-                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 1.5, 260, 800) * pressure * jitter);
+                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 1.0, 450, 1200) * pressure * jitter);
 
-            const dur = (heavy ? clamp(700 + Math.sqrt(q.w * q.h) * 0.6, 800, 1300)
-                               : clamp(380 + Math.sqrt(q.w * q.h) * 2, 420, 700)) * pressure * jitter;
+            const dur = (heavy ? clamp(1100 + Math.sqrt(q.w * q.h) * 0.8, 1300, 2000)
+                               : clamp(650 + Math.sqrt(q.w * q.h) * 2.5, 700, 1100)) * pressure * jitter;
             const fr = c.frame;
             fr.className = 'sw-frame';
             fr.style.display = 'block';
@@ -454,7 +454,7 @@ function initCursorCrew() {
             setTimeout(() => { if (fr.classList.contains('out')) fr.style.display = 'none'; }, 220);
             c.el.classList.add('click');
             setTimeout(() => c.el.classList.remove('click'), 170);
-            await sleep(rand(120, 260));
+            await sleep(rand(350, 700));
         } finally {
             finalize(el);
         }
@@ -526,13 +526,13 @@ function initCursorCrew() {
     setInterval(() => {
         const now = performance.now();
         for (let i = queue.length - 1; i >= 0; i--) {
-            if (!waiting && now - Math.max(queue[i].t, gateT) > 4500) {
+            if (!waiting && now - Math.max(queue[i].t, gateT) > 12000) {
                 const el = queue[i].el;
                 queue.splice(i, 1);
                 finalize(el);
             }
         }
-        building.forEach((t, el) => { if (now - t > 4000) finalize(el); });
+        building.forEach((t, el) => { if (now - t > 7000) finalize(el); });
     }, 1000);
 
     // Keyboard users: focusing something inside an unbuilt piece shows it (and its block) right away.
