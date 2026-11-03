@@ -429,15 +429,15 @@ function initCursorCrew() {
                 await sleep(170);
                 return;
             }
-            const pressure = Math.max(0.45, 1 / (1 + Math.min(queue.length, 12) * 0.1));
+            const pressure = Math.max(0.75, 1 / (1 + Math.min(queue.length, 12) * 0.05));
             const jitter = rand(0.9, 1.15);
 
             const tx = clamp(q.left, 6, vw - 6);
             await moveTo(c, tx, clamp(topNow(), 6, vh - 6),
-                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 2.2, 140, 520) * pressure * jitter);
+                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 1.5, 260, 800) * pressure * jitter);
 
-            const dur = (heavy ? clamp(320 + Math.sqrt(q.w * q.h) * 0.35, 360, 700)
-                               : clamp(160 + Math.sqrt(q.w * q.h) * 1.2, 180, 360)) * pressure * jitter;
+            const dur = (heavy ? clamp(700 + Math.sqrt(q.w * q.h) * 0.6, 800, 1300)
+                               : clamp(380 + Math.sqrt(q.w * q.h) * 2, 420, 700)) * pressure * jitter;
             const fr = c.frame;
             fr.className = 'sw-frame';
             fr.style.display = 'block';
@@ -454,6 +454,7 @@ function initCursorCrew() {
             setTimeout(() => { if (fr.classList.contains('out')) fr.style.display = 'none'; }, 220);
             c.el.classList.add('click');
             setTimeout(() => c.el.classList.remove('click'), 170);
+            await sleep(rand(120, 260));
         } finally {
             finalize(el);
         }
