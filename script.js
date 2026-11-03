@@ -252,7 +252,7 @@ function initCursorCrew() {
     const INLINE = 'i[class*="devicon"], .msym, svg, video, iframe, canvas, picture';
     const ATOMS  = [TEXT, UNIT, INLINE, 'img'].join(',');
     const MEDIA  = 'video, iframe, canvas, picture';
-    const MAX_SAME = 10;   // more identical pieces than this in one block appear together with the block
+    const MAX_SAME = 16;   // more identical pieces than this in one block appear together with the block
 
     // ---- what gets built --------------------------------------------------
     const hero = [...document.querySelectorAll(HERO)];
@@ -276,6 +276,32 @@ function initCursorCrew() {
         if (el.matches(UNIT) && el.parentElement.closest(UNIT)) return;
         atoms.push({ el, box });
     });
+    // Anything else that shows content (links, spans, labels, buttons, bare text) is a piece too,
+    // so nothing inside a block can appear before a cursor builds it.
+    const chosen = new Set(atoms.map(a => a.el));
+    const NOPE = new Set(['SCRIPT', 'STYLE', 'BR', 'HR', 'SOURCE', 'TRACK', 'OPTION', 'NOSCRIPT', 'PATH', 'G', 'USE', 'DEFS', 'CIRCLE', 'RECT', 'LINE', 'POLYGON', 'POLYLINE', 'ELLIPSE']);
+    const inChosen = (el, box) => { for (let n = el.parentElement; n && n !== box; n = n.parentElement) if (chosen.has(n)) return true; return false; };
+    containers.forEach(box => {
+        if (box.matches('.hero-text-side > *')) return;
+        box.querySelectorAll('*').forEach(el => {
+            if (chosen.has(el) || meta.has(el) || NOPE.has(el.tagName.toUpperCase()) || el.closest(SKIP) || el.closest('svg')) return;
+            if (inChosen(el, box)) return;
+            const own = [...el.childNodes].some(n => n.nodeType === 3 && n.nodeValue.trim());
+            if (!(own || !el.children.length)) return;
+            if ([...chosen].some(a => el.contains(a))) return;               // has real pieces inside: stays a wrapper
+            if (!own && !el.matches('img, input, textarea, select, canvas, video, iframe') && !el.offsetWidth) return;
+            chosen.add(el);
+            atoms.push({ el, box });
+        });
+    });
+    const wrappers = [];
+    atoms.forEach(({ el, box }) => {
+        for (let n = el.parentElement; n && n !== box; n = n.parentElement) {
+            if (meta.has(n) || chosen.has(n) || n.closest(SKIP)) continue;
+            meta.set(n, { box, wrapper: true, anim: null });
+            wrappers.push(n);
+        }
+    });
     const groups = new Map();
     atoms.forEach(({ el, box }) => {
         const sig = el.tagName + '.' + (el.classList[0] || '');
@@ -285,6 +311,7 @@ function initCursorCrew() {
         meta.set(el, { box, instant: n > MAX_SAME, anim: null });
     });
     const targets = [...containers, ...atoms.map(a => a.el)];
+    wrappers.forEach(w => { w.dataset.sw = 'wait'; });
 
     // ---- overlay + crew -------------------------------------------------------
     const pre = document.getElementById('preloader');
@@ -363,9 +390,17 @@ function initCursorCrew() {
     const building = new Map();
     let flushing = false;
 
+    function releaseWrappers(el) {
+        const m = meta.get(el);
+        for (let n = el.parentElement; n && m && n !== m.box; n = n.parentElement) {
+            const wm = meta.get(n);
+            if (wm && wm.wrapper && n.dataset.sw === 'wait') n.dataset.sw = 'done';
+        }
+    }
     function finalize(el) {
         if (!el.dataset.sw || el.dataset.sw === 'done') return;
         const m = meta.get(el);
+        releaseWrappers(el);
         building.delete(el);
         if (el.matches(BLOCKS)) el.classList.add('visible');
         if (el.matches(HERO)) el.style.opacity = '1';     // hero blocks have a base opacity of 0 and no .visible state
@@ -429,8 +464,7 @@ function initCursorCrew() {
             measure();
             if (q.w < 4 || q.h < 4 || topNow() + q.h < 0 || topNow() > vh) { finalize(el); return; }   // scrolled past
 
-            el.dataset.sw = 'building';
-            building.set(el, performance.now());
+            building.set(el, performance.now());           // stays 'queued' (hidden) until the cursor starts drawing
             const heavy = el.matches(HEAVY) || q.w * q.h > 70000;
 
             if (lite) {                                        // slow device: quick plain fade, no cursor
@@ -452,7 +486,9 @@ function initCursorCrew() {
             fr.className = 'sw-frame';
             fr.style.display = 'block';
             fr.style.borderRadius = heavy ? getComputedStyle(el).borderRadius : '3px';
+            releaseWrappers(el);
             m.anim = reveal(el, dur, heavy);
+            el.dataset.sw = 'building';
             await tween(dur, p => {
                 const e = easeIO(p), top = topNow();
                 fr.style.transform = `translate3d(${q.left}px, ${top}px, 0)`;
@@ -545,11 +581,17 @@ function initCursorCrew() {
             }
         }
         building.forEach((t, el) => { if (now - t > 7000) finalize(el); });
+        wrappers.forEach(w => {
+            if (w.dataset.sw !== 'wait') return;
+            const b = meta.get(w).box;
+            if (b.dataset.sw === 'done') { w._t = w._t || now; if (now - w._t > 12000) w.dataset.sw = 'done'; }
+        });
     }, 1000);
 
     // Keyboard users: focusing something inside an unbuilt piece shows it (and its block) right away.
     document.addEventListener('focusin', e => {
         for (let n = e.target; n && n !== document.body; n = n.parentElement) {
+            if (n.dataset && n.dataset.sw && n.dataset.sw !== 'done' && meta.get(n) && meta.get(n).wrapper) { n.dataset.sw = 'done'; continue; }
             if (n.dataset && n.dataset.sw && n.dataset.sw !== 'done') {
                 const qi = queue.findIndex(q => q.el === n);
                 if (qi > -1) queue.splice(qi, 1);
