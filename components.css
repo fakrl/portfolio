@@ -766,7 +766,8 @@ body.crew-on .hero-text-side > * { animation: none !important; }
 body.crew-on .fade-in,
 body.crew-on .fade-in-up,
 body.crew-on .moment-item,
-body.crew-on .gb-post.fade-in { animation: none !important; }
+body.crew-on .gb-post,
+body.crew-on .gb-post.fade-in { animation: none !important; opacity: 1 !important; transform: none !important; }
 body.crew-on.portfolio-page { animation: none !important; opacity: 1 !important; }
 
 .sw-layer {

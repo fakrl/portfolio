@@ -244,7 +244,7 @@ function initCursorCrew() {
     if (!Element.prototype.animate || !('IntersectionObserver' in window)) throw new Error('crew: unsupported');
 
     const HERO   = '.hero-photo-side, .hero-text-side > *';
-    const BLOCKS = '.glass-card, .section-title';
+    const BLOCKS = '.glass-card, .section-title, .spotlight-eyebrow, .work-card-link, .cv-download-btn, .cv-download-hint, .proof-filter-bar, .moments-filters, .yearbook';
     const HEAVY  = '.glass-card, .hero-photo-side';
     const SKIP   = '.navbar, .floating-pill, .lightbox, .cert-modal-overlay, .sw-layer';
     const TEXT   = 'h1, h2, h3, h4, p, li, blockquote, figcaption';
@@ -252,7 +252,7 @@ function initCursorCrew() {
     const INLINE = 'i[class*="devicon"], .msym, svg, video, iframe, canvas, picture';
     const ATOMS  = [TEXT, UNIT, INLINE, 'img'].join(',');
     const MEDIA  = 'video, iframe, canvas, picture';
-    const MAX_SAME = 16;   // more identical pieces than this in one block appear together with the block
+    const MAX_SAME = 60;   // more identical pieces than this in one block appear together with the block
 
     // ---- what gets built --------------------------------------------------
     const hero = [...document.querySelectorAll(HERO)];
@@ -335,7 +335,7 @@ function initCursorCrew() {
     layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
 
-    const SIZE = window.innerWidth >= 1024 ? 9 : window.innerWidth >= 768 ? 6 : 4;
+    const SIZE = window.innerWidth >= 1024 ? 14 : window.innerWidth >= 768 ? 9 : 5;
     const ARROW = '<svg width="20" height="24" viewBox="0 0 20 24" fill="none">' +
         '<path transform="translate(1.6 2.2)" d="M1.5 1.5L15.8 11.2L9.2 12.6L6.3 19.2L1.5 1.5Z" fill="rgba(0,0,0,.28)"/>' +
         '<path d="M1.5 1.5L15.8 11.2L9.2 12.6L6.3 19.2L1.5 1.5Z" fill="#0b0b0c" stroke="#fff" ' +
@@ -482,15 +482,15 @@ function initCursorCrew() {
                 await sleep(170);
                 return;
             }
-            const pressure = 1;
+            const pressure = queue.length > 24 ? 0.7 : 1;
             const jitter = rand(0.9, 1.15);
 
             const tx = clamp(q.left, 6, vw - 6);
             await moveTo(c, tx, clamp(topNow(), 6, vh - 6),
-                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 1.0, 450, 1200) * pressure * jitter);
+                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 1.4, 300, 850) * pressure * jitter);
 
-            const dur = (heavy ? clamp(1100 + Math.sqrt(q.w * q.h) * 0.8, 1300, 2000)
-                               : clamp(650 + Math.sqrt(q.w * q.h) * 2.5, 700, 1100)) * pressure * jitter;
+            const dur = (heavy ? clamp(800 + Math.sqrt(q.w * q.h) * 0.6, 950, 1500)
+                               : clamp(420 + Math.sqrt(q.w * q.h) * 1.8, 480, 760)) * pressure * jitter;
             measure();                                         // layout may have moved while the cursor travelled
             const fr = c.frame;
             fr.className = 'sw-frame';
@@ -510,7 +510,7 @@ function initCursorCrew() {
             setTimeout(() => { if (fr.classList.contains('out')) fr.style.display = 'none'; }, 220);
             c.el.classList.add('click');
             setTimeout(() => c.el.classList.remove('click'), 170);
-            await sleep(rand(350, 700));
+            await sleep(rand(150, 380));
         } finally {
             finalize(el);
         }
