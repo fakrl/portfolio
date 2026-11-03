@@ -264,6 +264,16 @@ function initCursorCrew() {
     const meta = new WeakMap();                 // el -> { box, instant, anim }
     containers.forEach(el => meta.set(el, { box: null, instant: false, anim: null }));
 
+    // Experience dividers are a border of the row itself, so a cursor could never "build" them.
+    // Swap each for a real line element that is its own piece.
+    document.querySelectorAll('.exp-row:not(:last-child)').forEach(row => {
+        if (row.querySelector(':scope > .sw-rule')) return;
+        const rule = document.createElement('i');
+        rule.className = 'sw-rule';
+        rule.setAttribute('aria-hidden', 'true');
+        row.appendChild(rule);
+    });
+
     const atoms = [];
     document.querySelectorAll(ATOMS).forEach(el => {
         if (meta.has(el) || el.closest(SKIP)) return;

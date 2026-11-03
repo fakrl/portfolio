@@ -823,3 +823,17 @@ body.crew-on.portfolio-page { animation: none !important; opacity: 1 !important;
 body.crew-on [data-sw="building"],
 body.crew-on [data-sw="queued"] { transition: none !important; }
 body.crew-on [data-sw="done"] { transition-property: background, background-color, border-color, box-shadow, color, filter, transform !important; }
+
+/* experience divider: a real element while the crew is active, so a cursor can draw it */
+.sw-rule { display: none; }
+body.crew-on .exp-row:not(:last-child) { border-bottom: 0 !important; position: relative; }
+body.crew-on .exp-row .sw-rule {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 6px;
+    border-bottom: 1px dashed rgba(128, 128, 128, 0.22);
+    pointer-events: none;
+}
