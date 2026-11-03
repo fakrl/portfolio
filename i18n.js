@@ -254,6 +254,15 @@ const I18N = {
     'contact.liConnect': { en: 'Connect', id: 'Hubungkan' },
 
     // ── Feedback ──
+    // ── Yearbook (Moments page) ──
+    'yearbook.title': { en: 'Yearbook 2023', id: 'Buku Tahunan 2023' },
+    'yearbook.desc': { en: "Photographer on the yearbook committee, MA Ma'had Al-Zaytun 2023. My photos are on pages 53 to 55; type 54 in the page box to jump there.", id: "Fotografer panitia buku tahunan MA Ma'had Al-Zaytun 2023. Foto saya ada di halaman 53 sampai 55; ketik 54 di kolom halaman untuk loncat ke sana." },
+    'yearbook.open': { en: 'Open the yearbook', id: 'Buka buku tahunan' },
+    'yearbook.newTab': { en: 'Open in a new tab', id: 'Buka di tab baru' },
+    'yearbook.note': { en: 'Opens in the AnyFlip reader, which may show its own ad.', id: 'Dibuka lewat pembaca AnyFlip, yang bisa menampilkan iklannya sendiri.' },
+    'yearbook.coverAlt': { en: 'Cover of the 2023 yearbook', id: 'Sampul buku tahunan 2023' },
+    'yearbook.frameTitle': { en: 'Digital yearbook 2023', id: 'Buku tahunan digital 2023' },
+
     'feedback.title': { en: 'Leave a Feedback', id: 'Tinggalkan Kesan' },
     'feedback.desc': { en: 'Got something to say? Drop a message, it shows up instantly.', id: 'Ada yang mau disampaikan? Tulis pesan, langsung muncul.' },
     'feedback.namePh': { en: 'Your name', id: 'Nama kamu' },

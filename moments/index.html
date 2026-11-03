@@ -117,6 +117,23 @@
 
     </section>
 
+    <!-- ── YEARBOOK ──────────────────────────────── -->
+    <section id="yearbook" class="section">
+        <figure class="yearbook" id="yearbook-figure">
+            <div class="yearbook-stage" id="yearbookStage">
+                <button type="button" class="yearbook-book" id="yearbookOpen" aria-label="Open the yearbook" data-i18n-attr="aria-label:yearbook.open">
+                    <span class="yearbook-cover"><img src="https://online.anyflip.com/lqcnn/fhvh/files/shot.jpg" alt="Cover of the 2023 yearbook" data-i18n-attr="alt:yearbook.coverAlt" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></span>
+                </button>
+            </div>
+            <figcaption class="yearbook-caption">
+                <strong data-i18n="yearbook.title">Yearbook 2023</strong>
+                <span data-i18n="yearbook.desc">Photographer on the yearbook committee, MA Ma'had Al-Zaytun 2023. My photos are on pages 53 to 55; type 54 in the page box to jump there.</span>
+                <a class="yearbook-link" href="https://online.anyflip.com/lqcnn/fhvh/mobile/index.html" target="_blank" rel="noopener" data-i18n="yearbook.newTab">Open in a new tab</a>
+                <span class="yearbook-note" data-i18n="yearbook.note">Opens in the AnyFlip reader, which may show its own ad.</span>
+            </figcaption>
+        </figure>
+    </section>
+
     <!-- ── FEEDBACK ──────────────────────────────── -->
     <section id="feedback" class="section">
         <h2 class="section-title" data-i18n="feedback.title">Leave a Feedback</h2>
@@ -206,6 +223,25 @@
     const update = () => pill.classList.toggle('visible', window.scrollY > 200);
     window.addEventListener('scroll', update, { passive: true });
     update();
+})();
+</script>
+
+<!-- Yearbook: load the reader only when asked (260 pages + a third-party ad) -->
+<script>
+(function () {
+    const btn = document.getElementById('yearbookOpen');
+    const stage = document.getElementById('yearbookStage');
+    if (!btn || !stage) return;
+    btn.addEventListener('click', () => {
+        const f = document.createElement('iframe');
+        f.src = 'https://online.anyflip.com/lqcnn/fhvh/mobile/index.html';
+        const t = (typeof I18N !== 'undefined') && I18N['yearbook.frameTitle'];
+        f.title = (t && t[document.documentElement.lang === 'id' ? 'id' : 'en']) || 'Digital yearbook 2023';
+        f.setAttribute('allowfullscreen', '');
+        f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms');
+        stage.replaceChildren(f);
+        stage.closest('.yearbook').classList.add('is-open');
+    });
 })();
 </script>
 

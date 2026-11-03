@@ -895,6 +895,87 @@ body.dark .moments-filter:hover {
     .moments-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
+/* ==========================================
+   YEARBOOK (moments page): a small book, no card. The reader loads on click.
+   ========================================== */
+#yearbook.section { padding-top: 1rem; padding-bottom: 3rem; }
+
+.yearbook {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.yearbook.is-open { flex-direction: column; gap: 1rem; }
+
+.yearbook-stage { width: 190px; flex: none; }
+.yearbook.is-open .yearbook-stage {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: rgba(128, 128, 128, 0.12);
+}
+.yearbook-stage iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+/* the closed book: cover with a spine and a hint of page edge */
+.yearbook-book {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+}
+.yearbook-cover {
+    position: relative;
+    display: block;
+    aspect-ratio: 340 / 439;
+    overflow: hidden;
+    border-radius: 2px 6px 6px 2px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28), 3px 0 0 -1px rgba(255, 255, 255, 0.55), 5px 0 0 -2px rgba(0, 0, 0, 0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.yearbook-cover::after {                       /* spine shading */
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 9%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.35), rgba(255, 255, 255, 0.12) 45%, rgba(0, 0, 0, 0));
+    pointer-events: none;
+}
+/* AnyFlip's cover image has pale bands above and below the cover; trim most of them (6% of the width each) */
+.yearbook-cover img { display: block; width: 100%; margin-top: -6%; }
+.yearbook-book:hover .yearbook-cover { transform: translateY(-4px) rotate(-1deg); }
+.yearbook-book:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; border-radius: 6px; }
+
+.yearbook-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    max-width: 340px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+.yearbook-caption strong { font-size: 1rem; }
+.yearbook-note { font-size: 0.78rem; }
+.yearbook-link { align-self: flex-start; font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
+body.light .yearbook-caption strong { color: var(--text-primary-light); }
+body.dark  .yearbook-caption strong { color: var(--text-primary-dark); }
+body.light .yearbook-caption, body.light .yearbook-link { color: var(--text-secondary-light); }
+body.dark  .yearbook-caption, body.dark  .yearbook-link { color: var(--text-secondary-dark); }
+.yearbook.is-open .yearbook-caption { max-width: none; }
+
+@media (max-width: 768px) {
+    .yearbook { flex-direction: column; text-align: center; gap: 1.25rem; }
+    .yearbook-caption { align-items: center; }
+    .yearbook-link { align-self: center; }
+}
+
 @keyframes momentIn { from { opacity: 0; } to { opacity: 1; } }
 
 .moment-item {
