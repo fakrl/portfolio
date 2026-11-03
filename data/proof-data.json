@@ -81,6 +81,30 @@
       ]
     },
     {
+      "id": "ensa",
+      "title": "CCNA: Enterprise Networking, Security & Automation (ENSA)",
+      "images": [
+        "../image/cert-ensa-1.webp",
+        "../image/cert-ensa-2.webp"
+      ],
+      "badge": "96%",
+      "badgeTone": "blue",
+      "date": "Sep 2026",
+      "issuer": "Cisco Networking Academy",
+      "desc": "Cisco Networking Academy CCNA course on enterprise networking: single-area OSPFv2, IPv4 access control lists, NAT, WAN and QoS concepts, security best practices, and network automation. Student-level credential, verifiable on Credly. The final assessment was done in Cisco Packet Tracer Physical Mode. Score: 96%.",
+      "kind": "Networking",
+      "tags": [
+        "Cisco IOS",
+        "OSPFv2",
+        "NAT",
+        "ACL",
+        "Network Security",
+        "Network Automation"
+      ],
+      "link": "https://www.credly.com/badges/96d14238-7884-4b73-97e5-da6a1d270ba1",
+      "link-label": "Verify on Credly →"
+    },
+    {
       "id": "huawei",
       "title": "HCIA Cloud Service",
       "credential-id": "19511300840-121/FGA/BLSDM.Komdigi/2025",
@@ -229,30 +253,6 @@
       "issuer": "Language Development Agency · Kemdikbud",
       "desc": "Official Indonesian language proficiency certification. Score: 549, Madya (Intermediate-Advanced) level. Valid until Sep 2027.",
       "kind": "Language Certification"
-    },
-    {
-      "id": "ensa",
-      "title": "CCNA: Enterprise Networking, Security & Automation (ENSA)",
-      "images": [
-        "../image/cert-ensa-1.webp",
-        "../image/cert-ensa-2.webp"
-      ],
-      "badge": "96%",
-      "badgeTone": "blue",
-      "date": "Sep 2026",
-      "issuer": "Cisco Networking Academy",
-      "desc": "Cisco Networking Academy CCNA course on enterprise networking: single-area OSPFv2, IPv4 access control lists, NAT, WAN and QoS concepts, security best practices, and network automation. Student-level credential, verifiable on Credly. The final assessment was done in Cisco Packet Tracer Physical Mode. Score: 96%.",
-      "kind": "Networking",
-      "tags": [
-        "Cisco IOS",
-        "OSPFv2",
-        "NAT",
-        "ACL",
-        "Network Security",
-        "Network Automation"
-      ],
-      "link": "https://www.credly.com/badges/96d14238-7884-4b73-97e5-da6a1d270ba1",
-      "link-label": "Verify on Credly →"
     }
   ],
   "awards": [
