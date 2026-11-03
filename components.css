@@ -750,3 +750,65 @@ body.dark  .skill-card h3 { color: var(--text-primary-dark); }
     .section       { padding: 3rem 5%; }
     .skills-grid   { grid-template-columns: 1fr; }
 }
+/* ==========================================
+   CURSOR CREW (script.js → initCursorCrew)
+   One look: black arrow with a white outline, readable on light and dark.
+   ========================================== */
+body.dark  { --sw-line: rgba(255, 255, 255, 0.6); --sw-wash: rgba(255, 255, 255, 0.05); }
+body.light { --sw-line: rgba(0, 0, 0, 0.5);       --sw-wash: rgba(0, 0, 0, 0.04); }
+
+/* hidden until a cursor builds it; the crew owns the hero entrance too */
+body.crew-on [data-sw="wait"],
+body.crew-on [data-sw="queued"] { opacity: 0 !important; pointer-events: none; }
+body.crew-on .hero-photo-side,
+body.crew-on .hero-text-side > * { animation: none !important; }
+
+.sw-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.sw-cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 22px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    will-change: transform;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+.sw-cursor.on { opacity: 0.95; }
+.sw-cursor svg { display: block; transform-origin: 2px 2px; transition: transform 0.16s ease; }
+.sw-cursor.click svg { transform: scale(0.82); }
+
+.sw-frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    border: 1px solid var(--sw-line);
+    background: var(--sw-wash);
+    transition: opacity 0.2s ease;
+}
+.sw-frame.out { opacity: 0; }
+.sw-frame::before,
+.sw-frame::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid var(--sw-line);
+}
+.sw-frame::before { left: -3px;  top: -3px; }
+.sw-frame::after  { right: -3px; bottom: -3px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .sw-layer { display: none; }
+}
