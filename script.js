@@ -225,25 +225,70 @@ if (hamburger && navLinks) {
 }
 // ==========================================
 // CURSOR CREW
-// A few cursors "build" each block the moment it scrolls into view: they drag out
-// its outline from the top-left corner while the block is revealed under the
-// selection. They only exist while there is something to build, then leave.
-// Hero blocks wait for the Hello preloader to finish (cursors roam over it).
-// Throws on setup problems so the caller can fall back to a plain reveal.
+// A crew of cursors "builds" the page as it scrolls into view: first each block
+// (card / section title), then the pieces inside it one by one (images, icons,
+// headings, paragraphs, tags, buttons). Each build drags out the piece's outline
+// while it is revealed. Cursors only exist while there is something to build.
+//
+// Performance rules (the first version lagged):
+//  - reveals use the Web Animations API (opacity / transform / clip-path on small
+//    pieces), never per-frame style writes on big blurred cards;
+//  - cursors and outlines only ever change `transform` (+ a size write on the outline);
+//  - no layout reads inside animation frames (positions come from IntersectionObserver
+//    data plus the scroll offset); one shared requestAnimationFrame ticker;
+//  - if frames get slow it drops to "lite" (plain quick fades, cursors hidden).
+// Hero blocks wait for the Hello preloader, cursors roam over it meanwhile.
+// Throws on setup problems so the caller falls back to the plain reveal.
 // ==========================================
 function initCursorCrew() {
-    const HERO = '.hero-photo-side, .hero-text-side > *';
-    const hero = [...document.querySelectorAll(HERO)];
-    const rest = [...document.querySelectorAll('.glass-card, .section-title')]
-        .filter(el => !el.closest('.hero-section'));
-    const all = [...hero, ...rest];
-    // build the outer block only, never a block nested inside another one
-    const targets = all.filter(el => !all.some(o => o !== el && o.contains(el)));
-    if (!targets.length || !('IntersectionObserver' in window)) throw new Error('crew: nothing to build');
+    if (!Element.prototype.animate || !('IntersectionObserver' in window)) throw new Error('crew: unsupported');
 
+    const HERO   = '.hero-photo-side, .hero-text-side > *';
+    const BLOCKS = '.glass-card, .section-title';
+    const HEAVY  = '.glass-card, .hero-photo-side';
+    const SKIP   = '.navbar, .floating-pill, .lightbox, .cert-modal-overlay, .sw-layer';
+    const TEXT   = 'h1, h2, h3, h4, p, li, blockquote, figcaption';
+    const UNIT   = '.btn, .skill-chip, .tag, .bio-chip, .work-card-tag, .exp-card-badge, .proof-card__badge, .proof-card__tag';
+    const INLINE = 'i[class*="devicon"], .msym, svg';
+    const ATOMS  = [TEXT, UNIT, INLINE, 'img'].join(',');
+    const MAX_SAME = 10;   // more identical pieces than this in one block appear together with the block
+
+    // ---- what gets built --------------------------------------------------
+    const hero = [...document.querySelectorAll(HERO)];
+    const blocks = [...document.querySelectorAll(BLOCKS)].filter(el => !el.closest('.hero-section'));
+    const all = [...hero, ...blocks];
+    const containers = all.filter(el => !all.some(o => o !== el && o.contains(el)));
+    if (!containers.length) throw new Error('crew: nothing to build');
+
+    const meta = new WeakMap();                 // el -> { box, instant, anim }
+    containers.forEach(el => meta.set(el, { box: null, instant: false, anim: null }));
+
+    const atoms = [];
+    document.querySelectorAll(ATOMS).forEach(el => {
+        if (meta.has(el) || el.closest(SKIP)) return;
+        const box = containers.find(c => c.contains(el) && !c.matches('.hero-text-side > *'));
+        if (!box) return;                                                    // only pieces inside a block
+        if (el.matches(INLINE) && el.parentElement.closest(TEXT + ',' + UNIT)) return;   // icon inside text / tag
+        if (el.matches('img') && el.closest(UNIT)) return;
+        if (el.matches(TEXT) && (el.querySelector(TEXT + ', img, ' + UNIT) || el.closest(UNIT))) return;  // leaf text only
+        if (el.matches(UNIT) && el.parentElement.closest(UNIT)) return;
+        atoms.push({ el, box });
+    });
+    const groups = new Map();
+    atoms.forEach(({ el, box }) => {
+        const sig = el.tagName + '.' + (el.classList[0] || '');
+        const g = groups.get(box) || groups.set(box, new Map()).get(box);
+        const n = (g.get(sig) || 0) + 1;
+        g.set(sig, n);
+        meta.set(el, { box, instant: n > MAX_SAME, anim: null });
+    });
+    const targets = [...containers, ...atoms.map(a => a.el)];
+
+    // ---- overlay + crew -------------------------------------------------------
     const pre = document.getElementById('preloader');
     let waiting = !!pre && !pre.classList.contains('hide-preloader');
     let gateT = performance.now();
+    let lite = false;
 
     document.body.classList.add('crew-on');
     const layer = document.createElement('div');
@@ -251,16 +296,20 @@ function initCursorCrew() {
     layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
 
-    const SIZE = window.innerWidth < 768 ? 3 : 5;
-    const ARROW = '<svg width="18" height="22" viewBox="0 0 18 22" fill="none">' +
-        '<path d="M1.5 1.5L15.8 11.2L9.2 12.6L6.3 19.2L1.5 1.5Z" fill="#0b0b0c" ' +
-        'stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+    const SIZE = window.innerWidth >= 1024 ? 9 : window.innerWidth >= 768 ? 6 : 4;
+    const ARROW = '<svg width="20" height="24" viewBox="0 0 20 24" fill="none">' +
+        '<path transform="translate(1.6 2.2)" d="M1.5 1.5L15.8 11.2L9.2 12.6L6.3 19.2L1.5 1.5Z" fill="rgba(0,0,0,.28)"/>' +
+        '<path d="M1.5 1.5L15.8 11.2L9.2 12.6L6.3 19.2L1.5 1.5Z" fill="#0b0b0c" stroke="#fff" ' +
+        'stroke-width="1.5" stroke-linejoin="round"/></svg>';
     const crew = Array.from({ length: SIZE }, (_, i) => {
         const el = document.createElement('div');
         el.className = 'sw-cursor';
         el.innerHTML = ARROW;
-        layer.appendChild(el);
-        return { i, el, x: -60, y: -60, alive: false };
+        const frame = document.createElement('div');
+        frame.className = 'sw-frame';
+        frame.style.display = 'none';
+        layer.append(frame, el);
+        return { i, el, frame, x: -60, y: -60, alive: false };
     });
 
     const rand  = (a, b) => a + Math.random() * (b - a);
@@ -271,14 +320,32 @@ function initCursorCrew() {
         c.x = x; c.y = y;
         c.el.style.transform = `translate3d(${(x - 1.5).toFixed(1)}px, ${(y - 1.5).toFixed(1)}px, 0)`;
     };
-    const tween = (dur, fn) => new Promise(res => {
-        const t0 = performance.now();
-        (function step(now) {
-            const p = clamp((now - t0) / dur, 0, 1);
-            fn(p);
-            if (p < 1) requestAnimationFrame(step); else res();
-        })(t0);
-    });
+
+    // one shared ticker; also watches frame time and switches to lite when it is slow
+    const tweens = new Set();
+    let raf = 0, last = 0, ema = 16, slow = 0;
+    function tick(now) {
+        raf = 0;
+        const dt = now - last; last = now;
+        if (!lite && dt > 0 && dt < 250) {
+            ema = ema * 0.9 + dt * 0.1;
+            if (performance.now() > gateT + 900 && ema > 26) { if (++slow > 25) goLite(); } else if (ema <= 26) slow = 0;
+        }
+        tweens.forEach(tw => {
+            const p = clamp((now - tw.t0) / tw.dur, 0, 1);
+            tw.fn(p);
+            if (p >= 1) { tweens.delete(tw); tw.res(); }
+        });
+        if (tweens.size) raf = requestAnimationFrame(tick);
+    }
+    function tween(dur, fn) {
+        return new Promise(res => {
+            tweens.add({ t0: performance.now(), dur, fn, res });
+            if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+        });
+    }
+    function goLite() { lite = true; layer.style.display = 'none'; }
+
     const moveTo = (c, tx, ty, dur) => {
         const sx = c.x, sy = c.y;
         return tween(dur, p => { const e = easeIO(p); place(c, sx + (tx - sx) * e, sy + (ty - sy) * e); });
@@ -290,80 +357,106 @@ function initCursorCrew() {
     };
     const wander = async c => {
         const w = window.innerWidth, h = window.innerHeight;
-        await moveTo(c, rand(w * 0.12, w * 0.88), rand(h * 0.18, h * 0.85), rand(700, 1300));
-        await sleep(rand(120, 420));
+        await moveTo(c, rand(w * 0.1, w * 0.9), rand(h * 0.15, h * 0.88), rand(700, 1300));
+        await sleep(rand(100, 380));
     };
 
+    // ---- queue / state --------------------------------------------------------
     const queue = [];
     const building = new Map();
+    let flushing = false;
 
     function finalize(el) {
         if (!el.dataset.sw || el.dataset.sw === 'done') return;
+        const m = meta.get(el);
         building.delete(el);
-        el.classList.add('visible');
-        el.style.removeProperty('clip-path');
-        el.style.removeProperty('transition');
-        el.style.removeProperty('transform');
-        // hero blocks have a base opacity of 0 and no .visible state, so keep it explicit
-        if (el.matches(HERO)) el.style.opacity = '1'; else el.style.removeProperty('opacity');
+        if (el.matches(BLOCKS)) el.classList.add('visible');
+        if (el.matches(HERO)) el.style.opacity = '1';     // hero blocks have a base opacity of 0 and no .visible state
         el.dataset.sw = 'done';
+        if (m && m.anim) { m.anim.cancel(); m.anim = null; }
+        flushInstant();
+    }
+    function flushInstant() {                              // crowded pieces appear with their block, no cursor
+        if (flushing) return;
+        flushing = true;
+        for (let i = queue.length - 1; i >= 0; i--) {
+            const m = meta.get(queue[i].el);
+            if (m.instant && (!m.box || m.box.dataset.sw === 'done')) { const el = queue[i].el; queue.splice(i, 1); finalize(el); }
+        }
+        flushing = false;
+    }
+    function enqueue(el, r) {
+        if (el.dataset.sw !== 'wait') return;
+        const m = meta.get(el);
+        if (m.box && m.box.dataset.sw === 'wait') { io.unobserve(m.box); enqueue(m.box, m.box.getBoundingClientRect()); }
+        el.dataset.sw = 'queued';
+        const b = r || el.getBoundingClientRect();
+        queue.push({ el, t: performance.now(), top: b.top, left: b.left, w: b.width, h: b.height, y0: window.scrollY });
+    }
+    function pickNext() {
+        flushInstant();
+        const sy = window.scrollY;
+        let bi = -1, bt = Infinity;
+        for (let i = 0; i < queue.length; i++) {
+            const m = meta.get(queue[i].el);
+            if (m.box && m.box.dataset.sw !== 'done') continue;       // a piece waits for its block
+            const top = queue[i].top + (queue[i].y0 - sy);
+            if (top < bt) { bt = top; bi = i; }
+        }
+        return bi < 0 ? null : queue.splice(bi, 1)[0];
     }
 
-    async function buildOne(c, el) {
+    function reveal(el, dur, heavy) {
+        const kf = heavy
+            ? [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }]
+            : [{ opacity: 0, clipPath: 'inset(0 100% 100% 0)' }, { opacity: 1, clipPath: 'inset(-8px -8px -8px -8px)' }];
+        return el.animate(kf, { duration: dur, easing: heavy ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'ease-out', fill: 'both' });
+    }
+
+    async function buildOne(c, q) {
+        const el = q.el, m = meta.get(el);
         try {
             const vh = window.innerHeight, vw = window.innerWidth;
-            let r = el.getBoundingClientRect();
-            // scrolled past (or collapsed) before a cursor got to it: just show it
-            if (r.width < 4 || r.height < 4 || r.bottom < 0 || r.top > vh) { finalize(el); return; }
+            const topNow = () => q.top + (q.y0 - window.scrollY);
+            if (q.w < 4 || q.h < 4 || topNow() + q.h < 0 || topNow() > vh) { finalize(el); return; }   // scrolled past
 
             el.dataset.sw = 'building';
             building.set(el, performance.now());
-            const pressure = 1 / (1 + Math.min(queue.length, 6) * 0.2);
+            const heavy = el.matches(HEAVY) || q.w * q.h > 70000;
+
+            if (lite) {                                        // slow device: quick plain fade, no cursor
+                m.anim = reveal(el, 170, heavy);
+                await sleep(170);
+                return;
+            }
+            const pressure = Math.max(0.45, 1 / (1 + Math.min(queue.length, 12) * 0.1));
             const jitter = rand(0.9, 1.15);
 
-            const sy = clamp(r.top, 6, vh - 6);
-            const dist = Math.hypot(r.left - c.x, sy - c.y);
-            await moveTo(c, clamp(r.left, 6, vw - 6), sy, clamp(dist / 1.7, 200, 620) * pressure * jitter);
+            const tx = clamp(q.left, 6, vw - 6);
+            await moveTo(c, tx, clamp(topNow(), 6, vh - 6),
+                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 2.2, 140, 520) * pressure * jitter);
 
-            const frame = document.createElement('div');
-            frame.className = 'sw-frame';
-            frame.style.borderRadius = getComputedStyle(el).borderRadius;
-            layer.appendChild(frame);
-
-            el.style.transition = 'none';
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-
-            r = el.getBoundingClientRect();
-            const dur = clamp(300 + Math.sqrt(r.width * r.height) * 0.45, 360, 820) * pressure * jitter;
+            const dur = (heavy ? clamp(320 + Math.sqrt(q.w * q.h) * 0.35, 360, 700)
+                               : clamp(160 + Math.sqrt(q.w * q.h) * 1.2, 180, 360)) * pressure * jitter;
+            const fr = c.frame;
+            fr.className = 'sw-frame';
+            fr.style.display = 'block';
+            fr.style.borderRadius = heavy ? getComputedStyle(el).borderRadius : '3px';
+            m.anim = reveal(el, dur, heavy);
             await tween(dur, p => {
-                const e = easeIO(p);
-                const b = el.getBoundingClientRect();     // follows the block while the page scrolls
-                const w = b.width, h = b.height;
-                frame.style.transform = `translate3d(${b.left}px, ${b.top}px, 0)`;
-                frame.style.width = `${w * e}px`;
-                frame.style.height = `${h * e}px`;
-                // reveal grows with the selection; shadow room on the open sides
-                el.style.clipPath = `inset(${-40 * e}px ${(1 - e) * w - 40 * e}px ${(1 - e) * h - 40 * e}px ${-40 * e}px)`;
-                place(c, clamp(b.left + w * e, 6, vw - 6), clamp(b.top + h * e, 6, vh - 6));
+                const e = easeIO(p), top = topNow();
+                fr.style.transform = `translate3d(${q.left}px, ${top}px, 0)`;
+                fr.style.width = `${q.w * e}px`;
+                fr.style.height = `${q.h * e}px`;
+                place(c, clamp(q.left + q.w * e, 6, vw - 6), clamp(top + q.h * e, 6, vh - 6));
             });
-
-            frame.classList.add('out');
-            setTimeout(() => frame.remove(), 240);
+            fr.classList.add('out');
+            setTimeout(() => { if (fr.classList.contains('out')) fr.style.display = 'none'; }, 220);
             c.el.classList.add('click');
             setTimeout(() => c.el.classList.remove('click'), 170);
         } finally {
             finalize(el);
         }
-    }
-
-    function pickNext() {
-        let bi = 0, bt = Infinity;
-        queue.forEach((q, i) => {
-            const top = q.el.getBoundingClientRect().top;
-            if (top < bt) { bt = top; bi = i; }
-        });
-        return queue.splice(bi, 1)[0].el;
     }
 
     async function life(c) {
@@ -374,13 +467,18 @@ function initCursorCrew() {
         c.el.classList.add('on');
         let idleSince = 0;
         while (true) {
-            if (waiting) { await wander(c); continue; }              // roam over the Hello screen
-            if (queue.length) { idleSince = 0; await buildOne(c, pickNext()); continue; }
+            if (waiting) { await wander(c); continue; }                       // roam over the Hello screen
+            if (queue.length) {
+                const q = pickNext();
+                if (q) { idleSince = 0; await buildOne(c, q); } else { await sleep(70); }
+                continue;
+            }
             if (!idleSince) idleSince = performance.now();
-            if (performance.now() - idleSince > 2200 + c.i * 450) break;
+            if (performance.now() - idleSince > 2200 + c.i * 300) break;
             await wander(c);
         }
         c.el.classList.remove('on');
+        c.frame.style.display = 'none';
         await sleep(350);
         c.alive = false;
         if (queue.length) wake();
@@ -389,23 +487,20 @@ function initCursorCrew() {
     function wake() {
         if (waiting) return;
         const alive = crew.filter(c => c.alive).length;
-        let need = clamp(queue.length, 2, SIZE) - alive;
+        const cap = lite ? 3 : SIZE;
+        let need = clamp(queue.length, 2, cap) - alive;
         crew.forEach(c => {
             if (need <= 0 || c.alive) return;
             need--;
-            setTimeout(() => life(c).catch(() => { c.alive = false; }), c.i * 120);
+            setTimeout(() => life(c).catch(() => { c.alive = false; }), c.i * 90);
         });
     }
 
     const io = new IntersectionObserver(entries => {
-        entries.filter(e => e.isIntersecting)
-            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-            .forEach(e => {
-                io.unobserve(e.target);
-                if (e.target.dataset.sw !== 'wait') return;
-                e.target.dataset.sw = 'queued';
-                queue.push({ el: e.target, t: performance.now() });
-            });
+        entries.filter(e => e.isIntersecting).forEach(e => {
+            io.unobserve(e.target);
+            enqueue(e.target, e.boundingClientRect);
+        });
         wake();
     }, { threshold: 0.01, rootMargin: '0px 0px -6% 0px' });
 
@@ -419,7 +514,7 @@ function initCursorCrew() {
         wake();
     };
     if (waiting) {
-        crew.forEach(c => setTimeout(() => life(c).catch(() => { c.alive = false; }), 250 + c.i * 160));
+        crew.forEach(c => setTimeout(() => life(c).catch(() => { c.alive = false; }), 250 + c.i * 110));
         new MutationObserver((_, mo) => {
             if (pre.classList.contains('hide-preloader')) { mo.disconnect(); release(); }
         }).observe(pre, { attributes: true, attributeFilter: ['class'] });
@@ -431,21 +526,24 @@ function initCursorCrew() {
         const now = performance.now();
         for (let i = queue.length - 1; i >= 0; i--) {
             if (!waiting && now - Math.max(queue[i].t, gateT) > 4500) {
-                finalize(queue[i].el);
+                const el = queue[i].el;
                 queue.splice(i, 1);
+                finalize(el);
             }
         }
         building.forEach((t, el) => { if (now - t > 4000) finalize(el); });
     }, 1000);
 
-    // Keyboard users: focusing something inside an unbuilt block shows it right away.
+    // Keyboard users: focusing something inside an unbuilt piece shows it (and its block) right away.
     document.addEventListener('focusin', e => {
-        const t = targets.find(x => x.contains(e.target));
-        if (!t || !t.dataset.sw || t.dataset.sw === 'done') return;
-        const qi = queue.findIndex(q => q.el === t);
-        if (qi > -1) queue.splice(qi, 1);
-        io.unobserve(t);
-        t.dataset.sw = 'queued';
-        finalize(t);
+        for (let n = e.target; n && n !== document.body; n = n.parentElement) {
+            if (n.dataset && n.dataset.sw && n.dataset.sw !== 'done') {
+                const qi = queue.findIndex(q => q.el === n);
+                if (qi > -1) queue.splice(qi, 1);
+                io.unobserve(n);
+                if (n.dataset.sw === 'wait') n.dataset.sw = 'queued';
+                finalize(n);
+            }
+        }
     });
 }

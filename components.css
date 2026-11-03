@@ -775,12 +775,11 @@ body.crew-on .hero-text-side > * { animation: none !important; }
     position: absolute;
     top: 0;
     left: 0;
-    width: 18px;
-    height: 22px;
+    width: 20px;
+    height: 24px;
     opacity: 0;
     transition: opacity 0.3s ease;
     will-change: transform;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 .sw-cursor.on { opacity: 0.95; }
 .sw-cursor svg { display: block; transform-origin: 2px 2px; transition: transform 0.16s ease; }
@@ -794,6 +793,7 @@ body.crew-on .hero-text-side > * { animation: none !important; }
     border: 1px solid var(--sw-line);
     background: var(--sw-wash);
     transition: opacity 0.2s ease;
+    will-change: transform;
 }
 .sw-frame.out { opacity: 0; }
 .sw-frame::before,
