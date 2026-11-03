@@ -437,11 +437,17 @@ function initCursorCrew() {
     }
     function pickNext() {
         flushInstant();
-        const sy = window.scrollY;
+        const sy = window.scrollY, vh = window.innerHeight;
         let bi = -1, bt = Infinity;
+        for (let i = queue.length - 1; i >= 0; i--) {
+            const q = queue[i];
+            const top = q.top + (q.y0 - sy);
+            if (top + q.h < -40) { queue.splice(i, 1); finalize(q.el); continue; }                       // scrolled past
+            if (top > vh + 40) { queue.splice(i, 1); const e = q.el; if (e.dataset.sw === 'queued') { e.dataset.sw = 'wait'; io.observe(e); } continue; }   // not reached yet
+        }
         for (let i = 0; i < queue.length; i++) {
             const m = meta.get(queue[i].el);
-            if (m.box && m.box.dataset.sw !== 'done') continue;       // a piece waits for its block
+            if (m.box && m.box.dataset.sw !== 'done' && m.box.dataset.sw !== 'building') continue;   // a piece waits for its block
             const top = queue[i].top + (queue[i].y0 - sy);
             if (top < bt) { bt = top; bi = i; }
         }
@@ -449,10 +455,12 @@ function initCursorCrew() {
     }
 
     function reveal(el, dur, heavy) {
+        // blurred glass cards fade (a clip-path on them is expensive); everything else is wiped open
+        // with the same easing the outline uses, so the content never gets ahead of the cursor
         const kf = heavy
-            ? [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }]
-            : [{ opacity: 0, clipPath: 'inset(0 100% 100% 0)' }, { opacity: 1, clipPath: 'inset(-8px -8px -8px -8px)' }];
-        return el.animate(kf, { duration: dur, easing: heavy ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'ease-out', fill: 'both' });
+            ? [{ opacity: 0, transform: 'none' }, { opacity: 1, transform: 'none' }]
+            : [{ clipPath: 'inset(0 100% 100% 0)' }, { clipPath: 'inset(-8px -8px -8px -8px)' }];
+        return el.animate(kf, { duration: dur, easing: heavy ? 'cubic-bezier(0.4, 0, 0.2, 1)' : 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'both' });
     }
 
     async function buildOne(c, q) {
@@ -475,7 +483,7 @@ function initCursorCrew() {
             if (q.w < 4 || q.h < 4 || topNow() + q.h < 0 || topNow() > vh) { finalize(el); return; }   // scrolled past
 
             building.set(el, performance.now());           // stays 'queued' (hidden) until the cursor starts drawing
-            const heavy = el.matches(HEAVY) || q.w * q.h > 70000;
+            const heavy = el.matches(HEAVY);
 
             if (lite) {                                        // slow device: quick plain fade, no cursor
                 m.anim = reveal(el, 170, heavy);
@@ -517,7 +525,6 @@ function initCursorCrew() {
     }
 
     async function life(c) {
-        if (c.alive) return;
         c.alive = true;
         const [sx, sy] = edgePoint();
         place(c, sx, sy);
@@ -528,7 +535,7 @@ function initCursorCrew() {
             if (queue.length) {
                 const q = pickNext();
                 if (q) { idleSince = 0; await buildOne(c, q); }
-                else { if (!idleSince) idleSince = performance.now(); if (performance.now() - idleSince > 900 + c.i * 200) break; await sleep(80); }
+                else { if (!idleSince) idleSince = performance.now(); if (performance.now() - idleSince > 2500 + c.i * 150) break; await sleep(80); }
                 continue;
             }
             if (!idleSince) idleSince = performance.now();
@@ -546,12 +553,15 @@ function initCursorCrew() {
         if (waiting) return;
         const alive = crew.filter(c => c.alive).length;
         const cap = lite ? 3 : SIZE;
-        const ready = queue.filter(q => { const b = meta.get(q.el).box; return !b || b.dataset.sw === 'done'; }).length;
-        let need = Math.min(ready, cap) - alive;
+        const ready = queue.filter(q => { const b = meta.get(q.el).box; return !b || b.dataset.sw === 'done' || b.dataset.sw === 'building'; }).length;
+        // enough hands for what is ready now, plus a share of what is about to become ready
+        const want = Math.min(cap, Math.max(ready, Math.ceil(queue.length * 0.6)));
+        let need = want - alive, k = 0;
         crew.forEach(c => {
             if (need <= 0 || c.alive) return;
             need--;
-            setTimeout(() => life(c).catch(() => { c.alive = false; }), 40 + c.i * 120);
+            c.alive = true;
+            setTimeout(() => life(c).catch(() => { c.alive = false; }), 40 + (k++) * 90);
         });
     }
 
@@ -573,18 +583,20 @@ function initCursorCrew() {
         wake();
     };
     if (waiting) {
-        crew.slice(0, 3).forEach(c => setTimeout(() => life(c).catch(() => { c.alive = false; }), 250 + c.i * 200));
+        crew.slice(0, 3).forEach(c => { c.alive = true; setTimeout(() => life(c).catch(() => { c.alive = false; }), 250 + c.i * 200); });
         new MutationObserver((_, mo) => {
             if (pre.classList.contains('hide-preloader')) { mo.disconnect(); release(); }
         }).observe(pre, { attributes: true, attributeFilter: ['class'] });
         setTimeout(release, 6000);
     }
 
+    setInterval(wake, 300);
+
     // Watchdog: nothing may stay hidden because animation was slow or throttled.
     setInterval(() => {
         const now = performance.now();
         for (let i = queue.length - 1; i >= 0; i--) {
-            if (!waiting && now - Math.max(queue[i].t, gateT) > 12000) {
+            if (!waiting && now - Math.max(queue[i].t, gateT) > 15000) {
                 const el = queue[i].el;
                 queue.splice(i, 1);
                 finalize(el);
