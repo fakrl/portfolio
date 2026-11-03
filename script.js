@@ -415,6 +415,18 @@ function initCursorCrew() {
         try {
             const vh = window.innerHeight, vw = window.innerWidth;
             const topNow = () => q.top + (q.y0 - window.scrollY);
+            // Fresh measurement (layout may have shifted since it was queued). Base transforms
+            // (a card waiting at translateY(24px)) are subtracted so the outline hugs the final box.
+            const measure = () => {
+                const r = el.getBoundingClientRect();
+                let ty = 0;
+                if (el.matches(HEAVY) || el.matches(HERO)) {
+                    const t = getComputedStyle(el).transform;
+                    if (t && t !== 'none') { const mm = t.match(/matrix\(([^)]+)\)/); if (mm) ty = parseFloat(mm[1].split(',')[5]) || 0; }
+                }
+                q.left = r.left; q.top = r.top - ty; q.w = r.width; q.h = r.height; q.y0 = window.scrollY;
+            };
+            measure();
             if (q.w < 4 || q.h < 4 || topNow() + q.h < 0 || topNow() > vh) { finalize(el); return; }   // scrolled past
 
             el.dataset.sw = 'building';
@@ -435,6 +447,7 @@ function initCursorCrew() {
 
             const dur = (heavy ? clamp(1100 + Math.sqrt(q.w * q.h) * 0.8, 1300, 2000)
                                : clamp(650 + Math.sqrt(q.w * q.h) * 2.5, 700, 1100)) * pressure * jitter;
+            measure();                                         // layout may have moved while the cursor travelled
             const fr = c.frame;
             fr.className = 'sw-frame';
             fr.style.display = 'block';
