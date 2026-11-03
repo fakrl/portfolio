@@ -818,3 +818,9 @@ body.crew-on.portfolio-page { animation: none !important; opacity: 1 !important;
 @media (prefers-reduced-motion: reduce) {
     .sw-layer { display: none; }
 }
+
+/* No CSS transition may add a second fade while the crew reveals an element */
+body.crew-on [data-sw="building"],
+body.crew-on [data-sw="queued"] { transition: none !important; }
+body.crew-on [data-sw="done"] { transition-property: background, background-color, border-color, box-shadow, color, filter !important; }
+body.crew-on [data-sw="done"].glass-card { transition-property: background, border-color, box-shadow, transform, color !important; }
