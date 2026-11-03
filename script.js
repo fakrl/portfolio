@@ -236,7 +236,7 @@ if (hamburger && navLinks) {
 //  - cursors and outlines only ever change `transform` (+ a size write on the outline);
 //  - no layout reads inside animation frames (positions come from IntersectionObserver
 //    data plus the scroll offset); one shared requestAnimationFrame ticker;
-//  - if frames get slow it drops to "lite" (plain quick fades, cursors hidden).
+//  - cursors only exist while there is something ready to build (as many as needed, max 9).
 // Hero blocks wait for the Hello preloader, cursors roam over it meanwhile.
 // Throws on setup problems so the caller falls back to the plain reveal.
 // ==========================================
@@ -249,8 +249,9 @@ function initCursorCrew() {
     const SKIP   = '.navbar, .floating-pill, .lightbox, .cert-modal-overlay, .sw-layer';
     const TEXT   = 'h1, h2, h3, h4, p, li, blockquote, figcaption';
     const UNIT   = '.btn, .skill-chip, .tag, .bio-chip, .work-card-tag, .exp-card-badge, .proof-card__badge, .proof-card__tag';
-    const INLINE = 'i[class*="devicon"], .msym, svg';
+    const INLINE = 'i[class*="devicon"], .msym, svg, video, iframe, canvas, picture';
     const ATOMS  = [TEXT, UNIT, INLINE, 'img'].join(',');
+    const MEDIA  = 'video, iframe, canvas, picture';
     const MAX_SAME = 10;   // more identical pieces than this in one block appear together with the block
 
     // ---- what gets built --------------------------------------------------
@@ -268,8 +269,9 @@ function initCursorCrew() {
         if (meta.has(el) || el.closest(SKIP)) return;
         const box = containers.find(c => c.contains(el) && !c.matches('.hero-text-side > *'));
         if (!box) return;                                                    // only pieces inside a block
-        if (el.matches(INLINE) && el.parentElement.closest(TEXT + ',' + UNIT)) return;   // icon inside text / tag
-        if (el.matches('img') && el.closest(UNIT)) return;
+        if (el.matches(INLINE) && !el.matches(MEDIA) && el.parentElement.closest(TEXT + ',' + UNIT)) return;   // icon inside text / tag
+        if (el.matches('img') && (el.closest(UNIT) || el.closest('picture'))) return;
+        if (el.matches(MEDIA) && el.parentElement.closest(MEDIA)) return;
         if (el.matches(TEXT) && (el.querySelector(TEXT + ', img, ' + UNIT) || el.closest(UNIT))) return;  // leaf text only
         if (el.matches(UNIT) && el.parentElement.closest(UNIT)) return;
         atoms.push({ el, box });
@@ -321,16 +323,12 @@ function initCursorCrew() {
         c.el.style.transform = `translate3d(${(x - 1.5).toFixed(1)}px, ${(y - 1.5).toFixed(1)}px, 0)`;
     };
 
-    // one shared ticker; also watches frame time and switches to lite when it is slow
+    // one shared ticker for every tween
     const tweens = new Set();
-    let raf = 0, last = 0, ema = 16, slow = 0;
+    let raf = 0, last = 0;
     function tick(now) {
         raf = 0;
         const dt = now - last; last = now;
-        if (!lite && dt > 0 && dt < 250) {
-            ema = ema * 0.9 + dt * 0.1;
-            if (performance.now() > gateT + 900 && ema > 26) { if (++slow > 25) goLite(); } else if (ema <= 26) slow = 0;
-        }
         tweens.forEach(tw => {
             const p = clamp((now - tw.t0) / tw.dur, 0, 1);
             tw.fn(p);
@@ -344,7 +342,6 @@ function initCursorCrew() {
             if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
         });
     }
-    function goLite() { lite = true; layer.style.display = 'none'; }
 
     const moveTo = (c, tx, ty, dur) => {
         const sx = c.x, sy = c.y;
@@ -471,12 +468,13 @@ function initCursorCrew() {
             if (waiting) { await wander(c); continue; }                       // roam over the Hello screen
             if (queue.length) {
                 const q = pickNext();
-                if (q) { idleSince = 0; await buildOne(c, q); } else { await sleep(70); }
+                if (q) { idleSince = 0; await buildOne(c, q); }
+                else { if (!idleSince) idleSince = performance.now(); if (performance.now() - idleSince > 900 + c.i * 200) break; await sleep(80); }
                 continue;
             }
             if (!idleSince) idleSince = performance.now();
-            if (performance.now() - idleSince > 2200 + c.i * 300) break;
-            await wander(c);
+            if (performance.now() - idleSince > 500 + c.i * 150) break;
+            await sleep(120);
         }
         c.el.classList.remove('on');
         c.frame.style.display = 'none';
@@ -489,11 +487,12 @@ function initCursorCrew() {
         if (waiting) return;
         const alive = crew.filter(c => c.alive).length;
         const cap = lite ? 3 : SIZE;
-        let need = clamp(queue.length, 2, cap) - alive;
+        const ready = queue.filter(q => { const b = meta.get(q.el).box; return !b || b.dataset.sw === 'done'; }).length;
+        let need = Math.min(ready, cap) - alive;
         crew.forEach(c => {
             if (need <= 0 || c.alive) return;
             need--;
-            setTimeout(() => life(c).catch(() => { c.alive = false; }), c.i * 90);
+            setTimeout(() => life(c).catch(() => { c.alive = false; }), 40 + c.i * 120);
         });
     }
 
@@ -515,7 +514,7 @@ function initCursorCrew() {
         wake();
     };
     if (waiting) {
-        crew.forEach(c => setTimeout(() => life(c).catch(() => { c.alive = false; }), 250 + c.i * 110));
+        crew.slice(0, 3).forEach(c => setTimeout(() => life(c).catch(() => { c.alive = false; }), 250 + c.i * 200));
         new MutationObserver((_, mo) => {
             if (pre.classList.contains('hide-preloader')) { mo.disconnect(); release(); }
         }).observe(pre, { attributes: true, attributeFilter: ['class'] });
