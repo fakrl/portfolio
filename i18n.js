@@ -25,6 +25,7 @@ const I18N = {
     'hero.online': { en: 'Online · Open to Work', id: 'Online · Terbuka untuk Kerja' },
     'hero.contactBtn': { en: 'Contact Me', id: 'Hubungi Saya' },
     'hero.downloadCv': { en: 'Download CV', id: 'Unduh CV' },
+    'hero.viewCv': { en: 'View CV', id: 'Lihat CV' },
     'hero.getInTouch': { en: 'Get In Touch', id: 'Hubungi Saya' },
     'hero.bio': {
         en: "Full Stack Developer (<span class=\"bio-chip\"><i class=\"devicon-laravel-plain colored\"></i>Laravel</span>, <span class=\"bio-chip\"><i class=\"devicon-vuejs-plain colored\"></i>Vue.js</span>, <span class=\"bio-chip\"><i class=\"devicon-go-plain colored\"></i>Golang</span>) who turns manual workflows into systems people actually use: production features at PT Indotech Digital, a Laravel system replacing a casting agency's WhatsApp-and-spreadsheet process, and data automation in Google Apps Script. Information Systems student at UNPAM, GPA 3.70. <strong>Available now for full-time roles.</strong>",
