@@ -244,7 +244,7 @@ function initCursorCrew() {
     if (!Element.prototype.animate || !('IntersectionObserver' in window)) throw new Error('crew: unsupported');
 
     const HERO   = '.hero-photo-side, .hero-text-side > *';
-    const BLOCKS = '.glass-card, .section-title, .spotlight-eyebrow, .work-card-link, .cv-download-btn, .cv-download-hint, .proof-filter-bar, .moments-filters, .yearbook';
+    const BLOCKS = '.glass-card, .section-title, .cs-wrap > *:not(.cs-2col), .cs-2col > *, .spotlight-eyebrow, .work-card-link, .cv-download-btn, .cv-download-hint, .proof-filter-bar, .moments-filters, .yearbook';
     const HEAVY  = '.glass-card, .hero-photo-side';
     const SKIP   = '.navbar, .floating-pill, .lightbox, .cert-modal-overlay, .sw-layer';
     const TEXT   = 'h1, h2, h3, h4, p, li, blockquote, figcaption';
@@ -258,7 +258,12 @@ function initCursorCrew() {
     const hero = [...document.querySelectorAll(HERO)];
     const blocks = [...document.querySelectorAll(BLOCKS)].filter(el => !el.closest('.hero-section'));
     const all = [...hero, ...blocks];
-    const containers = all.filter(el => !all.some(o => o !== el && o.contains(el)));
+    const CARD = HEAVY + ', .hero-text-side > *';
+    const containers = all.filter(el => {
+        if (all.some(o => o !== el && o.contains(el) && o.matches(CARD))) return false;          // inside a card / hero item
+        if (!el.matches(CARD) && all.some(o => o !== el && el.contains(o))) return false;        // plain wrapper of other blocks
+        return true;
+    });
     if (!containers.length) throw new Error('crew: nothing to build');
 
     const meta = new WeakMap();                 // el -> { box, instant, anim }
@@ -404,7 +409,7 @@ function initCursorCrew() {
         const m = meta.get(el);
         for (let n = el.parentElement; n && m && n !== m.box; n = n.parentElement) {
             const wm = meta.get(n);
-            if (wm && wm.wrapper && n.dataset.sw === 'wait') n.dataset.sw = 'done';
+            if (wm && wm.wrapper && n.dataset.sw === 'wait') { n.dataset.sw = 'done'; if (n.matches('.glass-card')) n.classList.add('visible'); }
         }
     }
     function finalize(el) {
@@ -412,7 +417,7 @@ function initCursorCrew() {
         const m = meta.get(el);
         releaseWrappers(el);
         building.delete(el);
-        if (el.matches(BLOCKS)) el.classList.add('visible');
+        if (el.matches(BLOCKS) || el.matches('.glass-card')) el.classList.add('visible');
         if (el.matches(HERO)) el.style.opacity = '1';     // hero blocks have a base opacity of 0 and no .visible state
         el.dataset.sw = 'done';
         if (m && m.anim) { m.anim.cancel(); m.anim = null; }
@@ -454,12 +459,12 @@ function initCursorCrew() {
         return bi < 0 ? null : queue.splice(bi, 1)[0];
     }
 
-    function reveal(el, dur, heavy) {
+    function reveal(el, dur, heavy, ox = 0, oy = 0) {
         // blurred glass cards fade (a clip-path on them is expensive); everything else is wiped open
         // with the same easing the outline uses, so the content never gets ahead of the cursor
         const kf = heavy
             ? [{ opacity: 0, transform: 'none' }, { opacity: 1, transform: 'none' }]
-            : [{ clipPath: 'inset(0 100% 100% 0)' }, { clipPath: 'inset(-8px -8px -8px -8px)' }];
+            : [{ clipPath: `inset(${oy ? '100%' : '0'} ${ox ? '0' : '100%'} ${oy ? '0' : '100%'} ${ox ? '100%' : '0'})` }, { clipPath: 'inset(-8px -8px -8px -8px)' }];
         return el.animate(kf, { duration: dur, easing: heavy ? 'cubic-bezier(0.4, 0, 0.2, 1)' : 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'both' });
     }
 
@@ -493,9 +498,10 @@ function initCursorCrew() {
             const pressure = queue.length > 24 ? 0.7 : 1;
             const jitter = rand(0.9, 1.15);
 
-            const tx = clamp(q.left, 6, vw - 6);
-            await moveTo(c, tx, clamp(topNow(), 6, vh - 6),
-                clamp(Math.hypot(tx - c.x, clamp(topNow(), 6, vh - 6) - c.y) / 1.4, 300, 850) * pressure * jitter);
+            // each build starts from a random corner and is dragged to the opposite one
+            const ox = Math.random() < 0.5 ? 0 : 1, oy = Math.random() < 0.5 ? 0 : 1;
+            const tx = clamp(q.left + ox * q.w, 6, vw - 6), ty = clamp(topNow() + oy * q.h, 6, vh - 6);
+            await moveTo(c, tx, ty, clamp(Math.hypot(tx - c.x, ty - c.y) / 1.4, 300, 850) * pressure * jitter);
 
             const dur = (heavy ? clamp(800 + Math.sqrt(q.w * q.h) * 0.6, 950, 1500)
                                : clamp(420 + Math.sqrt(q.w * q.h) * 1.8, 480, 760)) * pressure * jitter;
@@ -505,14 +511,15 @@ function initCursorCrew() {
             fr.style.display = 'block';
             fr.style.borderRadius = heavy ? getComputedStyle(el).borderRadius : '3px';
             releaseWrappers(el);
-            m.anim = reveal(el, dur, heavy);
+            m.anim = reveal(el, dur, heavy, ox, oy);
             el.dataset.sw = 'building';
             await tween(dur, p => {
                 const e = easeIO(p), top = topNow();
-                fr.style.transform = `translate3d(${q.left}px, ${top}px, 0)`;
+                const fx = ox ? q.left + q.w * (1 - e) : q.left, fy = oy ? top + q.h * (1 - e) : top;
+                fr.style.transform = `translate3d(${fx}px, ${fy}px, 0)`;
                 fr.style.width = `${q.w * e}px`;
                 fr.style.height = `${q.h * e}px`;
-                place(c, clamp(q.left + q.w * e, 6, vw - 6), clamp(top + q.h * e, 6, vh - 6));
+                place(c, clamp(ox ? fx : fx + q.w * e, 6, vw - 6), clamp(oy ? fy : fy + q.h * e, 6, vh - 6));
             });
             fr.classList.add('out');
             setTimeout(() => { if (fr.classList.contains('out')) fr.style.display = 'none'; }, 220);
@@ -606,14 +613,14 @@ function initCursorCrew() {
         wrappers.forEach(w => {
             if (w.dataset.sw !== 'wait') return;
             const b = meta.get(w).box;
-            if (b.dataset.sw === 'done') { w._t = w._t || now; if (now - w._t > 12000) w.dataset.sw = 'done'; }
+            if (b.dataset.sw === 'done') { w._t = w._t || now; if (now - w._t > 12000) { w.dataset.sw = 'done'; if (w.matches('.glass-card')) w.classList.add('visible'); } }
         });
     }, 1000);
 
     // Keyboard users: focusing something inside an unbuilt piece shows it (and its block) right away.
     document.addEventListener('focusin', e => {
         for (let n = e.target; n && n !== document.body; n = n.parentElement) {
-            if (n.dataset && n.dataset.sw && n.dataset.sw !== 'done' && meta.get(n) && meta.get(n).wrapper) { n.dataset.sw = 'done'; continue; }
+            if (n.dataset && n.dataset.sw && n.dataset.sw !== 'done' && meta.get(n) && meta.get(n).wrapper) { n.dataset.sw = 'done'; if (n.matches('.glass-card')) n.classList.add('visible'); continue; }
             if (n.dataset && n.dataset.sw && n.dataset.sw !== 'done') {
                 const qi = queue.findIndex(q => q.el === n);
                 if (qi > -1) queue.splice(qi, 1);
