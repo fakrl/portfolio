@@ -340,7 +340,7 @@ function initCursorCrew() {
     layer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(layer);
 
-    const SIZE = window.innerWidth >= 1024 ? 14 : window.innerWidth >= 768 ? 9 : 5;
+    const SIZE = window.innerWidth >= 1024 ? 14 : window.innerWidth >= 768 ? 9 : 4;
     const ARROW = '<svg width="20" height="24" viewBox="0 0 20 24" fill="none">' +
         '<path transform="translate(1.6 2.2)" d="M1.5 1.5L15.8 11.2L9.2 12.6L6.3 19.2L1.5 1.5Z" fill="rgba(0,0,0,.28)"/>' +
         '<path d="M1.5 1.5L15.8 11.2L9.2 12.6L6.3 19.2L1.5 1.5Z" fill="#0b0b0c" stroke="#fff" ' +
