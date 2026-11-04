@@ -9,114 +9,366 @@
   <style>
     * { box-sizing: border-box; }
     html, body { width: 100%; height: 100%; margin: 0; }
-    body { display: grid; grid-template-rows: 1fr auto; gap: 10px; padding: 12px; background: #17191f; color: #f5f5f5; font: 14px/1.4 system-ui, sans-serif; }
-    .page { display: grid; place-items: center; min-height: 0; overflow: hidden; }
-    .page img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 8px 32px #0008; }
+    body { display: grid; grid-template-rows: minmax(0, 1fr) auto auto; gap: 10px; padding: 12px; background: #17191f; color: #f5f5f5; font: 14px/1.4 system-ui, sans-serif; }
+    .book { display: grid; grid-template-rows: minmax(0, 1fr); place-items: stretch; min-height: 0; perspective: 1200px; }
+    .spread { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); align-items: stretch; gap: 1px; width: 100%; height: 100%; min-height: 0; }
+    .spread.double { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .spread.single { max-width: min(100%, 48vh); }
+    .page-slot { display: grid; place-items: center; width: 100%; height: 100%; min-width: 0; min-height: 0; overflow: hidden; background: #111318; }
+    .page-slot img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 130px); object-fit: contain; box-shadow: 0 8px 32px #0008; }
+    .page-slot:empty { background: transparent; }
+    .spread.turning { animation: turn 350ms ease both; transform-origin: center; }
+    @keyframes turn { from { opacity: .25; transform: rotateY(-7deg); } to { opacity: 1; transform: rotateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .spread.turning { animation: fade .15s ease both; } @keyframes fade { from { opacity: .4; } to { opacity: 1; } } }
     .toolbar { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; }
     button, input { min-height: 38px; border: 1px solid #ffffff30; border-radius: 8px; background: #ffffff12; color: inherit; font: inherit; }
     button { padding: 0 12px; cursor: pointer; }
     button:hover:not(:disabled) { background: #ffffff24; }
     button:disabled { opacity: .45; cursor: default; }
     input { width: 5.5em; padding: 0 8px; text-align: center; }
+    .lock-panel { width: min(100%, 320px); padding: 20px; text-align: center; }
+    .lock-panel .lock { font-size: 1.5rem; }
+    .lock-panel p { margin: 8px 0; color: #c8cad2; }
+    .lock-panel form { display: grid; gap: 8px; }
+    .lock-panel input { width: 100%; text-align: left; }
+    .status { min-height: 1.4em; color: #f2c5c5; }
+    .status[role="status"] { color: #d3d5de; }
+    .photos { display: flex; justify-content: center; }
     :focus-visible { outline: 2px solid #9fc5ff; outline-offset: 2px; }
-    .jump { display: flex; gap: 6px; }
-    .jump button { min-width: 2.6em; padding: 0 8px; }
-    .jump button[aria-current="true"] { background: #ffffff30; border-color: #ffffff60; }
-    .page { touch-action: pan-y; }
-    @media (max-width: 460px) { body { padding: 8px; gap: 6px; } .toolbar { gap: 5px; } button { padding: 0 9px; } }
+    @media (min-width: 700px) { .spread.double { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 699px) {
+      body { padding: 8px; gap: 6px; }
+      .spread.double { grid-template-columns: minmax(0, 1fr); }
+      .spread.single { max-width: 100%; }
+      .toolbar { gap: 5px; }
+      button { padding: 0 9px; }
+    }
   </style>
 </head>
 <body>
-  <main class="page"><img id="yearbookPage" alt="Yearbook page 1" fetchpriority="high" decoding="async"></main>
+  <main class="book" id="book" aria-label="Digital yearbook"></main>
   <form class="toolbar" id="pageForm" aria-label="Yearbook controls">
-    <button id="previousPage" type="button" aria-label="Previous page">←</button>
-    <label><span id="pageStatus" aria-live="polite">Page 1 of 260</span>
-      <input id="pageNumber" type="number" min="1" max="260" value="1" aria-label="Go to page">
+    <button id="previousPage" type="button" aria-label="Previous spread">←</button>
+    <label><span id="pageStatus" aria-live="polite">Loading yearbook…</span>
+      <input id="pageNumber" type="number" min="1" max="260" value="52" aria-label="Go to page">
     </label>
-    <button type="submit">Go</button>
-    <button id="nextPage" type="button" aria-label="Next page">→</button>
+    <button id="goPage" type="submit">Go</button>
+    <button id="nextPage" type="button" aria-label="Next spread">→</button>
     <button id="fullscreen" type="button" aria-label="Toggle fullscreen">⛶</button>
-    <span class="jump" id="jump" aria-label="My photos"></span>
   </form>
+  <div class="photos"><button id="myPhotos" type="button">My photos</button></div>
   <script>
-    const pageImage = document.getElementById('yearbookPage');
-    const pageNumber = document.getElementById('pageNumber');
+    <!-- READER_CRYPTO_START -->
+    function normalizeReaderPassword(value) {
+      return value.normalize('NFKC').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    async function deriveReaderKey(password, salt, iterations) {
+      const material = await crypto.subtle.importKey(
+        'raw',
+        new TextEncoder().encode(normalizeReaderPassword(password)),
+        'PBKDF2',
+        false,
+        ['deriveKey']
+      );
+      return crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt, iterations, hash: 'SHA-256' },
+        material,
+        { name: 'AES-GCM', length: 256 },
+        true,
+        ['decrypt']
+      );
+    }
+
+    async function decryptPayload(payload, key) {
+      const bytes = payload instanceof Uint8Array ? payload : new Uint8Array(payload);
+      return new Uint8Array(await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: bytes.slice(0, 12) },
+        key,
+        bytes.slice(12)
+      ));
+    }
+    <!-- READER_CRYPTO_END -->
+
+    const TOTAL = 260;
+    const PUBLIC_PAGES = new Set([52, 53, 54, 55]);
+    const isId = new URLSearchParams(location.search).get('lang') === 'id';
+    const text = isId
+      ? { page: 'Halaman', of: 'dari', go: 'Buka', goLabel: 'Ke halaman', previous: 'Spread sebelumnya', next: 'Spread berikutnya', myPhotos: 'Foto saya', locked: 'Halaman ini terkunci.', motto: 'Petunjuk: motto angkatan kita, 5 kata, bahasa Inggris.', submit: 'Buka buku', checking: 'Memeriksa…', wrong: 'Motto salah, coba lagi.', failed: 'Halaman tidak dapat dimuat.', setup: 'Reader belum siap. Coba lagi nanti.' }
+      : { page: 'Page', of: 'of', go: 'Go', goLabel: 'Go to page', previous: 'Previous spread', next: 'Next spread', myPhotos: 'My photos', locked: 'This page is locked.', motto: 'Hint: our class motto, 5 words, in English.', submit: 'Unlock', checking: 'Checking…', wrong: 'Wrong motto, try again.', failed: 'Page could not be loaded.', setup: 'Reader is not ready yet. Please try again later.' };
+    document.documentElement.lang = isId ? 'id' : 'en';
+
+    const book = document.getElementById('book');
     const pageStatus = document.getElementById('pageStatus');
+    const pageNumber = document.getElementById('pageNumber');
     const previousPage = document.getElementById('previousPage');
     const nextPage = document.getElementById('nextPage');
-    const TOTAL = 260;
-    const MY_PAGES = [53, 54, 55];                       // my photos (54 = the cave photo)
-    const isId = new URLSearchParams(location.search).get('lang') === 'id';
-    const L = isId
-      ? { page: (p) => `Halaman ${p} dari ${TOTAL}`, go: 'Ke halaman', mine: 'Foto saya', goBtn: 'Buka' }
-      : { page: (p) => `Page ${p} of ${TOTAL}`, go: 'Go to page', mine: 'My photos', goBtn: 'Go' };
-    document.documentElement.lang = isId ? 'id' : 'en';
-    pageNumber.setAttribute('aria-label', L.go);
-    document.querySelector('#pageForm button[type="submit"]').textContent = L.goBtn;
-    document.getElementById('jump').setAttribute('aria-label', L.mine);
-    document.getElementById('jump').title = L.mine;
+    const myPhotos = document.getElementById('myPhotos');
+    const pageForm = document.getElementById('pageForm');
+    const cache = new Map();
+    let manifest = null;
+    let key = null;
+    let page = parsePage(location.hash.slice(1)) || 52;
+    let renderId = 0;
+    let pointerStart = null;
 
-    let page = 1;
-    // pages live on Cloudinary (folder "yearbook", ids 001..260); f_auto,q_auto,w_1200 = right format and size per device
-    const CDN = 'https://res.cloudinary.com/dxccvha88/image/upload/f_auto,q_auto,w_1200/yearbook/';
-    const src = n => CDN + String(n).padStart(3, '0');
-    const warmed = new Set();
-    function warm(n) {                                    // preload neighbours so flipping feels instant
-      if (n < 1 || n > TOTAL || warmed.has(n)) return;
-      warmed.add(n); const im = new Image(); im.decoding = 'async'; im.src = src(n);
+    function parsePage(value) {
+      const number = Number(value);
+      return Number.isInteger(number) && number >= 1 && number <= TOTAL ? number : null;
     }
 
-    const jump = document.getElementById('jump');
-    MY_PAGES.forEach(n => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.textContent = n; b.dataset.p = n;
-      b.addEventListener('click', () => showPage(n));
-      jump.appendChild(b);
-    });
+    function base64Bytes(value) {
+      const binary = atob(value);
+      return Uint8Array.from(binary, character => character.charCodeAt(0));
+    }
 
-    function showPage(value, fromHash) {
-      page = Math.max(1, Math.min(TOTAL, Number(value) || 1));
+    function bytesBase64(value) {
+      let binary = '';
+      for (const byte of value) binary += String.fromCharCode(byte);
+      return btoa(binary);
+    }
+
+    function validManifest(value) {
+      return value && value.v === 1 && value.total === TOTAL &&
+        Number.isInteger(value.iter) && value.iter >= 100000 && value.iter <= 500000 &&
+        base64Bytes(value.salt).length === 16 && base64Bytes(value.check).length > 28 &&
+        JSON.stringify(value.publicPages) === '[52,53,54,55]' &&
+        value.plainBase === 'https://res.cloudinary.com/dxccvha88/image/upload/f_auto,q_auto,w_1200/yearbook/' &&
+        value.encBase === 'https://res.cloudinary.com/dxccvha88/raw/upload/yearbook-enc/';
+    }
+
+    async function loadManifest() {
+      const response = await fetch('manifest.json', { cache: 'no-cache' });
+      if (!response.ok) throw new Error('manifest');
+      const value = await response.json();
+      if (!validManifest(value)) throw new Error('manifest');
+      manifest = value;
+      const saved = sessionStorage.getItem('yearbook:key');
+      if (saved) {
+        try {
+          const imported = await crypto.subtle.importKey('raw', base64Bytes(saved), 'AES-GCM', true, ['decrypt']);
+          if (await verifyKey(imported)) key = imported;
+          else sessionStorage.removeItem('yearbook:key');
+        } catch (_) {
+          sessionStorage.removeItem('yearbook:key');
+        }
+      }
+    }
+
+    async function verifyKey(candidate) {
+      const clear = await decryptPayload(base64Bytes(manifest.check), candidate);
+      return new TextDecoder().decode(clear) === 'yearbook-ok';
+    }
+
+    function visiblePages() {
+      if (window.matchMedia('(min-width: 700px)').matches && page !== 1) {
+        const left = page % 2 === 0 ? page : page - 1;
+        return [left, Math.min(left + 1, TOTAL)];
+      }
+      return [page];
+    }
+
+    function displayRange(pages) {
+      if (pages.length === 1) return text.page + ' ' + pages[0] + ' ' + text.of + ' ' + TOTAL;
+      return text.page + 's ' + pages[0] + '–' + pages[1] + ' ' + text.of + ' ' + TOTAL;
+    }
+
+    function pageUrl(number) {
+      return manifest.plainBase + String(number).padStart(3, '0');
+    }
+
+    function trimCache() {
+      while (cache.size > 12) {
+        const oldest = cache.keys().next().value;
+        URL.revokeObjectURL(cache.get(oldest));
+        cache.delete(oldest);
+      }
+    }
+
+    async function privatePageUrl(number) {
+      if (cache.has(number)) {
+        const cached = cache.get(number);
+        cache.delete(number);
+        cache.set(number, cached);
+        return cached;
+      }
+      if (!key) throw new Error('locked');
+      const response = await fetch(manifest.encBase + String(number).padStart(3, '0') + '.bin');
+      if (!response.ok) throw new Error('page');
+      const clear = await decryptPayload(await response.arrayBuffer(), key);
+      const url = URL.createObjectURL(new Blob([clear], { type: 'image/webp' }));
+      cache.set(number, url);
+      trimCache();
+      return url;
+    }
+
+    function lockPanel() {
+      const panel = document.createElement('section');
+      panel.className = 'lock-panel';
+      const icon = document.createElement('div');
+      icon.className = 'lock';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = '🔒';
+      const message = document.createElement('p');
+      message.textContent = text.locked;
+      const hint = document.createElement('p');
+      hint.textContent = text.motto;
+      const form = document.createElement('form');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.autocomplete = 'off';
+      input.spellcheck = false;
+      input.setAttribute('aria-label', text.motto);
+      const button = document.createElement('button');
+      button.type = 'submit';
+      button.textContent = text.submit;
+      const status = document.createElement('p');
+      status.className = 'status';
+      status.setAttribute('aria-live', 'polite');
+      status.setAttribute('role', 'status');
+      form.append(input, button, status);
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        button.disabled = true;
+        status.textContent = text.checking;
+        try {
+          const candidate = await deriveReaderKey(input.value, base64Bytes(manifest.salt), manifest.iter);
+          if (!await verifyKey(candidate)) throw new Error('wrong');
+          key = candidate;
+          try { sessionStorage.setItem('yearbook:key', bytesBase64(new Uint8Array(await crypto.subtle.exportKey('raw', candidate)))); } catch (_) {}
+          await render(true);
+        } catch (_) {
+          status.textContent = text.wrong;
+          input.focus();
+        } finally {
+          button.disabled = false;
+        }
+      });
+      panel.append(icon, message, hint, form);
+      return panel;
+    }
+
+    async function render(animate = false) {
+      const id = ++renderId;
+      const pages = visiblePages();
       pageNumber.value = page;
-      pageStatus.textContent = L.page(page);
-      pageImage.src = src(page);
-      pageImage.alt = (isId ? 'Halaman buku tahunan ' : 'Yearbook page ') + page;
-      previousPage.disabled = page === 1;
-      nextPage.disabled = page === TOTAL;
-      jump.querySelectorAll('button').forEach(b => b.setAttribute('aria-current', String(Number(b.dataset.p) === page)));
-      warm(page + 1); warm(page - 1); warm(page + 2);
-      if (!fromHash) { try { history.replaceState(null, '', '#' + page); } catch (_) {} }
+      pageNumber.setAttribute('aria-label', text.goLabel);
+      pageStatus.textContent = displayRange(pages);
+      previousPage.setAttribute('aria-label', text.previous);
+      nextPage.setAttribute('aria-label', text.next);
+      myPhotos.textContent = text.myPhotos;
+      book.replaceChildren();
+
+      const spread = document.createElement('div');
+      spread.className = 'spread ' + (pages.length === 2 ? 'double' : 'single');
+      if (animate) spread.classList.add('turning');
+      book.appendChild(spread);
+      let firstInput = null;
+
+      for (const number of pages) {
+        const slot = document.createElement('div');
+        slot.className = 'page-slot';
+        spread.appendChild(slot);
+        if (!PUBLIC_PAGES.has(number) && !key) {
+          const panel = lockPanel();
+          slot.appendChild(panel);
+          if (!firstInput) firstInput = panel.querySelector('input');
+          continue;
+        }
+        const image = document.createElement('img');
+        image.alt = (isId ? 'Halaman buku tahunan ' : 'Yearbook page ') + number;
+        image.decoding = 'async';
+        image.draggable = false;
+        slot.appendChild(image);
+        try {
+          image.src = PUBLIC_PAGES.has(number) ? pageUrl(number) : await privatePageUrl(number);
+        } catch (_) {
+          if (id !== renderId) return;
+          const message = document.createElement('p');
+          message.className = 'status';
+          message.setAttribute('role', 'status');
+          message.setAttribute('aria-live', 'polite');
+          message.textContent = text.failed;
+          slot.replaceChildren(message);
+        }
+        if (id !== renderId) return;
+      }
+
+      if (firstInput) firstInput.focus({ preventScroll: true });
+      previousPage.disabled = page <= 1;
+      nextPage.disabled = page >= TOTAL;
+      if (!key) {
+        for (const number of pages) if (!PUBLIC_PAGES.has(number)) return;
+      }
+      preloadNeighbours();
     }
 
-    document.getElementById('pageForm').addEventListener('submit', event => {
+    function movePage(delta) {
+      const step = window.matchMedia('(min-width: 700px)').matches ? 2 : 1;
+      page = Math.max(1, Math.min(TOTAL, page + delta * step));
+      history.replaceState(null, '', '#' + page);
+      render(true);
+    }
+
+    function preloadNeighbours() {
+      if (!manifest) return;
+      const current = visiblePages();
+      for (const number of new Set([...current, current[0] - 1, current.at(-1) + 1])) {
+        if (number < 1 || number > TOTAL) continue;
+        if (PUBLIC_PAGES.has(number)) {
+          const image = new Image();
+          image.src = pageUrl(number);
+        } else if (key) {
+          privatePageUrl(number).catch(() => {});
+        }
+      }
+    }
+
+    pageForm.addEventListener('submit', event => {
       event.preventDefault();
-      showPage(pageNumber.value);
+      const value = parsePage(pageNumber.value);
+      if (!value) return;
+      page = value;
+      history.replaceState(null, '', '#' + page);
+      render(true);
     });
-    previousPage.addEventListener('click', () => showPage(page - 1));
-    nextPage.addEventListener('click', () => showPage(page + 1));
+    previousPage.addEventListener('click', () => movePage(-1));
+    nextPage.addEventListener('click', () => movePage(1));
+    myPhotos.addEventListener('click', () => {
+      page = 54;
+      history.replaceState(null, '', '#54');
+      render(true);
+    });
     document.getElementById('fullscreen').addEventListener('click', () => {
       if (document.fullscreenElement) document.exitFullscreen();
       else document.documentElement.requestFullscreen?.();
     });
     document.addEventListener('keydown', event => {
-      if (event.target === pageNumber) return;
-      if (event.key === 'ArrowLeft') showPage(page - 1);
-      if (event.key === 'ArrowRight') showPage(page + 1);
+      if (event.target === pageNumber || event.target.matches('input, button')) return;
+      if (event.key === 'ArrowLeft') movePage(-1);
+      if (event.key === 'ArrowRight') movePage(1);
     });
-
-    // swipe left / right on the page (touch)
-    let sx = null;
-    const stage = document.querySelector('.page');
-    stage.addEventListener('pointerdown', e => { sx = e.clientX; });
-    stage.addEventListener('pointerup', e => {
-      if (sx === null) return;
-      const dx = e.clientX - sx; sx = null;
-      if (Math.abs(dx) > 50) showPage(page + (dx < 0 ? 1 : -1));
+    book.addEventListener('pointerdown', event => {
+      if (event.target.closest('input, button')) return;
+      pointerStart = event.clientX;
     });
-    stage.addEventListener('pointercancel', () => { sx = null; });
+    book.addEventListener('pointerup', event => {
+      if (pointerStart === null) return;
+      const delta = event.clientX - pointerStart;
+      pointerStart = null;
+      if (Math.abs(delta) > 50) movePage(delta < 0 ? 1 : -1);
+    });
+    book.addEventListener('pointercancel', () => { pointerStart = null; });
+    window.addEventListener('hashchange', () => {
+      page = parsePage(location.hash.slice(1)) || 52;
+      render(true);
+    });
+    window.matchMedia('(min-width: 700px)').addEventListener('change', () => render());
 
-    // opens at #54 etc. when linked that way
-    window.addEventListener('hashchange', () => showPage(location.hash.slice(1), true));
-    showPage(location.hash.slice(1) || 1, true);
+    loadManifest().then(() => render()).catch(() => {
+      pageStatus.textContent = text.setup;
+      book.replaceChildren();
+    });
   </script>
 </body>
 </html>

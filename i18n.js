@@ -257,11 +257,10 @@ const I18N = {
     // ── Feedback ──
     // ── Yearbook (Moments page) ──
     'yearbook.title': { en: 'Yearbook 2023', id: 'Buku Tahunan 2023' },
-    'yearbook.desc': { en: "Photographer on the yearbook committee, MA Ma'had Al-Zaytun 2023. It opens at my photos, pages 53 to 55.", id: "Fotografer panitia buku tahunan MA Ma'had Al-Zaytun 2023. Dibuka langsung di foto-foto saya, halaman 53 sampai 55." },
+    'yearbook.desc': { en: "Photographer on the yearbook committee, MA Ma'had Al-Zaytun 2023. Pages 52–55 are open to everyone; the rest unlocks with our class motto.", id: "Fotografer panitia buku tahunan MA Ma'had Al-Zaytun 2023. Halaman 52–55 terbuka untuk semua; halaman lainnya bisa dibuka dengan motto angkatan." },
     'yearbook.open': { en: 'Open the yearbook', id: 'Buka buku tahunan' },
     'yearbook.newTab': { en: 'Open in a new tab', id: 'Buka di tab baru' },
-    'yearbook.note': { en: 'Opens the locally hosted reader, without third-party ads.', id: 'Dibuka lewat pembaca lokal tanpa iklan pihak ketiga.' },
-    'yearbook.coverAlt': { en: 'Cover of the 2023 yearbook', id: 'Sampul buku tahunan 2023' },
+    'yearbook.note': { en: 'Pages 52–55 are public; the rest of the yearbook needs the class motto.', id: 'Halaman 52–55 terbuka untuk semua; sisanya perlu motto angkatan.' },
     'yearbook.frameTitle': { en: 'Digital yearbook 2023', id: 'Buku tahunan digital 2023' },
 
     'feedback.title': { en: 'Leave a Feedback', id: 'Tinggalkan Kesan' },
