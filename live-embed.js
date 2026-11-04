@@ -39,7 +39,21 @@
     }, { passive: true });
   }
 
+  // card previews only start loading (full third-party sites!) when they are about to be seen,
+  // so they do not compete with the page itself during load
+  function lazyFrames() {
+    var frames = document.querySelectorAll('iframe[data-src]');
+    if (!frames.length) return;
+    function load(f) { var u = f.getAttribute('data-src'); if (u) { f.removeAttribute('data-src'); f.src = u; } }
+    if (!('IntersectionObserver' in window)) { frames.forEach(load); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); load(e.target); } });
+    }, { rootMargin: '300px 0px' });
+    frames.forEach(function (f) { io.observe(f); });
+  }
+
   function init() {
+    lazyFrames();
     var boxes = document.querySelectorAll('.live-embed');
     if (!boxes.length) return;
     boxes.forEach(shield);

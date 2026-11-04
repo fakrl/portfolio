@@ -37,6 +37,7 @@
         for (const m of muts) for (const node of m.addedNodes) {
             if (!(node instanceof HTMLElement) || !node.classList.contains('gb-post')) continue;
             if (first) { first = false; continue; }
+            if ([...m.removedNodes].some(n => n.nodeType === 1 && n.hasAttribute && n.hasAttribute('data-pre'))) continue;   // pre-render swapped for the real post
             if (!node.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) continue;
             node.animate(
                 [{ opacity: 0, transform: `translateX(${dir * 28}px)` }, { opacity: 1, transform: 'translateX(0)' }],

@@ -7,7 +7,18 @@
     <link rel="preconnect" href="https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app" crossorigin>
     <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js">
     <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js">
-    <script src="../feedback-early.js"></script>
+    <script>
+(function () {
+    var KEY = 'fb_feedback_v1', cached = null;
+    try { cached = JSON.parse(localStorage.getItem(KEY)); } catch (_) {}
+    window.__fbEarly = {
+        key: KEY,
+        cached: cached && typeof cached === 'object' ? cached : null,
+        promise: fetch('https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app/feedback.json', { cache: 'no-store' })
+            .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+    };
+})();
+</script>
     <title>Moments — Fakhrul Mukhlisin</title>
     <link rel="icon" type="image/webp" href="/image/favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -168,6 +179,39 @@
                 </div>
                 <div class="feedback-dots" id="feedbackDots"></div>
             </div>
+<script>
+/* Shows the newest guestbook post as soon as its data is there (cache or REST), long before the page
+   scripts have run. The page script replaces it with the real carousel post, same markup. */
+(function () {
+    var e = window.__fbEarly, l = document.getElementById('feedbackList');
+    if (!e || !l) return;
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function rel(ts) {
+        if (!ts) return '';
+        var d = Date.now() - ts; if (d < 60000) return 'just now';
+        var m = Math.floor(d / 60000); if (m < 60) return m + 'm';
+        var h = Math.floor(m / 60); if (h < 24) return h + 'h';
+        var dd = Math.floor(h / 24); if (dd < 7) return dd + 'd';
+        return new Date(ts).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+    function show(data) {
+        if (!data || l.querySelector('.gb-post')) return;
+        var keys = Object.keys(data); if (!keys.length) return;
+        var it = data[keys[keys.length - 1]]; if (!it) return;
+        var empty = document.getElementById('feedbackEmpty'); if (empty) empty.style.display = 'none';
+        var p = document.createElement('article');
+        p.className = 'gb-post gb-post--carousel';
+        p.setAttribute('data-pre', '1');
+        p.innerHTML = '<span class="gb-avatar">' + esc((it.nama || '?').charAt(0).toUpperCase()) + '</span>' +
+            '<div class="gb-main"><div class="gb-head"><span class="gb-name">' + esc(it.nama) + '</span><span class="gb-time">· ' + rel(it.waktu) + '</span></div>' +
+            (it.dari ? '<div class="gb-from">' + esc(it.dari) + '</div>' : '') +
+            '<p class="gb-text">' + esc(it.pesan) + '</p></div>';
+        l.appendChild(p);
+    }
+    if (e.cached) show(e.cached);
+    e.promise.then(show);
+})();
+</script>
         </div>
     </section>
 
