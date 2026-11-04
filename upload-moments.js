@@ -2,11 +2,14 @@ const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 const path = require('path');
 
-cloudinary.config({
-  cloud_name: 'dxccvha88',
-  api_key: 'REMOVED_CLOUDINARY_KEY',
-  api_secret: 'REMOVED_CLOUDINARY_SECRET'
-});
+// Credentials come from the environment, never from this file:
+//   PowerShell:  $env:CLOUDINARY_URL = "cloudinary://<api_key>:<api_secret>@dxccvha88"
+// (copy the API environment variable from the Cloudinary dashboard > API Keys)
+if (!process.env.CLOUDINARY_URL) {
+  console.error('Set CLOUDINARY_URL first (see the comment above).');
+  process.exit(1);
+}
+cloudinary.config({ secure: true });
 
 const IMAGE_DIR = './image';
 
