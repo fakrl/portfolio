@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fakrul-feeeb-default-rtdb.asia-southeast1.firebasedatabase.app" crossorigin>
+    <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js">
+    <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js">
+    <script src="feedback-early.js"></script>
     <title>Fakhrul Mukhlisin — Full Stack Developer</title>
     <link rel="icon" type="image/webp" href="/image/favicon.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2766,12 +2771,12 @@
 
 <!-- Firebase Feedback -->
 <script type="module">
-    import { initializeApp }
-        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onValue, serverTimestamp }
-        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
-        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    // The SDK is imported dynamically so the page can render the guestbook (cache / REST, see
+    // feedback-early.js) without waiting for it. dbReady / authReady resolve once each part is loaded.
+    const FB_BASE = "https://www.gstatic.com/firebasejs/10.12.2/";
+    let initializeApp, getDatabase, ref, push, onValue, serverTimestamp,
+        getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged;
+    let app, db, auth, provider, commentsRef;
 
     const firebaseConfig = {
         apiKey: "AIzaSyDhJLaWGZs1YILiMaNIDQ3mapnBUoH9R6s",
@@ -2790,11 +2795,21 @@
     //   4. Realtime DB Rules: allow write to feedback/$id/replies only if auth.uid === this UID.
     const OWNER_UID = "624rNLzK3JSG61VOCF9ddWEEUm33"; // Fakhrul — enables owner replies
 
-    const app  = initializeApp(firebaseConfig);
-    const db   = getDatabase(app);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-    const commentsRef = ref(db, "feedback");
+    const dbReady = (async () => {
+        const [a, d] = await Promise.all([import(FB_BASE + "firebase-app.js"), import(FB_BASE + "firebase-database.js")]);
+        ({ initializeApp } = a);
+        ({ getDatabase, ref, push, onValue, serverTimestamp } = d);
+        app = initializeApp(firebaseConfig);
+        db = getDatabase(app);
+        commentsRef = ref(db, "feedback");
+    })();
+    const authReady = (async () => {
+        await dbReady;
+        const au = await import(FB_BASE + "firebase-auth.js");
+        ({ getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } = au);
+        auth = getAuth(app);
+        provider = new GoogleAuthProvider();
+    })();
 
     let latestData  = null;
     let currentUser = null;
@@ -2935,7 +2950,20 @@
         startCarousel();
     });
 
-    onValue(commentsRef, (snapshot) => { latestData = snapshot.val(); render(); });
+    // First paint from the cache / REST request, then the live subscription takes over.
+    let gotLive = false;
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    const early = window.__fbEarly;
+    if (early) {
+        if (early.cached) { latestData = early.cached; render(); }
+        early.promise.then(d => { if (!gotLive && d && !same(d, latestData)) { latestData = d; render(); } });
+    }
+    dbReady.then(() => onValue(commentsRef, (snapshot) => {
+        gotLive = true;
+        const v = snapshot.val();
+        try { localStorage.setItem("fb_feedback_v1", JSON.stringify(v)); } catch (_) {}
+        if (!same(v, latestData)) { latestData = v; render(); }
+    }));
 
     // ── New feedback ──
     document.getElementById("feedbackSubmit").addEventListener("click", async () => {
@@ -2947,6 +2975,7 @@
         if (!nama || !pesan) { alert("Name and message required."); return; }
         btn.textContent = "Sending..."; btn.disabled = true;
         try {
+            await dbReady;
             await push(commentsRef, { nama, dari: dari || "Anonymous", pesan, waktu: serverTimestamp() });
             nameEl.value = ""; fromEl.value = ""; msgEl.value = "";
         } catch(err) { alert("Failed to send, try again."); console.error(err); }
@@ -2954,7 +2983,8 @@
     });
 
     // ── Owner auth (Google sign-in) ──
-    function doLogin() {
+    async function doLogin() {
+        await authReady;
         signInWithPopup(auth, provider).catch(err => {
             console.error(err);
             alert("Sign-in failed. Enable the Google provider in Firebase Console → Authentication.");
@@ -2968,7 +2998,7 @@
             bar.innerHTML =
                 `<span class="owner-auth-status">${owner ? "✓ Owner mode — you can reply" : "Signed in (not recognized as owner)"}</span>
                  <button id="ownerLogoutBtn" class="owner-auth-link">Logout</button>`;
-            document.getElementById("ownerLogoutBtn").addEventListener("click", () => signOut(auth));
+            document.getElementById("ownerLogoutBtn").addEventListener("click", () => authReady.then(() => signOut(auth)));
         } else {
             bar.innerHTML =
                 `<button id="ownerLoginBtn" class="owner-auth-link"><span class="msym">login</span> Owner? Sign in to reply</button>`;
@@ -2977,12 +3007,12 @@
     }
     updateAuthBar();
 
-    onAuthStateChanged(auth, (user) => {
+    authReady.then(() => onAuthStateChanged(auth, (user) => {
         currentUser = user;
         if (user) console.log("Owner UID:", user.uid, "— paste this into OWNER_UID to enable replying.");
         updateAuthBar();
         render();
-    });
+    }));
 
     // ── Owner reply (event delegation) ──
     document.getElementById("feedbackList").addEventListener("click", async (e) => {
@@ -2995,6 +3025,7 @@
         if (!pesan) return;
         btn.disabled = true;
         try {
+            await dbReady;
             await push(ref(db, `feedback/${key}/replies`), { pesan, waktu: serverTimestamp(), uid: currentUser.uid });
             input.value = "";
         } catch(err) { console.error(err); alert("Reply failed. Check your Firebase DB rules."); }

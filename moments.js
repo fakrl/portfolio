@@ -1,9 +1,9 @@
-import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, push, onValue, serverTimestamp, get }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+// The SDK is imported dynamically so the guestbook can render from the cache / REST request
+// (see feedback-early.js) without waiting for it. dbReady / authReady resolve once each part is loaded.
+const FB_BASE = "https://www.gstatic.com/firebasejs/10.12.2/";
+let initializeApp, getDatabase, ref, push, onValue, serverTimestamp, get,
+    getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged;
+let app, db, auth, provider, photosRef, commentsRef;
 
 // ── Firebase config ───────────────────────
 const firebaseConfig = {
@@ -16,12 +16,22 @@ const firebaseConfig = {
     appId: "1:767578062305:web:3cdf7bd8678923bb3e26a0"
 };
 
-const app      = initializeApp(firebaseConfig);
-const db       = getDatabase(app);
-const auth     = getAuth(app);
-const provider = new GoogleAuthProvider();
-const photosRef   = ref(db, "photos");
-const commentsRef = ref(db, "feedback");
+const dbReady = (async () => {
+    const [a, d] = await Promise.all([import(FB_BASE + "firebase-app.js"), import(FB_BASE + "firebase-database.js")]);
+    ({ initializeApp } = a);
+    ({ getDatabase, ref, push, onValue, serverTimestamp, get } = d);
+    app = initializeApp(firebaseConfig);
+    db = getDatabase(app);
+    photosRef = ref(db, "photos");
+    commentsRef = ref(db, "feedback");
+})();
+const authReady = (async () => {
+    await dbReady;
+    const au = await import(FB_BASE + "firebase-auth.js");
+    ({ getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } = au);
+    auth = getAuth(app);
+    provider = new GoogleAuthProvider();
+})();
 
 // ── Guestbook owner auth ──
 const OWNER_UID = "624rNLzK3JSG61VOCF9ddWEEUm33";
@@ -154,6 +164,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     renderSkeletons(grid);
 
     try {
+        await dbReady;
         const snapshot = await get(photosRef);
         const data = snapshot.val();
 
@@ -339,7 +350,20 @@ function renderFeedback() {
     startCarousel();
 }
 
-onValue(commentsRef, (snapshot) => { latestFeedback = snapshot.val(); renderFeedback(); });
+// First paint from the cache / REST request, then the live subscription takes over.
+let gotLive = false;
+const sameData = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const earlyFb = window.__fbEarly;
+if (earlyFb) {
+    if (earlyFb.cached) { latestFeedback = earlyFb.cached; renderFeedback(); }
+    earlyFb.promise.then(d => { if (!gotLive && d && !sameData(d, latestFeedback)) { latestFeedback = d; renderFeedback(); } });
+}
+dbReady.then(() => onValue(commentsRef, (snapshot) => {
+    gotLive = true;
+    const v = snapshot.val();
+    try { localStorage.setItem("fb_feedback_v1", JSON.stringify(v)); } catch (_) {}
+    if (!sameData(v, latestFeedback) || !earlyFb) { latestFeedback = v; renderFeedback(); }
+}));
 
 // Pause auto-rotation while the user is reading/hovering, resume on leave.
 document.getElementById("feedbackList").addEventListener("mouseenter", () => { carouselPaused = true; });
@@ -362,6 +386,7 @@ document.getElementById("feedbackSubmit").addEventListener("click", async () => 
     if (!nama || !pesan) { alert("Name and message required."); return; }
     btn.textContent = "Sending..."; btn.disabled = true;
     try {
+        await dbReady;
         await push(commentsRef, { nama, dari: dari || "Anonymous", pesan, waktu: serverTimestamp() });
         nameEl.value = ""; fromEl.value = ""; msgEl.value = "";
     } catch(err) { alert("Failed to send, try again."); console.error(err); }
@@ -369,7 +394,8 @@ document.getElementById("feedbackSubmit").addEventListener("click", async () => 
 });
 
 // ── Owner auth (Google sign-in) ──
-function doLogin() {
+async function doLogin() {
+    await authReady;
     signInWithPopup(auth, provider).catch(err => {
         console.error(err);
         alert("Sign-in failed. Enable the Google provider in Firebase Console → Authentication.");
@@ -382,7 +408,7 @@ function updateAuthBar() {
         bar.innerHTML =
             `<span class="owner-auth-status">${isOwner() ? "✓ Owner mode — you can reply" : "Signed in (not recognized as owner)"}</span>
              <button id="ownerLogoutBtn" class="owner-auth-link">Logout</button>`;
-        document.getElementById("ownerLogoutBtn").addEventListener("click", () => signOut(auth));
+        document.getElementById("ownerLogoutBtn").addEventListener("click", () => authReady.then(() => signOut(auth)));
     } else {
         bar.innerHTML =
             `<button id="ownerLoginBtn" class="owner-auth-link"><span class="msym">login</span> Owner? Sign in to reply</button>`;
@@ -391,11 +417,11 @@ function updateAuthBar() {
 }
 updateAuthBar();
 
-onAuthStateChanged(auth, (user) => {
+authReady.then(() => onAuthStateChanged(auth, (user) => {
     currentUser = user;
     updateAuthBar();
     renderFeedback();
-});
+}));
 
 document.getElementById("feedbackList").addEventListener("click", async (e) => {
     const btn = e.target.closest(".gb-reply-send");
@@ -407,6 +433,7 @@ document.getElementById("feedbackList").addEventListener("click", async (e) => {
     if (!pesan) return;
     btn.disabled = true;
     try {
+        await dbReady;
         await push(ref(db, `feedback/${key}/replies`), { pesan, waktu: serverTimestamp(), uid: currentUser.uid });
         input.value = "";
     } catch(err) { console.error(err); alert("Reply failed. Check your Firebase DB rules."); }
