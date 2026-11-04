@@ -595,6 +595,12 @@ body.dark  .floating-pill__divider { background: var(--border-dark); }
     }
 }
 
+/* very small phones: keep the bottom bar clear of the WhatsApp and theme buttons */
+@media (max-width: 360px) {
+    .floating-pill__item { padding: 0.65rem 0.7rem; gap: 0.3rem; }
+    .floating-pill__label { font-size: 0.6rem; letter-spacing: 0; }
+}
+
 /* ==========================================
    PRELOADER
    ========================================== */
