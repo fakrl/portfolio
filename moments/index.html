@@ -138,14 +138,14 @@
         <figure class="yearbook" id="yearbook-figure">
             <div class="yearbook-stage" id="yearbookStage">
                 <button type="button" class="yearbook-book" id="yearbookOpen" aria-label="Open the yearbook" data-i18n-attr="aria-label:yearbook.open">
-                    <span class="yearbook-cover"><img src="https://online.anyflip.com/lqcnn/fhvh/files/shot.jpg" alt="Cover of the 2023 yearbook" data-i18n-attr="alt:yearbook.coverAlt" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></span>
+                    <span class="yearbook-cover"><img src="/yearbook/cover.jpg" alt="Cover of the 2023 yearbook" data-i18n-attr="alt:yearbook.coverAlt" loading="lazy" onerror="this.parentNode.remove()"></span>
                 </button>
             </div>
             <figcaption class="yearbook-caption">
                 <strong data-i18n="yearbook.title">Yearbook 2023</strong>
                 <span data-i18n="yearbook.desc">Photographer on the yearbook committee, MA Ma'had Al-Zaytun 2023. My photos are on pages 53 to 55; type 54 in the page box to jump there.</span>
-                <a class="yearbook-link" href="https://online.anyflip.com/lqcnn/fhvh/mobile/index.html" target="_blank" rel="noopener" data-i18n="yearbook.newTab">Open in a new tab</a>
-                <span class="yearbook-note" data-i18n="yearbook.note">Opens in the AnyFlip reader, which may show its own ad.</span>
+                <a class="yearbook-link" href="/yearbook/#54" target="_blank" rel="noopener" data-i18n="yearbook.newTab">Open in a new tab</a>
+                <span class="yearbook-note" data-i18n="yearbook.note">Opens the locally hosted reader, without third-party ads.</span>
             </figcaption>
         </figure>
     </section>
@@ -276,7 +276,7 @@
 })();
 </script>
 
-<!-- Yearbook: load the reader only when asked (260 pages + a third-party ad) -->
+<!-- Yearbook: load the local reader only when asked. -->
 <script>
 (function () {
     const btn = document.getElementById('yearbookOpen');
@@ -284,11 +284,12 @@
     if (!btn || !stage) return;
     btn.addEventListener('click', () => {
         const f = document.createElement('iframe');
-        f.src = 'https://online.anyflip.com/lqcnn/fhvh/mobile/index.html';
+        const lang = document.documentElement.lang === 'id' ? 'id' : 'en';
+        f.src = '/yearbook/?lang=' + lang + '#54';             // opens at my photos (pages 53 to 55, the cave photo is 54)
         const t = (typeof I18N !== 'undefined') && I18N['yearbook.frameTitle'];
         f.title = (t && t[document.documentElement.lang === 'id' ? 'id' : 'en']) || 'Digital yearbook 2023';
         f.setAttribute('allowfullscreen', '');
-        f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms');
+        f.setAttribute('sandbox', 'allow-scripts');
         stage.replaceChildren(f);
         stage.closest('.yearbook').classList.add('is-open');
     });

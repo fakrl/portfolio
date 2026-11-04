@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17191f">
+  <meta name="robots" content="noindex, nofollow, noimageindex">
+  <title>Yearbook 2023</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body { display: grid; grid-template-rows: 1fr auto; gap: 10px; padding: 12px; background: #17191f; color: #f5f5f5; font: 14px/1.4 system-ui, sans-serif; }
+    .page { display: grid; place-items: center; min-height: 0; overflow: hidden; }
+    .page img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 8px 32px #0008; }
+    .toolbar { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; }
+    button, input { min-height: 38px; border: 1px solid #ffffff30; border-radius: 8px; background: #ffffff12; color: inherit; font: inherit; }
+    button { padding: 0 12px; cursor: pointer; }
+    button:hover:not(:disabled) { background: #ffffff24; }
+    button:disabled { opacity: .45; cursor: default; }
+    input { width: 5.5em; padding: 0 8px; text-align: center; }
+    :focus-visible { outline: 2px solid #9fc5ff; outline-offset: 2px; }
+    .jump { display: flex; gap: 6px; }
+    .jump button { min-width: 2.6em; padding: 0 8px; }
+    .jump button[aria-current="true"] { background: #ffffff30; border-color: #ffffff60; }
+    .page { touch-action: pan-y; }
+    @media (max-width: 460px) { body { padding: 8px; gap: 6px; } .toolbar { gap: 5px; } button { padding: 0 9px; } }
+  </style>
+</head>
+<body>
+  <main class="page"><img id="yearbookPage" alt="Yearbook page 1" fetchpriority="high" decoding="async"></main>
+  <form class="toolbar" id="pageForm" aria-label="Yearbook controls">
+    <button id="previousPage" type="button" aria-label="Previous page">←</button>
+    <label><span id="pageStatus" aria-live="polite">Page 1 of 260</span>
+      <input id="pageNumber" type="number" min="1" max="260" value="1" aria-label="Go to page">
+    </label>
+    <button type="submit">Go</button>
+    <button id="nextPage" type="button" aria-label="Next page">→</button>
+    <button id="fullscreen" type="button" aria-label="Toggle fullscreen">⛶</button>
+    <span class="jump" id="jump" aria-label="My photos"></span>
+  </form>
+  <script>
+    const pageImage = document.getElementById('yearbookPage');
+    const pageNumber = document.getElementById('pageNumber');
+    const pageStatus = document.getElementById('pageStatus');
+    const previousPage = document.getElementById('previousPage');
+    const nextPage = document.getElementById('nextPage');
+    const TOTAL = 260;
+    const MY_PAGES = [53, 54, 55];                       // my photos (54 = the cave photo)
+    const isId = new URLSearchParams(location.search).get('lang') === 'id';
+    const L = isId
+      ? { page: (p) => `Halaman ${p} dari ${TOTAL}`, go: 'Ke halaman', mine: 'Foto saya', goBtn: 'Buka' }
+      : { page: (p) => `Page ${p} of ${TOTAL}`, go: 'Go to page', mine: 'My photos', goBtn: 'Go' };
+    document.documentElement.lang = isId ? 'id' : 'en';
+    pageNumber.setAttribute('aria-label', L.go);
+    document.querySelector('#pageForm button[type="submit"]').textContent = L.goBtn;
+    document.getElementById('jump').setAttribute('aria-label', L.mine);
+    document.getElementById('jump').title = L.mine;
+
+    let page = 1;
+    // pages live on Cloudinary (folder "yearbook", ids 001..260); f_auto,q_auto,w_1200 = right format and size per device
+    const CDN = 'https://res.cloudinary.com/dxccvha88/image/upload/f_auto,q_auto,w_1200/yearbook/';
+    const src = n => CDN + String(n).padStart(3, '0');
+    const warmed = new Set();
+    function warm(n) {                                    // preload neighbours so flipping feels instant
+      if (n < 1 || n > TOTAL || warmed.has(n)) return;
+      warmed.add(n); const im = new Image(); im.decoding = 'async'; im.src = src(n);
+    }
+
+    const jump = document.getElementById('jump');
+    MY_PAGES.forEach(n => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = n; b.dataset.p = n;
+      b.addEventListener('click', () => showPage(n));
+      jump.appendChild(b);
+    });
+
+    function showPage(value, fromHash) {
+      page = Math.max(1, Math.min(TOTAL, Number(value) || 1));
+      pageNumber.value = page;
+      pageStatus.textContent = L.page(page);
+      pageImage.src = src(page);
+      pageImage.alt = (isId ? 'Halaman buku tahunan ' : 'Yearbook page ') + page;
+      previousPage.disabled = page === 1;
+      nextPage.disabled = page === TOTAL;
+      jump.querySelectorAll('button').forEach(b => b.setAttribute('aria-current', String(Number(b.dataset.p) === page)));
+      warm(page + 1); warm(page - 1); warm(page + 2);
+      if (!fromHash) { try { history.replaceState(null, '', '#' + page); } catch (_) {} }
+    }
+
+    document.getElementById('pageForm').addEventListener('submit', event => {
+      event.preventDefault();
+      showPage(pageNumber.value);
+    });
+    previousPage.addEventListener('click', () => showPage(page - 1));
+    nextPage.addEventListener('click', () => showPage(page + 1));
+    document.getElementById('fullscreen').addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen?.();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.target === pageNumber) return;
+      if (event.key === 'ArrowLeft') showPage(page - 1);
+      if (event.key === 'ArrowRight') showPage(page + 1);
+    });
+
+    // swipe left / right on the page (touch)
+    let sx = null;
+    const stage = document.querySelector('.page');
+    stage.addEventListener('pointerdown', e => { sx = e.clientX; });
+    stage.addEventListener('pointerup', e => {
+      if (sx === null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 50) showPage(page + (dx < 0 ? 1 : -1));
+    });
+    stage.addEventListener('pointercancel', () => { sx = null; });
+
+    // opens at #54 etc. when linked that way
+    window.addEventListener('hashchange', () => showPage(location.hash.slice(1), true));
+    showPage(location.hash.slice(1) || 1, true);
+  </script>
+</body>
+</html>

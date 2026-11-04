@@ -916,7 +916,8 @@ body.dark .moments-filter:hover {
 .yearbook-stage { width: 190px; flex: none; }
 .yearbook.is-open .yearbook-stage {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: auto;
+    height: min(82vh, 760px);                /* pages are portrait, so give the reader height */
     border-radius: var(--radius-md);
     overflow: hidden;
     background: rgba(128, 128, 128, 0.12);
@@ -936,7 +937,7 @@ body.dark .moments-filter:hover {
 .yearbook-cover {
     position: relative;
     display: block;
-    aspect-ratio: 340 / 439;
+    aspect-ratio: 340 / 480;
     overflow: hidden;
     border-radius: 2px 6px 6px 2px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28), 3px 0 0 -1px rgba(255, 255, 255, 0.55), 5px 0 0 -2px rgba(0, 0, 0, 0.18);
@@ -950,8 +951,8 @@ body.dark .moments-filter:hover {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.35), rgba(255, 255, 255, 0.12) 45%, rgba(0, 0, 0, 0));
     pointer-events: none;
 }
-/* AnyFlip's cover image has pale bands above and below the cover; trim most of them (6% of the width each) */
-.yearbook-cover img { display: block; width: 100%; margin-top: -6%; }
+/* the cover is page 1 of the local yearbook, already cropped to the page */
+.yearbook-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .yearbook-book:hover .yearbook-cover { transform: translateY(-4px) rotate(-1deg); }
 .yearbook-book:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; border-radius: 6px; }
 
@@ -976,6 +977,7 @@ body.dark  .yearbook-caption, body.dark  .yearbook-link { color: var(--text-seco
     .yearbook { flex-direction: column; text-align: center; gap: 1.25rem; }
     .yearbook-caption { align-items: center; }
     .yearbook-link { align-self: center; }
+    .yearbook.is-open .yearbook-stage { height: min(78vh, 640px); }
 }
 
 @keyframes momentIn { from { opacity: 0; } to { opacity: 1; } }
