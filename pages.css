@@ -922,7 +922,9 @@ body.dark .moments-filter:hover {
     height: auto;
     background: none;                        /* no card: just the book */
 }
-.yearbook-pages { margin: -0.25rem 0 0; text-align: center; font-size: 0.8rem; letter-spacing: 0.04em; opacity: 0.6; }
+.yearbook-pages { margin: -0.25rem 0 0; text-align: center; font-size: 0.8rem; letter-spacing: 0.04em; opacity: 0.85; }
+body.light .yearbook-pages { color: var(--text-secondary-light); }
+body.dark  .yearbook-pages { color: var(--text-secondary-dark); }
 .yearbook-stage iframe { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; border: 0; }
 
 /* the closed book: cover with a spine and a hint of page edge */
