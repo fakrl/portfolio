@@ -141,6 +141,7 @@
                     <span class="yearbook-cover" aria-hidden="true"></span>
                 </button>
             </div>
+            <p class="yearbook-pages" id="yearbookPages" aria-live="polite" hidden></p>
             <figcaption class="yearbook-caption">
                 <strong data-i18n="yearbook.title">Batch 19 FENTURAL Yearbook</strong>
                 <span data-i18n="yearbook.desc">Photographer on the yearbook committee. Pages 52–55 are open to everyone; the rest unlocks with our batch motto.</span>
@@ -287,6 +288,12 @@
     const newTab = document.querySelector('.yearbook-link');
     newTab?.addEventListener('click', () => { newTab.href = '/yearbook/?lang=' + lang() + '&intro=1#54'; });
     let opened = false;
+    const pagesEl = document.getElementById('yearbookPages');
+    window.addEventListener('message', e => {
+        if (e.origin !== location.origin || !e.data || e.data.type !== 'yearbook-pages' || !pagesEl) return;
+        pagesEl.textContent = String(e.data.label || '').slice(0, 40);
+        pagesEl.hidden = false;
+    });
     function openBook() {
         if (opened) return;
         opened = true;
