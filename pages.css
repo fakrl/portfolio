@@ -915,9 +915,9 @@ body.dark .moments-filter:hover {
 
 .yearbook-stage { position: relative; width: 190px; aspect-ratio: 340 / 480; flex: none; perspective: 1200px; transition: width 650ms ease, height 650ms ease; }
 .yearbook.is-open .yearbook-stage {
-    width: 100%;
+    width: min(100%, 540px);                 /* kept small on purpose: a quiet side element, visitors zoom if they want detail */
     aspect-ratio: auto;
-    height: min(82vh, 760px);                /* pages are portrait, so give the reader height */
+    height: min(60vh, 420px);                /* the two-page spread is landscape */
     border-radius: var(--radius-md);
     overflow: hidden;
     background: rgba(128, 128, 128, 0.12);
@@ -1002,7 +1002,7 @@ body.dark  .yearbook-caption, body.dark  .yearbook-link { color: var(--text-seco
     .yearbook { flex-direction: column; text-align: center; gap: 1.25rem; }
     .yearbook-caption { align-items: center; }
     .yearbook-link { align-self: center; }
-    .yearbook.is-open .yearbook-stage { height: min(60vh, 400px); }   /* two-page spread is landscape, so it needs far less height */
+    .yearbook.is-open .yearbook-stage { width: 100%; height: min(56vh, 340px); }   /* two-page spread is landscape, so it needs far less height */
 }
 
 @keyframes momentIn { from { opacity: 0; } to { opacity: 1; } }
