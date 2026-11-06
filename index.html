@@ -1327,11 +1327,11 @@
         flex-shrink: 0;
         align-self: center;
         font-size: 1.2rem;
-        opacity: 0;
-        transition: opacity var(--transition-fast);
+        opacity: 0.55;                                   /* always visible so it reads as "tap to view" on touch too */
+        transition: opacity var(--transition-fast), transform var(--transition-fast);
         margin-right: 0.4rem;
     }
-    .edu-timeline-item--cert:hover .edu-timeline-view { opacity: 0.5; }
+    .edu-timeline-item--cert:hover .edu-timeline-view { opacity: 1; transform: scale(1.1); }
     body.light .edu-timeline-view { color: var(--text-secondary-light); }
     body.dark  .edu-timeline-view { color: var(--text-secondary-dark); }
 
@@ -1353,17 +1353,23 @@
     }
     .edu-cert-modal__nav {
         position: absolute; top: 50%; transform: translateY(-50%);
-        background: rgba(255,255,255,0.15); border: none; color: #fff;
-        width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
+        background: rgba(20,20,24,0.78); border: 1px solid rgba(255,255,255,0.35); color: #fff;
+        width: 40px; height: 40px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer;
+        display: flex; align-items: center; justify-content: center; z-index: 2;
     }
-    .edu-cert-modal__nav:hover { background: rgba(255,255,255,0.28); }
-    .edu-cert-modal__nav--prev { left: -50px; }
-    .edu-cert-modal__nav--next { right: -50px; }
-    .edu-cert-modal__counter { text-align: center; color: rgba(255,255,255,0.7); font-size: 0.8rem; margin-top: 0.6rem; }
+    .edu-cert-modal__nav:hover { background: rgba(60,60,70,0.9); }
+    .edu-cert-modal__nav:disabled { opacity: 0.3; cursor: default; }
+    .edu-cert-modal__nav--prev { left: -54px; }
+    .edu-cert-modal__nav--next { right: -54px; }
+    .edu-cert-modal__img { transition: opacity 0.15s ease; touch-action: pan-y; user-select: none; -webkit-user-drag: none; }
+    .edu-cert-modal__img.fading { opacity: 0.25; }
+    .edu-cert-modal__counter { text-align: center; color: rgba(255,255,255,0.8); font-size: 0.8rem; margin-top: 0.6rem; }
+    .edu-cert-modal__dots { display: flex; justify-content: center; gap: 6px; margin-top: 0.5rem; flex-wrap: wrap; }
+    .edu-cert-modal__dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: background .15s, transform .15s; }
+    .edu-cert-modal__dot.active { background: #fff; transform: scale(1.25); }
     @media (max-width: 640px) {
-        .edu-cert-modal__nav--prev { left: 4px; }
-        .edu-cert-modal__nav--next { right: 4px; }
+        .edu-cert-modal__nav--prev { left: 6px; }
+        .edu-cert-modal__nav--next { right: 6px; }
     }
 
     .edu-timeline-dot {
@@ -2512,6 +2518,7 @@
             <img class="edu-cert-modal__img" id="eduCertModalImg" src="" alt="Certificate">
             <button class="edu-cert-modal__nav edu-cert-modal__nav--next" id="eduCertModalNext">›</button>
             <div class="edu-cert-modal__counter" id="eduCertModalCounter"></div>
+            <div class="edu-cert-modal__dots" id="eduCertModalDots"></div>
         </div>
     </div>
 
@@ -3352,16 +3359,34 @@
         let images = [];
         let current = 0;
 
+        const dotsEl = document.getElementById('eduCertModalDots');
+
         function show(i) {
             current = i;
+            imgEl.classList.add('fading');
+            imgEl.onload = imgEl.onerror = () => imgEl.classList.remove('fading');
             imgEl.src = images[i];
             counterEl.textContent = images.length > 1 ? `${i + 1} / ${images.length}` : '';
             btnPrev.style.display = images.length > 1 ? 'flex' : 'none';
             btnNext.style.display = images.length > 1 ? 'flex' : 'none';
+            btnPrev.disabled = i === 0;
+            btnNext.disabled = i === images.length - 1;
+            dotsEl.querySelectorAll('.edu-cert-modal__dot').forEach((d, n) => d.classList.toggle('active', n === i));
+            // warm the neighbours so swiping feels instant
+            [i - 1, i + 1].forEach(n => { if (images[n]) { const p = new Image(); p.src = images[n]; } });
         }
 
         function open(imgList) {
             images = imgList;
+            dotsEl.innerHTML = '';
+            if (images.length > 1) images.forEach((_, n) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'edu-cert-modal__dot';
+                dot.setAttribute('aria-label', 'Image ' + (n + 1));
+                dot.addEventListener('click', e => { e.stopPropagation(); show(n); });
+                dotsEl.appendChild(dot);
+            });
             show(0);
             overlay.classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -3385,6 +3410,17 @@
         btnNext.addEventListener('click', () => { if (current < images.length - 1) show(current + 1); });
         btnClose.addEventListener('click', close);
         overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+        // swipe left/right like the certifications page
+        let touchX = null;
+        overlay.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+        overlay.addEventListener('touchend', e => {
+            if (touchX === null) return;
+            const dx = e.changedTouches[0].clientX - touchX;
+            touchX = null;
+            if (Math.abs(dx) < 45) return;
+            if (dx < 0 && current < images.length - 1) show(current + 1);
+            if (dx > 0 && current > 0) show(current - 1);
+        }, { passive: true });
         document.addEventListener('keydown', e => {
             if (!overlay.classList.contains('open')) return;
             if (e.key === 'Escape') close();
