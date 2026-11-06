@@ -64,6 +64,14 @@
     .spread.double.locked::after { opacity: .5; }
     .spread.double.locked .lock-panel { position: relative; z-index: 4; width: min(88%, 340px); padding: 8px; }
     @container (max-width: 420px) { .spread.double.locked .lock-panel { font-size: 11px; } .spread.double.locked .lock-panel .lock { font-size: 1.1rem; } .spread.double.locked .lock-panel p { margin: 3px 0; } .spread.double.locked .lock-panel input, .spread.double.locked .lock-panel button { min-height: 28px; } }
+    .pw-overlay { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 10px; background: #000a; }
+    .pw-card { width: min(100%, 340px); max-height: 100%; overflow: auto; padding: 16px; border: 1px solid #ffffff2a; border-radius: 14px; background: #1d2027; text-align: center; box-shadow: 0 20px 60px #000c; }
+    .pw-card .lock { font-size: 1.5rem; }
+    .pw-card p { margin: 6px 0; color: #c8cad2; }
+    .pw-card .pw-title { color: #f5f5f5; font-weight: 600; }
+    .pw-card input { width: 100%; margin-top: 4px; text-align: left; }
+    .pw-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+    .pw-actions .primary { background: #3b6cff; border-color: #3b6cff; }
     :focus-visible { outline: 2px solid #9fc5ff; outline-offset: 2px; }
     @media (min-width: 700px) { .spread.double { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 699px) {
@@ -123,8 +131,8 @@
     const PUBLIC_PAGES = new Set([1, 52, 53, 54, 55]);
     const isId = new URLSearchParams(location.search).get('lang') === 'id';
     const text = isId
-      ? { page: 'Halaman', of: 'dari', go: 'Buka', goLabel: 'Ke halaman', previous: 'Spread sebelumnya', next: 'Spread berikutnya', myPhotos: 'Foto saya', locked: 'Halaman ini terkunci.', motto: 'Petunjuk: motto angkatan kita, 5 kata, bahasa Inggris.', submit: 'Buka buku', checking: 'Memeriksa…', wrong: 'Motto salah, coba lagi.', failed: 'Halaman tidak dapat dimuat.', setup: 'Reader belum siap. Coba lagi nanti.' }
-      : { page: 'Page', of: 'of', go: 'Go', goLabel: 'Go to page', previous: 'Previous spread', next: 'Next spread', myPhotos: 'My photos', locked: 'This page is locked.', motto: 'Hint: our class motto, 5 words, in English.', submit: 'Unlock', checking: 'Checking…', wrong: 'Wrong motto, try again.', failed: 'Page could not be loaded.', setup: 'Reader is not ready yet. Please try again later.' };
+      ? { page: 'Halaman', of: 'dari', go: 'Buka', goLabel: 'Ke halaman', previous: 'Spread sebelumnya', next: 'Spread berikutnya', myPhotos: 'Foto saya', locked: 'Halaman ini terkunci.', motto: 'Petunjuk: motto angkatan kita, 5 kata, bahasa Inggris.', submit: 'Buka buku', cancel: 'Batal', enter: 'Masukkan motto', checking: 'Memeriksa…', wrong: 'Motto salah, coba lagi.', failed: 'Halaman tidak dapat dimuat.', setup: 'Reader belum siap. Coba lagi nanti.' }
+      : { page: 'Page', of: 'of', go: 'Go', goLabel: 'Go to page', previous: 'Previous spread', next: 'Next spread', myPhotos: 'My photos', locked: 'This page is locked.', motto: 'Hint: our class motto, 5 words, in English.', submit: 'Unlock', cancel: 'Cancel', enter: 'Enter motto', checking: 'Checking…', wrong: 'Wrong motto, try again.', failed: 'Page could not be loaded.', setup: 'Reader is not ready yet. Please try again later.' };
     document.documentElement.lang = isId ? 'id' : 'en';
 
     const book = document.getElementById('book');
@@ -255,6 +263,78 @@
       return url;
     }
 
+    let passwordModal = null;
+
+    function askPassword() {
+      if (passwordModal) return;
+      const overlay = document.createElement('div');
+      overlay.className = 'pw-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      const card = document.createElement('form');
+      card.className = 'pw-card';
+      const icon = document.createElement('div');
+      icon.className = 'lock';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = '🔒';
+      const message = document.createElement('p');
+      message.className = 'pw-title';
+      message.textContent = text.locked;
+      const hint = document.createElement('p');
+      hint.textContent = text.motto;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.autocomplete = 'off';
+      input.spellcheck = false;
+      input.setAttribute('aria-label', text.motto);
+      const status = document.createElement('p');
+      status.className = 'status';
+      status.setAttribute('aria-live', 'polite');
+      status.setAttribute('role', 'status');
+      const row = document.createElement('div');
+      row.className = 'pw-actions';
+      const cancel = document.createElement('button');
+      cancel.type = 'button';
+      cancel.textContent = text.cancel;
+      const button = document.createElement('button');
+      button.type = 'submit';
+      button.className = 'primary';
+      button.textContent = text.submit;
+      row.append(cancel, button);
+      card.append(icon, message, hint, input, status, row);
+      overlay.appendChild(card);
+      const close = () => {
+        passwordModal = null;
+        document.removeEventListener('keydown', onKey, true);
+        overlay.remove();
+      };
+      const onKey = event => { if (event.key === 'Escape') { event.stopPropagation(); close(); } };
+      document.addEventListener('keydown', onKey, true);
+      cancel.addEventListener('click', close);
+      overlay.addEventListener('click', event => { if (event.target === overlay) close(); });
+      card.addEventListener('submit', async event => {
+        event.preventDefault();
+        button.disabled = true;
+        status.textContent = text.checking;
+        try {
+          const candidate = await deriveReaderKey(input.value, base64Bytes(manifest.salt), manifest.iter);
+          if (!await verifyKey(candidate)) throw new Error('wrong');
+          key = candidate;
+          try { sessionStorage.setItem('yearbook:key', bytesBase64(new Uint8Array(await crypto.subtle.exportKey('raw', candidate)))); } catch (_) {}
+          close();
+          await render(true);
+        } catch (_) {
+          status.textContent = text.wrong;
+          input.focus();
+          button.disabled = false;
+        }
+      });
+      passwordModal = overlay;
+      document.body.appendChild(overlay);
+      input.focus();
+    }
+
+    // the page itself only shows a locked placeholder; the password is asked in a popup
     function lockPanel() {
       const panel = document.createElement('section');
       panel.className = 'lock-panel';
@@ -264,40 +344,11 @@
       icon.textContent = '🔒';
       const message = document.createElement('p');
       message.textContent = text.locked;
-      const hint = document.createElement('p');
-      hint.textContent = text.motto;
-      const form = document.createElement('form');
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.autocomplete = 'off';
-      input.spellcheck = false;
-      input.setAttribute('aria-label', text.motto);
-      const button = document.createElement('button');
-      button.type = 'submit';
-      button.textContent = text.submit;
-      const status = document.createElement('p');
-      status.className = 'status';
-      status.setAttribute('aria-live', 'polite');
-      status.setAttribute('role', 'status');
-      form.append(input, button, status);
-      form.addEventListener('submit', async event => {
-        event.preventDefault();
-        button.disabled = true;
-        status.textContent = text.checking;
-        try {
-          const candidate = await deriveReaderKey(input.value, base64Bytes(manifest.salt), manifest.iter);
-          if (!await verifyKey(candidate)) throw new Error('wrong');
-          key = candidate;
-          try { sessionStorage.setItem('yearbook:key', bytesBase64(new Uint8Array(await crypto.subtle.exportKey('raw', candidate)))); } catch (_) {}
-          await render(true);
-        } catch (_) {
-          status.textContent = text.wrong;
-          input.focus();
-        } finally {
-          button.disabled = false;
-        }
-      });
-      panel.append(icon, message, hint, form);
+      const open = document.createElement('button');
+      open.type = 'button';
+      open.textContent = text.enter;
+      open.addEventListener('click', askPassword);
+      panel.append(icon, message, open);
       return panel;
     }
 
@@ -324,8 +375,8 @@
         spread.classList.add('locked');
         const panel = lockPanel();
         spread.appendChild(panel);
-        firstInput = panel.querySelector('input');
-        firstInput.focus({ preventScroll: true });
+        firstInput = panel.querySelector('button');
+        askPassword();
         previousPage.disabled = page <= 1;
         nextPage.disabled = page >= TOTAL;
         return;
@@ -338,7 +389,7 @@
         if (!PUBLIC_PAGES.has(number) && !key) {
           const panel = lockPanel();
           slot.appendChild(panel);
-          if (!firstInput) firstInput = panel.querySelector('input');
+          if (!firstInput) firstInput = panel.querySelector('button');
           continue;
         }
         const image = document.createElement('img');
@@ -360,7 +411,7 @@
         if (id !== renderId) return;
       }
 
-      if (firstInput) firstInput.focus({ preventScroll: true });
+      if (firstInput) askPassword();
       previousPage.disabled = page <= 1;
       nextPage.disabled = page >= TOTAL;
       if (!key) {

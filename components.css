@@ -862,5 +862,8 @@ body.crew-on .exp-row .sw-rule {
 .wa-gate__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .wa-gate__err { margin: 0; font-size: 0.85rem; color: #f87171; }
 .wa-gate__actions { display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 0.3rem; }
+.ui-preview { display: flex; flex-direction: column; gap: 0.6rem; margin: 0 0 1.1rem; padding: 0.8rem 0.9rem; border-radius: 10px; background: rgba(128, 128, 128, 0.12); max-height: 40vh; overflow: auto; }
+.ui-preview__k { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.6; }
+.ui-preview__v { margin: 0.1rem 0 0; font-size: 0.92rem; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
 body.light .wa-gate__card { background: rgba(255, 255, 255, 0.92); }
 body.dark  .wa-gate__card { background: rgba(24, 24, 26, 0.92); }

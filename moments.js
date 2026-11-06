@@ -383,13 +383,21 @@ document.getElementById("feedbackSubmit").addEventListener("click", async () => 
     const msgEl  = document.getElementById("feedbackMessage");
     const btn    = document.getElementById("feedbackSubmit");
     const nama = nameEl.value.trim(), dari = fromEl.value.trim(), pesan = msgEl.value.trim();
-    if (!nama || !pesan) { alert("Name and message required."); return; }
+    const idl = (localStorage.getItem("lang") || "en") === "id";
+    if (!nama || !pesan) { UIDialog.alert(idl ? "Nama dan pesan wajib diisi." : "Name and message required."); return; }
+    const okSend = await UIDialog.confirm({
+        title: idl ? "Kirim pesan ini?" : "Post this message?",
+        message: idl ? "Pesan akan tampil publik di guestbook." : "It will be shown publicly in the guestbook.",
+        preview: [{ label: idl ? "Nama" : "Name", value: nama }, { label: idl ? "Dari" : "From", value: dari }, { label: idl ? "Pesan" : "Message", value: pesan }],
+        ok: idl ? "Kirim" : "Post", cancel: idl ? "Edit lagi" : "Edit",
+    });
+    if (!okSend) return;
     btn.textContent = "Sending..."; btn.disabled = true;
     try {
         await dbReady;
         await push(commentsRef, { nama, dari: dari || "Anonymous", pesan, waktu: serverTimestamp() });
         nameEl.value = ""; fromEl.value = ""; msgEl.value = "";
-    } catch(err) { alert("Failed to send, try again."); console.error(err); }
+    } catch(err) { UIDialog.alert(idl ? "Gagal mengirim, coba lagi." : "Failed to send, try again."); console.error(err); }
     finally { btn.textContent = "Send Message"; btn.disabled = false; }
 });
 
@@ -398,7 +406,7 @@ async function doLogin() {
     await authReady;
     signInWithPopup(auth, provider).catch(err => {
         console.error(err);
-        alert("Sign-in failed. Enable the Google provider in Firebase Console → Authentication.");
+        UIDialog.alert("Sign-in failed. Enable the Google provider in Firebase Console → Authentication.");
     });
 }
 function updateAuthBar() {
@@ -426,7 +434,7 @@ authReady.then(() => onAuthStateChanged(auth, (user) => {
 document.getElementById("feedbackList").addEventListener("click", async (e) => {
     const btn = e.target.closest(".gb-reply-send");
     if (!btn) return;
-    if (!isOwner()) { alert("Owner only."); return; }
+    if (!isOwner()) { UIDialog.alert("Owner only."); return; }
     const key   = btn.dataset.key;
     const input = btn.parentElement.querySelector(".gb-reply-input");
     const pesan = input.value.trim();
@@ -436,7 +444,7 @@ document.getElementById("feedbackList").addEventListener("click", async (e) => {
         await dbReady;
         await push(ref(db, `feedback/${key}/replies`), { pesan, waktu: serverTimestamp(), uid: currentUser.uid });
         input.value = "";
-    } catch(err) { console.error(err); alert("Reply failed. Check your Firebase DB rules."); }
+    } catch(err) { console.error(err); UIDialog.alert("Reply failed. Check your Firebase DB rules."); }
     finally { btn.disabled = false; }
 });
 
