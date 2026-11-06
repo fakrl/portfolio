@@ -48,6 +48,9 @@
 
         viewport.addEventListener('pointerdown', e => {
             if (e.button > 0 || interactive(e.target)) return;
+            // a primary pointer always starts a fresh gesture: drop anything left over from a missed pointerup,
+            // otherwise a stale entry makes every later single touch look like a pinch and blocks page turns
+            if (e.isPrimary) { ptrs.clear(); pinch = null; pan = null; downInfo = null; }
             ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
             if (ptrs.size === 1) {
                 downInfo = { x: e.clientX, y: e.clientY, t: performance.now(), moved: false, multi: false };
@@ -110,6 +113,8 @@
                 if (!cancelled && info && !info.moved && !info.multi && performance.now() - info.t < 400) tap(e);
             }
         }
+        viewport.addEventListener('lostpointercapture', e => release(e, true));
+        window.addEventListener('blur', () => { ptrs.clear(); pinch = null; pan = null; downInfo = null; });
         viewport.addEventListener('pointerup', e => release(e, false));
         viewport.addEventListener('pointercancel', e => release(e, true));
 

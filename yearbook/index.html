@@ -98,7 +98,7 @@
   <form class="toolbar" id="pageForm" aria-label="Yearbook controls">
     <button id="previousPage" type="button" aria-label="Previous spread">←</button>
     <label><span id="pageStatus" aria-live="polite">Loading yearbook…</span>
-      <input id="pageNumber" type="number" min="1" max="260" value="54" aria-label="Go to page">
+      <input id="pageNumber" type="text" inputmode="text" autocomplete="off" spellcheck="false" aria-label="Go to page">
     </label>
     <button id="goPage" type="submit">Go</button>
     <button id="nextPage" type="button" aria-label="Next spread">→</button>
@@ -253,9 +253,28 @@
       if (window.parent !== window) { try { window.parent.postMessage({ type: 'yearbook-pages', label }, location.origin); } catch (_) {} }
     }
 
+    // numbering follows the printed contents page: PDF page 5-7 = i-iii, PDF page 8 = printed page 1
+    const FRONT_ROMAN = { 5: 'i', 6: 'ii', 7: 'iii' };
+    const PRINT_OFFSET = 7;
+    function printedLabel(n) {
+      if (n === 1) return isId ? 'Sampul' : 'Cover';
+      if (FRONT_ROMAN[n]) return FRONT_ROMAN[n];
+      return n > PRINT_OFFSET ? String(n - PRINT_OFFSET) : '';
+    }
+    function parsePrinted(value) {
+      const v = String(value).trim().toLowerCase();
+      if (v === 'cover' || v === 'sampul') return 1;
+      for (const k in FRONT_ROMAN) if (FRONT_ROMAN[k] === v) return Number(k);
+      const n = Number(v);
+      return Number.isInteger(n) && n >= 1 && n + PRINT_OFFSET <= TOTAL ? n + PRINT_OFFSET : null;
+    }
+
     function displayRange(pages) {
-      const word = isId ? 'Halaman' : (pages.length === 1 ? 'Page' : 'Pages');
-      return word + ' ' + pages.join('–') + ' / ' + TOTAL;
+      if (pages.length === 1 && pages[0] === 1) return isId ? 'Sampul' : 'Cover';
+      const labels = pages.map(printedLabel).filter(Boolean);
+      if (!labels.length) return isId ? 'Halaman awal' : 'Front matter';
+      const word = isId ? 'Halaman' : (labels.length > 1 ? 'Pages' : 'Page');
+      return word + ' ' + labels.join('–');
     }
 
     function pageUrl(number) {
@@ -381,7 +400,7 @@
       flipping = false;
       zoom.reset(false);
       const pages = visiblePages();
-      pageNumber.value = page;
+      pageNumber.value = printedLabel(page);
       pageNumber.setAttribute('aria-label', text.goLabel);
       setStatus(pages);
       previousPage.setAttribute('aria-label', text.previous);
@@ -450,7 +469,7 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     function updateChrome() {
-      pageNumber.value = page;
+      pageNumber.value = printedLabel(page);
       setStatus(visiblePages());
       previousPage.disabled = page <= 1;
       nextPage.disabled = page >= TOTAL;
@@ -570,7 +589,7 @@
 
     pageForm.addEventListener('submit', event => {
       event.preventDefault();
-      const value = parsePage(pageNumber.value);
+      const value = parsePrinted(pageNumber.value);
       if (!value) return;
       page = value;
       history.replaceState(null, '', '#' + page);
