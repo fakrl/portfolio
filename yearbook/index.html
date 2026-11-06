@@ -193,7 +193,7 @@
         return cached;
       }
       if (!key) throw new Error('locked');
-      const response = await fetch(manifest.encBase + String(number).padStart(3, '0') + '.bin');
+      const response = await fetch(manifest.encBase + String(number).padStart(3, '0'));
       if (!response.ok) throw new Error('page');
       const clear = await decryptPayload(await response.arrayBuffer(), key);
       const url = URL.createObjectURL(new Blob([clear], { type: 'image/webp' }));

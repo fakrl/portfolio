@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "total": 260,
+  "iter": 310000,
+  "salt": "nAOn3EXi504WulszXdfGSg==",
+  "publicPages": [
+    52,
+    53,
+    54,
+    55
+  ],
+  "check": "3hRmLVCjCH7trz5v7caYitCjsJ4tzWwvY5F63Ox5Ifr4mlbi4msT",
+  "plainBase": "https://res.cloudinary.com/dxccvha88/image/upload/f_auto,q_auto,w_1200/yearbook/",
+  "encBase": "https://res.cloudinary.com/dxccvha88/raw/upload/yearbook-enc/"
+}
