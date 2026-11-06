@@ -258,6 +258,8 @@ const I18N = {
     // ── Yearbook (Moments page) ──
     'yearbook.title': { en: 'Batch 19 FENTURAL Yearbook', id: 'Buku Angkatan 19 FENTURAL' },
     'yearbook.desc': { en: "Photographer on the yearbook committee. Pages 52–55 are open to everyone; the rest unlocks with our batch motto.", id: "Fotografer panitia buku angkatan. Halaman 52–55 terbuka untuk semua; halaman lainnya bisa dibuka dengan motto angkatan." },
+    'yearbook.kicker': { en: 'Batch Yearbook', id: 'Buku Angkatan' },
+    'yearbook.credit': { en: 'Photos by Fakrul', id: 'Foto oleh Fakrul' },
     'yearbook.open': { en: 'Open the yearbook', id: 'Buka buku tahunan' },
     'yearbook.newTab': { en: 'Open in a new tab', id: 'Buka di tab baru' },
     'yearbook.note': { en: 'Pages 52–55 are public; the rest of the yearbook needs the class motto.', id: 'Halaman 52–55 terbuka untuk semua; sisanya perlu motto angkatan.' },
