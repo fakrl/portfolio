@@ -1346,7 +1346,9 @@
     }
     .edu-cert-modal-overlay.open { opacity: 1; pointer-events: auto; }
     .edu-cert-modal { position: relative; max-width: 520px; width: 100%; }
-    .edu-cert-modal__img { width: 100%; border-radius: var(--radius-md); display: block; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .edu-cert-zoom { position: relative; overflow: hidden; border-radius: var(--radius-md); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .edu-cert-zoom.is-zoomed { cursor: grab; }
+    .edu-cert-modal__img { width: 100%; border-radius: var(--radius-md); display: block; }
     .edu-cert-modal__close {
         position: absolute; top: -40px; right: 0;
         background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer;
@@ -1361,7 +1363,7 @@
     .edu-cert-modal__nav:disabled { opacity: 0.3; cursor: default; }
     .edu-cert-modal__nav--prev { left: -54px; }
     .edu-cert-modal__nav--next { right: -54px; }
-    .edu-cert-modal__img { transition: opacity 0.15s ease; touch-action: pan-y; user-select: none; -webkit-user-drag: none; }
+    .edu-cert-modal__img { transition: opacity 0.15s ease; user-select: none; -webkit-user-drag: none; }
     .edu-cert-modal__img.fading { opacity: 0.25; }
     .edu-cert-modal__counter { text-align: center; color: rgba(255,255,255,0.8); font-size: 0.8rem; margin-top: 0.6rem; }
     .edu-cert-modal__dots { display: flex; justify-content: center; gap: 6px; margin-top: 0.5rem; flex-wrap: wrap; }
@@ -2515,7 +2517,7 @@
         <div class="edu-cert-modal">
             <button class="edu-cert-modal__close" id="eduCertModalClose">✕</button>
             <button class="edu-cert-modal__nav edu-cert-modal__nav--prev" id="eduCertModalPrev">‹</button>
-            <img class="edu-cert-modal__img" id="eduCertModalImg" src="" alt="Certificate">
+            <div class="edu-cert-zoom" id="eduCertZoom"><img class="edu-cert-modal__img" id="eduCertModalImg" src="" alt="Certificate"></div>
             <button class="edu-cert-modal__nav edu-cert-modal__nav--next" id="eduCertModalNext">›</button>
             <div class="edu-cert-modal__counter" id="eduCertModalCounter"></div>
             <div class="edu-cert-modal__dots" id="eduCertModalDots"></div>
@@ -2694,6 +2696,7 @@
 </div>
 
 <script src="script.js"></script>
+<script defer src="panzoom.js"></script>
 <script defer src="ui-dialog.js"></script>
 <script defer src="feedback-carousel.js"></script>
 <script defer src="wa-gate.js"></script>
@@ -3360,9 +3363,12 @@
         let current = 0;
 
         const dotsEl = document.getElementById('eduCertModalDots');
+        const zoomBox = document.getElementById('eduCertZoom');
+        let zoom = null;     // created on first open (panzoom.js is deferred)
 
         function show(i) {
             current = i;
+            if (zoom) zoom.reset(false);
             imgEl.classList.add('fading');
             imgEl.onload = imgEl.onerror = () => imgEl.classList.remove('fading');
             imgEl.src = images[i];
@@ -3387,12 +3393,14 @@
                 dot.addEventListener('click', e => { e.stopPropagation(); show(n); });
                 dotsEl.appendChild(dot);
             });
+            if (!zoom && window.PanZoom) zoom = PanZoom(zoomBox, imgEl, { wheel: true, lockTouch: true, max: 5 });
             show(0);
             overlay.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
         function close() {
+            if (zoom) zoom.reset(false);
             overlay.classList.remove('open');
             document.body.style.overflow = '';
         }
@@ -3412,9 +3420,9 @@
         overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
         // swipe left/right like the certifications page
         let touchX = null;
-        overlay.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+        overlay.addEventListener('touchstart', e => { touchX = e.touches.length === 1 ? e.touches[0].clientX : null; }, { passive: true });
         overlay.addEventListener('touchend', e => {
-            if (touchX === null) return;
+            if (touchX === null || (zoom && (zoom.zoomed() || zoom.recent()))) { touchX = null; return; }
             const dx = e.changedTouches[0].clientX - touchX;
             touchX = null;
             if (Math.abs(dx) < 45) return;

@@ -34,7 +34,7 @@
     .status { min-height: 1.4em; color: #f2c5c5; }
     .status[role="status"] { color: #d3d5de; }
     /* open-book look + page flip (desktop spread) */
-    .book { container-type: size; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .book { position: relative; overflow: hidden; container-type: size; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
     .spread.double { position: relative; display: block; width: min(100cqw, 100cqh * 1.4146); height: auto; aspect-ratio: 2716 / 1920; margin: auto; gap: 0; perspective: 2600px; background: #e9e5dc; border-radius: 3px; box-shadow: 0 22px 60px #000b, 0 0 0 1px #0006; }
     .spread.double .page-slot { position: absolute; top: 0; bottom: 0; width: 50%; height: 100%; background: #e9e5dc; }
     .spread.double .page-slot:nth-child(1) { left: 0; }
@@ -50,6 +50,9 @@
     .leaf .face.bk { transform: rotateY(180deg); }
     .leaf .face img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .book .spread.double { cursor: grab; }
+    .zoomwrap { display: grid; place-items: center; width: 100%; height: 100%; }
+    .book.is-zoomed { touch-action: none; }
+    .book.is-zoomed .spread.double { cursor: move; }
     /* intro: closed cover centred on the right half, then the book opens */
     .spread.double.closed { transform: translateX(-25%); background: transparent; box-shadow: none; }
     .spread.double.closed::after { opacity: 0; }
@@ -90,7 +93,8 @@
 </head>
 <body>
   <script>if (window.self !== window.top) document.body.classList.add('embedded');</script>
-  <main class="book" id="book" aria-label="Digital yearbook"></main>
+  <script src="../panzoom.js"></script>
+  <main class="book" id="book" aria-label="Digital yearbook"><div class="zoomwrap" id="zoomwrap"></div></main>
   <form class="toolbar" id="pageForm" aria-label="Yearbook controls">
     <button id="previousPage" type="button" aria-label="Previous spread">←</button>
     <label><span id="pageStatus" aria-live="polite">Loading yearbook…</span>
@@ -142,6 +146,13 @@
     document.documentElement.lang = isId ? 'id' : 'en';
 
     const book = document.getElementById('book');
+    const stage = document.getElementById('zoomwrap');
+    // pinch / double-tap / drag to zoom into the pages; a single tap on a half still turns the page
+    const zoom = PanZoom(book, stage, {
+      max: 4,
+      onGesture: () => cancelDrag(),
+      onTap: x => { const box = book.getBoundingClientRect(); movePage(x < box.left + box.width / 2 ? -1 : 1); },
+    });
     const pageStatus = document.getElementById('pageStatus');
     const pageNumber = document.getElementById('pageNumber');
     const previousPage = document.getElementById('previousPage');
@@ -368,18 +379,19 @@
     async function render(animate = false) {
       const id = ++renderId;
       flipping = false;
+      zoom.reset(false);
       const pages = visiblePages();
       pageNumber.value = page;
       pageNumber.setAttribute('aria-label', text.goLabel);
       setStatus(pages);
       previousPage.setAttribute('aria-label', text.previous);
       nextPage.setAttribute('aria-label', text.next);
-      book.replaceChildren();
+      stage.replaceChildren();
 
       const spread = document.createElement('div');
       spread.className = 'spread ' + (pages.length === 2 ? 'double' : 'single');
       if (animate) spread.classList.add('turning');
-      book.appendChild(spread);
+      stage.appendChild(spread);
       if (introPending && pages.length === 2 && !reduceMotion.matches) { introPending = false; startIntro(spread); }
       let firstInput = null;
 
@@ -523,6 +535,7 @@
     }
 
     async function movePage(delta) {
+      if (zoom.zoomed()) zoom.reset(false);
       const plan = flipPlan(delta);
       if (plan) {
         flipping = true;
@@ -584,7 +597,7 @@
       drag.ctx.leaf.style.transform = 'rotateY(' + (drag.dir > 0 ? -180 : 180) * drag.p + 'deg)';
     }
     book.addEventListener('pointerdown', event => {
-      if (event.button > 0 || flipping || event.target.closest('input, button, form')) return;
+      if (event.button > 0 || flipping || zoom.zoomed() || event.target.closest('input, button, form')) return;
       drag = { x: event.clientX, y: event.clientY, t: performance.now(), dx: 0, dir: 0, p: 0, ctx: null, prep: null, simple: false };
     });
     book.addEventListener('pointermove', event => {
@@ -604,6 +617,12 @@
       }
       applyDrag();
     });
+    function cancelDrag() {
+      const d = drag;
+      if (!d) return;
+      drag = null;
+      if (d.prep) (d.ctx ? Promise.resolve(d.ctx) : d.prep).then(ctx => { if (ctx) finishFlip(ctx, false); });
+    }
     async function endDrag(event, cancelled) {
       const current = drag;
       drag = null;
@@ -616,11 +635,7 @@
         return;
       }
       if (cancelled) return;
-      if (current.simple) { movePage(current.dir); return; }
-      if (Math.abs(event.clientX - current.x) < 8 && Math.abs(event.clientY - current.y) < 8 && !event.target.closest('input, button, form')) {
-        const box = book.getBoundingClientRect();
-        movePage(event.clientX < box.left + box.width / 2 ? -1 : 1);
-      }
+      if (current.simple) movePage(current.dir);
     }
     book.addEventListener('pointerup', event => endDrag(event, false));
     book.addEventListener('pointercancel', event => endDrag(event, true));
@@ -632,7 +647,7 @@
 
     loadManifest().then(() => render()).catch(() => {
       pageStatus.textContent = text.setup;
-      book.replaceChildren();
+      stage.replaceChildren();
     });
   </script>
 </body>

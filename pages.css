@@ -466,7 +466,7 @@ body.dark .cert-modal__close:hover {
 .cert-modal__viewer {
     position: relative;
     flex: 1;
-    overflow: auto;
+    overflow: hidden;                        /* zoom/pan is handled by panzoom.js */
     min-height: 300px;
     display: flex;
     align-items: center;
@@ -483,8 +483,10 @@ body.dark  .cert-modal__viewer { background: #1a1a1a; }
     display: block;
     transition: opacity 0.25s ease;
     padding: 0.5rem;
-    cursor: zoom-in;
+    user-select: none;
+    -webkit-user-drag: none;
 }
+.cert-modal__viewer.is-zoomed .cert-modal__img { cursor: grab; }
 
 .cert-modal__img.fading { opacity: 0; }
 

@@ -393,6 +393,7 @@
         .catch(() => { /* silent — no counter shown if the DB call fails */ });
 })();
 </script>
+<script src="../panzoom.js"></script>
 <script src="../proof.js"></script>
 <script>
 // Skeleton shimmer on proof card images until loaded
@@ -418,6 +419,7 @@ document.querySelectorAll('.proof-card__img img').forEach(img => {
 (function() {
     const overlay  = document.getElementById('certModal');
     const modalImg = document.getElementById('certModalImg');
+    const zoom = PanZoom(modalImg.parentElement, modalImg, { wheel: true, lockTouch: true, max: 5 });
     const modalPH  = document.getElementById('certModalPlaceholder');
     const titleEl  = document.getElementById('certModalTitle');
     const counter  = document.getElementById('certModalCounter');
@@ -432,7 +434,7 @@ document.querySelectorAll('.proof-card__img img').forEach(img => {
     function showImg(index) {
         current = index;
         modalImg.classList.add('fading');
-        modalImg.classList.remove('zoomed');
+        zoom.reset(false);
         modalPH.style.display = 'none';
         modalImg.style.display = 'block';
 
@@ -538,6 +540,7 @@ document.querySelectorAll('.proof-card__img img').forEach(img => {
     }
 
     function closeModal() {
+        zoom.reset(false);
         overlay.classList.remove('open');
         document.body.style.overflow = '';
     }
@@ -550,7 +553,6 @@ document.querySelectorAll('.proof-card__img img').forEach(img => {
         });
     });
 
-    modalImg.addEventListener('click', () => modalImg.classList.toggle('zoomed'));
     btnPrev.addEventListener('click', () => { if (current > 0) showImg(current - 1); });
     btnNext.addEventListener('click', () => { if (current < images.length - 1) showImg(current + 1); });
     btnClose.addEventListener('click', closeModal);
@@ -567,6 +569,7 @@ document.querySelectorAll('.proof-card__img img').forEach(img => {
     const inner = document.getElementById('certModalInner');
     inner.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     inner.addEventListener('touchend', e => {
+        if (zoom.zoomed() || zoom.recent()) return;
         const dx = e.changedTouches[0].clientX - touchStartX;
         if (Math.abs(dx) < 40) return;
         if (dx < 0 && current < images.length - 1) showImg(current + 1);
