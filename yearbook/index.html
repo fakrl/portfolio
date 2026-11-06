@@ -33,7 +33,23 @@
     .lock-panel input { width: 100%; text-align: left; }
     .status { min-height: 1.4em; color: #f2c5c5; }
     .status[role="status"] { color: #d3d5de; }
-    .photos { display: flex; justify-content: center; }
+    /* open-book look + page flip (desktop spread) */
+    .book { container-type: size; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .spread.double { position: relative; display: block; width: min(100cqw, 100cqh * 1.4146); height: auto; aspect-ratio: 2716 / 1920; margin: auto; gap: 0; perspective: 2600px; background: #e9e5dc; border-radius: 3px; box-shadow: 0 22px 60px #000b, 0 0 0 1px #0006; }
+    .spread.double .page-slot { position: absolute; top: 0; bottom: 0; width: 50%; height: 100%; background: #e9e5dc; }
+    .spread.double .page-slot:nth-child(1) { left: 0; }
+    .spread.double .page-slot:nth-child(2) { left: 50%; }
+    .spread.double .page-slot img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover; box-shadow: none; }
+    .spread.double .page-slot:has(.lock-panel) { background: #111318; }
+    .spread.double::after { content: ''; position: absolute; top: 0; bottom: 0; left: calc(50% - 16px); width: 32px; z-index: 3; pointer-events: none; background: linear-gradient(to right, transparent, rgba(0, 0, 0, .26) 50%, transparent); }
+    .leaf { position: absolute; top: 0; width: 50%; height: 100%; z-index: 2; transform-style: preserve-3d; will-change: transform; }
+    .leaf.fwd { left: 50%; transform-origin: left center; }
+    .leaf.back { left: 0; transform-origin: right center; }
+    .leaf.anim { transition: transform 680ms cubic-bezier(.45, .05, .25, 1); }
+    .leaf .face { position: absolute; inset: 0; overflow: hidden; background: #e9e5dc; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .leaf .face.bk { transform: rotateY(180deg); }
+    .leaf .face img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .book .spread.double { cursor: grab; }
     :focus-visible { outline: 2px solid #9fc5ff; outline-offset: 2px; }
     @media (min-width: 700px) { .spread.double { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 699px) {
@@ -56,7 +72,6 @@
     <button id="nextPage" type="button" aria-label="Next spread">→</button>
     <button id="fullscreen" type="button" aria-label="Toggle fullscreen">⛶</button>
   </form>
-  <div class="photos"><button id="myPhotos" type="button">My photos</button></div>
   <script>
     <!-- READER_CRYPTO_START -->
     function normalizeReaderPassword(value) {
@@ -103,7 +118,6 @@
     const pageNumber = document.getElementById('pageNumber');
     const previousPage = document.getElementById('previousPage');
     const nextPage = document.getElementById('nextPage');
-    const myPhotos = document.getElementById('myPhotos');
     const pageForm = document.getElementById('pageForm');
     const cache = new Map();
     let manifest = null;
@@ -250,13 +264,13 @@
 
     async function render(animate = false) {
       const id = ++renderId;
+      flipping = false;
       const pages = visiblePages();
       pageNumber.value = page;
       pageNumber.setAttribute('aria-label', text.goLabel);
       pageStatus.textContent = displayRange(pages);
       previousPage.setAttribute('aria-label', text.previous);
       nextPage.setAttribute('aria-label', text.next);
-      myPhotos.textContent = text.myPhotos;
       book.replaceChildren();
 
       const spread = document.createElement('div');
@@ -303,10 +317,111 @@
       preloadNeighbours();
     }
 
-    function movePage(delta) {
+    // ---- page flip (desktop spread): one leaf rotates around the spine ----
+    let flipping = false;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function updateChrome() {
+      pageNumber.value = page;
+      pageStatus.textContent = displayRange(visiblePages());
+      previousPage.disabled = page <= 1;
+      nextPage.disabled = page >= TOTAL;
+    }
+
+    function srcFor(number) {
+      return PUBLIC_PAGES.has(number) ? Promise.resolve(pageUrl(number)) : privatePageUrl(number);
+    }
+
+    async function decoded(url) {
+      const image = new Image();
+      image.src = url;
+      try { await image.decode(); } catch (_) {}
+      return url;
+    }
+
+    function flipPlan(dir) {
+      if (flipping || reduceMotion.matches) return null;
+      const spread = book.querySelector('.spread.double');
+      if (!spread || spread.querySelectorAll('.page-slot > img').length !== 2) return null;
+      const current = visiblePages();
+      if (current.length !== 2) return null;
+      const left = current[0] + dir * 2;
+      if (left < 2 || left + 1 > TOTAL) return null;
+      const target = [left, left + 1];
+      if (![...current, ...target].every(n => PUBLIC_PAGES.has(n) || key)) return null;
+      return { current, target, spread };
+    }
+
+    async function prepareFlip(dir, plan) {
+      const { current, target, spread } = plan;
+      const slots = spread.querySelectorAll('.page-slot');
+      const need = dir > 0 ? [current[1], target[0], target[1]] : [current[0], target[1], target[0]];
+      const urls = await Promise.all(need.map(async n => decoded(await srcFor(n))));
+      const face = (url, back) => {
+        const box = document.createElement('div');
+        box.className = 'face' + (back ? ' bk' : '');
+        const image = new Image();
+        image.src = url; image.alt = ''; image.draggable = false;
+        box.appendChild(image);
+        return box;
+      };
+      const leaf = document.createElement('div');
+      leaf.className = 'leaf ' + (dir > 0 ? 'fwd' : 'back');
+      leaf.append(face(urls[0], false), face(urls[1], true));
+      // the page that will be uncovered goes under the leaf right away
+      slots[dir > 0 ? 1 : 0].querySelector('img').src = urls[2];
+      spread.appendChild(leaf);
+      return { spread, slots, leaf, dir, plan, urls };
+    }
+
+    function finishFlip(ctx, complete) {
+      return new Promise(resolve => {
+        const { leaf, dir, slots, plan, urls } = ctx;
+        leaf.getBoundingClientRect();
+        leaf.classList.add('anim');
+        leaf.style.transform = complete ? 'rotateY(' + (dir > 0 ? -180 : 180) + 'deg)' : 'rotateY(0deg)';
+        let done = false;
+        const end = async () => {
+          if (done) return;
+          done = true;
+          const keepSlot = slots[dir > 0 ? 0 : 1].querySelector('img');
+          const underSlot = slots[dir > 0 ? 1 : 0].querySelector('img');
+          if (complete) {
+            keepSlot.src = urls[1];
+            try { await keepSlot.decode(); } catch (_) {}
+            page = plan.target[0];
+            try { history.replaceState(null, '', '#' + page); } catch (_) {}
+            updateChrome();
+          } else {
+            underSlot.src = urls[0];
+            try { await underSlot.decode(); } catch (_) {}
+          }
+          leaf.remove();
+          flipping = false;
+          resolve(complete);
+          if (complete) preloadNeighbours();
+        };
+        leaf.addEventListener('transitionend', end, { once: true });
+        setTimeout(end, 900);
+      });
+    }
+
+    async function movePage(delta) {
+      const plan = flipPlan(delta);
+      if (plan) {
+        flipping = true;
+        try {
+          await finishFlip(await prepareFlip(delta, plan), true);
+        } catch (_) {
+          flipping = false;
+          render(true);
+        }
+        return;
+      }
+      if (flipping) return;
       const step = window.matchMedia('(min-width: 700px)').matches ? 2 : 1;
       page = Math.max(1, Math.min(TOTAL, page + delta * step));
-      history.replaceState(null, '', '#' + page);
+      try { history.replaceState(null, '', '#' + page); } catch (_) {}
       render(true);
     }
 
@@ -334,11 +449,6 @@
     });
     previousPage.addEventListener('click', () => movePage(-1));
     nextPage.addEventListener('click', () => movePage(1));
-    myPhotos.addEventListener('click', () => {
-      page = 54;
-      history.replaceState(null, '', '#54');
-      render(true);
-    });
     document.getElementById('fullscreen').addEventListener('click', () => {
       if (document.fullscreenElement) document.exitFullscreen();
       else document.documentElement.requestFullscreen?.();
@@ -348,17 +458,56 @@
       if (event.key === 'ArrowLeft') movePage(-1);
       if (event.key === 'ArrowRight') movePage(1);
     });
+    // drag a page corner like a real book; a tap on the left/right half also turns the page
+    let drag = null;
+    function applyDrag() {
+      if (!drag || !drag.ctx) return;
+      const width = drag.ctx.spread.getBoundingClientRect().width;
+      const signed = drag.dx * (drag.dir > 0 ? -1 : 1);
+      drag.p = Math.max(0, Math.min(1, signed / (width * 0.6)));
+      drag.ctx.leaf.style.transform = 'rotateY(' + (drag.dir > 0 ? -180 : 180) * drag.p + 'deg)';
+    }
     book.addEventListener('pointerdown', event => {
-      if (event.target.closest('input, button')) return;
-      pointerStart = event.clientX;
+      if (event.button > 0 || flipping || event.target.closest('input, button, form')) return;
+      drag = { x: event.clientX, y: event.clientY, t: performance.now(), dx: 0, dir: 0, p: 0, ctx: null, prep: null, simple: false };
     });
-    book.addEventListener('pointerup', event => {
-      if (pointerStart === null) return;
-      const delta = event.clientX - pointerStart;
-      pointerStart = null;
-      if (Math.abs(delta) > 50) movePage(delta < 0 ? 1 : -1);
+    book.addEventListener('pointermove', event => {
+      if (!drag) return;
+      drag.dx = event.clientX - drag.x;
+      if (!drag.dir) {
+        if (Math.abs(drag.dx) < 10) return;
+        drag.dir = drag.dx < 0 ? 1 : -1;
+        const plan = flipPlan(drag.dir);
+        if (!plan) { drag.simple = true; return; }
+        flipping = true;
+        try { book.setPointerCapture(event.pointerId); } catch (_) {}
+        const current = drag;
+        current.prep = prepareFlip(current.dir, plan).then(ctx => { current.ctx = ctx; applyDrag(); return ctx; })
+          .catch(() => { flipping = false; if (drag === current) drag = null; render(true); return null; });
+        return;
+      }
+      applyDrag();
     });
-    book.addEventListener('pointercancel', () => { pointerStart = null; });
+    async function endDrag(event, cancelled) {
+      const current = drag;
+      drag = null;
+      if (!current) return;
+      if (current.prep) {
+        const ctx = current.ctx || await current.prep;
+        if (!ctx) return;
+        const quick = performance.now() - current.t < 350 && current.p > 0.08;
+        await finishFlip(ctx, !cancelled && (current.p > 0.3 || quick));
+        return;
+      }
+      if (cancelled) return;
+      if (current.simple) { movePage(current.dir); return; }
+      if (Math.abs(event.clientX - current.x) < 8 && Math.abs(event.clientY - current.y) < 8 && !event.target.closest('input, button, form')) {
+        const box = book.getBoundingClientRect();
+        movePage(event.clientX < box.left + box.width / 2 ? -1 : 1);
+      }
+    }
+    book.addEventListener('pointerup', event => endDrag(event, false));
+    book.addEventListener('pointercancel', event => endDrag(event, true));
     window.addEventListener('hashchange', () => {
       page = parsePage(location.hash.slice(1)) || 52;
       render(true);
