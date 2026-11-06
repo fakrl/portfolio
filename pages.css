@@ -1002,7 +1002,7 @@ body.dark  .yearbook-caption, body.dark  .yearbook-link { color: var(--text-seco
     .yearbook { flex-direction: column; text-align: center; gap: 1.25rem; }
     .yearbook-caption { align-items: center; }
     .yearbook-link { align-self: center; }
-    .yearbook.is-open .yearbook-stage { height: min(78vh, 640px); }
+    .yearbook.is-open .yearbook-stage { height: min(60vh, 400px); }   /* two-page spread is landscape, so it needs far less height */
 }
 
 @keyframes momentIn { from { opacity: 0; } to { opacity: 1; } }

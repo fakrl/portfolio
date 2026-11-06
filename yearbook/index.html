@@ -60,6 +60,10 @@
     .spread.double.opening .page-slot:nth-child(1) { transition: opacity 600ms ease 250ms; }
     .leaf.intro { transition: transform 800ms cubic-bezier(.45, .05, .25, 1), opacity 260ms ease 540ms; box-shadow: 0 22px 60px #000b; }
     .leaf.intro .face.bk { background: #d8d3c8; }
+    .spread.double.locked { display: grid; place-items: center; background: #111318; }
+    .spread.double.locked::after { opacity: .5; }
+    .spread.double.locked .lock-panel { position: relative; z-index: 4; width: min(88%, 340px); padding: 8px; }
+    @container (max-width: 420px) { .spread.double.locked .lock-panel { font-size: 11px; } .spread.double.locked .lock-panel .lock { font-size: 1.1rem; } .spread.double.locked .lock-panel p { margin: 3px 0; } .spread.double.locked .lock-panel input, .spread.double.locked .lock-panel button { min-height: 28px; } }
     :focus-visible { outline: 2px solid #9fc5ff; outline-offset: 2px; }
     @media (min-width: 700px) { .spread.double { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 699px) {
@@ -210,7 +214,7 @@
     }
 
     function visiblePages() {
-      if (window.matchMedia('(min-width: 700px)').matches && page !== 1) {
+      if (true && page !== 1) {
         const left = page % 2 === 0 ? page : page - 1;
         return [left, Math.min(left + 1, TOTAL)];
       }
@@ -314,6 +318,18 @@
       book.appendChild(spread);
       if (introPending && pages.length === 2 && !reduceMotion.matches) { introPending = false; startIntro(spread); }
       let firstInput = null;
+
+      // a fully locked spread gets one panel across both pages instead of two cramped ones
+      if (pages.length === 2 && !key && pages.every(n => !PUBLIC_PAGES.has(n))) {
+        spread.classList.add('locked');
+        const panel = lockPanel();
+        spread.appendChild(panel);
+        firstInput = panel.querySelector('input');
+        firstInput.focus({ preventScroll: true });
+        previousPage.disabled = page <= 1;
+        nextPage.disabled = page >= TOTAL;
+        return;
+      }
 
       for (const number of pages) {
         const slot = document.createElement('div');
@@ -455,7 +471,7 @@
         return;
       }
       if (flipping) return;
-      const step = window.matchMedia('(min-width: 700px)').matches ? 2 : 1;
+      const step = true ? 2 : 1;
       page = Math.max(1, Math.min(TOTAL, page + delta * step));
       try { history.replaceState(null, '', '#' + page); } catch (_) {}
       render(true);
@@ -548,7 +564,7 @@
       page = parsePage(location.hash.slice(1)) || 54;
       render(true);
     });
-    window.matchMedia('(min-width: 700px)').addEventListener('change', () => render());
+
 
     loadManifest().then(() => render()).catch(() => {
       pageStatus.textContent = text.setup;
