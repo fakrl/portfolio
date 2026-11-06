@@ -144,7 +144,7 @@
             <figcaption class="yearbook-caption">
                 <strong data-i18n="yearbook.title">Batch 19 FENTURAL Yearbook</strong>
                 <span data-i18n="yearbook.desc">Photographer on the yearbook committee. Pages 52–55 are open to everyone; the rest unlocks with our batch motto.</span>
-                <a class="yearbook-link" href="/yearbook/?lang=en#52" target="_blank" rel="noopener" data-i18n="yearbook.newTab">Open in a new tab</a>
+                <a class="yearbook-link" href="/yearbook/?lang=en&intro=1#54" target="_blank" rel="noopener" data-i18n="yearbook.newTab">Open in a new tab</a>
                 <span class="yearbook-note" data-i18n="yearbook.note">Pages 52–55 are public; the rest of the yearbook needs the class motto.</span>
             </figcaption>
         </figure>
@@ -284,29 +284,32 @@
     if (!btn || !stage) return;
     const lang = () => document.documentElement.lang === 'id' ? 'id' : 'en';
     const newTab = document.querySelector('.yearbook-link');
-    newTab?.addEventListener('click', () => { newTab.href = '/yearbook/?lang=' + lang() + '#52'; });
-    btn.addEventListener('click', () => {
+    newTab?.addEventListener('click', () => { newTab.href = '/yearbook/?lang=' + lang() + '&intro=1#54'; });
+    let opened = false;
+    function openBook() {
+        if (opened) return;
+        opened = true;
         const f = document.createElement('iframe');
         const figure = stage.closest('.yearbook');
         const t = (typeof I18N !== 'undefined') && I18N['yearbook.frameTitle'];
         f.title = (t && t[lang()]) || 'Digital yearbook 2023';
-        f.src = '/yearbook/?lang=' + lang() + '#52';
+        f.src = '/yearbook/?lang=' + lang() + '&intro=1#54';
         f.allow = 'fullscreen';
         f.setAttribute('allowfullscreen', '');
         f.loading = 'eager';
         stage.prepend(f);
-        figure.classList.add('is-open');
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            btn.hidden = true;
-            return;
-        }
-        figure.classList.add('is-opening');
-        window.setTimeout(() => {
-            figure.classList.remove('is-opening');
-            btn.hidden = true;
-            f.focus();
-        }, 680);
-    });
+        figure.classList.add('is-open', 'is-opening');
+        // the reader plays its own "cover opens onto the spread" intro; the small cover just fades out
+        window.setTimeout(() => { btn.hidden = true; }, 260);
+    }
+    btn.addEventListener('click', openBook);
+    // opens by itself the first time the book is properly on screen
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(es => {
+            if (es.some(e => e.isIntersecting)) { io.disconnect(); window.setTimeout(openBook, 500); }
+        }, { threshold: 0.6 });
+        io.observe(stage);
+    }
 })();
 </script>
 

@@ -50,6 +50,16 @@
     .leaf .face.bk { transform: rotateY(180deg); }
     .leaf .face img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .book .spread.double { cursor: grab; }
+    /* intro: closed cover centred on the right half, then the book opens */
+    .spread.double.closed { transform: translateX(-25%); background: transparent; box-shadow: none; }
+    .spread.double.closed::after { opacity: 0; }
+    .spread.double.closed .page-slot:nth-child(1) { opacity: 0; }
+    .spread.double.closed .page-slot:nth-child(2) { box-shadow: 0 22px 60px #000b; }
+    .spread.double.opening { transition: transform 800ms cubic-bezier(.45, .05, .25, 1), background .8s, box-shadow .8s; }
+    .spread.double.opening::after { transition: opacity .8s; }
+    .spread.double.opening .page-slot:nth-child(1) { transition: opacity 600ms ease 250ms; }
+    .leaf.intro { transition: transform 800ms cubic-bezier(.45, .05, .25, 1), opacity 260ms ease 540ms; box-shadow: 0 22px 60px #000b; }
+    .leaf.intro .face.bk { background: #d8d3c8; }
     :focus-visible { outline: 2px solid #9fc5ff; outline-offset: 2px; }
     @media (min-width: 700px) { .spread.double { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 699px) {
@@ -66,7 +76,7 @@
   <form class="toolbar" id="pageForm" aria-label="Yearbook controls">
     <button id="previousPage" type="button" aria-label="Previous spread">←</button>
     <label><span id="pageStatus" aria-live="polite">Loading yearbook…</span>
-      <input id="pageNumber" type="number" min="1" max="260" value="52" aria-label="Go to page">
+      <input id="pageNumber" type="number" min="1" max="260" value="54" aria-label="Go to page">
     </label>
     <button id="goPage" type="submit">Go</button>
     <button id="nextPage" type="button" aria-label="Next spread">→</button>
@@ -106,7 +116,7 @@
     <!-- READER_CRYPTO_END -->
 
     const TOTAL = 260;
-    const PUBLIC_PAGES = new Set([52, 53, 54, 55]);
+    const PUBLIC_PAGES = new Set([1, 52, 53, 54, 55]);
     const isId = new URLSearchParams(location.search).get('lang') === 'id';
     const text = isId
       ? { page: 'Halaman', of: 'dari', go: 'Buka', goLabel: 'Ke halaman', previous: 'Spread sebelumnya', next: 'Spread berikutnya', myPhotos: 'Foto saya', locked: 'Halaman ini terkunci.', motto: 'Petunjuk: motto angkatan kita, 5 kata, bahasa Inggris.', submit: 'Buka buku', checking: 'Memeriksa…', wrong: 'Motto salah, coba lagi.', failed: 'Halaman tidak dapat dimuat.', setup: 'Reader belum siap. Coba lagi nanti.' }
@@ -122,8 +132,33 @@
     const cache = new Map();
     let manifest = null;
     let key = null;
-    let page = parsePage(location.hash.slice(1)) || 52;
+    let page = parsePage(location.hash.slice(1)) || 54;
     let renderId = 0;
+    // ?intro=1: start as a closed book (the cover) and open it onto the spread
+    let introPending = new URLSearchParams(location.search).get('intro') === '1';
+
+    function startIntro(spread) {
+      spread.classList.add('closed');
+      const leaf = document.createElement('div');
+      leaf.className = 'leaf fwd intro';
+      const front = document.createElement('div');
+      front.className = 'face';
+      const cover = new Image();
+      cover.alt = ''; cover.draggable = false;
+      cover.src = manifest.plainBase + '001';
+      front.appendChild(cover);
+      const back = document.createElement('div');
+      back.className = 'face bk';
+      leaf.append(front, back);
+      spread.appendChild(leaf);
+      setTimeout(() => {
+        spread.classList.add('opening');
+        spread.classList.remove('closed');
+        leaf.style.transform = 'rotateY(-180deg)';
+        leaf.style.opacity = '0';
+        setTimeout(() => { leaf.remove(); spread.classList.remove('opening'); }, 1000);
+      }, 900);
+    }
     let pointerStart = null;
 
     function parsePage(value) {
@@ -146,7 +181,7 @@
       return value && value.v === 1 && value.total === TOTAL &&
         Number.isInteger(value.iter) && value.iter >= 100000 && value.iter <= 500000 &&
         base64Bytes(value.salt).length === 16 && base64Bytes(value.check).length > 28 &&
-        JSON.stringify(value.publicPages) === '[52,53,54,55]' &&
+        JSON.stringify(value.publicPages) === '[1,52,53,54,55]' &&
         value.plainBase === 'https://res.cloudinary.com/dxccvha88/image/upload/f_auto,q_auto,w_1200/yearbook/' &&
         value.encBase === 'https://res.cloudinary.com/dxccvha88/raw/upload/yearbook-enc/';
     }
@@ -277,6 +312,7 @@
       spread.className = 'spread ' + (pages.length === 2 ? 'double' : 'single');
       if (animate) spread.classList.add('turning');
       book.appendChild(spread);
+      if (introPending && pages.length === 2 && !reduceMotion.matches) { introPending = false; startIntro(spread); }
       let firstInput = null;
 
       for (const number of pages) {
@@ -509,7 +545,7 @@
     book.addEventListener('pointerup', event => endDrag(event, false));
     book.addEventListener('pointercancel', event => endDrag(event, true));
     window.addEventListener('hashchange', () => {
-      page = parsePage(location.hash.slice(1)) || 52;
+      page = parsePage(location.hash.slice(1)) || 54;
       render(true);
     });
     window.matchMedia('(min-width: 700px)').addEventListener('change', () => render());
